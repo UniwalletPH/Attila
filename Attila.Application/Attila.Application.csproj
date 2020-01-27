@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Common\Base\" />
-    <Folder Include="Equipment\Commands\" />
-    <Folder Include="Equipment\Queries\" />
     <Folder Include="Event\Commands\" />
     <Folder Include="Event\Queries\" />
     <Folder Include="User\Commands\" />
