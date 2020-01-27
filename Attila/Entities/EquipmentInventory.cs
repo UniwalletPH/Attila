@@ -9,7 +9,6 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_EquipmentInventory")]
     public class EquipmentInventory
     {
-
         public int ID { get; set; }
         public DateTime EncodingDate { get; set; }
         public long EncodedBy { get; set; }

@@ -6,11 +6,9 @@ namespace Attila.Domain.Entities.Enums
 {
     public enum EquipmentType : byte
     {
-        None = 0,
-        Admin = 1,
-        Coordinator = 2,
-        Chef = 3,
-        InventoryManager = 4
+        Consumable = 0,
+        NonConsumable =1,
+        Others = 2
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attila.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -8,9 +9,10 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_EventDetails")]
     public class EventDetails
     {
-
         public int ID { get; set; }
+        public string Code { get; set; }
         public string EventName { get; set; }
+        public EventType Type { get; set; }
         public string Address { get; set; }
         public DateTime BookingDate { get; set; }
         public DateTime EventDate { get; set; }
@@ -20,9 +22,6 @@ namespace Attila.Domain.Entities.Tables
         public User EventCoordinator { get; set; }
         public EventPackageDetails Package { get; set; }
         public string Remarks { get; set; }
-
-
-
 
     }
 }

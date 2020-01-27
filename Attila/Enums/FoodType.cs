@@ -8,5 +8,6 @@ namespace Attila.Domain.Entities.Enums
     {
         Perishable = 0,
         NonPerishable = 1,
+        Others = 2
     }
 }

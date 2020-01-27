@@ -10,9 +10,9 @@ namespace Attila.Domain.Entities.Tables
     public class EquipmentDelivery
     {
         public int ID { get; set; }
-        public DateTime RestockDate { get; set; } 
+        public DateTime DeliveryDate { get; set; } 
         public byte[] ReceiptImage { get; set; }
-        public decimal RestockPrice { get; set; }
+        public decimal DeliveryPrice { get; set; }
         public string Remarks { get; set; }
     }
 }

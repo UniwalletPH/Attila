@@ -8,7 +8,6 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_FoodInventory")]
     public class FoodInventory
     {
-
         public int ID { get; set; }
         public int Quantity { get; set; }
         public DateTime ExpirationDate { get; set; }

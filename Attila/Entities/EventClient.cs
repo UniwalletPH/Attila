@@ -8,7 +8,6 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_EventClient")]
     public class EventClient
     {
-
         public int ID { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
