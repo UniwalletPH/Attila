@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Domain
+namespace Attila.Application
 {
-    class Class1
+    class DependencyInjection
     {
     }
 }

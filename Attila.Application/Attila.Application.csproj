@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Base\" />
+    <Folder Include="Common\Behaviors\" />
+    <Folder Include="Equipment\Commands\" />
+    <Folder Include="Equipment\Queries\" />
+    <Folder Include="Event\Commands\" />
+    <Folder Include="Event\Queries\" />
+    <Folder Include="Food\Commands\" />
+    <Folder Include="Food\Queries\" />
+    <Folder Include="User\Commands\" />
+    <Folder Include="User\Queries\" />
+  </ItemGroup>
+
+</Project>
