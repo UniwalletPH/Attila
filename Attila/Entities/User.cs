@@ -1,4 +1,4 @@
-﻿using Attila.Enums;
+﻿using Attila.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,8 +15,6 @@ namespace Attila.Domain.Entities.Tables
         public string ContactNumber { get; set; }
         public string Email{ get; set; }
         public AccessRole Role { get; set; }
-
-
 
     }
 }
