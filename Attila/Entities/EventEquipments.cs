@@ -10,7 +10,7 @@ namespace Attila.Domain.Entities.Tables
     {
         public int ID { get; set; }
 
-
+        public int EquipmentDetailsID { get; set; }
 
     }
 }

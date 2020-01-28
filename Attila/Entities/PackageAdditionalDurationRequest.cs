@@ -9,9 +9,12 @@ namespace Attila.Domain.Entities.Tables
     public class PackageAdditionalDurationRequest
     {
         public int ID { get; set; }
+
         public TimeSpan Duration { get; set; }
+
         public decimal Rate { get; set; }
 
+        public int EventDetailsID { get; set; }
 
     }
 }

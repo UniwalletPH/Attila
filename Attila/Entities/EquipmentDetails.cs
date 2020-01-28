@@ -8,10 +8,15 @@ namespace Attila.Domain.Entities.Tables
     public class EquipmentDetails
     {
         public int ID { get; set; }
+
         public int Code { get; set; } 
+
         public string Name { get; set; }
+
         public string Description { get; set; }
-        public UnitType Unit { get; set; }
+
+        public UnitType UnitType { get; set; }
+
         public EquipmentType EquipmentType { get; set; }
 
     }
