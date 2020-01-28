@@ -16,6 +16,5 @@ namespace Attila.Domain.Entities.Tables
         public TimeSpan Duration{ get; set; }
 
 
-
     }
 }
