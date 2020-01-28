@@ -8,13 +8,13 @@ namespace Attila.Presentation
 {
     public class Program
     {
-        static IMediator Mediator
-        {
-            get
-            {
-                return ServiceRegistration.ServiceProvider.GetService<>
-            }
-        }
+        //static IMediator Mediator
+        //{
+        //    get
+        //    {
+        //        return ServiceRegistration.ServiceProvider.GetService<>
+        //    }
+        //}
 
         static void Main(string[] args)
         {

@@ -14,7 +14,7 @@ namespace Attila.Domain.Entities
 
         public DateTime DateTimeRequest { get; set; }
 
-        public int FoodtDetailsID { get; set; }
+        public int FoodsDetailsID { get; set; }
 
         public int UserID { get; set; }
     }
