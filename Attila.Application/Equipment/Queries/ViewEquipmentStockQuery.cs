@@ -12,11 +12,8 @@ namespace Attila.Application.Equipment.Queries
 {
     public class ViewEquipmentStockQuery : IRequest<IEnumerable<EquipmentInventory>>
     {
-        private readonly int searchedID;
-
-        public ViewEquipmentStockQuery(int searchedID)
+        public ViewEquipmentStockQuery()
         {
-            this.searchedID = searchedID;
         }
 
         public class ViewEquipmentStockQueryHandler : IRequestHandler<ViewEquipmentStockQuery, IEnumerable<EquipmentInventory>>

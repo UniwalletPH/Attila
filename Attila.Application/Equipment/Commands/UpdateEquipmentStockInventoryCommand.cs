@@ -32,6 +32,8 @@ namespace Attila.Application.Equipment.Commands
                 _updatedEquipmentStock.Quantity = request.myEquipmentInventory.Quantity;
                 _updatedEquipmentStock.ItemPrice = request.myEquipmentInventory.ItemPrice;
                 _updatedEquipmentStock.Remarks = request.myEquipmentInventory.Remarks;
+                _updatedEquipmentStock.EquipmentDetailsID = request.myEquipmentInventory.EquipmentDetailsID;
+                _updatedEquipmentStock.EquipmentDeliveryID = request.myEquipmentInventory.EquipmentDeliveryID;
 
                 await dbContext.SaveChangesAsync();
 

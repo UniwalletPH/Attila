@@ -29,11 +29,11 @@ namespace Attila.Application.Equipment.Commands
             {
                 EquipmentInventory _equipmentInventory = new EquipmentInventory
                 {
-                    EncodingDate = request.myEquipmentInventory.EncodingDate,
-                    UserID = request.myEquipmentInventory.UserID,
                     Quantity = request.myEquipmentInventory.Quantity,
+                    EncodingDate = request.myEquipmentInventory.EncodingDate,
                     ItemPrice = request.myEquipmentInventory.ItemPrice,
-                    Remarks = request.myEquipmentInventory.Remarks
+                    Remarks = request.myEquipmentInventory.Remarks,
+                    UserID = request.myEquipmentInventory.UserID,
                 };
 
                 dbContext.EquipmentsInventory.Add(_equipmentInventory);
