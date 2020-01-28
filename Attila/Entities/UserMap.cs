@@ -8,6 +8,7 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_UserMap")]
     public class UserMap
     {
+        public int ID { get; set; }
         public User User { get; set; }
         public User Parent { get; set; }
 
