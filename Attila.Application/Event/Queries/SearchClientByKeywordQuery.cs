@@ -3,6 +3,7 @@ using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,9 +12,10 @@ namespace Attila.Application.Event.Queries
 {
     public class SearchClientByKeywordQuery : IRequest<EventClient>
     {
-        public SearchClientByKeywordQuery()
-        { 
-        
+        private readonly string Keyword;
+        public SearchClientByKeywordQuery(string keyword)
+        {
+            this.Keyword = keyword;
         }
 
         public class SearchClientByKeywordQueryHandler : IRequestHandler<SearchClientByKeywordQuery, EventClient>
@@ -24,9 +26,20 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<EventClient> Handle(SearchClientByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<EventClient> Handle(SearchClientByKeywordQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _searchedClient = dbContext.EventClients.Where
+                    (a => a.Firstname.Contains(request.Keyword)
+                    || a.Lastname.Contains(request.Keyword));
+
+                if (_searchedClient != null)
+                {
+                    return _searchedClient.SingleOrDefault();
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }          
             }
         }
     }

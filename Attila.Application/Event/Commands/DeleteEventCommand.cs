@@ -11,9 +11,10 @@ namespace Attila.Application.Event.Commands
 {
     public class DeleteEventCommand : IRequest<bool>
     {
-        public DeleteEventCommand()
+        private readonly int EventID;
+        public DeleteEventCommand(int eventID)
         {
-
+            this.EventID = eventID;
         }
 
         public class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand, bool>
@@ -25,9 +26,13 @@ namespace Attila.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<bool> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _eventToDelete = dbContext.EventsDetails.Find(request.EventID);
+                dbContext.EventsDetails.Remove(_eventToDelete);
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }

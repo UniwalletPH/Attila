@@ -12,5 +12,7 @@ namespace Attila.Domain.Entities.Tables
 
         public int EquipmentDetailsID { get; set; }
 
+
+
     }
 }

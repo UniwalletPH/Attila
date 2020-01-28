@@ -3,6 +3,7 @@ using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,9 +12,10 @@ namespace Attila.Application.Event.Queries
 {
     public class SearchClientByIdQuery : IRequest<EventClient>
     {
-        public SearchClientByIdQuery()
-        { 
-        
+        private readonly int ClientID;
+        public SearchClientByIdQuery(int clientID)
+        {
+            this.ClientID = clientID;
         }
 
         public class SearchClientByIdQueryHandler : IRequestHandler<SearchClientByIdQuery, EventClient>
@@ -24,9 +26,18 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<EventClient> Handle(SearchClientByIdQuery request, CancellationToken cancellationToken)
+            public async Task<EventClient> Handle(SearchClientByIdQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _clientSearched = dbContext.EventClients.Find(request.ClientID);
+
+                if (_clientSearched != null)
+                {
+                    return _clientSearched;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }
             }
         }
     }
