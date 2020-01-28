@@ -7,7 +7,7 @@ using Attila.Application.Interfaces;
 
 namespace Attila.Infrastructure.Persistence
 {
-    public interface AttilaDbContext : DbContext, IAttilaDbContext
+    public class AttilaDbContext : DbContext, IAttilaDbContext
     {
         public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
 
