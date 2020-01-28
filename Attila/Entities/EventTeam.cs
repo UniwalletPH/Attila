@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
-    [Table("tbl_UserMap")]
-    public class UserMap
+    public class EventTeam
     {
         public int ID { get; set; }
 
         public int UserID { get; set; }
 
         public int EventDetailsID { get; set; }
-
     }
 }

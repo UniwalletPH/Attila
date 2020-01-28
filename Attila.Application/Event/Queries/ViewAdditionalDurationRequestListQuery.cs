@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Attila.Application.Event.Queries
 {
-    class ViewAdditionalDurationRequestListQuery
+    public class ViewAdditionalDurationRequestListQuery : IRequest<>
     {
     }
 }

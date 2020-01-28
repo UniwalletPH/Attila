@@ -9,8 +9,12 @@ namespace Attila.Domain.Entities.Tables
     public class PackageAdditionalEquipmentRequest
     {
         public int ID { get; set; }
-        public EventEquipments Equipment { get; set; }
+
+        public int EventEquipmentsID { get; set; }
+
         public decimal Rate { get; set; }
+
+        public int EventDetailsID { get; set; }
 
     }
 }

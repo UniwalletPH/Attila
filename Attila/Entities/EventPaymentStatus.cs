@@ -9,11 +9,14 @@ namespace Attila.Domain.Entities.Tables
     public class EventPaymentStatus
     {
         public int ID { get; set; }  
-        public decimal Amount { get; set; }
-        public DateTime DateOfPayment { get; set; }
-        public string ReferenceNumber { get; set; }
-        public string Remarks { get; set; }
 
+        public decimal Amount { get; set; }
+
+        public DateTime DateOfPayment { get; set; }
+
+        public string ReferenceNumber { get; set; }
+
+        public string Remarks { get; set; }
 
     }
 }
