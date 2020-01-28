@@ -8,6 +8,8 @@
     <Folder Include="Common\Base\" />
     <Folder Include="Event\Commands\" />
     <Folder Include="Event\Queries\" />
+    <Folder Include="User\Commands\" />
+    <Folder Include="User\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
