@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 using Attila.Domain.Entities.Tables;
+using Attila.Domain.Entities;
 
 namespace Attila.Application.Interfaces
 {
@@ -13,6 +14,8 @@ namespace Attila.Application.Interfaces
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }
 
         public DbSet<EquipmentInventory> EquipmentsInventory { get; set; }
+
+        public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
         public DbSet<EventClient> EventClients { get; set; }
 
@@ -29,6 +32,8 @@ namespace Attila.Application.Interfaces
         public DbSet<FoodInventory> FoodsInventory { get; set; }
 
         public DbSet<FoodRestock> FoodsRestock { get; set; }
+
+        public DbSet<FoodRestockRequest> FoodRestockRequests { get; set; }
 
         public DbSet<PackageAdditionalDurationRequest> PackageAdditionalDurationRequests { get; set; }
 
