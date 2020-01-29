@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Admin.Queries
+namespace Atilla.Application.Admin.Queries
 {
     class GenerateEventWeeklyReportQuery
     {

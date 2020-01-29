@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Admin.Equipment.Commands
+namespace Atilla.Application.Admin.Equipment.Commands
 {
     class DeclineAdditionalEquipmentRequestCommand
     {

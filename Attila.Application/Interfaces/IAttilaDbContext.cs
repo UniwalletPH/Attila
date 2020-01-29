@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain.Entities;
+using Atilla.Domain.Entities.Tables;
+using Atilla.Domain.Entities;
 
-namespace Attila.Application.Interfaces
+namespace Atilla.Application.Interfaces
 {
     public interface IAttilaDbContext
     {

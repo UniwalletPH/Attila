@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Admin.Food.Commands
+namespace Atilla.Application.Admin.Food.Commands
 {
     class ApproveFoodRestockRequestCommand
     {

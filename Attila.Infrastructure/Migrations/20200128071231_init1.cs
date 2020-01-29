@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Attila.Infrastructure.Migrations
+namespace Atilla.Infrastructure.Migrations
 {
     public partial class init1 : Migration
     {

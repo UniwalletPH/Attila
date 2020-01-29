@@ -1,5 +1,5 @@
-﻿using Attila.Application;
-using Attila.Infrastructure;
+﻿using Atilla.Application;
+using Atilla.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Application.Presentation.EventCoordinator
+namespace Attila.Presentation.UserSignUp
 {
     public static class ServiceRegistration
     {

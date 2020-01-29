@@ -2,8 +2,9 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using Application.Presentation.EventCoordinator;
 
-namespace Application.Presentation.EventCoordinator
+namespace Attila.Presentation.EventCoordinator
 {
     public class Program
     {

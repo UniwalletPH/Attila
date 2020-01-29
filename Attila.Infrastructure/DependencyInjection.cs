@@ -1,12 +1,12 @@
-﻿using Attila.Application.Interfaces;
-using Attila.Infrastructure.Persistence;
+﻿using Atilla.Application.Interfaces;
+using Atilla.Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Infrastructure
+namespace Atilla.Infrastructure
 {
     public static class DependencyInjection
     {

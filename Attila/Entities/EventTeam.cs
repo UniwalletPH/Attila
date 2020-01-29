@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Domain.Entities
+namespace Atilla.Domain.Entities
 {
     public class EventTeam
     {

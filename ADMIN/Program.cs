@@ -2,9 +2,10 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using Attila.Application.Admin.Queries;
+using Atilla.Application.Admin.Queries;
+using Application.Presentation.EventCoordinator;
 
-namespace Application.Presentation.EventCoordinator
+namespace Atilla.Presentation.Admin
 {
     public class Program
     {
@@ -34,7 +35,7 @@ namespace Application.Presentation.EventCoordinator
 
             switch (_cmdNumber)
             {
-               
+
 
                 case "1":
 
@@ -79,6 +80,6 @@ namespace Application.Presentation.EventCoordinator
 
 
 
-            }
+        }
     }
 }

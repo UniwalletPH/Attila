@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Domain.Entities.Enums
+namespace Atilla.Domain.Entities.Enums
 {
     public enum EquipmentType : byte
     {

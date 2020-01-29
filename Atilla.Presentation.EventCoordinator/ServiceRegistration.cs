@@ -1,5 +1,5 @@
-﻿using Attila.Application;
-using Attila.Infrastructure;
+﻿using Atilla.Application;
+using Atilla.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;

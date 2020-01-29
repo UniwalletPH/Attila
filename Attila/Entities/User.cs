@@ -1,10 +1,10 @@
-﻿using Attila.Domain.Entities.Enums;
+﻿using Atilla.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text; 
 
-namespace Attila.Domain.Entities.Tables
+namespace Atilla.Domain.Entities.Tables
 {
     [Table("tbl_User")]
     public class User

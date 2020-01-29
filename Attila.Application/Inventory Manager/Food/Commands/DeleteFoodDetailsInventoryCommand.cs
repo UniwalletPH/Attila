@@ -1,4 +1,4 @@
-﻿using Attila.Application.Interfaces;
+﻿using Atilla.Application.Interfaces;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Food.Commands
+namespace Atilla.Application.Food.Commands
 {
     public class DeleteFoodDetailsInventoryCommand : IRequest<bool>
     {
