@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace USER_SIGN_UP
+namespace InventoryManager
 {
     class Program
     {

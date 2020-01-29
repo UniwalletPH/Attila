@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Attila.Presentation.Admin
+namespace Administrator
 {
     public static class ServiceRegistration
     {

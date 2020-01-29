@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Application.Presentation.EventCoordinator
+namespace Coordinator
 {
     public static class ServiceRegistration
     {
