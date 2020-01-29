@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Commands
 {
-    public class AddAdditionalEquipmentRequestCommand : IRequest<PackageAdditionalEquipmentRequest>
+    public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
     {
-        public AddAdditionalEquipmentRequestCommand()
+        private readonly PackageAdditionalEquipmentRequest additionalEquipment;
+        public AddAdditionalEquipmentRequestCommand(PackageAdditionalEquipmentRequest _additionalEquipment)
         {
-
+            _additionalEquipment = additionalEquipment;
         }
 
-        public class AddAdditionalEquipmentRequestCommandHandler : IRequestHandler<AddAdditionalEquipmentRequestCommand, PackageAdditionalEquipmentRequest>
+        public class AddAdditionalEquipmentRequestCommandHandler : IRequestHandler<AddAdditionalEquipmentRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -25,9 +26,19 @@ namespace Attila.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<PackageAdditionalEquipmentRequest> Handle(AddAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _additionalEquipment = new PackageAdditionalEquipmentRequest
+                {
+                    EventDetailsID = request.additionalEquipment.EventDetailsID,
+                    EventEquipmentsID = request.additionalEquipment.EventEquipmentsID,
+                    Rate = request.additionalEquipment.Rate
+                };
+
+                dbContext.PackageAdditionalEquipmentRequests.Add(_additionalEquipment);
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }
