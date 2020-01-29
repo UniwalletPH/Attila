@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-
-{
-    class ServiceRegistration
-    {
-    }
-}
-
-using Attila.Application;
+﻿using Attila.Application;
 using Attila.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Attila.Presentation.InventoryManager
+namespace Attila.Presentation
 {
     public static class ServiceRegistration
     {

@@ -34,7 +34,7 @@ namespace Attila.Application.Food.Commands
                     UserID = request.myFoodRestockRequest.UserID
                 };
 
-                dbContext.FoodsRestockRequests.Add(_foodRestockRequest);
+                dbContext.FoodRestockRequests.Add(_foodRestockRequest);
                 await dbContext.SaveChangesAsync();
 
                 return true;
