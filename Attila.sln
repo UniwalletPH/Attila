@@ -28,9 +28,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADMIN", "ADMIN\ADMIN.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "USER SIGN UP", "USER SIGN UP\USER SIGN UP.csproj", "{E2E1AA40-342D-4BF3-918C-5BE5529D4B9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attile.Presentation", "Attile.Presentation\Attile.Presentation.csproj", "{BEA948D0-310C-415D-B770-49AFEA0E9F4D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attila.Presentation", "Attile.Presentation\Attila.Presentation.csproj", "{BEA948D0-310C-415D-B770-49AFEA0E9F4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.Presentation.InventoryManager", "Application.Presentation.InventoryManager\Application.Presentation.InventoryManager.csproj", "{889CDD78-C8ED-4A28-944A-9F8FFD70EA7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attila.Presentation.InventoryManager", "Application.Presentation.InventoryManager\Attila.Presentation.InventoryManager.csproj", "{889CDD78-C8ED-4A28-944A-9F8FFD70EA7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
