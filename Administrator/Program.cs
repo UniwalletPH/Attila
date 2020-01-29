@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Atilla.Application.Admin.Queries;
 
-namespace Administrator
+namespace Attila.Presentation.Administrator
 {
     public class Program
     {
@@ -26,7 +26,7 @@ namespace Administrator
             Console.WriteLine("2 - VIEW PAST EVENTS LIST");
             Console.WriteLine("3 - VIEW NOTIFICATION");
             Console.WriteLine("4 - VIEW REPORTS");
-       
+
 
 
         start:
@@ -44,7 +44,7 @@ namespace Administrator
 
                     foreach (var item in _eventList)
                     {
-                        Console.WriteLine("{0}    {1}    {2}    {3}", item.Code,item.EventName,item.Address, item.EventStatus);
+                        Console.WriteLine("{0}    {1}    {2}    {3}", item.Code, item.EventName, item.Address, item.EventStatus);
 
                     }
 

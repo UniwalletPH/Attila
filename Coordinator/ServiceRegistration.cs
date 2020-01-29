@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Coordinator
+namespace Attila.Presentation.Coordinator
 {
     public static class ServiceRegistration
     {

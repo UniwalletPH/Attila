@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace InventoryManager
+namespace Attila.Presentation.InventoryManager
 {
     public static class ServiceRegistration
     {

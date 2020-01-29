@@ -24,11 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.Infrastructure", "At
 		{39D614FC-CEE1-45EE-B00B-69FB8404F219} = {39D614FC-CEE1-45EE-B00B-69FB8404F219}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Administrator", "Administrator\Administrator.csproj", "{7431E5B3-4B89-4363-96A4-738BC817848C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.Presentation.Administrator", "Administrator\Attila.Presentation.Administrator.csproj", "{7431E5B3-4B89-4363-96A4-738BC817848C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coordinator", "Coordinator\Coordinator.csproj", "{389A2FA3-0BDC-4D43-AB52-DA36D2D0B9A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.Presentation.Coordinator", "Coordinator\Attila.Presentation.Coordinator.csproj", "{389A2FA3-0BDC-4D43-AB52-DA36D2D0B9A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InventoryManager", "InventoryManager\InventoryManager.csproj", "{83CBDAD1-EA39-4A4F-9283-1E6567097182}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.Presentation.InventoryManager", "InventoryManager\Attila.Presentation.InventoryManager.csproj", "{83CBDAD1-EA39-4A4F-9283-1E6567097182}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
