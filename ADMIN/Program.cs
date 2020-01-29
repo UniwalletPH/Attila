@@ -1,11 +1,10 @@
-﻿using Attila.Presentation;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Attila.Application.Admin.Queries;
 
-namespace ADMIN
+namespace Application.Presentation.UserSignUp
 {
     public class Program
     {
