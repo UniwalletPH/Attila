@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Commands
 {
-    public class AddEventPackageCommand : IRequest<EventPackageDetails>
+    public class AddEventPackageCommand : IRequest<bool>
     {
-        public AddEventPackageCommand()
+        private readonly EventPackageDetails EventPackageDetails;
+        public AddEventPackageCommand(EventPackageDetails eventPackageDetails)
         {
-
+            this.EventPackageDetails = eventPackageDetails;
         }
 
-        public class AddEventPackageCommandHandler : IRequestHandler<AddEventPackageCommand, EventPackageDetails>
+        public class AddEventPackageCommandHandler : IRequestHandler<AddEventPackageCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -25,9 +26,22 @@ namespace Attila.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<EventPackageDetails> Handle(AddEventPackageCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddEventPackageCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _newPackage = new EventPackageDetails {
+                    
+                    Code = request.EventPackageDetails.Code,
+                    Description = request.EventPackageDetails.Description,
+                    Duration = request.EventPackageDetails.Duration,
+                    NumberOfGuest = request.EventPackageDetails.NumberOfGuest,
+                    Rate = request.EventPackageDetails.Rate,                
+
+                };
+
+                dbContext.EventsPackageDetails.Add(_newPackage);
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }

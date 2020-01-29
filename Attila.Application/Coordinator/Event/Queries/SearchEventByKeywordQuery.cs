@@ -3,6 +3,7 @@ using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,9 +12,10 @@ namespace Attila.Application.Event.Queries
 {
     public class SearchEventByKeywordQuery : IRequest<EventDetails>
     {
-        public SearchEventByKeywordQuery()
+        private readonly string EventKeyword;
+        public SearchEventByKeywordQuery(string eventKeyword)
         {
-
+            this.EventKeyword = eventKeyword;
         }
 
         public class SearchEventByKeywordQueryHandler : IRequestHandler<SearchEventByKeywordQuery, EventDetails>
@@ -24,9 +26,20 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<EventDetails> Handle(SearchEventByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<EventDetails> Handle(SearchEventByKeywordQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _searchedEvent = dbContext.EventsDetails.Where
+                    (a => a.EventName.Contains(request.EventKeyword)
+                    || a.Description.Contains(request.EventKeyword));
+
+                if (_searchedEvent != null)
+                {
+                    return _searchedEvent.SingleOrDefault();
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }
             }
         }
     }

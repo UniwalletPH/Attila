@@ -11,9 +11,10 @@ namespace Attila.Application.Event.Queries
 {
     public class SearchEventByIdQuery : IRequest<EventDetails>
     {
-        public SearchEventByIdQuery()
-        { 
-        
+        private readonly int EventID;
+        public SearchEventByIdQuery(int eventID)
+        {
+            this.EventID = eventID;
         }
 
         public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, EventDetails>
@@ -24,9 +25,18 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<EventDetails> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
+            public async Task<EventDetails> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _searchedEvent = dbContext.EventsDetails.Find(request.EventID);
+
+                if (_searchedEvent != null)
+                {
+                    return _searchedEvent;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }
             }
         }
     }

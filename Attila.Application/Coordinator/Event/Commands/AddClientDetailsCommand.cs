@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Commands
 {
-    public class AddClientDetailsCommand : IRequest<EventClient>
+    public class AddClientDetailsCommand : IRequest<bool>
     {
-        public AddClientDetailsCommand()
+        private readonly EventClient EventClient;
+        public AddClientDetailsCommand(EventClient eventClient)
         {
-
+            this.EventClient = eventClient;
         }
 
-        public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, EventClient>
+        public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -25,9 +26,23 @@ namespace Attila.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<EventClient> Handle(AddClientDetailsCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _newClient = new EventClient
+                {
+                    Firstname = request.EventClient.Firstname,
+                    Lastname = request.EventClient.Lastname,
+                    Address = request.EventClient.Address,
+                    Contact = request.EventClient.Contact,
+                    Email = request.EventClient.Email
+
+                };
+
+                dbContext.EventClients.Add(_newClient);
+                await dbContext.SaveChangesAsync();
+
+                return true;
+
             }
         }
     }
