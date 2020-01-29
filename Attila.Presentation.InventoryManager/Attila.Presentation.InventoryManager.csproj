@@ -22,4 +22,9 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Attila.Application\Attila.Application.csproj" />
+    <ProjectReference Include="..\Attila.Infrastructure\Attila.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

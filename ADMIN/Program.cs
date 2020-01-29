@@ -1,12 +1,36 @@
-﻿using System;
+﻿using Attila.Presentation;
+using MediatR;
+using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ADMIN
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+
+        static IMediator Mediator
         {
-            Console.WriteLine("Hello World!");
+            get
+            {
+                return ServiceRegistration.ServiceProvider.GetService<IMediator>();
+            }
+        }
+
+
+        static async Task Main(string[] args)
+        {
+
+
+            Console.WriteLine("ADMIN");
+            Console.WriteLine("YOUR OPTIONS");
+            Console.WriteLine("1 - VIEW EVENTS");
+            Console.WriteLine("2 - VIEW NOTIFICATIONS");
+            Console.WriteLine("3 - VIEW REPORTS");
+           
+
+
+
         }
     }
 }
