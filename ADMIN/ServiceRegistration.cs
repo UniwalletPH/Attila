@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Application.Presentation.UserSignUp
+namespace Application.Presentation.EventCoordinator
 {
     public static class ServiceRegistration
     {

@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Application.Presentation.UserSignUp
+namespace Application.Presentation.EventCoordinator
 {
     public class Program
     {
