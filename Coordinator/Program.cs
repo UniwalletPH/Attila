@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Atilla.Presentation.EventCoordinator
+namespace Attila.Presentation.Coordinator
 {
     class Program
     {

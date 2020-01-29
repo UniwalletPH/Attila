@@ -1,5 +1,5 @@
-﻿using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
+﻿using Atilla.Application.Interfaces;
+using Atilla.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Commands
+namespace Atilla.Application.Event.Commands
 {
     public class AddEventPackageCommand : IRequest<bool>
     {

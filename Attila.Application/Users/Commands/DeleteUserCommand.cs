@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Users.Commands
+namespace Atilla.Application.Users.Commands
 {
     class DeleteUserCommand
     {

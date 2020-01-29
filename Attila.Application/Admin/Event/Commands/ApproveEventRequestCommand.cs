@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Admin.Commands
+namespace Atilla.Application.Admin.Commands
 {
     class ApproveEventRequestCommand
     {

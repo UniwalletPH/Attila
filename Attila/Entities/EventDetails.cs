@@ -1,10 +1,11 @@
-﻿using Attila.Domain.Enums;
+﻿using Atilla.Domain.Enums;
+using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Atilla.Domain.Entities.Tables
 {
     [Table("tbl_EventDetails")]
     public class EventDetails
@@ -16,6 +17,8 @@ namespace Attila.Domain.Entities.Tables
         public string EventName { get; set; }
 
         public EventType Type { get; set; }
+
+        public Status EventStatus { get; set; }
 
         public string Address { get; set; }
 

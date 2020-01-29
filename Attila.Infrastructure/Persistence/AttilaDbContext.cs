@@ -2,11 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Attila.Domain.Entities.Tables;
-using Attila.Application.Interfaces;
-using Attila.Domain.Entities;
+using Atilla.Domain.Entities.Tables;
+using Atilla.Application.Interfaces;
+using Atilla.Domain.Entities;
 
-namespace Attila.Infrastructure.Persistence
+namespace Atilla.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
