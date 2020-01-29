@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Admin\Inventory\Commands\" />
+    <Folder Include="Admin\Inventory\Queries\" />
     <Folder Include="Common\Base\" />
-    <Folder Include="Event\Commands\" />
   </ItemGroup>
 
   <ItemGroup>
