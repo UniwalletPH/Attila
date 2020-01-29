@@ -1,4 +1,15 @@
-﻿using Attila.Application;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+
+{
+    class ServiceRegistration
+    {
+    }
+}
+
+using Attila.Application;
 using Attila.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
