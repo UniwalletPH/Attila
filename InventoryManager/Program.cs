@@ -288,9 +288,31 @@ namespace Attila.Presentation.InventoryManager
 
                             Console.WriteLine();
                             Console.WriteLine("Update Food Stock Inventory");
+                            Console.WriteLine();
+
+                            var _viewFoodStockDetailsCommand4 = await Mediator.Send(new ViewFoodDetailsQuery());
+
+                            foreach (var item in _viewFoodStockDetailsCommand4)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Food Details ID: {0}", item.ID);
+                                Console.WriteLine("Food Name: {0}", item.Name);
+                                Console.WriteLine("Food Code: {0}", item.Code);
+                                Console.WriteLine("Food Specification: {0}", item.Specification);
+                                Console.WriteLine("Food Description: {0}", item.Description);
+                                Console.WriteLine("Food Unit Type: {0}", item.Unit);
+                                Console.WriteLine("Food Type: {0}", item.FoodType);
+                            }
+
+
                             Console.WriteLine("Enter Food ID: ");
                             var _updateFoodStockId = Console.ReadLine();
-                            int _updatedSelectedFoodStockId = int.Parse(_updateFoodStockId);
+                            int _updateSelectedFoodStockId = int.Parse(_updateFoodStockId);
+
+                            Console.WriteLine();
+                            Console.WriteLine("Enter New Food Stock: ");
+                            var _updateFoodStockQuantity = Console.ReadLine();
+                            int _updateParsedFoodStockQuantity = int.Parse(_updateFoodStockQuantity);
 
 
 
