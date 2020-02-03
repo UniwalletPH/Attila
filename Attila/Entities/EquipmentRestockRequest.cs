@@ -17,6 +17,8 @@ namespace Atilla.Domain.Entities
 
         public int EquipmentDetailsID { get; set; }
         
+        public string Status { get; set; }
+
         public int UserID { get; set; }
 
     }

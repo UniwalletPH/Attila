@@ -26,7 +26,12 @@ namespace Atilla.Application.Admin.Food.Commands
 
             public async Task<int> Handle(ApproveFoodRestockRequestCommand request, CancellationToken cancellationToken)
             {
-                
+                var _requestToApproved = dbContext.FoodRestockRequests.Find(request.RequestID);
+
+                _requestToApproved.Status = "Approved";
+                await dbContext.SaveChangesAsync();
+
+                return _requestToApproved.ID;
 
             }
         }
