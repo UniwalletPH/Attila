@@ -3,6 +3,8 @@ using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 using Atilla.Application.Admin.Queries;
+using Atilla.Application.Event.Queries;
+using Atilla.Application.Admin.Commands;
 
 namespace Attila.Presentation.Administrator
 {
@@ -44,9 +46,50 @@ namespace Attila.Presentation.Administrator
 
                     foreach (var item in _eventList)
                     {
-                        Console.WriteLine("{0}    {1}    {2}    {3}", item.Code, item.EventName, item.Address, item.EventStatus);
+                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}",item.ID, item.Code, item.EventName, item.Address, item.EventStatus);
 
                     }
+
+                    Console.WriteLine("SELECT EVENT");
+                    Console.WriteLine("ENTER EVENT ID TO APPROVE/DECLINE");
+                    var _selectedID = Console.ReadLine();
+                    var _toSearchID = Int32.Parse(_selectedID);
+
+
+
+                    var _eventSelected = await Mediator.Send(new SearchEventByIdQuery(_toSearchID));
+
+
+                    Console.WriteLine("{0}    {1}    {2}    {3}   {4}", _eventSelected.ID, _eventSelected.Code, _eventSelected.EventName, _eventSelected.Address, _eventSelected.EventStatus);
+
+                    Console.WriteLine("EVENT REQUIREMENTS");
+                    Console.WriteLine("EVENT REQUIREMENTS");
+                    Console.WriteLine("EVENT REQUIREMENTS");
+                    Console.WriteLine("EVENT REQUIREMENTS");
+
+
+                    Console.WriteLine("1 = APPROVE | 2 = DECLINE ");
+                    string _optionNumber = Console.ReadLine();
+
+                    if (_optionNumber == "1")
+                    {
+
+                        var _retVal = await Mediator.Send(new ApproveEventRequestCommand(_toSearchID));
+
+                    }
+
+                    else if (_optionNumber == "2")
+
+                    {
+                        var _returnID = await Mediator.Send(new DeclineEventRequestCommand(_toSearchID));
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                    }
+
+
 
                     goto start;
 
@@ -75,6 +118,18 @@ namespace Attila.Presentation.Administrator
 
                     goto start;
 
+                case "4":
+
+
+                    Console.WriteLine("VIEW REPORTS");
+
+
+                    goto start;
+
+
+                default:
+                    Console.WriteLine("Invalid Command!");
+                    goto start;
 
             }
         }
