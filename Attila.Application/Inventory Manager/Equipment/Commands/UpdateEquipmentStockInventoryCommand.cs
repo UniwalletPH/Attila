@@ -11,11 +11,13 @@ namespace Atilla.Application.Equipment.Commands
 {
     public class UpdateEquipmentStockInventoryCommand : IRequest<bool>
     {
-        private readonly EquipmentInventory myEquipmentInventory;
+        private readonly int updateSearchedID;
+        private readonly int newFoodStockQuantity;
 
-        public UpdateEquipmentStockInventoryCommand(EquipmentInventory myEquipmentInventory)
+        public UpdateEquipmentStockInventoryCommand(int updateSearchedID, int newFoodStockQuantity)
         {
-            this.myEquipmentInventory = myEquipmentInventory;
+            this.updateSearchedID = updateSearchedID;
+            this.newFoodStockQuantity = newFoodStockQuantity;
         }
 
         public class UpdateEquipmentStockInventoryCommandHandler : IRequestHandler<UpdateEquipmentStockInventoryCommand, bool>
@@ -27,13 +29,9 @@ namespace Atilla.Application.Equipment.Commands
             }
             public async Task<bool> Handle(UpdateEquipmentStockInventoryCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.myEquipmentInventory.ID);
+                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.updateSearchedID);
 
-                _updatedEquipmentStock.Quantity = request.myEquipmentInventory.Quantity;
-                _updatedEquipmentStock.ItemPrice = request.myEquipmentInventory.ItemPrice;
-                _updatedEquipmentStock.Remarks = request.myEquipmentInventory.Remarks;
-                _updatedEquipmentStock.EquipmentDetailsID = request.myEquipmentInventory.EquipmentDetailsID;
-                _updatedEquipmentStock.EquipmentDeliveryID = request.myEquipmentInventory.EquipmentDeliveryID;
+                _updatedEquipmentStock.Quantity = request.newFoodStockQuantity;
 
                 await dbContext.SaveChangesAsync();
 
