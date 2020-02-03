@@ -11,9 +11,10 @@ namespace Atilla.Application.Event.Commands
 {
     public class UpdatePaymentStatusCommand : IRequest<bool>
     {
-        public UpdatePaymentStatusCommand()
+        private readonly EventPaymentStatus status;
+        public UpdatePaymentStatusCommand(EventPaymentStatus status)
         {
-
+            this.status = status;
         }
 
         public class UpdatePaymentStatusCommandHandler : IRequestHandler<UpdatePaymentStatusCommand, bool>
@@ -25,9 +26,17 @@ namespace Atilla.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<bool> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.status.ID);
+
+                _updatedPackageStatus.Amount = request.status.Amount;
+                _updatedPackageStatus.Remarks = request.status.Remarks;
+                _updatedPackageStatus.DateOfPayment = request.status.DateOfPayment;
+
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }

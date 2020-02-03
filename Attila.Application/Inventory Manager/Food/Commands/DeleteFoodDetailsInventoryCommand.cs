@@ -33,7 +33,7 @@ namespace Atilla.Application.Food.Commands
                 }
                 else
                 {
-                    throw new Exception("Equipment ID does not exist!");
+                    throw new Exception("Food ID does not exist!");
                 }
 
                 await dbContext.SaveChangesAsync();
