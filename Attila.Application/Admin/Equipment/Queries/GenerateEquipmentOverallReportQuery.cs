@@ -6,5 +6,6 @@ namespace Atilla.Application.Admin.Equipment.Queries
 {
     class GenerateEquipmentOverallReportQuery
     {
+        // TODO: logic?
     }
 }

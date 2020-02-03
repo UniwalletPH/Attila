@@ -6,5 +6,6 @@ namespace Atilla.Application.Admin.Food.Commands
 {
     class DeclineFoodRestockRequestCommand
     {
+        // UNDONE: logic?
     }
 }

@@ -10,6 +10,8 @@ namespace Atilla.Application.Admin.Food.Commands
 {
     public class ApproveFoodRestockRequestCommand : IRequest<int>
     {
+        // TODO: a little changes, make public property for command and query except handler - see below - then remove assignment from constructor
+        // public int RequestID { get; set; }
         private readonly int RequestID;
         public ApproveFoodRestockRequestCommand(int requestID)
         {
@@ -26,7 +28,8 @@ namespace Atilla.Application.Admin.Food.Commands
 
             public async Task<int> Handle(ApproveFoodRestockRequestCommand request, CancellationToken cancellationToken)
             {
-                
+                // UNDONE: logic?
+                throw new NotImplementedException();
 
             }
         }
