@@ -12,11 +12,6 @@ namespace Atilla.Application.Food.Queries
 {
     public class ViewFoodDetailsQuery : IRequest<IEnumerable<FoodDetails>>
     {
-
-        public ViewFoodDetailsQuery()
-        {
-        }
-
         public class ViewFoodDetailsQueryHandler : IRequestHandler<ViewFoodDetailsQuery, IEnumerable<FoodDetails>>
         {
             private readonly IAttilaDbContext dbContext;
