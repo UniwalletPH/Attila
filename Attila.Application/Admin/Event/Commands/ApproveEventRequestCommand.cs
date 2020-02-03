@@ -28,6 +28,7 @@ namespace Atilla.Application.Admin.Commands
             {
                 var _toApprove = dbContext.EventsDetails.Find(request.EventID);
 
+                // TODO: make this an enum
                 _toApprove.EventStatus = "Approved";
 
                 await dbContext.SaveChangesAsync();

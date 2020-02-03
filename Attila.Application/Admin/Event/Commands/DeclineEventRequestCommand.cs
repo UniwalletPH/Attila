@@ -27,6 +27,7 @@ namespace Atilla.Application.Admin.Commands
             public async Task<int> Handle(DeclineEventRequestCommand request, CancellationToken cancellationToken)
             {
                 var _toDecline = dbContext.EventsDetails.Find(request.EventID);
+                // TODO: make this an  enum
                 _toDecline.EventStatus = "Declined";
 
                 await dbContext.SaveChangesAsync();
