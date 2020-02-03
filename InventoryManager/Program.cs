@@ -49,9 +49,9 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("2 - View Food Stock Details");
                     Console.WriteLine("3 - Update Food Stock Details");
                     Console.WriteLine("4 - Delete Food Stock Details");
+                    Console.WriteLine("5 - Update Food Stock Inventory");
                     Console.WriteLine();
-                    Console.WriteLine("5 - Request Food Restock Delivery");
-                    Console.WriteLine("6 - Update Food Stock Inventory");
+                    Console.WriteLine("6 - Request Food Restock Delivery");
                     Console.WriteLine("7 - Search Food By ID");
                     Console.WriteLine("8 - Search Food By Keyword");
                     Console.WriteLine("9 - View Food Details");
@@ -72,16 +72,16 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("Add Food Stock Details");
                             Console.WriteLine();
 
-                            Console.WriteLine("Food Code: ");
+                            Console.Write("Food Code: ");
                             var _foodCode = Console.ReadLine();
 
-                            Console.WriteLine("Food Name: ");
+                            Console.Write("Food Name: ");
                             var _foodName = Console.ReadLine();
 
-                            Console.WriteLine("Food Specification: ");
+                            Console.Write("Food Specification: ");
                             var _foodSpecification = Console.ReadLine();
 
-                            Console.WriteLine("Food Description: ");
+                            Console.Write("Food Description: ");
                             var _foodDescription = Console.ReadLine();
 
                             Console.WriteLine("Food Unit: ");
@@ -89,7 +89,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("2 - Box");
                             Console.WriteLine("3 - Dozen");
                             Console.WriteLine("4 - Others");
-                            Console.WriteLine();
+                            Console.Write("Food Unit: ");
                             var _foodUnit = Console.ReadLine();
                             UnitType _parsedfoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _foodUnit);
 
@@ -97,8 +97,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("1 - Perishable");
                             Console.WriteLine("2 - Non-perishable");
                             Console.WriteLine("3 - Others");
-                            Console.WriteLine();
-                            Console.WriteLine("Food Type: ");
+                            Console.Write("Food Type: ");
                             var _foodType = Console.ReadLine();
                             FoodType _parsedFoodType = (FoodType)Enum.Parse(typeof(FoodType), _foodType);
 
@@ -123,7 +122,7 @@ namespace Attila.Presentation.InventoryManager
                             goto foodsubstart;
                         #endregion
 
-                        //case 2 : View Food Stock Details Command
+                        //case 2 : View Food Stock Details Query
                         #region View Food Stock Details Command
                         case "2":
 
@@ -132,13 +131,13 @@ namespace Attila.Presentation.InventoryManager
                             foreach (var item in _viewFoodStockDetailsCommand)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Details ID: {0}", item.ID);
-                                Console.WriteLine("Food Name: {0}", item.Name);
-                                Console.WriteLine("Food Code: {0}", item.Code);
-                                Console.WriteLine("Food Specification: {0}", item.Specification);
-                                Console.WriteLine("Food Description: {0}", item.Description);
-                                Console.WriteLine("Food Unit Type: {0}", item.Unit);
-                                Console.WriteLine("Food Type: {0}", item.FoodType);
+                                Console.WriteLine("Food Details ID:     {0}", item.ID);
+                                Console.WriteLine("Food Name:           {0}", item.Name);
+                                Console.WriteLine("Food Code:           {0}", item.Code);
+                                Console.WriteLine("Food Specification:  {0}", item.Specification);
+                                Console.WriteLine("Food Description:    {0}", item.Description);
+                                Console.WriteLine("Food Unit Type:      {0}", item.Unit);
+                                Console.WriteLine("Food Type:           {0}", item.FoodType);
 
                             }
                             goto foodsubstart;
@@ -153,13 +152,14 @@ namespace Attila.Presentation.InventoryManager
                             foreach (var item in _viewFoodStockDetailsCommand2)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Details ID: {0}", item.ID);
-                                Console.WriteLine("Food Name: {0}", item.Name);
-                                Console.WriteLine("Food Code: {0}", item.Code);
-                                Console.WriteLine("Food Specification: {0}", item.Specification);
-                                Console.WriteLine("Food Description: {0}", item.Description);
-                                Console.WriteLine("Food Unit Type: {0}", item.Unit);
-                                Console.WriteLine("Food Type: {0}", item.FoodType);
+                                Console.WriteLine();
+                                Console.WriteLine("Food Details ID:     {0}", item.ID);
+                                Console.WriteLine("Food Name:           {0}", item.Name);
+                                Console.WriteLine("Food Code:           {0}", item.Code);
+                                Console.WriteLine("Food Specification:  {0}", item.Specification);
+                                Console.WriteLine("Food Description:    {0}", item.Description);
+                                Console.WriteLine("Food Unit Type:      {0}", item.Unit);
+                                Console.WriteLine("Food Type:           {0}", item.FoodType);
 
                             }
 
@@ -169,16 +169,16 @@ namespace Attila.Presentation.InventoryManager
                             var _updateSelectedFoodID = int.Parse(_updateFoodID);
 
 
-                            Console.WriteLine("Food Code: ");
+                            Console.Write("Food Code: ");
                             var _foodCodeUpdate = Console.ReadLine();
 
-                            Console.WriteLine("Food Name: ");
+                            Console.Write("Food Name: ");
                             var _foodNameUpdate = Console.ReadLine();
 
-                            Console.WriteLine("Food Specification: ");
+                            Console.Write("Food Specification: ");
                             var _foodSpecificationUpdate = Console.ReadLine();
 
-                            Console.WriteLine("Food Description: ");
+                            Console.Write("Food Description: ");
                             var _foodDescriptionUpdate = Console.ReadLine();
 
                             Console.WriteLine("Food Unit: ");
@@ -186,7 +186,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("2 - Box");
                             Console.WriteLine("3 - Dozen");
                             Console.WriteLine("4 - Others");
-                            Console.WriteLine();
+                            Console.Write("Food Unit: ");
                             var _updateFoodUnit = Console.ReadLine();
                             UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateFoodUnit);
 
@@ -194,8 +194,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("1 - Perishable");
                             Console.WriteLine("2 - Non-perishable");
                             Console.WriteLine("3 - Others");
-                            Console.WriteLine();
-                            Console.WriteLine("Food Type: ");
+                            Console.Write("Food Type: ");
                             var _updateFoodType = Console.ReadLine();
                             FoodType _parsedUpdateFoodType = (FoodType)Enum.Parse(typeof(FoodType), _updateFoodType);
 
@@ -231,13 +230,14 @@ namespace Attila.Presentation.InventoryManager
                             foreach (var item in _viewFoodStockDetailsCommand3)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Details ID: {0}", item.ID);
-                                Console.WriteLine("Food Name: {0}", item.Name);
-                                Console.WriteLine("Food Code: {0}", item.Code);
-                                Console.WriteLine("Food Specification: {0}", item.Specification);
-                                Console.WriteLine("Food Description: {0}", item.Description);
-                                Console.WriteLine("Food Unit Type: {0}", item.Unit);
-                                Console.WriteLine("Food Type: {0}", item.FoodType);
+                                Console.WriteLine();
+                                Console.WriteLine("Food Details ID:     {0}", item.ID);
+                                Console.WriteLine("Food Name:           {0}", item.Name);
+                                Console.WriteLine("Food Code:           {0}", item.Code);
+                                Console.WriteLine("Food Specification:  {0}", item.Specification);
+                                Console.WriteLine("Food Description:    {0}", item.Description);
+                                Console.WriteLine("Food Unit Type:      {0}", item.Unit);
+                                Console.WriteLine("Food Type:           {0}", item.FoodType);
                             }
 
                             Console.WriteLine();
@@ -262,20 +262,61 @@ namespace Attila.Presentation.InventoryManager
                             goto foodsubstart;
                         #endregion
 
-                        //case 5 : Request Food Stock Delivery Command
+                        //case 5 : Update Food Stock Inventory Command
+                        #region Update Food Stock Inventory Command
+                        case "6":
+
+                            Console.WriteLine();
+                            Console.WriteLine("Update Food Stock Inventory");
+                            Console.WriteLine();
+
+                            var _viewFoodStockDetailsCommand4 = await Mediator.Send(new ViewFoodDetailsQuery());
+
+                            foreach (var item in _viewFoodStockDetailsCommand4)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine();
+                                Console.WriteLine("Food Details ID:     {0}", item.ID);
+                                Console.WriteLine("Food Name:           {0}", item.Name);
+                                Console.WriteLine("Food Code:           {0}", item.Code);
+                                Console.WriteLine("Food Specification:  {0}", item.Specification);
+                                Console.WriteLine("Food Description:    {0}", item.Description);
+                                Console.WriteLine("Food Unit Type:      {0}", item.Unit);
+                                Console.WriteLine("Food Type:           {0}", item.FoodType);
+                            }
+
+
+                            Console.Write("Enter Food ID: ");
+                            var _updateID = Console.ReadLine();
+                            int _updatedID = int.Parse(_updateID);
+
+                            Console.WriteLine();
+                            Console.Write("Enter New Food Stock: ");
+                            var _updateStock = Console.ReadLine();
+                            int _updatedFoodStock = int.Parse(_updateStock);
+
+
+                            var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockInventoryCommand { SearchedID = _updatedID, NewFoodQuantity = _updatedFoodStock });
+
+
+                            goto foodsubstart;
+                        #endregion
+
+
+                        //case 6 : Request Food Stock Delivery Command
                         #region Request Food Stock Delivery Command
                         case "5":
 
                             Console.WriteLine();
-                            Console.WriteLine("Enter Food ID to restock: ");
+                            Console.Write("Enter Food ID to restock: ");
                             var _foodIdRestock = Console.ReadLine();
                             int _selectedFoodIdRestock = int.Parse(_foodIdRestock);
 
-                            Console.WriteLine("Enter Quantity: ");
+                            Console.Write("Enter Quantity: ");
                             var _foodRestockQuantity = Console.ReadLine();
                             int _foodRestockQuantityParsed = int.Parse(_foodRestockQuantity);
 
-                            Console.WriteLine("Enter User ID: ");
+                            Console.Write("Enter User ID: ");
                             var _foodRestockUserId = Console.ReadLine();
                             int _foodRestockUserIdParsed = int.Parse(_foodRestockUserId);
 
@@ -284,6 +325,7 @@ namespace Attila.Presentation.InventoryManager
                                 FoodsDetailsID = _selectedFoodIdRestock,
                                 Quantity = _foodRestockQuantityParsed,
                                 DateTimeRequest = DateTime.Now,
+                                Status = 0,
                                 UserID = _foodRestockUserIdParsed
                             };
 
@@ -297,48 +339,18 @@ namespace Attila.Presentation.InventoryManager
                             goto foodsubstart;
                         #endregion
 
-                        //case 7 : Update Food Stock Inventory Command
-                        #region Update Food Stock Inventory Command
-                        case "6":
-
-                            Console.WriteLine();
-                            Console.WriteLine("Update Food Stock Inventory");
-                            Console.WriteLine();
-
-                            var _viewFoodStockDetailsCommand4 = await Mediator.Send(new ViewFoodDetailsQuery());
-
-                            foreach (var item in _viewFoodStockDetailsCommand4)
-                            {
-                                Console.WriteLine();
-                                Console.WriteLine("Food Details ID: {0}", item.ID);
-                                Console.WriteLine("Food Name: {0}", item.Name);
-                                Console.WriteLine("Food Code: {0}", item.Code);
-                                Console.WriteLine("Food Specification: {0}", item.Specification);
-                                Console.WriteLine("Food Description: {0}", item.Description);
-                                Console.WriteLine("Food Unit Type: {0}", item.Unit);
-                                Console.WriteLine("Food Type: {0}", item.FoodType);
-                            }
-
-
-                            Console.WriteLine("Enter Food ID: ");
-                            var _updateID = Console.ReadLine();
-                            int _updatedID = int.Parse(_updateID);
-
-                            Console.WriteLine();
-                            Console.WriteLine("Enter New Food Stock: ");
-                            var _updateStock = Console.ReadLine();
-                            int _updatedFoodStock = int.Parse(_updateStock);
-
-
-                            var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockInventoryCommand {SearchedID = _updatedID, NewFoodQuantity = _updatedFoodStock });
-                            
-
-                            goto foodsubstart;
-                        #endregion
-
-
+                        //case 7 : Search Food by ID Query
                         #region Search Food by ID Command
                         case "7":
+
+                            Console.WriteLine();
+                            Console.WriteLine("Search Food By ID");
+                            Console.Write("Enter ID: ");
+                            var _searchID = Console.ReadLine();
+                            int _parsedSearchID = int.Parse(_searchID);
+
+
+                            var _searchFoodByIdQuaery = await Mediator.Send(new SearchFoodByIdQuery { SearchedID = _parsedSearchID});
 
                             goto foodsubstart;
                         #endregion
@@ -346,6 +358,21 @@ namespace Attila.Presentation.InventoryManager
 
                         #region Search Food by Keyword Command
                         case "8":
+
+                            Console.WriteLine();
+                            Console.WriteLine("Enter Keyword: ");
+                            var _searchKeyword = Console.ReadLine();
+
+                            var _searchFoodByKeywordQuery = await Mediator.Send(new SearchFoodByKeywordQuery {SearchedKeyword = _searchKeyword});
+                            if (_searchFoodByKeywordQuery != null)
+                            {
+                                foreach (var item in _searchFoodByKeywordQuery)
+                                {
+                                    Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
+                                    Console.WriteLine("Food Name: {0}   ,   Food Code: {1}", item.Name, item.Code);
+                                    Console.WriteLine("Food Specification: {0}   ,   Food Description: {1}", item.Specification, item.Description);
+                                }
+                            }
 
                             goto foodsubstart;
                         #endregion

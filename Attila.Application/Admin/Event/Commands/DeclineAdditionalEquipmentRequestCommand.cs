@@ -27,9 +27,9 @@ namespace Atilla.Application.Admin.Equipment.Commands
                 _requestToDecline.Status = Status.Declined;
                 await dbContext.SaveChangesAsync();
 
-                return _requestToDecline.ID;s
+                return _requestToDecline.ID;
 
             }
         }
     }
-}s
+}

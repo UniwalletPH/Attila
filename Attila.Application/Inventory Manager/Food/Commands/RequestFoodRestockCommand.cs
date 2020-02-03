@@ -28,6 +28,7 @@ namespace Atilla.Application.Food.Commands
                     Quantity = request.MyFoodRestockRequest.Quantity,
                     DateTimeRequest = DateTime.Now,
                     FoodsDetailsID = request.MyFoodRestockRequest.FoodsDetailsID,
+                    Status = 0,
                     UserID = request.MyFoodRestockRequest.UserID
                 };
 
