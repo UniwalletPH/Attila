@@ -11,9 +11,10 @@ namespace Atilla.Application.Event.Commands
 {
     public class UpdateEventPackageCommand : IRequest<bool>
     {
-        public UpdateEventPackageCommand()
+        private readonly EventPackageDetails package;
+        public UpdateEventPackageCommand(EventPackageDetails package)
         {
-
+            this.package = package;
         }
 
         public class UpdateEventPackageCommandHandler : IRequestHandler<UpdateEventPackageCommand, bool>
@@ -25,9 +26,18 @@ namespace Atilla.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.package.ID);
+
+                _updatedEventPackage.Description = request.package.Description;
+                _updatedEventPackage.Duration = request.package.Duration;
+                _updatedEventPackage.NumberOfGuest = request.package.NumberOfGuest;
+                _updatedEventPackage.Rate = request.package.Rate;
+
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }

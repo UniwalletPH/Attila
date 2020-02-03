@@ -11,9 +11,10 @@ namespace Atilla.Application.Event.Commands
 {
     public class UpdateClientDetailsCommand : IRequest<bool>
     {
-        public UpdateClientDetailsCommand()
+        private readonly EventClient client;
+        public UpdateClientDetailsCommand(EventClient client)
         {
-
+            this.client = client;
         }
 
         public class UpdateClientDetailsCommandHandler : IRequestHandler<UpdateClientDetailsCommand, bool>
@@ -25,9 +26,19 @@ namespace Atilla.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<bool> Handle(UpdateClientDetailsCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(UpdateClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _updatedClientDetails = dbContext.EventClients.Find(request.client.ID);
+
+                _updatedClientDetails.Lastname = request.client.Lastname;
+                _updatedClientDetails.Firstname = request.client.Firstname;
+                _updatedClientDetails.Address = request.client.Address;
+                _updatedClientDetails.Contact = request.client.Contact;
+                _updatedClientDetails.Email = request.client.Email;
+
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }

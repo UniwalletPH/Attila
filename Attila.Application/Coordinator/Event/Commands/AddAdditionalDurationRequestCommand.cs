@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace Atilla.Application.Event.Commands
 {
-    public class AddAdditionalDurationRequestCommand : IRequest<PackageAdditionalDurationRequest>
+    public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        public AddAdditionalDurationRequestCommand()
+        private readonly PackageAdditionalDurationRequest additionalPackage;
+        public AddAdditionalDurationRequestCommand(PackageAdditionalDurationRequest _additionalPackage)
         {
-
+            _additionalPackage = additionalPackage;
         }
 
-        public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, PackageAdditionalDurationRequest>
+        public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -25,9 +26,19 @@ namespace Atilla.Application.Event.Commands
                 this.dbContext = dbContext;
             }
 
-            public Task<PackageAdditionalDurationRequest> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _additionalDuration = new PackageAdditionalDurationRequest
+                {
+                    EventDetailsID = request.additionalPackage.EventDetailsID,
+                    Duration = request.additionalPackage.Duration,
+                    Rate = request.additionalPackage.Rate
+                };
+
+                dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);
+                await dbContext.SaveChangesAsync();
+
+                return true;
             }
         }
     }
