@@ -1,4 +1,5 @@
 ﻿using Atilla.Application.Interfaces;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,7 @@ namespace Atilla.Application.Admin.Food.Commands
 {
     public class DeclineFoodRestockRequestCommand : IRequest<int>
     {
-        private readonly int RequestID;
-        public DeclineFoodRestockRequestCommand(int requestID)
-        {
-            this.RequestID = requestID;
-        }
+        public int RequestID { get; set; }
 
         public class DeclineFoodRestockRequestCommandHandler : IRequestHandler<DeclineFoodRestockRequestCommand, int>
         {
@@ -29,7 +26,9 @@ namespace Atilla.Application.Admin.Food.Commands
             public async Task<int> Handle(DeclineFoodRestockRequestCommand request, CancellationToken cancellationToken)
             {
                 var _requestToDecline = dbContext.FoodRestockRequests.Find(request.RequestID);
-                _requestToDecline.Status = "Declined";
+
+                _requestToDecline.Status = Status.Declined;
+
                 await dbContext.SaveChangesAsync();
 
                 return _requestToDecline.ID;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attila.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -18,6 +19,6 @@ namespace Atilla.Domain.Entities
 
         public int UserID { get; set; }
 
-        public string Status { get; set; }
+        public Status Status { get; set; }
     }
 }

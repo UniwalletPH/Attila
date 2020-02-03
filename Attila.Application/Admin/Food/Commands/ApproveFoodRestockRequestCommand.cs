@@ -1,4 +1,5 @@
 ﻿using Atilla.Application.Interfaces;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,7 @@ namespace Atilla.Application.Admin.Food.Commands
 {
     public class ApproveFoodRestockRequestCommand : IRequest<int>
     {
-        private readonly int RequestID;
-        public ApproveFoodRestockRequestCommand(int requestID)
-        {
-            this.RequestID = requestID;
-        }
+        public int RequestID { get; set; }
 
         public class ApproveFoodRestockRequestCommandHandler : IRequestHandler<ApproveFoodRestockRequestCommand, int>
         {
@@ -28,7 +25,8 @@ namespace Atilla.Application.Admin.Food.Commands
             {
                 var _requestToApproved = dbContext.FoodRestockRequests.Find(request.RequestID);
 
-                _requestToApproved.Status = "Approved";
+                _requestToApproved.Status = Status.Approved;
+
                 await dbContext.SaveChangesAsync();
 
                 return _requestToApproved.ID;

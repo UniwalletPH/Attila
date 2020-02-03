@@ -1,4 +1,5 @@
 ﻿using Atilla.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,7 @@ namespace Atilla.Domain.Entities
 
         public int EquipmentDetailsID { get; set; }
         
-        public string Status { get; set; }
+        public Status Status { get; set; }
 
         public int UserID { get; set; }
 

@@ -12,9 +12,7 @@ namespace Atilla.Application.Admin.Queries
 {
     public class ViewAllEventDetailsListQuery : IRequest<List<EventDetails>>
     {
-        public ViewAllEventDetailsListQuery()
-        {  }
-
+       
         public class ViewAllEventDetailsListQueryHandler : IRequestHandler<ViewAllEventDetailsListQuery, List<EventDetails>>
         {
             private readonly IAttilaDbContext dbContext;
