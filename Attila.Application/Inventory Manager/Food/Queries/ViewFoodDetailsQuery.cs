@@ -12,11 +12,9 @@ namespace Atilla.Application.Food.Queries
 {
     public class ViewFoodDetailsQuery : IRequest<IEnumerable<FoodDetails>>
     {
-        private readonly int searchedID;
 
-        public ViewFoodDetailsQuery(int searchedID)
+        public ViewFoodDetailsQuery()
         {
-            this.searchedID = searchedID;
         }
 
         public class ViewFoodDetailsQueryHandler : IRequestHandler<ViewFoodDetailsQuery, IEnumerable<FoodDetails>>
