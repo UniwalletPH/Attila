@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attila.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
@@ -17,6 +18,5 @@ namespace Atilla.Domain.Entities
         public int FoodsDetailsID { get; set; }
 
         public int UserID { get; set; }
-
     }
 }

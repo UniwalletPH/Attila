@@ -1,4 +1,5 @@
 ﻿using Atilla.Application.Interfaces;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,8 @@ namespace Atilla.Application.Admin.Commands
 {
     public class ApproveEventRequestCommand : IRequest<int>
     {
-        private readonly int EventID;
-        public ApproveEventRequestCommand(int eventID)
-        {
-            this.EventID = eventID;
-        }
-
+        private int EventID { get; set; }
+       
         public class ApproveEventRequestCommandHandler : IRequestHandler<ApproveEventRequestCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
@@ -28,8 +25,8 @@ namespace Atilla.Application.Admin.Commands
             {
                 var _toApprove = dbContext.EventsDetails.Find(request.EventID);
 
-                // TODO: make this an enum
-                _toApprove.EventStatus = "Approved";
+
+                _toApprove.EventStatus = Status.Approved;
 
                 await dbContext.SaveChangesAsync();
 

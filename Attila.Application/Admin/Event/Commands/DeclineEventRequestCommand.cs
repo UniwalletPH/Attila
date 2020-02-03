@@ -1,4 +1,5 @@
 ﻿using Atilla.Application.Interfaces;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,7 @@ namespace Atilla.Application.Admin.Commands
 {
     public class DeclineEventRequestCommand : IRequest<int>
     {
-        private readonly int EventID;
-        public DeclineEventRequestCommand(int eventID)
-        {
-            this.EventID = eventID;
-        }
+       public int EventID { get; set; }
 
         public class DeclineEventRequestCommandHandler : IRequestHandler<DeclineEventRequestCommand, int>
         {
@@ -27,8 +24,9 @@ namespace Atilla.Application.Admin.Commands
             public async Task<int> Handle(DeclineEventRequestCommand request, CancellationToken cancellationToken)
             {
                 var _toDecline = dbContext.EventsDetails.Find(request.EventID);
-                // TODO: make this an  enum
-                _toDecline.EventStatus = "Declined";
+
+
+                _toDecline.EventStatus = Status.Declined;
 
                 await dbContext.SaveChangesAsync();
 
