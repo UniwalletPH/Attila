@@ -6,5 +6,6 @@ namespace Atilla.Application.Admin.Equipment.Commands
 {
     class DeclineAdditionalEquipmentRequestCommand
     {
+        // UNDONE: logic?
     }
 }
