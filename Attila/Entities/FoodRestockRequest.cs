@@ -17,5 +17,6 @@ namespace Atilla.Domain.Entities
         public int FoodsDetailsID { get; set; }
 
         public int UserID { get; set; }
+
     }
 }

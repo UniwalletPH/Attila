@@ -11,11 +11,8 @@ namespace Atilla.Application.Food.Commands
 {
     public class AddFoodDetailsInventoryCommand : IRequest<bool>
     {
-        public readonly FoodDetails myFoodDetails;
-        public AddFoodDetailsInventoryCommand(FoodDetails myFoodDetails)
-        {
-            this.myFoodDetails = myFoodDetails;
-        }
+
+        public FoodDetails MyFoodDetails { get; set; }
 
         public class AddFoodDetailsInventoryCommandHandler : IRequestHandler<AddFoodDetailsInventoryCommand, bool>
         {
@@ -28,12 +25,12 @@ namespace Atilla.Application.Food.Commands
             {
                 FoodDetails _foodDetails = new FoodDetails
                 {
-                    Code = request.myFoodDetails.Code,
-                    Name = request.myFoodDetails.Name,
-                    Specification = request.myFoodDetails.Specification,
-                    Description = request.myFoodDetails.Description,
-                    Unit = request.myFoodDetails.Unit,
-                    FoodType = request.myFoodDetails.FoodType
+                    Code = request.MyFoodDetails.Code,
+                    Name = request.MyFoodDetails.Name,
+                    Specification = request.MyFoodDetails.Specification,
+                    Description = request.MyFoodDetails.Description,
+                    Unit = request.MyFoodDetails.Unit,
+                    FoodType = request.MyFoodDetails.FoodType
                 };
 
                 dbContext.FoodsDetails.Add(_foodDetails);

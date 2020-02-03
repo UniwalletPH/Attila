@@ -11,11 +11,7 @@ namespace Atilla.Application.Food.Commands
 {
     public class UpdateFoodDetailsInventoryCommand : IRequest<bool>
     {
-        private readonly FoodDetails myFoodDetails;
-        public UpdateFoodDetailsInventoryCommand(FoodDetails myFoodDetails)
-        {
-            this.myFoodDetails = myFoodDetails;
-        }
+        public FoodDetails MyFoodDetails { get; set; }
 
         public class UpdateFoodDetailsInventoryCommandHandler : IRequestHandler<UpdateFoodDetailsInventoryCommand, bool>
         {
@@ -26,14 +22,14 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodDetailsInventoryCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodDetails = dbContext.FoodsDetails.Find(request.myFoodDetails.ID);
+                var _updatedFoodDetails = dbContext.FoodsDetails.Find(request.MyFoodDetails.ID);
 
-                _updatedFoodDetails.Code = request.myFoodDetails.Code;
-                _updatedFoodDetails.Name = request.myFoodDetails.Name;
-                _updatedFoodDetails.Specification = request.myFoodDetails.Specification;
-                _updatedFoodDetails.Description = request.myFoodDetails.Description;
-                _updatedFoodDetails.Unit = request.myFoodDetails.Unit;
-                _updatedFoodDetails.FoodType = request.myFoodDetails.FoodType;
+                _updatedFoodDetails.Code = request.MyFoodDetails.Code;
+                _updatedFoodDetails.Name = request.MyFoodDetails.Name;
+                _updatedFoodDetails.Specification = request.MyFoodDetails.Specification;
+                _updatedFoodDetails.Description = request.MyFoodDetails.Description;
+                _updatedFoodDetails.Unit = request.MyFoodDetails.Unit;
+                _updatedFoodDetails.FoodType = request.MyFoodDetails.FoodType;
 
                 await dbContext.SaveChangesAsync();
 

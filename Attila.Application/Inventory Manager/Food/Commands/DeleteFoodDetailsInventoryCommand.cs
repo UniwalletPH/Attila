@@ -10,11 +10,7 @@ namespace Atilla.Application.Food.Commands
 {
     public class DeleteFoodDetailsInventoryCommand : IRequest<bool>
     {
-        private readonly int deleteSearchedID;
-        public DeleteFoodDetailsInventoryCommand(int deleteSearchedID)
-        {
-            this.deleteSearchedID = deleteSearchedID;
-        }
+        public int DeleteSearchedID { get; set; }
 
         public class DeleteFoodDetailsInventoryCommandHandler : IRequestHandler<DeleteFoodDetailsInventoryCommand, bool>
         {
@@ -25,7 +21,7 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(DeleteFoodDetailsInventoryCommand request, CancellationToken cancellationToken)
             {
-                var _deleteFoodDetails = dbContext.FoodsInventory.Find(request.deleteSearchedID);
+                var _deleteFoodDetails = dbContext.FoodsInventory.Find(request.DeleteSearchedID);
 
                 if (_deleteFoodDetails != null)
                 {

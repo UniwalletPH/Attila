@@ -11,12 +11,8 @@ namespace Atilla.Application.Food.Commands
 {
     public class UpdateFoodStockInventoryCommand : IRequest<bool>
     {
-        private readonly FoodInventory myFoodInventory;
-
-        public UpdateFoodStockInventoryCommand(FoodInventory myFoodInventory)
-        {
-            this.myFoodInventory = myFoodInventory;
-        }
+        public int SearchedID { get; set; }
+        public int NewFoodQuantity { get; set; }
 
         public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockInventoryCommand, bool>
         {
@@ -27,14 +23,9 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockInventoryCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.myFoodInventory.ID);
+                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.SearchedID);
 
-                _updatedFoodStock.Quantity = request.myFoodInventory.Quantity;
-                _updatedFoodStock.ExpirationDate = request.myFoodInventory.ExpirationDate;
-                _updatedFoodStock.ItemPrice = request.myFoodInventory.ItemPrice;
-                _updatedFoodStock.Remarks = request.myFoodInventory.Remarks;
-                _updatedFoodStock.FoodDetailsID = request.myFoodInventory.FoodDetailsID;
-                _updatedFoodStock.FoodRestockID = request.myFoodInventory.FoodRestockID;
+                _updatedFoodStock.Quantity = request.NewFoodQuantity;
 
                 await dbContext.SaveChangesAsync();
 

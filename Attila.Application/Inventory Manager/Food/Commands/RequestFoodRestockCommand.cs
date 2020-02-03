@@ -11,11 +11,8 @@ namespace Atilla.Application.Food.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {
-        private readonly FoodRestockRequest myFoodRestockRequest;
-        public RequestFoodRestockCommand(FoodRestockRequest myFoodRestockRequest)
-        {
-            this.myFoodRestockRequest = myFoodRestockRequest;
-        }
+
+        public FoodRestockRequest MyFoodRestockRequest { get; set; }
 
         public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, bool>
         {
@@ -28,10 +25,10 @@ namespace Atilla.Application.Food.Commands
             {
                 FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
-                    Quantity = request.myFoodRestockRequest.Quantity,
+                    Quantity = request.MyFoodRestockRequest.Quantity,
                     DateTimeRequest = DateTime.Now,
-                    FoodsDetailsID = request.myFoodRestockRequest.FoodsDetailsID,
-                    UserID = request.myFoodRestockRequest.UserID
+                    FoodsDetailsID = request.MyFoodRestockRequest.FoodsDetailsID,
+                    UserID = request.MyFoodRestockRequest.UserID
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
