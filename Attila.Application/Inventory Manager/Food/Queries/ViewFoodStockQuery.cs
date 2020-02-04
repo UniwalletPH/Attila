@@ -12,9 +12,6 @@ namespace Atilla.Application.Food.Queries
 {
     public class ViewFoodStockQuery : IRequest<IEnumerable<FoodInventory>>
     {
-        public ViewFoodStockQuery()
-        {
-        }
 
         public class ViewFoodStockQueryHandler : IRequestHandler<ViewFoodStockQuery, IEnumerable<FoodInventory>>
         {

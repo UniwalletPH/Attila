@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Atilla.Application.Food.Commands
 {
-    public class UpdateFoodDetailsInventoryCommand : IRequest<bool>
+    public class UpdateFoodDetailsCommand : IRequest<bool>
     {
         public FoodDetails MyFoodDetails { get; set; }
 
-        public class UpdateFoodDetailsInventoryCommandHandler : IRequestHandler<UpdateFoodDetailsInventoryCommand, bool>
+        public class UpdateFoodDetailsInventoryCommandHandler : IRequestHandler<UpdateFoodDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
             public UpdateFoodDetailsInventoryCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<bool> Handle(UpdateFoodDetailsInventoryCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(UpdateFoodDetailsCommand request, CancellationToken cancellationToken)
             {
                 var _updatedFoodDetails = dbContext.FoodsDetails.Find(request.MyFoodDetails.ID);
 
