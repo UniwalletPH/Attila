@@ -1,5 +1,6 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+﻿
+using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,10 +22,9 @@ namespace Attila.Application.Admin.Inventory.Queries
                 this.dbContext = dbContext;
             }
 
-            // TODO: put async await
-            public Task<List<EquipmentRestockRequest>> Handle(ViewAllEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentRestockRequest>> Handle(ViewAllEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _allRequest = dbContext.EquipmentRestockRequests.ToListAsync();
+                var _allRequest = await dbContext.EquipmentRestockRequests.ToListAsync();
 
                 return _allRequest;
             }

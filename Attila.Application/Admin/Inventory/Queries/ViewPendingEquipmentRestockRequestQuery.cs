@@ -1,5 +1,7 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+﻿
+using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,9 +24,8 @@ namespace Attila.Application.Admin.Inventory.Queries
 
             public async Task<List<EquipmentRestockRequest>> Handle(ViewPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _pendingRequest = dbContext.EquipmentRestockRequests
-                    // TODO: dont use .Equals, compare enum with enum
-                    .Where(a => a.Status.Equals(0));
+                var _pendingRequest = dbContext.EquipmentRestockRequests                  
+                    .Where(a => a.Status == Status.Pending);
 
                 return _pendingRequest.ToList();
             }
