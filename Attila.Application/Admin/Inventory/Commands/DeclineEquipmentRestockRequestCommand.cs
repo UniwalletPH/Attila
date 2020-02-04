@@ -1,6 +1,10 @@
-﻿using Attila.Application.Interfaces;
+﻿
+using Attila.Application.Interfaces;
 using Attila.Domain.Enums;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,14 +26,17 @@ namespace Atilla.Application.Admin.Equipment.Commands
             {
                 var _requestToDecline = dbContext.EquipmentRestockRequests.Find(request.RequestID);
 
-                // TODO: Always put checking of object is null before accessing it
+                if (_requestToDecline != null)
+                {
+                    _requestToDecline.Status = Status.Declined;
+                    await dbContext.SaveChangesAsync();
+                    return _requestToDecline.ID;
 
-                // this might throw object reference is not set to an instance of an object if object is null
-                _requestToDecline.Status = Status.Declined;
-                await dbContext.SaveChangesAsync();
-
-                return _requestToDecline.ID;
-
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }
             }
         }
     }
