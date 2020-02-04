@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Event.Queries
 {
-    public class ViewEventEquipmentRequestQuery : IRequest<List<EventEquipmentRequest>>
+    public class GetEventEquipmentRequestQuery : IRequest<List<EventEquipmentRequest>>
     {
         public int EventID { get; set; }
-        public class ViewEventEquipmentRequestQueryHandler : IRequestHandler<ViewEventEquipmentRequestQuery, List<EventEquipmentRequest>>
+        public class ViewEventEquipmentRequestQueryHandler : IRequestHandler<GetEventEquipmentRequestQuery, List<EventEquipmentRequest>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewEventEquipmentRequestQueryHandler(IAttilaDbContext dbContext)
@@ -20,7 +20,7 @@ namespace Attila.Application.Admin.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventEquipmentRequest>> Handle(ViewEventEquipmentRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventEquipmentRequest>> Handle(GetEventEquipmentRequestQuery request, CancellationToken cancellationToken)
             {
 
                 var _eventRequestRequirements = dbContext.EventEquipmentRequest

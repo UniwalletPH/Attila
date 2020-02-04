@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Inventory.Queries
 {
-    public class ViewPendingEquipmentRestockRequestQuery : IRequest<List<EquipmentRestockRequest>>
+    public class GetPendingEquipmentRestockRequestQuery : IRequest<List<EquipmentRestockRequest>>
     {
-        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<ViewPendingEquipmentRestockRequestQuery, List<EquipmentRestockRequest>>
+        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<GetPendingEquipmentRestockRequestQuery, List<EquipmentRestockRequest>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPendingEquipmentRestockRequestQueryHandler(IAttilaDbContext dbContext)
@@ -22,7 +22,7 @@ namespace Attila.Application.Admin.Inventory.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EquipmentRestockRequest>> Handle(ViewPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentRestockRequest>> Handle(GetPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
                 var _pendingRequest = dbContext.EquipmentRestockRequests                  
                     .Where(a => a.Status == Status.Pending);

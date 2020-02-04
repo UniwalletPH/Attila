@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Attila.Application.Admin.Food.Queries
 {
-    class ViewFoodRestockRequestList
+    class GetFoodRestockRequestList
     {
     }
 }

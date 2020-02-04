@@ -9,6 +9,9 @@ using Attila.Application.Admin.Queries;
 using Atilla.Application.Admin.Food.Queries;
 using Attila.Application.Admin.Food.Commands;
 using Attila.Application.Event.Queries;
+using Attila.Application.Admin.Inventory.Queries;
+using Attila.Application.Admin.Equipment.Commands;
+using Atilla.Application.Admin.Equipment.Commands;
 
 namespace Attila.Presentation.Administrator
 {
@@ -31,7 +34,7 @@ namespace Attila.Presentation.Administrator
             Console.WriteLine("1 - VIEW PENDING EVENT LIST");
             Console.WriteLine("2 - VIEW PAST EVENTS LIST");
             Console.WriteLine("3 - VIEW PENDING FOOD RESTOCK REQUEST");
-            Console.WriteLine("4 - VIEW REPORTS");
+            Console.WriteLine("4 -VIEW PENDING EQUIPMENT RESTOCK REQUEST");
 
 
 
@@ -45,12 +48,12 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine(" VIEW EVENT LIST");
 
-                    var _pendingEventList = await Mediator.Send(new ViewAllPendingEventsQuery());
+                    var _pendingEventList = await Mediator.Send(new GetAllPendingEventsQuery());
 
 
                     foreach (var item in _pendingEventList)
                     {
-                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}",item.ID, item.Code, item.EventName, item.Address, item.EventStatus);
+                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}", item.ID, item.Code, item.EventName, item.Address, item.EventStatus);
 
                     }
 
@@ -61,13 +64,13 @@ namespace Attila.Presentation.Administrator
 
 
 
-                    var _eventSelected = await Mediator.Send(new SearchEventByIdQuery { EventId = _toSearchID});
+                    var _eventSelected = await Mediator.Send(new SearchEventByIdQuery { EventId = _toSearchID });
 
 
                     Console.WriteLine("{0}    {1}    {2}    {3}   {4}", _eventSelected.ID, _eventSelected.Code, _eventSelected.EventName, _eventSelected.Address, _eventSelected.EventStatus);
 
                     Console.WriteLine("EVENT REQUIREMENTS");
-                    var _equipmentRequest = await Mediator.Send(new ViewEventEquipmentRequestQuery { EventID = _toSearchID});
+                    var _equipmentRequest = await Mediator.Send(new GetEventEquipmentRequestQuery { EventID = _toSearchID });
 
                     foreach (var item in _equipmentRequest)
                     {
@@ -78,11 +81,11 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine("EVENT ADDITIONAL EQUIPMENT REQUEST");
 
-                    var _additionalEquipmentRequest = await Mediator.Send(new ViewAdditionalEquipmentRequestListQuery { EventID = _toSearchID});
+                    var _additionalEquipmentRequest = await Mediator.Send(new GetAdditionalEquipmentRequestListQuery { EventID = _toSearchID });
 
                     foreach (var item in _additionalEquipmentRequest)
                     {
-                        Console.WriteLine("{0}    {1}  ", item.EquipmentDetails.Name , item.Quantity, item.Rate );
+                        Console.WriteLine("{0}    {1}  ", item.EquipmentDetails.Name, item.Quantity, item.Rate);
 
                     }
 
@@ -102,7 +105,7 @@ namespace Attila.Presentation.Administrator
                     else if (_optionNumber == "2")
 
                     {
-                        var _returnID = await Mediator.Send(new DeclineEventRequestCommand { EventID = _toSearchID});
+                        var _returnID = await Mediator.Send(new DeclineEventRequestCommand { EventID = _toSearchID });
 
                     }
                     else
@@ -120,7 +123,7 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine("VIEW PAST EVENTS");
 
-                    var _pastEventsList = await Mediator.Send(new ViewPastEventListQuery());
+                    var _pastEventsList = await Mediator.Send(new GetPastEventListQuery());
 
                     foreach (var item in _pastEventsList)
                     {
@@ -136,11 +139,11 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine("VIEW PENDING FOOD RESTOCK REQUESTS");
 
-                    var _pendingFoodRequest = await Mediator.Send(new ViewAllFoodRestockRequestListQuery {});
+                    var _pendingFoodRequest = await Mediator.Send(new GetAllFoodRestockRequestListQuery { });
 
                     foreach (var item in _pendingFoodRequest)
                     {
-                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}",item.FoodDetails.Name, item.Quantity, item.Status );
+                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}", item.FoodDetails.Name, item.Quantity, item.Status);
 
                     }
 
@@ -180,7 +183,45 @@ namespace Attila.Presentation.Administrator
                 case "4":
 
 
-                    Console.WriteLine("VIEW REPORTS");
+                    Console.WriteLine("VIEW PENDING EQUIPMENT RESTOCK REQUEST");
+
+                    var _pendingEquipmentReq = await Mediator.Send(new GetPendingEquipmentRestockRequestQuery {});
+
+                    foreach (var item in _pendingEquipmentReq)
+                    {
+                        Console.WriteLine("{0}    {1}    {2}", item.ID, item.EquipmentDetailsID, item.Quantity , item.EquipmentDetails.Name);
+                    }
+
+
+                    Console.WriteLine("SELECT REQUEST");
+                    Console.WriteLine("ENTER  ID TO APPROVE/DECLINE");
+                    var _selectedThing = Console.ReadLine();
+                    var _selectedReqID = Int32.Parse(_selectedThing);
+
+
+                    Console.WriteLine("1 = APPROVE | 2 = DECLINE ");
+                    string _opNum = Console.ReadLine();
+
+                    if (_opNum == "1")
+                    {
+
+                        var _retVal = await Mediator.Send(new ApproveEquipmentRestockRequestCommand { RequestID = _selectedReqID });
+
+                    }
+
+                    else if (_opNum == "2")
+
+                    {
+                        var _returnID = await Mediator.Send(new DeclineEquipmentRestockRequestCommand { RequestID = _selectedReqID });
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                    }
+
+
+
 
 
                     goto start;

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Atilla.Application.Admin.Food.Queries
 {
-    public class ViewAllFoodRestockRequestListQuery : IRequest<List<FoodRestockRequest>>
+    public class GetAllFoodRestockRequestListQuery : IRequest<List<FoodRestockRequest>>
     {
-        public class ViewAllFoodRestockRequestListHandler : IRequestHandler<ViewAllFoodRestockRequestListQuery, List<FoodRestockRequest>>
+        public class ViewAllFoodRestockRequestListHandler : IRequestHandler<GetAllFoodRestockRequestListQuery, List<FoodRestockRequest>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewAllFoodRestockRequestListHandler(IAttilaDbContext dbContext)
@@ -18,7 +18,7 @@ namespace Atilla.Application.Admin.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async  Task<List<FoodRestockRequest>> Handle(ViewAllFoodRestockRequestListQuery request, CancellationToken cancellationToken)
+            public async  Task<List<FoodRestockRequest>> Handle(GetAllFoodRestockRequestListQuery request, CancellationToken cancellationToken)
             {
                 var _foodRestockRequests = await dbContext.FoodRestockRequests.ToListAsync();
 

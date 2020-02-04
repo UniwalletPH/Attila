@@ -17,6 +17,8 @@ namespace Attila.Domain.Entities
         public DateTime DateTimeRequest { get; set; }
 
         public int EquipmentDetailsID { get; set; }
+
+        public EquipmentDetails EquipmentDetails { get; set; }
         
         public Status Status { get; set; }
 
