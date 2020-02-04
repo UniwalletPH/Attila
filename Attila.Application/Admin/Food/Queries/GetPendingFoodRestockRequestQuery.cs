@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Food.Queries
 {
-    public class ViewPendingFoodRestockRequestQuery : IRequest<List<FoodRestockRequest>>
+    public class GetPendingFoodRestockRequestQuery : IRequest<List<FoodRestockRequest>>
     {
-        public class ViewPendingFoodRestockRequestQueryHandler : IRequestHandler<ViewPendingFoodRestockRequestQuery, List<FoodRestockRequest>>
+        public class ViewPendingFoodRestockRequestQueryHandler : IRequestHandler<GetPendingFoodRestockRequestQuery, List<FoodRestockRequest>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPendingFoodRestockRequestQueryHandler(IAttilaDbContext dbContext)
@@ -20,7 +20,7 @@ namespace Attila.Application.Admin.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async  Task<List<FoodRestockRequest>> Handle(ViewPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
+            public async  Task<List<FoodRestockRequest>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
             {
                 var _pendingFoodRestock = dbContext.FoodRestockRequests                 
                     .Where(a => a.Status == Status.Pending);
