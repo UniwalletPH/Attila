@@ -14,10 +14,11 @@ namespace Attila.Domain.Entities.Tables
         public int EventEquipmentsID { get; set; }
 
         public decimal Rate { get; set; }
-
-        public int EventDetailsID { get; set; }
+        
 
         public Status Status { get; set; }
+
+        public int EventDetailsID { get; set; }
 
     }
 }

@@ -129,7 +129,7 @@ namespace Attila.Presentation.InventoryManager
                         case "2":
 
                             Console.WriteLine();
-                            var _viewFoodDetails = await Mediator.Send(new ViewFoodDetailsQuery());
+                            var _viewFoodDetails = await Mediator.Send(new GetFoodDetailsQuery());
 
                             foreach (var item in _viewFoodDetails)
                             {
@@ -194,7 +194,7 @@ namespace Attila.Presentation.InventoryManager
                         #region View Food Details Query
                         case "3":
 
-                            var _viewFoodDetailsQuery = await Mediator.Send(new ViewFoodDetailsQuery());
+                            var _viewFoodDetailsQuery = await Mediator.Send(new GetFoodDetailsQuery());
 
                             foreach (var item in _viewFoodDetailsQuery)
                             {
@@ -216,7 +216,7 @@ namespace Attila.Presentation.InventoryManager
                         case "4":
 
                             Console.WriteLine();
-                            var _viewFoodStockQuery = await Mediator.Send(new ViewFoodStockQuery());
+                            var _viewFoodStockQuery = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewFoodStockQuery)
                             {
@@ -235,7 +235,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Update Food Details Command
                         case "5":
 
-                            var _viewFoodDetailsQuery1 = await Mediator.Send(new ViewFoodDetailsQuery());
+                            var _viewFoodDetailsQuery1 = await Mediator.Send(new GetFoodDetailsQuery());
 
                             foreach (var item in _viewFoodDetailsQuery1)
                             {
@@ -317,7 +317,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine();
 
                             Console.WriteLine();
-                            var _viewFoodStockQuery1 = await Mediator.Send(new ViewFoodStockQuery());
+                            var _viewFoodStockQuery1 = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewFoodStockQuery1)
                             {
@@ -355,7 +355,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Delete Food Details Command
                         case "7":
 
-                            var _viewFoodDetailsQuery2 = await Mediator.Send(new ViewFoodDetailsQuery());
+                            var _viewFoodDetailsQuery2 = await Mediator.Send(new GetFoodDetailsQuery());
 
                             foreach (var item in _viewFoodDetailsQuery2)
                             {
@@ -397,7 +397,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Request Food Stock Command
                         case "8":
 
-                            var _viewFoodDetailsQuery3 = await Mediator.Send(new ViewFoodDetailsQuery());
+                            var _viewFoodDetailsQuery3 = await Mediator.Send(new GetFoodDetailsQuery());
 
                             foreach (var item in _viewFoodDetailsQuery3)
                             {
@@ -581,7 +581,7 @@ namespace Attila.Presentation.InventoryManager
                         case "2":
 
                             Console.WriteLine();
-                            var _viewEquipmentDetails = await Mediator.Send(new ViewEquipmentDetailsQuery());
+                            var _viewEquipmentDetails = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewEquipmentDetails)
                             {
@@ -639,7 +639,7 @@ namespace Attila.Presentation.InventoryManager
                         #region View Equipment Details Query
                         case "3":
 
-                            var _viewequipmentsubstartDetailsQuery = await Mediator.Send(new ViewEquipmentDetailsQuery());
+                            var _viewequipmentsubstartDetailsQuery = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewequipmentsubstartDetailsQuery)
                             {
@@ -660,7 +660,7 @@ namespace Attila.Presentation.InventoryManager
                         case "4":
 
                             Console.WriteLine();
-                            var _viewEquipmentStockQuery = await Mediator.Send(new ViewFoodStockQuery());
+                            var _viewEquipmentStockQuery = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewEquipmentStockQuery)
                             {
@@ -679,7 +679,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Update Equipment Details Command
                         case "5":
 
-                            var _viewEquipmentDetailsQuery1 = await Mediator.Send(new ViewEquipmentDetailsQuery());
+                            var _viewEquipmentDetailsQuery1 = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewEquipmentDetailsQuery1)
                             {
@@ -755,7 +755,7 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine();
 
                             Console.WriteLine();
-                            var _viewEquipmentStockQuery1 = await Mediator.Send(new ViewFoodStockQuery());
+                            var _viewEquipmentStockQuery1 = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewEquipmentStockQuery1)
                             {
@@ -793,7 +793,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Delete Equipment Details Command
                         case "7":
 
-                            var _viewEquipmentDetailsQuery2 = await Mediator.Send(new ViewEquipmentDetailsQuery());
+                            var _viewEquipmentDetailsQuery2 = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewEquipmentDetailsQuery2)
                             {
@@ -833,7 +833,7 @@ namespace Attila.Presentation.InventoryManager
                         #region Request Equipment Stock Command
                         case "8":
 
-                            var _viewEquipmentDetailsQuery3 = await Mediator.Send(new ViewEquipmentDetailsQuery());
+                            var _viewEquipmentDetailsQuery3 = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewEquipmentDetailsQuery3)
                             {
