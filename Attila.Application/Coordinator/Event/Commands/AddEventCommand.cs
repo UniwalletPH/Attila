@@ -39,6 +39,7 @@ namespace Attila.Application.Event.Commands
                     EventPackageDetailsID = request.EventDetails.EventPackageDetailsID,
                     Location = request.EventDetails.Location,         
                     Remarks = request.EventDetails.Remarks,
+                    UserID = request.EventDetails.UserID,
                     EventStatus = Status.Pending
                 
                 };

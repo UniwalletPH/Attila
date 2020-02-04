@@ -76,10 +76,6 @@ namespace Attila.Presentation.Coordinator
 
                     Console.WriteLine("EVENT INFORMATION\n");
 
-                    Console.WriteLine("Please enter client ID: ");
-                    var _addEventClientId = Console.ReadLine();
-                    int _addEventClientId2 = int.Parse(_addEventClientId);
-
                     Console.WriteLine("Please enter event name: ");
                     var _addEventName = Console.ReadLine();
 
