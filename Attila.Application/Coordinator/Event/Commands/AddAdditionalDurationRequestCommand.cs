@@ -11,10 +11,8 @@ namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        // TODO: please use public property
         public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
 
-        // TODO: remove constructor in Command
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -26,7 +24,6 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                // TODO: check if request.additionalPackage is not null
                 if(request.AdditionalPackage != null)
                 {
                     var _additionalDuration = new PackageAdditionalDurationRequest
