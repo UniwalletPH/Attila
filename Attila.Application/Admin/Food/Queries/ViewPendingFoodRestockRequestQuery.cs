@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
