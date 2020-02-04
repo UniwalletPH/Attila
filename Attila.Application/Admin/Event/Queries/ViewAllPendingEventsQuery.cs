@@ -23,9 +23,7 @@ namespace Attila.Application.Admin.Event.Queries
             public async Task<List<EventDetails>> Handle(ViewAllPendingEventsQuery request, CancellationToken cancellationToken)
             {
                 var _pendingEvents = dbContext.EventsDetails
-                    // TODO: dont use .Equals to compare object, use == instead
-                    // TODO: EventStatus is an Enum, compare it with  enum values also
-                    .Where(a => a.EventStatus.Equals(0));
+                    .Where(a => a.EventStatus == Status.Pending);
 
                 return _pendingEvents.ToList();
             }

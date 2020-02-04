@@ -25,16 +25,17 @@ namespace Attila.Application.Admin.Commands
             {
                 var _toApprove = dbContext.EventsDetails.Find(request.EventID);
 
-                // TODO: Always put checking of object is null before accessing it
-                // this might throw object reference is not set to an instance of an object if _toApprove is null
-                _toApprove.EventStatus = Status.Approved;
-
-                await dbContext.SaveChangesAsync();
-
-                return _toApprove.ID;
+                if (_toApprove != null)
+                {
+                    _toApprove.EventStatus = Status.Approved;
+                    await dbContext.SaveChangesAsync();
+                    return _toApprove.ID;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }          
             }
         }
-
-    }
-    
+    }    
 }

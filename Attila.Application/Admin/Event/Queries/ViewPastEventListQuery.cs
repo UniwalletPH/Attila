@@ -23,9 +23,8 @@ namespace Attila.Application.Admin.Queries
 
             public async Task<List<EventDetails>> Handle(ViewPastEventListQuery request, CancellationToken cancellationToken)
             {
-                var _list = dbContext.EventsDetails
-                    // TODO: this is not a past events, this is future events
-                    .Where(a => a.EventDate > DateTime.Now);
+                var _list = dbContext.EventsDetails                    
+                    .Where(a => a.EventDate < DateTime.Now);
 
                 return _list.ToList();
 

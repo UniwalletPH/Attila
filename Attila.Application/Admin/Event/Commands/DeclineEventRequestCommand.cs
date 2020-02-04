@@ -25,12 +25,18 @@ namespace Attila.Application.Admin.Commands
             {
                 var _toDecline = dbContext.EventsDetails.Find(request.EventID);
 
+                if (_toDecline != null)
+                {
+                    _toDecline.EventStatus = Status.Declined;
 
-                _toDecline.EventStatus = Status.Declined;
+                    await dbContext.SaveChangesAsync();
 
-                await dbContext.SaveChangesAsync();
-
-                return _toDecline.ID;
+                    return _toDecline.ID;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }            
             }
         }
     }
