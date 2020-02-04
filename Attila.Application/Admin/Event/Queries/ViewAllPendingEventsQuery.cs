@@ -1,11 +1,9 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,7 +25,7 @@ namespace Attila.Application.Admin.Event.Queries
                 var _pendingEvents = dbContext.EventsDetails
                     // TODO: dont use .Equals to compare object, use == instead
                     // TODO: EventStatus is an Enum, compare it with  enum values also
-                    .Where(a => a.EventStatus.Equals(0)) ;
+                    .Where(a => a.EventStatus.Equals(0));
 
                 return _pendingEvents.ToList();
             }

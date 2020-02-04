@@ -1,13 +1,11 @@
-﻿using Atilla.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Attila.Application.Admin.Event.Queries
 {
