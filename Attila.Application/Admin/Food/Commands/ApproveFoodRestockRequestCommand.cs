@@ -25,6 +25,9 @@ namespace Atilla.Application.Admin.Food.Commands
             {
                 var _requestToApproved = dbContext.FoodRestockRequests.Find(request.RequestID);
 
+                // TODO: Always put checking of object is null before accessing it
+
+                // this might throw object reference is not set to an instance of an object if object is null
                 _requestToApproved.Status = Status.Approved;
 
                 await dbContext.SaveChangesAsync();

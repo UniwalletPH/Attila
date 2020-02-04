@@ -22,8 +22,9 @@ namespace Attila.Application.Admin.Inventory.Queries
 
             public async Task<List<EquipmentRestockRequest>> Handle(ViewPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _pendingRequest = dbContext.EquipmentRestockRequests.Where
-                    (a => a.Status.Equals(0));
+                var _pendingRequest = dbContext.EquipmentRestockRequests
+                    // TODO: dont use .Equals, compare enum with enum
+                    .Where(a => a.Status.Equals(0));
 
                 return _pendingRequest.ToList();
             }

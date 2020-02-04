@@ -26,7 +26,9 @@ namespace Atilla.Application.Admin.Food.Commands
             public async Task<int> Handle(DeclineFoodRestockRequestCommand request, CancellationToken cancellationToken)
             {
                 var _requestToDecline = dbContext.FoodRestockRequests.Find(request.RequestID);
+                // TODO: Always put checking of object is null before accessing it
 
+                // this might throw object reference is not set to an instance of an object if _toApprove is null
                 _requestToDecline.Status = Status.Declined;
 
                 await dbContext.SaveChangesAsync();

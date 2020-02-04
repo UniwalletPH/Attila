@@ -26,6 +26,7 @@ namespace Atilla.Application.Admin.Equipment.Queries
             {
                 var _additionalEquipments = dbContext.PackageAdditionalEquipmentRequests
                     .Include(a => a.EquipmentDetails)
+                    // TODO: dont use .Equals to compare object, use == instead
                     .Where(a => a.EventDetailsID.Equals(request.EventID));
 
                 return _additionalEquipments.ToList();

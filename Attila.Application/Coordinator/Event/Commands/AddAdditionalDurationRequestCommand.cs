@@ -11,7 +11,10 @@ namespace Atilla.Application.Event.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
+        // TODO: please use public property
         private readonly PackageAdditionalDurationRequest additionalPackage;
+
+        // TODO: remove constructor in Command
         public AddAdditionalDurationRequestCommand(PackageAdditionalDurationRequest _additionalPackage)
         {
             _additionalPackage = additionalPackage;
@@ -28,6 +31,7 @@ namespace Atilla.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
+                // TODO: check if request.additionalPackage is not null
                 var _additionalDuration = new PackageAdditionalDurationRequest
                 {
                     EventDetailsID = request.additionalPackage.EventDetailsID,

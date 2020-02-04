@@ -21,6 +21,7 @@ namespace Attila.Application.Admin.Inventory.Queries
                 this.dbContext = dbContext;
             }
 
+            // TODO: put async await
             public Task<List<EquipmentRestockRequest>> Handle(ViewAllEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
                 var _allRequest = dbContext.EquipmentRestockRequests.ToListAsync();
