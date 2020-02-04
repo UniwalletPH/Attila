@@ -12,6 +12,7 @@ using Attila.Application.Event.Queries;
 using Attila.Application.Admin.Inventory.Queries;
 using Attila.Application.Admin.Equipment.Commands;
 using Atilla.Application.Admin.Equipment.Commands;
+using Attila.Application.Admin.Food.Queries;
 
 namespace Attila.Presentation.Administrator
 {
@@ -139,7 +140,7 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine("VIEW PENDING FOOD RESTOCK REQUESTS");
 
-                    var _pendingFoodRequest = await Mediator.Send(new GetAllFoodRestockRequestListQuery { });
+                    var _pendingFoodRequest = await Mediator.Send(new GetPendingFoodRestockRequestQuery { });
 
                     foreach (var item in _pendingFoodRequest)
                     {
