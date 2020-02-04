@@ -242,32 +242,17 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EventEquipmentsID")
-                        .HasColumnType("int");
-
                     b.Property<string>("EventName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EventPackageDetailsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventPaymentStatusID")
-                        .HasColumnType("int");
-
                     b.Property<byte>("EventStatus")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("EventTeamID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PackageAdditionalDurationRequestID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PackageAdditionalEquipmentRequestID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
@@ -340,6 +325,9 @@ namespace Attila.Infrastructure.Migrations
 
                     b.Property<DateTime>("DateOfPayment")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("EventDetailsID")
+                        .HasColumnType("int");
 
                     b.Property<string>("ReferenceNumber")
                         .HasColumnType("nvarchar(max)");
