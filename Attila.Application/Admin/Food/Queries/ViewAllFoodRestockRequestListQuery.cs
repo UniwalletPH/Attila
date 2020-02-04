@@ -1,11 +1,8 @@
-﻿
-using Attila.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

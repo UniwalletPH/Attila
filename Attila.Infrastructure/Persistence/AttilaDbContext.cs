@@ -25,8 +25,6 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EventEquipments> EventsEquipments { get; set; }
 
-        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
-
         public DbSet<EventPackageDetails> EventsPackageDetails { get; set; }
 
         public DbSet<EventPaymentStatus> EventsPaymentStatus { get; set; }

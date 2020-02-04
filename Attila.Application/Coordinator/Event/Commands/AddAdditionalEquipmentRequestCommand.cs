@@ -14,14 +14,9 @@ namespace Attila.Application.Event.Commands
     public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
     {
         // TODO: use public property
-        private readonly PackageAdditionalEquipmentRequest additionalEquipment;
+        public PackageAdditionalEquipmentRequest AdditionalEquipment { get; set; }
 
         // TODO: remove constructor
-        public AddAdditionalEquipmentRequestCommand(PackageAdditionalEquipmentRequest _additionalEquipment)
-        {
-            _additionalEquipment = additionalEquipment;
-        }
-
         public class AddAdditionalEquipmentRequestCommandHandler : IRequestHandler<AddAdditionalEquipmentRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -36,9 +31,9 @@ namespace Attila.Application.Event.Commands
                 // TODO: can't build, check first before check in.
                 var _additionalEquipment = new PackageAdditionalEquipmentRequest
                 {
-                    EventDetailsID = request.AddEquipment.EventDetailsID,
-                    EventEquipmentsID = request.AddEquipment.EventEquipmentsID,
-                    Rate = request.AddEquipment.Rate,
+                    EventDetailsID = request.AdditionalEquipment.EventDetailsID,
+                    EventEquipmentsID = request.AdditionalEquipment.EventEquipmentsID,
+                    Rate = request.AdditionalEquipment.Rate,
                     Status = Status.Pending
                     
                 };
