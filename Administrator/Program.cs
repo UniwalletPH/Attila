@@ -2,13 +2,13 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Atilla.Application.Admin.Queries;
-using Atilla.Application.Event.Queries;
-using Atilla.Application.Admin.Commands;
 using Attila.Application.Admin.Event.Queries;
-using Atilla.Application.Admin.Equipment.Queries;
+using Attila.Application.Admin.Equipment.Queries;
+using Attila.Application.Admin.Commands;
+using Attila.Application.Admin.Queries;
 using Atilla.Application.Admin.Food.Queries;
-using Atilla.Application.Admin.Food.Commands;
+using Attila.Application.Admin.Food.Commands;
+using Attila.Application.Event.Queries;
 
 namespace Attila.Presentation.Administrator
 {
@@ -61,7 +61,7 @@ namespace Attila.Presentation.Administrator
 
 
 
-                    var _eventSelected = await Mediator.Send(new SearchEventByIdQuery(_toSearchID));
+                    var _eventSelected = await Mediator.Send(new SearchEventByIdQuery { EventId = _toSearchID});
 
 
                     Console.WriteLine("{0}    {1}    {2}    {3}   {4}", _eventSelected.ID, _eventSelected.Code, _eventSelected.EventName, _eventSelected.Address, _eventSelected.EventStatus);
@@ -192,5 +192,7 @@ namespace Attila.Presentation.Administrator
 
             }
         }
+
+       
     }
 }

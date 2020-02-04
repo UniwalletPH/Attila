@@ -21,6 +21,8 @@ namespace Attila.Domain.Entities.Tables
 
         public Status Status { get; set; }
 
+        public int Quantity { get; set; }
+
 
 
     }
