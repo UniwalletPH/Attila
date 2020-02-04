@@ -143,7 +143,7 @@ namespace Attila.Presentation.Administrator
 
                     foreach (var item in _pendingFoodRequest)
                     {
-                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}", item.FoodDetails.Name, item.Quantity, item.Status);
+                        Console.WriteLine("{0}    {1}    {2}", item.FoodDetails.Name, item.Quantity, item.Status);
 
                     }
 

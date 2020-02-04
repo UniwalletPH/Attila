@@ -23,7 +23,5 @@ namespace Attila.Domain.Entities.Tables
 
         public int Quantity { get; set; }
 
-
-
     }
 }
