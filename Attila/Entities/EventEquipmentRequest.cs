@@ -1,4 +1,5 @@
-﻿using Attila.Domain.Enums;
+﻿using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,6 +15,8 @@ namespace Attila.Domain.Entities
         public int EventDetailsID { get; set; }
 
         public int EquipmentDetailsID { get; set; }
+
+        public EquipmentDetails EquipmentDetails { get; set; }
 
         public int Quantity { get; set; }
 
