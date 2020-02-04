@@ -1,5 +1,5 @@
-﻿using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
+﻿using Atilla.Application.Interfaces;
+using Atilla.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,16 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
     public class SearchEquipmentByIdQuery : IRequest<EquipmentInventory>
     {
-        private readonly int searchedID;
-
-        public SearchEquipmentByIdQuery(int searchedID)
-        {
-            this.searchedID = searchedID;
-        }
+        public int SearchedID { get; set; }
 
         public class SearchEquipmentByIdQueryHandler : IRequestHandler<SearchEquipmentByIdQuery, EquipmentInventory>
         {
@@ -28,7 +23,7 @@ namespace Attila.Application.Equipment.Queries
             }
             public async Task<EquipmentInventory> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
             {
-                EquipmentInventory _searchedEquipmentInventory = dbContext.EquipmentsInventory.Find(request.searchedID);
+                EquipmentInventory _searchedEquipmentInventory = dbContext.EquipmentsInventory.Find(request.SearchedID);
 
                 return _searchedEquipmentInventory;
             }

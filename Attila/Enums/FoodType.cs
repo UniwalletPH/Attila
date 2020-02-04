@@ -6,8 +6,8 @@ namespace Attila.Domain.Entities.Enums
 {
     public enum FoodType : byte
     {
-        Perishable = 0,
-        NonPerishable = 1,
-        Others = 2
+        Perishable = 1,
+        NonPerishable = 2,
+        Others = 3
     }
 }

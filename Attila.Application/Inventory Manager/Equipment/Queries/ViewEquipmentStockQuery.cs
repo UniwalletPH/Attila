@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
     public class ViewEquipmentStockQuery : IRequest<IEnumerable<EquipmentInventory>>
     {

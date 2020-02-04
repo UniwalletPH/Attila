@@ -6,6 +6,6 @@ namespace Attila.Application.Admin.Equipment.Queries
 {
     class GenerateEquipmentOverallReportQuery
     {
-        // TODO: logic?
+      
     }
 }

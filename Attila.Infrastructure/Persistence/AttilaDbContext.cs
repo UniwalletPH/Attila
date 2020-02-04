@@ -10,6 +10,7 @@ namespace Attila.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
         public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
 
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }

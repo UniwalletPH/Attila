@@ -8,17 +8,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class SearchEquipmentByKeywordQuery : IRequest<IEnumerable<EquipmentInventory>>
+    public class SearchEquipmentByKeywordQuery : IRequest<IEnumerable<EquipmentDetails>>
     {
-        private readonly string searchedKeyword;
-        public SearchEquipmentByKeywordQuery(string searchedKeyword)
-        {
-            this.searchedKeyword = searchedKeyword;
-        }
+        public string SearchedKeyword { get; set; }
 
-        public class SearchEquipmentByKeywordQueryHandler : IRequestHandler<SearchEquipmentByKeywordQuery, IEnumerable<EquipmentInventory>>
+        public class SearchEquipmentByKeywordQueryHandler : IRequestHandler<SearchEquipmentByKeywordQuery, IEnumerable<EquipmentDetails>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -26,12 +22,15 @@ namespace Attila.Application.Equipment.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<EquipmentInventory>> Handle(SearchEquipmentByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentDetails>> Handle(SearchEquipmentByKeywordQuery request, CancellationToken cancellationToken)
             {
-                var _searchedKeyword = dbContext.EquipmentsInventory.Where(a => a.Remarks.Contains(request.searchedKeyword));
+                var _searchedKeyword = dbContext.EquipmentsDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
+                                                                         a.Code.Contains(request.SearchedKeyword) ||
+                                                                         a.Description.Contains(request.SearchedKeyword));
 
                 return _searchedKeyword.ToList();
             }
         }
     }
 }
+

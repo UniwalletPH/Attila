@@ -8,17 +8,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class ViewEquipmentDetailsQuery : IRequest<IEnumerable<EquipmentDetails>>
     {
-        private readonly int searchedID;
-
-        public ViewEquipmentDetailsQuery (int searchedID)
-        {
-            this.searchedID = searchedID;
-        }
-
         public class ViewEquipmentDetailsQueryHandler : IRequestHandler<ViewEquipmentDetailsQuery, IEnumerable<EquipmentDetails>>
         {
             private readonly IAttilaDbContext dbContext;

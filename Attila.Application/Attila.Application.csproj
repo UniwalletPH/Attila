@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Admin\Inventory\Commands\" />
     <Folder Include="Common\Base\" />
   </ItemGroup>
 

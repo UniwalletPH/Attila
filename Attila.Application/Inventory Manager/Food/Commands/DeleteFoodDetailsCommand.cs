@@ -2,34 +2,34 @@
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Food.Commands
 {
-    public class DeleteFoodDetailsInventoryCommand : IRequest<bool>
+    public class DeleteFoodDetailsCommand : IRequest<bool>
     {
-        private readonly int deleteSearchedID;
-        public DeleteFoodDetailsInventoryCommand(int deleteSearchedID)
-        {
-            this.deleteSearchedID = deleteSearchedID;
-        }
+        public int DeleteSearchedID { get; set; }
 
-        public class DeleteFoodDetailsInventoryCommandHandler : IRequestHandler<DeleteFoodDetailsInventoryCommand, bool>
+        public class DeleteFoodDetailsInventoryCommandHandler : IRequestHandler<DeleteFoodDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
             public DeleteFoodDetailsInventoryCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<bool> Handle(DeleteFoodDetailsInventoryCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(DeleteFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _deleteFoodDetails = dbContext.FoodsInventory.Find(request.deleteSearchedID);
+                var _deleteFoodDetails = dbContext.FoodsDetails.Find(request.DeleteSearchedID);
 
                 if (_deleteFoodDetails != null)
                 {
-                    dbContext.FoodsInventory.Remove(_deleteFoodDetails);
+                    dbContext.FoodsDetails.Remove(_deleteFoodDetails);
+
+                    var _deleteFoodInventory = dbContext.FoodsInventory.Where(a => a.FoodDetailsID == request.DeleteSearchedID).ToList();
+                    dbContext.FoodsInventory.RemoveRange(_deleteFoodInventory);
                 }
                 else
                 {

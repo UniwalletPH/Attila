@@ -6,9 +6,9 @@ namespace Attila.Domain.Enums
 {
     public enum UnitType : byte
     {
-        Piece = 0,
-        Box = 1,
-        Dozen = 2,
-        Others = 3
+        Piece = 1,
+        Box = 2,
+        Dozen = 3,
+        Others = 4
     }
 }

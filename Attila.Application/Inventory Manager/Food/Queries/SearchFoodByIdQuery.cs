@@ -11,12 +11,7 @@ namespace Attila.Application.Food.Queries
 {
     public class SearchFoodByIdQuery : IRequest<FoodInventory>
     {
-        private readonly int searchedID;
-
-        public SearchFoodByIdQuery(int searchedID)
-        {
-            this.searchedID = searchedID;
-        }
+        public int SearchedID { get; set; }
 
         public class SearchFoodByIdQueryHandler : IRequestHandler<SearchFoodByIdQuery, FoodInventory>
         {
@@ -28,7 +23,7 @@ namespace Attila.Application.Food.Queries
             }
             public async Task<FoodInventory> Handle(SearchFoodByIdQuery request, CancellationToken cancellationToken)
             {
-                FoodInventory _searchedFoodInventory = dbContext.FoodsInventory.Find(request.searchedID);
+                FoodInventory _searchedFoodInventory = dbContext.FoodsInventory.Find(request.SearchedID);
 
                 return _searchedFoodInventory;
             }

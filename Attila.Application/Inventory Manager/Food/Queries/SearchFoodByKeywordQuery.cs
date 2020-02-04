@@ -10,15 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Food.Queries
 {
-    public class SearchFoodByKeywordQuery : IRequest<IEnumerable<FoodInventory>>
+    public class SearchFoodByKeywordQuery : IRequest<IEnumerable<FoodDetails>>
     {
-        private readonly string searchedKeyword;
-        public SearchFoodByKeywordQuery(string searchedKeyword)
-        {
-            this.searchedKeyword = searchedKeyword;
-        }
+        public string SearchedKeyword { get; set; }
 
-        public class SearchFoodByKeywordQueryHandler : IRequestHandler<SearchFoodByKeywordQuery, IEnumerable<FoodInventory>>
+        public class SearchFoodByKeywordQueryHandler : IRequestHandler<SearchFoodByKeywordQuery, IEnumerable<FoodDetails>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -26,9 +22,12 @@ namespace Attila.Application.Food.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<FoodInventory>> Handle(SearchFoodByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<FoodDetails>> Handle(SearchFoodByKeywordQuery request, CancellationToken cancellationToken)
             {
-                var _searchedKeyword = dbContext.FoodsInventory.Where(a => a.Remarks.Contains(request.searchedKeyword));
+                var _searchedKeyword = dbContext.FoodsDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
+                                                                         a.Code.Contains(request.SearchedKeyword) ||
+                                                                         a.Specification.Contains(request.SearchedKeyword) ||
+                                                                         a.Description.Contains(request.SearchedKeyword));
 
                 return _searchedKeyword.ToList();
             }
