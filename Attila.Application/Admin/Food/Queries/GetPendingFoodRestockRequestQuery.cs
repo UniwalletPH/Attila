@@ -3,6 +3,7 @@ using Attila.Domain.Entities;
 using Attila.Domain.Enums;
 using MediatR;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -22,7 +23,8 @@ namespace Attila.Application.Admin.Food.Queries
 
             public async  Task<List<FoodRestockRequest>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _pendingFoodRestock = dbContext.FoodRestockRequests                 
+                var _pendingFoodRestock = dbContext.FoodRestockRequests
+                    .Include(a => a.FoodDetails)
                     .Where(a => a.Status == Status.Pending);
 
                 return _pendingFoodRestock.ToList();
