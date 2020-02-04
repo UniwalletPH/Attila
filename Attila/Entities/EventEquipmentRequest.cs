@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Atilla.Domain.Entities.Tables;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,8 @@ namespace Attila.Domain.Entities
         public int EventDetailsID { get; set; }
 
         public int EquipmentDetailsID { get; set; }
+
+        public EquipmentDetails EquipmentDetails { get; set; }
 
         public int Quantity { get; set; }
 

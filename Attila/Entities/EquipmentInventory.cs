@@ -15,7 +15,6 @@ namespace Atilla.Domain.Entities.Tables
 
         public DateTime EncodingDate { get; set; }
 
-
         public decimal ItemPrice { get; set; }
 
         public string Remarks { get; set; }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Atilla.Application.Admin.Equipment.Commands
 {
-    public class ApproveAdditionalEquipmentRequestCommand : IRequest<int>
+    public class ApproveEquipmentRestockRequestCommand : IRequest<int>
     {
         public int RequestID { get; set; }
 
-        public class ApproveAdditionalEquipmentRequestCommandHandler : IRequestHandler<ApproveAdditionalEquipmentRequestCommand, int>
+        public class ApproveAdditionalEquipmentRequestCommandHandler : IRequestHandler<ApproveEquipmentRestockRequestCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -24,7 +24,7 @@ namespace Atilla.Application.Admin.Equipment.Commands
             
             }
 
-            public async  Task<int> Handle(ApproveAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
+            public async  Task<int> Handle(ApproveEquipmentRestockRequestCommand request, CancellationToken cancellationToken)
             {
                 var _requestToApprove = dbContext.EquipmentRestockRequests.Find(request.RequestID);
                 _requestToApprove.Status = Status.Approved;

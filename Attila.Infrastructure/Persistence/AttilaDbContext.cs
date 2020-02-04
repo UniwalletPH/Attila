@@ -5,11 +5,13 @@ using System.Text;
 using Atilla.Domain.Entities.Tables;
 using Atilla.Application.Interfaces;
 using Atilla.Domain.Entities;
+using Attila.Domain.Entities;
 
 namespace Atilla.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
         public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
 
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }

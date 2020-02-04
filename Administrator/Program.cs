@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using Atilla.Application.Admin.Queries;
 using Atilla.Application.Event.Queries;
 using Atilla.Application.Admin.Commands;
+using Attila.Application.Admin.Event.Queries;
+using Atilla.Application.Admin.Equipment.Queries;
+using Atilla.Application.Admin.Food.Queries;
+using Atilla.Application.Admin.Food.Commands;
 
 namespace Attila.Presentation.Administrator
 {
@@ -24,9 +28,9 @@ namespace Attila.Presentation.Administrator
 
             Console.WriteLine("ADMINISTRATOR");
             Console.WriteLine("YOUR OPTIONS");
-            Console.WriteLine("1 - VIEW EVENT LIST");
+            Console.WriteLine("1 - VIEW PENDING EVENT LIST");
             Console.WriteLine("2 - VIEW PAST EVENTS LIST");
-            Console.WriteLine("3 - VIEW NOTIFICATION");
+            Console.WriteLine("3 - VIEW PENDING FOOD RESTOCK REQUEST");
             Console.WriteLine("4 - VIEW REPORTS");
 
 
@@ -41,10 +45,10 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine(" VIEW EVENT LIST");
 
-                    var _eventList = await Mediator.Send(new ViewAllEventDetailsListQuery());
+                    var _pendingEventList = await Mediator.Send(new ViewAllPendingEventsQuery());
 
 
-                    foreach (var item in _eventList)
+                    foreach (var item in _pendingEventList)
                     {
                         Console.WriteLine("{0}    {1}    {2}    {3}   {4}",item.ID, item.Code, item.EventName, item.Address, item.EventStatus);
 
@@ -63,9 +67,26 @@ namespace Attila.Presentation.Administrator
                     Console.WriteLine("{0}    {1}    {2}    {3}   {4}", _eventSelected.ID, _eventSelected.Code, _eventSelected.EventName, _eventSelected.Address, _eventSelected.EventStatus);
 
                     Console.WriteLine("EVENT REQUIREMENTS");
-                    Console.WriteLine("EVENT REQUIREMENTS");
-                    Console.WriteLine("EVENT REQUIREMENTS");
-                    Console.WriteLine("EVENT REQUIREMENTS");
+                    var _equipmentRequest = await Mediator.Send(new ViewEventEquipmentRequestQuery { EventID = _toSearchID});
+
+                    foreach (var item in _equipmentRequest)
+                    {
+                        Console.WriteLine("{0}    {1}  ", item.EquipmentDetails.Name, item.Quantity);
+
+                    }
+
+
+                    Console.WriteLine("EVENT ADDITIONAL EQUIPMENT REQUEST");
+
+                    var _additionalEquipmentRequest = await Mediator.Send(new ViewAdditionalEquipmentRequestListQuery { EventID = _toSearchID});
+
+                    foreach (var item in _additionalEquipmentRequest)
+                    {
+                        Console.WriteLine("{0}    {1}  ", item.EquipmentDetails.Name , item.Quantity, item.Rate );
+
+                    }
+
+
 
 
                     Console.WriteLine("1 = APPROVE | 2 = DECLINE ");
@@ -74,14 +95,14 @@ namespace Attila.Presentation.Administrator
                     if (_optionNumber == "1")
                     {
 
-                        var _retVal = await Mediator.Send(new ApproveEventRequestCommand(_toSearchID));
+                        var _retVal = await Mediator.Send(new ApproveEventRequestCommand { EventID = _toSearchID });
 
                     }
 
                     else if (_optionNumber == "2")
 
                     {
-                        var _returnID = await Mediator.Send(new DeclineEventRequestCommand(_toSearchID));
+                        var _returnID = await Mediator.Send(new DeclineEventRequestCommand { EventID = _toSearchID});
 
                     }
                     else
@@ -113,7 +134,45 @@ namespace Attila.Presentation.Administrator
                 case "3":
 
 
-                    Console.WriteLine("VIEW NOTIFICATIONS");
+                    Console.WriteLine("VIEW PENDING FOOD RESTOCK REQUESTS");
+
+                    var _pendingFoodRequest = await Mediator.Send(new ViewAllFoodRestockRequestListQuery {});
+
+                    foreach (var item in _pendingFoodRequest)
+                    {
+                        Console.WriteLine("{0}    {1}    {2}    {3}   {4}",item.FoodDetails.Name, item.Quantity, item.Status );
+
+                    }
+
+                    Console.WriteLine("SELECT REQUEST");
+                    Console.WriteLine("ENTER EVENT ID TO APPROVE/DECLINE");
+                    var _selected = Console.ReadLine();
+                    var _selectID = Int32.Parse(_selected);
+
+
+
+
+                    Console.WriteLine("1 = APPROVE | 2 = DECLINE ");
+                    string _num = Console.ReadLine();
+
+                    if (_num == "1")
+                    {
+
+                        var _retVal = await Mediator.Send(new ApproveFoodRestockRequestCommand { RequestID = _selectID });
+
+                    }
+
+                    else if (_num == "2")
+
+                    {
+                        var _returnID = await Mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = _selectID });
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid Input");
+                    }
+
 
 
                     goto start;

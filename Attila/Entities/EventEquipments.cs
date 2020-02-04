@@ -12,7 +12,7 @@ namespace Atilla.Domain.Entities.Tables
 
         public int EquipmentDetailsID { get; set; }
 
-
+        public int EventDetailsID { get; set; }
 
     }
 }

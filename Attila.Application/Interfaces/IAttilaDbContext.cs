@@ -3,12 +3,14 @@ using System.Threading.Tasks;
 using System.Threading;
 using Atilla.Domain.Entities.Tables;
 using Atilla.Domain.Entities;
+using Attila.Domain.Entities;
 
 namespace Atilla.Application.Interfaces
 {
     public interface IAttilaDbContext
     {
 
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
         public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
 
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }

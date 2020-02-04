@@ -11,7 +11,7 @@ namespace Atilla.Application.Admin.Commands
 {
     public class ApproveEventRequestCommand : IRequest<int>
     {
-        private int EventID { get; set; }
+        public int EventID { get; set; }
        
         public class ApproveEventRequestCommandHandler : IRequestHandler<ApproveEventRequestCommand, int>
         {
