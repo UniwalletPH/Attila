@@ -11,14 +11,7 @@ namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        // TODO: please use public property
-        private readonly PackageAdditionalDurationRequest additionalPackage;
-
-        // TODO: remove constructor in Command
-        public AddAdditionalDurationRequestCommand(PackageAdditionalDurationRequest _additionalPackage)
-        {
-            _additionalPackage = additionalPackage;
-        }
+        public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
 
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
@@ -31,18 +24,24 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                // TODO: check if request.additionalPackage is not null
-                var _additionalDuration = new PackageAdditionalDurationRequest
+                if(request.AdditionalPackage != null)
                 {
-                    EventDetailsID = request.AddEventDuration.EventDetailsID,
-                    Duration = request.AddEventDuration.Duration,
-                    Rate = request.AddEventDuration.Rate
-                };
+                    var _additionalDuration = new PackageAdditionalDurationRequest
+                    {
+                        EventDetailsID = request.AdditionalPackage.EventDetailsID,
+                        Duration = request.AdditionalPackage.Duration,
+                        Rate = request.AdditionalPackage.Rate
+                    };
 
-                dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);
-                await dbContext.SaveChangesAsync();
-
-                return true;
+                    dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);
+                    await dbContext.SaveChangesAsync();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
         }
     }

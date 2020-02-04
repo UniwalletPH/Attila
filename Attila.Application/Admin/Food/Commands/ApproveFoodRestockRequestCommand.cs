@@ -25,15 +25,18 @@ namespace Attila.Application.Admin.Food.Commands
             {
                 var _requestToApproved = dbContext.FoodRestockRequests.Find(request.RequestID);
 
-                // TODO: Always put checking of object is null before accessing it
+                if (_requestToApproved != null)
+                {
+                    _requestToApproved.Status = Status.Approved;
 
-                // this might throw object reference is not set to an instance of an object if object is null
-                _requestToApproved.Status = Status.Approved;
+                    await dbContext.SaveChangesAsync();
 
-                await dbContext.SaveChangesAsync();
-
-                return _requestToApproved.ID;
-
+                    return _requestToApproved.ID;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }         
             }
         }
     }

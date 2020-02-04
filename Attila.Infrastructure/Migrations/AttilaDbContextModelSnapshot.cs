@@ -43,6 +43,8 @@ namespace Attila.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("EquipmentDetailsID");
+
                     b.ToTable("tbl_EquipmentRestockRequest");
                 });
 
@@ -67,6 +69,8 @@ namespace Attila.Infrastructure.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("EquipmentDetailsID");
+
                     b.ToTable("tbl_EventEquipmentRequest");
                 });
 
@@ -79,6 +83,9 @@ namespace Attila.Infrastructure.Migrations
 
                     b.Property<DateTime>("DateTimeRequest")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("FoodDetailsID")
+                        .HasColumnType("int");
 
                     b.Property<int>("FoodsDetailsID")
                         .HasColumnType("int");
@@ -93,6 +100,8 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("FoodDetailsID");
 
                     b.ToTable("tbl_FoodRestockRequest");
                 });
@@ -284,6 +293,9 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<int>("EquipmentDetailsID")
                         .HasColumnType("int");
 
+                    b.Property<int>("EventDetailsID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
                     b.ToTable("tbl_EventEquipments");
@@ -458,10 +470,16 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("EquipmentDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EquipmentsDetailsID")
+                        .HasColumnType("int");
+
                     b.Property<int>("EventDetailsID")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventEquipmentsID")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rate")
@@ -471,6 +489,8 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("tinyint");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("EquipmentDetailsID");
 
                     b.ToTable("tbl_PackageAdditionalEquipmentRequest");
                 });
@@ -518,6 +538,38 @@ namespace Attila.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("tbl_UserMap");
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.EquipmentRestockRequest", b =>
+                {
+                    b.HasOne("Attila.Domain.Entities.Tables.EquipmentDetails", "EquipmentDetails")
+                        .WithMany()
+                        .HasForeignKey("EquipmentDetailsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.EventEquipmentRequest", b =>
+                {
+                    b.HasOne("Attila.Domain.Entities.Tables.EquipmentDetails", "EquipmentDetails")
+                        .WithMany()
+                        .HasForeignKey("EquipmentDetailsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.FoodRestockRequest", b =>
+                {
+                    b.HasOne("Attila.Domain.Entities.Tables.FoodDetails", "FoodDetails")
+                        .WithMany()
+                        .HasForeignKey("FoodDetailsID");
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.Tables.PackageAdditionalEquipmentRequest", b =>
+                {
+                    b.HasOne("Attila.Domain.Entities.Tables.EquipmentDetails", "EquipmentDetails")
+                        .WithMany()
+                        .HasForeignKey("EquipmentDetailsID");
                 });
 #pragma warning restore 612, 618
         }

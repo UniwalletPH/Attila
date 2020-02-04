@@ -13,14 +13,7 @@ namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
     {
-        // TODO: use public property
-        private readonly PackageAdditionalEquipmentRequest additionalEquipment;
-
-        // TODO: remove constructor
-        public AddAdditionalEquipmentRequestCommand(PackageAdditionalEquipmentRequest _additionalEquipment)
-        {
-            _additionalEquipment = additionalEquipment;
-        }
+        public PackageAdditionalEquipmentRequest AdditionalEquipment { get; set; }
 
         public class AddAdditionalEquipmentRequestCommandHandler : IRequestHandler<AddAdditionalEquipmentRequestCommand, bool>
         {
@@ -33,12 +26,12 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
             {
-                // TODO: can't build, check first before check in.
                 var _additionalEquipment = new PackageAdditionalEquipmentRequest
                 {
-                    EventDetailsID = request.AddEquipment.EventDetailsID,
-                    EventEquipmentsID = request.AddEquipment.EventEquipmentsID,
-                    Rate = request.AddEquipment.Rate,
+                    EventDetailsID = request.AdditionalEquipment.EventDetailsID,
+                    EquipmentsDetailsID = request.AdditionalEquipment.EquipmentsDetailsID,
+                    Rate = request.AdditionalEquipment.Rate,
+                    Quantity = request.AdditionalEquipment.Quantity,
                     Status = Status.Pending
                     
                 };
