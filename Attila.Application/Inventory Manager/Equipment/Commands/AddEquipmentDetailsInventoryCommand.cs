@@ -17,6 +17,8 @@ namespace Attila.Application.Equipment.Commands
             this.myEquipmentDetails = myEquipmentDetails;
         }
 
+        public EquipmentDetails MyEquipmentDetails { get; set; }
+
         public class AddEquipmentDetailsInventoryCommandHandler : IRequestHandler<AddEquipmentDetailsInventoryCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -28,10 +30,10 @@ namespace Attila.Application.Equipment.Commands
             {
                 EquipmentDetails _equipmentDetails = new EquipmentDetails
                 {
-                    Code = request.myEquipmentDetails.Code,
-                    Name = request.myEquipmentDetails.Name,
-                    Description = request.myEquipmentDetails.Description,
-                    UnitType = request.myEquipmentDetails.UnitType
+                    Code = request.MyEquipmentDetails.Code,
+                    Name = request.MyEquipmentDetails.Name,
+                    Description = request.MyEquipmentDetails.Description,
+                    UnitType = request.MyEquipmentDetails.UnitType
                 };
 
                 dbContext.EquipmentsDetails.Add(_equipmentDetails);

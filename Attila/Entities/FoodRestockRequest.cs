@@ -1,4 +1,4 @@
-﻿using Atilla.Domain.Entities.Tables;
+﻿using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
