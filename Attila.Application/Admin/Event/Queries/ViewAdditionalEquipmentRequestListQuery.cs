@@ -1,5 +1,6 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿
+using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,9 +26,8 @@ namespace Attila.Application.Admin.Equipment.Queries
             public async Task<List<PackageAdditionalEquipmentRequest>> Handle(ViewAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
             {
                 var _additionalEquipments = dbContext.PackageAdditionalEquipmentRequests
-                    .Include(a => a.EquipmentDetails)
-                    // TODO: dont use .Equals to compare object, use == instead
-                    .Where(a => a.EventDetailsID.Equals(request.EventID));
+                    .Include(a => a.EquipmentDetails)          
+                    .Where(a => a.EventDetailsID == request.EventID);
 
                 return _additionalEquipments.ToList();
             }

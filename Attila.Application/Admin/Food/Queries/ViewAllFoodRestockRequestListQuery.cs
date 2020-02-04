@@ -1,5 +1,6 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+﻿
+using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,10 +21,9 @@ namespace Atilla.Application.Admin.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            // TODO: put async and await
-            public  Task<List<FoodRestockRequest>> Handle(ViewAllFoodRestockRequestListQuery request, CancellationToken cancellationToken)
+            public async  Task<List<FoodRestockRequest>> Handle(ViewAllFoodRestockRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _foodRestockRequests = dbContext.FoodRestockRequests.ToListAsync();
+                var _foodRestockRequests = await dbContext.FoodRestockRequests.ToListAsync();
 
                 return _foodRestockRequests;
             }

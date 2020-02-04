@@ -1,5 +1,7 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+﻿
+using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,10 +24,8 @@ namespace Attila.Application.Admin.Food.Queries
 
             public async  Task<List<FoodRestockRequest>> Handle(ViewPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _pendingFoodRestock = dbContext.FoodRestockRequests
-                    // TODO: dont use .Equals
-                    // TODO: Status is an Enum, compare with Enum
-                    .Where(a => a.Status.Equals(0));
+                var _pendingFoodRestock = dbContext.FoodRestockRequests                 
+                    .Where(a => a.Status == Status.Pending);
 
                 return _pendingFoodRestock.ToList();
 

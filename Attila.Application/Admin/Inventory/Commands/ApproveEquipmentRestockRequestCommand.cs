@@ -28,16 +28,17 @@ namespace Attila.Application.Admin.Equipment.Commands
             {
                 var _requestToApprove = dbContext.EquipmentRestockRequests.Find(request.RequestID);
 
-                // TODO: Always put checking of object is null before accessing it
+                if (_requestToApprove != null)
+                {
+                    _requestToApprove.Status = Status.Approved;
+                    await dbContext.SaveChangesAsync();
 
-                // this might throw object reference is not set to an instance of an object if object is null
-
-                _requestToApprove.Status = Status.Approved;
-                await dbContext.SaveChangesAsync();
-
-                return _requestToApprove.ID;
-
-
+                    return _requestToApprove.ID;
+                }
+                else
+                {
+                    throw new Exception("Does not exist!");
+                }
             }
         }
     }
