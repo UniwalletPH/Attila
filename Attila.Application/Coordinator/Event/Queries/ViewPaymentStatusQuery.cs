@@ -1,22 +1,19 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Queries
+namespace Attila.Application.Event.Queries
 {
-    public class ViewPaymentStatusQuery : IRequest<EventPaymentStatus>
+    public class ViewPaymentStatusQuery : IRequest<List<EventPaymentStatus>>
     {
-        public ViewPaymentStatusQuery()
-        { 
-        
-        }
 
-        public class ViewPaymentStatusQueryHandler : IRequestHandler<ViewPaymentStatusQuery, EventPaymentStatus>
+        public class ViewPaymentStatusQueryHandler : IRequestHandler<ViewPaymentStatusQuery, List<EventPaymentStatus>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPaymentStatusQueryHandler(IAttilaDbContext dbContext)
@@ -24,9 +21,11 @@ namespace Atilla.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<EventPaymentStatus> Handle(ViewPaymentStatusQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventPaymentStatus>> Handle(ViewPaymentStatusQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _viewPaymentStatus = await dbContext.EventsPaymentStatus.ToListAsync();
+                
+                return _viewPaymentStatus;
             }
         }
     }

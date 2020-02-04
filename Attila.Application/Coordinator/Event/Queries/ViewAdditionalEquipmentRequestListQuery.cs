@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atilla.Application.Event.Queries
+namespace Attila.Application.Event.Queries
 {
     class ViewAdditionalEquipmentRequestListQuery
     {

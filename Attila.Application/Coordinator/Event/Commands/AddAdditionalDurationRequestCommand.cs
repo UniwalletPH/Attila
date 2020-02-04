@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        private readonly PackageAdditionalDurationRequest additionalPackage;
-        public AddAdditionalDurationRequestCommand(PackageAdditionalDurationRequest _additionalPackage)
-        {
-            _additionalPackage = additionalPackage;
-        }
+        public PackageAdditionalDurationRequest AddEventDuration { get; set; }
 
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
@@ -30,9 +26,9 @@ namespace Atilla.Application.Event.Commands
             {
                 var _additionalDuration = new PackageAdditionalDurationRequest
                 {
-                    EventDetailsID = request.additionalPackage.EventDetailsID,
-                    Duration = request.additionalPackage.Duration,
-                    Rate = request.additionalPackage.Rate
+                    EventDetailsID = request.AddEventDuration.EventDetailsID,
+                    Duration = request.AddEventDuration.Duration,
+                    Rate = request.AddEventDuration.Rate
                 };
 
                 dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);

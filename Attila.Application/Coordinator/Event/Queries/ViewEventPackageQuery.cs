@@ -1,20 +1,17 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Queries
+namespace Attila.Application.Event.Queries
 {
     public class ViewEventPackageQuery : IRequest<List<EventPackageDetails>>
     {
-        public ViewEventPackageQuery()
-        {
-
-        }
 
         public class ViewEventPackageQueryHandler : IRequestHandler<ViewEventPackageQuery, List<EventPackageDetails>>
         {
@@ -24,9 +21,11 @@ namespace Atilla.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public Task<List<EventPackageDetails>> Handle(ViewEventPackageQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventPackageDetails>> Handle(ViewEventPackageQuery request, CancellationToken cancellationToken)
             {
-                throw new NotImplementedException();
+                var _viewEventPackage = await dbContext.EventsPackageDetails.ToListAsync();
+
+                return _viewEventPackage;
             }
         }
     }

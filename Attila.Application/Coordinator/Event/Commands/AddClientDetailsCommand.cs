@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class AddClientDetailsCommand : IRequest<bool>
     {
-        private readonly EventClient EventClient;
-        public AddClientDetailsCommand(EventClient eventClient)
-        {
-            this.EventClient = eventClient;
-        }
+        public EventClient EventClient { get; set; }
 
         public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, bool>
         {

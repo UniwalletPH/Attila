@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,15 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Queries
+namespace Attila.Application.Event.Queries
 {
     public class SearchClientByIdQuery : IRequest<EventClient>
     {
-        private readonly int ClientID;
-        public SearchClientByIdQuery(int clientID)
-        {
-            this.ClientID = clientID;
-        }
+        public int ClientId { get; set; }
 
         public class SearchClientByIdQueryHandler : IRequestHandler<SearchClientByIdQuery, EventClient>
         {
@@ -28,7 +24,7 @@ namespace Atilla.Application.Event.Queries
 
             public async Task<EventClient> Handle(SearchClientByIdQuery request, CancellationToken cancellationToken)
             {
-                var _clientSearched = dbContext.EventClients.Find(request.ClientID);
+                var _clientSearched = dbContext.EventClients.Find(request.ClientId);
 
                 if (_clientSearched != null)
                 {

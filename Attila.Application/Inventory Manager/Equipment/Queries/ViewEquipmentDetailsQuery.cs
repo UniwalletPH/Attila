@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Equipment.Queries
+namespace Attila.Application.Equipment.Queries
 {
     public class ViewEquipmentDetailsQuery : IRequest<IEnumerable<EquipmentDetails>>
     {

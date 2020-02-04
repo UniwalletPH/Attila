@@ -1,11 +1,11 @@
-﻿using Atilla.Domain.Entities.Enums;
-using Atilla.Domain.Enums;
+﻿using Attila.Domain.Entities.Enums;
+using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities.Tables
+namespace Attila.Domain.Entities.Tables
 {
     [Table("tbl_FoodDetails")]
     public class FoodDetails

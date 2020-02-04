@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class AddEventPackageCommand : IRequest<bool>
     {
-        private readonly EventPackageDetails EventPackageDetails;
-        public AddEventPackageCommand(EventPackageDetails eventPackageDetails)
-        {
-            this.EventPackageDetails = eventPackageDetails;
-        }
+        public EventPackageDetails PackageDetails;
 
         public class AddEventPackageCommandHandler : IRequestHandler<AddEventPackageCommand, bool>
         {
@@ -30,11 +26,11 @@ namespace Atilla.Application.Event.Commands
             {
                 var _newPackage = new EventPackageDetails {
                     
-                    Code = request.EventPackageDetails.Code,
-                    Description = request.EventPackageDetails.Description,
-                    Duration = request.EventPackageDetails.Duration,
-                    NumberOfGuest = request.EventPackageDetails.NumberOfGuest,
-                    Rate = request.EventPackageDetails.Rate,                
+                    Code = request.PackageDetails.Code,
+                    Description = request.PackageDetails.Description,
+                    Duration = request.PackageDetails.Duration,
+                    NumberOfGuest = request.PackageDetails.NumberOfGuest,
+                    Rate = request.PackageDetails.Rate,                
 
                 };
 

@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Attila.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities.Tables
+namespace Attila.Domain.Entities.Tables
 {
     [Table("tbl_PackageAdditionalEquipmentRequest")]
     public class PackageAdditionalEquipmentRequest
@@ -15,6 +16,8 @@ namespace Atilla.Domain.Entities.Tables
         public decimal Rate { get; set; }
 
         public int EventDetailsID { get; set; }
+
+        public Status Status { get; set; }
 
     }
 }

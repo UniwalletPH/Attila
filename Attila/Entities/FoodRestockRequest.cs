@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities
+namespace Attila.Domain.Entities
 {
     [Table("tbl_FoodRestockRequest")]
     public class FoodRestockRequest

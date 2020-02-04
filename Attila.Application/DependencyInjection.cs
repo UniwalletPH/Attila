@@ -1,9 +1,9 @@
-﻿using Atilla.Application.Common.Behaviors;
+﻿using Attila.Application.Common.Behaviors;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace Atilla.Application
+namespace Attila.Application
 {
     public static class DependencyInjection
     {

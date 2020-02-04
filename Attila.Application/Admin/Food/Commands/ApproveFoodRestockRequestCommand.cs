@@ -1,4 +1,4 @@
-﻿using Atilla.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Enums;
 using MediatR;
 using System;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Admin.Food.Commands
+namespace Attila.Application.Admin.Food.Commands
 {
     public class ApproveFoodRestockRequestCommand : IRequest<int>
     {

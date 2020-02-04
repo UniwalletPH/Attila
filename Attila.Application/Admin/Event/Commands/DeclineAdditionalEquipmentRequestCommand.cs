@@ -1,4 +1,4 @@
-﻿using Atilla.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Enums;
 using MediatR;
 using System;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Admin.Equipment.Commands
+namespace Attila.Application.Admin.Equipment.Commands
 {
     public class DeclineAdditionalEquipmentRequestCommand : IRequest<int>
     {
@@ -27,9 +27,9 @@ namespace Atilla.Application.Admin.Equipment.Commands
                 _requestToDecline.Status = Status.Declined;
                 await dbContext.SaveChangesAsync();
 
-                return _requestToDecline.ID;s
+                return _requestToDecline.ID;
 
             }
         }
     }
-}s
+}

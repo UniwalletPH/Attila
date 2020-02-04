@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class UpdateEventPackageCommand : IRequest<bool>
     {
-        private readonly EventPackageDetails package;
-        public UpdateEventPackageCommand(EventPackageDetails package)
-        {
-            this.package = package;
-        }
+        public EventPackageDetails UpdatePackage { get; set; }
 
         public class UpdateEventPackageCommandHandler : IRequestHandler<UpdateEventPackageCommand, bool>
         {
@@ -28,12 +24,12 @@ namespace Atilla.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.package.ID);
+                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.UpdatePackage.ID);
 
-                _updatedEventPackage.Description = request.package.Description;
-                _updatedEventPackage.Duration = request.package.Duration;
-                _updatedEventPackage.NumberOfGuest = request.package.NumberOfGuest;
-                _updatedEventPackage.Rate = request.package.Rate;
+                _updatedEventPackage.Description = request.UpdatePackage.Description;
+                _updatedEventPackage.Duration = request.UpdatePackage.Duration;
+                _updatedEventPackage.NumberOfGuest = request.UpdatePackage.NumberOfGuest;
+                _updatedEventPackage.Rate = request.UpdatePackage.Rate;
 
                 await dbContext.SaveChangesAsync();
 

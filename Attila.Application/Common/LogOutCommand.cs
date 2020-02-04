@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atilla.Application.Admin.Commands
+namespace Attila.Application.Admin.Commands
 {
     class LogOutCommand
     {

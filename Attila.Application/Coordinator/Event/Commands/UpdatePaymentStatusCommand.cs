@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class UpdatePaymentStatusCommand : IRequest<bool>
     {
-        private readonly EventPaymentStatus status;
-        public UpdatePaymentStatusCommand(EventPaymentStatus status)
-        {
-            this.status = status;
-        }
+        public EventPaymentStatus UpdatePaymentStatus { get; set; }
 
         public class UpdatePaymentStatusCommandHandler : IRequestHandler<UpdatePaymentStatusCommand, bool>
         {
@@ -28,11 +24,11 @@ namespace Atilla.Application.Event.Commands
 
             public async Task<bool> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
             {
-                var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.status.ID);
+                var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.UpdatePaymentStatus.ID);
 
-                _updatedPackageStatus.Amount = request.status.Amount;
-                _updatedPackageStatus.Remarks = request.status.Remarks;
-                _updatedPackageStatus.DateOfPayment = request.status.DateOfPayment;
+                _updatedPackageStatus.Amount = request.UpdatePaymentStatus.Amount;
+                _updatedPackageStatus.Remarks = request.UpdatePaymentStatus.Remarks;
+                _updatedPackageStatus.DateOfPayment = request.UpdatePaymentStatus.DateOfPayment;
 
                 await dbContext.SaveChangesAsync();
 

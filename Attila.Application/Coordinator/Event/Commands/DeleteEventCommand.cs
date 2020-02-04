@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class DeleteEventCommand : IRequest<bool>
     {
-        private readonly int EventID;
-        public DeleteEventCommand(int eventID)
-        {
-            this.EventID = eventID;
-        }
+        public int EventId { get; set; }
 
         public class DeleteEventCommandHandler : IRequestHandler<DeleteEventCommand, bool>
         {
@@ -28,7 +24,7 @@ namespace Atilla.Application.Event.Commands
 
             public async Task<bool> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
             {
-                var _eventToDelete = dbContext.EventsDetails.Find(request.EventID);
+                var _eventToDelete = dbContext.EventsDetails.Find(request.EventId);
                 dbContext.EventsDetails.Remove(_eventToDelete);
                 await dbContext.SaveChangesAsync();
 

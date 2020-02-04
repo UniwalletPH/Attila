@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities.Tables
+namespace Attila.Domain.Entities.Tables
 {
 
     [Table("tbl_EquipmentInventory")]
@@ -14,7 +14,6 @@ namespace Atilla.Domain.Entities.Tables
         public int Quantity { get; set; }
 
         public DateTime EncodingDate { get; set; }
-
 
         public decimal ItemPrice { get; set; }
 
