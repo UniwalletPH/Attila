@@ -32,6 +32,8 @@ namespace Attila.Domain.Entities.Tables
 
         public string Remarks { get; set; }
 
+        public int UserID { get; set; }
+
         public int  EventPackageDetailsID { get; set; }
 
         public int EventClientID { get; set; }
