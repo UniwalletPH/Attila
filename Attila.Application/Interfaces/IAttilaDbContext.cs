@@ -1,16 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Threading;
-using Atilla.Domain.Entities.Tables;
-using Atilla.Domain.Entities;
 using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
 
-namespace Atilla.Application.Interfaces
+namespace Attila.Application.Interfaces
 {
     public interface IAttilaDbContext
     {
 
-        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
         public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
 
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }
@@ -24,6 +22,8 @@ namespace Atilla.Application.Interfaces
         public DbSet<EventDetails> EventsDetails { get; set; }
 
         public DbSet<EventEquipments> EventsEquipments { get; set; }
+
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
 
         public DbSet<EventPackageDetails> EventsPackageDetails { get; set; }
 

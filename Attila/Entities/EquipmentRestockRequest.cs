@@ -1,11 +1,11 @@
-﻿using Atilla.Domain.Entities.Tables;
+﻿using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities
+namespace Attila.Domain.Entities
 {
     [Table("tbl_EquipmentRestockRequest")]
     public class EquipmentRestockRequest

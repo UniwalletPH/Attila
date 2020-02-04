@@ -8,25 +8,26 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Queries
+namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class SearchClientByKeywordQuery : IRequest<EventClient>
+    public class GetClientIdCommand : IRequest<EventClient>
     {
-        public string Keyword { get; set; }
+        public string LastName { get; set; }
+        public string FirstName { get; set; }
 
-        public class SearchClientByKeywordQueryHandler : IRequestHandler<SearchClientByKeywordQuery, EventClient>
+        public class GetClientIdCommandHandler : IRequestHandler<GetClientIdCommand, EventClient>
         {
             private readonly IAttilaDbContext dbContext;
-            public SearchClientByKeywordQueryHandler(IAttilaDbContext dbContext)
+
+            public GetClientIdCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-
-            public async Task<EventClient> Handle(SearchClientByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<EventClient> Handle(GetClientIdCommand request, CancellationToken cancellationToken)
             {
                 var _searchedClient = dbContext.EventClients.Where
-                    (a => a.Firstname.Contains(request.Keyword)
-                    || a.Lastname.Contains(request.Keyword));
+                    (a => a.Firstname.Contains(request.FirstName)
+                    && a.Lastname.Contains(request.LastName));
 
                 if (_searchedClient != null)
                 {
@@ -35,7 +36,7 @@ namespace Attila.Application.Event.Queries
                 else
                 {
                     throw new Exception("Does not exist!");
-                }          
+                }
             }
         }
     }

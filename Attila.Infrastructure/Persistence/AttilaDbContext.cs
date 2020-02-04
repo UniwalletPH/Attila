@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Atilla.Domain.Entities.Tables;
-using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+using Attila.Domain.Entities.Tables;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 
-namespace Atilla.Infrastructure.Persistence
+namespace Attila.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
@@ -25,6 +24,8 @@ namespace Atilla.Infrastructure.Persistence
         public DbSet<EventDetails> EventsDetails { get; set; }
 
         public DbSet<EventEquipments> EventsEquipments { get; set; }
+
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
 
         public DbSet<EventPackageDetails> EventsPackageDetails { get; set; }
 

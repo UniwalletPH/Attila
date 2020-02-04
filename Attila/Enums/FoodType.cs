@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atilla.Domain.Entities.Enums
+namespace Attila.Domain.Entities.Enums
 {
     public enum FoodType : byte
     {

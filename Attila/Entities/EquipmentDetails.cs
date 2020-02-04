@@ -1,8 +1,8 @@
-﻿using Atilla.Domain.Entities.Enums;
-using Atilla.Domain.Enums;
+﻿using Attila.Domain.Entities.Enums;
+using Attila.Domain.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Atilla.Domain.Entities.Tables
+namespace Attila.Domain.Entities.Tables
 {
     [Table("tbl_EquipmentDetails")]
     public class EquipmentDetails

@@ -1,13 +1,15 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Status = Attila.Domain.Enums.Status;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
     {
@@ -34,9 +36,11 @@ namespace Atilla.Application.Event.Commands
                 // TODO: can't build, check first before check in.
                 var _additionalEquipment = new PackageAdditionalEquipmentRequest
                 {
-                    EventDetailsID = request.additionalEquipment.EventDetailsID,
-                    EventEquipmentsID = request.additionalEquipment.EventEquipmentsID,
-                    Rate = request.additionalEquipment.Rate
+                    EventDetailsID = request.AddEquipment.EventDetailsID,
+                    EventEquipmentsID = request.AddEquipment.EventEquipmentsID,
+                    Rate = request.AddEquipment.Rate,
+                    Status = Status.Pending
+                    
                 };
 
                 dbContext.PackageAdditionalEquipmentRequests.Add(_additionalEquipment);

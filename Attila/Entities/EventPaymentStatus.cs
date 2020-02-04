@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Atilla.Domain.Entities.Tables
+namespace Attila.Domain.Entities.Tables
 {
     [Table("tbl_EventPaymentStatus")]
     public class EventPaymentStatus

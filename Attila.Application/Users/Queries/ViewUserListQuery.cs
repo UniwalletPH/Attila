@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atilla.Application.Users.Queries
+namespace Attila.Application.Users.Queries
 {
     class ViewUserListQuery
     {

@@ -1,5 +1,6 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Commands
+namespace Attila.Application.Event.Commands
 {
     public class AddEventCommand : IRequest<int>
     {
-        private readonly EventDetails EventDetails;
-        public AddEventCommand(EventDetails eventDetails)
-        {
-            this.EventDetails = eventDetails;
-        }
+       public EventDetails EventDetails { get; set; }
 
         public class AddEventCommandHandler : IRequestHandler<AddEventCommand, int>
         {
@@ -47,7 +44,8 @@ namespace Atilla.Application.Event.Commands
                     UserID = request.EventDetails.UserID,
                     PackageAdditionalDurationRequestID = request.EventDetails.PackageAdditionalDurationRequestID,
                     PackageAdditionalEquipmentRequestID = request.EventDetails.PackageAdditionalEquipmentRequestID,
-                    Remarks = request.EventDetails.Remarks
+                    Remarks = request.EventDetails.Remarks,
+                    EventStatus = Status.Pending
                 
                 };
 

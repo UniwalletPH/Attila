@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Admin.Queries
+namespace Attila.Application.Admin.Food.Queries
 {
-    class GenerateEventMonthlyReportQuery
+    class ViewFoodRestockRequestList
     {
     }
 }

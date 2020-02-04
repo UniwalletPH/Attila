@@ -1,5 +1,5 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,15 +7,12 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Event.Queries
+namespace Attila.Application.Event.Queries
 {
     public class ViewPaymentStatusByIDQuery : IRequest<EventPaymentStatus>
     {
-        private readonly int PaymentID;
-        public ViewPaymentStatusByIDQuery(int paymentID)
-        {
-            this.PaymentID = paymentID;
-        }
+
+        public int PaymentId { get; set; }
 
         public class ViewPaymentStatusQueryHandler : IRequestHandler<ViewPaymentStatusByIDQuery, EventPaymentStatus>
         {
@@ -27,7 +24,7 @@ namespace Atilla.Application.Event.Queries
 
             public async Task<EventPaymentStatus> Handle(ViewPaymentStatusByIDQuery request, CancellationToken cancellationToken)
             {
-                var _paymentStatus = dbContext.EventsPaymentStatus.Find(request.PaymentID);
+                var _paymentStatus = dbContext.EventsPaymentStatus.Find(request.PaymentId);
 
                 if (_paymentStatus != null)
                 {

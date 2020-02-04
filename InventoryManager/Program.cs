@@ -2,16 +2,12 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
-using Atilla.Application.Admin.Queries;
-using Atilla.Domain.Entities.Tables;
-using Atilla.Domain.Enums;
-using Atilla.Application.Food.Commands;
-using Atilla.Application.Food.Queries;
-using Atilla.Domain.Entities;
-using Atilla.Domain.Entities.Enums;
-using Attila.Application.Inventory_Manager.Equipment.Commands;
-using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Commands;
+using Attila.Application.Admin.Queries;
+using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
+using Attila.Application.Food.Commands;
+using Attila.Application.Food.Queries;
+using Attila.Domain.Entities;
 
 namespace Attila.Presentation.InventoryManager
 {

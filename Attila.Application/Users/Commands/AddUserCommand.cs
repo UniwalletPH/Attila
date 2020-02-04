@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Atilla.Application.Users.Commands
+namespace Attila.Application.Users.Commands
 {
     class AddUserCommand
     {

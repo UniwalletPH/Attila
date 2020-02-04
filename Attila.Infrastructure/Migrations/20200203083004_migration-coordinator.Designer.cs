@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.Infrastructure.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200128071231_init1")]
-    partial class init1
+    [Migration("20200203083004_migration-coordinator")]
+    partial class migrationcoordinator
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,84 @@ namespace Attila.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Attila.Domain.Entities.EquipmentRestockRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTimeRequest")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EquipmentDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("tbl_EquipmentRestockRequest");
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.EventEquipmentRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EquipmentDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("tbl_EventEquipmentRequest");
+                });
+
+            modelBuilder.Entity("Attila.Domain.Entities.FoodRestockRequest", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateTimeRequest")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FoodsDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("tbl_FoodRestockRequest");
+                });
 
             modelBuilder.Entity("Attila.Domain.Entities.Tables.EquipmentDelivery", b =>
                 {
@@ -52,8 +130,8 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Code")
-                        .HasColumnType("int");
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
@@ -64,7 +142,7 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte>("Unit")
+                    b.Property<byte>("UnitType")
                         .HasColumnType("tinyint");
 
                     b.HasKey("ID");
@@ -79,11 +157,14 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("EncodedBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("EncodingDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("EquipmentDeliveryID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EquipmentDetailsID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ItemPrice")
                         .HasColumnType("decimal(18,2)");
@@ -93,6 +174,9 @@ namespace Attila.Infrastructure.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -139,28 +223,43 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ClientID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EventCoordinatorID")
+                    b.Property<int>("EventClientID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("EventEquipmentsID")
+                        .HasColumnType("int");
+
                     b.Property<string>("EventName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EventPackageDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventPaymentStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("EventStatus")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("EventTeamID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PackageID")
+                    b.Property<int>("PackageAdditionalDurationRequestID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageAdditionalEquipmentRequestID")
                         .HasColumnType("int");
 
                     b.Property<string>("Remarks")
@@ -169,13 +268,10 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<byte>("Type")
                         .HasColumnType("tinyint");
 
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
-
-                    b.HasIndex("ClientID");
-
-                    b.HasIndex("EventCoordinatorID");
-
-                    b.HasIndex("PackageID");
 
                     b.ToTable("tbl_EventDetails");
                 });
@@ -186,6 +282,9 @@ namespace Attila.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EquipmentDetailsID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -280,14 +379,17 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("EncodedBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("EncodingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FoodDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodRestockID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ItemPrice")
                         .HasColumnType("decimal(18,2)");
@@ -297,6 +399,9 @@ namespace Attila.Infrastructure.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
 
@@ -337,6 +442,9 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
 
+                    b.Property<int>("EventDetailsID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
@@ -352,15 +460,19 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EquipmentID")
+                    b.Property<int>("EventDetailsID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EventEquipmentsID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Rate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("ID");
+                    b.Property<byte>("Status")
+                        .HasColumnType("tinyint");
 
-                    b.HasIndex("EquipmentID");
+                    b.HasKey("ID");
 
                     b.ToTable("tbl_PackageAdditionalEquipmentRequest");
                 });
@@ -399,52 +511,15 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ParentID")
+                    b.Property<int>("EventDetailsID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserID")
+                    b.Property<int>("UserID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ParentID");
-
-                    b.HasIndex("UserID");
-
                     b.ToTable("tbl_UserMap");
-                });
-
-            modelBuilder.Entity("Attila.Domain.Entities.Tables.EventDetails", b =>
-                {
-                    b.HasOne("Attila.Domain.Entities.Tables.EventClient", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientID");
-
-                    b.HasOne("Attila.Domain.Entities.Tables.User", "EventCoordinator")
-                        .WithMany()
-                        .HasForeignKey("EventCoordinatorID");
-
-                    b.HasOne("Attila.Domain.Entities.Tables.EventPackageDetails", "Package")
-                        .WithMany()
-                        .HasForeignKey("PackageID");
-                });
-
-            modelBuilder.Entity("Attila.Domain.Entities.Tables.PackageAdditionalEquipmentRequest", b =>
-                {
-                    b.HasOne("Attila.Domain.Entities.Tables.EventEquipments", "Equipment")
-                        .WithMany()
-                        .HasForeignKey("EquipmentID");
-                });
-
-            modelBuilder.Entity("Attila.Domain.Entities.Tables.UserMap", b =>
-                {
-                    b.HasOne("Attila.Domain.Entities.Tables.User", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentID");
-
-                    b.HasOne("Attila.Domain.Entities.Tables.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Admin.Equipment.Queries
+namespace Attila.Application.Admin.Equipment.Queries
 {
     public class ViewAdditionalEquipmentRequestListQuery : IRequest<List<PackageAdditionalEquipmentRequest>>
     {
