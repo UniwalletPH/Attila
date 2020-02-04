@@ -1,9 +1,7 @@
-﻿using Atilla.Application.Interfaces;
-using Atilla.Domain.Entities;
+﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +9,6 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class RequestEquipmentRestockCommand : IRequest<bool>
     {
-
         public EquipmentRestockRequest MyEquipmentRestockRequest { get; set; }
 
         public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, bool>
