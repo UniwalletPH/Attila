@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200204083006_newdata.cs" />
+    <Compile Remove="Migrations\20200204083006_newdata.Designer.cs" />
+    <Compile Remove="Migrations\20200204083554_new-db.cs" />
+    <Compile Remove="Migrations\20200204083554_new-db.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.1" />
     <PackageReference Include="MediatR" Version="8.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
