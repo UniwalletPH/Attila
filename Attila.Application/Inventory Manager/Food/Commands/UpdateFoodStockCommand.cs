@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,11 +22,19 @@ namespace Atilla.Application.Food.Commands
             {
                 var _updatedFoodStock = dbContext.FoodsInventory.Find(request.SearchedID);
 
-                _updatedFoodStock.Quantity = request.NewFoodQuantity;
+                if (_updatedFoodStock != null)
+                {
+                    _updatedFoodStock.Quantity = request.NewFoodQuantity;
 
-                await dbContext.SaveChangesAsync();
+                    await dbContext.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("Food ID does not exist!");
+                }
+                
             }
         }
     }

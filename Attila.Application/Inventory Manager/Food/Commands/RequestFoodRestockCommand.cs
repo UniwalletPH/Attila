@@ -9,7 +9,7 @@ namespace Attila.Application.Food.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {
-
+        public int RequestFoodID { get; set; }
         public FoodRestockRequest MyFoodRestockRequest { get; set; }
 
         public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, bool>
@@ -21,19 +21,29 @@ namespace Attila.Application.Food.Commands
             }
             public async Task<bool> Handle(RequestFoodRestockCommand request, CancellationToken cancellationToken)
             {
-                FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
+                var _searchRequestFoodId = dbContext.FoodsDetails.Find(request.RequestFoodID);
+
+                if (_searchRequestFoodId != null)
                 {
-                    Quantity = request.MyFoodRestockRequest.Quantity,
-                    DateTimeRequest = DateTime.Now,
-                    FoodsDetailsID = request.MyFoodRestockRequest.FoodsDetailsID,
-                    Status = 0,
-                    UserID = request.MyFoodRestockRequest.UserID
-                };
+                    FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
+                    {
+                        Quantity = request.MyFoodRestockRequest.Quantity,
+                        DateTimeRequest = DateTime.Now,
+                        FoodsDetailsID = request.MyFoodRestockRequest.FoodsDetailsID,
+                        Status = 0,
+                        UserID = request.MyFoodRestockRequest.UserID
+                    };
 
-                dbContext.FoodRestockRequests.Add(_foodRestockRequest);
-                await dbContext.SaveChangesAsync();
+                    dbContext.FoodRestockRequests.Add(_foodRestockRequest);
+                    await dbContext.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("Food Details ID does not exist!");
+                }
+                
             }
         }
     }

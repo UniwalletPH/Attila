@@ -9,6 +9,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class RequestEquipmentRestockCommand : IRequest<bool>
     {
+        public int RequestEquipmentID { get; set; }
         public EquipmentRestockRequest MyEquipmentRestockRequest { get; set; }
 
         public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, bool>
@@ -21,19 +22,30 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
-                EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
+                var _searchRequestEquipmentId = dbContext.EquipmentsDetails.Find(request.RequestEquipmentID);
+
+                if (_searchRequestEquipmentId != null)
                 {
-                    Quantity = request.MyEquipmentRestockRequest.Quantity,
-                    DateTimeRequest = DateTime.Now,
-                    EquipmentDetailsID = request.MyEquipmentRestockRequest.EquipmentDetailsID,
-                    Status = 0,
-                    UserID = request.MyEquipmentRestockRequest.UserID
-                };
+                    EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
+                    {
+                        Quantity = request.MyEquipmentRestockRequest.Quantity,
+                        DateTimeRequest = DateTime.Now,
+                        EquipmentDetailsID = request.MyEquipmentRestockRequest.EquipmentDetailsID,
+                        Status = 0,
+                        UserID = request.MyEquipmentRestockRequest.UserID
+                    };
 
-                dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
-                await dbContext.SaveChangesAsync();
+                    dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
+                    await dbContext.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+
+                else
+                {
+                    throw new Exception("Equipment Details ID does not exist!");
+                }
+                
             }
         }
     }
