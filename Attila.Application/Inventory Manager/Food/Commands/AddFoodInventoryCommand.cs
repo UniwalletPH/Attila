@@ -30,8 +30,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                     ItemPrice = request.MyFoodInventory.ItemPrice,
                     Remarks = request.MyFoodInventory.Remarks,
                     UserID = request.MyFoodInventory.UserID,
-                    FoodDetailsID = request.MyFoodInventory.FoodDetailsID,
-                    FoodRestockID = request.MyFoodInventory.FoodRestockID
+                    FoodDetailsID = request.MyFoodInventory.FoodDetailsID
                 };
 
                 dbContext.FoodsInventory.Add(_foodInventory);
