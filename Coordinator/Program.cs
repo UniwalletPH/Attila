@@ -29,14 +29,16 @@ namespace Attila.Presentation.Coordinator
             Console.WriteLine("Event Manager\n");
             Console.WriteLine("1. Commands");
             Console.WriteLine("2. Queries");
-
+            Console.WriteLine("3. Exit");
             Console.Write("Please enter a number: ");
             string _cmdNumber = Console.ReadLine();
 
             switch (_cmdNumber)
             {
                 case "1":
+                startCommand:
                     #region Commands
+                    Console.Clear();
                     Console.WriteLine("Event Manager");
                     Console.WriteLine();
                     Console.WriteLine("1 - Add Event");
@@ -48,7 +50,7 @@ namespace Attila.Presentation.Coordinator
                     Console.WriteLine("7 - Update Event Payment Status");
                     Console.WriteLine("8 - Delete Event");
                     Console.WriteLine("9 - Delete Event Package");
-                    Console.WriteLine("10 - Exit");
+                    Console.WriteLine("10 - Go Back");
 
 
 
@@ -120,7 +122,7 @@ namespace Attila.Presentation.Coordinator
                             Console.WriteLine("Please enter event remarks: ");
                             var _addEventRemarks = Console.ReadLine();
 
-                            var _sample = await Mediator.Send(new GetClientIdCommand { FirstName = _addClientFirstName, LastName = _addClientLastName });
+                            var _sample = await Mediator.Send(new GetClientIdQuery { FirstName = _addClientFirstName, LastName = _addClientLastName });
 
 
                             EventType _eventType = (EventType)Enum.Parse(typeof(EventType), _addEventType);
@@ -148,7 +150,7 @@ namespace Attila.Presentation.Coordinator
                             if (check.Contains("Y") || check.Contains("y"))
                             {
                                 check = "";
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -196,7 +198,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -240,7 +242,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -310,7 +312,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -359,7 +361,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -410,7 +412,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -461,7 +463,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -484,7 +486,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -507,7 +509,7 @@ namespace Attila.Presentation.Coordinator
                             check = Console.ReadLine();
                             if (check.Contains("Y") || check.Contains("y"))
                             {
-                                goto start;
+                                goto startCommand;
                             }
                             else if (check.Contains("N") || check.Contains("n"))
                             {
@@ -515,13 +517,20 @@ namespace Attila.Presentation.Coordinator
                             }
                             break;
                         #endregion
+
+                        #region Go Back
+                        case "10":
+                            goto start;
+                        #endregion
                         default:
                             break;
                     }
                     #endregion
                     break;
                 case "2":
+                    startQuery:
                     #region Queries
+                    Console.Clear();
                     Console.WriteLine("Event Manager Queries");
                     Console.WriteLine();
                     Console.WriteLine("1 - Search Event By ID");
@@ -535,7 +544,7 @@ namespace Attila.Presentation.Coordinator
                     Console.WriteLine("9 - Get Payment Status By ID");
                     Console.WriteLine("10 - Get Event Additional Duration Request List");
                     Console.WriteLine("11 - Get Event Additional Equipment Request List");
-                    Console.WriteLine("12 - Exit");
+                    Console.WriteLine("12 - Go Back");
 
                     Console.Write("Please enter a number: ");
                     string _cmdNumber3 = Console.ReadLine();
@@ -567,7 +576,7 @@ namespace Attila.Presentation.Coordinator
                                     string check = Console.ReadLine();
                                     if (check.Contains("Y") || check.Contains("y"))
                                     {
-                                        goto start;
+                                        goto startQuery;
                                     }
                                     else if (check.Contains("N") || check.Contains("n"))
                                     {
@@ -607,7 +616,7 @@ namespace Attila.Presentation.Coordinator
                                     string check = Console.ReadLine();
                                     if (check.Contains("Y") || check.Contains("y"))
                                     {
-                                        goto start;
+                                        goto startQuery;
                                     }
                                     else if (check.Contains("N") || check.Contains("n"))
                                     {
@@ -637,8 +646,8 @@ namespace Attila.Presentation.Coordinator
                                 if (_searchClientByKeywordResult != null)
                                 {
                                     Console.WriteLine("Here are is the event:\n");
-                                    Console.WriteLine("ID: {0}\nCode: {1}\nLast Name: {2}\nFirst Name: {3}\nEmail: " +
-                                    "{4}\nContact No.: {5}\nAddress: {6}", _searchClientByKeywordResult.ID, _searchClientByKeywordResult.Lastname,
+                                    Console.WriteLine("ID: {0}\nLast Name: {1}\nFirst Name: {2}\nEmail: " +
+                                    "{3}\nContact No.: {4}\nAddress: {5}", _searchClientByKeywordResult.ID, _searchClientByKeywordResult.Lastname,
                                     _searchClientByKeywordResult.Firstname, _searchClientByKeywordResult.Email, _searchClientByKeywordResult.Contact,
                                     _searchClientByKeywordResult.Address);
 
@@ -647,7 +656,7 @@ namespace Attila.Presentation.Coordinator
                                     string check = Console.ReadLine();
                                     if (check.Contains("Y") || check.Contains("y"))
                                     {
-                                        goto start;
+                                        goto startQuery;
                                     }
                                     else if (check.Contains("N") || check.Contains("n"))
                                     {
@@ -661,6 +670,170 @@ namespace Attila.Presentation.Coordinator
                                 goto input3;
                             }
                             break;
+                        #endregion
+
+                        #region Search Client By Keyword
+                        case "4":
+                        input4:
+                            try
+                            {
+                                Console.WriteLine("Please enter the client keyword: ");
+                                var _inputSearchClientKeyword = Console.ReadLine();
+
+                                var _searchClientByKeywordResult = await Mediator.Send(new SearchClientByKeywordQuery { Keyword = _inputSearchClientKeyword });
+                                if (_searchClientByKeywordResult != null)
+                                {
+                                    Console.WriteLine("Here are is the client:\n");
+                                    Console.WriteLine("ID: {0}\nLast Name: {1}\nFirst Name: {2}\nEmail: " +
+                                    "{3}\nContact No.: {4}\nAddress: {5}", _searchClientByKeywordResult.ID, _searchClientByKeywordResult.Lastname,
+                                    _searchClientByKeywordResult.Firstname, _searchClientByKeywordResult.Email, _searchClientByKeywordResult.Contact,
+                                    _searchClientByKeywordResult.Address);
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto startQuery;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                goto input4;
+                            }
+                            break;
+                        #endregion
+
+                        #region Get Event List
+                        
+                        case "5":
+                            try
+                            {
+                                var _getEventList = await Mediator.Send(new GetEventListQuery());
+                                if (_getEventList != null)
+                                {
+                                    Console.WriteLine("Here are the list of events:\n");
+                                    //Console.WriteLine("ID:\tCode:\tEvent Name:\tEvent Type:\tEvent Status:\t" +
+                                    //    "Address:\tBooking Date:\tEvent Date:\tDescription:\tLocation:\tRemarks:");
+                                    foreach (var item in _getEventList)
+                                    {
+                                        //Console.WriteLine("{0}\t{1}\t{2}\t{3}\t" +
+                                        //"{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}",
+                                        //item.ID, item.Code, item.EventName, item.Type,
+                                        //item.EventStatus, item.Address, item.BookingDate,
+                                        //item.EventDate, item.Description, item.Location, item.Remarks);
+                                        Console.WriteLine("ID: {0}\nCode: {1}\nEvent Name: {2}\nEvent Type: {3}\nEvent Status: " +
+                                        "{4}\nAddress: {5}\nBooking Date: {6}\nEvent Date: {7}\nDescription: {8}\nLocation: {9}\nRemarks: {10}",
+                                        item.ID, item.Code, item.EventName, item.Type,
+                                        item.EventStatus, item.Address, item.BookingDate,
+                                        item.EventDate, item.Description, item.Location, item.Remarks);
+                                    }
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto startQuery;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                            break;
+                        #endregion
+
+                        #region Get Client List
+                        case "6":
+                            try
+                            {
+                                var _getClientList = await Mediator.Send(new GetClientListQuery());
+                                if (_getClientList != null)
+                                {
+                                    Console.WriteLine("Here are the list of clients:\n");
+                                    foreach (var item in _getClientList)
+                                    {
+                                        Console.WriteLine("ID: {0}\nLast Name: {1}\nFirst Name: {2}\nEmail: " +
+                                        "{3}\nContact No.: {4}\nAddress: {5}", item.ID, item.Lastname,
+                                        item.Firstname, item.Email, item.Contact, item.Address);
+                                    }
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto startQuery;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                            break;
+                        #endregion
+
+                        #region Get Client ID
+                        case "7":
+                        input5:
+                            try
+                            {
+                                Console.WriteLine("Please enter client's last name: ");
+                                var _inputGetClientLastName = Console.ReadLine();
+
+                                Console.WriteLine("Please enter client's first name: ");
+                                var _inputGetClientFirstName = Console.ReadLine();
+
+                                var _getClientId = await Mediator.Send(new GetClientIdQuery { LastName = _inputGetClientLastName, FirstName = _inputGetClientFirstName });
+                                if (_getClientId != null)
+                                {
+
+                                    Console.WriteLine("The client ID is: {0}", _getClientId.ID);
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto startQuery;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                goto input5;
+                            }
+                            break; 
+                        #endregion
+
+
+
+
+
+                        #region Go Back
+                        case "12":
+                            goto start; 
                             #endregion
 
 
@@ -672,13 +845,14 @@ namespace Attila.Presentation.Coordinator
 
 
 
-
-
-
-
                     }
-                    break;
                     #endregion
+                    break;
+                case "3":
+                    #region Exit
+                    Console.WriteLine("Thank you for using the system!"); 
+                    #endregion
+                    break;
             }
         }
             
