@@ -8,6 +8,7 @@ using Attila.Application.Event.Commands;
 using Attila.Domain.Enums;
 using Attila.Application.Coordinator.Event.Queries;
 using Attila.Domain.Entities;
+using Attila.Application.Event.Queries;
 
 namespace Attila.Presentation.Coordinator
 {
@@ -24,92 +25,104 @@ namespace Attila.Presentation.Coordinator
         {
         start:
             Console.Clear();
-            Console.WriteLine("Event Manager");
-            Console.WriteLine();
-            Console.WriteLine("1 - Add Event");
-            Console.WriteLine("2 - Add Event Package");
-            Console.WriteLine("3 - Request Event Requirements");
-            Console.WriteLine("4 - Update Event");
-            Console.WriteLine("5 - Update Event Package");
-            Console.WriteLine("6 - Update Client Details");
-            Console.WriteLine("7 - Update Event Payment Status");
-            Console.WriteLine("8 - Delete Event");
-            Console.WriteLine("9 - Delete Event Package");
-            Console.WriteLine("10 - Exit");
-        
-        
 
-            Console.Write("Please enter a command: ");
+            Console.WriteLine("Event Manager\n");
+            Console.WriteLine("1. Commands");
+            Console.WriteLine("2. Queries");
+
+            Console.Write("Please enter a number: ");
             string _cmdNumber = Console.ReadLine();
 
             switch (_cmdNumber)
             {
-
-                #region Add Event
                 case "1":
-                    Console.Clear();
+                    #region Commands
+                    Console.WriteLine("Event Manager");
+                    Console.WriteLine();
+                    Console.WriteLine("1 - Add Event");
+                    Console.WriteLine("2 - Add Event Package");
+                    Console.WriteLine("3 - Request Event Requirements");
+                    Console.WriteLine("4 - Update Event");
+                    Console.WriteLine("5 - Update Event Package");
+                    Console.WriteLine("6 - Update Client Details");
+                    Console.WriteLine("7 - Update Event Payment Status");
+                    Console.WriteLine("8 - Delete Event");
+                    Console.WriteLine("9 - Delete Event Package");
+                    Console.WriteLine("10 - Exit");
 
-                    Console.WriteLine("CLIENT INFORMATION\n ");
 
-                    Console.WriteLine("Please enter client's last name: ");
-                    var _addClientLastName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's first name: ");
-                    var _addClientFirstName = Console.ReadLine();
+                    Console.Write("Please enter a number: ");
+                    string _cmdNumber2 = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's email: ");
-                    var _addClientEmail = Console.ReadLine();
-
-                    Console.WriteLine("Please enter client's contact number: ");
-                    var _addClientContact = Console.ReadLine();
-
-                    Console.WriteLine("Please enter client's address: ");
-                    var _addClientAddress = Console.ReadLine();
-
-                    var _addClientDetails = new EventClient
+                    switch (_cmdNumber2)
                     {
-                        Address = _addClientAddress,
-                        Contact = _addClientContact,
-                        Email = _addClientEmail,
-                        Firstname = _addClientFirstName,
-                        Lastname = _addClientLastName,
 
-                    };
+                        #region Add Event
+                        case "1":
+                            Console.Clear();
 
-                    await Mediator.Send(new AddClientDetailsCommand { EventClient = _addClientDetails });
+                            Console.WriteLine("CLIENT INFORMATION\n ");
 
-                    Console.WriteLine("EVENT INFORMATION\n");
+                            Console.WriteLine("Please enter client's last name: ");
+                            var _addClientLastName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event name: ");
-                    var _addEventName = Console.ReadLine();
+                            Console.WriteLine("Please enter client's first name: ");
+                            var _addClientFirstName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event type: ");
-                    var _addEventType = Console.ReadLine();
+                            Console.WriteLine("Please enter client's email: ");
+                            var _addClientEmail = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event address: ");
-                    var _addEventAddress = Console.ReadLine();
+                            Console.WriteLine("Please enter client's contact number: ");
+                            var _addClientContact = Console.ReadLine();
+
+                            Console.WriteLine("Please enter client's address: ");
+                            var _addClientAddress = Console.ReadLine();
+
+                            var _addClientDetails = new EventClient
+                            {
+                                Address = _addClientAddress,
+                                Contact = _addClientContact,
+                                Email = _addClientEmail,
+                                Firstname = _addClientFirstName,
+                                Lastname = _addClientLastName,
+
+                            };
+
+                            await Mediator.Send(new AddClientDetailsCommand { EventClient = _addClientDetails });
+
+                            Console.WriteLine("EVENT INFORMATION\n");
+
+                            Console.WriteLine("Please enter event name: ");
+                            var _addEventName = Console.ReadLine();
+
+                            Console.WriteLine("Please enter event type: ");
+                            var _addEventType = Console.ReadLine();
+
+                            Console.WriteLine("Please enter event address: ");
+                            var _addEventAddress = Console.ReadLine();
 
                     Console.WriteLine("Format - (DD/MM/YYYY)");
                     Console.WriteLine("Please enter event date: ");
                     var _addEventDate = Console.ReadLine();
                     DateTime __addEventDateParsed = DateTime.Parse(_addEventDate);
 
-                    Console.WriteLine("Please enter event location: ");
-                    var _addEventLocation = Console.ReadLine();
+                            Console.WriteLine("Please enter event location: ");
+                            var _addEventLocation = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event description: ");
-                    var _addEventDesc = Console.ReadLine();
+                            Console.WriteLine("Please enter event description: ");
+                            var _addEventDesc = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event package: ");
-                    var _addEventPackage = Console.ReadLine();
+                            Console.WriteLine("Please enter event package: ");
+                            var _addEventPackage = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event remarks: ");
-                    var _addEventRemarks = Console.ReadLine();
+                            Console.WriteLine("Please enter event remarks: ");
+                            var _addEventRemarks = Console.ReadLine();
 
-                    var _sample = await Mediator.Send(new GetClientIdCommand { FirstName = _addClientFirstName, LastName = _addClientLastName });
+                            var _sample = await Mediator.Send(new GetClientIdCommand { FirstName = _addClientFirstName, LastName = _addClientLastName });
 
 
-                    EventType _eventType = (EventType)Enum.Parse(typeof(EventType), _addEventType);
+                            EventType _eventType = (EventType)Enum.Parse(typeof(EventType), _addEventType);
 
                     var _addEventDetails = new EventDetails
                     {
@@ -125,21 +138,21 @@ namespace Attila.Presentation.Coordinator
                     };
 
 
-                    await Mediator.Send(new AddEventCommand { EventDetails = _addEventDetails });
+                            await Mediator.Send(new AddEventCommand { EventDetails = _addEventDetails });
 
 
-                    Console.WriteLine("Event request done!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    string check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        check = "";
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
+                            Console.WriteLine("Event request done!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            string check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                check = "";
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
 
                     break;
                 #endregion
@@ -149,23 +162,23 @@ namespace Attila.Presentation.Coordinator
                     Console.Clear();
                     Console.WriteLine("ADD ADDITIONAL PACKAGE\n");
 
-                    Console.WriteLine("Please enter package name: ");
-                    var _addPackageName = Console.ReadLine();
+                            Console.WriteLine("Please enter package name: ");
+                            var _addPackageName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter package description: ");
-                    var _addPackageDesc = Console.ReadLine();
+                            Console.WriteLine("Please enter package description: ");
+                            var _addPackageDesc = Console.ReadLine();
 
-                    Console.WriteLine("Please enter pax: ");
-                    var _inputPackageGuest = Console.ReadLine();
-                    int _addPackageGuest = int.Parse(_inputPackageGuest);
+                            Console.WriteLine("Please enter pax: ");
+                            var _inputPackageGuest = Console.ReadLine();
+                            int _addPackageGuest = int.Parse(_inputPackageGuest);
 
-                    Console.WriteLine("Please enter package rate: ");
-                    var _inputPackageRate = Console.ReadLine();
-                    var _addPackageRate = Decimal.Parse(_inputPackageRate);
+                            Console.WriteLine("Please enter package rate: ");
+                            var _inputPackageRate = Console.ReadLine();
+                            var _addPackageRate = Decimal.Parse(_inputPackageRate);
 
-                    Console.WriteLine("Please enter package duration: ");
-                    var _inputPackageDuration = Console.ReadLine();
-                    TimeSpan timeSpan = TimeSpan.FromMinutes(double.Parse(_inputPackageDuration));
+                            Console.WriteLine("Please enter package duration: ");
+                            var _inputPackageDuration = Console.ReadLine();
+                            TimeSpan timeSpan = TimeSpan.FromMinutes(double.Parse(_inputPackageDuration));
 
                     var _addPackage = new EventPackageDetails
                     {
@@ -195,29 +208,29 @@ namespace Attila.Presentation.Coordinator
                     Console.Clear();
                     Console.WriteLine("REQUEST EVENT REQUIREMENTS\n");
 
-                    Console.WriteLine("Please enter event ID:");
-                    var _inputEventId = Console.ReadLine();
+                            Console.WriteLine("Please enter event ID:");
+                            var _inputEventId = Console.ReadLine();
 
-                    Console.WriteLine("Please enter equipment ID:");
-                    var _inputEquipmentId = Console.ReadLine();
+                            Console.WriteLine("Please enter equipment ID:");
+                            var _inputEquipmentId = Console.ReadLine();
 
-                    Console.WriteLine("Please enter equipment details:");
-                    var _inputEquipmentDetails = Console.ReadLine();
+                            Console.WriteLine("Please enter equipment details:");
+                            var _inputEquipmentDetails = Console.ReadLine();
 
-                    Console.WriteLine("Please enter quantity:");
-                    var _inputQuantity = Console.ReadLine();
+                            Console.WriteLine("Please enter quantity:");
+                            var _inputQuantity = Console.ReadLine();
 
-                    int _addEventId = int.Parse(_inputEventId);
-                    int _addEquipmentId = int.Parse(_inputEquipmentId);
-                    int _addQuantity = int.Parse(_inputQuantity);
+                            int _addEventId = int.Parse(_inputEventId);
+                            int _addEquipmentId = int.Parse(_inputEquipmentId);
+                            int _addQuantity = int.Parse(_inputQuantity);
 
-                    var _addRequest = new EventEquipmentRequest
-                    {
-                        EventDetailsID = _addEventId,
-                        EquipmentDetailsID = _addEquipmentId,
-                        Quantity = _addQuantity,
-                        Status = Status.Pending
-                    };
+                            var _addRequest = new EventEquipmentRequest
+                            {
+                                EventDetailsID = _addEventId,
+                                EquipmentDetailsID = _addEquipmentId,
+                                Quantity = _addQuantity,
+                                Status = Status.Pending
+                            };
 
                     await Mediator.Send(new RequestEventRequirementsCommand { EventRequirementRequest = _addRequest });
                     Console.WriteLine("Event requirements requested!");
@@ -239,54 +252,54 @@ namespace Attila.Presentation.Coordinator
                     Console.Clear();
                     Console.WriteLine("UPDATE EVENT DETAILS\n");
 
-                    Console.WriteLine("Please enter event ID: ");
-                    var _inputUpdateEventId = Console.ReadLine();
-                    var _addUpdateEventId = int.Parse(_inputUpdateEventId);
+                            Console.WriteLine("Please enter event ID: ");
+                            var _inputUpdateEventId = Console.ReadLine();
+                            var _addUpdateEventId = int.Parse(_inputUpdateEventId);
 
-                    Console.WriteLine("Please enter event name: ");
-                    var _inputUpdateEventName = Console.ReadLine();
+                            Console.WriteLine("Please enter event name: ");
+                            var _inputUpdateEventName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event code: ");
-                    var _inputUpdateEventCode = Console.ReadLine();
+                            Console.WriteLine("Please enter event code: ");
+                            var _inputUpdateEventCode = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event type: ");
-                    var _inputUpdateEventType = Console.ReadLine();
+                            Console.WriteLine("Please enter event type: ");
+                            var _inputUpdateEventType = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event address: ");
-                    var _inputUpdateEventAddress = Console.ReadLine();
+                            Console.WriteLine("Please enter event address: ");
+                            var _inputUpdateEventAddress = Console.ReadLine();
 
-                    /*Console.WriteLine("Please enter event date: ");
-                    var _addEventDate = */
+                            /*Console.WriteLine("Please enter event date: ");
+                            var _addEventDate = */
 
-                    Console.WriteLine("Please enter event location: ");
-                    var _inputUpdateEventLocation = Console.ReadLine();
+                            Console.WriteLine("Please enter event location: ");
+                            var _inputUpdateEventLocation = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event description: ");
-                    var _inputUpdateEventDesc = Console.ReadLine();
+                            Console.WriteLine("Please enter event description: ");
+                            var _inputUpdateEventDesc = Console.ReadLine();
 
-                    Console.WriteLine("Please enter event package: ");
-                    var _inputUpdateEventPackage = Console.ReadLine();
-                    var _addUpdateEventPackage = int.Parse(_inputUpdateEventPackage);
+                            Console.WriteLine("Please enter event package: ");
+                            var _inputUpdateEventPackage = Console.ReadLine();
+                            var _addUpdateEventPackage = int.Parse(_inputUpdateEventPackage);
 
-                    Console.WriteLine("Please enter event remarks: ");
-                    var _inputUpdateEventRemarks = Console.ReadLine();
+                            Console.WriteLine("Please enter event remarks: ");
+                            var _inputUpdateEventRemarks = Console.ReadLine();
 
 
-                    EventType _eventUpdateType = (EventType)Enum.Parse(typeof(EventType), _inputUpdateEventType);
+                            EventType _eventUpdateType = (EventType)Enum.Parse(typeof(EventType), _inputUpdateEventType);
 
-                    var _addUpdateEventDetails = new EventDetails
-                    {
-                        EventClientID = _addUpdateEventId,
-                        EventName = _inputUpdateEventName,
-                        Code = _inputUpdateEventCode,
-                        Address = _inputUpdateEventAddress,
-                        Location = _inputUpdateEventLocation,
-                        Remarks = _inputUpdateEventRemarks,
-                        EventPackageDetailsID = _addUpdateEventPackage,
-                        BookingDate = DateTime.Now,
-                        Description = _inputUpdateEventDesc,
-                        Type = _eventUpdateType
-                    };
+                            var _addUpdateEventDetails = new EventDetails
+                            {
+                                EventClientID = _addUpdateEventId,
+                                EventName = _inputUpdateEventName,
+                                Code = _inputUpdateEventCode,
+                                Address = _inputUpdateEventAddress,
+                                Location = _inputUpdateEventLocation,
+                                Remarks = _inputUpdateEventRemarks,
+                                EventPackageDetailsID = _addUpdateEventPackage,
+                                BookingDate = DateTime.Now,
+                                Description = _inputUpdateEventDesc,
+                                Type = _eventUpdateType
+                            };
 
 
                     await Mediator.Send(new UpdateEventCommand { UpdateEvent = _addUpdateEventDetails });
@@ -309,26 +322,26 @@ namespace Attila.Presentation.Coordinator
                     Console.Clear();
                     Console.WriteLine("UPDATE PACKAGE DETAILS\n");
 
-                    Console.WriteLine("Please enter package ID: ");
-                    var _inputUpdatePackageId = Console.ReadLine();
+                            Console.WriteLine("Please enter package ID: ");
+                            var _inputUpdatePackageId = Console.ReadLine();
 
-                    Console.WriteLine("Please enter package name: ");
-                    var _inputUpdatePackageName = Console.ReadLine();
+                            Console.WriteLine("Please enter package name: ");
+                            var _inputUpdatePackageName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter package description: ");
-                    var _inputUpdatePackageDesc = Console.ReadLine();
+                            Console.WriteLine("Please enter package description: ");
+                            var _inputUpdatePackageDesc = Console.ReadLine();
 
-                    Console.WriteLine("Please enter pax: ");
-                    var _inputUpdatePackageGuest = Console.ReadLine();
-                    int _addUpdatePackageGuest = int.Parse(_inputUpdatePackageGuest);
+                            Console.WriteLine("Please enter pax: ");
+                            var _inputUpdatePackageGuest = Console.ReadLine();
+                            int _addUpdatePackageGuest = int.Parse(_inputUpdatePackageGuest);
 
-                    Console.WriteLine("Please enter package rate: ");
-                    var _inputUpdatePackageRate = Console.ReadLine();
-                    var _addUpdatePackageRate = Decimal.Parse(_inputUpdatePackageRate);
+                            Console.WriteLine("Please enter package rate: ");
+                            var _inputUpdatePackageRate = Console.ReadLine();
+                            var _addUpdatePackageRate = Decimal.Parse(_inputUpdatePackageRate);
 
-                    Console.WriteLine("Please enter package duration: ");
-                    var _inputUpdatePackageDuration = Console.ReadLine();
-                    TimeSpan _updateTimeSpan = TimeSpan.FromMinutes(double.Parse(_inputUpdatePackageDuration));
+                            Console.WriteLine("Please enter package duration: ");
+                            var _inputUpdatePackageDuration = Console.ReadLine();
+                            TimeSpan _updateTimeSpan = TimeSpan.FromMinutes(double.Parse(_inputUpdatePackageDuration));
 
                     var _updatePackage = new EventPackageDetails
                     {
@@ -357,37 +370,37 @@ namespace Attila.Presentation.Coordinator
                 case "6":
                     Console.Clear();
 
-                    Console.WriteLine("UPDATE CLIENT INFORMATION\n ");
+                            Console.WriteLine("UPDATE CLIENT INFORMATION\n ");
 
-                    Console.WriteLine("Please enter client ID: ");
-                    var _inputUpdateClientId = Console.ReadLine();
-                    int _addUpdateClientId = int.Parse(_inputUpdateClientId);
+                            Console.WriteLine("Please enter client ID: ");
+                            var _inputUpdateClientId = Console.ReadLine();
+                            int _addUpdateClientId = int.Parse(_inputUpdateClientId);
 
-                    Console.WriteLine("Please enter client's last name: ");
-                    var _inputUpdateClientLastName = Console.ReadLine();
+                            Console.WriteLine("Please enter client's last name: ");
+                            var _inputUpdateClientLastName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's first name: ");
-                    var _inputUpdateClientFirstName = Console.ReadLine();
+                            Console.WriteLine("Please enter client's first name: ");
+                            var _inputUpdateClientFirstName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's email: ");
-                    var _inputUpdateClientEmail = Console.ReadLine();
+                            Console.WriteLine("Please enter client's email: ");
+                            var _inputUpdateClientEmail = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's contact number: ");
-                    var _inputUpdateClientContact = Console.ReadLine();
+                            Console.WriteLine("Please enter client's contact number: ");
+                            var _inputUpdateClientContact = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's address: ");
-                    var _inputUpdateClientAddress = Console.ReadLine();
+                            Console.WriteLine("Please enter client's address: ");
+                            var _inputUpdateClientAddress = Console.ReadLine();
 
-                    var _inputUpdateClientDetails = new EventClient
-                    {
-                        ID = _addUpdateClientId,
-                        Address = _inputUpdateClientAddress,
-                        Contact = _inputUpdateClientContact,
-                        Email = _inputUpdateClientEmail,
-                        Firstname = _inputUpdateClientFirstName,
-                        Lastname = _inputUpdateClientLastName,
+                            var _inputUpdateClientDetails = new EventClient
+                            {
+                                ID = _addUpdateClientId,
+                                Address = _inputUpdateClientAddress,
+                                Contact = _inputUpdateClientContact,
+                                Email = _inputUpdateClientEmail,
+                                Firstname = _inputUpdateClientFirstName,
+                                Lastname = _inputUpdateClientLastName,
 
-                    };
+                            };
 
                     await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdateClientDetails });
                     Console.WriteLine("Client details updated successfully!");
@@ -408,37 +421,37 @@ namespace Attila.Presentation.Coordinator
                 case "7":
                     Console.Clear();
 
-                    Console.WriteLine("UPDATE EVENT PAYMENT STATUS\n ");
+                            Console.WriteLine("UPDATE EVENT PAYMENT STATUS\n ");
 
-                    Console.WriteLine("Please enter event ID: ");
-                    var _inputUpdatePaymentId = Console.ReadLine();
-                    int _addUpdatePaymentId = int.Parse(_inputUpdatePaymentId);
+                            Console.WriteLine("Please enter event ID: ");
+                            var _inputUpdatePaymentId = Console.ReadLine();
+                            int _addUpdatePaymentId = int.Parse(_inputUpdatePaymentId);
 
-                    Console.WriteLine("Please enter client's last name: ");
-                    var _inputUpdatePaymentLastName = Console.ReadLine();
+                            Console.WriteLine("Please enter client's last name: ");
+                            var _inputUpdatePaymentLastName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's first name: ");
-                    var _inputUpdatePaymentFirstName = Console.ReadLine();
+                            Console.WriteLine("Please enter client's first name: ");
+                            var _inputUpdatePaymentFirstName = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's email: ");
-                    var _inputUpdatePaymentEmail = Console.ReadLine();
+                            Console.WriteLine("Please enter client's email: ");
+                            var _inputUpdatePaymentEmail = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's contact number: ");
-                    var _inputUpdatePaymentContact = Console.ReadLine();
+                            Console.WriteLine("Please enter client's contact number: ");
+                            var _inputUpdatePaymentContact = Console.ReadLine();
 
-                    Console.WriteLine("Please enter client's address: ");
-                    var _inputUpdatePaymentAddress = Console.ReadLine();
+                            Console.WriteLine("Please enter client's address: ");
+                            var _inputUpdatePaymentAddress = Console.ReadLine();
 
-                    var _inputUpdatePaymentDetails = new EventClient
-                    {
-                        ID = _addUpdatePaymentId,
-                        Address = _inputUpdatePaymentAddress,
-                        Contact = _inputUpdatePaymentContact,
-                        Email = _inputUpdatePaymentEmail,
-                        Firstname = _inputUpdatePaymentFirstName,
-                        Lastname = _inputUpdatePaymentLastName,
+                            var _inputUpdatePaymentDetails = new EventClient
+                            {
+                                ID = _addUpdatePaymentId,
+                                Address = _inputUpdatePaymentAddress,
+                                Contact = _inputUpdatePaymentContact,
+                                Email = _inputUpdatePaymentEmail,
+                                Firstname = _inputUpdatePaymentFirstName,
+                                Lastname = _inputUpdatePaymentLastName,
 
-                    };
+                            };
 
                     await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdatePaymentDetails });
                     Console.WriteLine("Payment status updated successfully!");
@@ -459,9 +472,9 @@ namespace Attila.Presentation.Coordinator
                 case "8":
                     Console.WriteLine("DELETE EVENT\n ");
 
-                    Console.WriteLine("Please enter event ID: ");
-                    var _inputDeleteEventId = Console.ReadLine();
-                    int _addDeleteEventId = int.Parse(_inputDeleteEventId);
+                            Console.WriteLine("Please enter event ID: ");
+                            var _inputDeleteEventId = Console.ReadLine();
+                            int _addDeleteEventId = int.Parse(_inputDeleteEventId);
 
                     await Mediator.Send(new DeleteEventCommand { EventId = _addDeleteEventId });
                     Console.WriteLine("Package deleted successfully!");
@@ -482,27 +495,88 @@ namespace Attila.Presentation.Coordinator
                 case "9":
                     Console.WriteLine("DELETE EVENT PACKAGE\n ");
 
-                    Console.WriteLine("Please enter event package ID: ");
-                    var _inputDeletePackageId = Console.ReadLine();
-                    int _addDeletePackageId = int.Parse(_inputDeletePackageId);
+                            Console.WriteLine("Please enter event package ID: ");
+                            var _inputDeletePackageId = Console.ReadLine();
+                            int _addDeletePackageId = int.Parse(_inputDeletePackageId);
 
-                    await Mediator.Send(new DeleteEventPackageCommand { PackageId = _addDeletePackageId });
-                    Console.WriteLine("Package deleted successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break; 
+                            await Mediator.Send(new DeleteEventPackageCommand { PackageId = _addDeletePackageId });
+                            Console.WriteLine("Package deleted successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
+                        default:
+                            break;
+                    } 
                     #endregion
-                default:
+                    break;
+                case "2":
+                    #region Queries
+                    Console.WriteLine("Event Manager Queries");
+                    Console.WriteLine();
+                    Console.WriteLine("1 - Search Event By ID");
+                    Console.WriteLine("2 - Search Event By Keyword");
+                    Console.WriteLine("3 - Search Client By ID ");
+                    Console.WriteLine("4 - Search Client By Keyword");
+                    Console.WriteLine("5 - Get Event List");
+                    Console.WriteLine("6 - Get Client List");
+                    Console.WriteLine("7 - Get Client ID");
+                    Console.WriteLine("8 - Get Payment Status");
+                    Console.WriteLine("9 - Get Payment Status By ID");
+                    Console.WriteLine("10 - Get Event Additional Duration Request List");
+                    Console.WriteLine("11 - Get Event Additional Equipment Request List");
+                    Console.WriteLine("12 - Exit");
+
+                    Console.Write("Please enter a number: ");
+                    string _cmdNumber3 = Console.ReadLine();
+
+                    switch (_cmdNumber3)
+                    {
+                        #region Search Event By ID
+                        case "1":
+                            Console.WriteLine("Please enter the event ID: ");
+                            var _inputSearchEventId = Console.ReadLine();
+                            var _addSearchEventId = int.Parse(_inputSearchEventId);
+
+                            if (_addSearchEventId != 0)
+                            {
+                                var _searchEventByIdResult = await Mediator.Send(new SearchEventByIdQuery { EventId = _addSearchEventId });
+
+                                Console.WriteLine("Here are is the event:\n");
+                                Console.WriteLine("ID: {0}\nCode: {1}\nEvent Name: {2}\nEvent Type: {3}\nEvent Status: " +
+                                    "{4}\nAddress: {5}\nBooking Date: {6}\nEvent Date: {7}\nDescription: {8}\nLocation: {9}\nRemarks: {10}",
+                                    _searchEventByIdResult.ID, _searchEventByIdResult.Code, _searchEventByIdResult.EventName, _searchEventByIdResult.Type,
+                                    _searchEventByIdResult.EventStatus, _searchEventByIdResult.Address, _searchEventByIdResult.BookingDate,
+                                    _searchEventByIdResult.EventDate, _searchEventByIdResult.Description, _searchEventByIdResult.Location, _searchEventByIdResult.Remarks);
+
+
+                                Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                string check = Console.ReadLine();
+                                if (check.Contains("Y") || check.Contains("y"))
+                                {
+                                    goto start;
+                                }
+                                else if (check.Contains("N") || check.Contains("n"))
+                                {
+                                    Console.WriteLine("Thank you for using the system!");
+                                }
+                            }
+                            break; 
+                            #endregion
+                    } 
+                    #endregion
                     break;
             }
+
+            
         }
     }
 }
