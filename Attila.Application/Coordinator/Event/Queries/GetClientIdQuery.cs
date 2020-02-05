@@ -35,7 +35,7 @@ namespace Attila.Application.Coordinator.Event.Queries
                 }
                 else
                 {
-                    throw new Exception("Does not exist!");
+                    throw new Exception("Client ID does not exist!");
                 }
             }
         }

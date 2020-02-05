@@ -30,12 +30,12 @@ namespace Attila.Presentation.InventoryManager
 
         static async Task Main(string[] args)
         {
+            start:
             Console.WriteLine("Inventory Manager");
             Console.WriteLine();
             Console.WriteLine("1 - Food");
             Console.WriteLine("2 - Equipment");
 
-            start:
             Console.WriteLine();
             Console.WriteLine();
             Console.Write("Please enter a command: ");
@@ -61,6 +61,7 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("8 - Request Food Restock Delivery");
                     Console.WriteLine("9 - Search Food By ID");
                     Console.WriteLine("10 - Search Food By Keyword");
+                    Console.WriteLine("X - Home");
 
                     
                     Console.WriteLine();
@@ -523,6 +524,14 @@ namespace Attila.Presentation.InventoryManager
                             goto foodsubstart;
                         #endregion
 
+                        //case X : Home Command
+                        #region Home Commands
+                        case "X":
+                            goto start;
+
+                        case "x":
+                            goto start; 
+                        #endregion
 
                         default:
                             break;
@@ -994,6 +1003,14 @@ namespace Attila.Presentation.InventoryManager
                             goto equipmentsubstart;
                         #endregion
 
+                        //case X : Home Command
+                        #region Home Commands
+                        case "X":
+                            goto start;
+
+                        case "x":
+                            goto start;
+                        #endregion
 
                         default:
                             break;
