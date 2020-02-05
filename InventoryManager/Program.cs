@@ -44,9 +44,11 @@ namespace Attila.Presentation.InventoryManager
             {
                 case "1":
 
+                foodsubstart:
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.WriteLine("Food Commands");
+                    Console.WriteLine("******************************************");
+                    Console.WriteLine("             Food Commands");
                     Console.WriteLine();
                     Console.WriteLine("1 - Add Food Details");
                     Console.WriteLine("2 - Add Food Inventory");
@@ -59,7 +61,7 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("9 - Search Food By ID");
                     Console.WriteLine("10 - Search Food By Keyword");
 
-                    foodsubstart:
+                    
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("Please enter a sub command: ");
@@ -329,7 +331,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Remarks:          {0}", item.Remarks);
                             }
 
-
+                            Console.WriteLine();
                             Console.Write("Enter Food ID: ");
                             var _updateID = Console.ReadLine();
                             int _updatedID = int.Parse(_updateID);
@@ -458,6 +460,8 @@ namespace Attila.Presentation.InventoryManager
                             var _searchFoodByIdQuery = await Mediator.Send(new SearchFoodByIdQuery { SearchedID = _parsedSearchID});
                             if (_searchFoodByIdQuery != null)
                             {
+                                Console.WriteLine();
+                                Console.WriteLine("Searched Food ID");
                                 Console.WriteLine("Food Details ID: {0}", _searchFoodByIdQuery.ID);
                                 Console.WriteLine("Food Quantity: {0}", _searchFoodByIdQuery.Quantity);
                                 Console.WriteLine("Expiration Date: {0}", _searchFoodByIdQuery.ExpirationDate);
@@ -482,6 +486,7 @@ namespace Attila.Presentation.InventoryManager
                             {
                                 foreach (var item in _searchFoodByKeywordQuery)
                                 {
+                                    Console.WriteLine();
                                     Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
                                     Console.WriteLine("Food Name: {0}   ,   Food Code: {1}", item.Name, item.Code);
                                     Console.WriteLine("Food Specification: {0}   ,   Food Description: {1}", item.Specification, item.Description);
@@ -500,9 +505,11 @@ namespace Attila.Presentation.InventoryManager
 
                 case "2":
 
+                equipmentsubstart:
                     Console.WriteLine();
                     Console.WriteLine();
-                    Console.WriteLine("Equipment Commands");
+                    Console.WriteLine("******************************************");
+                    Console.WriteLine("           Equipment Commands");
                     Console.WriteLine();
                     Console.WriteLine("1 - Add Equipment Details");
                     Console.WriteLine("2 - Add Equipment Inventory");
@@ -515,7 +522,6 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("9 - Search Equipment By ID");
                     Console.WriteLine("10 - Search Equipment By Keyword");
 
-                    equipmentsubstart:
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("Please enter a sub command: ");
@@ -893,6 +899,8 @@ namespace Attila.Presentation.InventoryManager
                             var _searchEquipmentByIdQuery = await Mediator.Send(new SearchEquipmentByIdQuery { SearchedID = _parsedSearchID });
                             if (_searchEquipmentByIdQuery != null)
                             {
+                                Console.WriteLine();
+                                Console.WriteLine("Searched Equipment ID");
                                 Console.WriteLine("Equipment Details ID: {0}", _searchEquipmentByIdQuery.ID);
                                 Console.WriteLine("Equipment Quantity: {0}", _searchEquipmentByIdQuery.Quantity);
                                 Console.WriteLine("Equipment Encoding Date: {0}", _searchEquipmentByIdQuery.EncodingDate);
@@ -916,6 +924,7 @@ namespace Attila.Presentation.InventoryManager
                             {
                                 foreach (var item in _searchEquipmentByKeywordQuery)
                                 {
+                                    Console.WriteLine();
                                     Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
                                     Console.WriteLine("Equipment Name: {0}   ,   Food Code: {1}", item.Name, item.Code);
                                     Console.WriteLine("Equipment Description: {0}", item.Description);
