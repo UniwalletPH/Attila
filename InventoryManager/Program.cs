@@ -12,6 +12,7 @@ using Attila.Application.Inventory_Manager.Food.Commands;
 using Atilla.Application.Food.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
+using System.Linq;
 
 namespace Attila.Presentation.InventoryManager
 {
@@ -252,61 +253,69 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Food Type:           {0}", item.FoodType);
                             }
 
-                            Console.WriteLine();
-                            Console.Write("Enter Food Details ID to update: ");
-                            var _updateFoodID = Console.ReadLine();
-                            var _updateSelectedFoodID = int.Parse(_updateFoodID);
-
-
-                            Console.Write("Food Name: ");
-                            var _foodNameUpdate = Console.ReadLine();
-
-                            Console.Write("Food Code: ");
-                            var _foodCodeUpdate = Console.ReadLine();
-
-                            Console.Write("Food Specification: ");
-                            var _foodSpecificationUpdate = Console.ReadLine();
-
-                            Console.Write("Food Description: ");
-                            var _foodDescriptionUpdate = Console.ReadLine();
-
-                            Console.WriteLine("Food Unit: ");
-                            Console.WriteLine("1 - Piece");
-                            Console.WriteLine("2 - Box");
-                            Console.WriteLine("3 - Dozen");
-                            Console.WriteLine("4 - Others");
-                            Console.Write("Food Unit: ");
-                            var _updateFoodUnit = Console.ReadLine();
-                            UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateFoodUnit);
-
-                            Console.WriteLine("Food Type: ");
-                            Console.WriteLine("1 - Perishable");
-                            Console.WriteLine("2 - Non-perishable");
-                            Console.WriteLine("3 - Others");
-                            Console.Write("Food Type: ");
-                            var _updateFoodType = Console.ReadLine();
-                            FoodType _parsedUpdateFoodType = (FoodType)Enum.Parse(typeof(FoodType), _updateFoodType);
-
-
-                            FoodDetails _foodDetailsUpdate = new FoodDetails
+                            try
                             {
-                                ID = _updateSelectedFoodID,
-                                Code = _foodCodeUpdate,
-                                Name = _foodNameUpdate,
-                                Specification = _foodSpecificationUpdate,
-                                Description = _foodDescriptionUpdate,
-                                Unit = _parsedUpdateFoodUnit,
-                                FoodType = _parsedUpdateFoodType
-                            };
+                                Console.WriteLine();
+                                Console.Write("Enter Food Details ID to update: ");
+                                var _updateFoodID = Console.ReadLine();
+                                var _updateSelectedFoodID = int.Parse(_updateFoodID);
 
-                            var _updateFoodDetailsInventoryCommand = await Mediator.Send(new UpdateFoodDetailsCommand {MyFoodDetails = _foodDetailsUpdate });
-                            if (_updateFoodDetailsInventoryCommand == true)
+
+                                Console.Write("Food Name: ");
+                                var _foodNameUpdate = Console.ReadLine();
+
+                                Console.Write("Food Code: ");
+                                var _foodCodeUpdate = Console.ReadLine();
+
+                                Console.Write("Food Specification: ");
+                                var _foodSpecificationUpdate = Console.ReadLine();
+
+                                Console.Write("Food Description: ");
+                                var _foodDescriptionUpdate = Console.ReadLine();
+
+                                Console.WriteLine("Food Unit: ");
+                                Console.WriteLine("1 - Piece");
+                                Console.WriteLine("2 - Box");
+                                Console.WriteLine("3 - Dozen");
+                                Console.WriteLine("4 - Others");
+                                Console.Write("Food Unit: ");
+                                var _updateFoodUnit = Console.ReadLine();
+                                UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateFoodUnit);
+
+                                Console.WriteLine("Food Type: ");
+                                Console.WriteLine("1 - Perishable");
+                                Console.WriteLine("2 - Non-perishable");
+                                Console.WriteLine("3 - Others");
+                                Console.Write("Food Type: ");
+                                var _updateFoodType = Console.ReadLine();
+                                FoodType _parsedUpdateFoodType = (FoodType)Enum.Parse(typeof(FoodType), _updateFoodType);
+
+
+                                FoodDetails _foodDetailsUpdate = new FoodDetails
+                                {
+                                    ID = _updateSelectedFoodID,
+                                    Code = _foodCodeUpdate,
+                                    Name = _foodNameUpdate,
+                                    Specification = _foodSpecificationUpdate,
+                                    Description = _foodDescriptionUpdate,
+                                    Unit = _parsedUpdateFoodUnit,
+                                    FoodType = _parsedUpdateFoodType
+                                };
+
+                                var _updateFoodDetailsInventoryCommand = await Mediator.Send(new UpdateFoodDetailsCommand { MyFoodDetails = _foodDetailsUpdate });
+                                if (_updateFoodDetailsInventoryCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Food Details Updated!");
+                                }
+                            }
+                            catch (Exception ex)
                             {
-                                Console.WriteLine(); 
-                                Console.WriteLine("Food Details Updated!");
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
                             }
 
-
+                            
                             goto foodsubstart;
                         #endregion
 
@@ -331,24 +340,33 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Remarks:          {0}", item.Remarks);
                             }
 
-                            Console.WriteLine();
-                            Console.Write("Enter Food ID: ");
-                            var _updateID = Console.ReadLine();
-                            int _updatedID = int.Parse(_updateID);
-
-                            Console.WriteLine();
-                            Console.Write("Enter New Food Stock: ");
-                            var _updateStock = Console.ReadLine();
-                            int _updatedFoodStock = int.Parse(_updateStock);
-
-
-                            var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockCommand { SearchedID = _updatedID, NewFoodQuantity = _updatedFoodStock });
-                            if (updateFoodStockInventoryCommand == true)
+                            try
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Stock Updated!");
+                                Console.Write("Enter Food ID: ");
+                                var _updateID = Console.ReadLine();
+                                int _updatedID = int.Parse(_updateID);
+
+                                Console.WriteLine();
+                                Console.Write("Enter New Food Stock: ");
+                                var _updateStock = Console.ReadLine();
+                                int _updatedFoodStock = int.Parse(_updateStock);
+
+
+                                var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockCommand { SearchedID = _updatedID, NewFoodQuantity = _updatedFoodStock });
+                                if (updateFoodStockInventoryCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Food Stock Updated!");
+                                }
+                                else Console.WriteLine("Update Failed!");
                             }
-                            else Console.WriteLine("Update Failed!");
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
+                            }
+                            
 
                             goto foodsubstart;
                         #endregion
@@ -414,34 +432,43 @@ namespace Attila.Presentation.InventoryManager
 
                             }
 
-                            Console.WriteLine();
-                            Console.Write("Enter Food Details ID to restock: ");
-                            var _foodIdRestock = Console.ReadLine();
-                            int _selectedFoodIdRestock = int.Parse(_foodIdRestock);
-
-                            Console.Write("Enter Quantity: ");
-                            var _foodRestockQuantity = Console.ReadLine();
-                            int _foodRestockQuantityParsed = int.Parse(_foodRestockQuantity);
-
-                            Console.Write("Enter User ID: ");
-                            var _foodRestockUserId = Console.ReadLine();
-                            int _foodRestockUserIdParsed = int.Parse(_foodRestockUserId);
-
-                            FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
-                            {
-                                FoodsDetailsID = _selectedFoodIdRestock,
-                                Quantity = _foodRestockQuantityParsed,
-                                DateTimeRequest = DateTime.Now,
-                                Status = 0,
-                                UserID = _foodRestockUserIdParsed
-                            };
-
-                            var _RequestFoodRestockCommand = await Mediator.Send(new RequestFoodRestockCommand { MyFoodRestockRequest = _foodRestockRequest});
-                            if (_RequestFoodRestockCommand == true)
+                            try
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Restock Successfully Requested!");
+                                Console.Write("Enter Food Details ID to restock: ");
+                                var _foodIdRestock = Console.ReadLine();
+                                int _selectedFoodIdRestock = int.Parse(_foodIdRestock);
+
+                                Console.Write("Enter Quantity: ");
+                                var _foodRestockQuantity = Console.ReadLine();
+                                int _foodRestockQuantityParsed = int.Parse(_foodRestockQuantity);
+
+                                Console.Write("Enter User ID: ");
+                                var _foodRestockUserId = Console.ReadLine();
+                                int _foodRestockUserIdParsed = int.Parse(_foodRestockUserId);
+
+                                FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
+                                {
+                                    FoodsDetailsID = _selectedFoodIdRestock,
+                                    Quantity = _foodRestockQuantityParsed,
+                                    DateTimeRequest = DateTime.Now,
+                                    Status = 0,
+                                    UserID = _foodRestockUserIdParsed
+                                };
+
+                                var _RequestFoodRestockCommand = await Mediator.Send(new RequestFoodRestockCommand { MyFoodRestockRequest = _foodRestockRequest });
+                                if (_RequestFoodRestockCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Food Restock Successfully Requested!");
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
+                            }
+                            
 
                             goto foodsubstart;
                         #endregion
@@ -685,6 +712,10 @@ namespace Attila.Presentation.InventoryManager
                         #region Update Equipment Details Command
                         case "5":
 
+                            Console.WriteLine();
+                            Console.WriteLine("Update Equipment Details");
+                            Console.WriteLine();
+
                             var _viewEquipmentDetailsQuery1 = await Mediator.Send(new GetEquipmentDetailsQuery());
 
                             foreach (var item in _viewEquipmentDetailsQuery1)
@@ -699,56 +730,65 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Equipment Type:           {0}", item.EquipmentType);
                             }
 
-                            Console.WriteLine();
-                            Console.Write("Enter Equipment Details ID to update: ");
-                            var _updateEquipmentID = Console.ReadLine();
-                            var _updateSelectedEquipmentID = int.Parse(_updateEquipmentID);
-
-
-                            Console.Write("Equipment Name: ");
-                            var _equipmentNameUpdate = Console.ReadLine();
-
-                            Console.Write("Equipment Code: ");
-                            var _equipmentCodeUpdate = Console.ReadLine();
-
-                            Console.Write("Equipment Description: ");
-                            var _equipmentDescriptionUpdate = Console.ReadLine();
-
-                            Console.WriteLine("Equipment Unit Type: ");
-                            Console.WriteLine("1 - Piece");
-                            Console.WriteLine("2 - Box");
-                            Console.WriteLine("3 - Dozen");
-                            Console.WriteLine("4 - Others");
-                            Console.Write("Food Unit: ");
-                            var _updateEquipmentUnit = Console.ReadLine();
-                            UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateEquipmentUnit);
-
-                            Console.WriteLine("Equipment Type: ");
-                            Console.WriteLine("1 - Perishable");
-                            Console.WriteLine("2 - Non-perishable");
-                            Console.WriteLine("3 - Others");
-                            Console.Write("Food Type: ");
-                            var _updateEquipmentType = Console.ReadLine();
-                            EquipmentType _parsedUpdateEquipmentType = (EquipmentType)Enum.Parse(typeof(EquipmentType), _updateEquipmentType);
-
-
-                            EquipmentDetails _equipmentDetailsUpdate = new EquipmentDetails
-                            {
-                                Code = _equipmentCodeUpdate,
-                                Name = _equipmentNameUpdate,
-                                Description = _equipmentDescriptionUpdate,
-                                UnitType = _parsedUpdateFoodUnit,
-                                EquipmentType = _parsedUpdateEquipmentType
-                            };
-
-                            var _updateEquipmentDetailsInventoryCommand = await Mediator.Send(new UpdateEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetailsUpdate });
-                            if (_updateEquipmentDetailsInventoryCommand == true)
+                            try
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Equipment Details Updated!");
+                                Console.WriteLine();
+                                Console.Write("Enter Equipment Details ID to update: ");
+                                var _updateEquipmentID = Console.ReadLine();
+                                var _updateSelectedEquipmentID = int.Parse(_updateEquipmentID);
+
+                                Console.Write("Equipment Name: ");
+                                var _equipmentNameUpdate = Console.ReadLine();
+
+                                Console.Write("Equipment Code: ");
+                                var _equipmentCodeUpdate = Console.ReadLine();
+
+                                Console.Write("Equipment Description: ");
+                                var _equipmentDescriptionUpdate = Console.ReadLine();
+
+                                Console.WriteLine("Equipment Unit Type: ");
+                                Console.WriteLine("1 - Piece");
+                                Console.WriteLine("2 - Box");
+                                Console.WriteLine("3 - Dozen");
+                                Console.WriteLine("4 - Others");
+                                Console.Write("Food Unit: ");
+                                var _updateEquipmentUnit = Console.ReadLine();
+                                UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateEquipmentUnit);
+
+                                Console.WriteLine("Equipment Type: ");
+                                Console.WriteLine("1 - Perishable");
+                                Console.WriteLine("2 - Non-perishable");
+                                Console.WriteLine("3 - Others");
+                                Console.Write("Food Type: ");
+                                var _updateEquipmentType = Console.ReadLine();
+                                EquipmentType _parsedUpdateEquipmentType = (EquipmentType)Enum.Parse(typeof(EquipmentType), _updateEquipmentType);
+
+
+                                EquipmentDetails _equipmentDetailsUpdate = new EquipmentDetails
+                                {
+                                    ID = _updateSelectedEquipmentID,
+                                    Code = _equipmentCodeUpdate,
+                                    Name = _equipmentNameUpdate,
+                                    Description = _equipmentDescriptionUpdate,
+                                    UnitType = _parsedUpdateFoodUnit,
+                                    EquipmentType = _parsedUpdateEquipmentType
+                                };
+
+                                var _updateEquipmentDetailsInventoryCommand = await Mediator.Send(new UpdateEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetailsUpdate });
+                                if (_updateEquipmentDetailsInventoryCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Equipment Details Updated!");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
                             }
 
-
+                           
                             goto equipmentsubstart;
                         #endregion
 
@@ -760,7 +800,6 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("Update Equipment Stock Inventory");
                             Console.WriteLine();
 
-                            Console.WriteLine();
                             var _viewEquipmentStockQuery1 = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewEquipmentStockQuery1)
@@ -774,23 +813,31 @@ namespace Attila.Presentation.InventoryManager
                             }
 
 
-                            Console.Write("Enter Equipment ID: ");
-                            var _updateID = Console.ReadLine();
-                            int _updatedID = int.Parse(_updateID);
+                            try
+                            {
+                                Console.Write("Enter Equipment ID: ");
+                                var _updateID = Console.ReadLine();
+                                int _updatedID = int.Parse(_updateID);
 
-                            Console.WriteLine();
-                            Console.Write("Enter New Equipment Stock: ");
-                            var _updateStock = Console.ReadLine();
-                            int _updatedEquipmentStock = int.Parse(_updateStock);
+                                Console.WriteLine();
+                                Console.Write("Enter New Equipment Stock: ");
+                                var _updateStock = Console.ReadLine();
+                                int _updatedEquipmentStock = int.Parse(_updateStock);
 
 
-                            var updateEquipmentStockInventoryCommand = await Mediator.Send(new UpdateEquipmentStockCommand { SearchedID = _updatedID, NewEquipmentQuantity = _updatedEquipmentStock });
-                            if (updateEquipmentStockInventoryCommand == true)
+                                var updateEquipmentStockInventoryCommand = await Mediator.Send(new UpdateEquipmentStockCommand { SearchedID = _updatedID, NewEquipmentQuantity = _updatedEquipmentStock });
+                                if (updateEquipmentStockInventoryCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Equipment Stock Updated!");
+                                }
+                            }
+                            catch (Exception ex)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Equipment Stock Updated!");
+                                Console.WriteLine(ex.Message);
                             }
-                            else Console.WriteLine("Update Failed!");
+
 
                             goto equipmentsubstart;
                         #endregion
@@ -853,34 +900,44 @@ namespace Attila.Presentation.InventoryManager
 
                             }
 
-                            Console.WriteLine();
-                            Console.Write("Enter Equipment Details ID to restock: ");
-                            var _equipmentIdRestock = Console.ReadLine();
-                            int _selectedEquipmentIdRestock = int.Parse(_equipmentIdRestock);
-
-                            Console.Write("Enter Quantity: ");
-                            var _equipmentRestockQuantity = Console.ReadLine();
-                            int _equipmentRestockQuantityParsed = int.Parse(_equipmentRestockQuantity);
-
-                            Console.Write("Enter User ID: ");
-                            var _equipmentRestockUserId = Console.ReadLine();
-                            int _equipmentRestockUserIdParsed = int.Parse(_equipmentRestockUserId);
-
-                            EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
-                            {
-                                Quantity = _equipmentRestockQuantityParsed,
-                                DateTimeRequest = DateTime.Now,
-                                EquipmentDetailsID = _selectedEquipmentIdRestock,
-                                Status = 0,
-                                UserID = _equipmentRestockUserIdParsed
-                            };
-
-                            var _RequestEquipmentRestockCommand = await Mediator.Send(new RequestEquipmentRestockCommand { MyEquipmentRestockRequest = _equipmentRestockRequest });
-                            if (_RequestEquipmentRestockCommand == true)
+                            try
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Equipment Restock Successfully Requested!");
+                                Console.Write("Enter Equipment Details ID to restock: ");
+                                var _equipmentIdRestock = Console.ReadLine();
+                                int _selectedEquipmentIdRestock = int.Parse(_equipmentIdRestock);
+
+                                Console.Write("Enter Quantity: ");
+                                var _equipmentRestockQuantity = Console.ReadLine();
+                                int _equipmentRestockQuantityParsed = int.Parse(_equipmentRestockQuantity);
+
+                                Console.Write("Enter User ID: ");
+                                var _equipmentRestockUserId = Console.ReadLine();
+                                int _equipmentRestockUserIdParsed = int.Parse(_equipmentRestockUserId);
+
+                                EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
+                                {
+                                    Quantity = _equipmentRestockQuantityParsed,
+                                    DateTimeRequest = DateTime.Now,
+                                    EquipmentDetailsID = _selectedEquipmentIdRestock,
+                                    Status = 0,
+                                    UserID = _equipmentRestockUserIdParsed
+                                };
+
+                                var _RequestEquipmentRestockCommand = await Mediator.Send(new RequestEquipmentRestockCommand { MyEquipmentRestockRequest = _equipmentRestockRequest, RequestEquipmentID = _selectedEquipmentIdRestock });
+                                if (_RequestEquipmentRestockCommand == true)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Equipment Restock Successfully Requested!");
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
+                            }
+
+                            
 
                             goto equipmentsubstart;
                         #endregion
@@ -908,6 +965,8 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Equipment Remarks: {0}", _searchEquipmentByIdQuery.Remarks);
                             }
 
+                            else Console.WriteLine("Equipment ID does not exist!");
+
                             goto equipmentsubstart;
                         #endregion
 
@@ -930,6 +989,7 @@ namespace Attila.Presentation.InventoryManager
                                     Console.WriteLine("Equipment Description: {0}", item.Description);
                                 }
                             }
+                            else Console.WriteLine("Keyword does not exist!");
 
                             goto equipmentsubstart;
                         #endregion

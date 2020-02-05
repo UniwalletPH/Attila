@@ -1,6 +1,7 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,15 +22,24 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             {
                 var _updatedEquipmentDetails = dbContext.EquipmentsDetails.Find(request.MyEquipmentDetails.ID);
 
-                _updatedEquipmentDetails.Code = request.MyEquipmentDetails.Code;
-                _updatedEquipmentDetails.Name = request.MyEquipmentDetails.Name;
-                _updatedEquipmentDetails.Description = request.MyEquipmentDetails.Description;
-                _updatedEquipmentDetails.UnitType = request.MyEquipmentDetails.UnitType;
-                _updatedEquipmentDetails.EquipmentType = request.MyEquipmentDetails.EquipmentType;
+                if (_updatedEquipmentDetails != null)
+                {
+                    _updatedEquipmentDetails.Code = request.MyEquipmentDetails.Code;
+                    _updatedEquipmentDetails.Name = request.MyEquipmentDetails.Name;
+                    _updatedEquipmentDetails.Description = request.MyEquipmentDetails.Description;
+                    _updatedEquipmentDetails.UnitType = request.MyEquipmentDetails.UnitType;
+                    _updatedEquipmentDetails.EquipmentType = request.MyEquipmentDetails.EquipmentType;
 
-                await dbContext.SaveChangesAsync();
+                    await dbContext.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+
+                else
+                {
+                    throw new Exception("Equipment ID does not exist!");
+                }
+
             }
         }
     }

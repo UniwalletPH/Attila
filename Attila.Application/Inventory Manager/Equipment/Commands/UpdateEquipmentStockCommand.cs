@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,11 +23,17 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             {
                 var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.SearchedID);
 
-                _updatedEquipmentStock.Quantity = request.NewEquipmentQuantity;
+                if (_updatedEquipmentStock != null)
+                {
+                    _updatedEquipmentStock.Quantity = request.NewEquipmentQuantity;
+                    await dbContext.SaveChangesAsync();
 
-                await dbContext.SaveChangesAsync();
-
-                return true;
+                    return true;
+                }
+                else
+                {
+                    throw new Exception("Equipment ID does not exist!");
+                }
             }
         }
     }
