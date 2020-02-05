@@ -82,7 +82,7 @@ namespace Attila.Presentation.Administrator
 
                     Console.WriteLine("EVENT ADDITIONAL EQUIPMENT REQUEST");
 
-                    var _additionalEquipmentRequest = await Mediator.Send(new GetAdditionalEquipmentRequestListQuery { EventID = _toSearchID });
+                    var _additionalEquipmentRequest = await Mediator.Send(new Application.Admin.Equipment.Queries.GetAdditionalEquipmentRequestListQuery { EventID = _toSearchID });
 
                     foreach (var item in _additionalEquipmentRequest)
                     {
