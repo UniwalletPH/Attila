@@ -10,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class ViewEventPackageQuery : IRequest<List<EventPackageDetails>>
+    public class GetEventPackageQuery : IRequest<List<EventPackageDetails>>
     {
 
-        public class ViewEventPackageQueryHandler : IRequestHandler<ViewEventPackageQuery, List<EventPackageDetails>>
+        public class GetEventPackageQueryHandler : IRequestHandler<GetEventPackageQuery, List<EventPackageDetails>>
         {
             private readonly IAttilaDbContext dbContext;
-            public ViewEventPackageQueryHandler(IAttilaDbContext dbContext)
+            public GetEventPackageQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventPackageDetails>> Handle(ViewEventPackageQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventPackageDetails>> Handle(GetEventPackageQuery request, CancellationToken cancellationToken)
             {
                 var _viewEventPackage = await dbContext.EventsPackageDetails.ToListAsync();
 

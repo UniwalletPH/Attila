@@ -10,22 +10,22 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class ViewEventListQuery : IRequest<List<EventDetails>>
+    public class GetClientListQuery : IRequest<List<EventClient>>
     {
 
-        public class ViewEventListQueryHandler : IRequestHandler<ViewEventListQuery, List<EventDetails>>
+        public class GetClientListQueryHandler : IRequestHandler<GetClientListQuery, List<EventClient>>
         {
             private readonly IAttilaDbContext dbContext;
-            public ViewEventListQueryHandler(IAttilaDbContext dbContext)
+            public GetClientListQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventDetails>> Handle(ViewEventListQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventClient>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
             {
-                var _viewEventList = await dbContext.EventsDetails.ToListAsync();
+                var _viewClientList = await dbContext.EventClients.ToListAsync();
 
-                return _viewEventList;
+                return _viewClientList;
             }
         }
 
