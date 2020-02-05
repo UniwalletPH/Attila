@@ -89,8 +89,10 @@ namespace Attila.Presentation.Coordinator
                     Console.WriteLine("Please enter event address: ");
                     var _addEventAddress = Console.ReadLine();
 
-                    /*Console.WriteLine("Please enter event date: ");
-                    var _addEventDate = */
+                    Console.WriteLine("Format - (DD/MM/YYYY)");
+                    Console.WriteLine("Please enter event date: ");
+                    var _addEventDate = Console.ReadLine();
+                    DateTime __addEventDateParsed = DateTime.Parse(_addEventDate);
 
                     Console.WriteLine("Please enter event location: ");
                     var _addEventLocation = Console.ReadLine();
@@ -118,7 +120,8 @@ namespace Attila.Presentation.Coordinator
                         Remarks = _addEventRemarks,
                         BookingDate = DateTime.Now,
                         Description = _addEventDesc,
-                        Type = _eventType
+                        Type = _eventType,
+                        EventDate = __addEventDateParsed
                     };
 
 
@@ -140,6 +143,7 @@ namespace Attila.Presentation.Coordinator
 
                     break;
                 #endregion
+
                 #region Add Additional Package
                 case "2":
                     Console.Clear();
@@ -185,6 +189,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Request Event Requirements
                 case "3":
                     Console.Clear();
@@ -228,6 +233,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Update Event Details
                 case "4":
                     Console.Clear();
@@ -297,6 +303,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Update Package Details
                 case "5":
                     Console.Clear();
@@ -345,6 +352,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Update Client Details
                 case "6":
                     Console.Clear();
@@ -395,6 +403,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Update Client Payment Status
                 case "7":
                     Console.Clear();
@@ -445,6 +454,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Delete Event
                 case "8":
                     Console.WriteLine("DELETE EVENT\n ");
@@ -467,6 +477,7 @@ namespace Attila.Presentation.Coordinator
                     }
                     break;
                 #endregion
+
                 #region Delete Event Package
                 case "9":
                     Console.WriteLine("DELETE EVENT PACKAGE\n ");
