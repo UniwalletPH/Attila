@@ -60,6 +60,7 @@ namespace Attila.Presentation.Coordinator
 
                         #region Add Event
                         case "1":
+
                             Console.Clear();
 
                             Console.WriteLine("CLIENT INFORMATION\n ");
@@ -102,10 +103,10 @@ namespace Attila.Presentation.Coordinator
                             Console.WriteLine("Please enter event address: ");
                             var _addEventAddress = Console.ReadLine();
 
-                    Console.WriteLine("Format - (DD/MM/YYYY)");
-                    Console.WriteLine("Please enter event date: ");
-                    var _addEventDate = Console.ReadLine();
-                    DateTime __addEventDateParsed = DateTime.Parse(_addEventDate);
+                            Console.WriteLine("Format - (DD/MM/YYYY)");
+                            Console.WriteLine("Please enter event date: ");
+                            var _addEventDate = Console.ReadLine();
+                            DateTime __addEventDateParsed = DateTime.Parse(_addEventDate);
 
                             Console.WriteLine("Please enter event location: ");
                             var _addEventLocation = Console.ReadLine();
@@ -124,18 +125,18 @@ namespace Attila.Presentation.Coordinator
 
                             EventType _eventType = (EventType)Enum.Parse(typeof(EventType), _addEventType);
 
-                    var _addEventDetails = new EventDetails
-                    {
-                        EventClientID = _sample.ID,
-                        EventName = _addEventName,
-                        Address = _addEventAddress,
-                        Location = _addEventLocation,
-                        Remarks = _addEventRemarks,
-                        BookingDate = DateTime.Now,
-                        Description = _addEventDesc,
-                        Type = _eventType,
-                        EventDate = __addEventDateParsed
-                    };
+                            var _addEventDetails = new EventDetails
+                            {
+                                EventClientID = _sample.ID,
+                                EventName = _addEventName,
+                                Address = _addEventAddress,
+                                Location = _addEventLocation,
+                                Remarks = _addEventRemarks,
+                                BookingDate = DateTime.Now,
+                                Description = _addEventDesc,
+                                Type = _eventType,
+                                EventDate = __addEventDateParsed
+                            };
 
 
                             await Mediator.Send(new AddEventCommand { EventDetails = _addEventDetails });
@@ -154,13 +155,14 @@ namespace Attila.Presentation.Coordinator
                                 Console.WriteLine("Thank you for using the system!");
                             }
 
-                    break;
-                #endregion
+                            break;
+                        #endregion
 
-                #region Add Additional Package
-                case "2":
-                    Console.Clear();
-                    Console.WriteLine("ADD ADDITIONAL PACKAGE\n");
+                        #region Add Additional Package
+                        case "2":
+
+                            Console.Clear();
+                            Console.WriteLine("ADD ADDITIONAL PACKAGE\n");
 
                             Console.WriteLine("Please enter package name: ");
                             var _addPackageName = Console.ReadLine();
@@ -180,33 +182,33 @@ namespace Attila.Presentation.Coordinator
                             var _inputPackageDuration = Console.ReadLine();
                             TimeSpan timeSpan = TimeSpan.FromMinutes(double.Parse(_inputPackageDuration));
 
-                    var _addPackage = new EventPackageDetails
-                    {
-                        Code = _addPackageName,
-                        Description = _addPackageDesc,
-                        Duration = timeSpan,
-                        NumberOfGuest = _addPackageGuest,
-                        Rate = _addPackageRate
-                    };
-                    await Mediator.Send(new AddEventPackageCommand { PackageDetails = _addPackage });
-                    Console.WriteLine("Package added successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            var _addPackage = new EventPackageDetails
+                            {
+                                Code = _addPackageName,
+                                Description = _addPackageDesc,
+                                Duration = timeSpan,
+                                NumberOfGuest = _addPackageGuest,
+                                Rate = _addPackageRate
+                            };
+                            await Mediator.Send(new AddEventPackageCommand { PackageDetails = _addPackage });
+                            Console.WriteLine("Package added successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Request Event Requirements
-                case "3":
-                    Console.Clear();
-                    Console.WriteLine("REQUEST EVENT REQUIREMENTS\n");
+                        #region Request Event Requirements
+                        case "3":
+                            Console.Clear();
+                            Console.WriteLine("REQUEST EVENT REQUIREMENTS\n");
 
                             Console.WriteLine("Please enter event ID:");
                             var _inputEventId = Console.ReadLine();
@@ -232,25 +234,25 @@ namespace Attila.Presentation.Coordinator
                                 Status = Status.Pending
                             };
 
-                    await Mediator.Send(new RequestEventRequirementsCommand { EventRequirementRequest = _addRequest });
-                    Console.WriteLine("Event requirements requested!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            await Mediator.Send(new RequestEventRequirementsCommand { EventRequirementRequest = _addRequest });
+                            Console.WriteLine("Event requirements requested!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Update Event Details
-                case "4":
-                    Console.Clear();
-                    Console.WriteLine("UPDATE EVENT DETAILS\n");
+                        #region Update Event Details
+                        case "4":
+                            Console.Clear();
+                            Console.WriteLine("UPDATE EVENT DETAILS\n");
 
                             Console.WriteLine("Please enter event ID: ");
                             var _inputUpdateEventId = Console.ReadLine();
@@ -302,25 +304,25 @@ namespace Attila.Presentation.Coordinator
                             };
 
 
-                    await Mediator.Send(new UpdateEventCommand { UpdateEvent = _addUpdateEventDetails });
-                    Console.WriteLine("Event updated successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            await Mediator.Send(new UpdateEventCommand { UpdateEvent = _addUpdateEventDetails });
+                            Console.WriteLine("Event updated successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Update Package Details
-                case "5":
-                    Console.Clear();
-                    Console.WriteLine("UPDATE PACKAGE DETAILS\n");
+                        #region Update Package Details
+                        case "5":
+                            Console.Clear();
+                            Console.WriteLine("UPDATE PACKAGE DETAILS\n");
 
                             Console.WriteLine("Please enter package ID: ");
                             var _inputUpdatePackageId = Console.ReadLine();
@@ -343,32 +345,32 @@ namespace Attila.Presentation.Coordinator
                             var _inputUpdatePackageDuration = Console.ReadLine();
                             TimeSpan _updateTimeSpan = TimeSpan.FromMinutes(double.Parse(_inputUpdatePackageDuration));
 
-                    var _updatePackage = new EventPackageDetails
-                    {
-                        Code = _inputUpdatePackageName,
-                        Description = _inputUpdatePackageDesc,
-                        Duration = _updateTimeSpan,
-                        NumberOfGuest = _addUpdatePackageGuest,
-                        Rate = _addUpdatePackageRate
-                    };
-                    await Mediator.Send(new AddEventPackageCommand { PackageDetails = _updatePackage });
-                    Console.WriteLine("Package updated successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            var _updatePackage = new EventPackageDetails
+                            {
+                                Code = _inputUpdatePackageName,
+                                Description = _inputUpdatePackageDesc,
+                                Duration = _updateTimeSpan,
+                                NumberOfGuest = _addUpdatePackageGuest,
+                                Rate = _addUpdatePackageRate
+                            };
+                            await Mediator.Send(new AddEventPackageCommand { PackageDetails = _updatePackage });
+                            Console.WriteLine("Package updated successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Update Client Details
-                case "6":
-                    Console.Clear();
+                        #region Update Client Details
+                        case "6":
+                            Console.Clear();
 
                             Console.WriteLine("UPDATE CLIENT INFORMATION\n ");
 
@@ -402,24 +404,24 @@ namespace Attila.Presentation.Coordinator
 
                             };
 
-                    await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdateClientDetails });
-                    Console.WriteLine("Client details updated successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdateClientDetails });
+                            Console.WriteLine("Client details updated successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Update Client Payment Status
-                case "7":
-                    Console.Clear();
+                        #region Update Client Payment Status
+                        case "7":
+                            Console.Clear();
 
                             Console.WriteLine("UPDATE EVENT PAYMENT STATUS\n ");
 
@@ -453,47 +455,47 @@ namespace Attila.Presentation.Coordinator
 
                             };
 
-                    await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdatePaymentDetails });
-                    Console.WriteLine("Payment status updated successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            await Mediator.Send(new AddClientDetailsCommand { EventClient = _inputUpdatePaymentDetails });
+                            Console.WriteLine("Payment status updated successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Delete Event
-                case "8":
-                    Console.WriteLine("DELETE EVENT\n ");
+                        #region Delete Event
+                        case "8":
+                            Console.WriteLine("DELETE EVENT\n ");
 
                             Console.WriteLine("Please enter event ID: ");
                             var _inputDeleteEventId = Console.ReadLine();
                             int _addDeleteEventId = int.Parse(_inputDeleteEventId);
 
-                    await Mediator.Send(new DeleteEventCommand { EventId = _addDeleteEventId });
-                    Console.WriteLine("Package deleted successfully!");
-                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                    check = Console.ReadLine();
-                    if (check.Contains("Y") || check.Contains("y"))
-                    {
-                        goto start;
-                    }
-                    else if (check.Contains("N") || check.Contains("n"))
-                    {
-                        Console.WriteLine("Thank you for using the system!");
-                    }
-                    break;
-                #endregion
+                            await Mediator.Send(new DeleteEventCommand { EventId = _addDeleteEventId });
+                            Console.WriteLine("Package deleted successfully!");
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto start;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+                            break;
+                        #endregion
 
-                #region Delete Event Package
-                case "9":
-                    Console.WriteLine("DELETE EVENT PACKAGE\n ");
+                        #region Delete Event Package
+                        case "9":
+                            Console.WriteLine("DELETE EVENT PACKAGE\n ");
 
                             Console.WriteLine("Please enter event package ID: ");
                             var _inputDeletePackageId = Console.ReadLine();
@@ -515,7 +517,7 @@ namespace Attila.Presentation.Coordinator
                         #endregion
                         default:
                             break;
-                    } 
+                    }
                     #endregion
                     break;
                 case "2":
@@ -542,41 +544,143 @@ namespace Attila.Presentation.Coordinator
                     {
                         #region Search Event By ID
                         case "1":
-                            Console.WriteLine("Please enter the event ID: ");
-                            var _inputSearchEventId = Console.ReadLine();
-                            var _addSearchEventId = int.Parse(_inputSearchEventId);
-
-                            if (_addSearchEventId != 0)
+                        input:
+                            try
                             {
+                                Console.WriteLine("Please enter the event ID: ");
+                                var _inputSearchEventId = Console.ReadLine();
+                                var _addSearchEventId = int.Parse(_inputSearchEventId);
+
                                 var _searchEventByIdResult = await Mediator.Send(new SearchEventByIdQuery { EventId = _addSearchEventId });
-
-                                Console.WriteLine("Here are is the event:\n");
-                                Console.WriteLine("ID: {0}\nCode: {1}\nEvent Name: {2}\nEvent Type: {3}\nEvent Status: " +
-                                    "{4}\nAddress: {5}\nBooking Date: {6}\nEvent Date: {7}\nDescription: {8}\nLocation: {9}\nRemarks: {10}",
-                                    _searchEventByIdResult.ID, _searchEventByIdResult.Code, _searchEventByIdResult.EventName, _searchEventByIdResult.Type,
-                                    _searchEventByIdResult.EventStatus, _searchEventByIdResult.Address, _searchEventByIdResult.BookingDate,
-                                    _searchEventByIdResult.EventDate, _searchEventByIdResult.Description, _searchEventByIdResult.Location, _searchEventByIdResult.Remarks);
-
-
-                                Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                string check = Console.ReadLine();
-                                if (check.Contains("Y") || check.Contains("y"))
+                                if (_searchEventByIdResult != null)
                                 {
-                                    goto start;
-                                }
-                                else if (check.Contains("N") || check.Contains("n"))
-                                {
-                                    Console.WriteLine("Thank you for using the system!");
+
+                                    Console.WriteLine("Here are is the event:\n");
+                                    Console.WriteLine("ID: {0}\nCode: {1}\nEvent Name: {2}\nEvent Type: {3}\nEvent Status: " +
+                                        "{4}\nAddress: {5}\nBooking Date: {6}\nEvent Date: {7}\nDescription: {8}\nLocation: {9}\nRemarks: {10}",
+                                        _searchEventByIdResult.ID, _searchEventByIdResult.Code, _searchEventByIdResult.EventName, _searchEventByIdResult.Type,
+                                        _searchEventByIdResult.EventStatus, _searchEventByIdResult.Address, _searchEventByIdResult.BookingDate,
+                                        _searchEventByIdResult.EventDate, _searchEventByIdResult.Description, _searchEventByIdResult.Location, _searchEventByIdResult.Remarks);
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto start;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
                                 }
                             }
-                            break; 
-                            #endregion
-                    } 
-                    #endregion
-                    break;
-            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                goto input;
+                            }
 
+                            break;
+                        #endregion
+
+                        #region Search Event By Keyword
+                        case "2":
+                        input2:
+                            try
+                            {
+                                Console.WriteLine("Please enter the event ID: ");
+                                var _inputSearchEventKeyword = Console.ReadLine();
+
+                                var _searchEventByKeywordResult = await Mediator.Send(new SearchEventByKeywordQuery { EventKeyword = _inputSearchEventKeyword });
+                                if (_searchEventByKeywordResult != null)
+                                {
+                                    Console.WriteLine("Here are is the event:\n");
+                                    Console.WriteLine("ID: {0}\nCode: {1}\nEvent Name: {2}\nEvent Type: {3}\nEvent Status: " +
+                                        "{4}\nAddress: {5}\nBooking Date: {6}\nEvent Date: {7}\nDescription: {8}\nLocation: {9}\nRemarks: {10}",
+                                        _searchEventByKeywordResult.ID, _searchEventByKeywordResult.Code, _searchEventByKeywordResult.EventName, _searchEventByKeywordResult.Type,
+                                        _searchEventByKeywordResult.EventStatus, _searchEventByKeywordResult.Address, _searchEventByKeywordResult.BookingDate,
+                                        _searchEventByKeywordResult.EventDate, _searchEventByKeywordResult.Description, _searchEventByKeywordResult.Location, _searchEventByKeywordResult.Remarks);
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto start;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                goto input2;
+                            }
+
+                            break;
+                        #endregion
+
+                        #region Search Client By ID
+                        case "3":
+                        input3:
+                            try
+                            {
+                                Console.WriteLine("Please enter the client ID: ");
+                                var _inputSearchClientKeyword = Console.ReadLine();
+                                var _addSearchClientKeyword = int.Parse(_inputSearchClientKeyword);
+
+                                var _searchClientByKeywordResult = await Mediator.Send(new SearchClientByIdQuery { ClientId = _addSearchClientKeyword });
+                                if (_searchClientByKeywordResult != null)
+                                {
+                                    Console.WriteLine("Here are is the event:\n");
+                                    Console.WriteLine("ID: {0}\nCode: {1}\nLast Name: {2}\nFirst Name: {3}\nEmail: " +
+                                    "{4}\nContact No.: {5}\nAddress: {6}", _searchClientByKeywordResult.ID, _searchClientByKeywordResult.Lastname,
+                                    _searchClientByKeywordResult.Firstname, _searchClientByKeywordResult.Email, _searchClientByKeywordResult.Contact,
+                                    _searchClientByKeywordResult.Address);
+
+
+                                    Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                    string check = Console.ReadLine();
+                                    if (check.Contains("Y") || check.Contains("y"))
+                                    {
+                                        goto start;
+                                    }
+                                    else if (check.Contains("N") || check.Contains("n"))
+                                    {
+                                        Console.WriteLine("Thank you for using the system!");
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                                goto input3;
+                            }
+                            break;
+                            #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+                    break;
+                    #endregion
+            }
+        }
             
         }
     }
-}
