@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class ViewAdditionalDurationRequestListQuery : IRequest<List<PackageAdditionalDurationRequest>>
+    public class GetAdditionalDurationRequestListQuery : IRequest<List<PackageAdditionalDurationRequest>>
     {
         public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
 
-        public class ViewAdditionalDurationReuestListQueryHandler : IRequestHandler<ViewAdditionalDurationRequestListQuery, List<PackageAdditionalDurationRequest>>
+        public class GetAdditionalDurationReuestListQueryHandler : IRequestHandler<GetAdditionalDurationRequestListQuery, List<PackageAdditionalDurationRequest>>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public ViewAdditionalDurationReuestListQueryHandler(IAttilaDbContext dbContext)
+            public GetAdditionalDurationReuestListQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<PackageAdditionalDurationRequest>> Handle(ViewAdditionalDurationRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<PackageAdditionalDurationRequest>> Handle(GetAdditionalDurationRequestListQuery request, CancellationToken cancellationToken)
             {
                 var _viewAdditionalDuration = await dbContext.PackageAdditionalDurationRequests.ToListAsync();
 

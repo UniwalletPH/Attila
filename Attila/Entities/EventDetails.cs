@@ -33,19 +33,9 @@ namespace Attila.Domain.Entities.Tables
 
         public int UserID { get; set; }
 
-        public int EventTeamID { get; set; }
-
         public int  EventPackageDetailsID { get; set; }
 
-        public int EventPaymentStatusID { get; set; }
-
         public int EventClientID { get; set; }
-
-        public int EventEquipmentsID { get; set; }
-
-        public int PackageAdditionalDurationRequestID { get; set; }
-
-        public int PackageAdditionalEquipmentRequestID { get; set; }
 
     }
 }

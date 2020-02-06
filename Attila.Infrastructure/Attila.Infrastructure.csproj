@@ -9,8 +9,6 @@
     <Compile Remove="Migrations\20200204083006_newdata.Designer.cs" />
     <Compile Remove="Migrations\20200204083554_new-db.cs" />
     <Compile Remove="Migrations\20200204083554_new-db.Designer.cs" />
-    <Compile Remove="Migrations\20200204120835_init1.cs" />
-    <Compile Remove="Migrations\20200204120835_init1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

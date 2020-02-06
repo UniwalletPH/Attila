@@ -36,15 +36,10 @@ namespace Attila.Application.Event.Commands
                     Description = request.EventDetails.Description,
                     EventClientID = request.EventDetails.EventClientID,
                     EventDate = request.EventDetails.EventDate,
-                    EventEquipmentsID = request.EventDetails.EventEquipmentsID,
                     EventPackageDetailsID = request.EventDetails.EventPackageDetailsID,
-                    EventPaymentStatusID = request.EventDetails.EventPaymentStatusID,
-                    EventTeamID =   request.EventDetails.EventTeamID,
-                    Location = request.EventDetails.Location,
-                    UserID = request.EventDetails.UserID,
-                    PackageAdditionalDurationRequestID = request.EventDetails.PackageAdditionalDurationRequestID,
-                    PackageAdditionalEquipmentRequestID = request.EventDetails.PackageAdditionalEquipmentRequestID,
+                    Location = request.EventDetails.Location,         
                     Remarks = request.EventDetails.Remarks,
+                    UserID = request.EventDetails.UserID,
                     EventStatus = Status.Pending
                 
                 };

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Food.Queries
 {
-    public class ViewFoodDetailsQuery : IRequest<IEnumerable<FoodDetails>>
+    public class GetFoodDetailsQuery : IRequest<IEnumerable<FoodDetails>>
     {
-        public class ViewFoodDetailsQueryHandler : IRequestHandler<ViewFoodDetailsQuery, IEnumerable<FoodDetails>>
+        public class ViewFoodDetailsQueryHandler : IRequestHandler<GetFoodDetailsQuery, IEnumerable<FoodDetails>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -19,7 +19,7 @@ namespace Attila.Application.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<FoodDetails>> Handle(ViewFoodDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<FoodDetails>> Handle(GetFoodDetailsQuery request, CancellationToken cancellationToken)
             {
                 var _foodDetailsList = await dbContext.FoodsDetails.ToListAsync();
 

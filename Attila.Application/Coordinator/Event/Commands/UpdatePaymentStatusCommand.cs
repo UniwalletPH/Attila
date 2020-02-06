@@ -25,11 +25,10 @@ namespace Attila.Application.Event.Commands
             public async Task<bool> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
             {
                 var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.UpdatePaymentStatus.ID);
-
                 _updatedPackageStatus.Amount = request.UpdatePaymentStatus.Amount;
                 _updatedPackageStatus.Remarks = request.UpdatePaymentStatus.Remarks;
                 _updatedPackageStatus.DateOfPayment = request.UpdatePaymentStatus.DateOfPayment;
-
+                _updatedPackageStatus.ReferenceNumber = request.UpdatePaymentStatus.ReferenceNumber;
                 await dbContext.SaveChangesAsync();
 
                 return true;

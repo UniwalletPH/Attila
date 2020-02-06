@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class GetClientIdCommand : IRequest<EventClient>
+    public class GetClientIdQuery : IRequest<EventClient>
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }
 
-        public class GetClientIdCommandHandler : IRequestHandler<GetClientIdCommand, EventClient>
+        public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, EventClient>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public GetClientIdCommandHandler(IAttilaDbContext dbContext)
+            public GetClientIdQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<EventClient> Handle(GetClientIdCommand request, CancellationToken cancellationToken)
+            public async Task<EventClient> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
             {
                 var _searchedClient = dbContext.EventClients.Where
                     (a => a.Firstname.Contains(request.FirstName)
@@ -35,7 +35,7 @@ namespace Attila.Application.Coordinator.Event.Queries
                 }
                 else
                 {
-                    throw new Exception("Does not exist!");
+                    throw new Exception("Client ID does not exist!");
                 }
             }
         }
