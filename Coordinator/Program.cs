@@ -809,7 +809,7 @@ namespace Attila.Presentation.Coordinator
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
                                     string check7 = Console.ReadLine();
-                                    if (check7.Contains("Y") || checcheck7k.Contains("y"))
+                                    if (check7.Contains("Y") || check7.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
@@ -883,13 +883,17 @@ namespace Attila.Presentation.Coordinator
                                 var _getPaymentStatusByIdQuery = await Mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = _parsedSearchId });
                                 if (_getPaymentStatusByIdQuery != null)
                                 {
-                                    Console.WriteLine();
-                                    Console.WriteLine("Payment Status ID:  {0}", _getPaymentStatusByIdQuery.ID);
-                                    Console.WriteLine("Event ID:           {0}", _getPaymentStatusByIdQuery.EventDetailsID);
-                                    Console.WriteLine("Amount:             {0}", _getPaymentStatusByIdQuery.Amount);
-                                    Console.WriteLine("Date of Payment:    {0}", _getPaymentStatusByIdQuery.DateOfPayment);
-                                    Console.WriteLine("Reference Number:   {0}", _getPaymentStatusByIdQuery.ReferenceNumber);
-                                    Console.WriteLine("Remarks:            {0}", _getPaymentStatusByIdQuery.Remarks);
+                                    foreach (var item in _getPaymentStatusByIdQuery)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine("Payment Status ID:  {0}", item.ID);
+                                        Console.WriteLine("Event ID:           {0}", item.EventDetailsID);
+                                        Console.WriteLine("Amount:             {0}", item.Amount);
+                                        Console.WriteLine("Date of Payment:    {0}", item.DateOfPayment);
+                                        Console.WriteLine("Reference Number:   {0}", item.ReferenceNumber);
+                                        Console.WriteLine("Remarks:            {0}", item.Remarks);
+                                    }
+                                    
                                 }
 
                                 Console.WriteLine();
