@@ -497,6 +497,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine("Food Price: {0}", _searchFoodByIdQuery.ItemPrice);
                                 Console.WriteLine("Food Remarks: {0}", _searchFoodByIdQuery.Remarks);
                             }
+                            else Console.WriteLine("Food ID does not exist!");
 
                             goto foodsubstart;
                         #endregion
@@ -520,6 +521,7 @@ namespace Attila.Presentation.InventoryManager
                                     Console.WriteLine("Food Specification: {0}   ,   Food Description: {1}", item.Specification, item.Description);
                                 }
                             }
+                            else Console.WriteLine("Keyword does not exist!");
 
                             goto foodsubstart;
                         #endregion

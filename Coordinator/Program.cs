@@ -573,12 +573,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check1 = Console.ReadLine();
+                                    if (check1.Contains("Y") || check1.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check1.Contains("N") || check1.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -613,12 +613,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check2 = Console.ReadLine();
+                                    if (check2.Contains("Y") || check2.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check2.Contains("N") || check2.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -653,12 +653,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check3 = Console.ReadLine();
+                                    if (check3.Contains("Y") || check3.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check3.Contains("N") || check3.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -691,12 +691,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check4 = Console.ReadLine();
+                                    if (check4.Contains("Y") || check4.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check4.Contains("N") || check4.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -737,12 +737,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check5 = Console.ReadLine();
+                                    if (check5.Contains("Y") || check5.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check5.Contains("N") || check5.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -772,12 +772,12 @@ namespace Attila.Presentation.Coordinator
 
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check6 = Console.ReadLine();
+                                    if (check6.Contains("Y") || check6.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check6.Contains("N") || check6.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -808,12 +808,12 @@ namespace Attila.Presentation.Coordinator
                                     Console.WriteLine("The client ID is: {0}", _getClientId.ID);
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                    string check = Console.ReadLine();
-                                    if (check.Contains("Y") || check.Contains("y"))
+                                    string check7 = Console.ReadLine();
+                                    if (check7.Contains("Y") || checcheck7k.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
-                                    else if (check.Contains("N") || check.Contains("n"))
+                                    else if (check7.Contains("N") || check7.Contains("n"))
                                     {
                                         Console.WriteLine("Thank you for using the system!");
                                     }
@@ -824,25 +824,157 @@ namespace Attila.Presentation.Coordinator
                                 Console.WriteLine(e.Message);
                                 goto input5;
                             }
-                            break; 
+                            break;
                         #endregion
 
+                        #region Get Payment Status
+                        case "8":
 
+                        input6:
+                            try
+                            {
+                                Console.WriteLine();
+                                var _getPaymentStatusQuery = await Mediator.Send(new GetPaymentStatusQuery());
 
+                                foreach (var item in _getPaymentStatusQuery)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Payment Status ID:  {0}", item.ID);
+                                    Console.WriteLine("Event ID:           {0}", item.EventDetailsID);
+                                    Console.WriteLine("Amount:             {0}", item.Amount);
+                                    Console.WriteLine("Date of Payment:    {0}", item.DateOfPayment);
+                                    Console.WriteLine("Reference Number:   {0}", item.ReferenceNumber);
+                                    Console.WriteLine("Remarks:            {0}", item.Remarks);
 
+                                }
+
+                                Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                string check8 = Console.ReadLine();
+                                if (check8.Contains("Y") || check8.Contains("y"))
+                                {
+                                    goto startQuery;
+                                }
+                                else if (check8.Contains("N") || check8.Contains("n"))
+                                {
+                                    Console.WriteLine("Thank you for using the system!");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                                Console.WriteLine(ex.Message);
+                                goto input6;
+                            }
+
+                            break;
+                        #endregion
+
+                        #region Get Payment Status By ID
+                        case "9":
+                        input7:
+
+                            try
+                            {
+                                Console.WriteLine();
+                                Console.Write("Please enter Event ID: ");
+                                var _searchedId = Console.ReadLine();
+                                int _parsedSearchId = int.Parse(_searchedId);
+
+                                var _getPaymentStatusByIdQuery = await Mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = _parsedSearchId });
+                                if (_getPaymentStatusByIdQuery != null)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine("Payment Status ID:  {0}", _getPaymentStatusByIdQuery.ID);
+                                    Console.WriteLine("Event ID:           {0}", _getPaymentStatusByIdQuery.EventDetailsID);
+                                    Console.WriteLine("Amount:             {0}", _getPaymentStatusByIdQuery.Amount);
+                                    Console.WriteLine("Date of Payment:    {0}", _getPaymentStatusByIdQuery.DateOfPayment);
+                                    Console.WriteLine("Reference Number:   {0}", _getPaymentStatusByIdQuery.ReferenceNumber);
+                                    Console.WriteLine("Remarks:            {0}", _getPaymentStatusByIdQuery.Remarks);
+                                }
+
+                                Console.WriteLine();
+                                Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                                string check9 = Console.ReadLine();
+                                if (check9.Contains("Y") || check9.Contains("y"))
+                                {
+                                    goto startQuery;
+                                }
+                                else if (check9.Contains("N") || check9.Contains("n"))
+                                {
+                                    Console.WriteLine("Thank you for using the system!");
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine(ex.Message);
+                                goto input7;
+                            }
+                            break;
+                        #endregion
+
+                        #region Get Event Additional Duration Request List
+                        case "10":
+
+                            var _getEventAdditionalDurationRequestList = await Mediator.Send(new GetAdditionalDurationRequestListQuery());
+                            foreach (var item in _getEventAdditionalDurationRequestList)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Event Duration Request ID: {0}", item.ID);
+                                Console.WriteLine("Duration: {0}", item.Duration);
+                                Console.WriteLine("Rate: {0}", item.Rate);
+                                Console.WriteLine("Event Details ID: {0}", item.EventDetailsID);
+                            }
+
+                            Console.WriteLine();
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            string check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto startQuery;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+
+                            break;
+                        #endregion
+
+                        #region Get Event Additional Equipment Request List
+                        case "11":
+
+                            var _getEventAdditionalEquipmentRequestList = await Mediator.Send(new GetAdditionalEquipmentRequestListQuery());
+                            foreach (var item in _getEventAdditionalEquipmentRequestList)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Event Equipment Request ID: {0}", item.ID);
+                                Console.WriteLine("Equipment Details ID: {0}", item.EquipmentsDetailsID);
+                                Console.WriteLine("Rate: {0}", item.Rate);
+                                Console.WriteLine("Event Details ID: {0}", item.EventDetailsID);
+                                Console.WriteLine("Status: {0}", item.Status);
+                                Console.WriteLine("Quantity: {0}", item.Quantity);
+                            }
+
+                            Console.WriteLine();
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                goto startQuery;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+
+                            break; 
+                        #endregion
 
                         #region Go Back
                         case "12":
                             goto start; 
                             #endregion
-
-
-
-
-
-
-
-
 
 
                     }
