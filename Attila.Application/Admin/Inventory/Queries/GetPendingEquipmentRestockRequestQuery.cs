@@ -4,6 +4,7 @@ using Attila.Domain.Entities;
 using Attila.Domain.Enums;
 using MediatR;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,8 @@ namespace Attila.Application.Admin.Inventory.Queries
 
             public async Task<List<EquipmentRestockRequest>> Handle(GetPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
-                var _pendingRequest = dbContext.EquipmentRestockRequests                  
+                var _pendingRequest = dbContext.EquipmentRestockRequests
+                    .Include(a => a.EquipmentDetails)
                     .Where(a => a.Status == Status.Pending);
 
                 return _pendingRequest.ToList();

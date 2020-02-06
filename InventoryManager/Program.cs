@@ -427,7 +427,7 @@ namespace Attila.Presentation.InventoryManager
 
                             FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                             {
-                                FoodsDetailsID = _selectedFoodIdRestock,
+                                FoodDetailsID = _selectedFoodIdRestock,
                                 Quantity = _foodRestockQuantityParsed,
                                 DateTimeRequest = DateTime.Now,
                                 Status = 0,

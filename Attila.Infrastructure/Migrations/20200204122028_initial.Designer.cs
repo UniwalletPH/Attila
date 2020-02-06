@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.Infrastructure.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200204083006_newdata")]
-    partial class newdata
+    [Migration("20200204122028_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,10 +86,7 @@ namespace Attila.Infrastructure.Migrations
                     b.Property<DateTime>("DateTimeRequest")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("FoodDetailsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FoodsDetailsID")
+                    b.Property<int>("FoodDetailsID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -472,10 +469,7 @@ namespace Attila.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("EquipmentDetailsID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EquipmentsDetailsID")
+                    b.Property<int>("EquipmentDetailsID")
                         .HasColumnType("int");
 
                     b.Property<int>("EventDetailsID")
@@ -564,14 +558,18 @@ namespace Attila.Infrastructure.Migrations
                 {
                     b.HasOne("Attila.Domain.Entities.Tables.FoodDetails", "FoodDetails")
                         .WithMany()
-                        .HasForeignKey("FoodDetailsID");
+                        .HasForeignKey("FoodDetailsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Attila.Domain.Entities.Tables.PackageAdditionalEquipmentRequest", b =>
                 {
                     b.HasOne("Attila.Domain.Entities.Tables.EquipmentDetails", "EquipmentDetails")
                         .WithMany()
-                        .HasForeignKey("EquipmentDetailsID");
+                        .HasForeignKey("EquipmentDetailsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

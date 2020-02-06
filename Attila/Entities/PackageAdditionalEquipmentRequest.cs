@@ -11,7 +11,7 @@ namespace Attila.Domain.Entities.Tables
     {
         public int ID { get; set; }
 
-        public int EquipmentsDetailsID { get; set; }
+        public int EquipmentDetailsID { get; set; }
 
         public EquipmentDetails EquipmentDetails { get; set; }
 

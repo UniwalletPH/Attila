@@ -10,6 +10,10 @@ namespace Attila.Domain.Entities.Tables
     {
         public int ID { get; set; }  
 
+        public int EventDetailsID { get; set; }
+
+        public EventDetails EventDetails { get; set; }
+
         public decimal Amount { get; set; }
 
         public DateTime DateOfPayment { get; set; }
