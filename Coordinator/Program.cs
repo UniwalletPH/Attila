@@ -1003,7 +1003,7 @@ namespace Attila.Presentation.Coordinator
                             {
                                 Console.WriteLine();
                                 Console.WriteLine("Event Equipment Request ID: {0}", item.ID);
-                                Console.WriteLine("Equipment Details ID: {0}", item.EquipmentsDetailsID);
+                                Console.WriteLine("Equipment Details ID: {0}", item.EquipmentDetailsID);
                                 Console.WriteLine("Rate: {0}", item.Rate);
                                 Console.WriteLine("Event Details ID: {0}", item.EventDetailsID);
                                 Console.WriteLine("Status: {0}", item.Status);
