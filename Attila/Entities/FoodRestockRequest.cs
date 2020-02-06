@@ -14,9 +14,10 @@ namespace Attila.Domain.Entities
 
         public int Quantity { get; set; }
 
+
         public DateTime DateTimeRequest { get; set; }
 
-        public int FoodsDetailsID { get; set; }
+        public int FoodDetailsID { get; set; }
 
         public FoodDetails FoodDetails { get; set; }
 

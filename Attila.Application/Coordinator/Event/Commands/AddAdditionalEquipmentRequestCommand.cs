@@ -29,7 +29,7 @@ namespace Attila.Application.Event.Commands
                 var _additionalEquipment = new PackageAdditionalEquipmentRequest
                 {
                     EventDetailsID = request.AdditionalEquipment.EventDetailsID,
-                    EquipmentsDetailsID = request.AdditionalEquipment.EquipmentsDetailsID,
+                    EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
                     Rate = request.AdditionalEquipment.Rate,
                     Quantity = request.AdditionalEquipment.Quantity,
                     Status = Status.Pending

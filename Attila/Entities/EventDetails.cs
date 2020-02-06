@@ -1,5 +1,4 @@
 ﻿using Attila.Domain.Enums;
-using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;

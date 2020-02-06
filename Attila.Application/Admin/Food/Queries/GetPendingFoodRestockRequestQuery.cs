@@ -21,7 +21,7 @@ namespace Attila.Application.Admin.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async  Task<List<FoodRestockRequest>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<FoodRestockRequest>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
             {
                 var _pendingFoodRestock = dbContext.FoodRestockRequests
                     .Include(a => a.FoodDetails)

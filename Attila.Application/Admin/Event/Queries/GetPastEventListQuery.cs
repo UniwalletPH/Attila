@@ -2,6 +2,7 @@
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace Attila.Application.Admin.Queries
 
             public async Task<List<EventDetails>> Handle(GetPastEventListQuery request, CancellationToken cancellationToken)
             {
-                var _list = dbContext.EventsDetails                    
+                var _list = dbContext.EventsDetails
                     .Where(a => a.EventDate < DateTime.Now);
 
                 return _list.ToList();
