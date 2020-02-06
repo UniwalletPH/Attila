@@ -9,6 +9,7 @@ using Attila.Domain.Enums;
 using Attila.Application.Coordinator.Event.Queries;
 using Attila.Domain.Entities;
 using Attila.Application.Event.Queries;
+using Attila.Application.Coordinator.Event.Commands;
 
 namespace Attila.Presentation.Coordinator
 {
@@ -36,6 +37,7 @@ namespace Attila.Presentation.Coordinator
             switch (_cmdNumber)
             {
                 case "1":
+
                 startCommand:
                     #region Commands
                     Console.Clear();
@@ -50,7 +52,8 @@ namespace Attila.Presentation.Coordinator
                     Console.WriteLine("7 - Update Event Payment Status");
                     Console.WriteLine("8 - Delete Event");
                     Console.WriteLine("9 - Delete Event Package");
-                    Console.WriteLine("10 - Go Back");
+                    Console.WriteLine("10 - Add Payment For Event ID");
+                    Console.WriteLine("11 - Go Back");
 
 
 
@@ -518,17 +521,73 @@ namespace Attila.Presentation.Coordinator
                             break;
                         #endregion
 
-                        #region Go Back
+                        #region Add Payment For Event ID
                         case "10":
+
+                            Console.WriteLine();
+                            Console.Write("Please enter event ID for payment: ");
+                            var _eventIdPayment = Console.ReadLine();
+                            int _parsedEventIdPayment = int.Parse(_eventIdPayment);
+
+                            Console.Write("Please enter amount: ");
+                            var _paymentAmount = Console.ReadLine();
+                            decimal _parsedPaymentAmount = decimal.Parse(_paymentAmount);
+
+                            Console.Write("Please enter reference number: ");
+                            var _referenceNumber = Console.ReadLine();
+
+                            Console.Write("Please enter remarks: ");
+                            var _remarks = Console.ReadLine();
+
+                            var _addPaymentForEvent = new EventPaymentStatus
+                            {
+                                EventDetailsID = _parsedEventIdPayment,
+                                Amount = _parsedPaymentAmount,
+                                DateOfPayment = DateTime.Now,
+                                ReferenceNumber = _referenceNumber,
+                                Remarks = _remarks
+                            };
+
+                            var _addPaymentForEventCommand = await Mediator.Send(new AddPaymentForEventCommand { MyEventPaymentStatus = _addPaymentForEvent });
+                            if (_addPaymentForEventCommand == true)
+                            {
+                                Console.WriteLine();
+                                Console.WriteLine("Payment Success!");
+                            }
+                            else Console.WriteLine("Payment Failed!");
+
+
+                            Console.WriteLine();
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            check = Console.ReadLine();
+                            if (check.Contains("Y") || check.Contains("y"))
+                            {
+                                check = "";
+                                goto startCommand;
+                            }
+                            else if (check.Contains("N") || check.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+
+
+                            break;
+                        #endregion
+
+                        #region Go Back
+                        case "11":
                             goto start;
                         #endregion
+
                         default:
                             break;
                     }
                     #endregion
                     break;
+
                 case "2":
-                    startQuery:
+
+                startQuery:
                     #region Queries
                     Console.Clear();
                     Console.WriteLine("Event Manager Queries");
@@ -711,7 +770,7 @@ namespace Attila.Presentation.Coordinator
                         #endregion
 
                         #region Get Event List
-                        
+
                         case "5":
                             try
                             {
@@ -809,7 +868,7 @@ namespace Attila.Presentation.Coordinator
 
                                     Console.WriteLine("\nDo you want to continue? [Y/N]: ");
                                     string check7 = Console.ReadLine();
-                                    if (check7.Contains("Y") || checcheck7k.Contains("y"))
+                                    if (check7.Contains("Y") || check7.Contains("y"))
                                     {
                                         goto startQuery;
                                     }
@@ -871,45 +930,40 @@ namespace Attila.Presentation.Coordinator
 
                         #region Get Payment Status By ID
                         case "9":
-                        input7:
 
-                            try
+                            Console.WriteLine();
+                            Console.Write("Please enter Event ID: ");
+                            var _searchedId = Console.ReadLine();
+                            int _parsedSearchId = int.Parse(_searchedId);
+
+                            var _getPaymentStatusByIdQuery = await Mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = _parsedSearchId });
+                            if (_getPaymentStatusByIdQuery != null)
                             {
-                                Console.WriteLine();
-                                Console.Write("Please enter Event ID: ");
-                                var _searchedId = Console.ReadLine();
-                                int _parsedSearchId = int.Parse(_searchedId);
-
-                                var _getPaymentStatusByIdQuery = await Mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = _parsedSearchId });
-                                if (_getPaymentStatusByIdQuery != null)
+                                foreach (var item in _getPaymentStatusByIdQuery)
                                 {
                                     Console.WriteLine();
-                                    Console.WriteLine("Payment Status ID:  {0}", _getPaymentStatusByIdQuery.ID);
-                                    Console.WriteLine("Event ID:           {0}", _getPaymentStatusByIdQuery.EventDetailsID);
-                                    Console.WriteLine("Amount:             {0}", _getPaymentStatusByIdQuery.Amount);
-                                    Console.WriteLine("Date of Payment:    {0}", _getPaymentStatusByIdQuery.DateOfPayment);
-                                    Console.WriteLine("Reference Number:   {0}", _getPaymentStatusByIdQuery.ReferenceNumber);
-                                    Console.WriteLine("Remarks:            {0}", _getPaymentStatusByIdQuery.Remarks);
+                                    Console.WriteLine("Payment Status ID:  {0}", item.ID);
+                                    Console.WriteLine("Event ID:           {0}", item.EventDetailsID);
+                                    Console.WriteLine("Amount:             {0}", item.Amount);
+                                    Console.WriteLine("Date of Payment:    {0}", item.DateOfPayment);
+                                    Console.WriteLine("Reference Number:   {0}", item.ReferenceNumber);
+                                    Console.WriteLine("Remarks:            {0}", item.Remarks);
                                 }
+                            }
+                            else Console.WriteLine("Event Details ID does not exist!");
 
-                                Console.WriteLine();
-                                Console.WriteLine("\nDo you want to continue? [Y/N]: ");
-                                string check9 = Console.ReadLine();
-                                if (check9.Contains("Y") || check9.Contains("y"))
-                                {
-                                    goto startQuery;
-                                }
-                                else if (check9.Contains("N") || check9.Contains("n"))
-                                {
-                                    Console.WriteLine("Thank you for using the system!");
-                                }
-                            }
-                            catch (Exception ex)
+                            Console.WriteLine();
+                            Console.WriteLine("\nDo you want to continue? [Y/N]: ");
+                            string check9 = Console.ReadLine();
+                            if (check9.Contains("Y") || check9.Contains("y"))
                             {
-                                Console.WriteLine();
-                                Console.WriteLine(ex.Message);
-                                goto input7;
+                                goto startQuery;
                             }
+                            else if (check9.Contains("N") || check9.Contains("n"))
+                            {
+                                Console.WriteLine("Thank you for using the system!");
+                            }
+
                             break;
                         #endregion
 
@@ -968,25 +1022,27 @@ namespace Attila.Presentation.Coordinator
                                 Console.WriteLine("Thank you for using the system!");
                             }
 
-                            break; 
+                            break;
                         #endregion
 
                         #region Go Back
                         case "12":
-                            goto start; 
+                            goto start;
                             #endregion
 
 
                     }
                     #endregion
                     break;
+
                 case "3":
+
                     #region Exit
-                    Console.WriteLine("Thank you for using the system!"); 
+                    Console.WriteLine("Thank you for using the system!");
                     #endregion
                     break;
             }
         }
-            
-        }
+
     }
+}
