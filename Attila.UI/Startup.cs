@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Attila.Application;
 using Attila.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,6 +42,8 @@ namespace Attila.UI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseBrowserLink();
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -58,7 +55,7 @@ namespace Attila.UI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseBrowserLink();
+            
         }
     }
 }
