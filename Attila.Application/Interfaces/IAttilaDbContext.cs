@@ -9,11 +9,11 @@ namespace Attila.Application.Interfaces
     public interface IAttilaDbContext
     {
 
-        public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
-
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }
 
         public DbSet<EquipmentInventory> EquipmentsInventory { get; set; }
+
+        public DbSet<EquipmentRestock> EquipmentsRestock { get; set; }
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 

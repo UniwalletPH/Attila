@@ -7,7 +7,7 @@ namespace Attila.Domain.Entities.Tables
 {
 
     [Table("tbl_EquipmentDelivery")]
-    public class EquipmentDelivery
+    public class EquipmentRestock
     {
         public int ID { get; set; }
 

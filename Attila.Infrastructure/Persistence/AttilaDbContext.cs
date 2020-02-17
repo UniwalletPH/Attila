@@ -10,12 +10,11 @@ namespace Attila.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
-        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
-        public DbSet<EquipmentDelivery> EquipmentsDelivery { get; set; }
-
         public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }
 
         public DbSet<EquipmentInventory> EquipmentsInventory { get; set; }
+
+        public DbSet<EquipmentRestock> EquipmentsRestock { get; set; }
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
@@ -24,6 +23,8 @@ namespace Attila.Infrastructure.Persistence
         public DbSet<EventDetails> EventsDetails { get; set; }
 
         public DbSet<EventEquipments> EventsEquipments { get; set; }
+
+        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
 
         public DbSet<EventPackageDetails> EventsPackageDetails { get; set; }
 
