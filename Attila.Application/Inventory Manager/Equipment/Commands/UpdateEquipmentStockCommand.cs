@@ -32,7 +32,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 }
                 else
                 {
-                    throw new Exception("Equipment ID does not exist!");
+                    throw new Exception("Equipment Stock ID does not exist!");
                 }
             }
         }

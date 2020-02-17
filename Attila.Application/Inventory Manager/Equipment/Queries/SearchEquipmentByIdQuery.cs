@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class SearchEquipmentByIdQuery : IRequest<EquipmentInventory>
+    public class SearchEquipmentByIdQuery : IRequest<EquipmentDetails>
     {
         public int SearchedID { get; set; }
 
-        public class SearchEquipmentByIdQueryHandler : IRequestHandler<SearchEquipmentByIdQuery, EquipmentInventory>
+        public class SearchEquipmentByIdQueryHandler : IRequestHandler<SearchEquipmentByIdQuery, EquipmentDetails>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -18,11 +18,11 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<EquipmentInventory> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
+            public async Task<EquipmentDetails> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
             {
-                EquipmentInventory _searchedEquipmentInventory = dbContext.EquipmentsInventory.Find(request.SearchedID);
+                EquipmentDetails _searchedEquipmentDetails = dbContext.EquipmentsDetails.Find(request.SearchedID);
 
-                return _searchedEquipmentInventory;
+                return _searchedEquipmentDetails;
             }
         }
     }

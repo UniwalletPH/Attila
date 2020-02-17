@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Food.Queries
 {
-    public class SearchFoodByIdQuery : IRequest<FoodInventory>
+    public class SearchFoodByIdQuery : IRequest<FoodDetails>
     {
         public int SearchedID { get; set; }
 
-        public class SearchFoodByIdQueryHandler : IRequestHandler<SearchFoodByIdQuery, FoodInventory>
+        public class SearchFoodByIdQueryHandler : IRequestHandler<SearchFoodByIdQuery, FoodDetails>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -18,11 +18,11 @@ namespace Attila.Application.Food.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<FoodInventory> Handle(SearchFoodByIdQuery request, CancellationToken cancellationToken)
+            public async Task<FoodDetails> Handle(SearchFoodByIdQuery request, CancellationToken cancellationToken)
             {
-                FoodInventory _searchedFoodInventory = dbContext.FoodsInventory.Find(request.SearchedID);
+                FoodDetails _searchedFoodDetails = dbContext.FoodsDetails.Find(request.SearchedID);
 
-                return _searchedFoodInventory;
+                return _searchedFoodDetails;
             }
         }
     }

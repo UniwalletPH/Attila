@@ -45,6 +45,7 @@ namespace Attila.Presentation.InventoryManager
             {
                 case "1":
 
+                #region FOOD CQRS
                 foodsubstart:
                     Console.WriteLine();
                     Console.WriteLine();
@@ -63,7 +64,7 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("10 - Search Food By Keyword");
                     Console.WriteLine("X - Home");
 
-                    
+
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.Write("Please enter a sub command: ");
@@ -118,7 +119,7 @@ namespace Attila.Presentation.InventoryManager
                                 FoodType = _parsedFoodType
                             };
 
-                            var _addFoodDetailsInventoryCommand = await Mediator.Send(new AddFoodDetailsCommand { MyFoodDetails = _foodDetails});
+                            var _addFoodDetailsInventoryCommand = await Mediator.Send(new AddFoodDetailsCommand { MyFoodDetails = _foodDetails });
                             if (_addFoodDetailsInventoryCommand == true)
                             {
                                 Console.WriteLine();
@@ -191,7 +192,7 @@ namespace Attila.Presentation.InventoryManager
                             }
                             else Console.WriteLine("Failed!");
 
-                            goto foodsubstart; 
+                            goto foodsubstart;
                         #endregion
 
                         //case 3 : View Food Details Query
@@ -219,13 +220,14 @@ namespace Attila.Presentation.InventoryManager
                         #region View Food Stock Query
                         case "4":
 
-                            Console.WriteLine();
                             var _viewFoodStockQuery = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewFoodStockQuery)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Details ID:  {0}", item.ID);
+                                Console.WriteLine();
+                                Console.WriteLine("Food Stock ID:    {0}", item.ID);
+                                Console.WriteLine("Food Details ID:  {0}", item.FoodDetailsID);
                                 Console.WriteLine("Quantity          {0}", item.Quantity);
                                 Console.WriteLine("Encoding Date:    {0}", item.EncodingDate);
                                 Console.WriteLine("Item Price:       {0}", item.ItemPrice);
@@ -316,7 +318,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine(ex.Message);
                             }
 
-                            
+
                             goto foodsubstart;
                         #endregion
 
@@ -328,13 +330,14 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("Update Food Stock Inventory");
                             Console.WriteLine();
 
-                            Console.WriteLine();
                             var _viewFoodStockQuery1 = await Mediator.Send(new GetFoodStockQuery());
 
                             foreach (var item in _viewFoodStockQuery1)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Food Details ID:  {0}", item.ID);
+                                Console.WriteLine();
+                                Console.WriteLine("Food Stock ID:    {0}", item.ID);
+                                Console.WriteLine("Food Details ID:  {0}", item.FoodDetailsID);
                                 Console.WriteLine("Quantity          {0}", item.Quantity);
                                 Console.WriteLine("Encoding Date:    {0}", item.EncodingDate);
                                 Console.WriteLine("Item Price:       {0}", item.ItemPrice);
@@ -344,12 +347,12 @@ namespace Attila.Presentation.InventoryManager
                             try
                             {
                                 Console.WriteLine();
-                                Console.Write("Enter Food ID: ");
+                                Console.Write("Enter Food Stock ID: ");
                                 var _updateID = Console.ReadLine();
                                 int _updatedID = int.Parse(_updateID);
 
                                 Console.WriteLine();
-                                Console.Write("Enter New Food Stock: ");
+                                Console.Write("Enter new quantity: ");
                                 var _updateStock = Console.ReadLine();
                                 int _updatedFoodStock = int.Parse(_updateStock);
 
@@ -367,7 +370,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine();
                                 Console.WriteLine(ex.Message);
                             }
-                            
+
 
                             goto foodsubstart;
                         #endregion
@@ -398,7 +401,7 @@ namespace Attila.Presentation.InventoryManager
 
                             try
                             {
-                                var _deleteFoodDetailsInventoryCommand = await Mediator.Send(new DeleteFoodDetailsCommand { DeleteSearchedID = _deleteSelectedFoodID});
+                                var _deleteFoodDetailsInventoryCommand = await Mediator.Send(new DeleteFoodDetailsCommand { DeleteSearchedID = _deleteSelectedFoodID });
                                 if (_deleteFoodDetailsInventoryCommand == true)
                                 {
                                     Console.WriteLine("Food Details ID {0} is Deleted!", _deleteSelectedFoodID);
@@ -469,7 +472,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine();
                                 Console.WriteLine(ex.Message);
                             }
-                            
+
 
                             goto foodsubstart;
                         #endregion
@@ -485,19 +488,22 @@ namespace Attila.Presentation.InventoryManager
                             int _parsedSearchID = int.Parse(_searchID);
 
 
-                            var _searchFoodByIdQuery = await Mediator.Send(new SearchFoodByIdQuery { SearchedID = _parsedSearchID});
+                            var _searchFoodByIdQuery = await Mediator.Send(new SearchFoodByIdQuery { SearchedID = _parsedSearchID });
                             if (_searchFoodByIdQuery != null)
                             {
                                 Console.WriteLine();
                                 Console.WriteLine("Searched Food ID");
-                                Console.WriteLine("Food Details ID: {0}", _searchFoodByIdQuery.ID);
-                                Console.WriteLine("Food Quantity: {0}", _searchFoodByIdQuery.Quantity);
-                                Console.WriteLine("Expiration Date: {0}", _searchFoodByIdQuery.ExpirationDate);
-                                Console.WriteLine("Food Encoding Date: {0}", _searchFoodByIdQuery.EncodingDate);
-                                Console.WriteLine("Food Price: {0}", _searchFoodByIdQuery.ItemPrice);
-                                Console.WriteLine("Food Remarks: {0}", _searchFoodByIdQuery.Remarks);
+                                Console.WriteLine("Food Details ID:     {0}", _searchFoodByIdQuery.ID);
+                                Console.WriteLine("Food Code:           {0}", _searchFoodByIdQuery.Code);
+                                Console.WriteLine("Food Name:           {0}", _searchFoodByIdQuery.Name);
+                                Console.WriteLine("Food Description:    {0}", _searchFoodByIdQuery.Description);
+                                Console.WriteLine("Food Specification:  {0}", _searchFoodByIdQuery.Specification);
+                                Console.WriteLine("Food Unit:           {0}", _searchFoodByIdQuery.Unit);
+                                Console.WriteLine("Food Type:           {0}", _searchFoodByIdQuery.FoodType);
                             }
-                            else Console.WriteLine("Food ID does not exist!");
+                            else
+                                Console.WriteLine(); 
+                                Console.WriteLine("Food Details ID does not exist!");
 
                             goto foodsubstart;
                         #endregion
@@ -507,18 +513,21 @@ namespace Attila.Presentation.InventoryManager
                         case "10":
 
                             Console.WriteLine();
-                            Console.WriteLine("Enter Keyword: ");
+                            Console.Write("Enter Keyword: ");
                             var _searchKeyword = Console.ReadLine();
 
-                            var _searchFoodByKeywordQuery = await Mediator.Send(new SearchFoodByKeywordQuery {SearchedKeyword = _searchKeyword});
+                            var _searchFoodByKeywordQuery = await Mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = _searchKeyword });
                             if (_searchFoodByKeywordQuery != null)
                             {
+                                Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
+
                                 foreach (var item in _searchFoodByKeywordQuery)
                                 {
                                     Console.WriteLine();
-                                    Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
-                                    Console.WriteLine("Food Name: {0}   ,   Food Code: {1}", item.Name, item.Code);
-                                    Console.WriteLine("Food Specification: {0}   ,   Food Description: {1}", item.Specification, item.Description);
+                                    Console.WriteLine("Food Name: {0}", item.Name);
+                                    Console.WriteLine("Food Code: {0}", item.Code);
+                                    Console.WriteLine("Food Specification: {0}", item.Specification);
+                                    Console.WriteLine("Food Description: {0}", item.Description);
                                 }
                             }
                             else Console.WriteLine("Keyword does not exist!");
@@ -532,17 +541,19 @@ namespace Attila.Presentation.InventoryManager
                             goto start;
 
                         case "x":
-                            goto start; 
+                            goto start;
                         #endregion
 
                         default:
-                            break;
+                            Console.WriteLine();
+                            Console.WriteLine("INVALID COMMAND NUMBER!");
+                            goto foodsubstart;
                     }
-                    goto start;
-
+                #endregion
 
                 case "2":
 
+                #region EQUIPMENT CQRS
                 equipmentsubstart:
                     Console.WriteLine();
                     Console.WriteLine();
@@ -557,8 +568,9 @@ namespace Attila.Presentation.InventoryManager
                     Console.WriteLine("6 - Update Equipment Stock");
                     Console.WriteLine("7 - Delete Equipment Details");
                     Console.WriteLine("8 - Request Equipment Restock Delivery");
-                    Console.WriteLine("9 - Search Equipment By ID");
-                    Console.WriteLine("10 - Search Equipment By Keyword");
+                    Console.WriteLine("9 - Search Equipment Details By ID");
+                    Console.WriteLine("10 - Search Equipment Details By Keyword");
+                    Console.WriteLine("X - HOME");
 
                     Console.WriteLine();
                     Console.WriteLine();
@@ -610,7 +622,7 @@ namespace Attila.Presentation.InventoryManager
                                 EquipmentType = _parsedEquipmentType
                             };
 
-                            var _addEquipmentDetailsCommand = await Mediator.Send(new AddEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetails});
+                            var _addEquipmentDetailsCommand = await Mediator.Send(new AddEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetails });
                             if (_addEquipmentDetailsCommand == true)
                             {
                                 Console.WriteLine();
@@ -676,7 +688,7 @@ namespace Attila.Presentation.InventoryManager
                             }
                             else Console.WriteLine("Failed!");
 
-                            goto equipmentsubstart; 
+                            goto equipmentsubstart;
                         #endregion
 
                         //case 3 : View Equipment Details Query
@@ -704,12 +716,13 @@ namespace Attila.Presentation.InventoryManager
                         case "4":
 
                             Console.WriteLine();
-                            var _viewEquipmentStockQuery = await Mediator.Send(new GetFoodStockQuery());
+                            var _viewEquipmentStockQuery = await Mediator.Send(new GetEquipmentStockQuery());
 
                             foreach (var item in _viewEquipmentStockQuery)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Equipment Details ID:   {0}", item.ID);
+                                Console.WriteLine("Equipment Stock ID:     {0}", item.ID);
+                                Console.WriteLine("Equipment Details ID:   {0}", item.EquipmentDetailsID);
                                 Console.WriteLine("Quantity                {0}", item.Quantity);
                                 Console.WriteLine("Encoding Date:          {0}", item.EncodingDate);
                                 Console.WriteLine("Item Price:             {0}", item.ItemPrice);
@@ -768,8 +781,8 @@ namespace Attila.Presentation.InventoryManager
                                 UnitType _parsedUpdateFoodUnit = (UnitType)Enum.Parse(typeof(UnitType), _updateEquipmentUnit);
 
                                 Console.WriteLine("Equipment Type: ");
-                                Console.WriteLine("1 - Perishable");
-                                Console.WriteLine("2 - Non-perishable");
+                                Console.WriteLine("1 - Consumable");
+                                Console.WriteLine("2 - Non-consumable");
                                 Console.WriteLine("3 - Others");
                                 Console.Write("Food Type: ");
                                 var _updateEquipmentType = Console.ReadLine();
@@ -799,7 +812,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine(ex.Message);
                             }
 
-                           
+
                             goto equipmentsubstart;
                         #endregion
 
@@ -811,27 +824,29 @@ namespace Attila.Presentation.InventoryManager
                             Console.WriteLine("Update Equipment Stock Inventory");
                             Console.WriteLine();
 
-                            var _viewEquipmentStockQuery1 = await Mediator.Send(new GetFoodStockQuery());
+                            var _viewEquipmentStockQuery1 = await Mediator.Send(new GetEquipmentStockQuery());
 
                             foreach (var item in _viewEquipmentStockQuery1)
                             {
                                 Console.WriteLine();
-                                Console.WriteLine("Equipment Details ID:  {0}", item.ID);
-                                Console.WriteLine("Quantity          {0}", item.Quantity);
-                                Console.WriteLine("Encoding Date:    {0}", item.EncodingDate);
-                                Console.WriteLine("Item Price:       {0}", item.ItemPrice);
-                                Console.WriteLine("Remarks:          {0}", item.Remarks);
+                                Console.WriteLine("Equipment Stock ID:     {0}", item.ID);
+                                Console.WriteLine("Equipment Details ID:   {0}", item.EquipmentDetailsID);
+                                Console.WriteLine("Quantity                {0}", item.Quantity);
+                                Console.WriteLine("Encoding Date:          {0}", item.EncodingDate);
+                                Console.WriteLine("Item Price:             {0}", item.ItemPrice);
+                                Console.WriteLine("Remarks:                {0}", item.Remarks);
                             }
 
 
                             try
                             {
-                                Console.Write("Enter Equipment ID: ");
+                                Console.WriteLine();
+                                Console.Write("Enter Equipment Stock ID: ");
                                 var _updateID = Console.ReadLine();
                                 int _updatedID = int.Parse(_updateID);
 
                                 Console.WriteLine();
-                                Console.Write("Enter New Equipment Stock: ");
+                                Console.Write("Enter new quantity: ");
                                 var _updateStock = Console.ReadLine();
                                 int _updatedEquipmentStock = int.Parse(_updateStock);
 
@@ -872,7 +887,7 @@ namespace Attila.Presentation.InventoryManager
                             }
 
                             Console.WriteLine();
-                            Console.WriteLine("Enter Equipment ID Details to delete: ");
+                            Console.Write("Enter Equipment ID Details: ");
                             var _deleteEquipmentID = Console.ReadLine();
                             int _deleteSelectedEquipmentID = int.Parse(_deleteEquipmentID);
 
@@ -948,7 +963,7 @@ namespace Attila.Presentation.InventoryManager
                                 Console.WriteLine(ex.Message);
                             }
 
-                            
+
 
                             goto equipmentsubstart;
                         #endregion
@@ -969,14 +984,17 @@ namespace Attila.Presentation.InventoryManager
                             {
                                 Console.WriteLine();
                                 Console.WriteLine("Searched Equipment ID");
-                                Console.WriteLine("Equipment Details ID: {0}", _searchEquipmentByIdQuery.ID);
-                                Console.WriteLine("Equipment Quantity: {0}", _searchEquipmentByIdQuery.Quantity);
-                                Console.WriteLine("Equipment Encoding Date: {0}", _searchEquipmentByIdQuery.EncodingDate);
-                                Console.WriteLine("Equipmemt Price: {0}", _searchEquipmentByIdQuery.ItemPrice);
-                                Console.WriteLine("Equipment Remarks: {0}", _searchEquipmentByIdQuery.Remarks);
+                                Console.WriteLine("Equipment Details ID:   {0}", _searchEquipmentByIdQuery.ID);
+                                Console.WriteLine("Equipment Code:         {0}", _searchEquipmentByIdQuery.Code);
+                                Console.WriteLine("Equipment Name:         {0}", _searchEquipmentByIdQuery.Name);
+                                Console.WriteLine("Equipmemt Description:  {0}", _searchEquipmentByIdQuery.Description);
+                                Console.WriteLine("Equipment Unit Type:    {0}", _searchEquipmentByIdQuery.UnitType);
+                                Console.WriteLine("Equipment Type:         {0}", _searchEquipmentByIdQuery.EquipmentType);
                             }
 
-                            else Console.WriteLine("Equipment ID does not exist!");
+                            else
+                                Console.WriteLine();
+                            Console.WriteLine("Equipment ID does not exist!");
 
                             goto equipmentsubstart;
                         #endregion
@@ -992,11 +1010,14 @@ namespace Attila.Presentation.InventoryManager
                             var _searchEquipmentByKeywordQuery = await Mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = _searchKeyword });
                             if (_searchEquipmentByKeywordQuery != null)
                             {
+                                Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
+
                                 foreach (var item in _searchEquipmentByKeywordQuery)
                                 {
                                     Console.WriteLine();
-                                    Console.WriteLine("Searched Keyword: {0}", _searchKeyword);
-                                    Console.WriteLine("Equipment Name: {0}   ,   Food Code: {1}", item.Name, item.Code);
+                                    
+                                    Console.WriteLine("Equipment Name: {0}", item.Name);
+                                    Console.WriteLine("Equipment Code: {0}", item.Code);
                                     Console.WriteLine("Equipment Description: {0}", item.Description);
                                 }
                             }
@@ -1006,7 +1027,7 @@ namespace Attila.Presentation.InventoryManager
                         #endregion
 
                         //case X : Home Command
-                        #region Home Commands
+                        #region Home Command
                         case "X":
                             goto start;
 
@@ -1015,11 +1036,18 @@ namespace Attila.Presentation.InventoryManager
                         #endregion
 
                         default:
-                            break;
+                            Console.WriteLine();
+                            Console.WriteLine("INVALID COMMAND NUMBER!");
+                            goto equipmentsubstart;
                     }
 
-                    goto start;
+                    goto start; 
+                #endregion
+
+
                 default:
+                    Console.WriteLine();
+                    Console.WriteLine("INVALID COMMAND NUMBER!");
                     break;
             }
         }
