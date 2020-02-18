@@ -11,7 +11,13 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class AddFoodRestockCommand : IRequest<bool>
     {
-        public FoodRestock MyFoodRestock { get; set; }
+        public DateTime DeliveryDate { get; set; }
+
+        public byte[] ReceiptImage { get; set; }
+
+        public decimal DeliveryPrice { get; set; }
+
+        public string Remarks { get; set; }
 
         public class AddFoodRestockCommandHandler : IRequestHandler<AddFoodRestockCommand, bool>
         {
@@ -26,10 +32,10 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
             {
                 FoodRestock _foodRestock = new FoodRestock
                 {
-                    DeliveryDate = request.MyFoodRestock.DeliveryDate,
-                    ReceiptImage = request.MyFoodRestock.ReceiptImage,
-                    DeliveryPrice = request.MyFoodRestock.DeliveryPrice,
-                    Remarks = request.MyFoodRestock.Remarks
+                    DeliveryDate = request.DeliveryDate,
+                    ReceiptImage = request.ReceiptImage,
+                    DeliveryPrice = request.DeliveryPrice,
+                    Remarks = request.Remarks
                 };
 
                 dbContext.FoodsRestock.Add(_foodRestock);

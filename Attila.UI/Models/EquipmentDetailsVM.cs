@@ -1,15 +1,17 @@
 ﻿using Attila.Domain.Entities.Enums;
 using Attila.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.UI.Models
 {
-    [Table("tbl_EquipmentDetails")]
-    public class EquipmentDetails
+    public class EquipmentDetailsVM
     {
         public int ID { get; set; }
 
-        public string Code { get; set; } 
+        public string Code { get; set; }
 
         public string Name { get; set; }
 
@@ -18,5 +20,6 @@ namespace Attila.Domain.Entities.Tables
         public UnitType UnitType { get; set; }
 
         public EquipmentType EquipmentType { get; set; }
+
     }
 }

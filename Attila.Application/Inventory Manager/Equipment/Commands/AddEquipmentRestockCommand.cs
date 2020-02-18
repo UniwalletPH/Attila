@@ -11,7 +11,13 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentRestockCommand : IRequest<bool>
     {
-        public EquipmentRestock MyEquipmentRestock { get; set; }
+        public DateTime DeliveryDate { get; set; }
+
+        public byte[] ReceiptImage { get; set; }
+
+        public decimal DeliveryPrice { get; set; }
+
+        public string Remarks { get; set; }
 
         public class AddEquipmentRestockCommandHandler : IRequestHandler<AddEquipmentRestockCommand, bool>
         {
@@ -26,10 +32,10 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             {
                 EquipmentRestock _equipmentRestock = new EquipmentRestock
                 {
-                    DeliveryDate = request.MyEquipmentRestock.DeliveryDate,
-                    ReceiptImage = request.MyEquipmentRestock.ReceiptImage,
-                    DeliveryPrice = request.MyEquipmentRestock.DeliveryPrice,
-                    Remarks = request.MyEquipmentRestock.Remarks
+                    DeliveryDate = request.DeliveryDate,
+                    ReceiptImage = request.ReceiptImage,
+                    DeliveryPrice = request.DeliveryPrice,
+                    Remarks = request.Remarks
                 };
 
                 dbContext.EquipmentsRestock.Add(_equipmentRestock);

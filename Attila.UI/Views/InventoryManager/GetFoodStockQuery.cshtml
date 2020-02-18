@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Attila.Domain.Entities.Tables.FoodInventory>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Food.Queries.FoodInventoryVM>
 
 @{
     ViewData["Title"] = "GetFoodStockQuery";
 }
 
-<h1>GetFoodStockQuery</h1>
+<h1>View Food Stock List</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -71,11 +68,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FoodRestockID)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

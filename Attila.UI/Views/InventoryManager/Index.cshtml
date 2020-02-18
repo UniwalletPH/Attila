@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inventory Manager</h1>
+
+<br />
+<br />
+<br />
+<button id="btnAddEquipmentDetails" class="btn btn-primary">ADD EQUIPMENT DETAILS</button>
+<br />
+<br />
+<button id="btnAddEquipmentInventory" class="btn btn-primary">ADD EQUIPMENT INVENTORY</button>
+<br />
+<br />
+<button id="btnAddEquipmentRestock" class="btn btn-primary">ADD EQUIPMENT RESTOCK</button>
+<br />
+<br />
+<button id="btnDeleteEquipment" class="btn btn-primary">DELETE EQUIPMENT</button>
+<br />
+<br />
+<button id="btnRequestEquipmentRestock" class="btn btn-primary">REQUEST EQUIPMENT RESTOCK</button>
+<br />
+<br />
+<button id="btnUpdateEquipmentDetails" class="btn btn-primary">UPDATE EQUIPMENT DETAILS</button>
+<br />
+<br />
+<button id="btnUpdateEquipmentStock" class="btn btn-primary">UPDATE EQUIPMENT STOCK</button>
+<br />
+<br />
+<button id="btnViewEquipmentDetails" class="btn btn-primary">VIEW  EQUIPMENT DETAILS</button>
+<br />
+<br />
+<button id="btnViewEquipmentStock" class="btn btn-primary">VIEW EQUIPMENT STOCK</button>
+<br />
+<br />
+<button id="btnSearchEquipmentByID" class="btn btn-primary">SEARCH EQUIPMENT BY ID</button>
+<br />
+<br />
+<button id="btnSearchEquipmentByKeyword" class="btn btn-primary">SEARCH EQUIPMENT BY KEYWORD</button>
+<br />
+<br />
+
+
+
+@section Scripts {
+
+    <script>
+
+        $('document').ready(function () {
+
+            $('#btnAddEquipmentDetails').on('click', function () {
+                window.location = "/InventoryManager/AddEquipmentDetailsCommand";
+            });
+
+            $('#btnAddEquipmentInventory').on('click', function () {
+                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
+            });
+
+            $('#btnAddEquipmentRestock').on('click', function () {
+                window.location = "/InventoryManager/AddEquipmentRestockCommand";
+            });
+
+            $('#btnDeleteEquipment').on('click', function () {
+                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+            });
+
+            $('#btnRequestEquipmentRestock').on('click', function () {
+                window.location = "/InventoryManager/RequestEquipmentRestockCommand";
+            });
+
+            $('#btnUpdateEquipmentDetails').on('click', function () {
+                window.location = "/InventoryManager/UpdateEquipmentDetailsCommand";
+            });
+
+            $('#btnUpdateEquipmentStock').on('click', function () {
+                window.location = "/InventoryManager/UpdateEquipmentStockCommand";
+            });
+
+            $('#btnViewEquipmentDetails').on('click', function () {
+                window.location = "/InventoryManager/GetEquipmentDetailsQuery";
+            });
+
+            $('#btnViewEquipmentStock').on('click', function () {
+                window.location = "/InventoryManager/GetEquipmentStockQuery";
+            });
+
+            $('#btnSearchEquipmentByID').on('click', function () {
+                window.location = "/InventoryManager/SearchEquipmentByIdQuery";
+            });
+
+            $('#btnSearchEquipmentByKeyword').on('click', function () {
+                window.location = "/InventoryManager/SearchEquipmentByKeywordQuery";
+            });
+        });
+
+    </script>
+}

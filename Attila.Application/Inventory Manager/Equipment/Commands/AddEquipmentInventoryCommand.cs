@@ -9,7 +9,19 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentInventoryCommand : IRequest<bool>
     {
-        public EquipmentInventory MyEquipmentInventory { get; set; }
+        public int Quantity { get; set; }
+
+        public DateTime EncodingDate { get; set; }
+
+        public decimal ItemPrice { get; set; }
+
+        public string Remarks { get; set; }
+
+        public int UserID { get; set; }
+
+        public int EquipmentDetailsID { get; set; }
+
+        public int EquipmentDeliveryID { get; set; }
 
         public class AddEquipmentInventorycommandHandler : IRequestHandler<AddEquipmentInventoryCommand, bool>
         {
@@ -24,13 +36,13 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             {
                 EquipmentInventory _equipmentInventory = new EquipmentInventory
                 {
-                    Quantity = request.MyEquipmentInventory.Quantity,
+                    Quantity = request.Quantity,
                     EncodingDate = DateTime.Now,
-                    ItemPrice = request.MyEquipmentInventory.ItemPrice,
-                    Remarks = request.MyEquipmentInventory.Remarks,
-                    UserID = request.MyEquipmentInventory.UserID,
-                    EquipmentDetailsID = request.MyEquipmentInventory.EquipmentDetailsID,
-                    EquipmentDeliveryID = request.MyEquipmentInventory.EquipmentDeliveryID
+                    ItemPrice = request.ItemPrice,
+                    Remarks = request.Remarks,
+                    UserID = request.UserID,
+                    EquipmentDetailsID = request.EquipmentDetailsID,
+                    EquipmentDeliveryID = request.EquipmentDeliveryID
                 };
 
                 dbContext.EquipmentsInventory.Add(_equipmentInventory);

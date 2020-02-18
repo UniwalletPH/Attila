@@ -10,8 +10,10 @@ using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
+using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using EquipmentDetailsVM = Attila.UI.Models.EquipmentDetailsVM;
 
 namespace Attila.UI.Controllers
 {
@@ -36,13 +38,19 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentDetailsCommand(EquipmentDetails equipmentDetails)
+        public async Task<IActionResult> AddEquipmentDetailsCommand(EquipmentDetailsVM equipmentDetails)
         {
             try
             {
-                await mediator.Send(new AddEquipmentDetailsCommand { MyEquipmentDetails = equipmentDetails });
+                await mediator.Send(new AddEquipmentDetailsCommand 
+                { 
+                    Code = equipmentDetails.Code,
+                    Name = equipmentDetails.Name,
+                    Description = equipmentDetails.Name,
+                    UnitType = equipmentDetails.UnitType,
+                    EquipmentType = equipmentDetails.EquipmentType
+                });
                 _checker = true;
-
             }
             catch (Exception)
             {
@@ -59,11 +67,20 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentInventoryCommand(EquipmentInventory equipmentInventory)
+        public async Task<IActionResult> AddEquipmentInventoryCommand(Models.EquipmentInventoryVM equipmentInventory)
         {
             try
             {
-                await mediator.Send(new AddEquipmentInventoryCommand { MyEquipmentInventory = equipmentInventory });
+                await mediator.Send(new AddEquipmentInventoryCommand 
+                { 
+                    Quantity = equipmentInventory.Quantity,
+                    EncodingDate = equipmentInventory.EncodingDate,
+                    ItemPrice = equipmentInventory.ItemPrice,
+                    Remarks = equipmentInventory.Remarks,
+                    UserID = equipmentInventory.UserID,
+                    EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
+                    EquipmentDeliveryID = equipmentInventory.EquipmentDeliveryID
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -82,11 +99,17 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentRestockCommand(EquipmentRestock equipmentRestock)
+        public async Task<IActionResult> AddEquipmentRestockCommand(EquipmentRestockVM equipmentRestock)
         {
             try
             {
-                await mediator.Send(new AddEquipmentRestockCommand { MyEquipmentRestock = equipmentRestock});
+                await mediator.Send(new AddEquipmentRestockCommand 
+                { 
+                    DeliveryDate = equipmentRestock.DeliveryDate,
+                    ReceiptImage = equipmentRestock.ReceiptImage,
+                    DeliveryPrice = equipmentRestock.DeliveryPrice,
+                    Remarks = equipmentRestock.Remarks
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -128,11 +151,18 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestEquipmentRestockCommand(int reqEquipmentID, EquipmentRestockRequest equipmentRestockRequest)
+        public async Task<IActionResult> RequestEquipmentRestockCommand(EquipmentRestockRequestVM equipmentRestockRequest)
         {
             try
             {
-                await mediator.Send(new RequestEquipmentRestockCommand { RequestEquipmentID = reqEquipmentID, MyEquipmentRestockRequest = equipmentRestockRequest });
+                await mediator.Send(new RequestEquipmentRestockCommand 
+                { 
+                    Quantity = equipmentRestockRequest.Quantity,
+                    DateTimeRequest = equipmentRestockRequest.DateTimeRequest,
+                    EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
+                    Status = equipmentRestockRequest.Status,
+                    UserID = equipmentRestockRequest.UserID
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -269,11 +299,19 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodDetailsCommand(FoodDetails foodDetails)
+        public async Task<IActionResult> AddFoodDetailsCommand(FoodDetailsVM foodDetails)
         {
             try
             {
-                await mediator.Send(new AddFoodDetailsCommand { MyFoodDetails = foodDetails });
+                await mediator.Send(new AddFoodDetailsCommand 
+                {
+                    Code = foodDetails.Code,
+                    Name = foodDetails.Name,
+                    Specification = foodDetails.Specification,
+                    Description = foodDetails.Description,
+                    Unit = foodDetails.Unit,
+                    FoodType = foodDetails.FoodType
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -291,11 +329,20 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventoryCommand(FoodInventory foodInventory)
+        public async Task<IActionResult> AddFoodInventoryCommand(FoodInventoryVM foodInventory)
         {
             try
             {
-                await mediator.Send(new AddFoodInventoryCommand { MyFoodInventory = foodInventory });
+                await mediator.Send(new AddFoodInventoryCommand 
+                { 
+                    Quantity = foodInventory.Quantity,
+                    ExpirationDate = foodInventory.ExpirationDate,
+                    EncodingDate = foodInventory.EncodingDate,
+                    ItemPrice = foodInventory.ItemPrice,
+                    Remarks = foodInventory.Remarks,
+                    UserID = foodInventory.UserID,
+                    FoodDetailsID = foodInventory.FoodDetailsID
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -313,11 +360,17 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodRestockCommand(FoodRestock foodRestock)
+        public async Task<IActionResult> AddFoodRestockCommand(FoodRestockVM foodRestock)
         {
             try
             {
-                await mediator.Send(new AddFoodRestockCommand { MyFoodRestock = foodRestock });
+                await mediator.Send(new AddFoodRestockCommand 
+                { 
+                    DeliveryDate = foodRestock.DeliveryDate,
+                    ReceiptImage = foodRestock.ReceiptImage,
+                    DeliveryPrice = foodRestock.DeliveryPrice,
+                    Remarks = foodRestock.Remarks
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -357,11 +410,18 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestFoodRestockCommand(int reqFoodID, FoodRestockRequest foodRestockRequest)
+        public async Task<IActionResult> RequestFoodRestockCommand(FoodRestockRequestVM foodRestockRequest)
         {
             try
             {
-                await mediator.Send(new RequestFoodRestockCommand { RequestFoodID = reqFoodID, MyFoodRestockRequest = foodRestockRequest });
+                await mediator.Send(new RequestFoodRestockCommand 
+                {
+                    Quantity = foodRestockRequest.Quantity,
+                    DateTimeRequest = foodRestockRequest.DateTimeRequest,
+                    FoodDetailsID = foodRestockRequest.FoodDetailsID,
+                    Status = foodRestockRequest.Status,
+                    UserID = foodRestockRequest.UserID
+                });
                 _checker = true;
             }
             catch (Exception)

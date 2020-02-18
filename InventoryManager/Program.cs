@@ -119,7 +119,15 @@ namespace Attila.Presentation.InventoryManager
                                 FoodType = _parsedFoodType
                             };
 
-                            var _addFoodDetailsInventoryCommand = await Mediator.Send(new AddFoodDetailsCommand { MyFoodDetails = _foodDetails });
+                            var _addFoodDetailsInventoryCommand = await Mediator.Send(new AddFoodDetailsCommand 
+                            { 
+                                Code = _foodDetails.Code,
+                                Name = _foodDetails.Name,
+                                Specification = _foodDetails.Specification,
+                                Description = _foodDetails.Description,
+                                Unit = _foodDetails.Unit,
+                                FoodType = _foodDetails.FoodType
+                            });
                             if (_addFoodDetailsInventoryCommand == true)
                             {
                                 Console.WriteLine();
@@ -184,7 +192,16 @@ namespace Attila.Presentation.InventoryManager
                                 FoodDetailsID = _addFoodDetailsIdParsed
                             };
 
-                            var _addFoodInventoryCommand = await Mediator.Send(new AddFoodInventoryCommand { MyFoodInventory = _foodInventory });
+                            var _addFoodInventoryCommand = await Mediator.Send(new AddFoodInventoryCommand 
+                            { 
+                                Quantity = _foodInventory.Quantity,
+                                ExpirationDate = _foodInventory.ExpirationDate,
+                                EncodingDate = _foodInventory.EncodingDate,
+                                ItemPrice = _foodInventory.ItemPrice,
+                                Remarks = _foodInventory.Remarks,
+                                UserID = _foodInventory.UserID,
+                                FoodDetailsID = _foodInventory.FoodDetailsID
+                            });
                             if (_addFoodInventoryCommand == true)
                             {
                                 Console.WriteLine();
@@ -622,7 +639,14 @@ namespace Attila.Presentation.InventoryManager
                                 EquipmentType = _parsedEquipmentType
                             };
 
-                            var _addEquipmentDetailsCommand = await Mediator.Send(new AddEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetails });
+                            var _addEquipmentDetailsCommand = await Mediator.Send(new AddEquipmentDetailsCommand 
+                            { 
+                                Code = _equipmentDetails.Code,
+                                Name = _equipmentDetails.Name,
+                                Description = _equipmentDetails.Description,
+                                UnitType = _equipmentDetails.UnitType,
+                                EquipmentType  = _equipmentDetails.EquipmentType
+                            });
                             if (_addEquipmentDetailsCommand == true)
                             {
                                 Console.WriteLine();
@@ -680,7 +704,15 @@ namespace Attila.Presentation.InventoryManager
                                 EquipmentDetailsID = _addEquipmentDetailsIdParsed
                             };
 
-                            var _addEquipmentInventoryCommand = await Mediator.Send(new AddEquipmentInventoryCommand { MyEquipmentInventory = _EquipmentInventory });
+                            var _addEquipmentInventoryCommand = await Mediator.Send(new AddEquipmentInventoryCommand 
+                            { 
+                                Quantity = _EquipmentInventory.Quantity,
+                                EncodingDate = _EquipmentInventory.EncodingDate,
+                                ItemPrice = _EquipmentInventory.ItemPrice,
+                                Remarks = _EquipmentInventory.Remarks,
+                                UserID = _EquipmentInventory.UserID,
+                                EquipmentDetailsID = _EquipmentInventory.EquipmentDetailsID
+                            });
                             if (_addEquipmentInventoryCommand == true)
                             {
                                 Console.WriteLine();

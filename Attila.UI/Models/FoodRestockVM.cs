@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.UI.Models
 {
-
-    [Table("tbl_EquipmentRestock")]
-    public class EquipmentRestock
+    public class FoodRestockVM
     {
         public int ID { get; set; }
 
-        public DateTime DeliveryDate { get; set; } 
+        public DateTime DeliveryDate { get; set; }
 
         public byte[] ReceiptImage { get; set; }
 
         public decimal DeliveryPrice { get; set; }
 
         public string Remarks { get; set; }
+
     }
 }

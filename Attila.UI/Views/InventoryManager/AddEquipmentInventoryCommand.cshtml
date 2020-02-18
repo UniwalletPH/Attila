@@ -1,68 +1,99 @@
-﻿@model Attila.Domain.Entities.Tables.EquipmentInventory
+﻿@model Attila.UI.Models.EquipmentInventoryVM
 
 @{
     ViewData["Title"] = "AddEquipmentInventoryCommand";
 }
 
-<h1>AddEquipmentInventoryCommand</h1>
+<h1>Add Equipment Inventory</h1>
 
-<h4>EquipmentInventory</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddEquipmentInventoryCommand">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Quantity" class="control-label"></label>
-                <input asp-for="Quantity" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EncodingDate" class="control-label"></label>
-                <input asp-for="EncodingDate" class="form-control" />
-                <span asp-validation-for="EncodingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ItemPrice" class="control-label"></label>
-                <input asp-for="ItemPrice" class="form-control" />
-                <span asp-validation-for="ItemPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserID" class="control-label"></label>
-                <input asp-for="UserID" class="form-control" />
-                <span asp-validation-for="UserID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EquipmentDetailsID" class="control-label"></label>
-                <input asp-for="EquipmentDetailsID" class="form-control" />
-                <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EquipmentDeliveryID" class="control-label"></label>
-                <input asp-for="EquipmentDeliveryID" class="form-control" />
-                <span asp-validation-for="EquipmentDeliveryID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<div class="form-group">
+            <label asp-for="ID" class="control-label"></label>
+            <input asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
+            <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
+            <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EquipmentDeliveryID" class="control-label">Equipment Delivery ID: </label>
+            <input id="EquipmentDeliveryID" asp-for="EquipmentDeliveryID" class="form-control" />
+            <span asp-validation-for="EquipmentDeliveryID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quantity" class="control-label">Quantity: </label>
+            <input id="txtQuantity" asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="EncodingDate" class="control-label">Encoding Date: </label>
+            <input id="txtEncodingDate" asp-for="EncodingDate" class="form-control" />
+            <span asp-validation-for="EncodingDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ItemPrice" class="control-label">Item Price: </label>
+            <input id="txtItemPrice" asp-for="ItemPrice" class="form-control" />
+            <span asp-validation-for="ItemPrice" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Remarks" class="control-label">Remarks: </label>
+            <input id="txtRemarks" asp-for="Remarks" class="form-control" />
+            <span asp-validation-for="Remarks" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UserID" class="control-label">User ID: </label>
+            <input id="UserID" asp-for="UserID" class="form-control" />
+            <span asp-validation-for="UserID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <button id="btnSubmit" class="btn btn-primary">Submit </button>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _quantity = $('#txtQuantity').val();
+                var _encodingDate = $('#txtEncodingDate').val();
+                var _itemPrice = $('#txtItemPrice').val();
+                var _remarks = $('#txtRemarks').val();
+                var _userID = $('#UserID').val();
+                var _equipmentDetailsID = $('#EquipmentDetailsID').val();
+                var _equipmentDeliveryID = $('#EquipmentDeliveryID').val();
+
+                var _equipmentDelivery =
+                {
+                    Quantity: _quantity,
+                    EncodingDate: _encodingDate,
+                    ItemPrice: _itemPrice,
+                    Remarks: _remarks,
+                    UserID: _userID,
+                    EquipmentDetailsID: _equipmentDetailsID,
+                    EquipmentDeliveryID: _equipmentDeliveryID
+                };
+
+                $.post('/InventoryManager/AddEquipmentInventoryCommand', { equipmentInventory: _equipmentDelivery }).done(function (data) { InputResult(data) });
+            });
+        });
+
+        function InputResult(result) {
+            if (result == true) {
+                alert("Equipment inventory successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
+            }
+        }
+    </script>
 }

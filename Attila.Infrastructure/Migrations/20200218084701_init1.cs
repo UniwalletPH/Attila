@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Attila.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,13 +93,8 @@ namespace Attila.Infrastructure.Migrations
                     Location = table.Column<string>(nullable: true),
                     Remarks = table.Column<string>(nullable: true),
                     UserID = table.Column<int>(nullable: false),
-                    EventTeamID = table.Column<int>(nullable: false),
                     EventPackageDetailsID = table.Column<int>(nullable: false),
-                    EventPaymentStatusID = table.Column<int>(nullable: false),
-                    EventClientID = table.Column<int>(nullable: false),
-                    EventEquipmentsID = table.Column<int>(nullable: false),
-                    PackageAdditionalDurationRequestID = table.Column<int>(nullable: false),
-                    PackageAdditionalEquipmentRequestID = table.Column<int>(nullable: false)
+                    EventClientID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -135,22 +130,6 @@ namespace Attila.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_tbl_EventPackageDetails", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "tbl_EventPaymentStatus",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Amount = table.Column<decimal>(nullable: false),
-                    DateOfPayment = table.Column<DateTime>(nullable: false),
-                    ReferenceNumber = table.Column<string>(nullable: true),
-                    Remarks = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_tbl_EventPaymentStatus", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,8 +176,8 @@ namespace Attila.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RecieptImage = table.Column<byte[]>(nullable: true),
-                    DeliveryTime = table.Column<DateTime>(nullable: false),
+                    DeliveryDate = table.Column<DateTime>(nullable: false),
+                    ReceiptImage = table.Column<byte[]>(nullable: true),
                     DeliveryPrice = table.Column<decimal>(nullable: false),
                     Remarks = table.Column<string>(nullable: true)
                 },
@@ -322,6 +301,29 @@ namespace Attila.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "tbl_EventPaymentStatus",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EventDetailsID = table.Column<int>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
+                    DateOfPayment = table.Column<DateTime>(nullable: false),
+                    ReferenceNumber = table.Column<string>(nullable: true),
+                    Remarks = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tbl_EventPaymentStatus", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_tbl_EventPaymentStatus_tbl_EventDetails_EventDetailsID",
+                        column: x => x.EventDetailsID,
+                        principalTable: "tbl_EventDetails",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "tbl_FoodRestockRequest",
                 columns: table => new
                 {
@@ -355,6 +357,11 @@ namespace Attila.Infrastructure.Migrations
                 column: "EquipmentDetailsID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_tbl_EventPaymentStatus_EventDetailsID",
+                table: "tbl_EventPaymentStatus",
+                column: "EventDetailsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_tbl_FoodRestockRequest_FoodDetailsID",
                 table: "tbl_FoodRestockRequest",
                 column: "FoodDetailsID");
@@ -378,9 +385,6 @@ namespace Attila.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbl_EventClient");
-
-            migrationBuilder.DropTable(
-                name: "tbl_EventDetails");
 
             migrationBuilder.DropTable(
                 name: "tbl_EventEquipmentRequest");
@@ -414,6 +418,9 @@ namespace Attila.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "tbl_UserMap");
+
+            migrationBuilder.DropTable(
+                name: "tbl_EventDetails");
 
             migrationBuilder.DropTable(
                 name: "tbl_FoodDetails");

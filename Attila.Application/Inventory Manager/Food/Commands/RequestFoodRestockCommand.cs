@@ -1,5 +1,7 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Threading;
@@ -9,8 +11,15 @@ namespace Attila.Application.Food.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {
-        public int RequestFoodID { get; set; }
-        public FoodRestockRequest MyFoodRestockRequest { get; set; }
+        public int Quantity { get; set; }
+
+        public DateTime DateTimeRequest { get; set; }
+
+        public int FoodDetailsID { get; set; }
+
+        public Status Status { get; set; }
+
+        public int UserID { get; set; }
 
         public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, bool>
         {
@@ -21,29 +30,20 @@ namespace Attila.Application.Food.Commands
             }
             public async Task<bool> Handle(RequestFoodRestockCommand request, CancellationToken cancellationToken)
             {
-                var _searchRequestFoodId = dbContext.FoodsDetails.Find(request.RequestFoodID);
-
-                if (_searchRequestFoodId != null)
+                FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
-                    FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
-                    {
-                        Quantity = request.MyFoodRestockRequest.Quantity,
-                        DateTimeRequest = DateTime.Now,
-                        FoodDetailsID = request.MyFoodRestockRequest.FoodDetailsID,
-                        Status = 0,
-                        UserID = request.MyFoodRestockRequest.UserID
-                    };
+                    Quantity = request.Quantity,
+                    DateTimeRequest = DateTime.Now,
+                    FoodDetailsID = request.FoodDetailsID,
+                    Status = request.Status,
+                    UserID = request.UserID
+                };
 
-                    dbContext.FoodRestockRequests.Add(_foodRestockRequest);
-                    await dbContext.SaveChangesAsync();
+                dbContext.FoodRestockRequests.Add(_foodRestockRequest);
+                await dbContext.SaveChangesAsync();
 
-                    return true;
-                }
-                else
-                {
-                    throw new Exception("Food Details ID does not exist!");
-                }
-                
+                return true;
+
             }
         }
     }

@@ -6,9 +6,8 @@ namespace Attila.Domain.Enums
 {
     public enum  Status : byte
     {
-        Pending = 0,
-        Approved = 1,
-        Declined = 2
-        
+        Pending = 1,
+        Approved = 2,
+        Declined = 3
     }
 }

@@ -1,14 +1,11 @@
-﻿@model IEnumerable<Attila.Domain.Entities.Tables.FoodDetails>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Food.Queries.FoodDetailsVM>
 
 @{
     ViewData["Title"] = "GetFoodDetailsQuery";
 }
 
-<h1>GetFoodDetailsQuery</h1>
+<h1>Get Food Details</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -59,11 +56,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FoodType)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }
