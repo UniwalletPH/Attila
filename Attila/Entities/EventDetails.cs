@@ -33,9 +33,15 @@ namespace Attila.Domain.Entities.Tables
 
         public int UserID { get; set; }
 
+        public User User { get; set; }
+
         public int  EventPackageDetailsID { get; set; }
 
+        public EventPackageDetails EventPackageDetails { get; set; }
+
         public int EventClientID { get; set; }
+
+        public EventClient EventClient { get; set; }
 
     }
 }
