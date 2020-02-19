@@ -67,28 +67,16 @@
             $('#btnSubmit').on('click', function () {
 
                 var _id = $('#txtID').val();
-                //var _quantity = $('#txtQuantity').val();
                 var _equipmentDetailsID = $('#EquipmentDetailsID').val();
-                //var _encodingDate = $('#txtEncodingDate').val();
-                //var _itemPrice = $('#txtItemPrice').val();
-                //var _remarks = $('#txtRemarks').val();
-                //var _userID = $('#UserID').val();
-                //var _equipmentDeliveryID = $('#EquipmentDeliveryID').val();
+                
 
-                var _equipmentDelivery =
+                var _equipmentInventory =
                 {
-                    //Quantity: _quantity,
                     ID: _id,
                     EquipmentDetailsID: _equipmentDetailsID
-                    //EncodingDate: _encodingDate,
-                    //ItemPrice: _itemPrice,
-                    //Remarks: _remarks,
-                    //UserID: _userID,
-                    
-                    //EquipmentDeliveryID: _equipmentDeliveryID
                 };
 
-                $.post('/InventoryManager/UpdateEquipmentStockCommand', { equipmentInventory: _equipmentDelivery }).done(function (data) { InputResult(data) });
+                $.post('/InventoryManager/UpdateEquipmentStockCommand', { equipmentInventory: _equipmentInventory }).done(function (data) { InputResult(data) });
             });
         });
 

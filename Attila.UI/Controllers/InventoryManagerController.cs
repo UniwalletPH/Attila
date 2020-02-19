@@ -219,7 +219,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new UpdateEquipmentStockCommand 
                 { 
-                    ID = equipmentInventory.EquipmentDeliveryID,
+                    ID = equipmentInventory.ID,
                     Quantity = equipmentInventory.Quantity
                 });
                 _checker = true;
@@ -456,7 +456,16 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateFoodDetailsCommand { MyFoodDetails = foodDetails });
+                await mediator.Send(new UpdateFoodDetailsCommand 
+                { 
+                    ID = foodDetails.ID,
+                    Code = foodDetails.Code,
+                    Name = foodDetails.Name, 
+                    Specification = foodDetails.Specification,
+                    Description  = foodDetails.Description,
+                    Unit = foodDetails.Unit,
+                    FoodType = foodDetails.FoodType
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -474,11 +483,15 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStockCommand(int foodID, int foodQuantity)
+        public async Task<IActionResult> UpdateFoodStockCommand(FoodInventory foodInventory)
         {
             try
             {
-                await mediator.Send(new UpdateFoodStockCommand { SearchedID = foodID, NewFoodQuantity = foodQuantity });
+                await mediator.Send(new UpdateFoodStockCommand 
+                {
+                    ID = foodInventory.ID,
+                    Quantity = foodInventory.Quantity
+                });
                 _checker = true;
             }
             catch (Exception)
