@@ -477,7 +477,14 @@ namespace Attila.Presentation.InventoryManager
                                     UserID = _foodRestockUserIdParsed
                                 };
 
-                                var _RequestFoodRestockCommand = await Mediator.Send(new RequestFoodRestockCommand { MyFoodRestockRequest = _foodRestockRequest });
+                                var _RequestFoodRestockCommand = await Mediator.Send(new RequestFoodRestockCommand 
+                                { 
+                                    FoodDetailsID = _foodRestockRequest.FoodDetailsID ,
+                                    DateTimeRequest = _foodRestockRequest.DateTimeRequest,
+                                    UserID = _foodRestockRequest.UserID,
+                                    Quantity = _foodRestockRequest.Quantity,
+                                    Status = _foodRestockRequest.Status
+                                });
                                 if (_RequestFoodRestockCommand == true)
                                 {
                                     Console.WriteLine();
@@ -982,7 +989,15 @@ namespace Attila.Presentation.InventoryManager
                                     UserID = _equipmentRestockUserIdParsed
                                 };
 
-                                var _RequestEquipmentRestockCommand = await Mediator.Send(new RequestEquipmentRestockCommand { MyEquipmentRestockRequest = _equipmentRestockRequest, RequestEquipmentID = _selectedEquipmentIdRestock });
+                                var _RequestEquipmentRestockCommand = await Mediator.Send(new RequestEquipmentRestockCommand 
+                                { 
+                                    DateTimeRequest = _equipmentRestockRequest.DateTimeRequest,
+                                    Quantity = _equipmentRestockRequest.Quantity,
+                                    EquipmentDetails = _equipmentRestockRequest.EquipmentDetails,
+                                    EquipmentDetailsID = _equipmentRestockRequest.EquipmentDetailsID,
+                                    Status = _equipmentRestockRequest.Status,
+                                    UserID = _equipmentRestockRequest.UserID
+                                });
                                 if (_RequestEquipmentRestockCommand == true)
                                 {
                                     Console.WriteLine();

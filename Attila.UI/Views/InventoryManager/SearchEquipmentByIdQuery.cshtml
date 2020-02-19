@@ -1,54 +1,89 @@
-﻿@model Attila.Domain.Entities.Tables.EquipmentDetails
+﻿@model Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM
 
 @{
     ViewData["Title"] = "SearchEquipmentByIdQuery";
 }
 
-<h1>SearchEquipmentByIdQuery</h1>
+<h1>Search Equipment By Id</h1>
 
-<div>
-    <h4>EquipmentDetails</h4>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter equipment ID: </label>
+        <input id="txtSearchID" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+<div id="searchView" style="display:none">
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID)
+        <dt class="col-sm-2">
+            @Html.DisplayName("ID: ")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ID)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Code)
+        <dt class="col-sm-2">
+            @Html.DisplayName("Code: ")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Code)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-sm-2">
+            @Html.DisplayName("Name :")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-2">
+            @Html.DisplayName("Description: ")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Description)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UnitType)
+        <dt class="col-sm-2">
+            @Html.DisplayName("Unit Type: ")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.UnitType)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EquipmentType)
+        <dt class="col-sm-2">
+            @Html.DisplayName("Equipment Type: ")
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.EquipmentType)
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+
+    <script>
+
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+                alert("test");
+                var _searchID = $('#txtSearchID').val();
+
+                $.post('/InventoryManager/SearchEquipmentByIdQuery', { searchedID: _searchID }).done(function (data) { InputResult(data) });
+
+            });
+        });
+
+        function InputResult(result) {
+            if (result != null) {
+                alert("Equipment successfully searched!");
+                $('#searchView').show();
+                //must get the value of the returned object and pass it to the model in the UI
+            }
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/SearchEquipmentByIdQuery";
+            }
+        }
+
+    </script>
+}
