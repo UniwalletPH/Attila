@@ -8,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Attila.Application.Admin.Event.Queries
 {
-    public class GetAllIncomingEventsQuery : IRequest<List<EventDetails>>
+    public class GetAllIncomingEventsQuery : IRequest<List<EventVM>>
     {
-        public class GetAllIncomingEventsQueryHandler : IRequestHandler<GetAllIncomingEventsQuery, List<EventDetails>>
+        public class GetAllIncomingEventsQueryHandler : IRequestHandler<GetAllIncomingEventsQuery, List<EventVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetAllIncomingEventsQueryHandler(IAttilaDbContext dbContext)
@@ -21,12 +22,39 @@ namespace Attila.Application.Admin.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventDetails>> Handle(GetAllIncomingEventsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventVM>> Handle(GetAllIncomingEventsQuery request, CancellationToken cancellationToken)
             {
-                var _incomingEvents =  dbContext.EventsDetails
-                    .Where(a => a.EventStatus == Status.Approved && a.EventDate > DateTime.Now);
+                var _listIncomingEvents = new List<EventVM>();
 
-                return _incomingEvents.ToList();
+                var _incomingEvents = dbContext.EventsDetails
+                    .Include(a => a.EventPackageDetails)
+                    .Include(a => a.EventClient)
+                    .Include(a => a.User)
+                    .Where(a => a.EventStatus == Status.Approved && a.EventDate > DateTime.Now).ToList();
+
+                foreach (var item in _incomingEvents)
+                {
+                    var Event = new EventVM
+                    {
+                        ID = item.ID,
+                        Code = item.Code,
+                        EventName = item.EventName,
+                        Address = item.Address,
+                        Location = item.Location,
+                        BookingDate = item.BookingDate,
+                        EventDate = item.EventDate,
+                        Description = item.Description,
+                        Type = item.Type,
+                        Package = item.EventPackageDetails,
+                        Coordinator = item.User,
+                        Client = item.EventClient,
+                        EventStatus = item.EventStatus,
+                        Remarks = item.Remarks 
+                    };
+
+                    _listIncomingEvents.Add(Event);                  
+                }
+                return _listIncomingEvents;              
             }
         }
     }

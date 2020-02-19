@@ -9,7 +9,21 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class AddFoodInventoryCommand : IRequest<bool>
     {
-        public FoodInventory MyFoodInventory { get; set; }
+        public int Quantity { get; set; }
+
+        public DateTime ExpirationDate { get; set; }
+
+        public DateTime EncodingDate { get; set; }
+
+        public decimal ItemPrice { get; set; }
+
+        public string Remarks { get; set; }
+
+        public int UserID { get; set; }
+
+        public int FoodDetailsID { get; set; }
+
+        public int FoodRestockID { get; set; }
 
         public class AddFoodInventoryCommandHandler : IRequestHandler<AddFoodInventoryCommand, bool>
         {
@@ -24,13 +38,13 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
             {
                 FoodInventory _foodInventory = new FoodInventory
                 {
-                    Quantity = request.MyFoodInventory.Quantity,
-                    ExpirationDate = request.MyFoodInventory.ExpirationDate,
+                    Quantity = request.Quantity,
+                    ExpirationDate = request.ExpirationDate,
                     EncodingDate = DateTime.Now,
-                    ItemPrice = request.MyFoodInventory.ItemPrice,
-                    Remarks = request.MyFoodInventory.Remarks,
-                    UserID = request.MyFoodInventory.UserID,
-                    FoodDetailsID = request.MyFoodInventory.FoodDetailsID
+                    ItemPrice = request.ItemPrice,
+                    Remarks = request.Remarks,
+                    UserID = request.UserID,
+                    FoodDetailsID = request.FoodDetailsID
                 };
 
                 dbContext.FoodsInventory.Add(_foodInventory);

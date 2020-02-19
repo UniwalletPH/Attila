@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Inventory.Queries
 {
-    public class GetPendingEquipmentRestockRequestQuery : IRequest<List<EquipmentRestockRequest>>
+    public class GetPendingEquipmentRestockRequestQuery : IRequest<List<EquipmentRequestVM>>
     {
-        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<GetPendingEquipmentRestockRequestQuery, List<EquipmentRestockRequest>>
+        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<GetPendingEquipmentRestockRequestQuery, List<EquipmentRequestVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPendingEquipmentRestockRequestQueryHandler(IAttilaDbContext dbContext)
@@ -23,13 +23,32 @@ namespace Attila.Application.Admin.Inventory.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EquipmentRestockRequest>> Handle(GetPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentRequestVM>> Handle(GetPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
+                var _listPendingRequest = new List<EquipmentRequestVM>();
+
                 var _pendingRequest = dbContext.EquipmentRestockRequests
                     .Include(a => a.EquipmentDetails)
+                    .Include(a => a.User)
                     .Where(a => a.Status == Status.Pending);
 
-                return _pendingRequest.ToList();
+                foreach (var item in _pendingRequest)
+                {
+                    var Equipments = new EquipmentRequestVM
+                    {
+                        ID = item.ID,
+                        EquipmentDetails = item.EquipmentDetails,
+                        Quantity = item.Quantity,
+                        DateTimeRequest = item.DateTimeRequest,
+                        Status = item.Status,
+                        User = item.User
+                    };
+
+                    _listPendingRequest.Add(Equipments);
+                }
+
+                return _listPendingRequest;
+                
             }
         }
     }

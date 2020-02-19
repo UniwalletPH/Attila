@@ -18,11 +18,13 @@ namespace Attila.Domain.Entities
 
         public int EquipmentDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
-        
         public Status Status { get; set; }
 
         public int UserID { get; set; }
+
+        public EquipmentDetails EquipmentDetails { get; set; }
+
+        public User User { get; set; }
 
     }
 }

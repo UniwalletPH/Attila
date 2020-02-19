@@ -18,6 +18,5 @@ namespace Attila.Domain.Entities.Tables
         public UnitType UnitType { get; set; }
 
         public EquipmentType EquipmentType { get; set; }
-
     }
 }

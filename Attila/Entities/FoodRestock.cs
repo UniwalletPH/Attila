@@ -8,11 +8,11 @@ namespace Attila.Domain.Entities.Tables
     [Table("tbl_FoodRestock")]
     public class FoodRestock
     {
-        public int ID { get; set; }  
+        public int ID { get; set; }
 
-        public byte[] RecieptImage { get; set; }
+        public DateTime DeliveryDate { get; set; }
 
-        public DateTime DeliveryTime { get; set; }
+        public byte[] ReceiptImage { get; set; }
 
         public decimal DeliveryPrice { get; set; }
 

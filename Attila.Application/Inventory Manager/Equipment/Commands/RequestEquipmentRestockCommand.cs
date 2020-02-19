@@ -1,5 +1,7 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Threading;
@@ -9,8 +11,17 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class RequestEquipmentRestockCommand : IRequest<bool>
     {
-        public int RequestEquipmentID { get; set; }
-        public EquipmentRestockRequest MyEquipmentRestockRequest { get; set; }
+        public int Quantity { get; set; }
+
+        public DateTime DateTimeRequest { get; set; }
+
+        public int EquipmentDetailsID { get; set; }
+
+        public EquipmentDetails EquipmentDetails { get; set; }
+
+        public Status Status { get; set; }
+
+        public int UserID { get; set; }
 
         public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, bool>
         {
@@ -22,30 +33,21 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
-                var _searchRequestEquipmentId = dbContext.EquipmentsDetails.Find(request.RequestEquipmentID);
-
-                if (_searchRequestEquipmentId != null)
+                var _equipmentRestockRequest = new EquipmentRestockRequest
                 {
-                    EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
-                    {
-                        Quantity = request.MyEquipmentRestockRequest.Quantity,
-                        DateTimeRequest = DateTime.Now,
-                        EquipmentDetailsID = request.MyEquipmentRestockRequest.EquipmentDetailsID,
-                        Status = 0,
-                        UserID = request.MyEquipmentRestockRequest.UserID
-                    };
+                    Quantity = request.Quantity,
+                    DateTimeRequest = DateTime.Now,
+                    EquipmentDetailsID = request.EquipmentDetailsID,
+                    Status = request.Status,
+                    UserID = request.UserID
+                };
 
-                    dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
-                    await dbContext.SaveChangesAsync();
+                dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
+                await dbContext.SaveChangesAsync();
 
-                    return true;
-                }
+                return true;
 
-                else
-                {
-                    throw new Exception("Equipment Details ID does not exist!");
-                }
-                
+
             }
         }
     }

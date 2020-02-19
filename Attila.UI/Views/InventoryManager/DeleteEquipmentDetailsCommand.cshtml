@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Attila.Domain.Entities.Tables.EquipmentDetails>
+
+@{
+    ViewData["Title"] = "DeleteEquipmentDetailsCommand";
+}
+
+<h1>Delete Equipment</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentType)
+                </td>
+            </tr>
+        }*@
+    </tbody>
+</table>
+
+
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter equipment ID: </label>
+        <input id="txtDeleteId" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _deleteId = $('#txtDeleteId').val();
+
+                $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId }).done(function (data) { InputResult(data) });
+
+
+            });
+        });
+
+        function InputResult(result) {
+            if (result == true) {
+                alert("Equipment successfully deleted!");
+                window.location = "/InventoryManager/Index";
+            }
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+            }
+        }
+
+    </script>
+}

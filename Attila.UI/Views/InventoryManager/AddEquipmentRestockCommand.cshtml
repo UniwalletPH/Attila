@@ -1,0 +1,79 @@
+﻿@model Attila.UI.Models.EquipmentRestockVM
+
+@{
+    ViewData["Title"] = "AddEquipmentRestockCommand";
+}
+
+<h1>Add Equipment Restock</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEquipmentRestockCommand">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="DeliveryDate" class="control-label">Delivery Date: </label>
+                <input id="txtDeliveryDate" asp-for="DeliveryDate" class="form-control" />
+                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiptImage" class="control-label">ReceiptImage</label>
+                <input id="imgReceiptImage" asp-for="ReceiptImage" class="form-control" />
+                <span asp-validation-for="ReceiptImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryPrice" class="control-label">Delivery Price: </label>
+                <input id="txtDeliveryPrice" asp-for="DeliveryPrice" class="form-control" />
+                <span asp-validation-for="DeliveryPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label">Remarks: </label>
+                <input id="txtRemarks" asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _deliveryDate = $('#txtDeliveryDate').val();
+                var _receiptImage = $('#imgReceiptImage').val();
+                var _deliveryPrice = $('#txtDeliveryPrice').val();
+                var _remarks = $('#txtRemarks').val();
+
+                var _equipmentRestock =
+                {
+                    DeliveryDate: _deliveryDate,
+                    ReceiptImage: _receiptImage,
+                    DeliveryPrice: _deliveryPrice,
+                    Remarks: _remarks
+                };
+
+                $.post('/InventoryManager/AddEquipmentRestockCommand', { equipmentRestock: _equipmentRestock }).done(function (data) { InputResult(data) });
+            });
+        });
+
+        function InputResult(result) {
+            if (result == true) {
+                alert("Equipment restock successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddEquipmentRestockCommand";
+            }
+        }
+    </script>
+}
