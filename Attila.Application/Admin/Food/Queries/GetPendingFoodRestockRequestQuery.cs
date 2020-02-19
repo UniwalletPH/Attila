@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Food.Queries
 {
-    public class GetPendingFoodRestockRequestQuery : IRequest<List<FoodRestockRequest>>
+    public class GetPendingFoodRestockRequestQuery : IRequest<List<FoodRequestVM>>
     {
-        public class ViewPendingFoodRestockRequestQueryHandler : IRequestHandler<GetPendingFoodRestockRequestQuery, List<FoodRestockRequest>>
+        public class ViewPendingFoodRestockRequestQueryHandler : IRequestHandler<GetPendingFoodRestockRequestQuery, List<FoodRequestVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPendingFoodRestockRequestQueryHandler(IAttilaDbContext dbContext)
@@ -21,13 +21,31 @@ namespace Attila.Application.Admin.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<FoodRestockRequest>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<FoodRequestVM>> Handle(GetPendingFoodRestockRequestQuery request, CancellationToken cancellationToken)
             {
+                var _listPendingRequest = new List<FoodRequestVM>();
+
                 var _pendingFoodRestock = dbContext.FoodRestockRequests
                     .Include(a => a.FoodDetails)
+                    .Include(a => a.User)
                     .Where(a => a.Status == Status.Pending);
 
-                return _pendingFoodRestock.ToList();
+                foreach (var item in _pendingFoodRestock)
+                {
+                    var FoodRestockRequest = new FoodRequestVM
+                    { 
+                        ID = item.ID,
+                        FoodDetails = item.FoodDetails,
+                        Quantity = item.Quantity,
+                        DateTimeRequest = item.DateTimeRequest,
+                        Status = item.Status,
+                        User = item.User
+                    };
+
+                    _listPendingRequest.Add(FoodRestockRequest);
+                }
+
+                return _listPendingRequest;
 
             }
         }
