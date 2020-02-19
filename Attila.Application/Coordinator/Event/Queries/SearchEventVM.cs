@@ -1,13 +1,11 @@
 ﻿using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Application.Coordinator.Event.Queries
 {
-    [Table("tbl_EventDetails")]
-    public class EventDetails
+    public class SearchEventVM
     {
         public int ID { get; set; }
 
@@ -33,15 +31,8 @@ namespace Attila.Domain.Entities.Tables
 
         public int UserID { get; set; }
 
-        public User User { get; set; }
-
-        public int  EventPackageDetailsID { get; set; }
-
-        public EventPackageDetails EventPackageDetails { get; set; }
+        public int EventPackageDetailsID { get; set; }
 
         public int EventClientID { get; set; }
-
-        public EventClient EventClient { get; set; }
-
     }
 }

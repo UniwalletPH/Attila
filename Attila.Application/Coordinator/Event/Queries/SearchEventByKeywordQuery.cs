@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class SearchEventByKeywordQuery : IRequest<EventDetails>
+    public class SearchEventByKeywordQuery : IRequest<List<SearchEventVM>>
     {
         public string EventKeyword { get; set; }
 
-        public class SearchEventByKeywordQueryHandler : IRequestHandler<SearchEventByKeywordQuery, EventDetails>
+        public class SearchEventByKeywordQueryHandler : IRequestHandler<SearchEventByKeywordQuery, List<SearchEventVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public SearchEventByKeywordQueryHandler(IAttilaDbContext dbContext)
@@ -22,15 +23,35 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<EventDetails> Handle(SearchEventByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<List<SearchEventVM>> Handle(SearchEventByKeywordQuery request, CancellationToken cancellationToken)
             {
+                var _search = new List<SearchEventVM>();
+
                 var _searchedEvent = dbContext.EventsDetails.Where
                     (a => a.EventName.Contains(request.EventKeyword)
-                    || a.Description.Contains(request.EventKeyword));
+                    || a.Description.Contains(request.EventKeyword)).ToList();
 
                 if (_searchedEvent != null)
                 {
-                    return _searchedEvent.SingleOrDefault();
+                    foreach (var item in _searchedEvent)
+                    {
+                        var _result = new SearchEventVM
+                        {
+                            Address = item.Address,
+                            BookingDate = item.BookingDate,
+                            Code = item.Code,
+                            Description = item.Description,
+                            EventDate = item.EventDate,
+                            EventName = item.EventName,
+                            EventStatus = item.EventStatus,
+                            Location = item.Location,
+                            Remarks = item.Remarks,
+                            Type = item.Type,
+                            ID = item.ID
+                        };
+                        _search.Add(_result);
+                    }
+                    return _search;
                 }
                 else
                 {

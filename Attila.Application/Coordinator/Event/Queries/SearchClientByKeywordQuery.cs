@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class SearchClientByKeywordQuery : IRequest<EventClient>
+    public class SearchClientByKeywordQuery : IRequest<List<SearchClientVM>>
     {
         public string Keyword { get; set; }
 
-        public class SearchClientByKeywordQueryHandler : IRequestHandler<SearchClientByKeywordQuery, EventClient>
+        public class SearchClientByKeywordQueryHandler : IRequestHandler<SearchClientByKeywordQuery, List<SearchClientVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public SearchClientByKeywordQueryHandler(IAttilaDbContext dbContext)
@@ -22,15 +23,29 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<EventClient> Handle(SearchClientByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<List<SearchClientVM>> Handle(SearchClientByKeywordQuery request, CancellationToken cancellationToken)
             {
+                var _search = new List<SearchClientVM>();
+
                 var _searchedClient = dbContext.EventClients.Where
                     (a => a.Firstname.Contains(request.Keyword)
                     || a.Lastname.Contains(request.Keyword));
 
                 if (_searchedClient != null)
                 {
-                    return _searchedClient.SingleOrDefault();
+                    foreach (var item in _searchedClient)
+                    {
+                        var _result = new SearchClientVM
+                        {
+                            Address = item.Address,
+                            Contact = item.Contact,
+                            Email = item.Email,
+                            Firstname = item.Firstname,
+                            Lastname = item.Lastname
+                        };
+                        _search.Add(_result);
+                    }
+                    return _search;
                 }
                 else
                 {

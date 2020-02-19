@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20200204083554_new-db.Designer.cs" />
     <Compile Remove="Migrations\20200217140832_init1.cs" />
     <Compile Remove="Migrations\20200217140832_init1.Designer.cs" />
+    <Compile Remove="Migrations\20200218084701_init1.cs" />
+    <Compile Remove="Migrations\20200218084701_init1.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +40,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Attila.Application\Attila.Application.csproj" />
     <ProjectReference Include="..\Attila\Attila.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

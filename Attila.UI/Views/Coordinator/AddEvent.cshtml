@@ -1,0 +1,113 @@
+﻿@model Attila.UI.Models.EventDetailsVM
+
+@{
+    ViewData["Title"] = "AddEvent";
+}
+
+<h1>Add Event</h1>
+
+<h4>Please input the specified information.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" id="txtCode" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventName" class="control-label"></label>
+                <input asp-for="EventName" id="txtEventName" class="form-control" />
+                <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventStatus" class="control-label"></label>
+                <input asp-for="EventStatus" class="form-control" />
+                <span asp-validation-for="EventStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventDate" class="control-label"></label>
+                <input asp-for="EventDate" class="form-control" />
+                <span asp-validation-for="EventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button id="btnSubmit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        //var txtUsername = $("#txtUsername").val();
+        $('document').ready(function () {
+            //ReplyLog();
+            $('#submitBtn').on('click', function () {
+                alert("Event added successfully!");
+                var _username = $('#txtUsername').val();
+                var _password = $('#txtPassword').val();
+                var _email = $('#txtEmail').val();
+                var _confirmpassword = $('#txtConfirmPassword').val();
+
+                var _user =
+                {
+                    Username: _username,
+                    Password: _password,
+                    Email: _email,
+                    ConfirmPassword: _confirmpassword
+                };
+
+                $.post('/User/Register', { register: _user }).done(function (a) {
+                    ReplyLog(a)
+                });
+
+            });
+
+        });
+
+
+        function ReplyLog(reply) {
+            console.log(reply);
+            if (reply == true) {
+                console.log("nice");
+                alert("Registered Successfully!");
+                window.location = "/User/RegisterSuccess";
+            }
+        }
+    </script>
+}

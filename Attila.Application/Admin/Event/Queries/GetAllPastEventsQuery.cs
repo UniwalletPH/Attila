@@ -1,38 +1,36 @@
 ﻿using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Attila.Application.Admin.Event.Queries
 {
-    public class GetAllIncomingEventsQuery : IRequest<List<EventVM>>
+    public class GetAllPastEventsQuery : IRequest<List<EventVM>>
     {
-        public class GetAllIncomingEventsQueryHandler : IRequestHandler<GetAllIncomingEventsQuery, List<EventVM>>
+        public class GetAllPastEventsQueryHandler : IRequestHandler<GetAllPastEventsQuery, List<EventVM>>
         {
             private readonly IAttilaDbContext dbContext;
-            public GetAllIncomingEventsQueryHandler(IAttilaDbContext dbContext)
+            public GetAllPastEventsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventVM>> Handle(GetAllIncomingEventsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventVM>> Handle(GetAllPastEventsQuery request, CancellationToken cancellationToken)
             {
-                var _listIncomingEvents = new List<EventVM>();
+                var _listPastEvents = new List<EventVM>();
 
-                var _incomingEvents = dbContext.EventsDetails
+                var _pastEvents = dbContext.EventsDetails
                     .Include(a => a.EventPackageDetails)
                     .Include(a => a.EventClient)
                     .Include(a => a.User)
-                    .Where(a => a.EventStatus == Status.Approved && a.EventDate > DateTime.Now).ToList();
+                    .Where(a => a.EventDate < DateTime.Now);
 
-                foreach (var item in _incomingEvents)
+                foreach (var item in _pastEvents)
                 {
                     var Event = new EventVM
                     {
@@ -49,12 +47,13 @@ namespace Attila.Application.Admin.Event.Queries
                         Coordinator = item.User,
                         Client = item.EventClient,
                         EventStatus = item.EventStatus,
-                        Remarks = item.Remarks 
+                        Remarks = item.Remarks
                     };
 
-                    _listIncomingEvents.Add(Event);                  
+                    _listPastEvents.Add(Event);
                 }
-                return _listIncomingEvents;              
+
+                return _listPastEvents;
             }
         }
     }

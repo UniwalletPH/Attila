@@ -11,7 +11,20 @@ namespace Attila.Application.Coordinator.Event.Commands
 {
     public class AddPaymentForEventCommand : IRequest<bool>
     {
-        public EventPaymentStatus MyEventPaymentStatus { get; set; }
+        //public EventPaymentStatus MyEventPaymentStatus { get; set; }
+        public int ID { get; set; }
+
+        public int EventDetailsID { get; set; }
+
+        public EventDetails EventDetails { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public DateTime DateOfPayment { get; set; }
+
+        public string ReferenceNumber { get; set; }
+
+        public string Remarks { get; set; }
 
         public class AddPaymentForEventHandler : IRequestHandler<AddPaymentForEventCommand, bool>
         {
@@ -25,11 +38,11 @@ namespace Attila.Application.Coordinator.Event.Commands
             {
                 var _addPaymentForEventCommand = new EventPaymentStatus
                 {
-                    EventDetailsID = request.MyEventPaymentStatus.EventDetailsID,
-                    Amount = request.MyEventPaymentStatus.Amount,
+                    EventDetailsID = request.EventDetailsID,
+                    Amount = request.Amount,
                     DateOfPayment = DateTime.Now,
-                    ReferenceNumber = request.MyEventPaymentStatus.ReferenceNumber,
-                    Remarks = request.MyEventPaymentStatus.Remarks
+                    ReferenceNumber = request.ReferenceNumber,
+                    Remarks = request.Remarks
                 };
 
                 dbContext.EventsPaymentStatus.Add(_addPaymentForEventCommand);

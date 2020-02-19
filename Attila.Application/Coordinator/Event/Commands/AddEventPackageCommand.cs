@@ -11,7 +11,18 @@ namespace Attila.Application.Event.Commands
 {
     public class AddEventPackageCommand : IRequest<bool>
     {
-        public EventPackageDetails PackageDetails;
+        //public EventPackageDetails PackageDetails;
+        public int ID { get; set; }
+
+        public string Code { get; set; }
+
+        public string Description { get; set; }
+
+        public int NumberOfGuest { get; set; }
+
+        public decimal Rate { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public class AddEventPackageCommandHandler : IRequestHandler<AddEventPackageCommand, bool>
         {
@@ -26,11 +37,11 @@ namespace Attila.Application.Event.Commands
             {
                 var _newPackage = new EventPackageDetails {
                     
-                    Code = request.PackageDetails.Code,
-                    Description = request.PackageDetails.Description,
-                    Duration = request.PackageDetails.Duration,
-                    NumberOfGuest = request.PackageDetails.NumberOfGuest,
-                    Rate = request.PackageDetails.Rate,                
+                    Code = request.Code,
+                    Description = request.Description,
+                    Duration = request.Duration,
+                    NumberOfGuest = request.NumberOfGuest,
+                    Rate = request.Rate,                
 
                 };
 

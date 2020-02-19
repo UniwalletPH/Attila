@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class GetClientListQuery : IRequest<List<EventClient>>
+    public class GetClientListQuery : IRequest<List<SearchClientVM>>
     {
 
-        public class GetClientListQueryHandler : IRequestHandler<GetClientListQuery, List<EventClient>>
+        public class GetClientListQueryHandler : IRequestHandler<GetClientListQuery, List<SearchClientVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetClientListQueryHandler(IAttilaDbContext dbContext)
@@ -21,11 +22,13 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventClient>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
+            public async Task<List<SearchClientVM>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
             {
                 var _viewClientList = await dbContext.EventClients.ToListAsync();
 
-                return _viewClientList;
+                var _search = new List<SearchClientVM>();
+
+                return _search;
             }
         }
 

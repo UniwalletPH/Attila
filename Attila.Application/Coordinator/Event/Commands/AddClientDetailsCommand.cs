@@ -11,7 +11,18 @@ namespace Attila.Application.Event.Commands
 {
     public class AddClientDetailsCommand : IRequest<bool>
     {
-        public EventClient EventClient { get; set; }
+        //public EventClient EventClient { get; set; }
+        public int ID { get; set; }
+
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string Contact { get; set; }
 
         public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, bool>
         {
@@ -26,11 +37,11 @@ namespace Attila.Application.Event.Commands
             {
                 var _newClient = new EventClient
                 {
-                    Firstname = request.EventClient.Firstname,
-                    Lastname = request.EventClient.Lastname,
-                    Address = request.EventClient.Address,
-                    Contact = request.EventClient.Contact,
-                    Email = request.EventClient.Email
+                    Firstname = request.Firstname,
+                    Lastname = request.Lastname,
+                    Address = request.Address,
+                    Contact = request.Contact,
+                    Email = request.Email
 
                 };
 

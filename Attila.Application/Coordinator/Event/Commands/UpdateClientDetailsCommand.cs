@@ -11,7 +11,18 @@ namespace Attila.Application.Event.Commands
 {
     public class UpdateClientDetailsCommand : IRequest<bool>
     {
-       public EventClient UpdateClient { get; set; }
+        //public EventClient UpdateClient { get; set; }
+        public int ID { get; set; }
+
+        public string Firstname { get; set; }
+
+        public string Lastname { get; set; }
+
+        public string Address { get; set; }
+
+        public string Email { get; set; }
+
+        public string Contact { get; set; }
 
         public class UpdateClientDetailsCommandHandler : IRequestHandler<UpdateClientDetailsCommand, bool>
         {
@@ -24,13 +35,13 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedClientDetails = dbContext.EventClients.Find(request.UpdateClient.ID);
+                var _updatedClientDetails = dbContext.EventClients.Find(request.ID);
 
-                _updatedClientDetails.Lastname = request.UpdateClient.Lastname;
-                _updatedClientDetails.Firstname = request.UpdateClient.Firstname;
-                _updatedClientDetails.Address = request.UpdateClient.Address;
-                _updatedClientDetails.Contact = request.UpdateClient.Contact;
-                _updatedClientDetails.Email = request.UpdateClient.Email;
+                _updatedClientDetails.Lastname = request.Lastname;
+                _updatedClientDetails.Firstname = request.Firstname;
+                _updatedClientDetails.Address = request.Address;
+                _updatedClientDetails.Contact = request.Contact;
+                _updatedClientDetails.Email = request.Email;
 
                 await dbContext.SaveChangesAsync();
 

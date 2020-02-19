@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.UI.Models
 {
-    [Table("tbl_EventPackageDetails")]
-    public class EventPackageDetails
+    public class EventPackageVM
     {
         public int ID { get; set; }
 
         public string Code { get; set; }
-
-        public string Name { get; set; }
 
         public string Description { get; set; }
 
@@ -20,7 +17,6 @@ namespace Attila.Domain.Entities.Tables
 
         public decimal Rate { get; set; }
 
-        public TimeSpan Duration{ get; set; }
-
+        public TimeSpan Duration { get; set; }
     }
 }
