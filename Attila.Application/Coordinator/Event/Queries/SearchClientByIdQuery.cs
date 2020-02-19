@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class SearchClientByIdQuery : IRequest<EventClient>
+    public class SearchClientByIdQuery : IRequest<SearchClientVM>
     {
         public int ClientId { get; set; }
 
-        public class SearchClientByIdQueryHandler : IRequestHandler<SearchClientByIdQuery, EventClient>
+        public class SearchClientByIdQueryHandler : IRequestHandler<SearchClientByIdQuery, SearchClientVM>
         {
             private readonly IAttilaDbContext dbContext;
             public SearchClientByIdQueryHandler(IAttilaDbContext dbContext) 
@@ -22,13 +23,21 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<EventClient> Handle(SearchClientByIdQuery request, CancellationToken cancellationToken)
+            public async Task<SearchClientVM> Handle(SearchClientByIdQuery request, CancellationToken cancellationToken)
             {
                 var _clientSearched = dbContext.EventClients.Find(request.ClientId);
 
                 if (_clientSearched != null)
                 {
-                    return _clientSearched;
+                    return new SearchClientVM
+                    {
+                        ID =  _clientSearched.ID,
+                        Address = _clientSearched.Address,
+                        Contact = _clientSearched.Contact,
+                        Email = _clientSearched.Email,
+                        Firstname = _clientSearched.Firstname,
+                        Lastname = _clientSearched.Lastname
+                    };
                 }
                 else
                 {
