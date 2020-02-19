@@ -1,0 +1,41 @@
+﻿@model Attila.UI.Models.InventoryViewVM
+
+@{
+    ViewData["Title"] = "Inventory";
+}
+
+<div class="text-center">
+    <h1>INVENTORY</h1>
+</div>
+
+<h1>PENDING FOOD RESTOCK REQUEST</h1>
+@{
+    foreach (var item in Model.PendingFoodRestockRequest)
+    {
+        <tr>
+            <td>@item.FoodDetails.Name</td>
+            <td>@item.Quantity</td>
+            <td>@item.DateTimeRequest</td>
+            <td>@item.User.Name</td>
+            <td>@item.Status</td>
+
+        </tr>
+
+    }
+}
+
+
+<h1>PENDING EQUIPMENT RESTOCK REQUEST</h1>
+@{
+    foreach (var item in Model.PendingEquipmentRestockRequest)
+    {
+        <tr>
+            <td>@item.EquipmentDetails.Name</td>
+            <td>@item.Quantity</td>
+            <td>@item.DateTimeRequest</td>
+            <td>@item.User.Name</td>
+            <td>@item.Status</td>
+        </tr>
+
+    }
+}
