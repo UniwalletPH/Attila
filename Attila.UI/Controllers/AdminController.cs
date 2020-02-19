@@ -1,4 +1,6 @@
 ﻿using Attila.Application.Admin.Event.Queries;
+using Attila.Application.Admin.Food.Queries;
+using Attila.Application.Admin.Inventory.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +31,7 @@ namespace Attila.UI.Controllers
 
             var _forEvent = new EventViewVM
             { 
-                IncomingEvent = _pendingEvents,
+                IncomingEvent = _incomingEvents,
                 PastEvent = _pastEvents,
                 PendingEvent = _pendingEvents
             };
@@ -38,11 +40,21 @@ namespace Attila.UI.Controllers
 
         }
 
-        [HttpGet]
-        public IActionResult Inventory()
-        {
 
-            return View();
+
+        [HttpGet]
+        public async Task<IActionResult> Inventory()
+        {
+            var _pendingFoodReq = await mediator.Send(new GetPendingFoodRestockRequestQuery { });
+            var _pendingEquimentReq = await mediator.Send(new GetPendingEquipmentRestockRequestQuery { });
+
+            var _pendingRequest = new InventoryViewVM
+            { 
+            PendingFoodRestockRequest = _pendingFoodReq,
+            PendingEquipmentRestockRequest = _pendingEquimentReq
+            };
+
+            return View(_pendingRequest);
         }
 
         [HttpGet]
