@@ -11,7 +11,18 @@ namespace Attila.Application.Event.Commands
 {
     public class UpdateEventPackageCommand : IRequest<bool>
     {
-        public EventPackageDetails UpdatePackage { get; set; }
+        //public EventPackageDetails UpdatePackage { get; set; }
+        public int ID { get; set; }
+
+        public string Code { get; set; }
+
+        public string Description { get; set; }
+
+        public int NumberOfGuest { get; set; }
+
+        public decimal Rate { get; set; }
+
+        public TimeSpan Duration { get; set; }
 
         public class UpdateEventPackageCommandHandler : IRequestHandler<UpdateEventPackageCommand, bool>
         {
@@ -24,12 +35,12 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.UpdatePackage.ID);
+                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.ID);
 
-                _updatedEventPackage.Description = request.UpdatePackage.Description;
-                _updatedEventPackage.Duration = request.UpdatePackage.Duration;
-                _updatedEventPackage.NumberOfGuest = request.UpdatePackage.NumberOfGuest;
-                _updatedEventPackage.Rate = request.UpdatePackage.Rate;
+                _updatedEventPackage.Description = request.Description;
+                _updatedEventPackage.Duration = request.Duration;
+                _updatedEventPackage.NumberOfGuest = request.NumberOfGuest;
+                _updatedEventPackage.Rate = request.Rate;
 
                 await dbContext.SaveChangesAsync();
 

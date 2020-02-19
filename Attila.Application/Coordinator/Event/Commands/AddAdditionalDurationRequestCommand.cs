@@ -11,7 +11,14 @@ namespace Attila.Application.Event.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
+        //public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
+        public int ID { get; set; }
+
+        public TimeSpan Duration { get; set; }
+
+        public decimal Rate { get; set; }
+
+        public int EventDetailsID { get; set; }
 
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
@@ -24,13 +31,13 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                if(request.AdditionalPackage != null)
+                if(request.Duration != null && request.Rate != null && request.EventDetailsID != null)
                 {
                     var _additionalDuration = new PackageAdditionalDurationRequest
                     {
-                        EventDetailsID = request.AdditionalPackage.EventDetailsID,
-                        Duration = request.AdditionalPackage.Duration,
-                        Rate = request.AdditionalPackage.Rate
+                        EventDetailsID = request.EventDetailsID,
+                        Duration = request.Duration,
+                        Rate = request.Rate
                     };
 
                     dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);
