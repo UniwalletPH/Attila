@@ -347,40 +347,54 @@ namespace Attila.UI.Controllers
             return Json(_searchResult);
         }
 
-        [HttpPost]
-        public IActionResult GetEventList()
+        [HttpGet]
+        public async Task<IActionResult> GetEventList()
         {
-            return View();
+            var _searchResult = await mediator.Send(new GetEventListQuery());
+
+            return View(_searchResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetClientList()
+        {
+            var _searchResult = await mediator.Send(new GetEventListQuery());
+
+            return View(_searchResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetPaymentStatus()
+        {
+            var _searchResult = await mediator.Send(new GetPaymentStatusQuery());
+
+            return View(_searchResult);
         }
 
         [HttpPost]
-        public IActionResult GetClientList()
+        public async Task<IActionResult> GetPaymentStatusById(int _eventID)
         {
-            return View();
+            var _searchResult = await mediator.Send(new GetPaymentStatusByEventIDQuery { 
+                EventID = _eventID
+            });;
+
+            return View(_searchResult);
         }
 
-        [HttpPost]
-        public IActionResult GetPaymentStatus()
+        [HttpGet]
+        public async Task<IActionResult> GetAdditionalDurationRequestList()
         {
-            return View();
+            var _searchResult = await mediator.Send(new GetAdditionalDurationRequestListQuery());
+
+            return View(_searchResult);
         }
 
-        [HttpPost]
-        public IActionResult GetPaymentStatusById()
+        [HttpGet]
+        public async Task<IActionResult> GetAdditionalEquipmentRequestList()
         {
-            return View();
-        }
+            var _searchResult = await mediator.Send(new GetAdditionalEquipmentRequestListQuery());
 
-        [HttpPost]
-        public IActionResult GetAdditionalDurationRequestList()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult GetAdditionalEquipmentRequestList()
-        {
-            return View();
+            return View(_searchResult);
         }
         #endregion
         #region HTTP GETs
