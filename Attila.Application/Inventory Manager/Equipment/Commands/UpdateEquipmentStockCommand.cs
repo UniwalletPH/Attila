@@ -8,8 +8,8 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class UpdateEquipmentStockCommand : IRequest<bool>
     {
-        public int SearchedID { get; set; }
-        public int NewEquipmentQuantity { get; set; }
+        public int ID { get; set; }
+        public int Quantity { get; set; }
 
         public class UpdateEquipmentStockCommandHandler : IRequestHandler<UpdateEquipmentStockCommand, bool>
         {
@@ -21,11 +21,11 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(UpdateEquipmentStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.SearchedID);
+                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.ID);
 
                 if (_updatedEquipmentStock != null)
                 {
-                    _updatedEquipmentStock.Quantity = request.NewEquipmentQuantity;
+                    _updatedEquipmentStock.Quantity = request.Quantity;
                     await dbContext.SaveChangesAsync();
 
                     return true;

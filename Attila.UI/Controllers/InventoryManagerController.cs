@@ -185,7 +185,16 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateEquipmentDetailsCommand { MyEquipmentDetails = equipmentDetails });
+                await mediator.Send(new UpdateEquipmentDetailsCommand 
+                { 
+                    ID = equipmentDetails.ID,
+                    Code = equipmentDetails.Code,
+                    Name = equipmentDetails.Name,
+                    Description = equipmentDetails.Description,
+                    UnitType = equipmentDetails.UnitType,
+                    EquipmentType = equipmentDetails.EquipmentType
+
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -204,11 +213,15 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentStockCommand(int equipmentID, int equipmentQuantity)
+        public async Task<IActionResult> UpdateEquipmentStockCommand(EquipmentInventory equipmentInventory)
         {
             try
             {
-                await mediator.Send(new UpdateEquipmentStockCommand { SearchedID = equipmentID, NewEquipmentQuantity = equipmentQuantity });
+                await mediator.Send(new UpdateEquipmentStockCommand 
+                { 
+                    ID = equipmentInventory.EquipmentDeliveryID,
+                    Quantity = equipmentInventory.Quantity
+                });
                 _checker = true;
             }
             catch (Exception)
@@ -528,13 +541,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchFoodByIdKeyword()
+        public IActionResult SearchFoodByKeywordQuery()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchFoodByIdKeyword(string searchedKeyword)
+        public async Task<IActionResult> SearchFoodByKeywordQuery(string searchedKeyword)
         {
             try
             {

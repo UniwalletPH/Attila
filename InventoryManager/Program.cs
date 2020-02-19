@@ -838,7 +838,15 @@ namespace Attila.Presentation.InventoryManager
                                     EquipmentType = _parsedUpdateEquipmentType
                                 };
 
-                                var _updateEquipmentDetailsInventoryCommand = await Mediator.Send(new UpdateEquipmentDetailsCommand { MyEquipmentDetails = _equipmentDetailsUpdate });
+                                var _updateEquipmentDetailsInventoryCommand = await Mediator.Send(new UpdateEquipmentDetailsCommand 
+                                {
+                                    ID = _equipmentDetailsUpdate.ID,
+                                    Code = _equipmentDetailsUpdate.Code,
+                                    Name = _equipmentDetailsUpdate.Name,
+                                    Description = _equipmentDetailsUpdate.Description,
+                                    EquipmentType = _equipmentDetailsUpdate.EquipmentType,
+                                    UnitType = _equipmentDetailsUpdate.UnitType
+                                });
                                 if (_updateEquipmentDetailsInventoryCommand == true)
                                 {
                                     Console.WriteLine();
@@ -890,7 +898,7 @@ namespace Attila.Presentation.InventoryManager
                                 int _updatedEquipmentStock = int.Parse(_updateStock);
 
 
-                                var updateEquipmentStockInventoryCommand = await Mediator.Send(new UpdateEquipmentStockCommand { SearchedID = _updatedID, NewEquipmentQuantity = _updatedEquipmentStock });
+                                var updateEquipmentStockInventoryCommand = await Mediator.Send(new UpdateEquipmentStockCommand { ID = _updatedID, Quantity = _updatedEquipmentStock });
                                 if (updateEquipmentStockInventoryCommand == true)
                                 {
                                     Console.WriteLine();
