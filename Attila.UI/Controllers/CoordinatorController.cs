@@ -39,7 +39,6 @@ namespace Attila.UI.Controllers
                 Description = _eventDetails.Description,
                 EventDate = _eventDetails.EventDate,
                 EventName = _eventDetails.EventName,
-                EventStatus = _eventDetails.EventStatus,
                 Location = _eventDetails.Location,
                 Type = _eventDetails.Type,
                 Remarks = _eventDetails.Remarks,
@@ -347,6 +346,34 @@ namespace Attila.UI.Controllers
             return Json(_searchResult);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> GetPaymentStatusById(int _eventID)
+        {
+            var _searchResult = await mediator.Send(new GetPaymentStatusByEventIDQuery { 
+                EventID = _eventID
+            });;
+
+            return View(_searchResult);
+        }
+
+        #endregion
+        #region HTTP GETs
+        [HttpGet]
+        public async Task<IActionResult> GetAdditionalDurationRequestList()
+        {
+            var _searchResult = await mediator.Send(new GetAdditionalDurationRequestListQuery());
+
+            return View(_searchResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAdditionalEquipmentRequestList()
+        {
+            var _searchResult = await mediator.Send(new GetAdditionalEquipmentRequestListQuery());
+
+            return View(_searchResult);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetEventList()
         {
@@ -371,82 +398,27 @@ namespace Attila.UI.Controllers
             return View(_searchResult);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> GetPaymentStatusById(int _eventID)
-        {
-            var _searchResult = await mediator.Send(new GetPaymentStatusByEventIDQuery { 
-                EventID = _eventID
-            });;
-
-            return View(_searchResult);
-        }
-
         [HttpGet]
-        public async Task<IActionResult> GetAdditionalDurationRequestList()
+        public IActionResult SearchEventById()
         {
-            var _searchResult = await mediator.Send(new GetAdditionalDurationRequestListQuery());
-
-            return View(_searchResult);
+            return View();
         }
-
         [HttpGet]
-        public async Task<IActionResult> GetAdditionalEquipmentRequestList()
+        public IActionResult SearchEventByKeyword()
         {
-            var _searchResult = await mediator.Send(new GetAdditionalEquipmentRequestListQuery());
-
-            return View(_searchResult);
+            return View();
         }
-        #endregion
-        #region HTTP GETs
-        //public IActionResult SearchEventById()
-        //{
-        //    return View();
-        //}
+        [HttpGet]
+        public IActionResult SearchClientById()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult SearchClientByKeyword()
+        {
+            return View();
+        }
 
-        //public IActionResult SearchEventByKeyword()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult SearchClientById()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult SearchClientByKeyword()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetEventList()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetClientList()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetPaymentStatus()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetPaymentStatusById()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetAdditionalDurationRequestList()
-        //{
-        //    return View();
-        //}
-
-        //public IActionResult GetAdditionalEquipmentRequestList()
-        //{
-        //    return View();
-        //} 
         #endregion
         //COORDINATOR QUERIES END HERE
     }
