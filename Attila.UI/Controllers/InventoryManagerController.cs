@@ -292,28 +292,10 @@ namespace Attila.UI.Controllers
 
         public async Task<IActionResult> SearchEquipmentByKeywordResult(string searchKeyword)
         {
-            //searchKeyword = "Cabinet";
-            //var _equipmentDetailsList = new List<EquipmentDetailsVM>();
             try
             {
                 var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = searchKeyword });
 
-                //if (_searchEquipmentByKeyword != null)
-                //{
-                //    foreach (var item in _searchEquipmentByKeyword)
-                //    {
-                //        var _result = new EquipmentDetailsVM
-                //        {
-                //            ID = item.ID,
-                //            Code = item.Code,
-                //            Name = item.Name,
-                //            Description = item.Description,
-                //            UnitType = item.UnitType,
-                //            EquipmentType = item.EquipmentType
-                //        };
-                //        _equipmentDetailsList.Add(_result);
-                //    }
-                //}
                 return View(_searchEquipmentByKeyword);
 
             }

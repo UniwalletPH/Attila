@@ -396,7 +396,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetClientList()
         {
-            var _searchResult = await mediator.Send(new GetEventListQuery());
+            var _searchResult = await mediator.Send(new GetClientListQuery());
 
             return View(_searchResult);
         }
