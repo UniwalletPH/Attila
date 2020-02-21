@@ -14,68 +14,6 @@
         <button id="btnSubmit" class="btn btn-primary">Submit</button>
     </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayName("ID")
-                </th>
-                <th>
-                    @Html.DisplayName("Code")
-                </th>
-                <th>
-                    @Html.DisplayName("Name")
-                </th>
-                <th>
-                    @Html.DisplayName("Specification")
-                </th>
-                <th>
-                    @Html.DisplayName("Description")
-                </th>
-                <th>
-                    @Html.DisplayName("Unit Type")
-                </th>
-                <th>
-                    @Html.DisplayName("Food Type")
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @*@foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Specification)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Unit)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FoodType)
-                    </td>
-                </tr>
-            }*@
-        </tbody>
-    </table>
-</div>
 
 @section Scripts {
 
@@ -86,23 +24,13 @@
                 alert("test");
                 var _searchedKeyword = $('#txtKeyword').val();
 
-                $.post('/InventoryManager/SearchFoodByKeywordQuery', { searchedKeyword: _searchedKeyword }).done(function (data) { InputResult(data) });
-
+                $.post('/InventoryManager/SearchFoodByKeywordResult', { searchedKeyword: _searchedKeyword })
+                    .done(function () {
+                        alert("Food keyword successfully searched!");
+                        window.location = "/InventoryManager/SearchFoodByKeywordResult";
+                    });
             });
         });
-
-        function InputResult(result) {
-            if (result != null) {
-                alert("Food keyword successfully searched!");
-                $('#searchView').show();
-                //must get the value of the returned object and pass it to the model in the UI
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/SearchFoodByKeywordQuery";
-            }
-        }
-        debugger;
 
     </script>
 }
