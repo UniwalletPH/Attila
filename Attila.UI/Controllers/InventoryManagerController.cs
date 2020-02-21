@@ -42,11 +42,11 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddEquipmentDetailsCommand 
-                { 
+                await mediator.Send(new AddEquipmentDetailsCommand
+                {
                     Code = equipmentDetails.Code,
                     Name = equipmentDetails.Name,
-                    Description = equipmentDetails.Name,
+                    Description = equipmentDetails.Description,
                     UnitType = equipmentDetails.UnitType,
                     EquipmentType = equipmentDetails.EquipmentType
                 });
@@ -71,8 +71,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddEquipmentInventoryCommand 
-                { 
+                await mediator.Send(new AddEquipmentInventoryCommand
+                {
                     Quantity = equipmentInventory.Quantity,
                     EncodingDate = equipmentInventory.EncodingDate,
                     ItemPrice = equipmentInventory.ItemPrice,
@@ -103,8 +103,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddEquipmentRestockCommand 
-                { 
+                await mediator.Send(new AddEquipmentRestockCommand
+                {
                     DeliveryDate = equipmentRestock.DeliveryDate,
                     ReceiptImage = equipmentRestock.ReceiptImage,
                     DeliveryPrice = equipmentRestock.DeliveryPrice,
@@ -155,8 +155,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new RequestEquipmentRestockCommand 
-                { 
+                await mediator.Send(new RequestEquipmentRestockCommand
+                {
                     Quantity = equipmentRestockRequest.Quantity,
                     DateTimeRequest = equipmentRestockRequest.DateTimeRequest,
                     EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
@@ -185,8 +185,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateEquipmentDetailsCommand 
-                { 
+                await mediator.Send(new UpdateEquipmentDetailsCommand
+                {
                     ID = equipmentDetails.ID,
                     Code = equipmentDetails.Code,
                     Name = equipmentDetails.Name,
@@ -217,8 +217,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateEquipmentStockCommand 
-                { 
+                await mediator.Send(new UpdateEquipmentStockCommand
+                {
                     ID = equipmentInventory.ID,
                     Quantity = equipmentInventory.Quantity
                 });
@@ -254,7 +254,7 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getEquipmentStock = await mediator.Send(new GetEquipmentStockQuery());
-                return View(_getEquipmentStock.ToList());
+                return View(_getEquipmentStock);
             }
             catch (Exception)
             {
@@ -274,8 +274,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                var _searchEquipmentById = await mediator.Send(new SearchEquipmentByIdQuery {SearchedID = searchedID });
-                return View(_searchEquipmentById);
+                var _equipmentDetails = await mediator.Send(new SearchEquipmentByIdQuery { SearchedID = searchedID });
+                return Json(_equipmentDetails);
             }
             catch (Exception)
             {
@@ -290,13 +290,32 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SearchEquipmentByKeywordQuery(string searchKeyword)
+        public async Task<IActionResult> SearchEquipmentByKeywordResult(string searchKeyword)
         {
+            //searchKeyword = "Cabinet";
+            //var _equipmentDetailsList = new List<EquipmentDetailsVM>();
             try
             {
                 var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = searchKeyword });
-                return View(_searchEquipmentByKeyword.ToList());
+
+                //if (_searchEquipmentByKeyword != null)
+                //{
+                //    foreach (var item in _searchEquipmentByKeyword)
+                //    {
+                //        var _result = new EquipmentDetailsVM
+                //        {
+                //            ID = item.ID,
+                //            Code = item.Code,
+                //            Name = item.Name,
+                //            Description = item.Description,
+                //            UnitType = item.UnitType,
+                //            EquipmentType = item.EquipmentType
+                //        };
+                //        _equipmentDetailsList.Add(_result);
+                //    }
+                //}
+                return View(_searchEquipmentByKeyword);
+
             }
             catch (Exception)
             {
@@ -316,7 +335,7 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddFoodDetailsCommand 
+                await mediator.Send(new AddFoodDetailsCommand
                 {
                     Code = foodDetails.Code,
                     Name = foodDetails.Name,
@@ -346,8 +365,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddFoodInventoryCommand 
-                { 
+                await mediator.Send(new AddFoodInventoryCommand
+                {
                     Quantity = foodInventory.Quantity,
                     ExpirationDate = foodInventory.ExpirationDate,
                     EncodingDate = foodInventory.EncodingDate,
@@ -377,8 +396,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddFoodRestockCommand 
-                { 
+                await mediator.Send(new AddFoodRestockCommand
+                {
                     DeliveryDate = foodRestock.DeliveryDate,
                     ReceiptImage = foodRestock.ReceiptImage,
                     DeliveryPrice = foodRestock.DeliveryPrice,
@@ -427,7 +446,7 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new RequestFoodRestockCommand 
+                await mediator.Send(new RequestFoodRestockCommand
                 {
                     Quantity = foodRestockRequest.Quantity,
                     DateTimeRequest = foodRestockRequest.DateTimeRequest,
@@ -456,13 +475,13 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateFoodDetailsCommand 
-                { 
+                await mediator.Send(new UpdateFoodDetailsCommand
+                {
                     ID = foodDetails.ID,
                     Code = foodDetails.Code,
-                    Name = foodDetails.Name, 
+                    Name = foodDetails.Name,
                     Specification = foodDetails.Specification,
-                    Description  = foodDetails.Description,
+                    Description = foodDetails.Description,
                     Unit = foodDetails.Unit,
                     FoodType = foodDetails.FoodType
                 });
@@ -487,7 +506,7 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new UpdateFoodStockCommand 
+                await mediator.Send(new UpdateFoodStockCommand
                 {
                     ID = foodInventory.ID,
                     Quantity = foodInventory.Quantity
@@ -543,8 +562,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                var _searchFoodById = await mediator.Send(new SearchFoodByIdQuery { SearchedID = searchedID });
-                return View(_searchFoodById);
+                var _foodDetails = await mediator.Send(new SearchFoodByIdQuery { SearchedID = searchedID });
+                return Json(_foodDetails);
             }
             catch (Exception)
             {
@@ -559,13 +578,15 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SearchFoodByKeywordQuery(string searchedKeyword)
+
+        public async Task<IActionResult> SearchFoodByKeywordResult(string searchKeyword)
         {
+            //searchKeyword = "a";
             try
             {
-                var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = searchedKeyword });
+                var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = searchKeyword });
                 return View(_searchFoodByKeyword);
+
             }
             catch (Exception)
             {

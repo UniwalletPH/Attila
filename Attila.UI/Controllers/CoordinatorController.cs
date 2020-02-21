@@ -306,8 +306,18 @@ namespace Attila.UI.Controllers
 
 
 
+
+
+
+
         //COORDINATOR QUERIES START HERE
         #region HTTP POSTs
+
+        [HttpGet]
+        public IActionResult SearchEventById()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> SearchEventById(int _eventId)
@@ -316,6 +326,7 @@ namespace Attila.UI.Controllers
                 EventId = _eventId
             });
             return Json(_searchResult);
+
         }
 
         [HttpPost]
@@ -398,11 +409,7 @@ namespace Attila.UI.Controllers
             return View(_searchResult);
         }
 
-        [HttpGet]
-        public IActionResult SearchEventById()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public IActionResult SearchEventByKeyword()
         {

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM>
+@{
+    ViewData["Title"] = "SearchEquipmentByKeywordResult";
+}
+
+<h1>Search Equipment By Keyword Result</h1>
+
+<br /><br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("ID")
+            </th>
+            <th>
+                @Html.DisplayName("Code")
+            </th>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("Description")
+            </th>
+            <th>
+                @Html.DisplayName("Unit Type")
+            </th>
+            <th>
+                @Html.DisplayName("Equipment Type")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentType)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
