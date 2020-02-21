@@ -1,17 +1,22 @@
 ﻿@model Attila.UI.Models.EventDetailsVM
 
 @{
-    ViewData["Title"] = "AddEvent";
+    ViewData["Title"] = "UpdateEvent";
 }
 
-<h1>Add Event</h1>
+<h1>UpdateEvent</h1>
 
-<h4>Event Details</h4>
+<h4>EventDetailsVM</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4 d-inline-flex">
+    <div class="col-md-4">
         <div>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" id="txtId" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
                 <input asp-for="Code" id="txtCode" class="form-control" />
@@ -64,14 +69,18 @@
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Create</button>
+                <label asp-for="EventClientID" class="control-label"></label>
+                <input asp-for="EventClientID" id="txtEventClientId" class="form-control" />
+                <span asp-validation-for="EventClientID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Update</button>
             </div>
         </div>
     </div>
 </div>
 
-@section  Scripts{ 
-
+@section Scripts{
     <script>
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
@@ -81,7 +90,7 @@
                 var _bookingDate = $("#txtBookingDate").val();
                 var _code = $("#txtCode").val();
                 var _description = $("#txtDesc").val();
-                var _eventDate = $("#txtEventDate").val();
+                var _eventDate = $("#txtEventDate").val();]
                 var _location = $("#txtLocation").val();
                 var _type = $("#txtType").val();
                 var _remarks = $("#txtRemarks").val();
@@ -100,7 +109,7 @@
 
                 };
 
-                $.post('/Coordinator/AddEvent', { _eventDetails: _eventDetails }).done(ReplyLog);
+                $.post('/Coordinator/AddEventPayment', { _eventDetails: _eventDetails }).done(ReplyLog);
 
 
             });
@@ -111,16 +120,15 @@
             console.log(reply);
             if (reply == true) {
                 console.log("nice");
-                alert("Event added successfully!");
+                alert("Event updated successfully!");
                 window.location = "/Coordinator/Index";
+                $().html();
+
             } else {
                 alert("Please enter the correct details!");
             }
         }
 
-
-
     </script>
-
 }
 
