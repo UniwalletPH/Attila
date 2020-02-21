@@ -53,11 +53,14 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
         {
+            int _duration = _eventPackage.Duration.Hours;
+            string _parsedDurationString = _duration.ToString("hh':'mm");
+            TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
             await mediator.Send(new AddEventPackageCommand
             {
                 Code = _eventPackage.Code,
                 Description = _eventPackage.Description,
-                Duration = _eventPackage.Duration,
+                Duration = _fromStringToTimeSpan,
                 NumberOfGuest = _eventPackage.NumberOfGuest,
                 Rate = _eventPackage.Rate
 
@@ -83,6 +86,7 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEventPayment(EventPaymentVM _eventPayment)
         {
+            
             await mediator.Send(new AddPaymentForEventCommand
             {
                 Amount = _eventPayment.Amount,
@@ -121,7 +125,6 @@ namespace Attila.UI.Controllers
                 Description = _eventDetails.Description,
                 EventDate = _eventDetails.EventDate,
                 EventName = _eventDetails.EventName,
-                EventStatus = _eventDetails.EventStatus,
                 Location = _eventDetails.Location,
                 Type = _eventDetails.Type,
                 Remarks = _eventDetails.Remarks
@@ -182,6 +185,7 @@ namespace Attila.UI.Controllers
                 EventId = _eventId
 
             });
+
             return Json(true);
         }
 

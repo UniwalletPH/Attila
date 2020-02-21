@@ -1,0 +1,90 @@
+﻿@model Attila.UI.Models.EventPaymentVM
+
+@{
+    ViewData["Title"] = "AddEventPayment";
+}
+
+<h1>AddEventPayment</h1>
+
+<h4>EventPaymentVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EventDetailsID" class="control-label"></label>
+                <input asp-for="EventDetailsID" id="txtEventDetails" class="form-control" />
+                <span asp-validation-for="EventDetailsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" id="txtAmount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfPayment" class="control-label"></label>
+                <input asp-for="DateOfPayment" id="txtDateOfPayment" class="form-control" />
+                <span asp-validation-for="DateOfPayment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReferenceNumber" class="control-label"></label>
+                <input asp-for="ReferenceNumber" id="txtReferenceNumber" class="form-control" />
+                <span asp-validation-for="ReferenceNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" id="txtRemarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _amount = $('#txtAmount').val();
+                var _dateOfPayment = $("#txtDateOfPayment").val();
+                var _referenceNumber = $("#txtReferenceNumber").val();
+                var _remarks = $("#txtRemarks").val();
+                var _eventDetails = $("#txtEventDetails").val();
+
+                var _eventPayment =
+                {
+                    Amount: _amount,
+                    DateOfPayment: _dateOfPayment,
+                    ReferenceNumber: _referenceNumber,
+                    Remarks: _remarks,
+                    EventDetailsID: _eventDetails,
+
+                };
+
+                $.post('/Coordinator/AddEventPayment', { _eventPayment: _eventPayment }).done(ReplyLog);
+
+
+            });
+
+        });
+
+        function ReplyLog(reply) {
+            console.log(reply);
+            if (reply == true) {
+                console.log("nice");
+                alert("Payment added successfully!");
+                window.location = "/Coordinator/Index";
+            } else {
+                alert("Please enter the correct details!");
+            }
+        }
+
+    </script>
+}
+
+
+
