@@ -1,0 +1,77 @@
+﻿@model Attila.UI.Models.PackageAdditionalDurationRequestVM
+
+@{
+    ViewData["Title"] = "AddAdditionalDurationRequest";
+}
+
+<h1>AddAdditionalDurationRequest</h1>
+
+<h4>PackageAdditionalDurationRequestVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Duration" class="control-label"></label>
+                <input asp-for="Duration" id="txtDuration" class="form-control" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate" class="control-label"></label>
+                <input asp-for="Rate" id="txtRate" class="form-control" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventDetailsID" class="control-label"></label>
+                <input asp-for="EventDetailsID" id="txtEventDetails" class="form-control" />
+                <span asp-validation-for="EventDetailsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _duration = $('#txtDuration').val();
+                var _rate = $('#txtRate').val();
+                var _eventDetails = $('#txtEventDetails').val();
+
+                var _additionalDuration =
+                {
+                    Duration: _duration,
+                    Rate: _rate,
+                    EventDetailsID: _eventDetails
+                };
+
+                $.post('/Coordinator/AddAdditionalDurationRequest', { _additionalDuration: _additionalDuration }).done(ReplyLog);
+
+            });
+        });
+
+        function ReplyLog(reply) {
+            if (reply) {
+                console.log("done");
+                alert("Additional duration request submitted!");
+                window.location = "/Coordinator/Index";
+            } else {
+                alert("Please enter the correct details!");
+            }
+
+        }
+
+
+
+
+    </script>
+
+
+
+
+}
