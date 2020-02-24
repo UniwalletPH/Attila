@@ -33,6 +33,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
                     UserID = a.UserID,
                     EquipmentDetailsID = a.EquipmentDetailsID,
                     EquipmentDeliveryID = a.EquipmentDeliveryID
+
                 }).ToListAsync();
 
                 return _equipmentInventoryList;
