@@ -122,9 +122,17 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteEquipmentDetailsCommand()
+        public async Task<IActionResult> DeleteEquipmentDetailsCommand()
         {
-            return View();
+            try
+            {
+                var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+                return View(_getEquipmentDetails);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -317,21 +325,31 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddFoodDetailsCommand
+                if (foodDetails.Code != null && foodDetails.Name != null && 
+                    foodDetails.Specification != null && foodDetails.Description != null)
                 {
-                    Code = foodDetails.Code,
-                    Name = foodDetails.Name,
-                    Specification = foodDetails.Specification,
-                    Description = foodDetails.Description,
-                    Unit = foodDetails.Unit,
-                    FoodType = foodDetails.FoodType
-                });
-                _checker = true;
+                    await mediator.Send(new AddFoodDetailsCommand
+                    {
+                        Code = foodDetails.Code,
+                        Name = foodDetails.Name,
+                        Specification = foodDetails.Specification,
+                        Description = foodDetails.Description,
+                        Unit = foodDetails.Unit,
+                        FoodType = foodDetails.FoodType
+                    });
+                    _checker = true;
+                }
+                else
+                {
+                    _checker = false;
+                }
+                
             }
             catch (Exception)
             {
                 _checker = false;
             }
+
             return Json(_checker);
         }
 
@@ -396,9 +414,17 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteFoodDetailsCommand()
+        public async Task<IActionResult> DeleteFoodDetailsCommand()
         {
-            return View();
+            try
+            {
+                var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+                return View(_getFoodDetails.ToList());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]

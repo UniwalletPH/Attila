@@ -10,11 +10,6 @@
 <div class="row">
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
-            <input asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <label asp-for="FoodDetailsID" class="control-label">Food Details ID: </label>
             <input id="FoodDetailsID" asp-for="FoodDetailsID" class="form-control" />
@@ -68,40 +63,54 @@
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _quantity = $('#txtQuantity').val();
-                var _expirationDate = $('#txtExpirationDate').val();
-                var _encodingDate = $('#txtEncodingDate').val();
-                var _itemPrice = $('#txtItemPrice').val();
-                var _remarks = $('#txtRemarks').val();
-                var _userID = $('#UserID').val();
-                var _foodDetailsID = $('#FoodDetailsID').val();
-                var _foodRestockID = $('#FoodRestockID').val();
+                if ($('#txtQuantity').val() &&
+                    $('#txtItemPrice').val() &&
+                    $('#txtRemarks').val() &&
+                    $('#UserID').val() &&
+                    $('#FoodDetailsID').val() &&
+                    $('#FoodRestockID').val()) {
 
-                var _foodInventory =
-                {
-                    Quantity: _quantity,
-                    ExpirationDate: _expirationDate,
-                    EncodingDate: _encodingDate,
-                    ItemPrice: _itemPrice,
-                    Remarks: _remarks,
-                    UserID: _userID,
-                    FoodDetailsID: _foodDetailsID,
-                    FoodRestockID: _foodRestockID
-                };
+                    var _quantity = $('#txtQuantity').val();
+                    var _expirationDate = $('#txtExpirationDate').val();
+                    var _encodingDate = $('#txtEncodingDate').val();
+                    var _itemPrice = $('#txtItemPrice').val();
+                    var _remarks = $('#txtRemarks').val();
+                    var _userID = $('#UserID').val();
+                    var _foodDetailsID = $('#FoodDetailsID').val();
+                    var _foodRestockID = $('#FoodRestockID').val();
 
-                $.post('/InventoryManager/AddFoodInventoryCommand', { foodInventory: _foodInventory }).done(function (data) { InputResult(data) });
+                    var _foodInventory =
+                    {
+                        Quantity: _quantity,
+                        ExpirationDate: _expirationDate,
+                        EncodingDate: _encodingDate,
+                        ItemPrice: _itemPrice,
+                        Remarks: _remarks,
+                        UserID: _userID,
+                        FoodDetailsID: _foodDetailsID,
+                        FoodRestockID: _foodRestockID
+                    };
+
+                    $.post('/InventoryManager/AddFoodInventoryCommand', { foodInventory: _foodInventory })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Food inventory successfully added!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/AddFoodInventoryCommand";
+                            }
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Food inventory successfully added!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/AddFoodInventoryCommand";
-            }
-        }
     </script>
 }

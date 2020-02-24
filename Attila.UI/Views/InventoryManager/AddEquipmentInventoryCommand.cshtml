@@ -10,11 +10,6 @@
 <div class="row">
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
-            <input asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
             <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
@@ -62,38 +57,50 @@
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _quantity = $('#txtQuantity').val();
-                var _encodingDate = $('#txtEncodingDate').val();
-                var _itemPrice = $('#txtItemPrice').val();
-                var _remarks = $('#txtRemarks').val();
-                var _userID = $('#UserID').val();
-                var _equipmentDetailsID = $('#EquipmentDetailsID').val();
-                var _equipmentDeliveryID = $('#EquipmentDeliveryID').val();
+                if ($('#txtQuantity').val() &&
+                    $('#txtItemPrice').val() &&
+                    $('#txtRemarks').val() &&
+                    $('#UserID').val() &&
+                    $('#EquipmentDetailsID').val() &&
+                    $('#EquipmentDeliveryID').val()) {
 
-                var _equipmentDelivery =
-                {
-                    Quantity: _quantity,
-                    EncodingDate: _encodingDate,
-                    ItemPrice: _itemPrice,
-                    Remarks: _remarks,
-                    UserID: _userID,
-                    EquipmentDetailsID: _equipmentDetailsID,
-                    EquipmentDeliveryID: _equipmentDeliveryID
-                };
+                    var _quantity = $('#txtQuantity').val();
+                    var _encodingDate = $('#txtEncodingDate').val();
+                    var _itemPrice = $('#txtItemPrice').val();
+                    var _remarks = $('#txtRemarks').val();
+                    var _userID = $('#UserID').val();
+                    var _equipmentDetailsID = $('#EquipmentDetailsID').val();
+                    var _equipmentDeliveryID = $('#EquipmentDeliveryID').val();
 
-                $.post('/InventoryManager/AddEquipmentInventoryCommand', { equipmentInventory: _equipmentDelivery }).done(function (data) { InputResult(data) });
+                    var _equipmentDelivery =
+                    {
+                        Quantity: _quantity,
+                        EncodingDate: _encodingDate,
+                        ItemPrice: _itemPrice,
+                        Remarks: _remarks,
+                        UserID: _userID,
+                        EquipmentDetailsID: _equipmentDetailsID,
+                        EquipmentDeliveryID: _equipmentDeliveryID
+                    };
+
+                    $.post('/InventoryManager/AddEquipmentInventoryCommand', { equipmentInventory: _equipmentDelivery })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Equipment inventory successfully added!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
+                            }
+                        });
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment inventory successfully added!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
-            }
-        }
     </script>
 }

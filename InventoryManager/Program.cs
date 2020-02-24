@@ -322,7 +322,16 @@ namespace Attila.Presentation.InventoryManager
                                     FoodType = _parsedUpdateFoodType
                                 };
 
-                                var _updateFoodDetailsInventoryCommand = await Mediator.Send(new UpdateFoodDetailsCommand { MyFoodDetails = _foodDetailsUpdate });
+                                var _updateFoodDetailsInventoryCommand = await Mediator.Send(new UpdateFoodDetailsCommand 
+                                { 
+                                    ID = _foodDetailsUpdate.ID,
+                                    Code = _foodDetailsUpdate.Code,
+                                    Name = _foodDetailsUpdate.Name,
+                                    Specification = _foodDetailsUpdate.Specification,
+                                    Description = _foodDetailsUpdate.Description,
+                                    Unit = _foodDetailsUpdate.Unit,
+                                    FoodType = _foodDetailsUpdate.FoodType
+                                });
                                 if (_updateFoodDetailsInventoryCommand == true)
                                 {
                                     Console.WriteLine();
@@ -374,7 +383,7 @@ namespace Attila.Presentation.InventoryManager
                                 int _updatedFoodStock = int.Parse(_updateStock);
 
 
-                                var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockCommand { SearchedID = _updatedID, NewFoodQuantity = _updatedFoodStock });
+                                var updateFoodStockInventoryCommand = await Mediator.Send(new UpdateFoodStockCommand { ID = _updatedID, Quantity = _updatedFoodStock });
                                 if (updateFoodStockInventoryCommand == true)
                                 {
                                     Console.WriteLine();

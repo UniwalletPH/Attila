@@ -1,10 +1,21 @@
-﻿@model IEnumerable<Attila.Domain.Entities.Tables.EquipmentDetails>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM>
 
 @{
     ViewData["Title"] = "DeleteEquipmentDetailsCommand";
 }
 
 <h1>Delete Equipment</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter equipment ID: </label>
+        <input id="txtDeleteId" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+<br />
+<br />
 
 <table class="table">
     <thead>
@@ -31,7 +42,7 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -53,26 +64,14 @@
                     @Html.DisplayFor(modelItem => item.EquipmentType)
                 </td>
             </tr>
-        }*@
+        }
     </tbody>
 </table>
 
 
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter equipment ID: </label>
-        <input id="txtDeleteId" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
+
+
 
 @section Scripts {
 

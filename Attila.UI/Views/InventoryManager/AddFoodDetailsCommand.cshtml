@@ -9,13 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="AddFoodDetailsCommand">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="Code" class="control-label">Code: </label>
                 <input id="txtCode" asp-for="Code" class="form-control" />
@@ -39,7 +33,7 @@
             <div class="form-group">
                 <label asp-for="Unit" class="control-label">Unit: </label>
                 <select id="txtUnit" asp-for="Unit" class="form-control">
-                    <option value="0"> -- select an option -- </option>
+                    <option value=""> -- select an option -- </option>
                     <option value="1">Piece</option>
                     <option value="2">Box</option>
                     <option value="3">Dozen</option>
@@ -50,7 +44,7 @@
             <div class="form-group">
                 <label asp-for="FoodType" class="control-label"></label>
                 <select id="txtFoodType" asp-for="FoodType" class="form-control">
-                    <option value="0"> -- select an option -- </option>
+                    <option value=""> -- select an option -- </option>
                     <option value="1">Perishable</option>
                     <option value="2">Non-perishable</option>
                     <option value="3">Others</option>
@@ -60,7 +54,6 @@
             <div class="form-group">
                 <button id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
-        </form>
     </div>
 </div>
 
@@ -70,36 +63,50 @@
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _code = $('#txtCode').val();
-                var _name = $('#txtName').val();
-                var _specification = $('#txtSpecification').val();
-                var _description = $('#txtDescription').val();
-                var _unitType = $('#txtUnit').val();
-                var _foodType = $('#txtFoodType').val();
+                if ($('#txtCode').val() &&
+                    $('#txtName').val() &&
+                    $('#txtSpecification').val() &&
+                    $('#txtDescription').val() &&
+                    $('#txtUnit').val() &&
+                    $('#txtFoodType').val()) {
 
-                var _equipmentDetails =
-                {
-                    Code: _code,
-                    Name: _name,
-                    Specification: _specification,
-                    Description: _description,
-                    UnitType: _unitType,
-                    FoodType: _foodType
-                };
+                    var _code = $('#txtCode').val();
+                    var _name = $('#txtName').val();
+                    var _specification = $('#txtSpecification').val();
+                    var _description = $('#txtDescription').val();
+                    var _unitType = $('#txtUnit').val();
+                    var _foodType = $('#txtFoodType').val();
 
-                $.post('/InventoryManager/AddEquipmentDetailsCommand', { foodDetails: _equipmentDetails }).done(function (data) { InputResult(data) });
+                    var _equipmentDetails =
+                    {
+                        Code: _code,
+                        Name: _name,
+                        Specification: _specification,
+                        Description: _description,
+                        UnitType: _unitType,
+                        FoodType: _foodType
+                    };
+
+                    $.post('/InventoryManager/AddFoodDetailsCommand', { foodDetails: _equipmentDetails })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Food details successfully added!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/AddFoodDetailsCommand";
+                            }
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Food details successfully added!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/AddEquipmentDetailsCommand";
-            }
-        }
     </script>
 }

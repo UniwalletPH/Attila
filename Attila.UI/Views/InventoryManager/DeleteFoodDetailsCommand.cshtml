@@ -1,10 +1,22 @@
-﻿@model IEnumerable<Attila.Domain.Entities.Tables.FoodDetails>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Food.Queries.FoodDetailsVM>
 
 @{
     ViewData["Title"] = "DeleteFoodDetailsCommand";
 }
 
 <h1>Delete Food</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter food ID: </label>
+        <input id="txtDeleteId" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+<br />
+<br />
+
 
 <table class="table">
     <thead>
@@ -34,54 +46,39 @@
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Code)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Specification)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Unit)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FoodType)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                        </td>
-                    </tr>
-            }*@
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodType)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 
 
-<br />
-<br />
-<br />
-<br />
-<br />
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter food ID: </label>
-        <input id="txtDeleteId" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
+
+
+
 
 @section Scripts {
 
@@ -90,24 +87,29 @@
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _deleteId = $('#txtDeleteId').val();
+                if ($('#txtDeleteId').val()) {
 
-                $.post('/InventoryManager/DeleteFoodDetailsCommand', { deleteID: _deleteId }).done(function (data) { InputResult(data) });
+                    var _deleteId = $('#txtDeleteId').val();
 
+                    $.post('/InventoryManager/DeleteFoodDetailsCommand', { deleteID: _deleteId })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Food successfully deleted!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/DeleteFoodDetailsCommand";
+                            }
+                        });
+                }
+
+                else {
+                    alert("Please enter the ID.");
+                }
 
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Food successfully deleted!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/DeleteFoodDetailsCommand";
-            }
-        }
 
     </script>
 }

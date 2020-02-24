@@ -10,11 +10,6 @@
 <div class="row">
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
-            <input asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
             <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
@@ -26,10 +21,10 @@
             <span asp-validation-for="Quantity" class="text-danger"></span>
         </div>
         @*<div class="form-group">
-            <label asp-for="DateTimeRequest" class="control-label">Date </label>
-            <input asp-for="DateTimeRequest" class="form-control" />
-            <span asp-validation-for="DateTimeRequest" class="text-danger"></span>
-        </div>*@
+                <label asp-for="DateTimeRequest" class="control-label">Date </label>
+                <input asp-for="DateTimeRequest" class="form-control" />
+                <span asp-validation-for="DateTimeRequest" class="text-danger"></span>
+            </div>*@
 
         <div class="form-group">
             <label asp-for="Status" class="control-label">Status: </label>
@@ -57,35 +52,47 @@
     <script>
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                alert("test");
-                var _equipmentDetailsID = $('#EquipmentDetailsID').val();
-                var _quantity = $('#txtQuantity').val();
-                var _status = $('#txtStatus').val();
-                var _userID = $('#UserID').val();
 
-                
-                var _equipmentRestockRequest =
-                {
-                    EquipmentDetailsID: _equipmentDetailsID,
-                    Quantity: _quantity,
-                    Status: _status,
-                    UserID: _userID
-                };
+                if ($('#EquipmentDetailsID').val() &&
+                    $('#txtQuantity').val() &&
+                    $('#txtStatus').val() &&
+                    $('#UserID').val()) {
+
+                    var _equipmentDetailsID = $('#EquipmentDetailsID').val();
+                    var _quantity = $('#txtQuantity').val();
+                    var _status = $('#txtStatus').val();
+                    var _userID = $('#UserID').val();
 
 
-                $.post('/InventoryManager/RequestEquipmentRestockCommand', {equipmentRestockRequest: _equipmentRestockRequest }).done(function (data) { InputResult(data) });
+                    var _equipmentRestockRequest =
+                    {
+                        EquipmentDetailsID: _equipmentDetailsID,
+                        Quantity: _quantity,
+                        Status: _status,
+                        UserID: _userID
+                    };
+
+
+                    $.post('/InventoryManager/RequestEquipmentRestockCommand', { equipmentRestockRequest: _equipmentRestockRequest })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Equipment restock successfully requested!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/RequestEquipmentRestockCommand";
+                            }
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment restock successfully requested!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/RequestEquipmentRestockCommand";
-            }
-        }
     </script>
 }
