@@ -34,7 +34,7 @@ namespace Attila.UI.Controllers
             await mediator.Send(new AddEventCommand
             {
                 Address = _eventDetails.Address,
-                BookingDate = _eventDetails.BookingDate,
+                BookingDate = DateTime.Now,
                 Code = _eventDetails.Code,
                 Description = _eventDetails.Description,
                 EventDate = _eventDetails.EventDate,
