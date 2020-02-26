@@ -29,25 +29,39 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEvent(EventDetailsVM _eventDetails)
         {
-            //var _eventDetails = eventDetails;
-
-            await mediator.Send(new AddEventCommand
+            bool flag = true;
+            try
             {
-                Address = _eventDetails.Address,
-                BookingDate = DateTime.Now,
-                Code = _eventDetails.Code,
-                Description = _eventDetails.Description,
-                EventDate = _eventDetails.EventDate,
-                EventName = _eventDetails.EventName,
-                Location = _eventDetails.Location,
-                Type = _eventDetails.Type,
-                Remarks = _eventDetails.Remarks,
-                UserID = _eventDetails.UserID,
-                EventClientID = _eventDetails.EventClientID,
-                EventPackageDetailsID = _eventDetails.EventPackageDetailsID
-            });
+                if (_eventDetails.Address != null && _eventDetails.Location != null &&
+               _eventDetails.Code != null && _eventDetails.EventDate != null &&
+               _eventDetails.EventName != null && _eventDetails.Type != 0)
+                {
 
-            return Json(true);
+                    await mediator.Send(new AddEventCommand
+                    {
+                        Address = _eventDetails.Address,
+                        BookingDate = DateTime.Now,
+                        Code = _eventDetails.Code,
+                        Description = _eventDetails.Description,
+                        EventDate = _eventDetails.EventDate,
+                        EventName = _eventDetails.EventName,
+                        Location = _eventDetails.Location,
+                        Type = _eventDetails.Type,
+                        Remarks = _eventDetails.Remarks,
+                        UserID = _eventDetails.UserID,
+                        EventClientID = _eventDetails.EventClientID,
+                        EventPackageDetailsID = _eventDetails.EventPackageDetailsID
+                    });
+                    flag = true;
+                }else
+                {
+                    flag = false;
+                }
+            }catch(Exception e)
+            {
+                flag = false;
+            }
+            return Json(flag);
         }
 
         [HttpPost]
@@ -56,68 +70,110 @@ namespace Attila.UI.Controllers
             int _duration = _eventPackage.Duration.Hours;
             string _parsedDurationString = _duration.ToString("hh':'mm");
             TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
-            await mediator.Send(new AddEventPackageCommand
+            bool flag = true;
+            try
             {
-                Code = _eventPackage.Code,
-                Description = _eventPackage.Description,
-                Duration = _fromStringToTimeSpan,
-                NumberOfGuest = _eventPackage.NumberOfGuest,
-                Rate = _eventPackage.Rate
+               if(_eventPackage.Code != null && _eventPackage.Description != null 
+                  && _eventPackage.Duration != null && _eventPackage.NumberOfGuest != 0 && _eventPackage.Rate != 0)
+                {
+                    await mediator.Send(new AddEventPackageCommand
+                    {
+                        Code = _eventPackage.Code,
+                        Description = _eventPackage.Description,
+                        Duration = _fromStringToTimeSpan,
+                        NumberOfGuest = _eventPackage.NumberOfGuest,
+                        Rate = _eventPackage.Rate
 
-            });
+                    });
 
-            return Json(true);
+                }
+                else
+                {
+                    flag = false;
+                }
+            }
+            catch (Exception e)
+            {
+                flag = false;
+            }
+            return Json(flag);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddClientDetails(EventClientVM _eventClient)
         {
-            await mediator.Send(new AddClientDetailsCommand
+            bool flag = true;
+            if(_eventClient.Address != null && _eventClient.Contact != null &&
+                _eventClient.Email != null && _eventClient.Firstname !=null &&
+                _eventClient.Lastname != null)
             {
-                Address = _eventClient.Address,
-                Contact = _eventClient.Contact,
-                Email = _eventClient.Email,
-                Lastname = _eventClient.Lastname,
-                Firstname = _eventClient.Firstname
-            });
-            return Json(true);
+                await mediator.Send(new AddClientDetailsCommand
+                {
+                    Address = _eventClient.Address,
+                    Contact = _eventClient.Contact,
+                    Email = _eventClient.Email,
+                    Lastname = _eventClient.Lastname,
+                    Firstname = _eventClient.Firstname
+                });
+            }
+            else
+            {
+                flag = false;
+            }
+            
+            return Json(flag);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEventPayment(EventPaymentVM _eventPayment)
         {
-            
-            await mediator.Send(new AddPaymentForEventCommand
+            bool flag = true;
+            if(_eventPayment.Amount != 0 && _eventPayment.DateOfPayment != null &&
+                _eventPayment.EventDetailsID != null && _eventPayment.ReferenceNumber != null &&)
             {
-                Amount = _eventPayment.Amount,
-                DateOfPayment = _eventPayment.DateOfPayment,
-                EventDetails = _eventPayment.EventDetails,
-                EventDetailsID = _eventPayment.EventDetailsID,
-                ReferenceNumber = _eventPayment.ReferenceNumber,
-                Remarks = _eventPayment.Remarks
+                await mediator.Send(new AddPaymentForEventCommand
+                {
+                    Amount = _eventPayment.Amount,
+                    DateOfPayment = _eventPayment.DateOfPayment,
+                    EventDetailsID = _eventPayment.EventDetailsID,
+                    ReferenceNumber = _eventPayment.ReferenceNumber,
+                    Remarks = _eventPayment.Remarks
 
-            });
+                });
 
-            return Json(true);
+            }else
+            {
+                flag = false;
+            }
+
+            return Json(flag);
         }
 
         [HttpPost]
         public async Task<IActionResult> RequestEventRequirements(EventEquipmentRequestVM _eventEquipmentRequest)
         {
-            await mediator.Send(new RequestEventRequirementsCommand
+            bool flag = true;
+            if(_eventEquipmentRequest.Quantity != 0)
             {
-                EquipmentDetailsID = _eventEquipmentRequest.EquipmentDetailsID,
-                EventDetailsID = _eventEquipmentRequest.EventDetailsID,
-                Quantity = _eventEquipmentRequest.Quantity,
+                await mediator.Send(new RequestEventRequirementsCommand
+                {
+                    EquipmentDetailsID = _eventEquipmentRequest.EquipmentDetailsID,
+                    EventDetailsID = _eventEquipmentRequest.EventDetailsID,
+                    Quantity = _eventEquipmentRequest.Quantity,
 
-            });
-            return Json(true);
+                });
+            }else
+            {
+                flag = false;
+            }
+           
+            return Json(flag);
         }
 
         [HttpPost]
         public async Task<IActionResult> UpdateEvent(EventDetailsVM _eventDetails)
         {
-
+            
             await mediator.Send(new UpdateEventCommand
             {
                 ID = _eventDetails.ID,
@@ -203,25 +259,42 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDurationRequest(PackageAdditionalDurationRequestVM _additionalDuration)
         {
-            await mediator.Send(new AddAdditionalDurationRequestCommand { 
-                Duration = _additionalDuration.Duration,
-                Rate = _additionalDuration.Rate,
-                EventDetailsID = _additionalDuration.EventDetailsID
-            });
-            return Json(true);
+            bool flag = true;
+            if(_additionalDuration.Duration != null && _additionalDuration.Rate != 0)
+            {
+                await mediator.Send(new AddAdditionalDurationRequestCommand
+                {
+                    Duration = _additionalDuration.Duration,
+                    Rate = _additionalDuration.Rate,
+                    EventDetailsID = _additionalDuration.EventDetailsID
+                });
+            }else
+            {
+                flag = false;
+            }
+           
+            return Json(flag);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddAdditionalEquipmentRequest(PackageAdditionalEquipmentRequestVM _additionalEquipment)
         {
-            await mediator.Send(new AddAdditionalEquipmentRequestCommand
+            bool flag = true;
+            if(_additionalEquipment.Rate != 0 && _additionalEquipment.Quantity != 0)
             {
-                EventDetailsID = _additionalEquipment.EventDetailsID,
-                EquipmentDetailsID = _additionalEquipment.EquipmentDetailsID,
-                Rate = _additionalEquipment.Rate,
-                Quantity = _additionalEquipment.Quantity,
-            });
-            return Json(true);
+                await mediator.Send(new AddAdditionalEquipmentRequestCommand
+                {
+                    EventDetailsID = _additionalEquipment.EventDetailsID,
+                    EquipmentDetailsID = _additionalEquipment.EquipmentDetailsID,
+                    Rate = _additionalEquipment.Rate,
+                    Quantity = _additionalEquipment.Quantity,
+                });
+            }else
+            {
+                flag = false;
+            }
+            
+            return Json(flag);
         }
         #endregion
         #region HTTP GETs
