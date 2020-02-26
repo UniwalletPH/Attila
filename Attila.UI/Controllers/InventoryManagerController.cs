@@ -74,7 +74,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new AddEquipmentInventoryCommand
                 {
                     Quantity = equipmentInventory.Quantity,
-                    EncodingDate = equipmentInventory.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = equipmentInventory.ItemPrice,
                     Remarks = equipmentInventory.Remarks,
                     UserID = equipmentInventory.UserID,
@@ -166,7 +166,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new RequestEquipmentRestockCommand
                 {
                     Quantity = equipmentRestockRequest.Quantity,
-                    DateTimeRequest = equipmentRestockRequest.DateTimeRequest,
+                    DateTimeRequest = DateTime.Now,
                     EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
                     Status = equipmentRestockRequest.Status,
                     UserID = equipmentRestockRequest.UserID
@@ -369,7 +369,7 @@ namespace Attila.UI.Controllers
                 {
                     Quantity = foodInventory.Quantity,
                     ExpirationDate = foodInventory.ExpirationDate,
-                    EncodingDate = foodInventory.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = foodInventory.ItemPrice,
                     Remarks = foodInventory.Remarks,
                     UserID = foodInventory.UserID,
@@ -457,7 +457,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new RequestFoodRestockCommand
                 {
                     Quantity = foodRestockRequest.Quantity,
-                    DateTimeRequest = foodRestockRequest.DateTimeRequest,
+                    DateTimeRequest = DateTime.Now,
                     FoodDetailsID = foodRestockRequest.FoodDetailsID,
                     Status = foodRestockRequest.Status,
                     UserID = foodRestockRequest.UserID
@@ -468,6 +468,7 @@ namespace Attila.UI.Controllers
             {
                 _checker = false;
             }
+
             return Json(_checker);
         }
 
