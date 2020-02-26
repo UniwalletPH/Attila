@@ -80,24 +80,29 @@
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _deleteId = $('#txtDeleteId').val();
+                if ($('#txtDeleteId').val()) {
 
-                $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId }).done(function (data) { InputResult(data) });
+                    var _deleteId = $('#txtDeleteId').val();
+
+                    $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Equipment successfully deleted!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+                            }
+                        });
+                }
+                else {
+                    alert("Please enter ID to delete.");
+                }
 
 
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment successfully deleted!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
-            }
-        }
 
     </script>
 }

@@ -11,29 +11,29 @@
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
+            <label asp-for="ID" class="control-label">ID: </label>
             <input id="txtID" asp-for="ID" class="form-control" />
             <span asp-validation-for="ID" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Code" class="control-label"></label>
+            <label asp-for="Code" class="control-label">Code: </label>
             <input id="txtCode" asp-for="Code" class="form-control" />
             <span asp-validation-for="Code" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Name" class="control-label"></label>
+            <label asp-for="Name" class="control-label">Name: </label>
             <input id="txtName" asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Description" class="control-label"></label>
+            <label asp-for="Description" class="control-label">Description: </label>
             <input id="txtDescription" asp-for="Description" class="form-control" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="UnitType" class="control-label"></label>
+            <label asp-for="UnitType" class="control-label">Unit Type:</label>
             <select id="txtUnitType" asp-for="UnitType" class="form-control">
-                <option value="0"> -- select an option -- </option>
+                <option value=""> -- select an option -- </option>
                 <option value="1">Piece</option>
                 <option value="2">Box</option>
                 <option value="3">Dozen</option>
@@ -42,9 +42,9 @@
             <span asp-validation-for="UnitType" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="EquipmentType" class="control-label"></label>
+            <label asp-for="EquipmentType" class="control-label">Equipment Type:</label>
             <select id="txtEquipmentType" asp-for="EquipmentType" class="form-control">
-                <option value="0"> -- select an option -- </option>
+                <option value=""> -- select an option -- </option>
                 <option value="1">Consumable</option>
                 <option value="2">Non-consumable</option>
                 <option value="3">Others</option>
@@ -63,37 +63,51 @@
     <script>
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                alert("test");
-                var _id = $('#txtID').val();
-                var _code = $('#txtCode').val();
-                var _name = $('#txtName').val();
-                var _description = $('#txtDescription').val();
-                var _unitType = $('#txtUnitType').val();
-                var _equipmentType = $('#txtEquipmentType').val();
 
-                var _equipmentDetails =
-                {
-                    ID: _id,
-                    Code: _code,
-                    Name: _name,
-                    Description: _description,
-                    UnitType: _unitType,
-                    EquipmentType: _equipmentType
-                };
+                if ($('#txtID').val() &&
+                    $('#txtCode').val() &&
+                    $('#txtName').val() &&
+                    $('#txtDescription').val() &&
+                    $('#txtUnitType').val() &&
+                    $('#txtEquipmentType').val()) {
 
-                $.post('/InventoryManager/UpdateEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails }).done(function (data) { InputResult(data) });
+                    var _id = $('#txtID').val();
+                    var _code = $('#txtCode').val();
+                    var _name = $('#txtName').val();
+                    var _description = $('#txtDescription').val();
+                    var _unitType = $('#txtUnitType').val();
+                    var _equipmentType = $('#txtEquipmentType').val();
+
+                    var _equipmentDetails =
+                    {
+                        ID: _id,
+                        Code: _code,
+                        Name: _name,
+                        Description: _description,
+                        UnitType: _unitType,
+                        EquipmentType: _equipmentType
+                    };
+
+                    $.post('/InventoryManager/UpdateEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Equipment details successfully updated!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/UpdateEquipmentDetailsCommand";
+                            }
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment details successfully updated!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/UpdateEquipmentDetailsCommand";
-            }
-        }
     </script>
 }

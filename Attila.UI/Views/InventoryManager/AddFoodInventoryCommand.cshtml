@@ -31,11 +31,6 @@
             <span asp-validation-for="ExpirationDate" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="EncodingDate" class="control-label">Encoding Date: </label>
-            <input id="txtEncodingDate" asp-for="EncodingDate" class="form-control" />
-            <span asp-validation-for="EncodingDate" class="text-danger"></span>
-        </div>
-        <div class="form-group">
             <label asp-for="ItemPrice" class="control-label">Item Price: </label>
             <input id="txtItemPrice" asp-for="ItemPrice" class="form-control" />
             <span asp-validation-for="ItemPrice" class="text-danger"></span>
@@ -72,7 +67,6 @@
 
                     var _quantity = $('#txtQuantity').val();
                     var _expirationDate = $('#txtExpirationDate').val();
-                    var _encodingDate = $('#txtEncodingDate').val();
                     var _itemPrice = $('#txtItemPrice').val();
                     var _remarks = $('#txtRemarks').val();
                     var _userID = $('#UserID').val();

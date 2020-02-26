@@ -21,14 +21,27 @@
 
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                alert("test");
-                var _searchedKeyword = $('#txtKeyword').val();
 
-                $.post('/InventoryManager/SearchEquipmentByKeywordResult', { searchKeyword: _searchedKeyword })
-                    .done(function () {
-                        alert("Equipment keyword successfully searched!");
-                        window.location = "/InventoryManager/SearchEquipmentByKeywordResult";
-                    });
+                if ($('#txtKeyword').val()) {
+
+                    var _searchedKeyword = $('#txtKeyword').val();
+
+                    $.post('/InventoryManager/SearchEquipmentByKeywordResult', { searchKeyword: _searchedKeyword })
+                        .done(function () {
+                            alert("Equipment keyword successfully searched!");
+                            window.location = "/InventoryManager/SearchEquipmentByKeywordResult";
+                        })
+                        .fail(function (error) {
+                            alert("Keyword does not exist!")
+                            $("#txtKeyword").val("");
+                        });
+                }
+
+                else {
+                    alert("Please enter keyword.");
+                }
+
+
 
             });
         });
