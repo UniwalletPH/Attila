@@ -300,6 +300,8 @@ namespace Attila.UI.Controllers
 
         public async Task<IActionResult> SearchEquipmentByKeywordResult(string searchKeyword)
         {
+            //searchKeyword = "a";
+
             try
             {
                 var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = searchKeyword });
@@ -588,9 +590,10 @@ namespace Attila.UI.Controllers
         }
 
 
+        [HttpGet]
         public async Task<IActionResult> SearchFoodByKeywordResult(string searchKeyword)
         {
-            //searchKeyword = "a";
+            searchKeyword = "a";
             try
             {
                 var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = searchKeyword });
