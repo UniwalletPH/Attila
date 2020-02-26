@@ -72,25 +72,52 @@
 
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                var _searchID = $('#txtSearchID').val();
 
-                $.post('/InventoryManager/SearchFoodByIDQuery', { searchedID: _searchID })
-                    .done(function (result) {
+                if ($('#txtSearchID').val()) {
 
-                        alert("Food ID successfully searched!");
-                        $("#ID").val(result.id);
-                        $("#code").val(result.code);
-                        $("#name").val(result.name);
-                        $("#speficiation").val(result.specification);
-                        $("#description").val(result.description);
-                        $("#unitType").val(result.unit);
-                        $("#foodType").val(result.foodType);
-                        $("#txtSearchID").val("");
+                    var _searchID = $('#txtSearchID').val();
 
-                    })
-                    .fail(function (error) {
-                        alert("Food ID does not exist!")
-                    });
+                    $.post('/InventoryManager/SearchFoodByIDQuery', { searchedID: _searchID })
+                        .done(function (result) {
+
+                            alert("Food ID successfully searched!");
+                            $("#ID").val(result.id);
+                            $("#code").val(result.code);
+                            $("#name").val(result.name);
+                            $("#speficiation").val(result.specification);
+                            $("#description").val(result.description);
+                            $("#unitType").val(result.unit);
+                            $("#foodType").val(result.foodType);
+
+                            $("#txtSearchID").val("");
+
+                        })
+                        .fail(function (error) {
+                            alert("Food ID does not exist!")
+                            $("#txtSearchID").val("");
+                            $("#ID").val("");
+                            $("#code").val("");
+                            $("#name").val("");
+                            $("#speficiation").val("");
+                            $("#description").val("");
+                            $("#unitType").val("");
+                            $("#foodType").val("");
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                    $("#txtSearchID").val("");
+                    $("#ID").val("");
+                    $("#code").val("");
+                    $("#name").val("");
+                    $("#speficiation").val("");
+                    $("#description").val("");
+                    $("#unitType").val("");
+                    $("#foodType").val("");
+                }
+
             });
         });
 

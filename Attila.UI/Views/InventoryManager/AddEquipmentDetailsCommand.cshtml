@@ -10,19 +10,14 @@
 <div class="row">
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
-            <input asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>*@
         <div class="form-group">
             <label asp-for="Code" class="control-label">Code: </label>
-            <input id="txtCode" asp-for="Code" class="form-control" />
+            <input id="txtCode" asp-for="Code" class="form-control" type="text" />
             <span asp-validation-for="Code" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Name" class="control-label">Name: </label>
-            <input id="txtName" asp-for="Name" class="form-control" />
+            <input id="txtName" asp-for="Name" class="form-control" type="text" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -33,7 +28,7 @@
         <div class="form-group">
             <label asp-for="UnitType" class="control-label">Unit Type: </label>
             <select id="txtUnitType" asp-for="UnitType" class="form-control">
-                <option value="0"> -- select an option -- </option>
+                <option value=""> -- select an option -- </option>
                 <option value="1">Piece</option>
                 <option value="2">Box</option>
                 <option value="3">Dozen</option>
@@ -44,7 +39,7 @@
         <div class="form-group">
             <label asp-for="EquipmentType" class="control-label">Equipment Type: </label>
             <select id="txtEquipmentType" asp-for="EquipmentType" class="form-control">
-                <option value="0"> -- select an option -- </option>
+                <option value=""> -- select an option -- </option>
                 <option value="1">Consumable</option>
                 <option value="2">Non-consumable</option>
                 <option value="3">Others</option>
@@ -62,6 +57,13 @@
     <script>
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
+
+                if ($('#txtCode').val() &&
+                    $('#txtName').val() &&
+                    $('#txtDescription').val() &&
+                    $('#txtUnitType').val() &&
+                    $('#txtEquipmentType').val()) {
+
                 var _code = $('#txtCode').val();
                 var _name = $('#txtName').val();
                 var _description = $('#txtDescription').val();
@@ -77,19 +79,24 @@
                     EquipmentType: _equipmentType
                 };
 
-                $.post('/InventoryManager/AddEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails }).done(function (data) { InputResult(data) });
+                $.post('/InventoryManager/AddEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails })
+                    .done(function (result) {
+                        if (result == true) {
+                            alert("Equipment details successfully added!");
+                            window.location = "/InventoryManager/Index";
+                        }
+                        else {
+                            alert("Failed!");
+                            window.location = "/InventoryManager/AddEquipmentDetailsCommand";
+                        }
+                    });
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
             });
         });
-
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment details successfully added!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/AddEquipmentRestockCommand";
-            }
-        }
     </script>
 }

@@ -74,7 +74,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new AddEquipmentInventoryCommand
                 {
                     Quantity = equipmentInventory.Quantity,
-                    EncodingDate = equipmentInventory.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = equipmentInventory.ItemPrice,
                     Remarks = equipmentInventory.Remarks,
                     UserID = equipmentInventory.UserID,
@@ -122,9 +122,17 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteEquipmentDetailsCommand()
+        public async Task<IActionResult> DeleteEquipmentDetailsCommand()
         {
-            return View();
+            try
+            {
+                var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+                return View(_getEquipmentDetails);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -158,7 +166,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new RequestEquipmentRestockCommand
                 {
                     Quantity = equipmentRestockRequest.Quantity,
-                    DateTimeRequest = equipmentRestockRequest.DateTimeRequest,
+                    DateTimeRequest = DateTime.Now,
                     EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
                     Status = equipmentRestockRequest.Status,
                     UserID = equipmentRestockRequest.UserID
@@ -317,21 +325,31 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                await mediator.Send(new AddFoodDetailsCommand
+                if (foodDetails.Code != null && foodDetails.Name != null && 
+                    foodDetails.Specification != null && foodDetails.Description != null)
                 {
-                    Code = foodDetails.Code,
-                    Name = foodDetails.Name,
-                    Specification = foodDetails.Specification,
-                    Description = foodDetails.Description,
-                    Unit = foodDetails.Unit,
-                    FoodType = foodDetails.FoodType
-                });
-                _checker = true;
+                    await mediator.Send(new AddFoodDetailsCommand
+                    {
+                        Code = foodDetails.Code,
+                        Name = foodDetails.Name,
+                        Specification = foodDetails.Specification,
+                        Description = foodDetails.Description,
+                        Unit = foodDetails.Unit,
+                        FoodType = foodDetails.FoodType
+                    });
+                    _checker = true;
+                }
+                else
+                {
+                    _checker = false;
+                }
+                
             }
             catch (Exception)
             {
                 _checker = false;
             }
+
             return Json(_checker);
         }
 
@@ -351,7 +369,7 @@ namespace Attila.UI.Controllers
                 {
                     Quantity = foodInventory.Quantity,
                     ExpirationDate = foodInventory.ExpirationDate,
-                    EncodingDate = foodInventory.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = foodInventory.ItemPrice,
                     Remarks = foodInventory.Remarks,
                     UserID = foodInventory.UserID,
@@ -396,9 +414,17 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult DeleteFoodDetailsCommand()
+        public async Task<IActionResult> DeleteFoodDetailsCommand()
         {
-            return View();
+            try
+            {
+                var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+                return View(_getFoodDetails.ToList());
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpPost]
@@ -431,7 +457,7 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new RequestFoodRestockCommand
                 {
                     Quantity = foodRestockRequest.Quantity,
-                    DateTimeRequest = foodRestockRequest.DateTimeRequest,
+                    DateTimeRequest = DateTime.Now,
                     FoodDetailsID = foodRestockRequest.FoodDetailsID,
                     Status = foodRestockRequest.Status,
                     UserID = foodRestockRequest.UserID
@@ -442,6 +468,7 @@ namespace Attila.UI.Controllers
             {
                 _checker = false;
             }
+
             return Json(_checker);
         }
 

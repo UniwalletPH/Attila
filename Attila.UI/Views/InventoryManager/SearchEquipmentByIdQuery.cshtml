@@ -65,26 +65,50 @@
 
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                var _searchID = $('#txtSearchID').val();
+
+                if ($('#txtSearchID').val()) {
+
+                    var _searchID = $('#txtSearchID').val();
 
 
-                $.post('/InventoryManager/SearchEquipmentByIdQuery', { searchedID: _searchID })
-                    .done(function (result) {
+                    $.post('/InventoryManager/SearchEquipmentByIdQuery', { searchedID: _searchID })
+                        .done(function (result) {
 
-                        alert("Equipment ID successfully searched!");
-                        $("#ID").val(result.id);
-                        $("#code").val(result.code);
-                        $("#name").val(result.name);
-                        $("#description").val(result.description);
-                        $("#unitType").val(result.unitType);
-                        $("#equipmentType").val(result.equipmentType);
+                            alert("Equipment ID successfully searched!");
+                            $("#ID").val(result.id);
+                            $("#code").val(result.code);
+                            $("#name").val(result.name);
+                            $("#description").val(result.description);
+                            $("#unitType").val(result.unitType);
+                            $("#equipmentType").val(result.equipmentType);
 
-                        $("#txtSearchID").val("");
+                            $("#txtSearchID").val("");
 
-                    })
-                    .fail(function (error) {
-                        alert("Equipment ID does not exist!")
-                    });
+                        })
+                        .fail(function (error) {
+                            alert("Equipment ID does not exist!")
+                            $("#txtSearchID").val("");
+                            $("#ID").val("");
+                            $("#code").val("");
+                            $("#name").val("");
+                            $("#description").val("");
+                            $("#unitType").val("");
+                            $("#equipmentType").val("");
+                        });
+
+                }
+
+                else {
+                    alert("Please enter the ID.");
+                    $("#ID").val("");
+                    $("#code").val("");
+                    $("#name").val("");
+                    $("#description").val("");
+                    $("#unitType").val("");
+                    $("#equipmentType").val("");
+                }
+
+
             });
 
         });
