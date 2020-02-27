@@ -26,7 +26,7 @@
 
                     var _searchedKeyword = $('#txtKeyword').val();
 
-                    $.post('/InventoryManager/SearchFoodByKeywordResult', { searchedKeyword: _searchedKeyword })
+                    $.get('/InventoryManager/SearchFoodByKeywordResult', { searchedKeyword: _searchedKeyword })
                         .done(function () {
                             alert("Food keyword successfully searched!");
                             window.location = "/InventoryManager/SearchFoodByKeywordResult";
