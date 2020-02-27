@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div>
+        <form asp-controller="Coordinator" asp-action="AddClientDetails" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Firstname" class="control-label"></label>
@@ -38,54 +38,26 @@
                 <span asp-validation-for="Contact" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Create</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Create</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
+
 @section Scripts {
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                var _firstName = $('#txtFirstName').val();
-                var _lastName = $("#txtLastName").val();
-                var _address = $("#txtAddress").val();
-                var _email = $("#txtEmail").val();
-                var _contact = $("#txtContact").val();
-
-                var _eventClientDetails =
-                {
-                    FirstName: _firstName,
-                    LastName: _lastName,
-                    Address: _address,
-                    Email: _email,
-                    Contact: _contact,
-
-                };
-
-                $.post('/Coordinator/AddClientDetails', { _eventClient: _eventClientDetails }).done(ReplyLog);
-
-
-            });
-
-        });
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Client added successfully!");
-                window.location = "/Coordinator/Index";
-            } else {
-                alert("Please enter the correct details!");
-            }
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Client added successfully!");
+            window.location = '/Coordinator/Index';
         }
 
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
+        }
 
     </script>
-
-
+    <partial name="_ValidationScriptsPartial" />
 }
-
