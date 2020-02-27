@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4 d-inline-flex">
-        <div>
+        <form asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
@@ -21,6 +21,10 @@
                 <label asp-for="EventName" class="control-label"></label>
                 <input asp-for="EventName" id="txtEventName" class="form-control" />
                 <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PackageList)
+                @Html.DropDownListFor(m => m.Selected, Model.PackageList, "SELECT PACKAGE", new { @class = "form-control" })
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
@@ -59,61 +63,27 @@
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Create</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Create</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
-@section  Scripts{ 
 
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                var _eventName = $('#txtEventName').val();
-                var _address = $("#txtAddress").val();
-                var _code = $("#txtCode").val();
-                var _description = $("#txtDesc").val();
-                var _eventDate = $("#txtEventDate").val();
-                var _location = $("#txtLocation").val();
-                var _type = $("#txtType").val();
-                var _remarks = $("#txtRemarks").val();
-
-                var _eventDetails =
-                {
-                    Address: _address,
-                    Code: _code,
-                    Description: _description,
-                    EventDate: _eventDate,
-                    EventName: _eventName,
-                    Location: _location,
-                    Type: _type,
-                    Remarks: _remarks,
-
-                };
-
-                $.post('/Coordinator/AddEvent', { _eventDetails: _eventDetails }).done(ReplyLog);
-
-
-            });
-
-        });
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Event added successfully!");
-                window.location = "/Coordinator/Index";
-            } else {
-                alert("Please enter the correct details!");
-            }
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Event submitted successfully!");
+            window.location = '/Coordinator/Index';
         }
 
-
+        function OnFailure(e) {
+            console.log(e);
+            alert("failed!");
+        }
 
     </script>
-
+    <partial name="_ValidationScriptsPartial" />
 }
-
+    
