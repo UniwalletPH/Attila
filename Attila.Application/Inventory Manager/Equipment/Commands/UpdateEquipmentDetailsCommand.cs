@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
