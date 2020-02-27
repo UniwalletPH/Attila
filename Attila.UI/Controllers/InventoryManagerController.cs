@@ -13,7 +13,9 @@ using Attila.Domain.Entities.Tables;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using EquipmentDetailsVM = Attila.UI.Models.EquipmentDetailsVM;
+using EquipmentInventoryVM = Attila.UI.Models.EquipmentInventoryVM;
 
 namespace Attila.UI.Controllers
 {
@@ -61,9 +63,43 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddEquipmentInventoryCommand()
+        public async Task<IActionResult> AddEquipmentInventoryCommand()
         {
-            return View();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + "|" + item.Name + "|" + item.Description
+                });
+            }
+
+
+            var getEquipmentRestock = await mediator.Send(new GetEquipmentStockQuery());
+            List<SelectListItem> _list2 = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentRestock)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Equipment ID: " + item.EquipmentDetailsID + " | Encoding Date: " + item.EncodingDate.Date
+                });
+            }
+
+
+
+
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            {
+                EquipmentDetailsList = _list,
+                EquipmentDeliveryList = _list2
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]
@@ -327,25 +363,16 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                if (foodDetails.Code != null && foodDetails.Name != null && 
-                    foodDetails.Specification != null && foodDetails.Description != null)
+                await mediator.Send(new AddFoodDetailsCommand
                 {
-                    await mediator.Send(new AddFoodDetailsCommand
-                    {
-                        Code = foodDetails.Code,
-                        Name = foodDetails.Name,
-                        Specification = foodDetails.Specification,
-                        Description = foodDetails.Description,
-                        Unit = foodDetails.Unit,
-                        FoodType = foodDetails.FoodType
-                    });
-                    _checker = true;
-                }
-                else
-                {
-                    _checker = false;
-                }
-                
+                    Code = foodDetails.Code,
+                    Name = foodDetails.Name,
+                    Specification = foodDetails.Specification,
+                    Description = foodDetails.Description,
+                    Unit = foodDetails.Unit,
+                    FoodType = foodDetails.FoodType
+                });
+                _checker = true;
             }
             catch (Exception)
             {
@@ -357,9 +384,43 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddFoodInventoryCommand()
+        public async Task<IActionResult> AddFoodInventoryCommand()
         {
-            return View();
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            var getFoodRestock = await mediator.Send(new GetFoodStockQuery());
+            List<SelectListItem> _list2 = new List<SelectListItem>();
+
+            foreach (var item in getFoodRestock)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Food ID: " + item.FoodDetailsID + " | Encoding Date: " + item.EncodingDate.Date
+                });
+            }
+
+
+
+
+            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            {
+                FoodDetailsList = _list,
+                FoodDeliveryList = _list2
+            };
+
+            return View(FoodDetailsListVM);
         }
 
         [HttpPost]
@@ -375,7 +436,8 @@ namespace Attila.UI.Controllers
                     ItemPrice = foodInventory.ItemPrice,
                     Remarks = foodInventory.Remarks,
                     UserID = foodInventory.UserID,
-                    FoodDetailsID = foodInventory.FoodDetailsID
+                    FoodDetailsID = foodInventory.FoodDetailsID,
+                    FoodRestockID = foodInventory.FoodRestockID
                 });
                 _checker = true;
             }
@@ -383,6 +445,7 @@ namespace Attila.UI.Controllers
             {
                 _checker = false;
             }
+
             return Json(_checker);
         }
 
