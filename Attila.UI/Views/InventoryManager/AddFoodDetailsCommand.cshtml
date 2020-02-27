@@ -7,8 +7,9 @@
 <h1>Add Food Details</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<form class="form-group" asp-action="AddFoodDetailsCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label">Code: </label>
@@ -42,7 +43,7 @@
                 <span asp-validation-for="Unit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FoodType" class="control-label"></label>
+                <label asp-for="FoodType" class="control-label">Food Type:</label>
                 <select id="txtFoodType" asp-for="FoodType" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Perishable</option>
@@ -54,59 +55,24 @@
             <div class="form-group">
                 <button id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Food details successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
 
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                if ($('#txtCode').val() &&
-                    $('#txtName').val() &&
-                    $('#txtSpecification').val() &&
-                    $('#txtDescription').val() &&
-                    $('#txtUnit').val() &&
-                    $('#txtFoodType').val()) {
-
-                    var _code = $('#txtCode').val();
-                    var _name = $('#txtName').val();
-                    var _specification = $('#txtSpecification').val();
-                    var _description = $('#txtDescription').val();
-                    var _unitType = $('#txtUnit').val();
-                    var _foodType = $('#txtFoodType').val();
-
-                    var _foodDetails =
-                    {
-                        Code: _code,
-                        Name: _name,
-                        Specification: _specification,
-                        Description: _description,
-                        Unit: _unitType,
-                        FoodType: _foodType
-                    };
-
-                    $.post('/InventoryManager/AddFoodDetailsCommand', { foodDetails: _foodDetails })
-                        .done(function (result) {
-                            if (result == true) {
-                                alert("Food details successfully added!");
-                                window.location = "/InventoryManager/Index";
-                            }
-                            else {
-                                alert("Failed!");
-                                window.location = "/InventoryManager/AddFoodDetailsCommand";
-                            }
-                        });
-
-                }
-
-                else {
-                    alert("Please fill in all the details.");
-                }
-
-
-            });
-        });
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddFoodDetailsCommand";
+            }
+        }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

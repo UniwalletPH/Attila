@@ -7,93 +7,65 @@
 <h1>Add Equipment Inventory</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
-            <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
-            <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="EquipmentDeliveryID" class="control-label">Equipment Delivery ID: </label>
-            <input id="EquipmentDeliveryID" asp-for="EquipmentDeliveryID" class="form-control" />
-            <span asp-validation-for="EquipmentDeliveryID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="control-label">Quantity: </label>
-            <input id="txtQuantity" asp-for="Quantity" class="form-control" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ItemPrice" class="control-label">Item Price: </label>
-            <input id="txtItemPrice" asp-for="ItemPrice" class="form-control" />
-            <span asp-validation-for="ItemPrice" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Remarks" class="control-label">Remarks: </label>
-            <input id="txtRemarks" asp-for="Remarks" class="form-control" />
-            <span asp-validation-for="Remarks" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserID" class="control-label">User ID: </label>
-            <input id="UserID" asp-for="UserID" class="form-control" />
-            <span asp-validation-for="UserID" class="text-danger"></span>
-        </div>
+<form class="form-group" asp-action="AddEquipmentInventoryCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
+                @Html.Label("Equipment Details List")
+                @Html.DropDownListFor(a => a.EquipmentDetailsID, Model.EquipmentDetailsList, "Select Equipment", new { @class = "form-control" })
+                <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentDeliveryID" class="control-label">Equipment Delivery ID: </label>
+                @Html.Label("Equipment Delivery List")
+                @Html.DropDownListFor(a => a.EquipmentDeliveryID, Model.EquipmentDeliveryList, "Select Delivery", new { @class = "form-control" })
+                <span asp-validation-for="EquipmentDeliveryID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity: </label>
+                <input id="txtQuantity" asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemPrice" class="control-label">Item Price: </label>
+                <input id="txtItemPrice" asp-for="ItemPrice" class="form-control" />
+                <span asp-validation-for="ItemPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label">Remarks: </label>
+                <input id="txtRemarks" asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label">User ID: </label>
+                <input id="UserID" asp-for="UserID" class="form-control" />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
 
-        <div class="form-group">
-            <button id="btnSubmit" class="btn btn-primary">Submit </button>
+            <div class="form-group">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit </button>
+            </div>
         </div>
     </div>
-</div>
+</form>
+
 
 @section Scripts {
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Equipment inventory successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
 
-                if ($('#txtQuantity').val() &&
-                    $('#txtItemPrice').val() &&
-                    $('#txtRemarks').val() &&
-                    $('#UserID').val() &&
-                    $('#EquipmentDetailsID').val() &&
-                    $('#EquipmentDeliveryID').val()) {
-
-                    var _quantity = $('#txtQuantity').val();
-                    var _itemPrice = $('#txtItemPrice').val();
-                    var _remarks = $('#txtRemarks').val();
-                    var _userID = $('#UserID').val();
-                    var _equipmentDetailsID = $('#EquipmentDetailsID').val();
-                    var _equipmentDeliveryID = $('#EquipmentDeliveryID').val();
-
-                    var _equipmentDelivery =
-                    {
-                        Quantity: _quantity,
-                        ItemPrice: _itemPrice,
-                        Remarks: _remarks,
-                        UserID: _userID,
-                        EquipmentDetailsID: _equipmentDetailsID,
-                        EquipmentDeliveryID: _equipmentDeliveryID
-                    };
-
-                    $.post('/InventoryManager/AddEquipmentInventoryCommand', { equipmentInventory: _equipmentDelivery })
-                        .done(function (result) {
-                            if (result == true) {
-                                alert("Equipment inventory successfully added!");
-                                window.location = "/InventoryManager/Index";
-                            }
-                            else {
-                                alert("Failed!");
-                                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
-                            }
-                        });
-                }
-
-                else {
-                    alert("Please fill in all the details.");
-                }
-
-            });
-        });
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddEquipmentInventoryCommand";
+            }
+        }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }
