@@ -33,7 +33,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
-                EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
+                var _equipmentRestockRequest = new EquipmentRestockRequest
                 {
                     Quantity = request.Quantity,
                     DateTimeRequest = request.DateTimeRequest,
