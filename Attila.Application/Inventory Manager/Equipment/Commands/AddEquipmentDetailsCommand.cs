@@ -10,7 +10,6 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentDetailsCommand : IRequest<bool>
     {
-
         public string Code { get; set; }
 
         public string Name { get; set; }
@@ -20,6 +19,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
         public UnitType UnitType { get; set; }
 
         public EquipmentType EquipmentType { get; set; }
+
         public class AddEquipmentDetailsCommandHandler : IRequestHandler<AddEquipmentDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;

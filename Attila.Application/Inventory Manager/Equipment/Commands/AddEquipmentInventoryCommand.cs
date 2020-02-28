@@ -37,7 +37,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 EquipmentInventory _equipmentInventory = new EquipmentInventory
                 {
                     Quantity = request.Quantity,
-                    EncodingDate = DateTime.Now,
+                    EncodingDate = request.EncodingDate,
                     ItemPrice = request.ItemPrice,
                     Remarks = request.Remarks,
                     UserID = request.UserID,

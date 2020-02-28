@@ -1,0 +1,134 @@
+﻿@model Attila.UI.Models.EventDetailsVM
+
+@{
+    ViewData["Title"] = "UpdateEvent";
+}
+
+<h1>UpdateEvent</h1>
+
+<h4>EventDetailsVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" id="txtId" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" id="txtCode" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventName" class="control-label"></label>
+                <input asp-for="EventName" id="txtEventName" class="form-control" />
+                <span asp-validation-for="EventName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select id="txtType" asp-for="Type" class="form-control">
+                    <option value="0">--please select a type--</option>
+                    <option value="1">Wedding</option>
+                    <option value="2">Birthday</option>
+                    <option value="3">Others</option>
+                    <option value="4">Graduation</option>
+                </select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" id="txtAddress" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BookingDate" class="control-label"></label>
+                <input asp-for="BookingDate" id="txtBookingDate" class="form-control" />
+                <span asp-validation-for="BookingDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventDate" class="control-label"></label>
+                <input asp-for="EventDate" id="txtEventDate" class="form-control" />
+                <span asp-validation-for="EventDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" id="txtDesc" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" id="txtLocation" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label"></label>
+                <input asp-for="Remarks" id="txtRemarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EventClientID" class="control-label"></label>
+                <input asp-for="EventClientID" id="txtEventClientId" class="form-control" />
+                <span asp-validation-for="EventClientID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                var _eventName = $('#txtEventName').val();
+                var _address = $("#txtAddress").val();
+                var _bookingDate = $("#txtBookingDate").val();
+                var _code = $("#txtCode").val();
+                var _description = $("#txtDesc").val();
+                var _eventDate = $("#txtEventDate").val();]
+                var _location = $("#txtLocation").val();
+                var _type = $("#txtType").val();
+                var _remarks = $("#txtRemarks").val();
+
+                var _eventDetails =
+                {
+                    Address: _address,
+                    BookingDate: _bookingDate,
+                    Code: _code,
+                    Description: _description,
+                    EventDate: _eventDate,
+                    EventName: _eventName,
+                    Location: _location,
+                    Type: _type,
+                    Remarks: _remarks,
+
+                };
+
+                $.post('/Coordinator/AddEventPayment', { _eventDetails: _eventDetails }).done(ReplyLog);
+
+
+            });
+
+        });
+
+        function ReplyLog(reply) {
+            console.log(reply);
+            if (reply == true) {
+                console.log("nice");
+                alert("Event updated successfully!");
+                window.location = "/Coordinator/Index";
+                $().html();
+
+            } else {
+                alert("Please enter the correct details!");
+            }
+        }
+
+    </script>
+}
+

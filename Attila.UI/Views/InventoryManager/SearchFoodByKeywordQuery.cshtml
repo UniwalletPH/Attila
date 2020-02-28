@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Food.Queries.FoodDetailsVM>
+
+@{
+    ViewData["Title"] = "SearchFoodByKeywordQuery";
+}
+
+<h1>Search Food By Keyword</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter keyword: </label>
+        <input id="txtKeyword" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                if ($('#txtKeyword').val()) {
+
+                    var _searchedKeyword = $('#txtKeyword').val();
+
+                    $.get('/InventoryManager/SearchFoodByKeywordResult', { searchedKeyword: _searchedKeyword })
+                        .done(function () {
+                            alert("Food keyword successfully searched!");
+                            window.location = "/InventoryManager/SearchFoodByKeywordResult";
+                        })
+                        .fail(function (error) {
+                            alert("Keyword does not exist!")
+                            $("#txtKeyword").val("");
+                        });
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+            });
+        });
+
+    </script>
+}

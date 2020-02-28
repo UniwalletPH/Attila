@@ -7,15 +7,10 @@
 <h1>Add Food Details</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddFoodDetailsCommand">
+<form class="form-group" asp-action="AddFoodDetailsCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="Code" class="control-label">Code: </label>
                 <input id="txtCode" asp-for="Code" class="form-control" />
@@ -39,7 +34,7 @@
             <div class="form-group">
                 <label asp-for="Unit" class="control-label">Unit: </label>
                 <select id="txtUnit" asp-for="Unit" class="form-control">
-                    <option value="0"> -- select an option -- </option>
+                    <option value=""> -- select an option -- </option>
                     <option value="1">Piece</option>
                     <option value="2">Box</option>
                     <option value="3">Dozen</option>
@@ -48,9 +43,9 @@
                 <span asp-validation-for="Unit" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FoodType" class="control-label"></label>
+                <label asp-for="FoodType" class="control-label">Food Type:</label>
                 <select id="txtFoodType" asp-for="FoodType" class="form-control">
-                    <option value="0"> -- select an option -- </option>
+                    <option value=""> -- select an option -- </option>
                     <option value="1">Perishable</option>
                     <option value="2">Non-perishable</option>
                     <option value="3">Others</option>
@@ -60,46 +55,24 @@
             <div class="form-group">
                 <button id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
-
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                var _code = $('#txtCode').val();
-                var _name = $('#txtName').val();
-                var _specification = $('#txtSpecification').val();
-                var _description = $('#txtDescription').val();
-                var _unitType = $('#txtUnit').val();
-                var _foodType = $('#txtFoodType').val();
-
-                var _equipmentDetails =
-                {
-                    Code: _code,
-                    Name: _name,
-                    Specification: _specification,
-                    Description: _description,
-                    UnitType: _unitType,
-                    FoodType: _foodType
-                };
-
-                $.post('/InventoryManager/AddEquipmentDetailsCommand', { foodDetails: _equipmentDetails }).done(function (data) { InputResult(data) });
-            });
-        });
-
-        function InputResult(result) {
+    <script type="text/javascript">
+        function OnSuccess(result) {
             if (result == true) {
                 alert("Food details successfully added!");
                 window.location = "/InventoryManager/Index";
             }
+
             else {
                 alert("Failed!");
-                window.location = "/InventoryManager/AddEquipmentDetailsCommand";
+                window.location = "/InventoryManager/AddFoodDetailsCommand";
             }
         }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

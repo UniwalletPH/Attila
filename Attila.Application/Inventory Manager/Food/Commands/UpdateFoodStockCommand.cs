@@ -8,8 +8,8 @@ namespace Atilla.Application.Food.Commands
 {
     public class UpdateFoodStockCommand : IRequest<bool>
     {
-        public int SearchedID { get; set; }
-        public int NewFoodQuantity { get; set; }
+        public int ID { get; set; }
+        public int Quantity { get; set; }
 
         public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockCommand, bool>
         {
@@ -20,11 +20,11 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.SearchedID);
+                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.ID);
 
                 if (_updatedFoodStock != null)
                 {
-                    _updatedFoodStock.Quantity = request.NewFoodQuantity;
+                    _updatedFoodStock.Quantity = request.Quantity;
 
                     await dbContext.SaveChangesAsync();
 

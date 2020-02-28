@@ -36,7 +36,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 var _equipmentRestockRequest = new EquipmentRestockRequest
                 {
                     Quantity = request.Quantity,
-                    DateTimeRequest = DateTime.Now,
+                    DateTimeRequest = request.DateTimeRequest,
                     EquipmentDetailsID = request.EquipmentDetailsID,
                     Status = request.Status,
                     UserID = request.UserID
@@ -46,8 +46,6 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 await dbContext.SaveChangesAsync();
 
                 return true;
-
-
             }
         }
     }

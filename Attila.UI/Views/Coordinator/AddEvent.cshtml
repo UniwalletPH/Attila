@@ -6,11 +6,11 @@
 
 <h1>Add Event</h1>
 
-<h4>Please input the specified information.</h4>
+<h4>Event Details</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <div>
+    <div class="col-md-4 d-inline-flex">
+        <form asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
@@ -23,91 +23,67 @@
                 <span asp-validation-for="EventName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.LabelFor(m => m.PackageList)
+                @Html.DropDownListFor(m => m.Selected, Model.PackageList, "SELECT PACKAGE", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <input asp-for="Type" class="form-control" />
+                <select id="txtType" asp-for="Type" class="form-control">
+                    <option value="0">--please select a type--</option>
+                    <option value="1">Wedding</option>
+                    <option value="2">Birthday</option>
+                    <option value="3">Others</option>
+                    <option value="4">Graduation</option>
+                </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EventStatus" class="control-label"></label>
-                <input asp-for="EventStatus" class="form-control" />
-                <span asp-validation-for="EventStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
+                <input asp-for="Address" id="txtAddress" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="BookingDate" class="control-label"></label>
-                <input asp-for="BookingDate" class="form-control" />
-                <span asp-validation-for="BookingDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="EventDate" class="control-label"></label>
-                <input asp-for="EventDate" class="form-control" />
+                <input asp-for="EventDate" id="txtEventDate" class="form-control" />
                 <span asp-validation-for="EventDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
+                <input asp-for="Description" id="txtDesc" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
+                <input asp-for="Location" id="txtLocation" class="form-control" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" class="form-control" />
+                <input asp-for="Remarks" id="txtRemarks" class="form-control" />
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
-
             <div class="form-group">
-                <button id="btnSubmit" value="Create" class="btn btn-primary" />
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Create</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script>
-        //var txtUsername = $("#txtUsername").val();
-        $('document').ready(function () {
-            //ReplyLog();
-            $('#submitBtn').on('click', function () {
-                alert("Event added successfully!");
-                var _username = $('#txtUsername').val();
-                var _password = $('#txtPassword').val();
-                var _email = $('#txtEmail').val();
-                var _confirmpassword = $('#txtConfirmPassword').val();
-
-                var _user =
-                {
-                    Username: _username,
-                    Password: _password,
-                    Email: _email,
-                    ConfirmPassword: _confirmpassword
-                };
-
-                $.post('/User/Register', { register: _user }).done(function (a) {
-                    ReplyLog(a)
-                });
-
-            });
-
-        });
-
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Registered Successfully!");
-                window.location = "/User/RegisterSuccess";
-            }
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Event submitted successfully!");
+            window.location = '/Coordinator/Index';
         }
+
+        function OnFailure(e) {
+            console.log(e);
+            alert("failed!");
+        }
+
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }
+    

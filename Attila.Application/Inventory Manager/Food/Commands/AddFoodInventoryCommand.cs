@@ -40,11 +40,12 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                 {
                     Quantity = request.Quantity,
                     ExpirationDate = request.ExpirationDate,
-                    EncodingDate = DateTime.Now,
+                    EncodingDate = request.EncodingDate,
                     ItemPrice = request.ItemPrice,
                     Remarks = request.Remarks,
                     UserID = request.UserID,
-                    FoodDetailsID = request.FoodDetailsID
+                    FoodDetailsID = request.FoodDetailsID,
+                    FoodRestockID = request.FoodRestockID
                 };
 
                 dbContext.FoodsInventory.Add(_foodInventory);

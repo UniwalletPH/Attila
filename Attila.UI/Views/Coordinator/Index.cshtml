@@ -3,52 +3,109 @@
     ViewData["Title"] = "Index";
 }
 
+<h1>EVENT MANAGER</h1>
+</br>
+</br>
+</br>
+<div>
+    <button id="btnAddEvent" class="btn btn-primary">ADD EVENT</button>
+    </br>
+    </br>
+    <button id="btnAddEventPackage" class="btn btn-primary">ADD EVENT PACKAGE</button>
+    </br>
+    </br>
+    <button id="btnAddClientDetails" class="btn btn-primary">ADD CLIENT DETAILS</button>
+    </br>
+    </br>
+    <button id="btnAddEventPayment" class="btn btn-primary">ADD EVENT PAYMENT</button>
+    </br>
+    </br>
+    <button id="btnRequestEventRequirements" class="btn btn-primary">REQUEST EVENT REQUIREMENTS</button>
+    </br>
+    </br>
+    <button id="btnUpdateEvent"class="btn btn-primary">UPDATE EVENT</button>
+    </br>
+    </br>
+    <button id="btnUpdateEventPackage" class="btn btn-primary">UPDATE EVENT PACKAGE</button>
+    </br>
+    </br>
+    <button id="btnUpdateClientDetails" class="btn btn-primary">UPDATE CLIENT DETAILS</button>
+    </br>
+    </br>
+    <button id ="btnUpdateEventPayment" class="btn btn-primary">UPDATE EVENT PAYMENT STATUS</button>
+    </br>
+    </br>
+    <button id="btnDeleteEvent" class="btn btn-primary">DELETE EVENT</button>
+    </br>
+    </br>
+    <button id="btnDeleteEventPackage" class="btn btn-primary">DELETE EVENT PACKAGE</button>
+    </br>
+    </br>
+    <button id="btnAddAdditionalDuration" class="btn btn-primary">ADD ADDITIONAL DURATION PACKAGE</button>
+    </br>
+    </br>
+    <button id="btnAddAdditionalEquipment" class="btn btn-primary">ADD ADDITIONAL EQUIPMENT PACKAGE</button>
 
 
-    <div class="d-flex align-content-start" id="wrapper">
+</div>
+
+@section Scripts{
+
+    <script>
+        $("document").ready(function () {
+            $('#btnAddEvent').on('click', function () {
+                window.location = "/Coordinator/AddEvent";
+            });
+
+            $('#btnAddEventPackage').on('click', function () {
+                window.location = "Coordinator/AddEventPackage";
+            });
+
+            $('#btnAddClientDetails').on('click', function () {
+                window.location = "Coordinator/AddClientDetails";
+            });
+
+            $('#btnAddEventPayment').on('click', function () {
+                window.location = "Coordinator/AddEventPayment";
+            });
+
+            $('#btnRequestEventRequirements').on('click', function () {
+                window.location = "Coordinator/RequestEventRequirements";
+            });
+
+            $('#btnUpdateEvent').on('click', function () {
+                window.location = "Coordinator/UpdateEvent";
+            });
+
+            $('#btnUpdateEventPackage').on('click', function () {
+                window.location = "Coordinator/UpdateEventPackage";
+            });
+
+            $('#btnUpdateClientDetails').on('click', function () {
+                window.location = "Coordinator/UpdateClientDetails";
+            });
+
+            $('#btnUpdateClientDetails').on('click', function () {
+                window.location = "Coordinator/UpdateClientDetails";
+            });
+
+            $('#btnUpdateEventPayment').on('click', function () {
+                window.location = "Coordinator/UpdateEventPayment";
+            });
+
+            $('#btnDeleteEvent').on('click', function () {
+                window.location = "Coordinator/DeleteEvent";
+            });
+
+            $('#btnDeleteEventPackage').on('click', function () {
+                window.location = "Coordinator/DeleteEventPackage";
+            });
+        });
 
 
-        <!-- Sidebar -->
-        <div>
-            <h3>Coordinator-1</h3>
-            <div class="list-group list-group-flush bg-light border">
-                <center>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">HOME</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">EVENTS</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">NOTIFICATIONS</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">REPORTS</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">PROFILE</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-light" style="height:80px;">LOGOUT</a>
-                </center>
 
-            </div>
 
-        </div>
-        
-        <div class="container-fluid d-inline-flex">
-            <div class="p-2" style="height:200px;width:200px;background-color:orange;color:white;padding-right:100px">
-                <h3 align="center">ON-GOING EVENTS</h3>
-                </br>
-                </br>
-                <h3 align="center">0</h3>
-            </div>
-            <div class="p-2" style="height:200px;width:200px;background-color:orange;color:white;">
-                <h3 align="center">INCOMING EVENTS</h3>
-                </br>
-                </br>
-                <h3 align="center">0</h3>
-            </div>
-            <h1 class="mt-4"></h1>
-            </div>
-            
+    </script>
 
-    </div>
-        
-        <!-- /#sidebar-wrapper -->
-        <!-- Page Content -->
-        @section Scripts{
-
-            <script></script>
-
-        }
+}
 

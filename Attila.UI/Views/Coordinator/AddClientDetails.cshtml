@@ -1,0 +1,63 @@
+﻿@model Attila.UI.Models.EventClientVM
+
+@{
+    ViewData["Title"] = "AddClientDetails";
+}
+
+<h1>AddClientDetails</h1>
+
+<h4>EventClientVM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Coordinator" asp-action="AddClientDetails" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" id="txtFirstName" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label"></label>
+                <input asp-for="Lastname" id="txtLastName" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" id="txtAddress" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" id="txtEmail" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contact" class="control-label"></label>
+                <input asp-for="Contact" id="txtContact" class="form-control" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Client added successfully!");
+            window.location = '/Coordinator/Index';
+        }
+
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
+        }
+
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

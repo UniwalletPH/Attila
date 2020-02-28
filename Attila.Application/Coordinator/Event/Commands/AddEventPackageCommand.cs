@@ -12,7 +12,6 @@ namespace Attila.Application.Event.Commands
     public class AddEventPackageCommand : IRequest<bool>
     {
         //public EventPackageDetails PackageDetails;
-        public int ID { get; set; }
 
         public string Code { get; set; }
 
@@ -41,7 +40,7 @@ namespace Attila.Application.Event.Commands
                     Description = request.Description,
                     Duration = request.Duration,
                     NumberOfGuest = request.NumberOfGuest,
-                    Rate = request.Rate,                
+                    Rate = request.Rate,
 
                 };
 

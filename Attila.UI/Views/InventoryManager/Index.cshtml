@@ -8,40 +8,97 @@
 <br />
 <br />
 <br />
-<button id="btnAddEquipmentDetails" class="btn btn-primary">ADD EQUIPMENT DETAILS</button>
-<br />
-<br />
-<button id="btnAddEquipmentInventory" class="btn btn-primary">ADD EQUIPMENT INVENTORY</button>
-<br />
-<br />
-<button id="btnAddEquipmentRestock" class="btn btn-primary">ADD EQUIPMENT RESTOCK</button>
-<br />
-<br />
-<button id="btnDeleteEquipment" class="btn btn-primary">DELETE EQUIPMENT</button>
-<br />
-<br />
-<button id="btnRequestEquipmentRestock" class="btn btn-primary">REQUEST EQUIPMENT RESTOCK</button>
-<br />
-<br />
-<button id="btnUpdateEquipmentDetails" class="btn btn-primary">UPDATE EQUIPMENT DETAILS</button>
-<br />
-<br />
-<button id="btnUpdateEquipmentStock" class="btn btn-primary">UPDATE EQUIPMENT STOCK</button>
-<br />
-<br />
-<button id="btnViewEquipmentDetails" class="btn btn-primary">VIEW  EQUIPMENT DETAILS</button>
-<br />
-<br />
-<button id="btnViewEquipmentStock" class="btn btn-primary">VIEW EQUIPMENT STOCK</button>
-<br />
-<br />
-<button id="btnSearchEquipmentByID" class="btn btn-primary">SEARCH EQUIPMENT BY ID</button>
-<br />
-<br />
-<button id="btnSearchEquipmentByKeyword" class="btn btn-primary">SEARCH EQUIPMENT BY KEYWORD</button>
-<br />
-<br />
+    <table>
+        <tr>
+            <td >
+                <button id="btnAddEquipmentDetails" class="btn btn-primary">ADD EQUIPMENT DETAILS</button>
+                <button id="btnAddFoodDetails" class="btn btn-primary">ADD FOOD DETAILS</button>
+                <br />
+                <br />
+            </td>
 
+        </tr>
+
+        <tr>
+            <td>
+                <button id="btnAddEquipmentInventory" class="btn btn-primary">ADD EQUIPMENT INVENTORY</button>
+                <button id="btnAddFoodInventory" class="btn btn-primary">ADD FOOD INVENTORY</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnAddEquipmentRestock" class="btn btn-primary">ADD EQUIPMENT RESTOCK</button>
+                <button id="btnAddFoodRestock" class="btn btn-primary">ADD FOOD RESTOCK</button>
+                <br />
+                <br />
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnDeleteEquipment" class="btn btn-primary">DELETE EQUIPMENT</button>
+                <button id="btnDeleteFood" class="btn btn-primary">DELETE FOOD</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnRequestEquipmentRestock" class="btn btn-primary">REQUEST EQUIPMENT RESTOCK</button>
+                <button id="btnRequestFoodRestock" class="btn btn-primary">REQUEST FOOD RESTOCK</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnUpdateEquipmentDetails" class="btn btn-primary">UPDATE EQUIPMENT DETAILS</button>
+                <button id="btnUpdateFoodDetails" class="btn btn-primary">UPDATE FOOD DETAILS</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnUpdateEquipmentStock" class="btn btn-primary">UPDATE EQUIPMENT STOCK</button>
+                <button id="btnUpdateFoodStock" class="btn btn-primary">UPDATE FOOD STOCK</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnViewEquipmentDetails" class="btn btn-primary">VIEW  EQUIPMENT DETAILS</button>
+                <button id="btnViewFoodDetails" class="btn btn-primary">VIEW  FOOD DETAILS</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnViewEquipmentStock" class="btn btn-primary">VIEW EQUIPMENT STOCK</button>
+                <button id="btnViewFoodStock" class="btn btn-primary">VIEW FOOD STOCK</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnSearchEquipmentByID" class="btn btn-primary">SEARCH EQUIPMENT BY ID</button>
+                <button id="btnSearchFoodByID" class="btn btn-primary">SEARCH FOOD BY ID</button>
+                <br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="btnSearchEquipmentByKeyword" class="btn btn-primary">SEARCH EQUIPMENT BY KEYWORD</button>
+                <button id="btnSearchFoodByKeyword" class="btn btn-primary">SEARCH FOOD BY KEYWORD</button>
+            </td>
+        </tr>
+    </table>
 
 
 @section Scripts {
@@ -92,6 +149,51 @@
 
             $('#btnSearchEquipmentByKeyword').on('click', function () {
                 window.location = "/InventoryManager/SearchEquipmentByKeywordQuery";
+            });
+
+
+            $('#btnAddFoodDetails').on('click', function () {
+                window.location = "/InventoryManager/AddFoodDetailsCommand";
+            });
+
+            $('#btnAddFoodInventory').on('click', function () {
+                window.location = "/InventoryManager/AddFoodInventoryCommand";
+            });
+
+            $('#btnAddFoodRestock').on('click', function () {
+                window.location = "/InventoryManager/AddFoodRestockCommand";
+            });
+
+            $('#btnDeleteFood').on('click', function () {
+                window.location = "/InventoryManager/DeleteFoodDetailsCommand";
+            });
+
+            $('#btnRequestFoodRestock').on('click', function () {
+                window.location = "/InventoryManager/RequestFoodRestockCommand";
+            });
+
+            $('#btnUpdateFoodDetails').on('click', function () {
+                window.location = "/InventoryManager/UpdateFoodDetailsCommand";
+            });
+
+            $('#btnUpdateFoodStock').on('click', function () {
+                window.location = "/InventoryManager/UpdateFoodStockCommand";
+            });
+
+            $('#btnViewFoodDetails').on('click', function () {
+                window.location = "/InventoryManager/GetFoodDetailsQuery";
+            });
+
+            $('#btnViewFoodStock').on('click', function () {
+                window.location = "/InventoryManager/GetFoodStockQuery";
+            });
+
+            $('#btnSearchFoodByID').on('click', function () {
+                window.location = "/InventoryManager/SearchFoodByIdQuery";
+            });
+
+            $('#btnSearchFoodByKeyword').on('click', function () {
+                window.location = "/InventoryManager/SearchFoodByKeywordQuery";
             });
         });
 

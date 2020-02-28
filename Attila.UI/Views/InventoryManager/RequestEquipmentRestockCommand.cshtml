@@ -7,85 +7,58 @@
 <h1>Request Equipment Restock</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="ID" class="control-label"></label>
-            <input asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>*@
-        <div class="form-group">
-            <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
-            <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
-            <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="control-label">Quantity: </label>
-            <input id="txtQuantity" asp-for="Quantity" class="form-control" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
-        </div>
-        @*<div class="form-group">
-            <label asp-for="DateTimeRequest" class="control-label">Date </label>
-            <input asp-for="DateTimeRequest" class="form-control" />
-            <span asp-validation-for="DateTimeRequest" class="text-danger"></span>
-        </div>*@
 
-        <div class="form-group">
-            <label asp-for="Status" class="control-label">Status: </label>
-            <select id="txtStatus" asp-for="Status" class="form-control">
-                <option value="0"> -- select an option -- </option>
-                <option value="1">Pending</option>
-                <option value="2">Approved</option>
-                <option value="3">Declined</option>
-            </select>
-            <span asp-validation-for="Status" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="UserID" class="control-label"></label>
-            <input id="UserID" asp-for="UserID" class="form-control" />
-            <span asp-validation-for="UserID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <button id="btnSubmit" class="btn btn-primary">Submit</button>
+<form class="form-group" asp-action="RequestEquipmentRestockCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
+                <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
+                <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity: </label>
+                <input id="txtQuantity" asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Status: </label>
+                <select id="txtStatus" asp-for="Status" class="form-control">
+                    <option value=""> -- select an option -- </option>
+                    <option value="1">Pending</option>
+                    <option value="2">Approved</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <input id="UserID" asp-for="UserID" class="form-control" />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
-</div>
+</form>
+
 
 @section Scripts {
-
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-                alert("test");
-                var _equipmentDetailsID = $('#EquipmentDetailsID').val();
-                var _quantity = $('#txtQuantity').val();
-                var _status = $('#txtStatus').val();
-                var _userID = $('#UserID').val();
-
-                
-                var _equipmentRestockRequest =
-                {
-                    EquipmentDetailsID: _equipmentDetailsID,
-                    Quantity: _quantity,
-                    Status: _status,
-                    UserID: _userID
-                };
-
-
-                $.post('/InventoryManager/RequestEquipmentRestockCommand', {equipmentRestockRequest: _equipmentRestockRequest }).done(function (data) { InputResult(data) });
-            });
-        });
-
-        function InputResult(result) {
+    <script type="text/javascript">
+        function OnSuccess(result) {
             if (result == true) {
                 alert("Equipment restock successfully requested!");
                 window.location = "/InventoryManager/Index";
             }
+
             else {
                 alert("Failed!");
                 window.location = "/InventoryManager/RequestEquipmentRestockCommand";
             }
         }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

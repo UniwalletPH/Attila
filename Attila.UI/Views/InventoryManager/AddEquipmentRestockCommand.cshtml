@@ -7,22 +7,18 @@
 <h1>Add Equipment Restock</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddEquipmentRestockCommand">
+
+<form class="form-group" asp-action="AddEquipmentRestockCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="DeliveryDate" class="control-label">Delivery Date: </label>
                 <input id="txtDeliveryDate" asp-for="DeliveryDate" class="form-control" />
                 <span asp-validation-for="DeliveryDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ReceiptImage" class="control-label">ReceiptImage</label>
+                <label asp-for="ReceiptImage" class="control-label">Receipt Image: </label>
                 <input id="imgReceiptImage" asp-for="ReceiptImage" class="form-control" />
                 <span asp-validation-for="ReceiptImage" class="text-danger"></span>
             </div>
@@ -39,41 +35,24 @@
             <div class="form-group">
                 <button id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                var _deliveryDate = $('#txtDeliveryDate').val();
-                var _receiptImage = $('#imgReceiptImage').val();
-                var _deliveryPrice = $('#txtDeliveryPrice').val();
-                var _remarks = $('#txtRemarks').val();
-
-                var _equipmentRestock =
-                {
-                    DeliveryDate: _deliveryDate,
-                    ReceiptImage: _receiptImage,
-                    DeliveryPrice: _deliveryPrice,
-                    Remarks: _remarks
-                };
-
-                $.post('/InventoryManager/AddEquipmentRestockCommand', { equipmentRestock: _equipmentRestock }).done(function (data) { InputResult(data) });
-            });
-        });
-
-        function InputResult(result) {
+    <script type="text/javascript">
+        function OnSuccess(result) {
             if (result == true) {
                 alert("Equipment restock successfully added!");
                 window.location = "/InventoryManager/Index";
             }
+
             else {
                 alert("Failed!");
                 window.location = "/InventoryManager/AddEquipmentRestockCommand";
             }
         }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

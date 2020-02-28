@@ -1,63 +1,119 @@
-﻿@model Attila.Domain.Entities.Tables.FoodDetails
+﻿@model Attila.UI.Models.FoodDetailsVM
 
 @{
     ViewData["Title"] = "UpdateFoodDetailsCommand";
 }
 
-<h1>UpdateFoodDetailsCommand</h1>
+<h1>Update Food Details</h1>
 
-<h4>FoodDetails</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="UpdateFoodDetailsCommand">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Specification" class="control-label"></label>
-                <input asp-for="Specification" class="form-control" />
-                <span asp-validation-for="Specification" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Unit" class="control-label"></label>
-                <input asp-for="Unit" class="form-control" />
-                <span asp-validation-for="Unit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FoodType" class="control-label"></label>
-                <input asp-for="FoodType" class="form-control" />
-                <span asp-validation-for="FoodType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="ID" class="control-label">ID:</label>
+            <input id="txtID" asp-for="ID" class="form-control" />
+            <span asp-validation-for="ID" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Code" class="control-label">Code:</label>
+            <input id="txtCode" asp-for="Code" class="form-control" />
+            <span asp-validation-for="Code" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name:</label>
+            <input id="txtName" asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Specification" class="control-label">Specification:</label>
+            <input id="txtSpecification" asp-for="Specification" class="form-control" />
+            <span asp-validation-for="Specification" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label">Description:</label>
+            <input id="txtDescription" asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Unit" class="control-label">Unit Type:</label>
+            <select id="txtUnitType" asp-for="Unit" class="form-control">
+                <option value="0"> -- select an option -- </option>
+                <option value="1">Piece</option>
+                <option value="2">Box</option>
+                <option value="3">Dozen</option>
+                <option value="4">Others</option>
+            </select>
+            <span asp-validation-for="Unit" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="FoodType" class="control-label">Food Type:</label>
+            <select id="txtFoodType" asp-for="FoodType" class="form-control">
+                <option value="0"> -- select an option -- </option>
+                <option value="1">Perishable</option>
+                <option value="2">Non-perishable</option>
+                <option value="3">Others</option>
+            </select>
+            <span asp-validation-for="FoodType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $('document').ready(function () {
+            $('#btnSubmit').on('click', function () {
+
+                if ($('#txtID').val() &&
+                    $('#txtCode').val() &&
+                    $('#txtName').val() &&
+                    $('#txtSpecification').val() &&
+                    $('#txtDescription').val() &&
+                    $('#txtUnitType').val() &&
+                    $('#txtFoodType').val()) {
+
+                    var _id = $('#txtID').val();
+                    var _code = $('#txtCode').val();
+                    var _name = $('#txtName').val();
+                    var _specification = $('#txtSpecification').val();
+                    var _description = $('#txtDescription').val();
+                    var _unitType = $('#txtUnitType').val();
+                    var _foodType = $('#txtFoodType').val();
+
+                    var _foodDetails =
+                    {
+                        ID: _id,
+                        Code: _code,
+                        Name: _name,
+                        Specification: _specification,
+                        Description: _description,
+                        Unit: _unitType,
+                        FoodType: _foodType
+                    };
+
+                    $.post('/InventoryManager/UpdateFoodDetailsCommand', { foodDetails: _foodDetails })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Food details successfully updated!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/UpdateFoodDetailsCommand";
+                            }
+                        });
+
+                }
+
+                else {
+                    alert("Please fill in all the details.");
+                }
+
+            });
+        });
+    </script>
 }

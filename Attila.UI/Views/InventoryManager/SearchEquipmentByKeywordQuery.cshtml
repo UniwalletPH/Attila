@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.UI.Models.EquipmentDetailsVM>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM>
 
 @{
     ViewData["Title"] = "SearchEquipmentByKeywordQuery";
@@ -8,64 +8,11 @@
 
 <div class="row">
     <div class="col-md-4">
-        <label class="control-label">Enter keyword: </label>
+        <label class="control-label">Enter keyword:asd </label>
         <input id="txtKeyword" class="form-control" />
         <br />
         <button id="btnSubmit" class="btn btn-primary">Submit</button>
     </div>
-</div>
-<br /><br /><br /><br/>
-<div id="searchView" style="display:none">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.ID)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Code)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.UnitType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EquipmentType)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @*@foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ID)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Code)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.UnitType)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EquipmentType)
-                    </td>
-                </tr>
-            }*@
-        </tbody>
-    </table>
 </div>
 
 @section Scripts {
@@ -74,26 +21,32 @@
 
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
-                alert("test");
-                var _searchedKeyword = $('#txtKeyword').val();
 
-                $.post('/InventoryManager/SearchEquipmentByKeywordQuery', { searchKeyword: _searchedKeyword }).done(function (data) { InputResult(data) });
+                if ($('#txtKeyword').val()) {
 
+                    var _searchedKeyword = $('#txtKeyword').val();
+
+                    $.get('/InventoryManager/SearchEquipmentByKeywordResult', { searchKeyword: _searchedKeyword })
+                        .done(function (result) {
+                            if (result != null) {
+                                alert("Equipment keyword successfully searched!");
+                                window.location = "/InventoryManager/SearchEquipmentByKeywordResult";
+                            }
+                            else {
+                                alert("Keyword does not exist!");
+                            }
+                        })
+                        .fail(function (error) {
+                            alert("Keyword does not exist!")
+                            $("#txtKeyword").val("");
+                        });
+                }
+
+                else {
+                    alert("Please enter keyword.");
+                }
             });
         });
-
-        function InputResult(result) {
-            if (result != null) {
-                alert("Equipment keyword successfully searched!");
-                $('#searchView').show();
-                //must get the value of the returned object and pass it to the model in the UI
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/SearchEquipmentByKeywordQuery";
-            }
-        }
-        debugger;
 
     </script>
 }

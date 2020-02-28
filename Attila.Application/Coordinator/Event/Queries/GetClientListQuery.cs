@@ -5,16 +5,17 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class GetClientListQuery : IRequest<List<SearchClientVM>>
+    public class GetClientListQuery : IRequest<IEnumerable<SearchClientVM>>
     {
 
-        public class GetClientListQueryHandler : IRequestHandler<GetClientListQuery, List<SearchClientVM>>
+        public class GetClientListQueryHandler : IRequestHandler<GetClientListQuery, IEnumerable<SearchClientVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetClientListQueryHandler(IAttilaDbContext dbContext)
@@ -22,13 +23,21 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<SearchClientVM>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<SearchClientVM>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
             {
-                var _viewClientList = await dbContext.EventClients.ToListAsync();
+                var _viewClientList = await dbContext.EventClients.Select(a => new SearchClientVM 
+                {
+                    ID = a.ID,
+                    Lastname = a.Lastname, 
+                    Firstname = a.Firstname,
+                    Address = a.Address,
+                    Email = a.Email,
+                    Contact = a.Contact
 
-                var _search = new List<SearchClientVM>();
+                }).ToListAsync();
 
-                return _search;
+
+                return _viewClientList;
             }
         }
 

@@ -1,37 +1,51 @@
-﻿@model IEnumerable<Attila.Domain.Entities.Tables.EquipmentDetails>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM>
 
 @{
     ViewData["Title"] = "DeleteEquipmentDetailsCommand";
 }
 
 <h1>Delete Equipment</h1>
+<hr />
+
+<form class="form-group" asp-action="DeleteEquipmentDetailsCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label">Enter equipment ID: </label>
+            <input asp-for="ID" id="txtDeleteId" class="form-control" />
+            <br />
+            <button id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+    <br />
+    <br />
+</form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
+                @Html.DisplayName("ID ")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Code)
+                @Html.DisplayName("Code")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayName("Name")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayName("Description")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UnitType)
+                @Html.DisplayName("Unit Type")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EquipmentType)
+                @Html.DisplayName("Equipment Type")
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var item in Model)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>
@@ -53,52 +67,59 @@
                     @Html.DisplayFor(modelItem => item.EquipmentType)
                 </td>
             </tr>
-        }*@
+        }
     </tbody>
 </table>
 
 
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter equipment ID: </label>
-        <input id="txtDeleteId" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
-    </div>
-</div>
-
 @section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Equipment successfully deleted!");
+                window.location = "/InventoryManager/Index";
+            }
+
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+            }
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+@*@section Scripts {
 
     <script>
 
         $('document').ready(function () {
             $('#btnSubmit').on('click', function () {
 
-                var _deleteId = $('#txtDeleteId').val();
+                if ($('#txtDeleteId').val()) {
 
-                $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId }).done(function (data) { InputResult(data) });
+                    var _deleteId = $('#txtDeleteId').val();
 
-
+                    $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId })
+                        .done(function (result) {
+                            if (result == true) {
+                                alert("Equipment successfully deleted!");
+                                window.location = "/InventoryManager/Index";
+                            }
+                            else {
+                                alert("Failed!");
+                                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+                            }
+                        });
+                }
+                else {
+                    alert("Please enter ID to delete.");
+                }
             });
         });
 
-        function InputResult(result) {
-            if (result == true) {
-                alert("Equipment successfully deleted!");
-                window.location = "/InventoryManager/Index";
-            }
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
-            }
-        }
-
     </script>
-}
+}*@
