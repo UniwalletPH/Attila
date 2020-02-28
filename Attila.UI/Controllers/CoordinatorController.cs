@@ -298,7 +298,7 @@ namespace Attila.UI.Controllers
             {
                 flag = false;
             }
-                
+                 
             
             return Json(flag);
         }
