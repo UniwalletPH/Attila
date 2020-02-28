@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Attila.Application.Inventory_Manager.Food.Queries
+namespace Attila.UI.Models
 {
     public class FoodRestockRequestVM
     {
         public int ID { get; set; }
 
         public int Quantity { get; set; }
+
 
         public DateTime DateTimeRequest { get; set; }
 
@@ -19,7 +23,5 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
         public Status Status { get; set; }
 
         public int UserID { get; set; }
-
-        public User User { get; set; }
     }
 }
