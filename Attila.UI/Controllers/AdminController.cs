@@ -1,4 +1,5 @@
-﻿using Attila.Application.Admin.Event.Queries;
+﻿using Attila.Application.Admin.Commands;
+using Attila.Application.Admin.Event.Queries;
 using Attila.Application.Admin.Food.Queries;
 using Attila.Application.Admin.Inventory.Queries;
 using Attila.UI.Models;
@@ -22,7 +23,7 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        [HttpGet]
+        
         public async Task<IActionResult> Event()
         {
             var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
@@ -37,10 +38,37 @@ namespace Attila.UI.Controllers
             };
 
             return View(_forEvent);
+        }
 
+       [HttpPost]
+        public async Task<IActionResult> ViewEvent(int EventID)
+        {
+            var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID});
+
+            var _allEventDetails = new ViewEventVM
+            {                 
+                EventDetails = _eventDetails
+            };
+
+            return PartialView("~/Views/Admin/Partial/_viewEvent.cshtml", _allEventDetails);
         }
 
 
+
+        public async Task<IActionResult> ApproveEvent (int eventID)
+        {
+            var _retVal = await mediator.Send(new ApproveEventRequestCommand { EventID = eventID});
+
+            return Json(_retVal);
+
+        }
+
+        public async Task<IActionResult> DeclineEvent(int eventID)
+        {
+            var _retVal = await mediator.Send(new DeclineEventRequestCommand { EventID = eventID});
+
+            return Json(_retVal);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Inventory()
@@ -68,5 +96,6 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
+
     }
 }
