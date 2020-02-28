@@ -31,11 +31,10 @@ namespace Attila.UI.Models
         public string Location { get; set; }
 
         public string Remarks { get; set; }
-
         public int UserID { get; set; }
-
+        [Required]
         public int EventPackageDetailsID { get; set; }
-
+        [Required]
         public int EventClientID { get; set; }
 
 
