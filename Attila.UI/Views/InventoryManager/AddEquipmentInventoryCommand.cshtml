@@ -13,13 +13,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
-                @Html.Label("Equipment Details List")
                 @Html.DropDownListFor(a => a.EquipmentDetailsID, Model.EquipmentDetailsList, "Select Equipment", new { @class = "form-control" })
                 <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="EquipmentDeliveryID" class="control-label">Equipment Delivery ID: </label>
-                @Html.Label("Equipment Delivery List")
                 @Html.DropDownListFor(a => a.EquipmentDeliveryID, Model.EquipmentDeliveryList, "Select Delivery", new { @class = "form-control" })
                 <span asp-validation-for="EquipmentDeliveryID" class="text-danger"></span>
             </div>
