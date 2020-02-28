@@ -15,8 +15,12 @@
     <Compile Remove="Migrations\20200218084701_init1.Designer.cs" />
     <Compile Remove="Migrations\20200218133122_init2.cs" />
     <Compile Remove="Migrations\20200218133122_init2.Designer.cs" />
-    <Compile Remove="Migrations\20200226073759_init3.cs" />
-    <Compile Remove="Migrations\20200226073759_init3.Designer.cs" />
+    <Compile Remove="Migrations\20200219085600_init.cs" />
+    <Compile Remove="Migrations\20200219085600_init.Designer.cs" />
+    <Compile Remove="Migrations\20200219110413_init.cs" />
+    <Compile Remove="Migrations\20200219110413_init.Designer.cs" />
+    <Compile Remove="Migrations\20200220092026_init.cs" />
+    <Compile Remove="Migrations\20200220092026_init.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,9 +42,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
-    <PackageReference Include="MySqlConnector" Version="0.61.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
-    <PackageReference Include="Pomelo.JsonObject" Version="2.2.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 

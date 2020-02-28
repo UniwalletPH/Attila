@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div>
+        <form asp-controller="Coordinator" asp-action="AddEventPayment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EventDetailsID" class="control-label"></label>
@@ -38,53 +38,27 @@
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
-@section Scripts{ 
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Payment added successfully!");
+            window.location = '/Coordinator/Index';
+        }
 
-                var _amount = $('#txtAmount').val();
-                var _dateOfPayment = $("#txtDateOfPayment").val();
-                var _referenceNumber = $("#txtReferenceNumber").val();
-                var _remarks = $("#txtRemarks").val();
-                var _eventDetails = $("#txtEventDetails").val();
-
-                var _eventPayment =
-                {
-                    Amount: _amount,
-                    DateOfPayment: _dateOfPayment,
-                    ReferenceNumber: _referenceNumber,
-                    Remarks: _remarks,
-                    EventDetailsID: _eventDetails,
-
-                };
-
-                $.post('/Coordinator/AddEventPayment', { _eventPayment: _eventPayment }).done(ReplyLog);
-
-
-            });
-
-        });
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Payment added successfully!");
-                window.location = "/Coordinator/Index";
-            } else {
-                alert("Please enter the correct details!");
-            }
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
         }
 
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }
-
 
 

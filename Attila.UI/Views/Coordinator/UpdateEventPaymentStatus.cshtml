@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div>
+        <form asp-controller="Coordinator" asp-action="UpdateEventPaymentStatus" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Amount" class="control-label"></label>
@@ -33,52 +33,25 @@
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Update</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Update</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
 @section Scripts {
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                var _amount = $("#txtAmount").val();
-                var _dateOfPayment = $("#txtDateOfPayment").val();
-                var _referenceNumber = $("#txtReferenceNumber").val();
-                var _remarks = $("#txtRemarks").val();
-
-                var _eventPaymentDetails = {
-
-                    Amount: _amount,
-                    DateOfPayment: _dateOfPayment,
-                    ReferenceNumber: _referenceNumber,
-                    Remarks: _remarks
-                };
-
-                $.post('/Coordinator/UpdateEventPaymentStatus', { _eventPayment: _eventPaymentDetails }).done(ReplyLog);
-
-            });
-
-
-        });
-
-        function ReplyLog(reply) {
-            if (reply == true) {
-                console.log("done");
-                alert("Payment status updated successfully!");
-                window.location = "/Coordinator/Index";
-            } else {
-                alert("Please enter correct details!");
-            }
-
-
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Event package updated successfully!");
+            window.location = '/Coordinator/Index';
         }
 
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
+        }
 
     </script>
-
-
-
+    <partial name="_ValidationScriptsPartial" />
 }

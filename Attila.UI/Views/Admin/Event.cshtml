@@ -5,58 +5,145 @@
 
 <div class="text-center">
     <h1>EVENTS</h1><br>
+    <h3>PENDING EVENTS</h3>
+</div>
+<table class="events" style="width:100%" data-toggle="modal" data-target="#myModal">
+    <tr>
+
+        <th>EVENT CODE</th>
+        <th>EVENT NAME</th>
+        <th>EVENT TYPE</th>
+        <th>PACKAGE</th>
+        <th>EVENT DATE</th>
+
+    </tr>
+    @foreach (var item in Model.PendingEvent)
+    {
+        <tr data-id="@item.ID">
+            <td>@item.Code</td>
+            <td>@item.EventName</td>
+            <td>@item.Type</td>
+            <td>@item.Package.Name</td>
+            <td>@item.EventDate.ToShortDateString()</td>
+
+        </tr>
+    }
+
+</table>
+
+<div class="text-center">
+    <br>
+    <h3>INCOMING EVENTS</h3>
+</div>
+<table class="events" style="width:100%" data-toggle="modal" data-target="#myModal">
+    <tr>
+
+        <th>EVENT CODE</th>
+        <th>EVENT NAME</th>
+        <th>EVENT TYPE</th>
+        <th>PACKAGE</th>
+        <th>EVENT DATE</th>
+
+    </tr>
+    @foreach (var item in Model.IncomingEvent)
+    {
+        <tr data-id="@item.ID">
+            <td>@item.Code</td>
+            <td>@item.EventName</td>
+            <td>@item.Type</td>
+            <td>@item.Package.Name</td>
+            <td>@item.EventDate.ToShortDateString()</td>
+
+        </tr>
+    }
+
+</table>
+
+<div class="text-center">
+    <br>
+    <h3>PAST EVENTS</h3>
+</div>
+<table class="events" style="width:100%" data-toggle="modal" data-target="#myModal">
+    <tr>
+        <th>EVENT CODE</th>
+        <th>EVENT NAME</th>
+        <th>EVENT TYPE</th>
+        <th>PACKAGE</th>
+        <th>EVENT DATE</th>
+
+    </tr>
+    @foreach (var item in Model.PastEvent)
+    {
+        <tr data-id="@item.ID">
+            <td>@item.Code</td>
+            <td>@item.EventName</td>
+            <td>@item.Type</td>
+            <td>@item.Package.Name</td>
+            <td>@item.EventDate.ToShortDateString()</td>
+        </tr>
+    }
+
+</table>
+
+
+
+<style>
+    table#example {
+        border-collapse: collapse;
+    }
+
+    .events tr {
+        background-color: #eee;
+        border-top: 1px solid #fff;
+    }
+
+    .events td {
+        padding: 8px 2px 10px 20px;
+    }
+
+    .events tr:hover {
+        background-color: #ccc;
+    }
+
+    .events th {
+        background-color: #fff;
+    }
+
+    .events th, #example td {
+        padding: 8px 2px 10px 20px;
+    }
+
+    .events td:hover {
+        cursor: pointer;
+    }
+</style>
+
+
+
+<div id="myModal" class="modal" role="contentinfo">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content"></div>
+
+    </div>
 </div>
 
-<h1>PENDING EVENTS</h1>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.events tr').click(function () {
+                var _id = $(this).data("id");
+                $.post('/Admin/ViewEvent', { EventID: _id }).done(Reply);
 
+            });
+        });
 
-@{
-    foreach (var item in Model.PendingEvent)
-    {
-    <tr>
-        <td>@item.Code</td>
-        <td>@item.EventName</td>
-        <td>@item.Type</td>
-        <td>@item.EventDate</td>
-        <td>@item.Address</td>
-        <td>@item.Package.Description</td>
-        <td>@item.EventStatus</td>
-    </tr>
-    }
+        function Reply(reply) {
+            console.log(reply);
+            $('#myModal .modal-content').html(reply);
+        };
 
+    </script>
 }
 
-<h1>INCOMING EVENTS</h1>
-
-@{
-    foreach (var item in Model.IncomingEvent)
-    {
-    <tr>
-        <td>@item.Code</td>
-        <td>@item.EventName</td>
-        <td>@item.Type</td>
-        <td>@item.EventDate</td>
-        <td>@item.Address</td>
-        <td>@item.Package.Description</td>
-        <td>@item.EventStatus</td>
-    </tr>
-    }
-
-}
-<h1>PAST EVENTS</h1>
-
-@{
-    foreach (var item in Model.PastEvent)
-    {
-    <tr>
-        <td>@item.Code</td>
-        <td>@item.EventName</td>
-        <td>@item.Type</td>
-        <td>@item.EventDate</td>
-        <td>@item.Address</td>
-        <td>@item.Package.Description</td>
-        <td>@item.EventStatus</td>
-    </tr>
-    }
-
-}
