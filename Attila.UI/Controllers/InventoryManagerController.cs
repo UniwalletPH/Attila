@@ -8,14 +8,25 @@ using Attila.Application.Food.Queries;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;
-using Attila.Domain.Entities;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities.Tables;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using EquipmentDetailsVM = Attila.UI.Models.EquipmentDetailsVM;
-using EquipmentInventoryVM = Attila.UI.Models.EquipmentInventoryVM;
+using EquipmentDetailsVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM;
+using EquipmentInventoryVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentInventoryVM;
+using EquipmentRestockRequestVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentRestockRequestVM;
+using EquipmentRestockVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentRestockVM;
+using FoodDetailsVM = Attila.Application.Inventory_Manager.Food.Queries.FoodDetailsVM;
+using FoodInventoryVM = Attila.Application.Inventory_Manager.Food.Queries.FoodInventoryVM;
+using FoodRestockVM = Attila.Application.Inventory_Manager.Food.Queries.FoodRestockVM;
+//using EquipmentDetailsVM = Attila.UI.Models.EquipmentDetailsVM;
+//using EquipmentInventoryVM = Attila.UI.Models.EquipmentInventoryVM;
+//using EquipmentRestockVM = Attila.UI.Models.EquipmentRestockVM;
+//using EquipmentRestockRequestVM = Attila.UI.Models.EquipmentRestockRequestVM;
+//using FoodDetailsVM = Attila.UI.Models.FoodDetailsVM;
+//using FoodInventoryVM = Attila.UI.Models.FoodInventoryVM;
 
 namespace Attila.UI.Controllers
 {
@@ -46,11 +57,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new AddEquipmentDetailsCommand
                 {
-                    Code = equipmentDetails.Code,
-                    Name = equipmentDetails.Name,
-                    Description = equipmentDetails.Description,
-                    UnitType = equipmentDetails.UnitType,
-                    EquipmentType = equipmentDetails.EquipmentType
+                    EquipmentsDetailsVM = equipmentDetails
                 });
                 _checker = true;
             }
@@ -73,7 +80,7 @@ namespace Attila.UI.Controllers
                 _list.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = item.Code + "|" + item.Name + "|" + item.Description
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
                 });
             }
 
@@ -93,29 +100,23 @@ namespace Attila.UI.Controllers
 
 
 
-            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
-            {
-                EquipmentDetailsList = _list,
-                EquipmentDeliveryList = _list2
-            };
+            //EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            //{
+            //    EquipmentDetailsList = _list,
+            //    EquipmentDeliveryList = _list2
+            //};
 
-            return View(equipmentDetailsListVM);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentInventoryCommand(Models.EquipmentInventoryVM equipmentInventory)
+        public async Task<IActionResult> AddEquipmentInventoryCommand(EquipmentInventoryVM equipmentInventory)
         {
             try
             {
                 await mediator.Send(new AddEquipmentInventoryCommand
                 {
-                    Quantity = equipmentInventory.Quantity,
-                    EncodingDate = DateTime.Now,
-                    ItemPrice = equipmentInventory.ItemPrice,
-                    Remarks = equipmentInventory.Remarks,
-                    UserID = equipmentInventory.UserID,
-                    EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
-                    EquipmentDeliveryID = equipmentInventory.EquipmentDeliveryID
+                    EquipmentsInventoryVM = equipmentInventory
                 });
                 _checker = true;
             }
@@ -306,6 +307,20 @@ namespace Attila.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetEquipmentDeliveryQuery()
+        {
+            try
+            {
+                var _getEquipmentDelivery = await mediator.Send(new GetEquipmentDeliveryQuery());
+                return View(_getEquipmentDelivery);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         [HttpGet]
         public IActionResult SearchEquipmentByIdQuery()
@@ -412,15 +427,15 @@ namespace Attila.UI.Controllers
             }
 
 
+            //FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            //{
+            //    FoodDetailsList = _list,
+            //    FoodDeliveryList = _list2
+            //};
 
+            
 
-            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
-            {
-                FoodDetailsList = _list,
-                FoodDeliveryList = _list2
-            };
-
-            return View(FoodDetailsListVM);
+            return View();
         }
 
         [HttpPost]
@@ -624,6 +639,20 @@ namespace Attila.UI.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetFoodDeliveryQuery()
+        {
+            try
+            {
+                var _getFoodDelivery = await mediator.Send(new GetFoodDeliveryQuery());
+                return View(_getFoodDelivery);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         [HttpGet]
         public IActionResult SearchFoodByIdQuery()
@@ -656,7 +685,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> SearchFoodByKeywordResult(string searchKeyword)
         {
-            searchKeyword = "a";
+            //searchKeyword = "a";
             try
             {
                 var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = searchKeyword });
