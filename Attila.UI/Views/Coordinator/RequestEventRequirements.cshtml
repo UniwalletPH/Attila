@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div>
+        <form asp-controller="Coordinator" asp-action="RequestEventRequirements" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EventDetailsID" class="control-label"></label>
@@ -28,44 +28,26 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
-@section Scripts{
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Client added successfully!");
+            window.location = '/Coordinator/Index';
+        }
 
-                var _eventDetails = $('#txtEventDetails').val();
-                var _equipmentDetails = $("#txtEventDetails").val();
-                var _quantity = $("#txtQuantity").val();
-
-                var _eventEquipmentRequest =
-                {
-                    EquipmentDetailsID: _equipmentDetails,
-                    Quantity: _quantity,
-                    EventDetailsID: _eventDetails,
-
-                };
-
-                $.post('/Coordinator/RequestEventRequirements', { _eventEquipmentRequest: _eventEquipmentRequest }).done(ReplyLog);
-            });
-
-        });
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Payment added successfully!");
-                window.location = "/Coordinator/Index";
-            } else {
-                alert("Please enter the correct details!");
-            }
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
         }
 
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }
+

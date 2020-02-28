@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <div>
+        <form asp-controller="Coordinator" asp-action="UpdateEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="ID" class="control-label"></label>
@@ -74,61 +74,27 @@
                 <span asp-validation-for="EventClientID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button id="btnSubmit" class="btn btn-primary">Update</button>
+                <button type="submit" id="btnSubmit" class="btn btn-primary">Update</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
-@section Scripts{
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            alert("Event updated successfully!");
+            window.location = '/Coordinator/Index';
+        }
 
-                var _eventName = $('#txtEventName').val();
-                var _address = $("#txtAddress").val();
-                var _bookingDate = $("#txtBookingDate").val();
-                var _code = $("#txtCode").val();
-                var _description = $("#txtDesc").val();
-                var _eventDate = $("#txtEventDate").val();]
-                var _location = $("#txtLocation").val();
-                var _type = $("#txtType").val();
-                var _remarks = $("#txtRemarks").val();
-
-                var _eventDetails =
-                {
-                    Address: _address,
-                    BookingDate: _bookingDate,
-                    Code: _code,
-                    Description: _description,
-                    EventDate: _eventDate,
-                    EventName: _eventName,
-                    Location: _location,
-                    Type: _type,
-                    Remarks: _remarks,
-
-                };
-
-                $.post('/Coordinator/AddEventPayment', { _eventDetails: _eventDetails }).done(ReplyLog);
-
-
-            });
-
-        });
-
-        function ReplyLog(reply) {
-            console.log(reply);
-            if (reply == true) {
-                console.log("nice");
-                alert("Event updated successfully!");
-                window.location = "/Coordinator/Index";
-                $().html();
-
-            } else {
-                alert("Please enter the correct details!");
-            }
+        function OnFailure(e) {
+            console.log(e);
+            alert("Please enter the correct details!");
         }
 
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }
+
 
