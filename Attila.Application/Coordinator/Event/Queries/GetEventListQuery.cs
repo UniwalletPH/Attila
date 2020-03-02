@@ -32,7 +32,6 @@ namespace Attila.Application.Event.Queries
                     EventName = a.EventName,
                     Type = a.Type,
                     EventStatus = a.EventStatus,
-                    Address = a.Address,
                     BookingDate = a.BookingDate,
                     EventDate = a.EventDate,
                     Description = a.Description,
