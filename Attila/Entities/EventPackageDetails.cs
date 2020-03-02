@@ -12,6 +12,8 @@ namespace Attila.Domain.Entities.Tables
 
         public string Code { get; set; }
 
+        public string Name { get; set; }
+
         public string Description { get; set; }
 
         public int NumberOfGuest { get; set; }

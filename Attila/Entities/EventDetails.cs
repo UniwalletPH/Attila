@@ -19,8 +19,6 @@ namespace Attila.Domain.Entities.Tables
 
         public Status EventStatus { get; set; }
 
-        public string Address { get; set; }
-
         public DateTime BookingDate { get; set; }
 
         public DateTime EventDate { get; set; }

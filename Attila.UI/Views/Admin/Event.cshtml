@@ -135,12 +135,11 @@
             $('.events tr').click(function () {
                 var _id = $(this).data("id");
                 $.post('/Admin/ViewEvent', { EventID: _id }).done(Reply);
-
             });
         });
 
         function Reply(reply) {
-            console.log(reply);
+            console.log(reply);          
             $('#myModal .modal-content').html(reply);
         };
 

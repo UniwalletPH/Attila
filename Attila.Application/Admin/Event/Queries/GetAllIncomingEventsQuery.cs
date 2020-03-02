@@ -38,8 +38,7 @@ namespace Attila.Application.Admin.Event.Queries
                     {
                         ID = item.ID,
                         Code = item.Code,
-                        EventName = item.EventName,
-                        Address = item.Address,
+                        EventName = item.EventName,                    
                         Location = item.Location,
                         BookingDate = item.BookingDate,
                         EventDate = item.EventDate,
