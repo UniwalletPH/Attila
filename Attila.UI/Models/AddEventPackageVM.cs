@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {
-    public class EventPackageVM
+    public class AddEventPackageVM
     {
         public int ID { get; set; }
         [Required]
