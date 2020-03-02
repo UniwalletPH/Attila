@@ -16,6 +16,8 @@ namespace Attila.Application.Event.Commands
 
         public string Code { get; set; }
 
+        public string Name { get; set; }
+
         public string Description { get; set; }
 
         public int NumberOfGuest { get; set; }
@@ -41,6 +43,7 @@ namespace Attila.Application.Event.Commands
                 _updatedEventPackage.Duration = request.Duration;
                 _updatedEventPackage.NumberOfGuest = request.NumberOfGuest;
                 _updatedEventPackage.Rate = request.Rate;
+                _updatedEventPackage.Name = request.Name;
 
                 await dbContext.SaveChangesAsync();
 

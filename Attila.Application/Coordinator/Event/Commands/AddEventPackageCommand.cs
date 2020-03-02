@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,17 +12,7 @@ namespace Attila.Application.Event.Commands
 {
     public class AddEventPackageCommand : IRequest<bool>
     {
-        //public EventPackageDetails PackageDetails;
-
-        public string Code { get; set; }
-
-        public string Description { get; set; }
-
-        public int NumberOfGuest { get; set; }
-
-        public decimal Rate { get; set; }
-
-        public TimeSpan Duration { get; set; }
+        public EventPackageVM PackageDetails;
 
         public class AddEventPackageCommandHandler : IRequestHandler<AddEventPackageCommand, bool>
         {
@@ -36,11 +27,12 @@ namespace Attila.Application.Event.Commands
             {
                 var _newPackage = new EventPackageDetails {
                     
-                    Code = request.Code,
-                    Description = request.Description,
-                    Duration = request.Duration,
-                    NumberOfGuest = request.NumberOfGuest,
-                    Rate = request.Rate,
+                    Code = request.PackageDetails.Code,
+                    Description = request.PackageDetails.Description,
+                    Duration = request.PackageDetails.Duration,
+                    NumberOfGuest = request.PackageDetails.NumberOfGuest,
+                    Rate = request.PackageDetails.Rate,
+                    Name = request.PackageDetails.Name
 
                 };
 
