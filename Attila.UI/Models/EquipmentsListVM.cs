@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {
-    public class EquipmentsInventoryVM
+    public class EquipmentsListVM
     {
         public EquipmentInventoryVM EquipmentInventoryVM { get; set; }
 
