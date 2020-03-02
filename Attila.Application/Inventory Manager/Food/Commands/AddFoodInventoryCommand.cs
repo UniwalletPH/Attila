@@ -10,7 +10,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class AddFoodInventoryCommand : IRequest<bool>
     {
-        public FoodInventoryVM MyFoodInventoryVM { get; set; }
+        public FoodsInventoryVM MyFoodInventoryVM { get; set; }
 
         public class AddFoodInventoryCommandHandler : IRequestHandler<AddFoodInventoryCommand, bool>
         {

@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Inventory_Manager.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Food.Queries
 {
-    public class EquipmentRestockRequestVM
+    public class FoodsRestockRequestVM
     {
         public int ID { get; set; }
 
@@ -14,9 +14,9 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
 
         public DateTime DateTimeRequest { get; set; }
 
-        public int EquipmentDetailsID { get; set; }
+        public int FoodDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
+        public FoodDetails FoodDetails { get; set; }
 
         public Status Status { get; set; }
 

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class SearchEquipmentByKeywordQuery : IRequest<IEnumerable<EquipmentDetailsVM>>
+    public class SearchEquipmentByKeywordQuery : IRequest<IEnumerable<EquipmentsDetailsVM>>
     {
         public string SearchedKeyword { get; set; }
 
-        public class SearchEquipmentByKeywordQueryHandler : IRequestHandler<SearchEquipmentByKeywordQuery, IEnumerable<EquipmentDetailsVM>>
+        public class SearchEquipmentByKeywordQueryHandler : IRequestHandler<SearchEquipmentByKeywordQuery, IEnumerable<EquipmentsDetailsVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -22,9 +22,9 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<EquipmentDetailsVM>> Handle(SearchEquipmentByKeywordQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentsDetailsVM>> Handle(SearchEquipmentByKeywordQuery request, CancellationToken cancellationToken)
             {
-                var _searchedKeywordList = new List<EquipmentDetailsVM>();
+                var _searchedKeywordList = new List<EquipmentsDetailsVM>();
 
                 var _searchedKeyword = dbContext.EquipmentsDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
                                                                          a.Code.Contains(request.SearchedKeyword) ||
@@ -34,7 +34,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
                 {
                     foreach (var item in _searchedKeyword)
                     {
-                        var _searchedResult = new EquipmentDetailsVM
+                        var _searchedResult = new EquipmentsDetailsVM
                         {
                             ID = item.ID,
                             Code = item.Code,

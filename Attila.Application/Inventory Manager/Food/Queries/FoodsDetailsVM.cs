@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Inventory_Manager.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Food.Queries
 {
-    public class EquipmentDetailsVM
+    public class FoodsDetailsVM
     {
         public int ID { get; set; }
 
@@ -14,10 +14,12 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
 
         public string Name { get; set; }
 
+        public string Specification { get; set; }
+
         public string Description { get; set; }
 
-        public UnitType UnitType { get; set; }
+        public UnitType Unit { get; set; }
 
-        public EquipmentType EquipmentType { get; set; }
+        public FoodType FoodType { get; set; }
     }
 }

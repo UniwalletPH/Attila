@@ -12,7 +12,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentRestockCommand : IRequest<bool>
     {
-        public EquipmentRestockVM MyEquipmentsRestockVM { get; set; }
+        public EquipmentsRestockVM MyEquipmentsRestockVM { get; set; }
 
         public class AddEquipmentRestockCommandHandler : IRequestHandler<AddEquipmentRestockCommand, bool>
         {

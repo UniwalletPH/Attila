@@ -11,7 +11,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class UpdateEquipmentDetailsCommand : IRequest<bool>
     {
-        public EquipmentDetailsVM MyEquipmentDetails { get; set; }
+        public EquipmentsDetailsVM MyEquipmentDetails { get; set; }
 
         public class UpdateEquipmentDetailsCommandHandler : IRequestHandler<UpdateEquipmentDetailsCommand, bool>
         {

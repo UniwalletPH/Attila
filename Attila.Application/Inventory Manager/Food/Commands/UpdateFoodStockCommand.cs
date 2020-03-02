@@ -9,7 +9,7 @@ namespace Atilla.Application.Food.Commands
 {
     public class UpdateFoodStockCommand : IRequest<bool>
     {
-        public FoodInventoryVM MyFoodInventoryVM { get; set; }
+        public FoodsInventoryVM MyFoodInventoryVM { get; set; }
 
         public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockCommand, bool>
         {

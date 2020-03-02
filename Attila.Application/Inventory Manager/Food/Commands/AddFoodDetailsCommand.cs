@@ -14,7 +14,7 @@ namespace Attila.Application.Food.Commands
 {
     public class AddFoodDetailsCommand : IRequest<bool>
     {
-        public FoodDetailsVM MyFoodDetailsVM { get; set; }
+        public FoodsDetailsVM MyFoodDetailsVM { get; set; }
 
         public class AddFoodDetailsInventoryCommandHandler : IRequestHandler<AddFoodDetailsCommand, bool>
         {

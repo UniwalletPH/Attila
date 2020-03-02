@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Inventory_Manager.Equipment.Queries
+namespace Attila.Application.Inventory_Manager.Food.Queries
 {
-    public class EquipmentRestockVM
+    public class FoodsRestockVM
     {
         public int ID { get; set; }
 

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class GetEquipmentStockQuery : IRequest<IEnumerable<EquipmentInventoryVM>>
+    public class GetEquipmentStockQuery : IRequest<IEnumerable<EquipmentsInventoryVM>>
     {
-        public class GetEquipmentStockQueryHandler : IRequestHandler<GetEquipmentStockQuery, IEnumerable<EquipmentInventoryVM>>
+        public class GetEquipmentStockQueryHandler : IRequestHandler<GetEquipmentStockQuery, IEnumerable<EquipmentsInventoryVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -18,9 +18,9 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<EquipmentInventoryVM>> Handle(GetEquipmentStockQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentsInventoryVM>> Handle(GetEquipmentStockQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentInventoryList = await dbContext.EquipmentsInventory.Select(a => new EquipmentInventoryVM
+                var _equipmentInventoryList = await dbContext.EquipmentsInventory.Select(a => new EquipmentsInventoryVM
                 { 
                     ID = a.ID,
                     Quantity = a.Quantity,

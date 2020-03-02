@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Food.Queries
 {
-    public class GetFoodDetailsQuery : IRequest<IEnumerable<FoodDetailsVM>>
+    public class GetFoodDetailsQuery : IRequest<IEnumerable<FoodsDetailsVM>>
     {
-        public class ViewFoodDetailsQueryHandler : IRequestHandler<GetFoodDetailsQuery, IEnumerable<FoodDetailsVM>>
+        public class GetFoodDetailsQueryHandler : IRequestHandler<GetFoodDetailsQuery, IEnumerable<FoodsDetailsVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public ViewFoodDetailsQueryHandler(IAttilaDbContext dbContext)
+            public GetFoodDetailsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<FoodDetailsVM>> Handle(GetFoodDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<FoodsDetailsVM>> Handle(GetFoodDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _foodDetailsList = await dbContext.FoodsDetails.Select(a => new FoodDetailsVM 
+                var _foodDetailsList = await dbContext.FoodsDetails.Select(a => new FoodsDetailsVM
                 { 
                     ID = a.ID,
                     Code = a.Code,
