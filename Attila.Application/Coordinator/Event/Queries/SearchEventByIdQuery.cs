@@ -30,7 +30,6 @@ namespace Attila.Application.Event.Queries
                 {
                     return new SearchEventVM {
                     ID = _searchedEvent.ID,
-                    Address = _searchedEvent.Address,
                     BookingDate = _searchedEvent.BookingDate,
                     Code = _searchedEvent.Code,
                     Description = _searchedEvent.Description,

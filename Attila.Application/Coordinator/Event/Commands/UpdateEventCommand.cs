@@ -53,8 +53,6 @@ namespace Attila.Application.Event.Commands
             public async Task<bool> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
             {
                 var _updatedEventDetails = dbContext.EventsDetails.Find(request.ID);
-
-                _updatedEventDetails.Address = request.Address;
                 _updatedEventDetails.Description = request.Description;
                 _updatedEventDetails.EventDate = request.EventDate;
                 _updatedEventDetails.EventName = request.EventName;

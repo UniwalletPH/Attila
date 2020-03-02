@@ -31,7 +31,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                if(request.Duration != null && request.Rate != null && request.EventDetailsID != null)
+                if(request.Duration != null && request.Rate != 0 && request.EventDetailsID != 0)
                 {
                     var _additionalDuration = new PackageAdditionalDurationRequest
                     {

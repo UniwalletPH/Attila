@@ -37,7 +37,6 @@ namespace Attila.Application.Event.Queries
                     {
                         var _result = new SearchEventVM
                         {
-                            Address = item.Address,
                             BookingDate = item.BookingDate,
                             Code = item.Code,
                             Description = item.Description,
