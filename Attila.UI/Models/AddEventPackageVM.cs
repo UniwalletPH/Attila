@@ -12,6 +12,8 @@ namespace Attila.UI.Models
         [Required]
         public string Code { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         [Required]
         public int NumberOfGuest { get; set; }
