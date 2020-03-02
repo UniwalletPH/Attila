@@ -6,14 +6,34 @@
 
 <h1>Search Equipment By Keyword</h1>
 
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter keyword:asd </label>
-        <input id="txtKeyword" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+<form class="form-group" asp-action="SearchEquipmentByKeywordQuery" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label">Enter keyword:asd </label>
+            <input id="txtKeyword" class="form-control" />
+            <br />
+            <button id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
-</div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Equipment details successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
+
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddEquipmentDetailsCommand";
+            }
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
 
 @section Scripts {
 

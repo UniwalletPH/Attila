@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsRestockVM>
+
+@{
+    ViewData["Title"] = "GetEquipmentDeliveryQuery";
+}
+
+<h1>View Equipment Delivery List</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeliveryPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
