@@ -1,4 +1,4 @@
-﻿@model Attila.UI.Models.EventDetailsVM
+﻿@model Attila.UI.Models.AddEventVM
 
 @{
     ViewData["Title"] = "AddEvent";
@@ -13,54 +13,58 @@
         <form asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" id="txtCode" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
+                <label asp-for="Event.Code" class="control-label"></label>
+                <input asp-for="Event.Code" id="txtCode" class="form-control" />
+                <span asp-validation-for="Event.Code" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EventName" class="control-label"></label>
-                <input asp-for="EventName" id="txtEventName" class="form-control" />
-                <span asp-validation-for="EventName" class="text-danger"></span>
+                <label asp-for="Event.EventName" class="control-label"></label>
+                <input asp-for="Event.EventName" id="txtEventName" class="form-control" />
+                <span asp-validation-for="Event.EventName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.PackageList)
-                @Html.DropDownListFor(m => m.Selected, Model.PackageList, "SELECT PACKAGE", new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
             </div>
             <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <select id="txtType" asp-for="Type" class="form-control">
+                @Html.LabelFor(m => m.ClientList)
+                @Html.DropDownListFor(m => m.SelectedClient, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Type" class="control-label"></label>
+                <select id="txtType" asp-for="Event.Type" class="form-control">
                     <option value="0">--please select a type--</option>
                     <option value="1">Wedding</option>
                     <option value="2">Birthday</option>
                     <option value="3">Others</option>
                     <option value="4">Graduation</option>
                 </select>
-                <span asp-validation-for="Type" class="text-danger"></span>
+                <span asp-validation-for="Event.Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" id="txtAddress" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+                <label asp-for="Event.Address" class="control-label"></label>
+                <input asp-for="Event.Address" id="txtAddress" class="form-control" />
+                <span asp-validation-for="Event.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EventDate" class="control-label"></label>
-                <input asp-for="EventDate" id="txtEventDate" class="form-control" />
-                <span asp-validation-for="EventDate" class="text-danger"></span>
+                <label asp-for="Event.EventDate" class="control-label"></label>
+                <input asp-for="Event.EventDate" id="txtEventDate" class="form-control" />
+                <span asp-validation-for="Event.EventDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" id="txtDesc" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Event.Description" class="control-label"></label>
+                <input asp-for="Event.Description" id="txtDesc" class="form-control" />
+                <span asp-validation-for="Event.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" id="txtLocation" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="Event.Location" class="control-label"></label>
+                <input asp-for="Event.Location" id="txtLocation" class="form-control" />
+                <span asp-validation-for="Event.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Remarks" class="control-label"></label>
-                <input asp-for="Remarks" id="txtRemarks" class="form-control" />
-                <span asp-validation-for="Remarks" class="text-danger"></span>
+                <label asp-for="Event.Remarks" class="control-label"></label>
+                <input asp-for="Event.Remarks" id="txtRemarks" class="form-control" />
+                <span asp-validation-for="Event.Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <button type="submit" id="btnSubmit" class="btn btn-primary">Create</button>
