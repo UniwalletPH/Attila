@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
@@ -11,15 +12,7 @@ namespace Attila.Application.Food.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {
-        public int Quantity { get; set; }
-
-        public DateTime DateTimeRequest { get; set; }
-
-        public int FoodDetailsID { get; set; }
-
-        public Status Status { get; set; }
-
-        public int UserID { get; set; }
+        public FoodRestockRequestVM MyFoodRestockRequestVM { get; set; }
 
         public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, bool>
         {
@@ -28,15 +21,16 @@ namespace Attila.Application.Food.Commands
             {
                 this.dbContext = dbContext;
             }
+            
             public async Task<bool> Handle(RequestFoodRestockCommand request, CancellationToken cancellationToken)
             {
                 FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
-                    Quantity = request.Quantity,
+                    Quantity = request.MyFoodRestockRequestVM.Quantity,
                     DateTimeRequest = DateTime.Now,
-                    FoodDetailsID = request.FoodDetailsID,
-                    Status = request.Status,
-                    UserID = request.UserID
+                    FoodDetailsID = request.MyFoodRestockRequestVM.FoodDetailsID,
+                    Status = request.MyFoodRestockRequestVM.Status,
+                    UserID = request.MyFoodRestockRequestVM.UserID
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);

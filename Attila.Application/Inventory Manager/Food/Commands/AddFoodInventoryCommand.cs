@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -9,21 +10,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class AddFoodInventoryCommand : IRequest<bool>
     {
-        public int Quantity { get; set; }
-
-        public DateTime ExpirationDate { get; set; }
-
-        public DateTime EncodingDate { get; set; }
-
-        public decimal ItemPrice { get; set; }
-
-        public string Remarks { get; set; }
-
-        public int UserID { get; set; }
-
-        public int FoodDetailsID { get; set; }
-
-        public int FoodRestockID { get; set; }
+        public FoodInventoryVM MyFoodInventoryVM { get; set; }
 
         public class AddFoodInventoryCommandHandler : IRequestHandler<AddFoodInventoryCommand, bool>
         {
@@ -38,14 +25,14 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
             {
                 FoodInventory _foodInventory = new FoodInventory
                 {
-                    Quantity = request.Quantity,
-                    ExpirationDate = request.ExpirationDate,
-                    EncodingDate = request.EncodingDate,
-                    ItemPrice = request.ItemPrice,
-                    Remarks = request.Remarks,
-                    UserID = request.UserID,
-                    FoodDetailsID = request.FoodDetailsID,
-                    FoodRestockID = request.FoodRestockID
+                    Quantity = request.MyFoodInventoryVM.Quantity,
+                    ExpirationDate = request.MyFoodInventoryVM.ExpirationDate,
+                    EncodingDate = request.MyFoodInventoryVM.EncodingDate,
+                    ItemPrice = request.MyFoodInventoryVM.ItemPrice,
+                    Remarks = request.MyFoodInventoryVM.Remarks,
+                    UserID = request.MyFoodInventoryVM.UserID,
+                    FoodDetailsID = request.MyFoodInventoryVM.FoodDetailsID,
+                    FoodRestockID = request.MyFoodInventoryVM.FoodRestockID
                 };
 
                 dbContext.FoodsInventory.Add(_foodInventory);

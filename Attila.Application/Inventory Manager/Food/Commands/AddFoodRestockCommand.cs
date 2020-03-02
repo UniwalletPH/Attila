@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,13 +12,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class AddFoodRestockCommand : IRequest<bool>
     {
-        public DateTime DeliveryDate { get; set; }
-
-        public byte[] ReceiptImage { get; set; }
-
-        public decimal DeliveryPrice { get; set; }
-
-        public string Remarks { get; set; }
+        public FoodRestockVM MyFoodRestockVM { get; set; }
 
         public class AddFoodRestockCommandHandler : IRequestHandler<AddFoodRestockCommand, bool>
         {
@@ -32,10 +27,10 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
             {
                 FoodRestock _foodRestock = new FoodRestock
                 {
-                    DeliveryDate = request.DeliveryDate,
-                    ReceiptImage = request.ReceiptImage,
-                    DeliveryPrice = request.DeliveryPrice,
-                    Remarks = request.Remarks
+                    DeliveryDate = request.MyFoodRestockVM.DeliveryDate,
+                    ReceiptImage = request.MyFoodRestockVM.ReceiptImage,
+                    DeliveryPrice = request.MyFoodRestockVM.DeliveryPrice,
+                    Remarks = request.MyFoodRestockVM.Remarks
                 };
 
                 dbContext.FoodsRestock.Add(_foodRestock);

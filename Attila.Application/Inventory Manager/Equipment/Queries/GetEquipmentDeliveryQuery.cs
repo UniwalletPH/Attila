@@ -1,7 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -9,17 +8,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class GetEquipmentDeliveryQuery : IRequest<IEnumerable<EquipmentRestockRequestVM>>
+    public class GetEquipmentDeliveryQuery : IRequest<IEnumerable<EquipmentRestockVM>>
     {
-        public DateTime DeliveryDate { get; set; }
-
-        public byte[] ReceiptImage { get; set; }
-
-        public decimal DeliveryPrice { get; set; }
-
-        public string Remarks { get; set; }
-
-        public class GetEquipmentDeliveryQueryHandler : IRequestHandler<GetEquipmentDeliveryQuery, IEnumerable<EquipmentRestockRequestVM>>
+        public class GetEquipmentDeliveryQueryHandler : IRequestHandler<GetEquipmentDeliveryQuery, IEnumerable<EquipmentRestockVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -28,14 +19,14 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<EquipmentRestockRequestVM>> Handle(GetEquipmentDeliveryQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentRestockVM>> Handle(GetEquipmentDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDeliveryList = await dbContext.EquipmentsRestock.Select(a => new EquipmentRestockRequestVM
+                var _equipmentDeliveryList = await dbContext.EquipmentsRestock.Select(a => new EquipmentRestockVM
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,
-                    DeliveryPrice = a.DeliveryPrice,
                     ReceiptImage = a.ReceiptImage,
+                    DeliveryPrice = a.DeliveryPrice,
                     Remarks = a.Remarks
 
                 }).ToListAsync();

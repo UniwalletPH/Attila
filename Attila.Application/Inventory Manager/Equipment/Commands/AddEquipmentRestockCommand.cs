@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,13 +12,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentRestockCommand : IRequest<bool>
     {
-        public DateTime DeliveryDate { get; set; }
-
-        public byte[] ReceiptImage { get; set; }
-
-        public decimal DeliveryPrice { get; set; }
-
-        public string Remarks { get; set; }
+        public EquipmentRestockVM MyEquipmentsRestockVM { get; set; }
 
         public class AddEquipmentRestockCommandHandler : IRequestHandler<AddEquipmentRestockCommand, bool>
         {
@@ -32,10 +27,10 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             {
                 EquipmentRestock _equipmentRestock = new EquipmentRestock
                 {
-                    DeliveryDate = request.DeliveryDate,
-                    ReceiptImage = request.ReceiptImage,
-                    DeliveryPrice = request.DeliveryPrice,
-                    Remarks = request.Remarks
+                    DeliveryDate = request.MyEquipmentsRestockVM.DeliveryDate,
+                    ReceiptImage = request.MyEquipmentsRestockVM.ReceiptImage,
+                    DeliveryPrice = request.MyEquipmentsRestockVM.DeliveryPrice,
+                    Remarks = request.MyEquipmentsRestockVM.Remarks
                 };
 
                 dbContext.EquipmentsRestock.Add(_equipmentRestock);
