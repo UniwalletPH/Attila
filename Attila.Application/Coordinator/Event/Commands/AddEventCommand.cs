@@ -49,7 +49,6 @@ namespace Attila.Application.Event.Commands
                 {
                     EventName = request.EventDetails.EventName,
                     Type = request.EventDetails.Type,
-                    Address = request.EventDetails.Address,
                     BookingDate = request.EventDetails.BookingDate,
                     Code = request.EventDetails.Code,
                     Description = request.EventDetails.Description,
