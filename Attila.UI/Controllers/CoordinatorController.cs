@@ -351,7 +351,6 @@ namespace Attila.UI.Controllers
 
             var x = new AddEventVM();
             x.PackageList = _list;
-            x.ClientList = _list;
             return View(x);
         }
 
