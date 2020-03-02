@@ -338,3 +338,6 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/Attila.Infrastructure/Migrations/20200302080918_test1.Designer.cs
+/Attila.Infrastructure/Migrations/20200302080918_test1.cs
+/Attila.Infrastructure/Migrations/AttilaDbContextModelSnapshot.cs
