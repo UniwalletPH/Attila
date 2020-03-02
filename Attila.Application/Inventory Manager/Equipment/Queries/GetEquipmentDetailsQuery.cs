@@ -12,27 +12,27 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
-    public class GetEquipmentDetailsQuery : IRequest<IEnumerable<EquipmentDetailsVM>>
+    public class GetEquipmentDetailsQuery : IRequest<IEnumerable<EquipmentsDetailsVM>>
     {
-        public class ViewEquipmentDetailsQueryHandler : IRequestHandler<GetEquipmentDetailsQuery, IEnumerable<EquipmentDetailsVM>>
+        public class GetEquipmentDetailsQueryHandler : IRequestHandler<GetEquipmentDetailsQuery, IEnumerable<EquipmentsDetailsVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public ViewEquipmentDetailsQueryHandler(IAttilaDbContext dbContext)
+            public GetEquipmentDetailsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<EquipmentDetailsVM>> Handle(GetEquipmentDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentsDetailsVM>> Handle(GetEquipmentDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDetailsList = await dbContext.EquipmentsDetails.Select(a => new EquipmentDetailsVM 
-                { 
-                    Code = a.Code, 
-                    Description = a.Description, 
-                    EquipmentType = a.EquipmentType, 
-                    ID = a.ID, 
-                    Name = a.Name, 
-                    UnitType = a.UnitType
+                var _equipmentDetailsList = await dbContext.EquipmentsDetails.Select(a => new EquipmentsDetailsVM 
+                {
+                    ID = a.ID,
+                    Code = a.Code,
+                    Name = a.Name,
+                    Description = a.Description,
+                    UnitType = a.UnitType,
+                    EquipmentType = a.EquipmentType
 
                 }).ToListAsync();
 

@@ -11,7 +11,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class AddEquipmentDetailsCommand : IRequest<bool>
     {
-        public EquipmentDetailsVM EquipmentsDetailsVM { get; set; }
+        public EquipmentsDetailsVM MyEquipmentsDetailsVM { get; set; }
 
         public class AddEquipmentDetailsCommandHandler : IRequestHandler<AddEquipmentDetailsCommand, bool>
         {
@@ -23,13 +23,13 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(AddEquipmentDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _equipmentDetails = new EquipmentDetails
+                EquipmentDetails _equipmentDetails = new EquipmentDetails
                 {
-                    Code = request.EquipmentsDetailsVM.Code,
-                    Name = request.EquipmentsDetailsVM.Name,
-                    Description = request.EquipmentsDetailsVM.Description,
-                    UnitType = request.EquipmentsDetailsVM.UnitType,
-                    EquipmentType = request.EquipmentsDetailsVM.EquipmentType
+                    Code = request.MyEquipmentsDetailsVM.Code,
+                    Name = request.MyEquipmentsDetailsVM.Name,
+                    Description = request.MyEquipmentsDetailsVM.Description,
+                    UnitType = request.MyEquipmentsDetailsVM.UnitType,
+                    EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType
                 };
 
                 dbContext.EquipmentsDetails.Add(_equipmentDetails);

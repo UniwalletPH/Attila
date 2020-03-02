@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipment.Queries;
 using MediatR;
 using System;
 using System.Threading;
@@ -8,8 +9,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class UpdateEquipmentStockCommand : IRequest<bool>
     {
-        public int ID { get; set; }
-        public int Quantity { get; set; }
+        public EquipmentsInventoryVM MyEquipmentInventoryVM { get; set; }
 
         public class UpdateEquipmentStockCommandHandler : IRequestHandler<UpdateEquipmentStockCommand, bool>
         {
@@ -21,11 +21,11 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(UpdateEquipmentStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.ID);
+                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.MyEquipmentInventoryVM.ID);
 
                 if (_updatedEquipmentStock != null)
                 {
-                    _updatedEquipmentStock.Quantity = request.Quantity;
+                    _updatedEquipmentStock.Quantity = request.MyEquipmentInventoryVM.Quantity;
                     await dbContext.SaveChangesAsync();
 
                     return true;

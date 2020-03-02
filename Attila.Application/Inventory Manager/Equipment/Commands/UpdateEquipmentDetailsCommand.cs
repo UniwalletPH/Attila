@@ -1,5 +1,6 @@
 ﻿
 using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,7 +11,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class UpdateEquipmentDetailsCommand : IRequest<bool>
     {
-        public EquipmentDetails MyEquipmentDetails { get; set; }
+        public EquipmentsDetailsVM MyEquipmentDetails { get; set; }
 
         public class UpdateEquipmentDetailsCommandHandler : IRequestHandler<UpdateEquipmentDetailsCommand, bool>
         {

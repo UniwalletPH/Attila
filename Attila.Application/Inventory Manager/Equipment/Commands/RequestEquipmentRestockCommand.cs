@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
@@ -11,17 +12,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 {
     public class RequestEquipmentRestockCommand : IRequest<bool>
     {
-        public int Quantity { get; set; }
-
-        public DateTime DateTimeRequest { get; set; }
-
-        public int EquipmentDetailsID { get; set; }
-
-        public EquipmentDetails EquipmentDetails { get; set; }
-
-        public Status Status { get; set; }
-
-        public int UserID { get; set; }
+        public EquipmentsRestockRequestVM MyEquipmentRestockRequestVM { get; set; }
 
         public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, bool>
         {
@@ -33,13 +24,13 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
-                var _equipmentRestockRequest = new EquipmentRestockRequest
+                EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
                 {
-                    Quantity = request.Quantity,
-                    DateTimeRequest = request.DateTimeRequest,
-                    EquipmentDetailsID = request.EquipmentDetailsID,
-                    Status = request.Status,
-                    UserID = request.UserID
+                    Quantity = request.MyEquipmentRestockRequestVM.Quantity,
+                    DateTimeRequest = request.MyEquipmentRestockRequestVM.DateTimeRequest,
+                    EquipmentDetailsID = request.MyEquipmentRestockRequestVM.EquipmentDetailsID,
+                    Status = request.MyEquipmentRestockRequestVM.Status,
+                    UserID = request.MyEquipmentRestockRequestVM.UserID
                 };
 
                 dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);

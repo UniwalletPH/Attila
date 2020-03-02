@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM>
+﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM>
 
 @{
     ViewData["Title"] = "DeleteEquipmentDetailsCommand";
@@ -7,18 +7,16 @@
 <h1>Delete Equipment</h1>
 <hr />
 
-<form class="form-group" asp-action="DeleteEquipmentDetailsCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
-    <div class="row">
-        <div class="col-md-4">
-            @*<label class="control-label">Enter equipment ID: </label>
-            <input asp-for="ID" id="txtDeleteId" class="form-control" />*@
-            <br />
-            <button id="btnSubmit" class="btn btn-primary">Submit</button>
-        </div>
+<div class="row">
+    <div class="col-md-4">
+        <label class="control-label">Enter equipment ID: </label>
+        <input id="txtDeleteId" class="form-control" />
+        <br />
+        <button id="btnSubmit" class="btn btn-primary">Submit</button>
     </div>
-    <br />
-    <br />
-</form>
+</div>
+<br />
+<br />
 
 <table class="table">
     <thead>
@@ -73,26 +71,6 @@
 
 
 @section Scripts {
-    <script type="text/javascript">
-        function OnSuccess(result) {
-            if (result == true) {
-                alert("Equipment successfully deleted!");
-                window.location = "/InventoryManager/Index";
-            }
-
-            else {
-                alert("Failed!");
-                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
-            }
-        }
-    </script>
-
-    <partial name="_ValidationScriptsPartial" />
-}
-
-
-
-@*@section Scripts {
 
     <script>
 
@@ -122,4 +100,4 @@
         });
 
     </script>
-}*@
+}

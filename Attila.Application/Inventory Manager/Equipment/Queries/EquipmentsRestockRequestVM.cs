@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class EquipmentRestockRequestVM
+    public class EquipmentsRestockRequestVM
     {
         public int ID { get; set; }
 

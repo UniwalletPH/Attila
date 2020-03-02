@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities.Enums;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
@@ -13,17 +14,7 @@ namespace Attila.Application.Food.Commands
 {
     public class AddFoodDetailsCommand : IRequest<bool>
     {
-        public string Code { get; set; }
-
-        public string Name { get; set; }
-
-        public string Specification { get; set; }
-
-        public string Description { get; set; }
-
-        public UnitType Unit { get; set; }
-
-        public FoodType FoodType { get; set; }
+        public FoodsDetailsVM MyFoodDetailsVM { get; set; }
 
         public class AddFoodDetailsInventoryCommandHandler : IRequestHandler<AddFoodDetailsCommand, bool>
         {
@@ -36,12 +27,12 @@ namespace Attila.Application.Food.Commands
             {
                 FoodDetails _foodDetails = new FoodDetails
                 {
-                    Code = request.Code,
-                    Name = request.Name,
-                    Specification = request.Specification,
-                    Description = request.Description,
-                    Unit = request.Unit,
-                    FoodType = request.FoodType
+                    Code = request.MyFoodDetailsVM.Code,
+                    Name = request.MyFoodDetailsVM.Name,
+                    Specification = request.MyFoodDetailsVM.Specification,
+                    Description = request.MyFoodDetailsVM.Description,
+                    Unit = request.MyFoodDetailsVM.Unit,
+                    FoodType = request.MyFoodDetailsVM.FoodType
                 };
 
                 dbContext.FoodsDetails.Add(_foodDetails);

@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Food.Queries;
 using MediatR;
 using System;
 using System.Threading;
@@ -8,8 +9,7 @@ namespace Atilla.Application.Food.Commands
 {
     public class UpdateFoodStockCommand : IRequest<bool>
     {
-        public int ID { get; set; }
-        public int Quantity { get; set; }
+        public FoodsInventoryVM MyFoodInventoryVM { get; set; }
 
         public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockCommand, bool>
         {
@@ -20,11 +20,11 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.ID);
+                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.MyFoodInventoryVM.ID);
 
                 if (_updatedFoodStock != null)
                 {
-                    _updatedFoodStock.Quantity = request.Quantity;
+                    _updatedFoodStock.Quantity = request.MyFoodInventoryVM.Quantity;
 
                     await dbContext.SaveChangesAsync();
 

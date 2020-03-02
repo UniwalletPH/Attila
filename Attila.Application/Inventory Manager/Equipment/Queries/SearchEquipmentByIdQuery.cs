@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class SearchEquipmentByIdQuery : IRequest<EquipmentDetailsVM>
+    public class SearchEquipmentByIdQuery : IRequest<EquipmentsDetailsVM>
     {
         public int SearchedID { get; set; }
 
-        public class SearchEquipmentByIdQueryHandler : IRequestHandler<SearchEquipmentByIdQuery, EquipmentDetailsVM>
+        public class SearchEquipmentByIdQueryHandler : IRequestHandler<SearchEquipmentByIdQuery, EquipmentsDetailsVM>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -19,13 +19,13 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<EquipmentDetailsVM> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
+            public async Task<EquipmentsDetailsVM> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
             {
                 EquipmentDetails _searchedEquipmentDetails = dbContext.EquipmentsDetails.Find(request.SearchedID);
                 
                 if (_searchedEquipmentDetails != null)
                 {
-                    EquipmentDetailsVM searchEquipmentDetailsVM = new EquipmentDetailsVM
+                    EquipmentsDetailsVM searchEquipmentDetailsVM = new EquipmentsDetailsVM
                     {
                         ID = request.SearchedID,
                         Code = _searchedEquipmentDetails.Code,

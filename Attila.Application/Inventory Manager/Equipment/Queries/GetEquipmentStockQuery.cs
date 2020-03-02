@@ -1,29 +1,26 @@
 ﻿using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class GetEquipmentStockQuery : IRequest<IEnumerable<EquipmentInventoryVM>>
+    public class GetEquipmentStockQuery : IRequest<IEnumerable<EquipmentsInventoryVM>>
     {
-        public class ViewEquipmentStockQueryHandler : IRequestHandler<GetEquipmentStockQuery, IEnumerable<EquipmentInventoryVM>>
+        public class GetEquipmentStockQueryHandler : IRequestHandler<GetEquipmentStockQuery, IEnumerable<EquipmentsInventoryVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public ViewEquipmentStockQueryHandler(IAttilaDbContext dbContext)
+            public GetEquipmentStockQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<EquipmentInventoryVM>> Handle(GetEquipmentStockQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<EquipmentsInventoryVM>> Handle(GetEquipmentStockQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentInventoryList = await dbContext.EquipmentsInventory.Select(a => new EquipmentInventoryVM
+                var _equipmentInventoryList = await dbContext.EquipmentsInventory.Select(a => new EquipmentsInventoryVM
                 { 
                     ID = a.ID,
                     Quantity = a.Quantity,

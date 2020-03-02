@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Inventory_Manager.Food.Queries
+namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class FoodInventoryVM
+    public class EquipmentsInventoryVM
     {
         public int ID { get; set; }
 
         public int Quantity { get; set; }
-
-        public DateTime ExpirationDate { get; set; }
 
         public DateTime EncodingDate { get; set; }
 
@@ -20,8 +18,8 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
 
         public int UserID { get; set; }
 
-        public int FoodDetailsID { get; set; }
+        public int EquipmentDetailsID { get; set; }
 
-        public int FoodRestockID { get; set; }
+        public int EquipmentDeliveryID { get; set; }
     }
 }

@@ -14,19 +14,6 @@ using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using EquipmentDetailsVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentDetailsVM;
-using EquipmentInventoryVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentInventoryVM;
-using EquipmentRestockRequestVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentRestockRequestVM;
-using EquipmentRestockVM = Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentRestockVM;
-using FoodDetailsVM = Attila.Application.Inventory_Manager.Food.Queries.FoodDetailsVM;
-using FoodInventoryVM = Attila.Application.Inventory_Manager.Food.Queries.FoodInventoryVM;
-using FoodRestockVM = Attila.Application.Inventory_Manager.Food.Queries.FoodRestockVM;
-//using EquipmentDetailsVM = Attila.UI.Models.EquipmentDetailsVM;
-//using EquipmentInventoryVM = Attila.UI.Models.EquipmentInventoryVM;
-//using EquipmentRestockVM = Attila.UI.Models.EquipmentRestockVM;
-//using EquipmentRestockRequestVM = Attila.UI.Models.EquipmentRestockRequestVM;
-//using FoodDetailsVM = Attila.UI.Models.FoodDetailsVM;
-//using FoodInventoryVM = Attila.UI.Models.FoodInventoryVM;
 
 namespace Attila.UI.Controllers
 {
@@ -51,13 +38,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentDetailsCommand(EquipmentDetailsVM equipmentDetails)
+        public async Task<IActionResult> AddEquipmentDetailsCommand(EquipmentsDetailsVM equipmentDetails)
         {
             try
             {
                 await mediator.Send(new AddEquipmentDetailsCommand
                 {
-                    EquipmentsDetailsVM = equipmentDetails
+                    MyEquipmentsDetailsVM = equipmentDetails
                 });
                 _checker = true;
             }
@@ -100,23 +87,23 @@ namespace Attila.UI.Controllers
 
 
 
-            //EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
-            //{
-            //    EquipmentDetailsList = _list,
-            //    EquipmentDeliveryList = _list2
-            //};
+            EquipmentsListVM equipmentDetailsListVM = new EquipmentsListVM
+            {
+                EquipmentDetailsList = _list,
+                EquipmentDeliveryList = _list2
+            };
 
-            return View();
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentInventoryCommand(EquipmentInventoryVM equipmentInventory)
+        public async Task<IActionResult> AddEquipmentInventoryCommand(EquipmentsInventoryVM equipmentInventory)
         {
             try
             {
                 await mediator.Send(new AddEquipmentInventoryCommand
                 {
-                    EquipmentsInventoryVM = equipmentInventory
+                    MyEquipmentsInventoryVM = equipmentInventory
                 });
                 _checker = true;
             }
@@ -136,16 +123,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentRestockCommand(EquipmentRestockVM equipmentRestock)
+        public async Task<IActionResult> AddEquipmentRestockCommand(EquipmentsRestockVM equipmentRestock)
         {
             try
             {
                 await mediator.Send(new AddEquipmentRestockCommand
                 {
-                    DeliveryDate = equipmentRestock.DeliveryDate,
-                    ReceiptImage = equipmentRestock.ReceiptImage,
-                    DeliveryPrice = equipmentRestock.DeliveryPrice,
-                    Remarks = equipmentRestock.Remarks
+                    MyEquipmentsRestockVM = equipmentRestock
                 });
                 _checker = true;
             }
@@ -196,17 +180,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestEquipmentRestockCommand(EquipmentRestockRequestVM equipmentRestockRequest)
+        public async Task<IActionResult> RequestEquipmentRestockCommand(EquipmentsRestockRequestVM equipmentRestockRequest)
         {
             try
             {
                 await mediator.Send(new RequestEquipmentRestockCommand
                 {
-                    Quantity = equipmentRestockRequest.Quantity,
-                    DateTimeRequest = DateTime.Now,
-                    EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
-                    Status = equipmentRestockRequest.Status,
-                    UserID = equipmentRestockRequest.UserID
+                    MyEquipmentRestockRequestVM = equipmentRestockRequest
                 });
                 _checker = true;
             }
@@ -226,18 +206,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentDetailsCommand(EquipmentDetails equipmentDetails)
+        public async Task<IActionResult> UpdateEquipmentDetailsCommand(EquipmentsDetailsVM equipmentDetails)
         {
             try
             {
                 await mediator.Send(new UpdateEquipmentDetailsCommand
                 {
-                    ID = equipmentDetails.ID,
-                    Code = equipmentDetails.Code,
-                    Name = equipmentDetails.Name,
-                    Description = equipmentDetails.Description,
-                    UnitType = equipmentDetails.UnitType,
-                    EquipmentType = equipmentDetails.EquipmentType
+                    MyEquipmentDetails = equipmentDetails
 
                 });
                 _checker = true;
@@ -258,14 +233,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentStockCommand(EquipmentInventory equipmentInventory)
+        public async Task<IActionResult> UpdateEquipmentStockCommand(EquipmentsInventoryVM equipmentInventory)
         {
             try
             {
                 await mediator.Send(new UpdateEquipmentStockCommand
                 {
-                    ID = equipmentInventory.ID,
-                    Quantity = equipmentInventory.Quantity
+                    MyEquipmentInventoryVM = equipmentInventory
                 });
                 _checker = true;
             }
@@ -374,18 +348,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodDetailsCommand(FoodDetailsVM foodDetails)
+        public async Task<IActionResult> AddFoodDetailsCommand(FoodsDetailsVM foodDetails)
         {
             try
             {
                 await mediator.Send(new AddFoodDetailsCommand
                 {
-                    Code = foodDetails.Code,
-                    Name = foodDetails.Name,
-                    Specification = foodDetails.Specification,
-                    Description = foodDetails.Description,
-                    Unit = foodDetails.Unit,
-                    FoodType = foodDetails.FoodType
+                    MyFoodDetailsVM = foodDetails
                 });
                 _checker = true;
             }
@@ -427,32 +396,23 @@ namespace Attila.UI.Controllers
             }
 
 
-            //FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
-            //{
-            //    FoodDetailsList = _list,
-            //    FoodDeliveryList = _list2
-            //};
+            FoodsListVM FoodDetailsListVM = new FoodsListVM
+            {
+                FoodDetailsList = _list,
+                FoodDeliveryList = _list2
+            };
 
-            
-
-            return View();
+            return View(FoodDetailsListVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventoryCommand(FoodInventoryVM foodInventory)
+        public async Task<IActionResult> AddFoodInventoryCommand(FoodsInventoryVM foodInventory)
         {
             try
             {
                 await mediator.Send(new AddFoodInventoryCommand
                 {
-                    Quantity = foodInventory.Quantity,
-                    ExpirationDate = foodInventory.ExpirationDate,
-                    EncodingDate = DateTime.Now,
-                    ItemPrice = foodInventory.ItemPrice,
-                    Remarks = foodInventory.Remarks,
-                    UserID = foodInventory.UserID,
-                    FoodDetailsID = foodInventory.FoodDetailsID,
-                    FoodRestockID = foodInventory.FoodRestockID
+                    MyFoodInventoryVM = foodInventory
                 });
                 _checker = true;
             }
@@ -472,16 +432,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodRestockCommand(FoodRestockVM foodRestock)
+        public async Task<IActionResult> AddFoodRestockCommand(FoodsRestockVM foodRestock)
         {
             try
             {
                 await mediator.Send(new AddFoodRestockCommand
                 {
-                    DeliveryDate = foodRestock.DeliveryDate,
-                    ReceiptImage = foodRestock.ReceiptImage,
-                    DeliveryPrice = foodRestock.DeliveryPrice,
-                    Remarks = foodRestock.Remarks
+                    MyFoodRestockVM = foodRestock
                 });
                 _checker = true;
             }
@@ -530,17 +487,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestFoodRestockCommand(FoodRestockRequestVM foodRestockRequest)
+        public async Task<IActionResult> RequestFoodRestockCommand(FoodsRestockRequestVM foodRestockRequest)
         {
             try
             {
                 await mediator.Send(new RequestFoodRestockCommand
                 {
-                    Quantity = foodRestockRequest.Quantity,
-                    DateTimeRequest = DateTime.Now,
-                    FoodDetailsID = foodRestockRequest.FoodDetailsID,
-                    Status = foodRestockRequest.Status,
-                    UserID = foodRestockRequest.UserID
+                    MyFoodRestockRequestVM = foodRestockRequest
                 });
                 _checker = true;
             }
@@ -560,19 +513,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodDetailsCommand(FoodDetails foodDetails)
+        public async Task<IActionResult> UpdateFoodDetailsCommand(FoodsDetailsVM foodDetails)
         {
             try
             {
                 await mediator.Send(new UpdateFoodDetailsCommand
                 {
-                    ID = foodDetails.ID,
-                    Code = foodDetails.Code,
-                    Name = foodDetails.Name,
-                    Specification = foodDetails.Specification,
-                    Description = foodDetails.Description,
-                    Unit = foodDetails.Unit,
-                    FoodType = foodDetails.FoodType
+                    MyFoodDetailsVM = foodDetails
                 });
                 _checker = true;
             }
@@ -591,14 +538,13 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStockCommand(FoodInventory foodInventory)
+        public async Task<IActionResult> UpdateFoodStockCommand(FoodsInventoryVM foodInventory)
         {
             try
             {
                 await mediator.Send(new UpdateFoodStockCommand
                 {
-                    ID = foodInventory.ID,
-                    Quantity = foodInventory.Quantity
+                    MyFoodInventoryVM = foodInventory
                 });
                 _checker = true;
             }
