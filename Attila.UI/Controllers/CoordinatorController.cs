@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Attila.Application.Coordinator.Event.Commands;
+using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Event.Commands;
 using Attila.Application.Event.Queries;
 using Attila.UI.Models;
@@ -28,27 +29,28 @@ namespace Attila.UI.Controllers
         #region HTTP POSTs
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent(EventDetailsVM _eventDetails)
+        public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
+
+            EventDetailsVM x = new EventDetailsVM
+            {
+                EventPackageDetailsID = _eventDetails.Selected,
+                Code = _eventDetails.Event.Code,
+                Description = _eventDetails.Event.Description,
+                EventDate = _eventDetails.Event.EventDate,
+                EventName = _eventDetails.Event.EventName,
+                Location = _eventDetails.Event.Location,
+                Remarks = _eventDetails.Event.Remarks,
+                Type = _eventDetails.Event.Type,
+                EventClientID = _eventDetails.SelectedClient,
+                
+                
+            };
+
             bool flag = true;
             try
             {
-                
-                    await mediator.Send(new AddEventCommand
-                    {
-                        Address = _eventDetails.Address,
-                        BookingDate = DateTime.Now,
-                        Code = _eventDetails.Code,
-                        Description = _eventDetails.Description,
-                        EventDate = _eventDetails.EventDate,
-                        EventName = _eventDetails.EventName,
-                        Location = _eventDetails.Location,
-                        Type = _eventDetails.Type,
-                        Remarks = _eventDetails.Remarks,
-                        UserID = _eventDetails.UserID,
-                        EventClientID = _eventDetails.EventClientID,
-                        EventPackageDetailsID = _eventDetails.EventPackageDetailsID
-                    });
+               await mediator.Send(new AddEventCommand{ EventDetails = _eventDetails.Event});
             }catch(Exception)
             {
                 flag = false;
@@ -67,12 +69,7 @@ namespace Attila.UI.Controllers
             {
                     await mediator.Send(new AddEventPackageCommand
                     {
-                        Code = _eventPackage.Code,
-                        Description = _eventPackage.Description,
-                        Duration = _fromStringToTimeSpan,
-                        NumberOfGuest = _eventPackage.NumberOfGuest,
-                        Rate = _eventPackage.Rate
-
+                        PackageDetails = _eventPackage
                     });
 
             }
@@ -330,6 +327,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddEvent()
         {
             var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            var _clientNames = await mediator.Send(new GetClientListQuery());
 
             List<SelectListItem> _list = new List<SelectListItem>();
 
@@ -339,11 +337,19 @@ namespace Attila.UI.Controllers
                 {
                     Value = item.ID.ToString(),
                     Text = item.Code
+                });
 
+            }
+
+            foreach (var item in _clientNames)
+            {
+                _list.Add(new SelectListItem{
+                    Value = item.ID.ToString(),
+                    Text = item.Firstname + item.Lastname,
                 });
             }
 
-            var x = new EventDetailsVM();
+            var x = new AddEventVM();
             x.PackageList = _list;
             return View(x);
         }
