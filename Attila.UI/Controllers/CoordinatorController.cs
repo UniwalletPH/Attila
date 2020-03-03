@@ -25,9 +25,10 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-        // COORDINATOR COMMANDS START HERE
-        #region HTTP POSTs
 
+
+
+        // COORDINATOR COMMANDS START HERE
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
@@ -57,6 +58,39 @@ namespace Attila.UI.Controllers
             }
             return Json(flag);
         }
+        [HttpGet]
+        public async Task<IActionResult> AddEvent()
+        {
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            var _clientNames = await mediator.Send(new GetClientListQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in _packageNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code
+                });
+
+            }
+
+            foreach (var item in _clientNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Firstname + item.Lastname,
+                });
+            }
+
+            var _addEventList = new AddEventVM();
+            _addEventList.PackageList = _list;
+            _addEventList.ClientList = _list;
+            return View(_addEventList);
+        }
+        
 
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
@@ -65,11 +99,22 @@ namespace Attila.UI.Controllers
             string _parsedDurationString = _duration.ToString("hh':'mm");
             TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
             bool flag = true;
+            EventPackageVM eventPackageVM = new EventPackageVM
+            {
+                Code = _eventPackage.Code,
+                Description = _eventPackage.Description,
+                Duration = _fromStringToTimeSpan,
+                Name = _eventPackage.Name,
+                NumberOfGuest = _eventPackage.NumberOfGuest,
+                Rate = _eventPackage.Rate
+
+            };
+
             try
             {
                     await mediator.Send(new AddEventPackageCommand
                     {
-                        PackageDetails = _eventPackage
+                        PackageDetails = eventPackageVM
                     });
 
             }
@@ -80,6 +125,13 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult AddEventPackage()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> AddClientDetails(EventClientVM _eventClient)
         {
@@ -88,11 +140,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new AddClientDetailsCommand
                 {
-                    Address = _eventClient.Address,
-                    Contact = _eventClient.Contact,
-                    Email = _eventClient.Email,
-                    Lastname = _eventClient.Lastname,
-                    Firstname = _eventClient.Firstname
+                    EventClient = _eventClient
                 });
             }
             catch (Exception)
@@ -103,20 +151,22 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult AddClientDetails()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> AddEventPayment(EventPaymentVM _eventPayment)
+        public async Task<IActionResult> AddEventPayment(PaymentStatusVM _eventPayment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddPaymentForEventCommand
                 {
-                    Amount = _eventPayment.Amount,
-                    DateOfPayment = _eventPayment.DateOfPayment,
-                    EventDetailsID = _eventPayment.EventDetailsID,
-                    ReferenceNumber = _eventPayment.ReferenceNumber,
-                    Remarks = _eventPayment.Remarks
-
+                    MyEventPaymentStatus = _eventPayment
                 });
             }
             catch (Exception)
@@ -127,8 +177,15 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult AddEventPayment()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> RequestEventRequirements(EventEquipmentRequestVM _eventEquipmentRequest)
+        public async Task<IActionResult> RequestEventRequirements(EventRequirementRequestVM _eventEquipmentRequest)
         {
             bool flag = true;
             try
@@ -137,10 +194,7 @@ namespace Attila.UI.Controllers
                 {
                     await mediator.Send(new RequestEventRequirementsCommand
                     {
-                        EquipmentDetailsID = _eventEquipmentRequest.EquipmentDetailsID,
-                        EventDetailsID = _eventEquipmentRequest.EventDetailsID,
-                        Quantity = _eventEquipmentRequest.Quantity,
-
+                        EventRequirementRequest = _eventEquipmentRequest
                     });
                 }
                 else
@@ -156,6 +210,13 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult RequestEventRequirements()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> UpdateEvent(EventDetailsVM _eventDetails)
         {
@@ -164,15 +225,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new UpdateEventCommand
                 {
-                    ID = _eventDetails.ID,
-                    Address = _eventDetails.Address,
-                    Description = _eventDetails.Description,
-                    EventDate = _eventDetails.EventDate,
-                    EventName = _eventDetails.EventName,
-                    Location = _eventDetails.Location,
-                    Type = _eventDetails.Type,
-                    Remarks = _eventDetails.Remarks
-
+                    UpdateEvent = _eventDetails
                 });
             }
             catch (Exception)
@@ -183,6 +236,13 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult UpdateEvent()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> UpdateEventPackage(EventPackageVM _eventPackage)
         {
@@ -191,12 +251,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new UpdateEventPackageCommand
                 {
-                    ID = _eventPackage.ID,
-                    Code = _eventPackage.Code,
-                    Description = _eventPackage.Description,
-                    Duration = _eventPackage.Duration,
-                    NumberOfGuest = _eventPackage.NumberOfGuest,
-                    Rate = _eventPackage.Rate
+                    UpdatePackage = _eventPackage
                 });
             }
             catch (Exception)
@@ -207,6 +262,13 @@ namespace Attila.UI.Controllers
 
             return Json(flag);
         }
+
+        [HttpGet]
+        public IActionResult UpdateEventPackage()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateClientDetails(EventClientVM _eventClient)
@@ -232,19 +294,22 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult UpdateClientDetails()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> UpdateEventPaymentStatus(EventPaymentVM _eventPayment)
+        public async Task<IActionResult> UpdateEventPaymentStatus(PaymentStatusVM _eventPayment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new UpdatePaymentStatusCommand
                 {
-                    ID = _eventPayment.ID,
-                    Amount = _eventPayment.Amount,
-                    DateOfPayment = _eventPayment.DateOfPayment,
-                    ReferenceNumber = _eventPayment.ReferenceNumber,
-                    Remarks = _eventPayment.Remarks
+                    UpdatePaymentStatus = _eventPayment
                 });
             }
             catch (Exception)
@@ -255,6 +320,13 @@ namespace Attila.UI.Controllers
 
             return Json(flag);
         }
+
+        [HttpGet]
+        public IActionResult UpdateEventPaymentStatus()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> DeleteEvent(int _eventId)
@@ -267,6 +339,13 @@ namespace Attila.UI.Controllers
             return Json(true);
         }
 
+        [HttpGet]
+        public IActionResult DeleteEvent()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> DeleteEventPackage(int _packageId)
         {
@@ -278,17 +357,22 @@ namespace Attila.UI.Controllers
             return Json(true);
         }
 
+        [HttpGet]
+        public IActionResult DeleteEventPackage()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> AddAdditionalDurationRequest(PackageAdditionalDurationRequestVM _additionalDuration)
+        public async Task<IActionResult> AddAdditionalDurationRequest(AdditionalDurationRequestListVM _additionalDuration)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddAdditionalDurationRequestCommand
                 {
-                    Duration = _additionalDuration.Duration,
-                    Rate = _additionalDuration.Rate,
-                    EventDetailsID = _additionalDuration.EventDetailsID
+                    AdditionalPackage = _additionalDuration
                 });
             }
             catch (Exception)
@@ -300,18 +384,22 @@ namespace Attila.UI.Controllers
             return Json(flag);
         }
 
+        [HttpGet]
+        public IActionResult AddAdditionalDurationRequest()
+        {
+            return View();
+        }
+
+
         [HttpPost]
-        public async Task<IActionResult> AddAdditionalEquipmentRequest(PackageAdditionalEquipmentRequestVM _additionalEquipment)
+        public async Task<IActionResult> AddAdditionalEquipmentRequest(AdditionalEquipmentRequestListVM _additionalEquipment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddAdditionalEquipmentRequestCommand
                 {
-                    EventDetailsID = _additionalEquipment.EventDetailsID,
-                    EquipmentDetailsID = _additionalEquipment.EquipmentDetailsID,
-                    Rate = _additionalEquipment.Rate,
-                    Quantity = _additionalEquipment.Quantity,
+                    AdditionalEquipment = _additionalEquipment
                 });
             }catch (Exception)
             {
@@ -321,104 +409,6 @@ namespace Attila.UI.Controllers
             
             return Json(flag);
         }
-        #endregion
-        #region HTTP GETs
-        [HttpGet]
-        public async Task<IActionResult> AddEvent()
-        {
-            var _packageNames = await mediator.Send(new GetEventPackageQuery());
-            var _clientNames = await mediator.Send(new GetClientListQuery());
-
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            foreach (var item in _packageNames)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Code
-                });
-
-            }
-
-            foreach (var item in _clientNames)
-            {
-                _list.Add(new SelectListItem{
-                    Value = item.ID.ToString(),
-                    Text = item.Firstname + item.Lastname,
-                });
-            }
-
-            var x = new AddEventVM();
-            x.PackageList = _list;
-            return View(x);
-        }
-
-        [HttpGet]
-        public IActionResult AddEventPackage()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult AddClientDetails()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult AddEventPayment()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult RequestEventRequirements()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult UpdateEvent()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult UpdateEventPackage()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult UpdateClientDetails()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult UpdateEventPaymentStatus()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult DeleteEvent()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult DeleteEventPackage()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult AddAdditionalDurationRequest()
-        {
-            return View();
-        }
 
         [HttpGet]
         public IActionResult AddAdditionalEquipmentRequest()
@@ -426,18 +416,11 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        #endregion
         //COORDINATOR COMMANDS END HERE
 
 
 
-
-
-
-
         //COORDINATOR QUERIES START HERE
-        #region HTTP POSTs
-
         [HttpGet]
         public IActionResult SearchEventById()
         {
@@ -492,8 +475,6 @@ namespace Attila.UI.Controllers
             return View(_searchResult);
         }
 
-        #endregion
-        #region HTTP GETs
         [HttpGet]
         public async Task<IActionResult> GetAdditionalDurationRequestList()
         {
@@ -550,8 +531,6 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-
-        #endregion
         //COORDINATOR QUERIES END HERE
     }
 }

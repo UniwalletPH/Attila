@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,19 +12,7 @@ namespace Attila.Application.Event.Commands
 {
     public class AddClientDetailsCommand : IRequest<bool>
     {
-        //public EventClient EventClient { get; set; }
-        public int ID { get; set; }
-
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
-
-        public string Address { get; set; }
-
-        public string Email { get; set; }
-
-        public string Contact { get; set; }
-
+        public EventClientVM EventClient { get; set; }
         public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -37,11 +26,11 @@ namespace Attila.Application.Event.Commands
             {
                 var _newClient = new EventClient
                 {
-                    Firstname = request.Firstname,
-                    Lastname = request.Lastname,
-                    Address = request.Address,
-                    Contact = request.Contact,
-                    Email = request.Email
+                    Firstname = request.EventClient.Firstname,
+                    Lastname = request.EventClient.Lastname,
+                    Address = request.EventClient.Address,
+                    Contact = request.EventClient.Contact,
+                    Email = request.EventClient.Email
 
                 };
 

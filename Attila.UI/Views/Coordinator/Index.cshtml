@@ -52,6 +52,7 @@
 @section Scripts{
 
     <script>
+
         $("document").ready(function () {
             $('#btnAddEvent').on('click', function () {
                 window.location = "/Coordinator/AddEvent";
@@ -90,7 +91,7 @@
             });
 
             $('#btnUpdateEventPayment').on('click', function () {
-                window.location = "Coordinator/UpdateEventPayment";
+                window.location = "Coordinator/UpdateEventPaymentStatus";
             });
 
             $('#btnDeleteEvent').on('click', function () {
@@ -100,10 +101,15 @@
             $('#btnDeleteEventPackage').on('click', function () {
                 window.location = "Coordinator/DeleteEventPackage";
             });
+
+            $('#btnAddAdditionalDuration').on('click', function () {
+                window.location = "Coordinator/AddAdditionalDurationRequest";
+            });
+
+            $('#btnAddAdditionalEquipment').on('click', function () {
+                window.location = "Coordinator/AddAdditionalEquipmentRequest";
+            });
         });
-
-
-
 
     </script>
 

@@ -2,24 +2,23 @@
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Attila.Domain.Entities
+namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class EventEquipmentRequest
+    public class EventRequirementRequestVM
     {
         public int ID { get; set; }
-
+        [Required]
         public int EventDetailsID { get; set; }
-
+        [Required]
         public int EquipmentDetailsID { get; set; }
 
         public EquipmentDetails EquipmentDetails { get; set; }
-
+        [Required]
         public int Quantity { get; set; }
-
+        [Required]
         public Status Status { get; set; }
-
     }
 }

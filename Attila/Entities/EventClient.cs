@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Attila.Domain.Entities.Tables
 {
-    [Table("tbl_EventClient")]
     public class EventClient
     {
         public int ID { get; set; }

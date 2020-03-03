@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Attila.UI.Models
+namespace Attila.Application.Coordinator.Event.Queries
 {
     public class EventClientVM
     {

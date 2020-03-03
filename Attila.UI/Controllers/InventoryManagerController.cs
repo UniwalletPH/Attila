@@ -72,7 +72,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            var getEquipmentRestock = await mediator.Send(new GetEquipmentStockQuery());
+            var getEquipmentRestock = await mediator.Send(new GetEquipmentDeliveryQuery());
             List<SelectListItem> _list2 = new List<SelectListItem>();
 
             foreach (var item in getEquipmentRestock)
@@ -80,14 +80,14 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Equipment ID: " + item.EquipmentDetailsID + " | Encoding Date: " + item.EncodingDate.Date
+                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
                 });
             }
 
 
 
 
-            EquipmentsListVM equipmentDetailsListVM = new EquipmentsListVM
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
             {
                 EquipmentDetailsList = _list,
                 EquipmentDeliveryList = _list2
@@ -396,7 +396,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            FoodsListVM FoodDetailsListVM = new FoodsListVM
+            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
             {
                 FoodDetailsList = _list,
                 FoodDeliveryList = _list2

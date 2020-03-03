@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using MediatR;
@@ -14,21 +15,7 @@ namespace Attila.Application.Event.Commands
 
     public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
     {
-        //public PackageAdditionalEquipmentRequest AdditionalEquipment { get; set; }
-        public int ID { get; set; }
-
-        public int EquipmentDetailsID { get; set; }
-
-        public EquipmentDetails EquipmentDetails { get; set; }
-
-        public decimal Rate { get; set; }
-
-        public int EventDetailsID { get; set; }
-
-        public Status Status { get; set; }
-
-        public int Quantity { get; set; }
-
+        public AdditionalEquipmentRequestListVM AdditionalEquipment { get; set; }
         public class AddAdditionalEquipmentRequestCommandHandler : IRequestHandler<AddAdditionalEquipmentRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -42,10 +29,10 @@ namespace Attila.Application.Event.Commands
             {
                 var _additionalEquipment = new PackageAdditionalEquipmentRequest
                 {
-                    EventDetailsID = request.EventDetailsID,
-                    EquipmentDetailsID = request.EquipmentDetailsID,
-                    Rate = request.Rate,
-                    Quantity = request.Quantity,
+                    EventDetailsID = request.AdditionalEquipment.EventDetailsID,
+                    EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
+                    Rate = request.AdditionalEquipment.Rate,
+                    Quantity = request.AdditionalEquipment.Quantity,
                     Status = Status.Pending
                     
                 };

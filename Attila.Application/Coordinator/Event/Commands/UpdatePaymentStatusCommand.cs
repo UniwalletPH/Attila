@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,21 +12,7 @@ namespace Attila.Application.Event.Commands
 {
     public class UpdatePaymentStatusCommand : IRequest<bool>
     {
-        //public EventPaymentStatus UpdatePaymentStatus { get; set; }
-        public int ID { get; set; }
-
-        public int EventDetailsID { get; set; }
-
-        public EventDetails EventDetails { get; set; }
-
-        public decimal Amount { get; set; }
-
-        public DateTime DateOfPayment { get; set; }
-
-        public string ReferenceNumber { get; set; }
-
-        public string Remarks { get; set; }
-
+        public PaymentStatusVM UpdatePaymentStatus { get; set; }
         public class UpdatePaymentStatusCommandHandler : IRequestHandler<UpdatePaymentStatusCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -37,11 +24,11 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdatePaymentStatusCommand request, CancellationToken cancellationToken)
             {
-                var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.ID);
-                _updatedPackageStatus.Amount = request.Amount;
-                _updatedPackageStatus.Remarks = request.Remarks;
-                _updatedPackageStatus.DateOfPayment = request.DateOfPayment;
-                _updatedPackageStatus.ReferenceNumber = request.ReferenceNumber;
+                var _updatedPackageStatus = dbContext.EventsPaymentStatus.Find(request.UpdatePaymentStatus.ID);
+                _updatedPackageStatus.Amount = request.UpdatePaymentStatus.Amount;
+                _updatedPackageStatus.Remarks = request.UpdatePaymentStatus.Remarks;
+                _updatedPackageStatus.DateOfPayment = request.UpdatePaymentStatus.DateOfPayment;
+                _updatedPackageStatus.ReferenceNumber = request.UpdatePaymentStatus.ReferenceNumber;
                 await dbContext.SaveChangesAsync();
 
                 return true;
