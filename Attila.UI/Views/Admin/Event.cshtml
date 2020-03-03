@@ -85,7 +85,9 @@
 
 </table>
 
-
+<div class="text-center">
+    <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+</div>
 
 <style>
     table#example {
@@ -119,30 +121,52 @@
 </style>
 
 
+<div id="info">
 
-<div id="myModal" class="modal" role="contentinfo">
-    <div class="modal-dialog modal-lg" style="width:90%">
-
-        <!-- Modal content-->
-        <div class="modal-content"></div>
-
+    <div id="content">
+        
     </div>
+   
+
 </div>
+
+
 
 @section Scripts {
     <script>
+        var a; 
+
         $(document).ready(function () {
             $('.events tr').click(function () {
                 var _id = $(this).data("id");
-                $.post('/Admin/ViewEvent', { EventID: _id }).done(Reply);
+                a = _id;
+                $.post('/Admin/ViewEvent', { EventID: _id }).done(UpModal);
             });
         });
 
-        function Reply(reply) {
-            console.log(reply);          
-            $('#myModal .modal-content').html(reply);
+        
+     
+
+        function UpModal(reply) {
+            console.log(reply);
+            $('#info #content').html(reply);
+             $('#btnApprove').click(function () {              
+                 $.post('/Admin/ApproveEvent', { EventID: a }).done();
+                 alert("Event Approved");
+                 window.location = "/Admin/Event";
+             });
+               $('#btnDecline').click(function () {              
+                   $.post('/Admin/DeclineEvent', { EventID: a }).done();
+                   alert("Event Declined");
+                   window.location = "/Admin/Event";
+            });
         };
+
+
+
 
     </script>
 }
+
+
 
