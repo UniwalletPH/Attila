@@ -99,11 +99,22 @@ namespace Attila.UI.Controllers
             string _parsedDurationString = _duration.ToString("hh':'mm");
             TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
             bool flag = true;
+            EventPackageVM eventPackageVM = new EventPackageVM
+            {
+                Code = _eventPackage.Code,
+                Description = _eventPackage.Description,
+                Duration = _fromStringToTimeSpan,
+                Name = _eventPackage.Name,
+                NumberOfGuest = _eventPackage.NumberOfGuest,
+                Rate = _eventPackage.Rate
+
+            };
+
             try
             {
                     await mediator.Send(new AddEventPackageCommand
                     {
-                        PackageDetails = _eventPackage
+                        PackageDetails = eventPackageVM
                     });
 
             }
