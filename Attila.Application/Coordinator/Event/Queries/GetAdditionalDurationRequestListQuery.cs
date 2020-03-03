@@ -12,7 +12,7 @@ namespace Attila.Application.Event.Queries
 {
     public class GetAdditionalDurationRequestListQuery : IRequest<IEnumerable<AdditionalDurationRequestListVM>>
     {
-        public PackageAdditionalDurationRequest AdditionalPackage { get; set; }
+        public EventAdditionalDurationRequest AdditionalPackage { get; set; }
 
         public class GetAdditionalDurationReuestListQueryHandler : IRequestHandler<GetAdditionalDurationRequestListQuery, IEnumerable<AdditionalDurationRequestListVM>>
         {
@@ -25,7 +25,7 @@ namespace Attila.Application.Event.Queries
 
             public async Task<IEnumerable<AdditionalDurationRequestListVM>> Handle(GetAdditionalDurationRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _viewAdditionalDuration = await dbContext.PackageAdditionalDurationRequests.Select(a => new AdditionalDurationRequestListVM 
+                var _viewAdditionalDuration = await dbContext.EventAdditionalDurationRequests.Select(a => new AdditionalDurationRequestListVM 
                 {
                     ID = a.ID,
                     EventDetailsID = a.EventDetailsID,

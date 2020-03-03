@@ -28,7 +28,6 @@ namespace Attila.Application.Event.Commands
 
                 _updatedEventPackage.Description = request.UpdatePackage.Description;
                 _updatedEventPackage.Duration = request.UpdatePackage.Duration;
-                _updatedEventPackage.NumberOfGuest = request.UpdatePackage.NumberOfGuest;
                 _updatedEventPackage.Rate = request.UpdatePackage.Rate;
                 _updatedEventPackage.Name = request.UpdatePackage.Name;
 

@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Event.Queries
             public async Task<EventVM> Handle(GetEventDetailQuery request, CancellationToken cancellationToken)
             {
                 var _eventDetail = dbContext.EventsDetails
-                    .Include(a => a.EventPackageDetails)
+                    .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
                     .Include(a => a.User)
                     .Where(a => a.ID == request.EventID).SingleOrDefault();
@@ -50,7 +50,7 @@ namespace Attila.Application.Admin.Event.Queries
                     Coordinator = _eventDetail.User,
                     Client = _eventDetail.EventClient,
                     EventStatus = _eventDetail.EventStatus,
-                    Package = _eventDetail.EventPackageDetails,
+                    Package = _eventDetail.PackageDetails,
                     AdditionalEquipment = _additionalEquipment,
                     AdditionalDuration = _additionalDuration
                 

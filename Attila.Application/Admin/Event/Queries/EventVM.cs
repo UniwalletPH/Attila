@@ -32,12 +32,12 @@ namespace Attila.Application.Admin.Event.Queries
 
         public User Coordinator { get; set; }
 
-        public EventPackageDetails  Package{ get; set; }
+        public PackageDetails  Package{ get; set; }
 
         public EventClient Client { get; set; }
 
-        public List<PackageAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
+        public List<EventAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
 
-        public PackageAdditionalDurationRequest AdditionalDuration { get; set; }
+        public EventAdditionalDurationRequest AdditionalDuration { get; set; }
     }
 }

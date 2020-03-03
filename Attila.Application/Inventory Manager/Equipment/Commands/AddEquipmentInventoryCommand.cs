@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     Remarks = request.MyEquipmentsInventoryVM.Remarks,
                     UserID = request.MyEquipmentsInventoryVM.UserID,
                     EquipmentDetailsID = request.MyEquipmentsInventoryVM.EquipmentDetailsID,
-                    EquipmentDeliveryID = request.MyEquipmentsInventoryVM.EquipmentDeliveryID
+                    EquipmentRestockID = request.MyEquipmentsInventoryVM.EquipmentDeliveryID
                 };
 
                 dbContext.EquipmentsInventory.Add(_equipmentInventory);

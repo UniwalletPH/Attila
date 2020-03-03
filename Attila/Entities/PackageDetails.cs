@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Attila.Domain.Entities.Tables
 {
-    public class EventPackageDetails
+    public class PackageDetails
     {
         public int ID { get; set; }
 
@@ -14,8 +14,6 @@ namespace Attila.Domain.Entities.Tables
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public int NumberOfGuest { get; set; }
 
         public decimal Rate { get; set; }
 

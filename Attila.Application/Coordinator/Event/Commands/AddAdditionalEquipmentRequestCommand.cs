@@ -27,7 +27,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
             {
-                var _additionalEquipment = new PackageAdditionalEquipmentRequest
+                var _additionalEquipment = new EventAdditionalEquipmentRequest
                 {
                     EventDetailsID = request.AdditionalEquipment.EventDetailsID,
                     EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
@@ -37,7 +37,7 @@ namespace Attila.Application.Event.Commands
                     
                 };
 
-                dbContext.PackageAdditionalEquipmentRequests.Add(_additionalEquipment);
+                dbContext.EventAdditionalEquipmentRequests.Add(_additionalEquipment);
                 await dbContext.SaveChangesAsync();
 
                 return true;

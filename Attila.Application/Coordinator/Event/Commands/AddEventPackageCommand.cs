@@ -25,12 +25,11 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _newPackage = new EventPackageDetails {
+                var _newPackage = new PackageDetails {
                     
                     Code = request.PackageDetails.Code,
                     Description = request.PackageDetails.Description,
                     Duration = request.PackageDetails.Duration,
-                    NumberOfGuest = request.PackageDetails.NumberOfGuest,
                     Rate = request.PackageDetails.Rate,
                     Name = request.PackageDetails.Name
 

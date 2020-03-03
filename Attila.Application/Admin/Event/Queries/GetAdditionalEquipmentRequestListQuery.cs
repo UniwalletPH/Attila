@@ -10,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Equipment.Queries
 {
-    public class GetAdditionalEquipmentRequestListQuery : IRequest<List<PackageAdditionalEquipmentRequest>>
+    public class GetAdditionalEquipmentRequestListQuery : IRequest<List<EventAdditionalEquipmentRequest>>
     {
         public int EventID { get; set; }
 
-        public class ViewAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, List<PackageAdditionalEquipmentRequest>>
+        public class ViewAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, List<EventAdditionalEquipmentRequest>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewAdditionalEquipmentRequestListQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<List<PackageAdditionalEquipmentRequest>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventAdditionalEquipmentRequest>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _additionalEquipments = dbContext.PackageAdditionalEquipmentRequests
+                var _additionalEquipments = dbContext.EventAdditionalEquipmentRequests
                     .Include(a => a.EquipmentDetails)          
                     .Where(a => a.EventDetailsID == request.EventID);
 

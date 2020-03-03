@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Attila.Domain.Entities.Tables
 {
-    public class PackageAdditionalEquipmentRequest
+    public class EventAdditionalEquipmentRequest
     {
         public int ID { get; set; }
 
@@ -17,6 +17,8 @@ namespace Attila.Domain.Entities.Tables
         public decimal Rate { get; set; }
 
         public int EventDetailsID { get; set; }
+
+        public EventDetails EventDetails { get; set; }
 
         public Status Status { get; set; }
 

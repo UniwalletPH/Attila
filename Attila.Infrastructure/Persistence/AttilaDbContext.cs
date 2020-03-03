@@ -26,7 +26,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
 
-        public DbSet<EventPackageDetails> EventsPackageDetails { get; set; }
+        public DbSet<PackageDetails> EventsPackageDetails { get; set; }
 
         public DbSet<EventPaymentStatus> EventsPaymentStatus { get; set; }
 
@@ -38,13 +38,11 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<FoodRestockRequest> FoodRestockRequests { get; set; }
 
-        public DbSet<PackageAdditionalDurationRequest> PackageAdditionalDurationRequests { get; set; }
+        public DbSet<EventAdditionalDurationRequest> EventAdditionalDurationRequests { get; set; }
 
-        public DbSet<PackageAdditionalEquipmentRequest> PackageAdditionalEquipmentRequests { get; set; }
+        public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
         public DbSet<User> Users { get; set; }
-
-        public DbSet<UserMap> UserMaps { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

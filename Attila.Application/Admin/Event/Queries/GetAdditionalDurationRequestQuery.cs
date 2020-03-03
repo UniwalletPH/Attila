@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Event.Queries
 {
-    public class GetAdditionalDurationRequestQuery : IRequest<PackageAdditionalDurationRequest>
+    public class GetAdditionalDurationRequestQuery : IRequest<EventAdditionalDurationRequest>
     {
         public int EventID { get; set; }
 
-        public class GetAdditionalDurationRequestQueryHandler : IRequestHandler<GetAdditionalDurationRequestQuery, PackageAdditionalDurationRequest>
+        public class GetAdditionalDurationRequestQueryHandler : IRequestHandler<GetAdditionalDurationRequestQuery, EventAdditionalDurationRequest>
         {
             private readonly IAttilaDbContext dbContext;
             public GetAdditionalDurationRequestQueryHandler (IAttilaDbContext dbContext)
@@ -21,9 +21,9 @@ namespace Attila.Application.Admin.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<PackageAdditionalDurationRequest> Handle(GetAdditionalDurationRequestQuery request, CancellationToken cancellationToken)
+            public async Task<EventAdditionalDurationRequest> Handle(GetAdditionalDurationRequestQuery request, CancellationToken cancellationToken)
             {
-                var _request = dbContext.PackageAdditionalDurationRequests.Find(request.EventID);
+                var _request = dbContext.EventAdditionalDurationRequests.Find(request.EventID);
 
                 return _request;
             }

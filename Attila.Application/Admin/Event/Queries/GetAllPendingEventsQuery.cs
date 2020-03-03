@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Event.Queries
                 var _listOfPendingEvents = new List<EventVM>();
 
                 var _pendingEvents = dbContext.EventsDetails
-                    .Include(a => a.EventPackageDetails)
+                    .Include(a => a.PackageDetails)
                     .Include(a => a.User)
                     .Include(a => a.EventClient)
                     .Where(a => a.EventStatus == Status.Pending);
@@ -45,7 +45,7 @@ namespace Attila.Application.Admin.Event.Queries
                     EventDate = item.EventDate,
                     Description = item.Description,
                     Type = item.Type,
-                    Package = item.EventPackageDetails,
+                    Package = item.PackageDetails,
                     Coordinator = item.User,
                     Client = item.EventClient,
                     EventStatus = item.EventStatus,

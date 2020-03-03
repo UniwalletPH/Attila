@@ -26,14 +26,14 @@ namespace Attila.Application.Event.Commands
             {
                 if(request.AdditionalPackage.Duration != null && request.AdditionalPackage.Rate != 0 && request.AdditionalPackage.EventDetailsID != 0)
                 {
-                    var _additionalDuration = new PackageAdditionalDurationRequest
+                    var _additionalDuration = new EventAdditionalDurationRequest
                     {
                         EventDetailsID = request.AdditionalPackage.EventDetailsID,
                         Duration = request.AdditionalPackage.Duration,
                         Rate = request.AdditionalPackage.Rate
                     };
 
-                    dbContext.PackageAdditionalDurationRequests.Add(_additionalDuration);
+                    dbContext.EventAdditionalDurationRequests.Add(_additionalDuration);
                     await dbContext.SaveChangesAsync();
                     return true;
                 }

@@ -19,9 +19,10 @@ namespace Attila.Domain.Entities.Tables
         public string Remarks { get; set; }
 
         public int UserID { get; set; }
-
+        public EquipmentDetails EquipmentDetails { get; set; }
+        public EquipmentRestock EquipmentRestock { get; set; }
         public int EquipmentDetailsID { get; set; }
 
-        public int EquipmentDeliveryID { get; set; }
+        public int EquipmentRestockID { get; set; }
     }
 }

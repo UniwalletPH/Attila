@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class GetEventPackageQuery : IRequest<List<EventPackageDetails>>
+    public class GetEventPackageQuery : IRequest<List<PackageDetails>>
     {
 
-        public class GetEventPackageQueryHandler : IRequestHandler<GetEventPackageQuery, List<EventPackageDetails>>
+        public class GetEventPackageQueryHandler : IRequestHandler<GetEventPackageQuery, List<PackageDetails>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetEventPackageQueryHandler(IAttilaDbContext dbContext)
@@ -21,7 +21,7 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventPackageDetails>> Handle(GetEventPackageQuery request, CancellationToken cancellationToken)
+            public async Task<List<PackageDetails>> Handle(GetEventPackageQuery request, CancellationToken cancellationToken)
             {
                 var _viewEventPackage = await dbContext.EventsPackageDetails.ToListAsync();
 
