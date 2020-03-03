@@ -10,19 +10,26 @@ namespace Attila.Domain.Entities.Tables
     {
         public int ID { get; set; }
 
+        public int UserID { get; set; }
+
         public int Quantity { get; set; }
+
+        public int EquipmentDetailsID { get; set; }
+
+        public int EquipmentRestockID { get; set; }
 
         public DateTime EncodingDate { get; set; }
 
         public decimal ItemPrice { get; set; }
 
-        public string Remarks { get; set; }
+        public string Remarks { get; set; }   
 
-        public int UserID { get; set; }
+        public User User { get; set; }
+
         public EquipmentDetails EquipmentDetails { get; set; }
-        public EquipmentRestock EquipmentRestock { get; set; }
-        public int EquipmentDetailsID { get; set; }
 
-        public int EquipmentRestockID { get; set; }
+        public EquipmentRestock EquipmentRestock { get; set; }
+
+       
     }
 }

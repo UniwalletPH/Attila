@@ -28,5 +28,7 @@ namespace Attila.Domain.Entities.Tables
         public FoodDetails FoodDetails { get; set; }
 
         public FoodRestock FoodRestock { get; set; }
+
+        public User User { get; set; }
     }
 }
