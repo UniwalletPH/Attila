@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Attila.Domain.Entities.Tables
 {
-    [Table("tbl_FoodInventory")]
     public class FoodInventory
     {
         public int ID { get; set; }

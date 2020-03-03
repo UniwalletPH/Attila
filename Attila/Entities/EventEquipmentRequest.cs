@@ -7,7 +7,6 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    [Table("tbl_EventEquipmentRequest")]
     public class EventEquipmentRequest
     {
         public int ID { get; set; }
