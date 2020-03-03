@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using MediatR;
@@ -12,35 +13,7 @@ namespace Attila.Application.Event.Commands
 {
     public class UpdateEventCommand : IRequest<bool>
     {
-        //public EventDetails UpdateEvent { get; set; }
-        public int ID { get; set; }
-
-        public string Code { get; set; }
-
-        public string EventName { get; set; }
-
-        public EventType Type { get; set; }
-
-        public Status EventStatus { get; set; }
-
-        public string Address { get; set; }
-
-        public DateTime BookingDate { get; set; }
-
-        public DateTime EventDate { get; set; }
-
-        public string Description { get; set; }
-
-        public string Location { get; set; }
-
-        public string Remarks { get; set; }
-
-        public int UserID { get; set; }
-
-        public int EventPackageDetailsID { get; set; }
-
-        public int EventClientID { get; set; }
-
+        public EventDetailsVM UpdateEvent { get; set; }
         public class UpdateEventCommandHandler : IRequestHandler<UpdateEventCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -52,14 +25,14 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEventDetails = dbContext.EventsDetails.Find(request.ID);
-                _updatedEventDetails.Description = request.Description;
-                _updatedEventDetails.EventDate = request.EventDate;
-                _updatedEventDetails.EventName = request.EventName;
-                _updatedEventDetails.EventStatus = request.EventStatus;
-                _updatedEventDetails.Location = request.Location;
-                _updatedEventDetails.Type = request.Type;
-                _updatedEventDetails.Remarks = request.Remarks;
+                var _updatedEventDetails = dbContext.EventsDetails.Find(request.UpdateEvent.ID);
+                _updatedEventDetails.Description = request.UpdateEvent.Description;
+                _updatedEventDetails.EventDate = request.UpdateEvent.EventDate;
+                _updatedEventDetails.EventName = request.UpdateEvent.EventName;
+                _updatedEventDetails.EventStatus = request.UpdateEvent.EventStatus;
+                _updatedEventDetails.Location = request.UpdateEvent.Location;
+                _updatedEventDetails.Type = request.UpdateEvent.Type;
+                _updatedEventDetails.Remarks = request.UpdateEvent.Remarks;
                 
 
                 await dbContext.SaveChangesAsync();

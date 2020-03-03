@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,20 +12,7 @@ namespace Attila.Application.Coordinator.Event.Commands
 {
     public class AddPaymentForEventCommand : IRequest<bool>
     {
-        //public EventPaymentStatus MyEventPaymentStatus { get; set; }
-        public int ID { get; set; }
-
-        public int EventDetailsID { get; set; }
-
-        public EventDetails EventDetails { get; set; }
-
-        public decimal Amount { get; set; }
-
-        public DateTime DateOfPayment { get; set; }
-
-        public string ReferenceNumber { get; set; }
-
-        public string Remarks { get; set; }
+        public PaymentStatusVM MyEventPaymentStatus { get; set; }
 
         public class AddPaymentForEventHandler : IRequestHandler<AddPaymentForEventCommand, bool>
         {
@@ -38,11 +26,11 @@ namespace Attila.Application.Coordinator.Event.Commands
             {
                 var _addPaymentForEventCommand = new EventPaymentStatus
                 {
-                    EventDetailsID = request.EventDetailsID,
-                    Amount = request.Amount,
+                    EventDetailsID = request.MyEventPaymentStatus.EventDetailsID,
+                    Amount = request.MyEventPaymentStatus.Amount,
                     DateOfPayment = DateTime.Now,
-                    ReferenceNumber = request.ReferenceNumber,
-                    Remarks = request.Remarks
+                    ReferenceNumber = request.MyEventPaymentStatus.ReferenceNumber,
+                    Remarks = request.MyEventPaymentStatus.Remarks
                 };
 
                 dbContext.EventsPaymentStatus.Add(_addPaymentForEventCommand);

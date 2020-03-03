@@ -8,23 +8,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Attila.Domain.Enums;
+using Attila.Application.Coordinator.Event.Queries;
 
 namespace Attila.Application.Event.Commands
 {
     public class RequestEventRequirementsCommand : IRequest<bool>
     {
-        //public EventEquipmentRequest EventRequirementRequest { get; set; }
-        public int ID { get; set; }
-
-        public int EventDetailsID { get; set; }
-
-        public int EquipmentDetailsID { get; set; }
-
-        public EquipmentDetails EquipmentDetails { get; set; }
-
-        public int Quantity { get; set; }
-
-        public Status Status { get; set; }
+        public EventRequirementRequestVM EventRequirementRequest { get; set; }
 
         public class RequestEventRequirementsCommandHandler : IRequestHandler<RequestEventRequirementsCommand, bool>
         {
@@ -38,9 +28,9 @@ namespace Attila.Application.Event.Commands
             {
                     var _eventRequirementRequest = new EventEquipmentRequest
                     {
-                        EventDetailsID = request.EventDetailsID,
-                        EquipmentDetailsID = request.EquipmentDetailsID,
-                        Quantity = request.Quantity,
+                        EventDetailsID = request.EventRequirementRequest.EventDetailsID,
+                        EquipmentDetailsID = request.EventRequirementRequest.EquipmentDetailsID,
+                        Quantity = request.EventRequirementRequest.Quantity,
                         Status = Status.Pending
                     };
 

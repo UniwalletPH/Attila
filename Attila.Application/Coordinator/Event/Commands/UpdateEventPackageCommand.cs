@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -11,21 +12,7 @@ namespace Attila.Application.Event.Commands
 {
     public class UpdateEventPackageCommand : IRequest<bool>
     {
-        //public EventPackageDetails UpdatePackage { get; set; }
-        public int ID { get; set; }
-
-        public string Code { get; set; }
-
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public int NumberOfGuest { get; set; }
-
-        public decimal Rate { get; set; }
-
-        public TimeSpan Duration { get; set; }
-
+        public EventPackageVM UpdatePackage { get; set; }
         public class UpdateEventPackageCommandHandler : IRequestHandler<UpdateEventPackageCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
@@ -37,13 +24,13 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.ID);
+                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.UpdatePackage.ID);
 
-                _updatedEventPackage.Description = request.Description;
-                _updatedEventPackage.Duration = request.Duration;
-                _updatedEventPackage.NumberOfGuest = request.NumberOfGuest;
-                _updatedEventPackage.Rate = request.Rate;
-                _updatedEventPackage.Name = request.Name;
+                _updatedEventPackage.Description = request.UpdatePackage.Description;
+                _updatedEventPackage.Duration = request.UpdatePackage.Duration;
+                _updatedEventPackage.NumberOfGuest = request.UpdatePackage.NumberOfGuest;
+                _updatedEventPackage.Rate = request.UpdatePackage.Rate;
+                _updatedEventPackage.Name = request.UpdatePackage.Name;
 
                 await dbContext.SaveChangesAsync();
 
