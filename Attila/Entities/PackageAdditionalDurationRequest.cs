@@ -5,7 +5,6 @@ using System.Text;
 
 namespace Attila.Domain.Entities.Tables
 {
-    [Table("tbl_PackageAdditionalDurationRequest")]
     public class PackageAdditionalDurationRequest
     {
         public int ID { get; set; }
