@@ -25,6 +25,9 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
+
+
+
         // COORDINATOR COMMANDS START HERE
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
@@ -144,19 +147,14 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddEventPayment(EventPaymentVM _eventPayment)
+        public async Task<IActionResult> AddEventPayment(PaymentStatusVM _eventPayment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddPaymentForEventCommand
                 {
-                    Amount = _eventPayment.Amount,
-                    DateOfPayment = _eventPayment.DateOfPayment,
-                    EventDetailsID = _eventPayment.EventDetailsID,
-                    ReferenceNumber = _eventPayment.ReferenceNumber,
-                    Remarks = _eventPayment.Remarks
-
+                    MyEventPaymentStatus = _eventPayment
                 });
             }
             catch (Exception)
@@ -175,7 +173,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> RequestEventRequirements(EventEquipmentRequestVM _eventEquipmentRequest)
+        public async Task<IActionResult> RequestEventRequirements(EventRequirementRequestVM _eventEquipmentRequest)
         {
             bool flag = true;
             try
@@ -184,10 +182,7 @@ namespace Attila.UI.Controllers
                 {
                     await mediator.Send(new RequestEventRequirementsCommand
                     {
-                        EquipmentDetailsID = _eventEquipmentRequest.EquipmentDetailsID,
-                        EventDetailsID = _eventEquipmentRequest.EventDetailsID,
-                        Quantity = _eventEquipmentRequest.Quantity,
-
+                        EventRequirementRequest = _eventEquipmentRequest
                     });
                 }
                 else
@@ -218,15 +213,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new UpdateEventCommand
                 {
-                    ID = _eventDetails.ID,
-                    Address = _eventDetails.Address,
-                    Description = _eventDetails.Description,
-                    EventDate = _eventDetails.EventDate,
-                    EventName = _eventDetails.EventName,
-                    Location = _eventDetails.Location,
-                    Type = _eventDetails.Type,
-                    Remarks = _eventDetails.Remarks
-
+                    UpdateEvent = _eventDetails
                 });
             }
             catch (Exception)
@@ -252,12 +239,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new UpdateEventPackageCommand
                 {
-                    ID = _eventPackage.ID,
-                    Code = _eventPackage.Code,
-                    Description = _eventPackage.Description,
-                    Duration = _eventPackage.Duration,
-                    NumberOfGuest = _eventPackage.NumberOfGuest,
-                    Rate = _eventPackage.Rate
+                    UpdatePackage = _eventPackage
                 });
             }
             catch (Exception)
@@ -308,18 +290,14 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEventPaymentStatus(EventPaymentVM _eventPayment)
+        public async Task<IActionResult> UpdateEventPaymentStatus(PaymentStatusVM _eventPayment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new UpdatePaymentStatusCommand
                 {
-                    ID = _eventPayment.ID,
-                    Amount = _eventPayment.Amount,
-                    DateOfPayment = _eventPayment.DateOfPayment,
-                    ReferenceNumber = _eventPayment.ReferenceNumber,
-                    Remarks = _eventPayment.Remarks
+                    UpdatePaymentStatus = _eventPayment
                 });
             }
             catch (Exception)
@@ -375,16 +353,14 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddAdditionalDurationRequest(PackageAdditionalDurationRequestVM _additionalDuration)
+        public async Task<IActionResult> AddAdditionalDurationRequest(AdditionalDurationRequestListVM _additionalDuration)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddAdditionalDurationRequestCommand
                 {
-                    Duration = _additionalDuration.Duration,
-                    Rate = _additionalDuration.Rate,
-                    EventDetailsID = _additionalDuration.EventDetailsID
+                    AdditionalPackage = _additionalDuration
                 });
             }
             catch (Exception)
@@ -404,17 +380,14 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddAdditionalEquipmentRequest(PackageAdditionalEquipmentRequestVM _additionalEquipment)
+        public async Task<IActionResult> AddAdditionalEquipmentRequest(AdditionalEquipmentRequestListVM _additionalEquipment)
         {
             bool flag = true;
             try
             {
                 await mediator.Send(new AddAdditionalEquipmentRequestCommand
                 {
-                    EventDetailsID = _additionalEquipment.EventDetailsID,
-                    EquipmentDetailsID = _additionalEquipment.EquipmentDetailsID,
-                    Rate = _additionalEquipment.Rate,
-                    Quantity = _additionalEquipment.Quantity,
+                    AdditionalEquipment = _additionalEquipment
                 });
             }catch (Exception)
             {
@@ -432,10 +405,6 @@ namespace Attila.UI.Controllers
         }
 
         //COORDINATOR COMMANDS END HERE
-
-
-
-
 
 
 
