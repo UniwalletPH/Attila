@@ -28,7 +28,7 @@ namespace Attila.Application.Event.Commands
 
                 _updatedEventPackage.Description = request.UpdatePackage.Description;
                 _updatedEventPackage.Duration = request.UpdatePackage.Duration;
-                _updatedEventPackage.RatePerHead = request.UpdatePackage.Rate;
+                _updatedEventPackage.RatePerHead = request.UpdatePackage.RatePerHead;
                 _updatedEventPackage.Name = request.UpdatePackage.Name;
 
                 await dbContext.SaveChangesAsync();

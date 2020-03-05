@@ -1,22 +1,21 @@
-﻿using System;
+﻿using Attila.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class EventPackageVM
+    public class MenuVM
     {
         public int ID { get; set; }
         [Required]
-        public string Code { get; set; }
+        public int MenuCategoryID { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
-        public decimal RatePerHead { get; set; }
-        [Required]
-        public TimeSpan Duration { get; set; }
+        public MenuCategoryVM MenuCategory { get; set; }
     }
 }
