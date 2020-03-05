@@ -27,7 +27,7 @@ namespace Attila.Application.Admin.Event.Queries
 
             public async Task<EventVM> Handle(GetEventDetailQuery request, CancellationToken cancellationToken)
             {
-                var _eventDetail = dbContext.EventsDetails
+                var _eventDetail = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
                     .Include(a => a.User)

@@ -23,7 +23,7 @@ namespace Attila.Application.Admin.Commands
 
             public async Task<int> Handle(ApproveEventRequestCommand request, CancellationToken cancellationToken)
             {
-                var _toApprove = dbContext.EventsDetails.Find(request.EventID);
+                var _toApprove = dbContext.EventDetails.Find(request.EventID);
 
                 if (_toApprove != null)
                 {
