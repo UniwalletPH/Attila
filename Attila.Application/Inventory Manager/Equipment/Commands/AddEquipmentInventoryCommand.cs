@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -34,7 +35,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     EquipmentRestockID = request.MyEquipmentsInventoryVM.EquipmentDeliveryID
                 };
 
-                dbContext.EquipmentsInventory.Add(_equipmentInventory);
+                dbContext.EquipmentInventories.Add(_equipmentInventory);
                 await dbContext.SaveChangesAsync();
 
                 return true;

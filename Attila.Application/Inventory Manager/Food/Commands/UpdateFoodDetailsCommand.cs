@@ -23,7 +23,7 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodDetails = dbContext.FoodsDetails.Find(request.MyFoodDetailsVM.ID);
+                var _updatedFoodDetails = dbContext.FoodDetails.Find(request.MyFoodDetailsVM.ID);
 
                 if (_updatedFoodDetails != null)
                 {

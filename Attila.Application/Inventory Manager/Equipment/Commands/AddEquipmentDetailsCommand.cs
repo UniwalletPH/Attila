@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Enums;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
@@ -32,7 +33,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType
                 };
 
-                dbContext.EquipmentsDetails.Add(_equipmentDetails);
+                dbContext.EquipmentDetails.Add(_equipmentDetails);
                 await dbContext.SaveChangesAsync();
 
                 return true;

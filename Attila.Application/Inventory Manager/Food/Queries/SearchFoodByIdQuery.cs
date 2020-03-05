@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -23,7 +24,7 @@ namespace Attila.Application.Food.Queries
             public async Task<FoodsDetailsVM> Handle(SearchFoodByIdQuery request, CancellationToken cancellationToken)
             {
 
-                FoodDetails _searchedFoodDetails = dbContext.FoodsDetails.Find(request.SearchedID);
+                FoodDetails _searchedFoodDetails = dbContext.FoodDetails.Find(request.SearchedID);
 
                 if (_searchedFoodDetails != null) 
                 {

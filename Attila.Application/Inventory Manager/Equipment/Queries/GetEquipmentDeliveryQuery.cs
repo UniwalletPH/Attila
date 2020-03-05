@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
 
             public async Task<IEnumerable<EquipmentsRestockVM>> Handle(GetEquipmentDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDeliveryList = await dbContext.EquipmentsRestock.Select(a => new EquipmentsRestockVM
+                var _equipmentDeliveryList = await dbContext.DeliveryDetails.Select(a => new EquipmentsRestockVM
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,

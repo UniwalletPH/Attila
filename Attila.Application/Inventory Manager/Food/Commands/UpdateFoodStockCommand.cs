@@ -20,7 +20,7 @@ namespace Atilla.Application.Food.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodStock = dbContext.FoodsInventory.Find(request.MyFoodInventoryVM.ID);
+                var _updatedFoodStock = dbContext.FoodInventories.Find(request.MyFoodInventoryVM.ID);
 
                 if (_updatedFoodStock != null)
                 {

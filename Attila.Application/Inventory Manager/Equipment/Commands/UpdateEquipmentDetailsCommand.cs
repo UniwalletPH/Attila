@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             }
             public async Task<bool> Handle(UpdateEquipmentDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentDetails = dbContext.EquipmentsDetails.Find(request.MyEquipmentDetails.ID);
+                var _updatedEquipmentDetails = dbContext.EquipmentDetails.Find(request.MyEquipmentDetails.ID);
 
                 if (_updatedEquipmentDetails != null)
                 {
