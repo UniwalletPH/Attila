@@ -200,9 +200,27 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateEquipmentDetails()
+        public async Task<IActionResult> UpdateEquipmentDetails()
         {
-            return View();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]
