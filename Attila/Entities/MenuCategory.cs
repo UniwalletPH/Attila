@@ -4,7 +4,7 @@
     {
         public int ID { get; set; }
 
-        public int PackegeDetailsID { get; set; }
+        public int PackageDetailsID { get; set; }
 
         public string Category { get; set; }
 
