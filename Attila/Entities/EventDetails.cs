@@ -32,7 +32,7 @@ namespace Attila.Domain.Entities.Tables
 
         public User User { get; set; }
 
-        public int  EventPackageDetailsID { get; set; }
+        public int PackageDetailsID { get; set; }
 
         public PackageDetails PackageDetails { get; set; }
 

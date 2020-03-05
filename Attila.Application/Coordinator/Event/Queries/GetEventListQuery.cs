@@ -38,7 +38,7 @@ namespace Attila.Application.Event.Queries
                     Location = a.Location,
                     Remarks = a.Remarks,
                     UserID = a.UserID,
-                    EventPackageDetailsID = a.EventPackageDetailsID,
+                    EventPackageDetailsID = a.PackageDetailsID,
                     EventClientID = a.EventClientID
 
                 }).ToListAsync();

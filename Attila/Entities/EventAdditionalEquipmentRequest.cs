@@ -14,8 +14,6 @@ namespace Attila.Domain.Entities.Tables
 
         public EquipmentDetails EquipmentDetails { get; set; }
 
-        public decimal Rate { get; set; }
-
         public int EventDetailsID { get; set; }
 
         public EventDetails EventDetails { get; set; }

@@ -31,10 +31,8 @@ namespace Attila.Application.Event.Commands
                 {
                     EventDetailsID = request.AdditionalEquipment.EventDetailsID,
                     EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
-                    Rate = request.AdditionalEquipment.Rate,
                     Quantity = request.AdditionalEquipment.Quantity,
-                    Status = Status.Pending
-                    
+                    Status = Status.Pending               
                 };
 
                 dbContext.EventAdditionalEquipmentRequests.Add(_additionalEquipment);

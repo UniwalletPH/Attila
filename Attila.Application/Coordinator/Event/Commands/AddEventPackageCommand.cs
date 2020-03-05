@@ -30,7 +30,7 @@ namespace Attila.Application.Event.Commands
                     Code = request.PackageDetails.Code,
                     Description = request.PackageDetails.Description,
                     Duration = request.PackageDetails.Duration,
-                    Rate = request.PackageDetails.Rate,
+                    RatePerHead = request.PackageDetails.Rate,
                     Name = request.PackageDetails.Name
 
                 };

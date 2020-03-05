@@ -43,6 +43,16 @@ namespace Attila.Application.Interfaces
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserLogins> UserLogins { get; set; }
+
+        public DbSet<MenuCategory> MenuCategories { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
+
+        public DbSet<EventMenus> EventMenus { get; set; }
+
+        public DbSet<EquipmentFee> EquipmentFees { get; set; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

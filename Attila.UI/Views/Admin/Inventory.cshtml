@@ -11,30 +11,31 @@
 <div class="text-center" >
     <h3>PENDING FOOD RESTOCK REQUEST</h3>
 </div>
-<table class="request" style="width:100%">
+<table class="request" style="width:100%" data-toggle="modal" data-target="#myModal">
     <tr>
         <th>Name</th>
         <th>Quantity</th>
         <th>Request Date</th>
         <th>Inventory Manager</th>
-        <th>Status</th>
+        
 
     </tr>
     @{
         foreach (var item in Model.PendingFoodRestockRequest)
         {
-            <tr>
+            <tr data-id="@item.ID" >
                 <td>@item.FoodDetails.Name</td>
                 <td>@item.Quantity</td>
                 <td>@item.DateTimeRequest.Date.ToShortDateString()</td>
                 <td>@item.User.Name</td>
-                <td>@item.Status</td>
+                
 
             </tr>
-
         }
     }
 </table>
+
+
 
 
 <div class="text-center">
@@ -65,6 +66,29 @@
 
 </table>
 
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>      
+      </div>
+      <div class="modal-body">
+          <div class="text-center">
+              <input type="submit" id="btnApprove" value="Approve" class="btn btn-primary" />
+
+              <input type="submit" id="btnDecline" value="Decline" class="btn btn-primary" />
+
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 
@@ -98,3 +122,44 @@
         cursor: pointer;
     }
 </style>
+
+
+
+@section Scripts {
+
+
+    <script>
+
+        var selectedID;
+       
+          $(document).ready(function () {
+            $('.request tr').click(function () {
+                var _id = $(this).data("id");     
+
+                selectedID = _id;
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#btnApprove').click(function () {              
+                $.post('/Admin/ApproveFoodRestockRequest', { foodID : selectedID }).done(Reply);
+               
+            });
+        });
+
+         $(document).ready(function () {
+            $('#btnDecline').click(function () {
+                 $.post('/Admin/DeclineFoodRestockRequest', { foodID : selectedID }).done(Reply);              
+            });
+        });
+
+        function Reply(reply) {
+            console.log(reply);
+            window, location = "/Admin/Inventory";
+        };
+       
+    </script>
+
+
+}

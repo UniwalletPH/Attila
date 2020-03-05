@@ -15,7 +15,7 @@ namespace Attila.Domain.Entities.Tables
 
         public string Description { get; set; }
 
-        public decimal Rate { get; set; }
+        public decimal RatePerHead { get; set; }
 
         public TimeSpan Duration{ get; set; }
 

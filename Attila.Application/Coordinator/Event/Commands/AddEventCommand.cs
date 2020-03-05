@@ -54,7 +54,7 @@ namespace Attila.Application.Event.Commands
                     Description = request.EventDetails.Description,
                     EventClientID = request.EventDetails.EventClientID,
                     EventDate = request.EventDetails.EventDate,
-                    EventPackageDetailsID = request.EventDetails.EventPackageDetailsID,
+                    PackageDetailsID = request.EventDetails.EventPackageDetailsID,
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
                     UserID = request.EventDetails.UserID,

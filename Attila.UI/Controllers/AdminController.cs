@@ -1,5 +1,8 @@
-﻿using Attila.Application.Admin.Commands;
+﻿using Atilla.Application.Admin.Equipment.Commands;
+using Attila.Application.Admin.Commands;
+using Attila.Application.Admin.Equipment.Commands;
 using Attila.Application.Admin.Event.Queries;
+using Attila.Application.Admin.Food.Commands;
 using Attila.Application.Admin.Food.Queries;
 using Attila.Application.Admin.Inventory.Queries;
 using Attila.UI.Models;
@@ -83,6 +86,40 @@ namespace Attila.UI.Controllers
             };
 
             return View(_pendingRequest);
+        }
+
+        public async Task<IActionResult> ApproveFoodRestockRequest(int foodID)
+        {
+            var _return = await mediator.Send(new ApproveFoodRestockRequestCommand { RequestID = foodID});
+
+            return Json(_return);
+        }
+
+        public async Task<IActionResult> DeclineFoodRestockRequest(int foodID)
+        {
+            var _return = await mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = foodID});
+
+            return Json(_return);
+        }
+
+        public async Task<IActionResult> ApproveEquipmentRestockRequest(int equipmentID)
+        {
+
+            var _return = await mediator.Send(new ApproveEquipmentRestockRequestCommand { RequestID = equipmentID});
+
+            return Json(_return);
+        }
+        public async Task<IActionResult> DeclineEquipmentRestockRequest(int equipmentID)
+        {
+
+            var _return = await mediator.Send(new DeclineEquipmentRestockRequestCommand {RequestID = equipmentID } );
+
+            return Json(_return);
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
         }
 
         [HttpGet]

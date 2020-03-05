@@ -1,19 +1,21 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Tables;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
-    public class EventAdditionalDurationRequest
+    public class EventMenus
     {
         public int ID { get; set; }
 
-        public TimeSpan Duration { get; set; }   
+        public int  MenuID {get; set;}
 
         public int EventDetailsID { get; set; }
 
         public EventDetails EventDetails { get; set; }
+        
+        public Menu Menu { get; set; }
 
     }
 }

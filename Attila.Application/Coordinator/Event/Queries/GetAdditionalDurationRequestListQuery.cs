@@ -29,8 +29,7 @@ namespace Attila.Application.Event.Queries
                 {
                     ID = a.ID,
                     EventDetailsID = a.EventDetailsID,
-                    Duration = a.Duration,
-                    Rate = a.Rate
+                    Duration = a.Duration
                     
                 }).ToListAsync();
 

@@ -32,8 +32,7 @@ namespace Attila.Application.Event.Queries
                     EquipmentDetails = a.EquipmentDetails,
                     EquipmentDetailsID = a.EquipmentDetailsID,
                     EventDetailsID = a.EventDetailsID,
-                    Quantity = a.Quantity,
-                    Rate = a.Rate,
+                    Quantity = a.Quantity,                 
                     Status = a.Status
 
                 }).ToListAsync();
