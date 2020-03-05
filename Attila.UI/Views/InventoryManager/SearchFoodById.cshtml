@@ -1,14 +1,15 @@
-﻿@model Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM
+﻿@model Attila.Application.Inventory_Manager.Food.Queries.FoodsDetailsVM
 
 @{
-    ViewData["Title"] = "SearchEquipmentByIdQuery";
+    ViewData["Title"] = "SearchFoodById";
 }
 
-<h1>Search Equipment By Id</h1>
+<h1>Search Food By Id</h1>
+
 
 <div class="row">
     <div class="col-md-4">
-        <label class="control-label">Enter equipment ID: </label>
+        <label class="control-label">Enter food ID: </label>
         <input id="txtSearchID" class="form-control" />
         <br />
         <button id="btnSubmit" class="btn btn-primary">Submit</button>
@@ -38,6 +39,12 @@
         <input id="name" readonly>
     </dd>
     <dt class="col-sm-2">
+        @Html.DisplayName("Specification: ")
+    </dt>
+    <dd class="col-sm-10">
+        <input id="speficiation" readonly>
+    </dd>
+    <dt class="col-sm-2">
         @Html.DisplayName("Description: ")
     </dt>
     <dd class="col-sm-10">
@@ -50,10 +57,10 @@
         <input id="unitType" readonly>
     </dd>
     <dt class="col-sm-2">
-        @Html.DisplayName("Equipment Type: ")
+        @Html.DisplayName("Food Type: ")
     </dt>
     <dd class="col-sm-10">
-        <input id="equipmentType" readonly>
+        <input id="foodType" readonly>
     </dd>
 </dl>
 
@@ -70,48 +77,53 @@
 
                     var _searchID = $('#txtSearchID').val();
 
-
-                    $.post('/InventoryManager/SearchEquipmentByIdQuery', { searchedID: _searchID })
+                    $.post('/InventoryManager/SearchFoodByID', { searchedID: _searchID })
                         .done(function (result) {
 
-                            alert("Equipment ID successfully searched!");
+                            alert("Food ID successfully searched!");
                             $("#ID").val(result.id);
                             $("#code").val(result.code);
                             $("#name").val(result.name);
+                            $("#speficiation").val(result.specification);
                             $("#description").val(result.description);
-                            $("#unitType").val(result.unitType);
-                            $("#equipmentType").val(result.equipmentType);
+                            $("#unitType").val(result.unit);
+                            $("#foodType").val(result.foodType);
 
                             $("#txtSearchID").val("");
 
                         })
                         .fail(function (error) {
-                            alert("Equipment ID does not exist!")
+                            alert("Food ID does not exist!")
                             $("#txtSearchID").val("");
                             $("#ID").val("");
                             $("#code").val("");
                             $("#name").val("");
+                            $("#speficiation").val("");
                             $("#description").val("");
                             $("#unitType").val("");
-                            $("#equipmentType").val("");
+                            $("#foodType").val("");
                         });
 
                 }
 
                 else {
-                    alert("Please enter the ID.");
+                    alert("Please fill in all the details.");
+                    $("#txtSearchID").val("");
                     $("#ID").val("");
                     $("#code").val("");
                     $("#name").val("");
+                    $("#speficiation").val("");
                     $("#description").val("");
                     $("#unitType").val("");
-                    $("#equipmentType").val("");
+                    $("#foodType").val("");
                 }
 
-
             });
-
         });
+
+
 
     </script>
 }
+
+

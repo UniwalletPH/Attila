@@ -1,7 +1,7 @@
 ﻿@model Attila.UI.Models.EquipmentDetailsVM
 
 @{
-    ViewData["Title"] = "UpdateEquipmentDetailsCommand";
+    ViewData["Title"] = "UpdateEquipmentDetails";
 }
 
 <h1>Update Equipment Details Command</h1>
@@ -88,7 +88,7 @@
                         EquipmentType: _equipmentType
                     };
 
-                    $.post('/InventoryManager/UpdateEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails })
+                    $.post('/InventoryManager/UpdateEquipmentDetails', { equipmentDetails: _equipmentDetails })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Equipment details successfully updated!");
@@ -96,7 +96,7 @@
                             }
                             else {
                                 alert("Failed!");
-                                window.location = "/InventoryManager/UpdateEquipmentDetailsCommand";
+                                window.location = "/InventoryManager/UpdateEquipmentDetails";
                             }
                         });
 
