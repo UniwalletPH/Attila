@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -29,8 +30,7 @@ namespace Attila.Application.Event.Queries
                 {
                     ID = a.ID,
                     EventDetailsID = a.EventDetailsID,
-                    Duration = a.Duration,
-                    Rate = a.Rate
+                    Duration = a.Duration
                     
                 }).ToListAsync();
 

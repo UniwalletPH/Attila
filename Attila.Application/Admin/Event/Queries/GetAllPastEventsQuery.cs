@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Event.Queries
             {
                 var _listPastEvents = new List<EventVM>();
 
-                var _pastEvents = dbContext.EventsDetails
+                var _pastEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
                     .Include(a => a.User)

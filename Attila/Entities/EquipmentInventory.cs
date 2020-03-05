@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
 
     public class EquipmentInventory
@@ -28,7 +25,7 @@ namespace Attila.Domain.Entities.Tables
 
         public EquipmentDetails EquipmentDetails { get; set; }
 
-        public EquipmentRestock EquipmentRestock { get; set; }
+        public DeliveryDetails EquipmentRestock { get; set; }
 
        
     }

@@ -26,7 +26,7 @@ namespace Attila.Application.Food.Queries
             {
                 var _searchedKeywordList = new List<FoodsDetailsVM>();
 
-                var _searchedKeyword = dbContext.FoodsDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
+                var _searchedKeyword = dbContext.FoodDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
                                                                          a.Code.Contains(request.SearchedKeyword) ||
                                                                          a.Specification.Contains(request.SearchedKeyword) ||
                                                                          a.Description.Contains(request.SearchedKeyword));

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-
-namespace Attila.Domain.Entities.Tables
+﻿namespace Attila.Domain.Entities
 {
-    public class EventClient
+    public class ClientDetails
     {
         public int ID { get; set; }
 

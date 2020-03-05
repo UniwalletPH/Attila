@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Enums;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
@@ -35,7 +36,7 @@ namespace Attila.Application.Food.Commands
                     FoodType = request.MyFoodDetailsVM.FoodType
                 };
 
-                dbContext.FoodsDetails.Add(_foodDetails);
+                dbContext.FoodDetails.Add(_foodDetails);
                 await dbContext.SaveChangesAsync();
 
                 return true;

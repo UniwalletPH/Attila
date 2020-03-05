@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
     public class FoodInventory
     {
@@ -27,7 +24,7 @@ namespace Attila.Domain.Entities.Tables
 
         public FoodDetails FoodDetails { get; set; }
 
-        public FoodRestock FoodRestock { get; set; }
+        public DeliveryDetails FoodRestock { get; set; }
 
         public User User { get; set; }
     }

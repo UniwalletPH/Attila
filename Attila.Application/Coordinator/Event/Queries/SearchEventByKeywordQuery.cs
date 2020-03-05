@@ -27,7 +27,7 @@ namespace Attila.Application.Event.Queries
             {
                 var _search = new List<SearchEventVM>();
 
-                var _searchedEvent = dbContext.EventsDetails.Where
+                var _searchedEvent = dbContext.EventDetails.Where
                     (a => a.EventName.Contains(request.EventKeyword)
                     || a.Description.Contains(request.EventKeyword)).ToList();
 

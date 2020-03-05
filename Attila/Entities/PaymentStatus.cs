@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
-    public class EventPaymentStatus
+    public class PaymentStatus
     {
         public int ID { get; set; }  
 

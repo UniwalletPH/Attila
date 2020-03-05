@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class GetClientIdQuery : IRequest<EventClient>
+    public class GetClientIdQuery : IRequest<ClientDetails>
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }
 
-        public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, EventClient>
+        public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, ClientDetails>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -23,9 +24,9 @@ namespace Attila.Application.Coordinator.Event.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<EventClient> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
+            public async Task<ClientDetails> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
             {
-                var _searchedClient = dbContext.EventClients.Where
+                var _searchedClient = dbContext.ClientDetails.Where
                     (a => a.Firstname.Contains(request.FirstName)
                     && a.Lastname.Contains(request.LastName));
 

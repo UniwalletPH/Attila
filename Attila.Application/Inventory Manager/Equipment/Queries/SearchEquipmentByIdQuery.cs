@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -21,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
             }
             public async Task<EquipmentsDetailsVM> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
             {
-                EquipmentDetails _searchedEquipmentDetails = dbContext.EquipmentsDetails.Find(request.SearchedID);
+                EquipmentDetails _searchedEquipmentDetails = dbContext.EquipmentDetails.Find(request.SearchedID);
                 
                 if (_searchedEquipmentDetails != null)
                 {

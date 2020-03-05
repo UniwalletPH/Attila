@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
 
             public async Task<IEnumerable<FoodsRestockVM>> Handle(GetFoodDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _foodDeliveryList = await dbContext.EquipmentsRestock.Select(a => new FoodsRestockVM
+                var _foodDeliveryList = await dbContext.DeliveryDetails.Select(a => new FoodsRestockVM
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,

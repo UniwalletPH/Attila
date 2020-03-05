@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -25,7 +26,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
 
             public async Task<bool> Handle(AddFoodRestockCommand request, CancellationToken cancellationToken)
             {
-                FoodRestock _foodRestock = new FoodRestock
+                DeliveryDetails _foodRestock = new DeliveryDetails
                 {
                     DeliveryDate = request.MyFoodRestockVM.DeliveryDate,
                     ReceiptImage = request.MyFoodRestockVM.ReceiptImage,
@@ -33,7 +34,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                     Remarks = request.MyFoodRestockVM.Remarks
                 };
 
-                dbContext.FoodsRestock.Add(_foodRestock);
+                dbContext.DeliveryDetails.Add(_foodRestock);
                 await dbContext.SaveChangesAsync();
 
                 return true;

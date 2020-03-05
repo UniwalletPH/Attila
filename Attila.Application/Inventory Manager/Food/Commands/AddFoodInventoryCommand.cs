@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -35,7 +36,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                     FoodRestockID = request.MyFoodInventoryVM.FoodRestockID
                 };
 
-                dbContext.FoodsInventory.Add(_foodInventory);
+                dbContext.FoodInventories.Add(_foodInventory);
                 await dbContext.SaveChangesAsync();
 
                 return true;

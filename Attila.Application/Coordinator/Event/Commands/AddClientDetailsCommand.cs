@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -24,7 +25,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _newClient = new EventClient
+                var _newClient = new ClientDetails
                 {
                     Firstname = request.EventClient.Firstname,
                     Lastname = request.EventClient.Lastname,
@@ -34,7 +35,7 @@ namespace Attila.Application.Event.Commands
 
                 };
 
-                dbContext.EventClients.Add(_newClient);
+                dbContext.ClientDetails.Add(_newClient);
                 await dbContext.SaveChangesAsync();
 
                 return true;

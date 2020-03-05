@@ -1,10 +1,6 @@
 ﻿using Attila.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
     public class EventAdditionalEquipmentRequest
     {
@@ -13,8 +9,6 @@ namespace Attila.Domain.Entities.Tables
         public int EquipmentDetailsID { get; set; }
 
         public EquipmentDetails EquipmentDetails { get; set; }
-
-        public decimal Rate { get; set; }
 
         public int EventDetailsID { get; set; }
 

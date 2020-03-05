@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -29,8 +30,7 @@ namespace Attila.Application.Event.Commands
                     var _additionalDuration = new EventAdditionalDurationRequest
                     {
                         EventDetailsID = request.AdditionalPackage.EventDetailsID,
-                        Duration = request.AdditionalPackage.Duration,
-                        Rate = request.AdditionalPackage.Rate
+                        Duration = request.AdditionalPackage.Duration
                     };
 
                     dbContext.EventAdditionalDurationRequests.Add(_additionalDuration);

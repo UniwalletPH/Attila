@@ -1,4 +1,5 @@
-﻿using Attila.Domain.Entities.Tables;
+﻿using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,9 @@ namespace Attila.Application.Admin.Event.Queries
 
         public User Coordinator { get; set; }
 
-        public PackageDetails  Package{ get; set; }
+        public PackageMenuDetails  Package{ get; set; }
 
-        public EventClient Client { get; set; }
+        public ClientDetails Client { get; set; }
 
         public List<EventAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
 

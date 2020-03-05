@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using MediatR;
@@ -54,7 +55,7 @@ namespace Attila.Application.Event.Commands
                     Description = request.EventDetails.Description,
                     EventClientID = request.EventDetails.EventClientID,
                     EventDate = request.EventDetails.EventDate,
-                    EventPackageDetailsID = request.EventDetails.EventPackageDetailsID,
+                    PackageDetailsID = request.EventDetails.EventPackageDetailsID,
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
                     UserID = request.EventDetails.UserID,
@@ -62,7 +63,7 @@ namespace Attila.Application.Event.Commands
 
                 };
 
-                dbContext.EventsDetails.Add(_newEvent);
+                dbContext.EventDetails.Add(_newEvent);
                 await dbContext.SaveChangesAsync();
 
                 return request.EventDetails.ID;

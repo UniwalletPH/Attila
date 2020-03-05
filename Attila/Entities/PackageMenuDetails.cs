@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
-    public class PackageDetails
+    public class PackageMenuDetails
     {
         public int ID { get; set; }
 
@@ -15,7 +15,7 @@ namespace Attila.Domain.Entities.Tables
 
         public string Description { get; set; }
 
-        public decimal Rate { get; set; }
+        public decimal RatePerHead { get; set; }
 
         public TimeSpan Duration{ get; set; }
 

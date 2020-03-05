@@ -9,39 +9,43 @@ namespace Attila.Application.Interfaces
     public interface IAttilaDbContext
     {
 
-        public DbSet<EquipmentDetails> EquipmentsDetails { get; set; }
+        public DbSet<EquipmentDetails> EquipmentDetails { get; set; }
 
-        public DbSet<EquipmentInventory> EquipmentsInventory { get; set; }
-
-        public DbSet<EquipmentRestock> EquipmentsRestock { get; set; }
+        public DbSet<EquipmentInventory> EquipmentInventories { get; set; }
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
-        public DbSet<EventClient> EventClients { get; set; }
+        public DbSet<FoodDetails> FoodDetails { get; set; }
 
-        public DbSet<EventDetails> EventsDetails { get; set; }
-
-        public DbSet<EventEquipments> EventsEquipments { get; set; }
-
-        public DbSet<EventEquipmentRequest> EventEquipmentRequest { get; set; }
-
-        public DbSet<PackageDetails> EventsPackageDetails { get; set; }
-
-        public DbSet<EventPaymentStatus> EventsPaymentStatus { get; set; }
-
-        public DbSet<FoodDetails> FoodsDetails { get; set; }
-
-        public DbSet<FoodInventory> FoodsInventory { get; set; }
-
-        public DbSet<FoodRestock> FoodsRestock { get; set; }
+        public DbSet<FoodInventory> FoodInventories { get; set; }
 
         public DbSet<FoodRestockRequest> FoodRestockRequests { get; set; }
+
+        public DbSet<DeliveryDetails> DeliveryDetails { get; set; }
+
+        public DbSet<EventDetails> EventDetails { get; set; }
+
+        public DbSet<ClientDetails> ClientDetails { get; set; }
+
+        public DbSet<EventEquipments> EventEquipments { get; set; }
+
+        public DbSet<PackageMenuDetails> PackageMenuDetails { get; set; }
+
+        public DbSet<MenuCategory> MenuCategories { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
+
+        public DbSet<PaymentStatus> PaymentStatus { get; set; }
+
+        public DbSet<EventMenus> EventMenus { get; set; }
 
         public DbSet<EventAdditionalDurationRequest> EventAdditionalDurationRequests { get; set; }
 
         public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<UserLogins> UserLogins { get; set; }
 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

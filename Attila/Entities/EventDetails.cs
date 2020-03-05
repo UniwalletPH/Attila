@@ -1,10 +1,7 @@
 ﻿using Attila.Domain.Enums;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
     public class EventDetails
     {
@@ -32,13 +29,13 @@ namespace Attila.Domain.Entities.Tables
 
         public User User { get; set; }
 
-        public int  EventPackageDetailsID { get; set; }
+        public int PackageDetailsID { get; set; }
 
-        public PackageDetails PackageDetails { get; set; }
+        public PackageMenuDetails PackageDetails { get; set; }
 
         public int EventClientID { get; set; }
 
-        public EventClient EventClient { get; set; }
+        public ClientDetails EventClient { get; set; }
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -25,7 +26,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(AddEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
-                EquipmentRestock _equipmentRestock = new EquipmentRestock
+                DeliveryDetails _equipmentRestock = new DeliveryDetails
                 {
                     DeliveryDate = request.MyEquipmentsRestockVM.DeliveryDate,
                     ReceiptImage = request.MyEquipmentsRestockVM.ReceiptImage,
@@ -33,7 +34,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     Remarks = request.MyEquipmentsRestockVM.Remarks
                 };
 
-                dbContext.EquipmentsRestock.Add(_equipmentRestock);
+                dbContext.DeliveryDetails.Add(_equipmentRestock);
                 await dbContext.SaveChangesAsync();
 
                 return true;

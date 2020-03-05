@@ -20,14 +20,14 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
             }
             public async Task<bool> Handle(DeleteEquipmentDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _deleteEquipmentDetails = dbContext.EquipmentsDetails.Find(request.DeleteSearchedID);
+                var _deleteEquipmentDetails = dbContext.EquipmentDetails.Find(request.DeleteSearchedID);
 
                 if (_deleteEquipmentDetails != null)
                 {
-                    dbContext.EquipmentsDetails.Remove(_deleteEquipmentDetails);
+                    dbContext.EquipmentDetails.Remove(_deleteEquipmentDetails);
 
-                    var _deleteEquipmentInventory = dbContext.EquipmentsInventory.Where(a => a.EquipmentDetailsID == request.DeleteSearchedID).ToList();
-                    dbContext.EquipmentsInventory.RemoveRange(_deleteEquipmentInventory);
+                    var _deleteEquipmentInventory = dbContext.EquipmentInventories.Where(a => a.EquipmentDetailsID == request.DeleteSearchedID).ToList();
+                    dbContext.EquipmentInventories.RemoveRange(_deleteEquipmentInventory);
 
                     await dbContext.SaveChangesAsync();
                     return true;

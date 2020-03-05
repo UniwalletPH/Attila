@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -25,10 +26,9 @@ namespace Attila.Application.Admin.Queries
 
             public Task<List<EventDetails>> Handle(GetAllEventDetailsListQuery request, CancellationToken cancellationToken)
             {
-                var _listOfEvents = dbContext.EventsDetails.ToListAsync();
+                var _listOfEvents = dbContext.EventDetails.ToListAsync();
 
                 return _listOfEvents;
-
             }
         }
     }

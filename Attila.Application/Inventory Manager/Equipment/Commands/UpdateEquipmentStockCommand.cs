@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(UpdateEquipmentStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentStock = dbContext.EquipmentsInventory.Find(request.MyEquipmentInventoryVM.ID);
+                var _updatedEquipmentStock = dbContext.EquipmentInventories.Find(request.MyEquipmentInventoryVM.ID);
 
                 if (_updatedEquipmentStock != null)
                 {

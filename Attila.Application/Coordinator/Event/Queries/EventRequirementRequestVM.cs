@@ -1,4 +1,5 @@
-﻿using Attila.Domain.Entities.Tables;
+﻿using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace Attila.Application.Coordinator.Event.Queries
         public int EquipmentDetailsID { get; set; }
 
         public EquipmentDetails EquipmentDetails { get; set; }
+
         [Required]
         public int Quantity { get; set; }
         [Required]

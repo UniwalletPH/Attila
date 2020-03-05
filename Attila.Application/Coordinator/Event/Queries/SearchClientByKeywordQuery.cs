@@ -27,7 +27,7 @@ namespace Attila.Application.Event.Queries
             {
                 var _search = new List<SearchClientVM>();
 
-                var _searchedClient = dbContext.EventClients.Where
+                var _searchedClient = dbContext.ClientDetails.Where
                     (a => a.Firstname.Contains(request.Keyword)
                     || a.Lastname.Contains(request.Keyword));
 

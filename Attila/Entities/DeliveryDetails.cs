@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
-    public class FoodRestock
+    public class DeliveryDetails
     {
         public int ID { get; set; }
 
@@ -16,6 +13,5 @@ namespace Attila.Domain.Entities.Tables
         public decimal DeliveryPrice { get; set; }
 
         public string Remarks { get; set; }
-
     }
 }

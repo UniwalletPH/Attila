@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using MediatR;
@@ -31,10 +32,8 @@ namespace Attila.Application.Event.Commands
                 {
                     EventDetailsID = request.AdditionalEquipment.EventDetailsID,
                     EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
-                    Rate = request.AdditionalEquipment.Rate,
                     Quantity = request.AdditionalEquipment.Quantity,
-                    Status = Status.Pending
-                    
+                    Status = Status.Pending               
                 };
 
                 dbContext.EventAdditionalEquipmentRequests.Add(_additionalEquipment);

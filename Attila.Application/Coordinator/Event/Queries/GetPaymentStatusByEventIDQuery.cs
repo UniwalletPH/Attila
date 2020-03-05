@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -10,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Event.Queries
 {
-    public class GetPaymentStatusByEventIDQuery : IRequest<IEnumerable<EventPaymentStatus>>
+    public class GetPaymentStatusByEventIDQuery : IRequest<IEnumerable<PaymentStatus>>
     {
         public int EventID { get; set; }
 
-        public class GetPaymentStatusQueryHandler : IRequestHandler<GetPaymentStatusByEventIDQuery, IEnumerable<EventPaymentStatus>>
+        public class GetPaymentStatusQueryHandler : IRequestHandler<GetPaymentStatusByEventIDQuery, IEnumerable<PaymentStatus>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetPaymentStatusQueryHandler(IAttilaDbContext dbContext)
@@ -22,9 +23,9 @@ namespace Attila.Application.Event.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<EventPaymentStatus>> Handle(GetPaymentStatusByEventIDQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<PaymentStatus>> Handle(GetPaymentStatusByEventIDQuery request, CancellationToken cancellationToken)
             {
-                var _paymentStatus = dbContext.EventsPaymentStatus.Where(a => a.EventDetailsID == request.EventID);
+                var _paymentStatus = dbContext.PaymentStatus.Where(a => a.EventDetailsID == request.EventID);
 
                 if (_paymentStatus != null)
                 {
