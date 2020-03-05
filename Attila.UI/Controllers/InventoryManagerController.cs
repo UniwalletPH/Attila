@@ -32,13 +32,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddEquipmentDetailsCommand()
+        public IActionResult AddEquipmentDetails()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentDetailsCommand(EquipmentsDetailsVM equipmentDetails)
+        public async Task<IActionResult> AddEquipmentDetails(EquipmentsDetailsVM equipmentDetails)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AddEquipmentInventoryCommand()
+        public async Task<IActionResult> AddEquipmentInventory()
         {
             var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
@@ -97,7 +97,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentInventoryCommand(EquipmentsInventoryVM equipmentInventory)
+        public async Task<IActionResult> AddEquipmentInventory(EquipmentsInventoryVM equipmentInventory)
         {
             try
             {
@@ -117,13 +117,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddEquipmentRestockCommand()
+        public IActionResult AddEquipmentRestock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentRestockCommand(EquipmentsRestockVM equipmentRestock)
+        public async Task<IActionResult> AddEquipmentRestock(EquipmentsRestockVM equipmentRestock)
         {
             try
             {
@@ -143,7 +143,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> DeleteEquipmentDetailsCommand()
+        public async Task<IActionResult> DeleteEquipmentDetails()
         {
             try
             {
@@ -157,7 +157,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteEquipmentDetailsCommand(int deleteID)
+        public async Task<IActionResult> DeleteEquipmentDetails(int deleteID)
         {
             try
             {
@@ -174,13 +174,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult RequestEquipmentRestockCommand()
+        public IActionResult RequestEquipmentRestock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestEquipmentRestockCommand(EquipmentsRestockRequestVM equipmentRestockRequest)
+        public async Task<IActionResult> RequestEquipmentRestock(EquipmentsRestockRequestVM equipmentRestockRequest)
         {
             try
             {
@@ -200,13 +200,31 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateEquipmentDetailsCommand()
+        public async Task<IActionResult> UpdateEquipmentDetails()
         {
-            return View();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentDetailsCommand(EquipmentsDetailsVM equipmentDetails)
+        public async Task<IActionResult> UpdateEquipmentDetails(EquipmentsDetailsVM equipmentDetails)
         {
             try
             {
@@ -227,13 +245,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateEquipmentStockCommand()
+        public IActionResult UpdateEquipmentStock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentStockCommand(EquipmentsInventoryVM equipmentInventory)
+        public async Task<IActionResult> UpdateEquipmentStock(EquipmentsInventoryVM equipmentInventory)
         {
             try
             {
@@ -253,7 +271,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetEquipmentDetailsQuery()
+        public async Task<IActionResult> GetEquipmentDetails()
         {
             try
             {
@@ -268,7 +286,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetEquipmentStockQuery()
+        public async Task<IActionResult> GetEquipmentStock()
         {
             try
             {
@@ -282,7 +300,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEquipmentDeliveryQuery()
+        public async Task<IActionResult> GetEquipmentDelivery()
         {
             try
             {
@@ -297,13 +315,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchEquipmentByIdQuery()
+        public IActionResult SearchEquipmentById()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchEquipmentByIdQuery(int searchedID)
+        public async Task<IActionResult> SearchEquipmentById(int searchedID)
         {
             try
             {
@@ -318,7 +336,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchEquipmentByKeywordQuery()
+        public IActionResult SearchEquipmentByKeyword()
         {
             return View();
         }
@@ -342,13 +360,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddFoodDetailsCommand()
+        public IActionResult AddFoodDetails()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodDetailsCommand(FoodsDetailsVM foodDetails)
+        public async Task<IActionResult> AddFoodDetails(FoodsDetailsVM foodDetails)
         {
             try
             {
@@ -368,7 +386,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> AddFoodInventoryCommand()
+        public async Task<IActionResult> AddFoodInventory()
         {
             var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
@@ -383,7 +401,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            var getFoodRestock = await mediator.Send(new GetFoodStockQuery());
+            var getFoodRestock = await mediator.Send(new GetFoodDeliveryQuery());
             List<SelectListItem> _list2 = new List<SelectListItem>();
 
             foreach (var item in getFoodRestock)
@@ -391,7 +409,8 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Food ID: " + item.FoodDetailsID + " | Encoding Date: " + item.EncodingDate.Date
+                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+
                 });
             }
 
@@ -406,7 +425,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventoryCommand(FoodsInventoryVM foodInventory)
+        public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
         {
             try
             {
@@ -426,13 +445,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddFoodRestockCommand()
+        public IActionResult AddFoodRestock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodRestockCommand(FoodsRestockVM foodRestock)
+        public async Task<IActionResult> AddFoodRestock(FoodsRestockVM foodRestock)
         {
             try
             {
@@ -451,7 +470,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> DeleteFoodDetailsCommand()
+        public async Task<IActionResult> DeleteFoodDetails()
         {
             try
             {
@@ -465,7 +484,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteFoodDetailsCommand(int deleteID)
+        public async Task<IActionResult> DeleteFoodDetails(int deleteID)
         {
             try
             {
@@ -481,13 +500,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult RequestFoodRestockCommand()
+        public IActionResult RequestFoodRestock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestFoodRestockCommand(FoodsRestockRequestVM foodRestockRequest)
+        public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
         {
             try
             {
@@ -507,13 +526,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateFoodDetailsCommand()
+        public IActionResult UpdateFoodDetails()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodDetailsCommand(FoodsDetailsVM foodDetails)
+        public async Task<IActionResult> UpdateFoodDetails(FoodsDetailsVM foodDetails)
         {
             try
             {
@@ -532,13 +551,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateFoodStockCommand()
+        public IActionResult UpdateFoodStock()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStockCommand(FoodsInventoryVM foodInventory)
+        public async Task<IActionResult> UpdateFoodStock(FoodsInventoryVM foodInventory)
         {
             try
             {
@@ -557,7 +576,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetFoodDetailsQuery()
+        public async Task<IActionResult> GetFoodDetails()
         {
             try
             {
@@ -572,7 +591,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetFoodStockQuery()
+        public async Task<IActionResult> GetFoodStock()
         {
             try
             {
@@ -586,7 +605,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetFoodDeliveryQuery()
+        public async Task<IActionResult> GetFoodDelivery()
         {
             try
             {
@@ -601,13 +620,13 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchFoodByIdQuery()
+        public IActionResult SearchFoodById()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchFoodByIdQuery(int searchedID)
+        public async Task<IActionResult> SearchFoodById(int searchedID)
         {
             try
             {
@@ -622,7 +641,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchFoodByKeywordQuery()
+        public IActionResult SearchFoodByKeyword()
         {
             return View();
         }

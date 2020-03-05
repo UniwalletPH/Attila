@@ -1,0 +1,62 @@
+﻿@model Attila.UI.Models.FoodRestockRequestVM
+
+@{
+    ViewData["Title"] = "RequestFoodRestock";
+}
+
+<h1>Request Food Restock</h1>
+
+<hr />
+<form class="form-group" asp-action="RequestFoodRestock" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FoodDetailsID" class="control-label">Food Details ID: </label>
+                <input id="FoodDetailsID" asp-for="FoodDetailsID" class="form-control" />
+                <span asp-validation-for="FoodDetailsID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity</label>
+                <input id="txtQuantity" asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Status: </label>
+                <select id="txtStatus" asp-for="Status" class="form-control">
+                    <option value=""> -- select an option -- </option>
+                    <option value="1">Pending</option>
+                    <option value="2">Approved</option>
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label">User ID: </label>
+                <input id="UserID" asp-for="UserID" class="form-control" />
+                <span asp-validation-for="UserID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Food restock successfully requested!");
+                window.location = "/InventoryManager/Index";
+            }
+
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/RequestFoodRestockCommand";
+            }
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

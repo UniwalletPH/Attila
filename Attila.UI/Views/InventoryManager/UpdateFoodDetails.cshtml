@@ -1,7 +1,7 @@
 ﻿@model Attila.UI.Models.FoodDetailsVM
 
 @{
-    ViewData["Title"] = "UpdateFoodDetailsCommand";
+    ViewData["Title"] = "UpdateFoodDetails";
 }
 
 <h1>Update Food Details</h1>
@@ -95,7 +95,7 @@
                         FoodType: _foodType
                     };
 
-                    $.post('/InventoryManager/UpdateFoodDetailsCommand', { foodDetails: _foodDetails })
+                    $.post('/InventoryManager/UpdateFoodDetails', { foodDetails: _foodDetails })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Food details successfully updated!");
@@ -103,7 +103,7 @@
                             }
                             else {
                                 alert("Failed!");
-                                window.location = "/InventoryManager/UpdateFoodDetailsCommand";
+                                window.location = "/InventoryManager/UpdateFoodDetails";
                             }
                         });
 

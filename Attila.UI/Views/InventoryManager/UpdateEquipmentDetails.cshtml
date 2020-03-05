@@ -1,7 +1,7 @@
 ﻿@model Attila.UI.Models.EquipmentDetailsVM
 
 @{
-    ViewData["Title"] = "UpdateEquipmentDetailsCommand";
+    ViewData["Title"] = "UpdateEquipmentDetails";
 }
 
 <h1>Update Equipment Details Command</h1>
@@ -12,7 +12,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="ID" class="control-label">ID: </label>
-            <input id="txtID" asp-for="ID" class="form-control" />
+            @Html.DropDownListFor(a => a.ID, Model.EquipmentDetailsList, "Select Equipment ID", new { @class = "form-control" })
             <span asp-validation-for="ID" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -88,7 +88,7 @@
                         EquipmentType: _equipmentType
                     };
 
-                    $.post('/InventoryManager/UpdateEquipmentDetailsCommand', { equipmentDetails: _equipmentDetails })
+                    $.post('/InventoryManager/UpdateEquipmentDetails', { equipmentDetails: _equipmentDetails })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Equipment details successfully updated!");
@@ -96,7 +96,7 @@
                             }
                             else {
                                 alert("Failed!");
-                                window.location = "/InventoryManager/UpdateEquipmentDetailsCommand";
+                                window.location = "/InventoryManager/UpdateEquipmentDetails";
                             }
                         });
 

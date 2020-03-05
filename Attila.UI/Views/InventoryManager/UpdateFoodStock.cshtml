@@ -1,26 +1,25 @@
-﻿@model Attila.UI.Models.EquipmentInventoryVM
+﻿@model Attila.UI.Models.FoodInventoryVM
 
 @{
-    ViewData["Title"] = "UpdateEquipmentStockCommand";
+    ViewData["Title"] = "UpdateFoodStock";
 }
 
-<h1>Update Equipment Stock Command</h1>
+<h1>Update Food Stock</h1>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="ID" class="control-label">Equipment ID:</label>
+            <label asp-for="ID" class="control-label">Food ID:</label>
             <input id="txtID" asp-for="ID" class="form-control" />
             <span asp-validation-for="ID" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Quantity" class="control-label">Quantity: </label>
+            <label asp-for="Quantity" class="control-label">Quantity:</label>
             <input id="txtQuantity" asp-for="Quantity" class="form-control" />
             <span asp-validation-for="Quantity" class="text-danger"></span>
         </div>
-
         <div class="form-group">
             <button id="btnSubmit" class="btn btn-primary">Submit</button>
         </div>
@@ -39,21 +38,21 @@
                     var _quantity = $('#txtQuantity').val();
 
 
-                    var _equipmentInventory =
+                    var _foodInventory =
                     {
                         ID: _id,
                         Quantity: _quantity
                     };
 
-                    $.post('/InventoryManager/UpdateEquipmentStockCommand', { equipmentInventory: _equipmentInventory })
+                    $.post('/InventoryManager/UpdateFoodStock', { foodInventory: _foodInventory })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Equipment inventory successfully updated!");
                                 window.location = "/InventoryManager/Index";
                             }
                             else {
-                                alert("Equipment Restock ID does not exist!!");
-                                window.location = "/InventoryManager/UpdateEquipmentStockCommand";
+                                alert("Food Restock ID does not exist!!");
+                                window.location = "/InventoryManager/UpdateFoodStock";
                             }
                         })
                 }
@@ -61,8 +60,6 @@
                 else {
                     alert("Please fill in all the details.");
                 }
-
-
             });
         });
     </script>

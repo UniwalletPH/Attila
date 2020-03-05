@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Attila.Application.Inventory_Manager.Food.Queries.FoodsDetailsVM>
 
 @{
-    ViewData["Title"] = "DeleteFoodDetailsCommand";
+    ViewData["Title"] = "DeleteFoodDetails";
 }
 
 <h1>Delete Food</h1>
@@ -91,7 +91,7 @@
 
                     var _deleteId = $('#txtDeleteId').val();
 
-                    $.post('/InventoryManager/DeleteFoodDetailsCommand', { deleteID: _deleteId })
+                    $.post('/InventoryManager/DeleteFoodDetails', { deleteID: _deleteId })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Food successfully deleted!");
@@ -99,7 +99,7 @@
                             }
                             else {
                                 alert("Failed!");
-                                window.location = "/InventoryManager/DeleteFoodDetailsCommand";
+                                window.location = "/InventoryManager/DeleteFoodDetails";
                             }
                         });
                 }

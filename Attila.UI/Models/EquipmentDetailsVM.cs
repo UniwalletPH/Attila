@@ -1,5 +1,6 @@
 ﻿using Attila.Domain.Entities.Enums;
 using Attila.Domain.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -26,6 +27,8 @@ namespace Attila.UI.Models
 
         [Required]
         public EquipmentType EquipmentType { get; set; }
+
+        public List<SelectListItem> EquipmentDetailsList { get; set; }
 
     }
 }

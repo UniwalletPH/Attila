@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM>
 
 @{
-    ViewData["Title"] = "DeleteEquipmentDetailsCommand";
+    ViewData["Title"] = "DeleteEquipmentDetails";
 }
 
 <h1>Delete Equipment</h1>
@@ -81,7 +81,7 @@
 
                     var _deleteId = $('#txtDeleteId').val();
 
-                    $.post('/InventoryManager/DeleteEquipmentDetailsCommand', { deleteID: _deleteId })
+                    $.post('/InventoryManager/DeleteEquipmentDetails', { deleteID: _deleteId })
                         .done(function (result) {
                             if (result == true) {
                                 alert("Equipment successfully deleted!");
@@ -89,7 +89,7 @@
                             }
                             else {
                                 alert("Failed!");
-                                window.location = "/InventoryManager/DeleteEquipmentDetailsCommand";
+                                window.location = "/InventoryManager/DeleteEquipmentDetails";
                             }
                         });
                 }

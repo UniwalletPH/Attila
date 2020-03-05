@@ -1,13 +1,13 @@
 ﻿@model Attila.UI.Models.FoodRestockVM
 
 @{
-    ViewData["Title"] = "AddFoodRestockCommand";
+    ViewData["Title"] = "AddFoodRestock";
 }
 
 <h1>Add Food Restock</h1>
 
 <hr />
-<form class="form-group" asp-action="AddFoodRestockCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+<form class="form-group" asp-action="AddFoodRestock" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
     <div class="row">
         <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -48,7 +48,7 @@
 
             else {
                 alert("Failed!");
-                window.location = "/InventoryManager/AddFoodRestockCommand";
+                window.location = "/InventoryManager/AddFoodRestock";
             }
         }
     </script>
