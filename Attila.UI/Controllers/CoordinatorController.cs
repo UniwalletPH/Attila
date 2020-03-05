@@ -185,39 +185,6 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> RequestEventRequirements(EventRequirementRequestVM _eventEquipmentRequest)
-        {
-            bool flag = true;
-            try
-            {
-                if (_eventEquipmentRequest.Quantity != 0)
-                {
-                    await mediator.Send(new RequestEventRequirementsCommand
-                    {
-                        EventRequirementRequest = _eventEquipmentRequest
-                    });
-                }
-                else
-                {
-                    flag = false;
-                }
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
-            
-            return Json(flag);
-        }
-
-        [HttpGet]
-        public IActionResult RequestEventRequirements()
-        {
-            return View();
-        }
-
-
-        [HttpPost]
         public async Task<IActionResult> UpdateEvent(EventDetailsVM _eventDetails)
         {
             bool flag = true;
