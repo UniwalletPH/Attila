@@ -105,8 +105,7 @@ namespace Attila.UI.Controllers
                 Description = _eventPackage.Description,
                 Duration = _fromStringToTimeSpan,
                 Name = _eventPackage.Name,
-                NumberOfGuest = _eventPackage.NumberOfGuest,
-                Rate = _eventPackage.Rate
+                RatePerHead = _eventPackage.RatePerHead
 
             };
 
