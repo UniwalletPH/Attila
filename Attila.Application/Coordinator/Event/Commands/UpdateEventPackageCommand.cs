@@ -24,7 +24,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(UpdateEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEventPackage = dbContext.EventsPackageDetails.Find(request.UpdatePackage.ID);
+                var _updatedEventPackage = dbContext.PackageMenuDetails.Find(request.UpdatePackage.ID);
 
                 _updatedEventPackage.Description = request.UpdatePackage.Description;
                 _updatedEventPackage.Duration = request.UpdatePackage.Duration;

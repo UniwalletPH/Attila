@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;

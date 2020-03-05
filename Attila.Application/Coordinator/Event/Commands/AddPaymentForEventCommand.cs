@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -24,7 +25,7 @@ namespace Attila.Application.Coordinator.Event.Commands
 
             public async Task<bool> Handle(AddPaymentForEventCommand request, CancellationToken cancellationToken)
             {
-                var _addPaymentForEventCommand = new EventPaymentStatus
+                var _addPaymentForEventCommand = new PaymentStatus
                 {
                     EventDetailsID = request.MyEventPaymentStatus.EventDetailsID,
                     Amount = request.MyEventPaymentStatus.Amount,
@@ -33,7 +34,7 @@ namespace Attila.Application.Coordinator.Event.Commands
                     Remarks = request.MyEventPaymentStatus.Remarks
                 };
 
-                dbContext.EventsPaymentStatus.Add(_addPaymentForEventCommand);
+                dbContext.PaymentStatus.Add(_addPaymentForEventCommand);
                 await dbContext.SaveChangesAsync();
 
                 return true;

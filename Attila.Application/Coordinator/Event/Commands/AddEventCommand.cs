@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
 using MediatR;
@@ -62,7 +63,7 @@ namespace Attila.Application.Event.Commands
 
                 };
 
-                dbContext.EventsDetails.Add(_newEvent);
+                dbContext.EventDetails.Add(_newEvent);
                 await dbContext.SaveChangesAsync();
 
                 return request.EventDetails.ID;

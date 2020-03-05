@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
@@ -25,7 +26,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _newPackage = new PackageDetails {
+                var _newPackage = new PackageMenuDetails {
                     
                     Code = request.PackageDetails.Code,
                     Description = request.PackageDetails.Description,
@@ -35,7 +36,7 @@ namespace Attila.Application.Event.Commands
 
                 };
 
-                dbContext.EventsPackageDetails.Add(_newPackage);
+                dbContext.PackageMenuDetails.Add(_newPackage);
                 await dbContext.SaveChangesAsync();
 
                 return true;

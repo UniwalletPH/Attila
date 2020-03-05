@@ -24,8 +24,8 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(DeleteEventPackageCommand request, CancellationToken cancellationToken)
             {
-                var _packageToDelete = dbContext.EventsPackageDetails.Find(request.PackageId);
-                dbContext.EventsPackageDetails.Remove(_packageToDelete);
+                var _packageToDelete = dbContext.PackageMenuDetails.Find(request.PackageId);
+                dbContext.PackageMenuDetails.Remove(_packageToDelete);
                 await dbContext.SaveChangesAsync();
 
                 return true;
