@@ -1,9 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Enums;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,6 +14,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
         public class AddEquipmentDetailsCommandHandler : IRequestHandler<AddEquipmentDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
+
             public AddEquipmentDetailsCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;

@@ -1,9 +1,7 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,11 +11,11 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
     {
         public EquipmentsInventoryVM MyEquipmentsInventoryVM { get; set; }
 
-        public class AddEquipmentInventorycommandHandler : IRequestHandler<AddEquipmentInventoryCommand, bool>
+        public class AddEquipmentInventoryCommandHandler : IRequestHandler<AddEquipmentInventoryCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
-            public AddEquipmentInventorycommandHandler(IAttilaDbContext dbContext)
+            public AddEquipmentInventoryCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
