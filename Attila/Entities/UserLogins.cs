@@ -1,5 +1,4 @@
-﻿using Attila.Domain.Entities.Tables;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Attila.Domain.Entities

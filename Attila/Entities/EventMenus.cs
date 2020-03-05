@@ -1,9 +1,4 @@
-﻿using Attila.Domain.Entities.Tables;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Attila.Domain.Entities
+﻿namespace Attila.Domain.Entities
 {
     public class EventMenus
     {

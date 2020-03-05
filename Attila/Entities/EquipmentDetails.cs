@@ -1,8 +1,7 @@
 ﻿using Attila.Domain.Entities.Enums;
 using Attila.Domain.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
     public class EquipmentDetails
     {
@@ -13,6 +12,8 @@ namespace Attila.Domain.Entities.Tables
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public decimal RentalFee { get; set; }
 
         public UnitType UnitType { get; set; }
 

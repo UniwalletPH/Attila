@@ -1,9 +1,4 @@
-﻿using Attila.Domain.Entities.Tables;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Attila.Domain.Entities
+﻿namespace Attila.Domain.Entities
 {
     public class MenuCategory
     {
@@ -13,7 +8,7 @@ namespace Attila.Domain.Entities
 
         public string Category { get; set; }
 
-        public PackageDetails PackageDetails { get; set; }
+        public PackageMenuDetails PackageDetails { get; set; }
 
        
     }
