@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM>
+﻿@model Attila.UI.Models.EquipmentDetailsVM
 
 @{
     ViewData["Title"] = "GetEquipmentDetails";
@@ -34,30 +34,31 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RentalFee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentType)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.EquipmentDetailsVMs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RentalFee)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentType)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

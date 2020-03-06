@@ -1,4 +1,5 @@
-﻿using Attila.Domain.Entities.Enums;
+﻿using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Domain.Entities.Enums;
 using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -29,5 +30,10 @@ namespace Attila.UI.Models
 
         [Required]
         public FoodType FoodType { get; set; }
+
+        [Required]
+        public string SearchedKeyword { get; set; }
+
+        public IEnumerable<FoodsDetailsVM> FoodDetailsVMs { get; set; }
     }
 }

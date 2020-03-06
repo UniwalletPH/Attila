@@ -32,6 +32,8 @@ namespace Attila.UI.Models
         [Required]
         public User User { get; set; }
 
+        public List<SelectListItem> EquipmentDetailsList { get; set; }
+
         public List<SelectListItem> UserList { get; set; }
 
     }

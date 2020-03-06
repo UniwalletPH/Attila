@@ -27,6 +27,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     Code = request.MyEquipmentsDetailsVM.Code,
                     Name = request.MyEquipmentsDetailsVM.Name,
                     Description = request.MyEquipmentsDetailsVM.Description,
+                    RentalFee = request.MyEquipmentsDetailsVM.RentalFee,
                     UnitType = request.MyEquipmentsDetailsVM.UnitType,
                     EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType
                 };

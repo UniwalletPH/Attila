@@ -29,6 +29,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                     _updatedEquipmentDetails.Code = request.MyEquipmentDetails.Code;
                     _updatedEquipmentDetails.Name = request.MyEquipmentDetails.Name;
                     _updatedEquipmentDetails.Description = request.MyEquipmentDetails.Description;
+                    _updatedEquipmentDetails.RentalFee = request.MyEquipmentDetails.RentalFee;
                     _updatedEquipmentDetails.UnitType = request.MyEquipmentDetails.UnitType;
                     _updatedEquipmentDetails.EquipmentType = request.MyEquipmentDetails.EquipmentType;
 

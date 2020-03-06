@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM>
+﻿@model Attila.UI.Models.EquipmentDetailsVM
 
 @{
     ViewData["Title"] = "DeleteEquipmentDetails";
@@ -7,14 +7,16 @@
 <h1>Delete Equipment</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter equipment ID: </label>
-        <input id="txtDeleteId" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+<form class="form-group" asp-action="DeleteEquipmentDetails" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label">Enter equipment ID: </label>
+            <input asp-for="ID" class="form-control" />
+            <br />
+            <button class="btn btn-primary">Submit</button>
+        </div>
     </div>
-</div>
+</form>
 <br />
 <br />
 
@@ -43,7 +45,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.EquipmentDetailsVMs)
         {
             <tr>
                 <td>
@@ -69,35 +71,20 @@
     </tbody>
 </table>
 
-
 @section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Equipment successfully deleted!");
+                window.location = "/InventoryManager/Index";
+            }
 
-    <script>
-
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
-
-                if ($('#txtDeleteId').val()) {
-
-                    var _deleteId = $('#txtDeleteId').val();
-
-                    $.post('/InventoryManager/DeleteEquipmentDetails', { deleteID: _deleteId })
-                        .done(function (result) {
-                            if (result == true) {
-                                alert("Equipment successfully deleted!");
-                                window.location = "/InventoryManager/Index";
-                            }
-                            else {
-                                alert("Failed!");
-                                window.location = "/InventoryManager/DeleteEquipmentDetails";
-                            }
-                        });
-                }
-                else {
-                    alert("Please enter ID to delete.");
-                }
-            });
-        });
-
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/DeleteEquipmentDetails";
+            }
+        }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }
