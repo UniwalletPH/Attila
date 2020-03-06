@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,8 @@ namespace Attila.UI.Models
 
         [Required]
         public int EquipmentDeliveryID { get; set; }
+
+        public IEnumerable<EquipmentsInventoryVM> EquipmentsInventoryVMs { get; set; }
 
         public List<SelectListItem> EquipmentDetailsList { get; set; }
 
