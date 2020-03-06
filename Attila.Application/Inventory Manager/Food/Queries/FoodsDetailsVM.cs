@@ -21,5 +21,9 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
         public UnitType Unit { get; set; }
 
         public FoodType FoodType { get; set; }
+
+        public string SearchedKeyword { get; set; }
+
+        public IEnumerable<FoodsDetailsVM> FoodsDetailsVMs { get; set; }
     }
 }
