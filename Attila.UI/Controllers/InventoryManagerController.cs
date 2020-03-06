@@ -9,7 +9,6 @@ using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;
 using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Domain.Entities.Tables;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -148,7 +147,13 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
-                return View(_getEquipmentDetails);
+
+                EquipmentDetailsVM equipmentDetailsVM = new EquipmentDetailsVM
+                {
+                    EquipmentDetailsVMs = _getEquipmentDetails
+                };
+
+                return View(equipmentDetailsVM);
             }
             catch (Exception)
             {
@@ -157,11 +162,11 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteEquipmentDetails(int deleteID)
+        public async Task<IActionResult> DeleteEquipmentDetails(EquipmentDetailsVM deleteID)
         {
             try
             {
-                await mediator.Send(new DeleteEquipmentDetailsCommand { DeleteSearchedID = deleteID });
+                await mediator.Send(new DeleteEquipmentDetailsCommand { DeleteSearchedID = deleteID.ID });
                 _checker = true;
             }
             catch (Exception)
@@ -176,6 +181,26 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public IActionResult RequestEquipmentRestock()
         {
+            //var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            //List<SelectListItem> _list = new List<SelectListItem>();
+
+            //foreach (var item in getEquipmentDetails)
+            //{
+            //    _list.Add(new SelectListItem
+            //    {
+            //        Value = item.ID.ToString(),
+            //        Text = item.Code + " | " + item.Name + " | " + item.Description
+            //    });
+            //}
+
+
+            //EquipmentRestockRequestVM equipmentDetailsListVM = new EquipmentRestockRequestVM
+            //{
+            //    EquipmentDetailsList = _list
+            //};
+
+            //return View(equipmentDetailsListVM);
+
             return View();
         }
 
@@ -215,7 +240,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentDetailsVM equipmentDetailsListVM = new EquipmentDetailsVM
+            Models.EquipmentDetailsVM equipmentDetailsListVM = new Models.EquipmentDetailsVM
             {
                 EquipmentDetailsList = _list
             };
@@ -294,7 +319,14 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
-                return View(_getEquipmentDetails);
+
+                Models.EquipmentDetailsVM equipmentDetailsVM = new Models.EquipmentDetailsVM
+                {
+                    EquipmentDetailsVMs = _getEquipmentDetails
+                };
+
+
+                return View(equipmentDetailsVM);
             }
             catch (Exception)
             {
@@ -309,7 +341,13 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getEquipmentStock = await mediator.Send(new GetEquipmentStockQuery());
-                return View(_getEquipmentStock);
+
+                EquipmentInventoryVM equipmentInventoryVM = new EquipmentInventoryVM 
+                {
+                    EquipmentsInventoryVMs = _getEquipmentStock
+                };
+
+                return View(equipmentInventoryVM);
             }
             catch (Exception)
             {
@@ -323,7 +361,14 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getEquipmentDelivery = await mediator.Send(new GetEquipmentDeliveryQuery());
-                return View(_getEquipmentDelivery);
+
+                DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
+                {
+                    EquipmentsRestockVMs = _getEquipmentDelivery
+                };
+
+
+                return View(deliveryDetailsVM);
             }
             catch (Exception)
             {
@@ -339,11 +384,11 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchEquipmentById(int searchedID)
+        public async Task<IActionResult> SearchEquipmentById(EquipmentsDetailsVM equipmentsDetailsVM)
         {
             try
             {
-                var _equipmentDetails = await mediator.Send(new SearchEquipmentByIdQuery { SearchedID = searchedID });
+                var _equipmentDetails = await mediator.Send(new SearchEquipmentByIdQuery { SearchedID = equipmentsDetailsVM.ID });
                 return Json(_equipmentDetails);
             }
             catch (Exception)
@@ -359,16 +404,20 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> SearchEquipmentByKeywordResult(string searchKeyword)
-        {
-            //searchKeyword = "a";
 
+        [HttpGet]
+        public async Task<IActionResult> SearchEquipmentByKeywordResult(EquipmentsDetailsVM equipmentDetailsVM)
+        {
             try
             {
-                var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = searchKeyword });
+                var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = equipmentDetailsVM.SearchedKeyword });
 
-                return View(_searchEquipmentByKeyword);
+                EquipmentDetailsVM equipmentDetails = new EquipmentDetailsVM
+                {
+                    EquipmentDetailsVMs = _searchEquipmentByKeyword
+                };
 
+                return View(equipmentDetails);
             }
             catch (Exception)
             {
@@ -493,7 +542,13 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-                return View(_getFoodDetails.ToList());
+
+                FoodDetailsVM foodDetailsVM = new FoodDetailsVM
+                {
+                    FoodDetailsVMs = _getFoodDetails
+                };
+
+                return View(foodDetailsVM);
             }
             catch (Exception)
             {
@@ -502,11 +557,11 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteFoodDetails(int deleteID)
+        public async Task<IActionResult> DeleteFoodDetails(FoodsDetailsVM deleteID)
         {
             try
             {
-                await mediator.Send(new DeleteFoodDetailsCommand { DeleteSearchedID = deleteID });
+                await mediator.Send(new DeleteFoodDetailsCommand { DeleteSearchedID = deleteID.ID });
                 _checker = true;
             }
             catch (Exception)
@@ -599,7 +654,14 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-                return View(_getFoodDetails.ToList());
+
+                FoodDetailsVM foodDetailsVM = new FoodDetailsVM
+                {
+                    FoodDetailsVMs = _getFoodDetails
+                };
+
+
+                return View(foodDetailsVM);
             }
             catch (Exception)
             {
@@ -614,7 +676,14 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getFoodStock = await mediator.Send(new GetFoodStockQuery());
-                return View(_getFoodStock.ToList());
+
+                FoodInventoryVM foodInventoryVM = new FoodInventoryVM
+                {
+                    FoodsInventoryVMs = _getFoodStock
+                };
+
+
+                return View(foodInventoryVM);
             }
             catch (Exception)
             {
@@ -628,7 +697,13 @@ namespace Attila.UI.Controllers
             try
             {
                 var _getFoodDelivery = await mediator.Send(new GetFoodDeliveryQuery());
-                return View(_getFoodDelivery);
+
+                DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
+                {
+                    FoodsRestockVMs = _getFoodDelivery
+                };
+
+                return View(deliveryDetailsVM);
             }
             catch (Exception)
             {
@@ -644,11 +719,11 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchFoodById(int searchedID)
+        public async Task<IActionResult> SearchFoodById(FoodsInventoryVM foodsInventoryVM)
         {
             try
             {
-                var _foodDetails = await mediator.Send(new SearchFoodByIdQuery { SearchedID = searchedID });
+                var _foodDetails = await mediator.Send(new SearchFoodByIdQuery { SearchedID = foodsInventoryVM.ID});
                 return Json(_foodDetails);
             }
             catch (Exception)
@@ -666,13 +741,18 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> SearchFoodByKeywordResult(string searchKeyword)
+        public async Task<IActionResult> SearchFoodByKeywordResult(FoodsDetailsVM foodsDetailsVM)
         {
-            //searchKeyword = "a";
             try
             {
-                var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = searchKeyword });
-                return View(_searchFoodByKeyword);
+                var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = foodsDetailsVM.SearchedKeyword });
+
+                FoodDetailsVM foodDetails = new FoodDetailsVM
+                {
+                    FoodDetailsVMs = _searchFoodByKeyword
+                };
+
+                return View(foodDetails);
 
             }
             catch (Exception)
