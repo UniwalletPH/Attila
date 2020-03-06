@@ -7,7 +7,7 @@ namespace Attila.Domain.Entities
     {
         public int ID { get; set; }
 
-        public string Code { get; set; }
+        public string Theme { get; set; }
 
         public string EventName { get; set; }
 
@@ -36,6 +36,16 @@ namespace Attila.Domain.Entities
         public int EventClientID { get; set; }
 
         public ClientDetails EventClient { get; set; }
+
+        public int NumberOfGuests { get; set; }
+
+        public DateTime ProgramStart { get; set; }
+
+        public DateTime EntryTime { get; set; }
+
+        public DateTime ServingTime { get; set; }
+
+        public ServingType ServingType { get; set; }
 
     }
 }
