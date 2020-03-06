@@ -14,18 +14,18 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EquipmentDetailsID" class="control-label">Equipment Details ID: </label>
-                <input id="EquipmentDetailsID" asp-for="EquipmentDetailsID" class="form-control" />
+                <input asp-for="EquipmentDetailsID" class="form-control" />
                 <span asp-validation-for="EquipmentDetailsID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Quantity" class="control-label">Quantity: </label>
-                <input id="txtQuantity" asp-for="Quantity" class="form-control" />
+                <input asp-for="Quantity" class="form-control" />
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Status" class="control-label">Status: </label>
-                <select id="txtStatus" asp-for="Status" class="form-control">
+                <select asp-for="Status" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Pending</option>
                     <option value="2">Approved</option>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="UserID" class="control-label"></label>
-                <input id="UserID" asp-for="UserID" class="form-control" />
+                @Html.DropDownListFor(a => a.UserID, Model.UserList, "Select Delivery", new { @class = "form-control" })
                 <span asp-validation-for="UserID" class="text-danger"></span>
             </div>
             <div class="form-group">

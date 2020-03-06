@@ -37,23 +37,16 @@ namespace Attila.Application.Event.Queries
                     {
                         var _result = new SearchEventVM
                         {
-                            EventName = item.EventName,
-                            Type = item.Type,
                             BookingDate = item.BookingDate,
-                            Theme = item.Theme,
+                            Code = item.Code,
                             Description = item.Description,
-                            EventClientID = item.EventClientID,
                             EventDate = item.EventDate,
-                            PackageDetailsID = item.PackageDetailsID,
+                            EventName = item.EventName,
+                            EventStatus = item.EventStatus,
                             Location = item.Location,
                             Remarks = item.Remarks,
-                            UserID = item.UserID,
-                            EventStatus = item.EventStatus,
-                            EntryTime = item.EntryTime,
-                            NumberOfGuests = item.NumberOfGuests,
-                            ProgramStart = item.ProgramStart,
-                            ServingTime = item.ServingTime,
-                            ServingType = item.ServingType,
+                            Type = item.Type,
+                            ID = item.ID
                         };
                         _search.Add(_result);
                     }

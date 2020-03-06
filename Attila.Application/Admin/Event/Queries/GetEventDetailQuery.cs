@@ -39,7 +39,7 @@ namespace Attila.Application.Admin.Event.Queries
                 var _allDetails = new EventVM
                 { 
                     ID = _eventDetail.ID,
-                    Code = _eventDetail.Theme,
+                    Code = _eventDetail.Code,
                     EventName = _eventDetail.EventName,
                     Type = _eventDetail.Type,
                     Description = _eventDetail.Description,

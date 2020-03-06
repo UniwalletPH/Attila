@@ -16,6 +16,8 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
 
         public string Description { get; set; }
 
+        public decimal RentalFee { get; set; }
+
         public UnitType UnitType { get; set; }
 
         public EquipmentType EquipmentType { get; set; }
