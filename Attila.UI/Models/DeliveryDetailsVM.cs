@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {
-    public class EquipmentRestockVM
+    public class DeliveryDetailsVM
     {
         public int ID { get; set; }
 
@@ -21,6 +18,5 @@ namespace Attila.UI.Models
 
         [Required]
         public string Remarks { get; set; }
-        
     }
 }

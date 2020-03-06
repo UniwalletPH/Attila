@@ -1,11 +1,9 @@
 ﻿using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {
@@ -33,6 +31,8 @@ namespace Attila.UI.Models
 
         [Required]
         public User User { get; set; }
+
+        public List<SelectListItem> UserList { get; set; }
 
     }
 }

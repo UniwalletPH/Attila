@@ -13,27 +13,27 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label">Code: </label>
-                <input id="txtCode" asp-for="Code" class="form-control" />
+                <input asp-for="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name: </label>
-                <input id="txtName" asp-for="Name" class="form-control" />
+                <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Specification" class="control-label">Specification: </label>
-                <input id="txtSpecification" asp-for="Specification" class="form-control" />
+                <input asp-for="Specification" class="form-control" />
                 <span asp-validation-for="Specification" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label">Description: </label>
-                <input id="txtDescription" asp-for="Description" class="form-control" />
+                <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Unit" class="control-label">Unit: </label>
-                <select id="txtUnit" asp-for="Unit" class="form-control">
+                <select asp-for="Unit" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Piece</option>
                     <option value="2">Box</option>
@@ -44,7 +44,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="FoodType" class="control-label">Food Type:</label>
-                <select id="txtFoodType" asp-for="FoodType" class="form-control">
+                <select asp-for="FoodType" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Perishable</option>
                     <option value="2">Non-perishable</option>
