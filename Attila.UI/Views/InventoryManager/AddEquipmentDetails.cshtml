@@ -19,17 +19,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label">Name: </label>
-                <input id="txtName" asp-for="Name" class="form-control" type="text" />
+                <input asp-for="Name" class="form-control" type="text" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label">Description: </label>
-                <input id="txtDescription" asp-for="Description" class="form-control" />
+                <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="RentalFee" class="control-label">Rental Fee: </label>
+                <input asp-for="RentalFee" class="form-control" />
+                <span asp-validation-for="RentalFee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="UnitType" class="control-label">Unit Type: </label>
-                <select id="txtUnitType" asp-for="UnitType" class="form-control">
+                <select asp-for="UnitType" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Piece</option>
                     <option value="2">Box</option>
@@ -40,7 +45,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="EquipmentType" class="control-label">Equipment Type: </label>
-                <select id="txtEquipmentType" asp-for="EquipmentType" class="form-control">
+                <select asp-for="EquipmentType" class="form-control">
                     <option value=""> -- select an option -- </option>
                     <option value="1">Consumable</option>
                     <option value="2">Non-consumable</option>
@@ -49,7 +54,7 @@
                 <span asp-validation-for="EquipmentType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

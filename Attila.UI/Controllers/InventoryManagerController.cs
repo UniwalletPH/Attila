@@ -215,7 +215,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            EquipmentDetailsVM equipmentDetailsListVM = new EquipmentDetailsVM
             {
                 EquipmentDetailsList = _list
             };
@@ -245,9 +245,27 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult UpdateEquipmentStock()
+        public async Task<IActionResult> UpdateEquipmentStock()
         {
-            return View();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]

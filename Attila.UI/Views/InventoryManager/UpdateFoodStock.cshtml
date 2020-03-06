@@ -7,60 +7,42 @@
 <h1>Update Food Stock</h1>
 
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="ID" class="control-label">Food ID:</label>
-            <input id="txtID" asp-for="ID" class="form-control" />
-            <span asp-validation-for="ID" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Quantity" class="control-label">Quantity:</label>
-            <input id="txtQuantity" asp-for="Quantity" class="form-control" />
-            <span asp-validation-for="Quantity" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <button id="btnSubmit" class="btn btn-primary">Submit</button>
+<form class="form-group" asp-action="UpdateFoodStock" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label">Food ID:</label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label">Quantity:</label>
+                <input asp-for="Quantity" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
         </div>
     </div>
-</div>
+</form>
 
 @section Scripts {
-    <script>
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Equipment inventory successfully updated!");
+                window.location = "/InventoryManager/Index";
+            }
 
-                if ($('#txtID').val() &&
-                    $('#txtQuantity').val()) {
-
-                    var _id = $('#txtID').val();
-                    var _quantity = $('#txtQuantity').val();
-
-
-                    var _foodInventory =
-                    {
-                        ID: _id,
-                        Quantity: _quantity
-                    };
-
-                    $.post('/InventoryManager/UpdateFoodStock', { foodInventory: _foodInventory })
-                        .done(function (result) {
-                            if (result == true) {
-                                alert("Equipment inventory successfully updated!");
-                                window.location = "/InventoryManager/Index";
-                            }
-                            else {
-                                alert("Food Restock ID does not exist!!");
-                                window.location = "/InventoryManager/UpdateFoodStock";
-                            }
-                        })
-                }
-
-                else {
-                    alert("Please fill in all the details.");
-                }
-            });
-        });
+            else {
+                alert("Food Restock ID does not exist!!");
+                window.location = "/InventoryManager/UpdateFoodStock";
+            }
+        }
     </script>
+
+    <partial name="_ValidationScriptsPartial" />
 }

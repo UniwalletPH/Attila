@@ -47,6 +47,10 @@ namespace Attila.Application.Interfaces
 
         public DbSet<UserLogins> UserLogins { get; set; }
 
+        public DbSet<PackageMenus> PackageMenus { get; set; }
+
+        public DbSet<PackageEquipments> PackageEquipments { get; set; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

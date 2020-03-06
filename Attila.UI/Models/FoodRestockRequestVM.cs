@@ -1,6 +1,7 @@
 ﻿using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using Attila.Domain.Enums;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,5 +25,7 @@ namespace Attila.UI.Models
         public Status Status { get; set; }
 
         public int UserID { get; set; }
+
+        public List<SelectListItem> UserList { get; set; }
     }
 }
