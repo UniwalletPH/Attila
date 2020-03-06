@@ -32,7 +32,7 @@ namespace Attila.Application.Event.Queries
                     Firstname = a.Firstname,
                     Address = a.Address,
                     Email = a.Email,
-                    Contact = a.Contact
+                    Contact = a.Contact,
 
                 }).ToListAsync();
 

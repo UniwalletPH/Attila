@@ -35,8 +35,8 @@ namespace Attila.UI.Controllers
 
             EventDetailsVM x = new EventDetailsVM
             {
-                EventPackageDetailsID = _eventDetails.Selected,
-                Code = _eventDetails.Event.Code,
+                PackageDetailsID = _eventDetails.Selected,
+                Theme = _eventDetails.Event.Theme,
                 Description = _eventDetails.Event.Description,
                 EventDate = _eventDetails.Event.EventDate,
                 EventName = _eventDetails.Event.EventName,
@@ -44,14 +44,18 @@ namespace Attila.UI.Controllers
                 Remarks = _eventDetails.Event.Remarks,
                 Type = _eventDetails.Event.Type,
                 EventClientID = _eventDetails.SelectedClient,
-                
+                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
+                EntryTime = _eventDetails.Event.EntryTime,
+                ProgramStart = _eventDetails.Event.ProgramStart,
+                ServingTime = _eventDetails.Event.ServingTime,
+                ServingType = _eventDetails.Event.ServingType,
                 
             };
 
             bool flag = true;
             try
             {
-               await mediator.Send(new AddEventCommand{ EventDetails = _eventDetails.Event});
+                    await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
             }catch(Exception)
             {
                 flag = false;
@@ -178,6 +182,55 @@ namespace Attila.UI.Controllers
 
         [HttpGet]
         public IActionResult AddEventPayment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenu(MenuVM _menu)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddMenuCommand
+                {
+                    PackageMenu = _menu
+                });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            
+            return Json(flag);
+        }
+
+        [HttpGet]
+        public IActionResult AddMenu()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menuCategory)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddMenuCategoryCommand { 
+                
+                    MenuCategory = _menuCategory
+                
+                });
+            }catch(Exception)
+            {
+                flag = false;
+            }
+            return Json(flag);
+        }
+
+        [HttpGet]
+        public IActionResult AddMenuCategory()
         {
             return View();
         }

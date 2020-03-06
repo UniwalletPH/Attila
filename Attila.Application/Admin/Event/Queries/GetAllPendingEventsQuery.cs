@@ -38,7 +38,7 @@ namespace Attila.Application.Admin.Event.Queries
                     var Event = new EventVM
                     { 
                     ID = item.ID,
-                    Code = item.Code,
+                    Code = item.Theme,
                     EventName = item.EventName,
                     Location = item.Location,
                     BookingDate = item.BookingDate,

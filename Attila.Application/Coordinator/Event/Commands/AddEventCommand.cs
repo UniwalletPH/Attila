@@ -51,15 +51,21 @@ namespace Attila.Application.Event.Commands
                     EventName = request.EventDetails.EventName,
                     Type = request.EventDetails.Type,
                     BookingDate = request.EventDetails.BookingDate,
-                    Code = request.EventDetails.Code,
+                    Theme = request.EventDetails.Theme,
                     Description = request.EventDetails.Description,
                     EventClientID = request.EventDetails.EventClientID,
                     EventDate = request.EventDetails.EventDate,
-                    PackageDetailsID = request.EventDetails.EventPackageDetailsID,
+                    PackageDetailsID = request.EventDetails.PackageDetailsID,
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
                     UserID = request.EventDetails.UserID,
-                    EventStatus = Status.Pending
+                    EventStatus = Status.Pending,
+                    EntryTime = request.EventDetails.EntryTime,
+                    NumberOfGuests = request.EventDetails.NumberOfGuests,
+                    ProgramStart = request.EventDetails.ProgramStart,
+                    ServingTime = request.EventDetails.ServingTime,
+                    ServingType = request.EventDetails.ServingType,
+                    
 
                 };
 
