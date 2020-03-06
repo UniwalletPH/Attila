@@ -1,7 +1,6 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,23 +27,19 @@ namespace Attila.Application.Event.Queries
             {
                 var _viewEventList = await dbContext.EventDetails.Select(a => new SearchEventVM 
                 {
+                    ID = a.ID,
+                    Code = a.Code,
                     EventName = a.EventName,
                     Type = a.Type,
+                    EventStatus = a.EventStatus,
                     BookingDate = a.BookingDate,
-                    Theme = a.Theme,
-                    Description = a.Description,
-                    EventClientID = a.EventClientID,
                     EventDate = a.EventDate,
-                    PackageDetailsID = a.PackageDetailsID,
+                    Description = a.Description,
                     Location = a.Location,
                     Remarks = a.Remarks,
                     UserID = a.UserID,
-                    EventStatus = Status.Pending,
-                    EntryTime = a.EntryTime,
-                    NumberOfGuests = a.NumberOfGuests,
-                    ProgramStart = a.ProgramStart,
-                    ServingTime = a.ServingTime,
-                    ServingType = a.ServingType,
+                    EventPackageDetailsID = a.PackageDetailsID,
+                    EventClientID = a.EventClientID
 
                 }).ToListAsync();
 
