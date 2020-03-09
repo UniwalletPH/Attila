@@ -48,6 +48,9 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<UserLogins> UserLogins { get; set; }
 
+        public DbSet<PackageMenus> PackageMenus { get ; set; }
+
+        public DbSet<PackageEquipments> PackageEquipments { get ; set ; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
