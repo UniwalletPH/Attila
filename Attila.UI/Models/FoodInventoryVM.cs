@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Attila.Application.Inventory_Manager.Food.Queries;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,8 @@ namespace Attila.UI.Models
 
         [Required]
         public int FoodRestockID { get; set; }
+
+        public IEnumerable<FoodsInventoryVM> FoodsInventoryVMs { get; set; }
 
         public List<SelectListItem> FoodDetailsList { get; set; }
 

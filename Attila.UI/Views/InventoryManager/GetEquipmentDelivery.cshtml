@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsRestockVM>
+﻿@model Attila.UI.Models.DeliveryDetailsVM
 
 @{
     ViewData["Title"] = "GetEquipmentDelivery";
@@ -28,24 +28,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiptImage)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliveryPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.EquipmentsRestockVMs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiptImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

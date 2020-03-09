@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsInventoryVM>
+﻿@model Attila.UI.Models.EquipmentInventoryVM
 
 @{
     ViewData["Title"] = "GetEquipmentStock";
@@ -37,33 +37,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EncodingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentDetailsID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentDeliveryID)
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.EquipmentsInventoryVMs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EncodingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ItemPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remarks)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentDetailsID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentDeliveryID)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

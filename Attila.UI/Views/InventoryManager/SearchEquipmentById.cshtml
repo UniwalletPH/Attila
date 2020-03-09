@@ -1,19 +1,20 @@
-﻿@model Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM
+﻿@model Attila.UI.Models.EquipmentDetailsVM
 
 @{
     ViewData["Title"] = "SearchEquipmentById";
 }
 
 <h1>Search Equipment By Id</h1>
-
-<div class="row">
-    <div class="col-md-4">
-        <label class="control-label">Enter equipment ID: </label>
-        <input id="txtSearchID" class="form-control" />
-        <br />
-        <button id="btnSubmit" class="btn btn-primary">Submit</button>
+<form class="form-group" asp-action="SearchEquipmentById" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+    <div class="row">
+        <div class="col-md-4">
+            <label class="control-label">Enter equipment ID: </label>
+            <input asp-for="ID" id="txtSearchID" class="form-control" />
+            <br />
+            <button type="submit" id="btnSubmit" class="btn btn-primary">Submit</button>
+        </div>
     </div>
-</div>
+</form>
 <br />
 
 <hr />
@@ -57,61 +58,31 @@
     </dd>
 </dl>
 
-
-
 @section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+                alert("Equipment ID successfully searched!");
+                $("#ID").val(result.id);
+                $("#code").val(result.code);
+                $("#name").val(result.name);
+                $("#description").val(result.description);
+                $("#unitType").val(result.unitType);
+                $("#equipmentType").val(result.equipmentType);
 
-    <script>
+                $("#txtSearchID").val("");
+        }
 
-        $('document').ready(function () {
-            $('#btnSubmit').on('click', function () {
+        function OnFailure() {
 
-                if ($('#txtSearchID').val()) {
-
-                    var _searchID = $('#txtSearchID').val();
-
-
-                    $.post('/InventoryManager/SearchEquipmentById', { searchedID: _searchID })
-                        .done(function (result) {
-
-                            alert("Equipment ID successfully searched!");
-                            $("#ID").val(result.id);
-                            $("#code").val(result.code);
-                            $("#name").val(result.name);
-                            $("#description").val(result.description);
-                            $("#unitType").val(result.unitType);
-                            $("#equipmentType").val(result.equipmentType);
-
-                            $("#txtSearchID").val("");
-
-                        })
-                        .fail(function (error) {
-                            alert("Equipment ID does not exist!")
-                            $("#txtSearchID").val("");
-                            $("#ID").val("");
-                            $("#code").val("");
-                            $("#name").val("");
-                            $("#description").val("");
-                            $("#unitType").val("");
-                            $("#equipmentType").val("");
-                        });
-
-                }
-
-                else {
-                    alert("Please enter the ID.");
-                    $("#ID").val("");
-                    $("#code").val("");
-                    $("#name").val("");
-                    $("#description").val("");
-                    $("#unitType").val("");
-                    $("#equipmentType").val("");
-                }
-
-
-            });
-
-        });
-
+            alert("Equipment ID does not exist!")
+                $("#txtSearchID").val("");
+                $("#ID").val("");
+                $("#code").val("");
+                $("#name").val("");
+                $("#description").val("");
+                $("#unitType").val("");
+                $("#equipmentType").val("");
+        }
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }

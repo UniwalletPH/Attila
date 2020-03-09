@@ -2,6 +2,7 @@
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 EquipmentInventory _equipmentInventory = new EquipmentInventory
                 {
                     Quantity = request.MyEquipmentsInventoryVM.Quantity,
-                    EncodingDate = request.MyEquipmentsInventoryVM.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = request.MyEquipmentsInventoryVM.ItemPrice,
                     Remarks = request.MyEquipmentsInventoryVM.Remarks,
                     UserID = request.MyEquipmentsInventoryVM.UserID,
