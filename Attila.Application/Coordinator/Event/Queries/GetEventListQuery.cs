@@ -28,7 +28,6 @@ namespace Attila.Application.Event.Queries
                 var _viewEventList = await dbContext.EventDetails.Select(a => new SearchEventVM 
                 {
                     ID = a.ID,
-                    Code = a.Code,
                     EventName = a.EventName,
                     Type = a.Type,
                     EventStatus = a.EventStatus,

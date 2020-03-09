@@ -1,5 +1,7 @@
 using Attila.Application;
+using Attila.Application.Interfaces;
 using Attila.Infrastructure;
+using Attila.UI.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,7 @@ namespace Attila.UI
             services.AddApplication();
             services.AddInfrastructure(Configuration);
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,6 +5,8 @@ using Attila.Application.Admin.Event.Queries;
 using Attila.Application.Admin.Food.Commands;
 using Attila.Application.Admin.Food.Queries;
 using Attila.Application.Admin.Inventory.Queries;
+using Attila.Application.Users.Commands;
+using Attila.Application.Users.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -117,10 +119,19 @@ namespace Attila.UI.Controllers
             return Json(_return);
         }
 
+
         public IActionResult Profile()
         {
             return View();
         }
+
+        public async Task<IActionResult> SaveUser(UserVM user)
+        {
+            var _return = await mediator.Send(new AddUserCommand { User = user});
+
+            return Json(true);
+        }
+
 
         [HttpGet]
         public IActionResult Notification()

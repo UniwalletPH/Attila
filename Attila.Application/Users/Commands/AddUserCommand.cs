@@ -1,10 +1,57 @@
-﻿using System;
+﻿using Attila.Application.Interfaces;
+using Attila.Application.Users.Queries;
+using Attila.Domain.Entities;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Attila.Application.Users.Commands
 {
-    class AddUserCommand
+    public class AddUserCommand : IRequest<bool>
     {
+        public UserVM User { get; set; }
+
+        public class AddUserCommandHandler : IRequestHandler<AddUserCommand, bool>
+        {
+            private readonly IAttilaDbContext dbContext;
+            private readonly IPasswordHasher passwordHasher;
+            public AddUserCommandHandler(IAttilaDbContext dbContext, IPasswordHasher passwordHasher)
+            {
+                this.dbContext = dbContext;
+                this.passwordHasher = passwordHasher;
+            }
+
+            public async Task<bool> Handle(AddUserCommand request, CancellationToken cancellationToken)
+            {
+                var _user = new User
+                { 
+                Name = request.User.Name,
+                ContactNumber = request.User.ContactNumber,
+                Email = request.User.Email,
+                Position = request.User.Position,
+                Role = request.User.Role,               
+                };
+
+                dbContext.Users.Add(_user);
+                await dbContext.SaveChangesAsync();
+
+                var salt = passwordHasher.GenerateSalt();
+
+                var _userLogin = new UserLogins
+                {
+                    Username = request.User.Username,
+                    Salt = salt,
+                    Password = passwordHasher.HashPassword(salt,request.User.Password)
+                };
+
+                await dbContext.SaveChangesAsync();
+                dbContext.UserLogins.Add(_userLogin);
+
+                return true;
+            }
+        }
     }
 }
