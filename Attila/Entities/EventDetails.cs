@@ -47,5 +47,9 @@ namespace Attila.Domain.Entities
 
         public ServingType ServingType { get; set; }
 
+        public VenueType VenueType { get; set; }
+
+        public LocationType LocationType { get; set; }
+
     }
 }
