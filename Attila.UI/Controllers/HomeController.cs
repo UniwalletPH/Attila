@@ -20,14 +20,28 @@ namespace Attila.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
+            return Redirect("~/Login");
+                }
 
         public IActionResult Privacy()
         {
             return View();
         }
+        [Route("Login")]
+        public IActionResult Login()
+        {
+            return View();
+        }
 
+
+
+
+
+        [Route("RegisterAccount")]
+        public IActionResult RegisterAccount()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

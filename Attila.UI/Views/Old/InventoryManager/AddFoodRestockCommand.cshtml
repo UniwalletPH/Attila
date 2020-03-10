@@ -1,0 +1,57 @@
+﻿@model Attila.UI.Models.FoodRestockVM
+
+@{
+    ViewData["Title"] = "AddFoodRestockCommand";
+}
+
+<h1>Add Food Restock</h1>
+
+<hr />
+<form class="form-group" asp-action="AddFoodRestockCommand" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DeliveryDate" class="control-label">Delivery Date: </label>
+                <input id="txtDeliveryDate" asp-for="DeliveryDate" class="form-control" />
+                <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiptImage" class="control-label">Receipt Image: </label>
+                <input id="imgReceiptImage" asp-for="ReceiptImage" class="form-control" />
+                <span asp-validation-for="ReceiptImage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryPrice" class="control-label">Delivery Price: </label>
+                <input id="txtDeliveryPrice" asp-for="DeliveryPrice" class="form-control" />
+                <span asp-validation-for="DeliveryPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Remarks" class="control-label">Remarks: </label>
+                <input id="txtRemarks" asp-for="Remarks" class="form-control" />
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button id="btnSubmit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Food restock successfully added!");
+                window.location = "/InventoryManager/Index";
+            }
+
+            else {
+                alert("Failed!");
+                window.location = "/InventoryManager/AddFoodRestockCommand";
+            }
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

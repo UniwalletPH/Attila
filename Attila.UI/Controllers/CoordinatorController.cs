@@ -155,7 +155,7 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-
+         
 
         [HttpPost]
         public async Task<IActionResult> AddEventPayment(PaymentStatusVM _eventPayment)
@@ -228,6 +228,7 @@ namespace Attila.UI.Controllers
 
             return Json(flag);
         }
+
 
         [HttpGet]
         public IActionResult UpdateEventPackage()
