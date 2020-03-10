@@ -1,6 +1,7 @@
 ﻿using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
+using Attila.Domain.Enums;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -29,16 +30,26 @@ namespace Attila.Application.Event.Queries
                 if (_searchedEvent != null)
                 {
                     return new SearchEventVM {
-                    ID = _searchedEvent.ID,
-                    BookingDate = _searchedEvent.BookingDate,
-                    Description = _searchedEvent.Description,
-                    EventDate = _searchedEvent.EventDate,
-                    EventName = _searchedEvent.EventName,
-                    EventStatus = _searchedEvent.EventStatus,
-                    Location = _searchedEvent.Location,
-                    Remarks = _searchedEvent.Remarks,
-                    Type = _searchedEvent.Type,
-                    
+                        EventName = _searchedEvent.EventName,
+                        Type = _searchedEvent.Type,
+                        BookingDate = _searchedEvent.BookingDate,
+                        Description = _searchedEvent.Description,
+                        EventClientID = _searchedEvent.EventClientID,
+                        EventDate = _searchedEvent.EventDate,
+                        PackageDetailsID = _searchedEvent.PackageDetailsID,
+                        Location = _searchedEvent.Location,
+                        Remarks = _searchedEvent.Remarks,
+                        UserID = _searchedEvent.UserID,
+                        EventStatus = _searchedEvent.EventStatus,
+                        EntryTime = _searchedEvent.EntryTime,
+                        NumberOfGuests = _searchedEvent.NumberOfGuests,
+                        ProgramStart = _searchedEvent.ProgramStart,
+                        ServingTime = _searchedEvent.ServingTime,
+                        LocationType = _searchedEvent.LocationType,
+                        ServingType = _searchedEvent.ServingType,
+                        Theme = _searchedEvent.Theme,
+                        VenueType = _searchedEvent.VenueType
+
                     };
                 }
                 else

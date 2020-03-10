@@ -27,18 +27,25 @@ namespace Attila.Application.Event.Queries
             {
                 var _viewEventList = await dbContext.EventDetails.Select(a => new SearchEventVM 
                 {
-                    ID = a.ID,
                     EventName = a.EventName,
                     Type = a.Type,
-                    EventStatus = a.EventStatus,
                     BookingDate = a.BookingDate,
-                    EventDate = a.EventDate,
                     Description = a.Description,
+                    EventClientID = a.EventClientID,
+                    EventDate = a.EventDate,
+                    PackageDetailsID = a.PackageDetailsID,
                     Location = a.Location,
                     Remarks = a.Remarks,
                     UserID = a.UserID,
-                    EventPackageDetailsID = a.PackageDetailsID,
-                    EventClientID = a.EventClientID
+                    EventStatus = a.EventStatus,
+                    EntryTime = a.EntryTime,
+                    NumberOfGuests = a.NumberOfGuests,
+                    ProgramStart = a.ProgramStart,
+                    ServingTime = a.ServingTime,
+                    LocationType = a.LocationType,
+                    ServingType = a.ServingType,
+                    Theme = a.Theme,
+                    VenueType = a.VenueType
 
                 }).ToListAsync();
 
