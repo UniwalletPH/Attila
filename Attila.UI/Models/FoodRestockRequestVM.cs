@@ -15,7 +15,6 @@ namespace Attila.UI.Models
 
         public int Quantity { get; set; }
 
-
         public DateTime DateTimeRequest { get; set; }
 
         public int FoodDetailsID { get; set; }

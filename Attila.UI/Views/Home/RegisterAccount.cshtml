@@ -4,105 +4,104 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
- 
-    <!-- BEGIN PAGE HEAD-->
-    <div class="page-head">
-        <!-- BEGIN PAGE TITLE -->
-        <div class="page-title">
-            <h1>
-                Register Officer
-                <small> </small>
-            </h1>
-        </div>
-        <!-- END PAGE TITLE -->
-        <!-- BEGIN PAGE TOOLBAR -->
-        <div class="page-toolbar">
-
-            <!-- BEGIN THEME PANEL -->
-            <!-- END THEME PANEL -->
-        </div>
-        <!-- END PAGE TOOLBAR -->
+@model Attila.Application.Users.Queries.UserVM;
+<!-- BEGIN PAGE HEAD-->
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            Register Officer
+            <small> </small>
+        </h1>
     </div>
-    <!-- END PAGE HEAD-->
-    <!-- BEGIN PAGE BREADCRUMB -->
-    <ul class="page-breadcrumb breadcrumb">
-    </ul>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-speech font-green"></i>
-                        <span class="caption-subject bold font-green uppercase">Officer Profile</span>
-                    </div>
-                    <div class="actions">
-                        <a href="javascript:;" class="btn btn-circle btn-outline green">
-                            <i class="fa fa-pencil"></i> Edit
-                        </a>
-                        <a href="javascript:;" class="btn btn-circle blue-steel btn-outline">
-                            <i class="fa fa-plus"></i> Add
-                        </a>
-                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <form role="form" action="#">
-                        <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input type="text" placeholder="John Smith" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">E-mail</label>
-                            <input type="email" placeholder="john.smith@gmail.com" class="form-control">
-                        </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
 
-                        <div class="form-group">
-                            <label class="control-label">Password</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Confirm Password</label>
-                            <input type="password" class="form-control">
-                        </div>
-                        <div class="form-group mt-repeater">
-                            <div data-repeater-list="group-b">
-                                <div class="mt-repeater-item">
-                                    <label class="control-label">Mobile Number</label>
-                                    <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control">
-                                </div>
-                                <div data-repeater-item="" class="mt-repeater-item mt-overflow">
-                                    <label class="control-label">Additional Contact Number</label>
-                                    <div class="mt-repeater-cell">
-                                        <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control mt-repeater-input-inline">
-                                        <a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete mt-repeater-del-right mt-repeater-btn-inline">
-                                            <i class="fa fa-close"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="javascript:;" data-repeater-create="" class="btn btn-success mt-repeater-add">
-                                <i class="fa fa-plus"></i> Add new contact number
-                            </a>
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Officer</label>
-                            <select class="form-control">
-                                <option>Coordinator</option>
-                                <option>Inventory</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Remarks</label>
-                            <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
-                        </div>
-                        <div class="margin-top-10">
-                            <a href="javascript:;" class="btn green">Register </a>
-                        </div>
-                    </form>
+        <!-- BEGIN THEME PANEL -->
+        <!-- END THEME PANEL -->
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<!-- END PAGE HEAD-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+</ul>
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-speech font-green"></i>
+                    <span class="caption-subject bold font-green uppercase">Officer Profile</span>
+                </div>
+                <div class="actions">
+                    <a href="javascript:;" class="btn btn-circle btn-outline green">
+                        <i class="fa fa-pencil"></i> Edit
+                    </a>
+                    <a href="javascript:;" class="btn btn-circle blue-steel btn-outline">
+                        <i class="fa fa-plus"></i> Add
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
                 </div>
             </div>
-        </div>
+            <div class="portlet-body">
+                <form role="form" action="#">
+                    <div class="form-group">
+                        <label class="control-label">Name</label>
+                        <input type="text" placeholder="John Smith" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">E-mail</label>
+                        <input type="email" placeholder="john.smith@gmail.com" class="form-control">
+                    </div>
 
+                    <div class="form-group">
+                        <label class="control-label">Password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Confirm Password</label>
+                        <input type="password" class="form-control">
+                    </div>
+                    <div class="form-group mt-repeater">
+                        <div data-repeater-list="group-b">
+                            <div class="mt-repeater-item">
+                                <label class="control-label">Mobile Number</label>
+                                <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control">
+                            </div>
+                            <div data-repeater-item="" class="mt-repeater-item mt-overflow">
+                                <label class="control-label">Additional Contact Number</label>
+                                <div class="mt-repeater-cell">
+                                    <input type="text" placeholder="+1 646 580 DEMO (6284)" class="form-control mt-repeater-input-inline">
+                                    <a href="javascript:;" data-repeater-delete="" class="btn btn-danger mt-repeater-delete mt-repeater-del-right mt-repeater-btn-inline">
+                                        <i class="fa fa-close"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="javascript:;" data-repeater-create="" class="btn btn-success mt-repeater-add">
+                            <i class="fa fa-plus"></i> Add new contact number
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label>Type of Officer</label>
+                        <select class="form-control">
+                            <option>Coordinator</option>
+                            <option>Inventory</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Remarks</label>
+                        <textarea class="form-control" rows="3" placeholder="We are KeenThemes!!!"></textarea>
+                    </div>
+                    <div class="margin-top-10">
+                        <a href="javascript:;" class="btn green">Register </a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <!-- End: life time stats -->
- 
+
+</div>
+<!-- End: life time stats -->
