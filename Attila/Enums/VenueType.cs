@@ -6,7 +6,7 @@ namespace Attila.Domain.Enums
 {
     public enum VenueType : byte
     {
-        Building = 1,
-        Condominium = 2
+        None = 1, 
+        Building = 2
     }
 }

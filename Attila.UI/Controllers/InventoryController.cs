@@ -36,6 +36,22 @@ namespace Attila.UI.Controllers
             }
         }
 
+        public IActionResult AddFood()
+        {
+            return View();
+        }
+        public IActionResult AddEquipment()
+        {
+            return View();
+        }
+        public IActionResult UpdateStocks()
+        {
+            return View();
+        }
+        public IActionResult RequestRestock()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

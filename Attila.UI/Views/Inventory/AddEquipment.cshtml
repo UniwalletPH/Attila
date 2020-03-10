@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
-@model Attila.UI.Models.EquipmentDetailsVM
+@model Attila.UI.Models.InventoryViewVM
 
 
 
@@ -13,7 +13,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Inventory
+            Clients
             <small> </small>
         </h1>
     </div>
@@ -40,7 +40,7 @@
                 <div class="caption font-dark">
                     @*<i class="icon-settings font-dark"></i>
                         <span class="caption-subject bold uppercase">Buttons</span>*@
-                    <button id="sample_editable_1_new" class="btn sbold green " onClick="onAddFood()">
+                    <button id="sample_editable_1_new" class="btn sbold green " onClick="onAdd()">
                         Add New
                         <i class="fa fa-plus"></i>
                     </button>
@@ -60,18 +60,17 @@
 
                 <tbody>
 
-                    @foreach (var item in Model.EquipmentDetailsVMs)
+                    @*@foreach (var item in Model.PendingFoodRestockRequest)
                     {
+                    
                     <tr>
                         <td>  @Html.DisplayFor(modelItem => item.Name)</td>
                         <td> @Html.DisplayFor(modelItem => item.Description)</td>
-                        <td> @Html.DisplayFor(modelItem => item.RentalFee)</td>
-                        <td> @Html.DisplayFor(modelItem => item.UnitType)</td>
-                        <td> @Html.DisplayFor(modelItem => item.EquipmentType)</td>
+                        <td> @Html.DisplayFor(modelItem => item.Specification)</td>
+                        <td> @Html.DisplayFor(modelItem => item.Unit)</td>
 
                     </tr>
-                    }
-
+                    }*@
 
 
 
@@ -91,7 +90,7 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <button id="sample_editable_1_new" class="btn sbold green " onClick="onAddEquipment()">
+                    <button id="sample_editable_1_new" class="btn sbold green " onClick="onAdd()">
                         Add New
                         <i class="fa fa-plus"></i>
                     </button>
@@ -155,15 +154,15 @@
                         <tbody>
 
                             @*@foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Firstname)  @Html.DisplayFor(modelItem => item.Lastname)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Email)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Contact)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Address)</td>
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(modelItem => item.Firstname)  @Html.DisplayFor(modelItem => item.Lastname)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Email)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Contact)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Address)</td>
 
-                                </tr>
-                            }*@
+                                    </tr>
+                                }*@
 
 
                         </tbody>
@@ -192,11 +191,8 @@
 
     <script src="../assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        function onAddFood() {
-            $("#confirmAddFood").modal('show');
-        }
-        function onAddEquipment() {
-            $("#confirmAddEquip").modal('show');
+        function onAdd() {
+            $("#confirm").modal('show');
         }
 
     </script>
