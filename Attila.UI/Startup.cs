@@ -47,6 +47,7 @@ namespace Attila.UI
             app.UseRouting();
 
             app.UseAuthorization();
+             
 
             app.UseEndpoints(endpoints =>
             {

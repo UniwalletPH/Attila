@@ -37,6 +37,10 @@
     <ProjectReference Include="..\Attila\Attila.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Dashboard\partials\" />
+  </ItemGroup>
+
 
 
 </Project>
