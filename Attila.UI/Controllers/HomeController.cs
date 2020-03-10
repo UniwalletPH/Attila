@@ -5,18 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Attila.Application.Users.Queries; 
 using Attila.UI.Models;
+using MediatR;
+using Attila.Application.Users.Commands;
 
 namespace Attila.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMediator mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMediator mediator)
         {
-            _logger = logger;
+            this.mediator = mediator;
         }
+
 
         public IActionResult Index()
         {
@@ -42,6 +46,19 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
+
+
+        [HttpPost]  
+        public async Task<IActionResult> AddUser(UserVM user)
+        {
+            var _return = await mediator.Send(new AddUserCommand { User = user });
+
+            return Json(_return);
+        }
+
+ 
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
