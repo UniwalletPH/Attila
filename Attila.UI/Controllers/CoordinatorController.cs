@@ -35,17 +35,27 @@ namespace Attila.UI.Controllers
 
             EventDetailsVM x = new EventDetailsVM
             {
-                EventPackageDetailsID = _eventDetails.Selected,
-                Code = _eventDetails.Event.Code,
-                Description = _eventDetails.Event.Description,
-                EventDate = _eventDetails.Event.EventDate,
                 EventName = _eventDetails.Event.EventName,
+                Type = _eventDetails.Event.Type,
+                BookingDate = _eventDetails.Event.BookingDate,
+                Description = _eventDetails.Event.Description,
+                EventClientID = _eventDetails.Event.EventClientID,
+                EventDate = _eventDetails.Event.EventDate,
+                PackageDetailsID = _eventDetails.Event.PackageDetailsID,
                 Location = _eventDetails.Event.Location,
                 Remarks = _eventDetails.Event.Remarks,
-                Type = _eventDetails.Event.Type,
-                EventClientID = _eventDetails.SelectedClient,
-                
-                
+                UserID = _eventDetails.Event.UserID,
+                EventStatus = _eventDetails.Event.EventStatus,
+                EntryTime = _eventDetails.Event.EntryTime,
+                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
+                ProgramStart = _eventDetails.Event.ProgramStart,
+                ServingTime = _eventDetails.Event.ServingTime,
+                LocationType = _eventDetails.Event.LocationType,
+                ServingType = _eventDetails.Event.ServingType,
+                Theme = _eventDetails.Event.Theme,
+                VenueType = _eventDetails.Event.VenueType
+
+
             };
 
             bool flag = true;
