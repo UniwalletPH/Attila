@@ -102,37 +102,37 @@ namespace Attila.UI.Controllers
         }
         
 
-        [HttpPost]
-        public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
-        {
-            int _duration = _eventPackage.Duration.Hours;
-            string _parsedDurationString = _duration.ToString("hh':'mm");
-            TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
-            bool flag = true;
-            EventPackageVM eventPackageVM = new EventPackageVM
-            {
-                Code = _eventPackage.Code,
-                Description = _eventPackage.Description,
-                Duration = _fromStringToTimeSpan,
-                Name = _eventPackage.Name,
-                RatePerHead = _eventPackage.RatePerHead
+        //[HttpPost]
+        //public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
+        //{
+        //    int _duration = _eventPackage.Duration.Hours;
+        //    string _parsedDurationString = _duration.ToString("hh':'mm");
+        //    TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
+        //    bool flag = true;
+        //    EventPackageVM eventPackageVM = new EventPackageVM
+        //    {
+        //        Code = _eventPackage.Code,
+        //        Description = _eventPackage.Description,
+          
+        //        Name = _eventPackage.Name,
+        //        RatePerHead = _eventPackage.RatePerHead
 
-            };
+        //    };
 
-            try
-            {
-                    await mediator.Send(new AddEventPackageCommand
-                    {
-                        PackageDetails = eventPackageVM
-                    });
+        //    try
+        //    {
+        //            await mediator.Send(new AddEventPackageCommand
+        //            {
+        //                PackageDetails = eventPackageVM
+        //            });
 
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
-            return Json(flag);
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        flag = false;
+        //    }
+        //    return Json(flag);
+        //}
 
         [HttpGet]
         public IActionResult AddEventPackage()

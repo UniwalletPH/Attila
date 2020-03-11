@@ -11,6 +11,7 @@ using Attila.Application.Admin.Event.Queries;
 using Attila.Application.Event.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Event.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -110,8 +111,8 @@ namespace Attila.UI.Controllers
         //[HttpGet]
         //public async Task<IActionResult> Details(int? EventID)
         //{
-             
-          
+
+
         //    if (EventID!= null)
         //    {
 
@@ -126,11 +127,94 @@ namespace Attila.UI.Controllers
 
         //    return View( _allEventDetails);
         //}
+        [HttpPost]
+        public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
+        {
 
+            EventDetailsVM x = new EventDetailsVM
+            {
+                EventName = _eventDetails.Event.EventName,
+                Type = _eventDetails.Event.Type,
+                BookingDate = _eventDetails.Event.BookingDate,
+                Description = _eventDetails.Event.Description,
+                EventClientID = _eventDetails.Event.EventClientID,
+                EventDate = _eventDetails.Event.EventDate,
+                PackageDetailsID = _eventDetails.Event.PackageDetailsID,
+                Location = _eventDetails.Event.Location,
+                Remarks = _eventDetails.Event.Remarks,
+                UserID = _eventDetails.Event.UserID,
+                EventStatus = _eventDetails.Event.EventStatus,
+                EntryTime = _eventDetails.Event.EntryTime,
+                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
+                ProgramStart = _eventDetails.Event.ProgramStart,
+                ServingTime = _eventDetails.Event.ServingTime,
+                LocationType = _eventDetails.Event.LocationType,
+                ServingType = _eventDetails.Event.ServingType,
+                Theme = _eventDetails.Event.Theme,
+                VenueType = _eventDetails.Event.VenueType
+
+
+            };
+
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            return Json(flag);
+        }
         public IActionResult Privacy()
         {
             return View();
-        } 
+        }
+
+        public async Task<IActionResult> Packages()
+        {
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            return View(_packageNames);
+        }
+
+        public IActionResult PackageForm()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
+        {
+            //int _duration = _eventPackage.Duration.Hours;
+            //string _parsedDurationString = _duration.ToString("hh':'mm");
+            //TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
+            bool flag = true;
+            EventPackageVM eventPackageVM = new EventPackageVM
+            {
+                Code = _eventPackage.Code,
+                Description = _eventPackage.Description,
+                //Duration = _fromStringToTimeSpan,
+                Name = _eventPackage.Name,
+                RatePerHead = _eventPackage.RatePerHead
+
+            };
+
+            try
+            {
+                await mediator.Send(new AddEventPackageCommand
+                {
+                    PackageDetails = eventPackageVM
+                });
+
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            return Json(flag);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

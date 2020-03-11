@@ -32,7 +32,7 @@
         <div class="portlet light bordered">
 
             <div class="portlet-body form">
-                <form role="form" asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-body">
                         <div class="form-group">
                             <label>Client Name</label>
@@ -104,24 +104,7 @@
 
 
                     </div>
-
-
-                    <div class="form-group">
-                        <label></label>
-                        <div class="mt-checkbox-list">
-                            <label class="mt-checkbox mt-checkbox-outline" asp-for="Event.ServingType">
-                                Manage Buffet
-                                <input type="checkbox" value="ManageBuffet" name="test">
-                                <span></span>
-                            </label>
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                Self-Service
-                                <input type="checkbox" value="SelfServiceBuffet" name="test">
-                                <span></span>
-                            </label>
-
-                        </div>
-                    </div>
+                     
                     <div class="form-group">
                         <label>Buffet Type </label>
                             <select id="txtType" asp-for="Event.ServingType" class="form-control">
