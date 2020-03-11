@@ -32,7 +32,7 @@
         <div class="portlet light bordered">
 
             <div class="portlet-body form">
-                <form role="form" asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-body">
                         <div class="form-group">
                             <label>Client Name</label>
@@ -51,10 +51,10 @@
                                 <option value="Wedding">Wedding</option>
                             </select>
                         </div>
-                      
+
                         <div class="form-group">
                             <label>Event Name</label>
-                            <input type="text" class="form-control" asp-for="Event.EventName"placeholder="">
+                            <input type="text" class="form-control" asp-for="Event.EventName" placeholder="">
                         </div>
 
                         <div class="form-group">
@@ -64,40 +64,23 @@
 
                         <div class="form-group">
                             <label>Event's Place</label>
-                            <input type="text" class="form-control"
-                                   asp-for="Event.Address" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City.">
+                            <input type="text" class="form-control" asp-for="Event.Location" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City.">
                         </div>
                         <div class="form-group">
-                            <label> Condominium or Building?</label>
-                            <div class="mt-checkbox-list">
-                                <label class="mt-checkbox mt-checkbox-outline">
-                                    Yes
-                                    <input type="checkbox" value="1" name="test">
-                                    <span></span>
-                                </label>
-                                <label class="mt-checkbox mt-checkbox-outline">
-                                    No
-                                    <input type="checkbox" value="1" name="test">
-                                    <span></span>
-                                </label>
+                            <label>Venue in Condominium or Building?</label>
+                            <select id="txtType" asp-for="Event.VenueType" class="form-control">
+                                <option value="2">Yes</option>
+                                <option value="1">No</option>
 
-                            </div>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label> Location Area</label>
-                            <div class="mt-checkbox-list">
-                                <label class="mt-checkbox mt-checkbox-outline">
-                                    North Area
-                                    <input type="checkbox" value="0" name="test">
-                                    <span></span>
-                                </label>
-                                <label class="mt-checkbox mt-checkbox-outline">
-                                    South Area
-                                    <input type="checkbox" value="1" name="test">
-                                    <span></span>
-                                </label>
+                            <label>Type of Location</label>
+                            <select id="txtType" asp-for="Event.LocationType" class="form-control">
+                                <option value="1">North Area</option>
+                                <option value="2">South Area</option>
 
-                            </div>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Event Date</label>
@@ -107,52 +90,42 @@
 
                         <div class="form-group">
                             <label>Set Up Time </label>
-                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" />
+                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.EntryTime" />
                         </div>
                         <div class="form-group">
                             <label>Program Starts At </label>
-                            <input type="text" value="2:30 PM" data-format="hh:mm A"   class="form-control clockface_1" />
+                            <input type="text" value="4:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ProgramStart" />
                         </div>
 
                         <div class="form-group">
                             <label>Serving Time </label>
-                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" />
+                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ServingTime" />
                         </div>
 
 
                     </div>
-
-
+                     
                     <div class="form-group">
-                        <label> Buffet Type </label>
-                        <div class="mt-checkbox-list">
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                Manage Buffet
-                                <input type="checkbox" value="1" name="test">
-                                <span></span>
-                            </label>
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                Self Service
-                                <input type="checkbox" value="1" name="test">
-                                <span></span>
-                            </label>
+                        <label>Buffet Type </label>
+                            <select id="txtType" asp-for="Event.ServingType" class="form-control">
+                                <option value="ManageBuffet">Manage Buffet</option>
+                                <option value="SelfServiceBuffet">Self-Service Buffet</option>
 
-                        </div>
-                    </div>
+                            </select>
+</div>
                     <div class="form-group">
                         <label>Number of Guests</label>
-                        <input type="number" min=85 class="form-control" placeholder="">
+                        <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests">
                     </div>
 
                     <div class="form-group">
                         <label>Package </label>
-
-                        @Html.LabelFor(m => m.PackageList)
+                         
                         @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3"  asp-for="Event.Remarks" ></textarea>
+                        <textarea class="form-control" rows="3" asp-for="Event.Remarks"></textarea>
                     </div>
 
 
@@ -215,7 +188,7 @@
 
                     </div>
                     <div class="form-actions">
-                        <button type="submit"   id="btnSubmit" class="btn blue">Submit</button>
+                        <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
                         <button type="button" class="btn default">Cancel</button>
                     </div>
 
@@ -255,6 +228,6 @@
         }
 
     </script>
-    <partial name="_SuccessfulRequest.cshtml" />
+    <partial name="partials/_SuccessfulRequest" />
 }
  

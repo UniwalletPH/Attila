@@ -8,12 +8,14 @@ using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Food.Queries;
+using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Food.Commands;
 
 namespace Attila.UI.Controllers
 {
     public class InventoryController : Controller
-    {  
-
+    {
+        public static bool _checker;
 
         private readonly IMediator mediator;
 
@@ -36,6 +38,41 @@ namespace Attila.UI.Controllers
             }
         }
 
+ 
+        public IActionResult AddFood()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddFoodDetails(FoodsDetailsVM foodDetails)
+        {
+            try
+            {
+                await mediator.Send(new AddFoodDetailsCommand
+                {
+                    MyFoodDetailsVM = foodDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
+        public IActionResult AddEquipment()
+        {
+            return View();
+        }
+        public IActionResult UpdateStocks()
+        {
+            return View();
+        }
+        public IActionResult RequestRestock()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
