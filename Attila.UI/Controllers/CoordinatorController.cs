@@ -105,15 +105,11 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
         {
-            int _duration = _eventPackage.Duration.Hours;
-            string _parsedDurationString = _duration.ToString("hh':'mm");
-            TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
             bool flag = true;
             EventPackageVM eventPackageVM = new EventPackageVM
             {
                 Code = _eventPackage.Code,
                 Description = _eventPackage.Description,
-                Duration = _fromStringToTimeSpan,
                 Name = _eventPackage.Name,
                 RatePerHead = _eventPackage.RatePerHead
 
@@ -482,6 +478,14 @@ namespace Attila.UI.Controllers
             var _searchResult = await mediator.Send(new GetClientListQuery());
 
             return View(_searchResult);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetEventPackageList()
+        {
+            var _getPackageList = await mediator.Send(new GetEventPackageListQuery());
+
+            return View(_getPackageList);
         }
 
         [HttpGet]
