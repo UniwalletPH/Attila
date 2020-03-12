@@ -1,4 +1,5 @@
-﻿@model Attila.UI.Models.AddEventVM
+﻿@model Attila.UI.Models.FoodDetailsVM
+
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +10,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Booking Form
+           Food Details Form
             <small> </small>
         </h1>
     </div>
@@ -32,178 +33,55 @@
         <div class="portlet light bordered">
 
             <div class="portlet-body form">
-                <form role="form" asp-controller="Coordinator" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label>Client Name</label>
-                            @Html.DropDownListFor(m => m.SelectedClient, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
+                <form role="form" asp-action="AddFoodDetails" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
 
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Occasion </label>
-                            <select id="txtType" asp-for="Event.Type" class="form-control">
-                                <option value="Baptismal">Baptismal</option>
-                                <option value="Birthday">Birthday</option>
-                                <option value="Others">Christmas Party</option>
-
-                                <option value="Graduation">Graduation</option>
-                                <option value="Meeting">Meeting </option>
-                                <option value="Wedding">Wedding</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event Name</label>
-                            <input type="text" class="form-control" asp-for="Event.EventName" placeholder="">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event Theme  | Color | Description</label>
-                            <input type="text" class="form-control" placeholder="Mermaid /Aqua Blue / Description" asp-for="Event.Description">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event's Place</label>
-                            <input type="text" class="form-control" asp-for="Event.Location" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City.">
-                        </div>
-                        <div class="form-group">
-                            <label>Venue in Condominium or Building?</label>
-                            <select id="txtType" asp-for="Event.VenueType" class="form-control">
-                                <option value="Building">Yes</option>
-                                <option value="None">No</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Location</label>
-                            <select id="txtType" asp-for="Event.LocationType" class="form-control">
-                                <option value="North">North Area</option>
-                                <option value="South">South Area</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Event Date</label>
-                            <input class="form-control form-control-inline   date-picker" size="16" type="text" asp-for="Event.EventDate" />
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Set Up Time </label>
-                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.EntryTime" />
-                        </div>
-                        <div class="form-group">
-                            <label>Program Starts At </label>
-                            <input type="text" value="4:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ProgramStart" />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Serving Time </label>
-                            <input type="text" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ServingTime" />
-                        </div>
-
-
-                    </div>
-
+                 
 
                     <div class="form-group">
-                        <label></label>
-                        <div class="mt-checkbox-list">
-                            <label class="mt-checkbox mt-checkbox-outline" asp-for="Event.ServingType">
-                                Manage Buffet
-                                <input type="checkbox" value="ManageBuffet" name="test">
-                                <span></span>
-                            </label>
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                Self-Service
-                                <input type="checkbox" value="SelfServiceBuffet" name="test">
-                                <span></span>
-                            </label>
+                        <label>Name</label>
+                        <input type="text" class="form-control" asp-for="Name" placeholder="">
+                    </div>
 
-                        </div>
+                    <div class="form-group">
+                        <label>Code</label>
+                        <input type="text" class="form-control" placeholder="FOOD123" asp-for="Code">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Specification</label>
+                        <input type="text" class="form-control" asp-for="Specification" placeholder="">
                     </div>
                     <div class="form-group">
-                        <label>Buffet Type </label>
-                        <select id="txtType" asp-for="Event.ServingType" class="form-control">
-                            <option value="ManageBuffet">Manage Buffet</option>
-                            <option value="SelfServiceBuffet">Self-Service Buffet</option>
+                        <label>Description</label>
+                        <input type="text" class="form-control" asp-for="Description" placeholder="">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Type of Food</label>
+                        <select id="txtType" asp-for="FoodType" class="form-control">
+                            <option value=""> -- select an option -- </option>
+                            <option value="1">Perishable</option>
+                            <option value="2">Non-perishable</option>
+                            <option value="3">Others</option>
 
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label>Number of Guests</label>
-                        <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests">
-                    </div>
+
 
                     <div class="form-group">
-                        <label>Package </label>
+                        <label>Unit Type </label>
+                        <select id="txtType" asp-for="Unit" class="form-control">
+                            <option value=""> -- select an option -- </option>
+                            <option value="1">Piece</option>
+                            <option value="2">Box</option>
+                            <option value="3">Dozen</option>
+                            <option value="4">Others</option>
 
-                        @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3" asp-for="Event.Remarks"></textarea>
-                    </div>
+                
 
 
-
-
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <span class="caption-subject  font-orange bold uppercase">Terms & Conditions</span>
-                            </div>
-
-                        </div>
-                        <div class="portlet-body">
-                            <div class="well">
-                                <h4>Minimum  </h4> of 35, 000 PHP  is required for a Catering Service in South Area, while P 50,000.00 in North Area.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Additional Transportation Fee</h4> (actual cost may vary based on the location on the extent of actual set up).
-                            </div>
-
-                            <div class="well">
-                                <h4>Final Menu </h4> choices should be 2 weeks before the event date, while 1 week for the final number of attendees.
-                            </div>
-                            <div class="well well-large">
-                                <h4>All catering equipment </h4> (tables, chairs, buffet and dinning set-up) is strictly to be used for Arleneâ€™s Catering Services only.
-                            </div>
-
-                            <div class="well">
-                                <h4>Additional fee   </h4> for any catering equipment requested by client.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Any loss or damage of catering equipment and centerpieces,</h4>  will be charged to client.
-                            </div>
-
-                            <div class="well">
-                                <h4>Service Fee for Venue in Condominium or Bldg.  </h4>is 3,500 PHP.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Services are limited  </h4> to 4 hours for lunch and dinner only, 3 hours for cocktails, exclusive of set/up preparations.
-                            </div>
-
-
-                            <div class="well">
-                                <h4>Additional P 1,000.00 per Hour </h4>beyond the prior agreed time.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Php 5,000.00 down payment upon signing the booking form,   </h4>remaining balance should be paid on the day of the event
-                            </div>
-                        </div>
-                        <div class="mt-checkbox-list">
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                I agree to the Terms & Conditions of the management about their services.
-                                <input type="checkbox" value="1" name="test">
-                                <span></span>
-                            </label>
-
-
-                        </div>
-
-
-                    </div>
                     <div class="form-actions">
                         <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
                         <button type="button" class="btn default">Cancel</button>
@@ -234,9 +112,10 @@
     <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
     <script type="text/javascript">
-        function OnSuccess(e) {
-
-            window.location = '/Inventory/Index';
+          function OnSuccess(e){
+                  $("#success").modal('show');  
+       
+           
         }
 
         function OnFailure(e) {
@@ -245,5 +124,6 @@
         }
 
     </script>
-    <partial name="partials/_SuccessfulRequest" />
+    <partial name="partials/_SuccessfulRegistration" />
+
 }

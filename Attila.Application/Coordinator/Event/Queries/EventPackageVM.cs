@@ -16,7 +16,5 @@ namespace Attila.Application.Coordinator.Event.Queries
         public string Description { get; set; }
         [Required]
         public decimal RatePerHead { get; set; }
-        [Required]
-        public TimeSpan Duration { get; set; }
     }
 }
