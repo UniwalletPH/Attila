@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Atilla.Application.Food.Commands;
 using Attila.Application.Food.Commands;
 using Attila.Application.Food.Queries;
+using Attila.Application.Inventory_Manager;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;
@@ -20,10 +20,12 @@ namespace Attila.UI.Controllers
     {
         public static bool _checker;
         private readonly IMediator mediator;
+
         public InventoryManagerController(IMediator mediator)
         {
             this.mediator = mediator;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -84,8 +86,6 @@ namespace Attila.UI.Controllers
             }
 
 
-
-
             EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
             {
                 EquipmentDetailsList = _list,
@@ -94,6 +94,7 @@ namespace Attila.UI.Controllers
 
             return View(equipmentDetailsListVM);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddEquipmentInventory(EquipmentsInventoryVM equipmentInventory)
@@ -161,6 +162,7 @@ namespace Attila.UI.Controllers
             }
         }
 
+
         [HttpPost]
         public async Task<IActionResult> DeleteEquipmentDetails(EquipmentDetailsVM deleteID)
         {
@@ -179,30 +181,28 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult RequestEquipmentRestock()
+        public async Task<IActionResult> RequestEquipmentRestock()
         {
-            //var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
-            //List<SelectListItem> _list = new List<SelectListItem>();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
 
-            //foreach (var item in getEquipmentDetails)
-            //{
-            //    _list.Add(new SelectListItem
-            //    {
-            //        Value = item.ID.ToString(),
-            //        Text = item.Code + " | " + item.Name + " | " + item.Description
-            //    });
-            //}
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
 
+            EquipmentRestockRequestVM equipmentDetailsListVM = new EquipmentRestockRequestVM
+            {
+                EquipmentDetailsList = _list
+            };
 
-            //EquipmentRestockRequestVM equipmentDetailsListVM = new EquipmentRestockRequestVM
-            //{
-            //    EquipmentDetailsList = _list
-            //};
-
-            //return View(equipmentDetailsListVM);
-
-            return View();
+            return View(equipmentDetailsListVM);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> RequestEquipmentRestock(EquipmentsRestockRequestVM equipmentRestockRequest)
@@ -240,13 +240,14 @@ namespace Attila.UI.Controllers
             }
 
 
-            Models.EquipmentDetailsVM equipmentDetailsListVM = new Models.EquipmentDetailsVM
+            EquipmentDetailsVM equipmentDetailsListVM = new EquipmentDetailsVM
             {
                 EquipmentDetailsList = _list
             };
 
             return View(equipmentDetailsListVM);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> UpdateEquipmentDetails(EquipmentsDetailsVM equipmentDetails)
@@ -573,10 +574,28 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult RequestFoodRestock()
+        public async Task<IActionResult> RequestFoodRestock()
         {
-            return View();
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+            FoodRestockRequestVM foodDetailsListVM = new FoodRestockRequestVM
+            {
+                FoodDetailsList = _list
+            };
+
+            return View(foodDetailsListVM);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
@@ -691,6 +710,7 @@ namespace Attila.UI.Controllers
             }
         }
 
+
         [HttpGet]
         public async Task<IActionResult> GetFoodDelivery()
         {
@@ -754,6 +774,29 @@ namespace Attila.UI.Controllers
 
                 return View(foodDetails);
 
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetInventoryDetails()
+        {
+            try
+            {
+                var _getInventoryDetails = await mediator.Send(new GetInventoryDetailsQuery());
+
+                InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM
+                {
+                    EquipmentsDetailsVM = _getInventoryDetails.EquipmentsDetailsVM,
+                    FoodsDetailsVM = _getInventoryDetails.FoodsDetailsVM
+                };
+
+
+                return View(inventoryDetailsVM);
             }
             catch (Exception)
             {

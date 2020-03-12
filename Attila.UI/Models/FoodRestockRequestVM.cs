@@ -25,6 +25,7 @@ namespace Attila.UI.Models
 
         public int UserID { get; set; }
 
+        public List<SelectListItem> FoodDetailsList { get; set; }
         public List<SelectListItem> UserList { get; set; }
     }
 }
