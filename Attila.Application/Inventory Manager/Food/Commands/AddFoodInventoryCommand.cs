@@ -28,7 +28,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                 {
                     Quantity = request.MyFoodInventoryVM.Quantity,
                     ExpirationDate = request.MyFoodInventoryVM.ExpirationDate,
-                    EncodingDate = request.MyFoodInventoryVM.EncodingDate,
+                    EncodingDate = DateTime.Now,
                     ItemPrice = request.MyFoodInventoryVM.ItemPrice,
                     Remarks = request.MyFoodInventoryVM.Remarks,
                     UserID = request.MyFoodInventoryVM.UserID,

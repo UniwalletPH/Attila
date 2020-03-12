@@ -27,7 +27,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
                 EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
                 {
                     Quantity = request.MyEquipmentRestockRequestVM.Quantity,
-                    DateTimeRequest = request.MyEquipmentRestockRequestVM.DateTimeRequest,
+                    DateTimeRequest = DateTime.Now,
                     EquipmentDetailsID = request.MyEquipmentRestockRequestVM.EquipmentDetailsID,
                     Status = request.MyEquipmentRestockRequestVM.Status,
                     UserID = request.MyEquipmentRestockRequestVM.UserID
