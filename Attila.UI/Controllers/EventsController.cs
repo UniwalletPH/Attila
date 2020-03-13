@@ -221,6 +221,31 @@ namespace Attila.UI.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> Menu()
+        {
+            var eventPackages = await mediator.Send(new GetEventPackageListQuery()); 
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+ 
+
+            foreach (var item in eventPackages)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name + item.RatePerHead,
+                });
+            }
+
+            var _packageList = new AddMenuCategoryVM();
+            _packageList.PackageList = _list; 
+            return View(_packageList);
+        }
+
+
+
 
         [HttpPost]
         public async Task<IActionResult> AddMenu(MenuVM _menuDetails)
@@ -249,6 +274,27 @@ namespace Attila.UI.Controllers
             }
             return Json(flag);
         }
+
+ 
+        [HttpPost]
+        public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menu)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddMenuCategoryCommand
+                {
+                    MenuCategory = _menu
+                });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+
+            return Json(flag);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
