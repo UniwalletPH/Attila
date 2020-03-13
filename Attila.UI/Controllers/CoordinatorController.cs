@@ -61,8 +61,8 @@ namespace Attila.UI.Controllers
             bool flag = true;
             try
             {
-               await mediator.Send(new AddEventCommand{ EventDetails = _eventDetails.Event});
-            }catch(Exception)
+                await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
+            } catch (Exception)
             {
                 flag = false;
             }
@@ -100,7 +100,7 @@ namespace Attila.UI.Controllers
             _addEventList.ClientList = _list;
             return View(_addEventList);
         }
-        
+
 
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
@@ -117,10 +117,10 @@ namespace Attila.UI.Controllers
 
             try
             {
-                    await mediator.Send(new AddEventPackageCommand
-                    {
-                        PackageDetails = eventPackageVM
-                    });
+                await mediator.Send(new AddEventPackageCommand
+                {
+                    PackageDetails = eventPackageVM
+                });
 
             }
             catch (Exception)
@@ -161,7 +161,7 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-         
+
 
         [HttpPost]
         public async Task<IActionResult> AddEventPayment(PaymentStatusVM _eventPayment)
@@ -178,7 +178,7 @@ namespace Attila.UI.Controllers
             {
                 flag = false;
             }
-               
+
             return Json(flag);
         }
 
@@ -200,9 +200,9 @@ namespace Attila.UI.Controllers
 
             try
             {
-                await mediator.Send(new AddMenuCategoryCommand { 
-                
-                    MenuCategory = _container
+                await mediator.Send(new AddMenuCategoryCommand {
+
+                    MenuCategory = _menuCategory.MenuCategory
 
                 });
             }
@@ -237,14 +237,21 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddMenu(MenuVM _menu)
+        public async Task<IActionResult> AddMenu(AddMenuVM _menu)
         {
             bool flag = true;
+
+            MenuVM _container = new MenuVM
+            {
+                MenuCategoryID = _menu.Menu.MenuCategoryID,
+                Description = _menu.Menu.Description,
+                Name = _menu.Menu.Name
+            };
             try
             {
                 await mediator.Send(new AddMenuCommand {
 
-                    PackageMenu = _menu
+                    PackageMenu = _menu.Menu
 
                 });
             }
@@ -254,6 +261,82 @@ namespace Attila.UI.Controllers
             }
 
             return Json(flag);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddMenu()
+        {
+            var _menuCategoryNames = await mediator.Send(new GetMenuCategoryListQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in _menuCategoryNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Category
+                });
+
+            }
+            var _addEventList = new AddMenuCategoryVM();
+            _addEventList.PackageList = _list;
+            return View(_addEventList);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddEventMenu(AddEventMenuVM _eventMenu)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddEventMenuCommand { 
+                
+                    EventMenu = _eventMenu.EventMenu
+                
+                });
+
+            } catch (Exception)
+            {
+                flag = false;
+            }
+
+            return Json(flag);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddEventMenuAsync()
+        {
+            var _menuCategoryNames = await mediator.Send(new GetMenuListQuery());
+            var _eventDetails = await mediator.Send(new GetEventListQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+
+            foreach (var item in _menuCategoryNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
+
+            }
+
+            foreach (var item in _eventDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EventName
+                });
+
+            }
+
+            var _addEventMenuList = new AddEventMenuVM();
+            _addEventMenuList.EventList = _list;
+            _addEventMenuList.MenuList = _list;
+            return View(_addEventMenuList);
         }
 
         [HttpPost]
