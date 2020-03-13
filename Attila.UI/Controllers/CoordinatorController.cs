@@ -188,6 +188,52 @@ namespace Attila.UI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menuCategory)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddMenuCategoryCommand { 
+                
+                    MenuCategory = _menuCategory
+
+                });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+
+            return Json(flag);
+        }
+
+        [HttpGet]
+        public IActionResult AddMenuCategory()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenu(MenuVM _menu)
+        {
+            bool flag = true;
+            try
+            {
+                await mediator.Send(new AddMenuCommand {
+
+                    PackageMenu = _menu
+
+                });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+
+            return Json(flag);
+        }
 
         [HttpPost]
         public async Task<IActionResult> UpdateEvent(EventDetailsVM _eventDetails)
