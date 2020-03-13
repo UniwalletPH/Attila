@@ -19,7 +19,7 @@ namespace Attila.UI.Controllers
     public class EventsController : Controller
     {
         private readonly IMediator mediator;
-
+        public static bool _checker;
         public EventsController(IMediator mediator)
         {
             this.mediator = mediator;
@@ -50,6 +50,7 @@ namespace Attila.UI.Controllers
 
             List<SelectListItem> _list = new List<SelectListItem>();
 
+            List<SelectListItem> _clientlist = new List<SelectListItem>();
             foreach (var item in _packageNames)
             {
                 _list.Add(new SelectListItem
@@ -62,7 +63,7 @@ namespace Attila.UI.Controllers
 
             foreach (var item in _clientNames)
             {
-                _list.Add(new SelectListItem
+                _clientlist.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
                     Text = item.Firstname + item.Lastname,
@@ -71,7 +72,7 @@ namespace Attila.UI.Controllers
 
             var _addEventList = new AddEventVM();
             _addEventList.PackageList = _list;
-            _addEventList.ClientList = _list;
+            _addEventList.ClientList = _clientlist;
             return View(_addEventList);
         }
 
@@ -157,16 +158,18 @@ namespace Attila.UI.Controllers
 
             };
 
-            bool flag = true;
+             
             try
             {
                 await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
+                _checker = true; 
             }
             catch (Exception)
             {
-                flag = false;
+                _checker = false;
             }
-            return Json(flag);
+            return Json(_checker);
+
         }
         public IActionResult Privacy()
         {
