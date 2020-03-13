@@ -9,7 +9,9 @@ using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Food.Queries;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager;
 using Attila.Application.Food.Commands;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Attila.UI.Controllers
 {
@@ -29,8 +31,8 @@ namespace Attila.UI.Controllers
         {
             try
             {
-                var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-                return View(_getFoodDetails.ToList());
+                var getDetails = await mediator.Send(new GetInventoryDetailsQuery());
+                return View(getDetails);
             }
             catch (Exception)
             {
@@ -69,10 +71,67 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-        public IActionResult RequestRestock()
+
+        [HttpGet]
+        public async Task<IActionResult> RequestFoodRestock()
         {
-            return View();
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+            FoodRestockRequestVM foodDetailsListVM = new FoodRestockRequestVM
+            {
+                FoodDetailsList = _list
+            };
+
+            return View(foodDetailsListVM);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
+        {
+                 FoodsRestockRequestVM _foodRequestDetails = new FoodsRestockRequestVM{ 
+                 FoodDetailsID = foodRestockRequest.FoodDetailsID,
+                 
+                 Quantity = foodRestockRequest.Quantity,
+                 Status = Domain.Enums.Status.Pending,
+                 UserID = 1
+                 
+                 
+                 
+                 };
+
+
+
+
+            try
+            {
+                await mediator.Send(new RequestFoodRestockCommand
+                {
+                    MyFoodRestockRequestVM = _foodRequestDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
+
+
+
+
         public IActionResult Privacy()
         {
             return View();
