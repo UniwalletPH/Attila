@@ -5,6 +5,8 @@
         public int ID { get; set; }
 
         public string Category { get; set; }
-       
+
+        public int PackageDetailsID { get; set; }
+
     }
 }
