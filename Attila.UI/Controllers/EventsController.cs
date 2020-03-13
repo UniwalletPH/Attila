@@ -12,6 +12,7 @@ using Attila.Application.Event.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Event.Commands;
+using Attila.Application.Coordinator.Event.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -172,10 +173,13 @@ namespace Attila.UI.Controllers
             return View();
         }
 
+    
+        [HttpGet]
         public async Task<IActionResult> Packages()
         {
-            var _packageNames = await mediator.Send(new GetEventPackageQuery());
-            return View(_packageNames);
+            var _getPackageList = await mediator.Send(new GetEventPackageListQuery());
+
+            return View(_getPackageList);
         }
 
         public IActionResult PackageForm()
@@ -206,6 +210,36 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new AddEventPackageCommand
                 {
                     PackageDetails = eventPackageVM
+                });
+
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+            return Json(flag);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenu(MenuVM _menuDetails)
+        { 
+            bool flag = true;
+            MenuVM menuDetails = new MenuVM
+            {
+
+                Name = _menuDetails.Name,
+                Description = _menuDetails.Description,
+                MenuCategoryID = _menuDetails.MenuCategoryID
+
+            };
+
+            try
+            {
+                await mediator.Send(new AddMenuCommand
+                {
+                    PackageMenu = menuDetails
                 });
 
             }

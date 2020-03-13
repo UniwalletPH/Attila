@@ -1,4 +1,4 @@
-﻿@model Attila.Application.Coordinator.Event.Queries.EventClientVM
+﻿@model Attila.UI.Models.FoodRestockRequestVM
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +10,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Register Client
+            Request Food Restock
             <small> </small>
         </h1>
     </div>
@@ -38,18 +38,18 @@
 
             </div>
             <div class="portlet-body">
-                <form role="form" asp-controller="Clients" asp-action="AddClientDetails" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-action="RequestFoodRestock" asp-controller="InventoryManager" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-group">
-                        <label class="control-label">First name : </label>
-                        <input type="text" asp-for="Firstname" placeholder="John Smith" class="form-control">
+                        <label class="control-label">Equipment ID  </label>
+                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT CLIENT--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Last Name</label>
-                        <input type="text" asp-for="Lastname" placeholder="John Smith" class="form-control">
+                        <label class="control-label">Quantity</label>
+                        <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
                     </div>
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label class="control-label">E-mail Address</label>
-                        <input type="email" asp-for="Email" placeholder="john.smith@gmail.com" class="form-control">
+                        <input type="email" asp-for="Foo" placeholder="john.smith@gmail.com" class="form-control">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Home Address</label>
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label class="control-label">Mobile Number</label>
                         <input type="tel" asp-for="Contact" placeholder="+63 912345678" class="form-control">
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label class="control-label">Telephone Number</label>
                         <input type="tel" placeholder="+632  1234 5678 " class="form-control">
@@ -83,7 +83,7 @@
 @section Scripts{
     <script type="text/javascript">
         function OnSuccess(e) {
-            $("#success").modal('show');
+            $("#successreq").modal('show');
 
 
         }
