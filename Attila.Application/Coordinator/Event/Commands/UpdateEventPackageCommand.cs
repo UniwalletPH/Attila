@@ -27,7 +27,6 @@ namespace Attila.Application.Event.Commands
                 var _updatedEventPackage = dbContext.PackageMenuDetails.Find(request.UpdatePackage.ID);
 
                 _updatedEventPackage.Description = request.UpdatePackage.Description;
-                //_updatedEventPackage.Duration = request.UpdatePackage.Duration;
                 _updatedEventPackage.RatePerHead = request.UpdatePackage.RatePerHead;
                 _updatedEventPackage.Name = request.UpdatePackage.Name;
 
