@@ -189,14 +189,20 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menuCategory)
+        public async Task<IActionResult> AddMenuCategory(AddMenuCategoryVM _menuCategory)
         {
             bool flag = true;
+            MenuCategoryVM _container = new MenuCategoryVM
+            {
+                Category = _menuCategory.MenuCategory.Category,
+                PackageDetailsID = _menuCategory.MenuCategory.PackageDetailsID
+            };
+
             try
             {
                 await mediator.Send(new AddMenuCategoryCommand { 
                 
-                    MenuCategory = _menuCategory
+                    MenuCategory = _container
 
                 });
             }
@@ -209,9 +215,24 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddMenuCategory()
+        public async Task<IActionResult> AddMenuCategoryAsync()
         {
-            return View();
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in _packageNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
+
+            }
+            var _addEventList = new AddMenuCategoryVM();
+            _addEventList.PackageList = _list;
+            return View(_addEventList);
         }
 
 
