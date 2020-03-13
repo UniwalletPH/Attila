@@ -28,6 +28,7 @@ namespace Attila.Application.Coordinator.Event.Commands
                 var _newMenuCategory = new MenuCategory
                 {
                     Category = request.MenuCategory.Category,
+                    PackageDetailsID = request.MenuCategory.PackageDetailsID
                 };
 
                 dbContext.MenuCategories.Add(_newMenuCategory);

@@ -13,7 +13,5 @@ namespace Attila.Application.Coordinator.Event.Queries
         public int PackageDetailsID { get; set; }
         [Required]
         public string Category { get; set; }
-        [Required]
-        public PackageMenuDetails PackageDetails { get; set; }
     }
 }
