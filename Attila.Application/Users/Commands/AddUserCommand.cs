@@ -47,8 +47,8 @@ namespace Attila.Application.Users.Commands
                     Password = passwordHasher.HashPassword(salt,request.User.Password)
                 };
 
-                await dbContext.SaveChangesAsync();
                 dbContext.UserLogins.Add(_userLogin);
+                 await dbContext.SaveChangesAsync();
 
                 return true;
             }
