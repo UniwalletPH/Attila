@@ -9,23 +9,27 @@ using Attila.Application.Users.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Users.Commands;
+using Attila.Application.Login.Queries;
+using Attila.Application.Interfaces;
 
 namespace Attila.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ISignInManager signInManager;
 
-        public HomeController(IMediator mediator)
+        public HomeController(IMediator mediator, ISignInManager signInManager)
         {
             this.mediator = mediator;
+            this.signInManager = signInManager;
         }
 
 
         public IActionResult Index()
         {
             return Redirect("~/Login");
-                }
+        }
 
         public IActionResult Privacy()
         {
@@ -38,7 +42,14 @@ namespace Attila.UI.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> SignIn(LoginDetailsVM data)
+        {
+            await signInManager.PasswordSignInAsync(data.Username, data.Password);
 
+            return Json(true);
+
+        }
 
 
         [Route("RegisterAccount")]
