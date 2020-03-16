@@ -33,19 +33,15 @@ namespace Attila.Application.Coordinator.Event.Queries
 
         public int PackageDetailsID { get; set; }
 
-        public PackageMenuDetails PackageDetails { get; set; }
-
         public int EventClientID { get; set; }
-
-        public ClientDetails EventClient { get; set; }
 
         public int NumberOfGuests { get; set; }
 
-        public DateTime ProgramStart { get; set; }
+        public TimeSpan ProgramStart { get; set; }
 
-        public DateTime EntryTime { get; set; }
+        public TimeSpan EntryTime { get; set; }
 
-        public DateTime ServingTime { get; set; }
+        public TimeSpan ServingTime { get; set; }
 
         public ServingType ServingType { get; set; }
 

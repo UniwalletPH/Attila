@@ -137,7 +137,7 @@ namespace Attila.UI.Controllers
             {
                 EventName = _eventDetails.Event.EventName,
                 Type = _eventDetails.Event.Type,
-                BookingDate = _eventDetails.Event.BookingDate,
+                BookingDate = DateTime.Now,
                 Description = _eventDetails.Event.Description,
                 EventClientID = _eventDetails.Event.EventClientID,
                 EventDate = _eventDetails.Event.EventDate,
