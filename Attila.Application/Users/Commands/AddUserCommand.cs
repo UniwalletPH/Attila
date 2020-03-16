@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Login.Queries;
 using Attila.Application.Users.Queries;
 using Attila.Domain.Entities;
 using MediatR;
@@ -18,10 +19,12 @@ namespace Attila.Application.Users.Commands
         {
             private readonly IAttilaDbContext dbContext;
             private readonly IPasswordHasher passwordHasher;
-            public AddUserCommandHandler(IAttilaDbContext dbContext, IPasswordHasher passwordHasher)
+            private readonly IMediator mediator;
+            public AddUserCommandHandler(IAttilaDbContext dbContext, IPasswordHasher passwordHasher, IMediator mediator)
             {
                 this.dbContext = dbContext;
                 this.passwordHasher = passwordHasher;
+                this.mediator = mediator;
             }
 
             public async Task<bool> Handle(AddUserCommand request, CancellationToken cancellationToken)
@@ -42,13 +45,15 @@ namespace Attila.Application.Users.Commands
 
                 var _userLogin = new UserLogins
                 {
+                    ID = await mediator.Send(new GetIDQuery { User = _user}),
                     Username = request.User.Username,
                     Salt = salt,
                     Password = passwordHasher.HashPassword(salt,request.User.Password)
                 };
 
-                await dbContext.SaveChangesAsync();
+               
                 dbContext.UserLogins.Add(_userLogin);
+                await dbContext.SaveChangesAsync();
 
                 return true;
             }
