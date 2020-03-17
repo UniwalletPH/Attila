@@ -13,5 +13,9 @@ namespace Attila.Domain.Entities
         public decimal DeliveryPrice { get; set; }
 
         public string Remarks { get; set; }
+
+        public int SupplierDetailsID { get; set; }
+
+        public SupplierDetails SupplierDetails { get; set; }
     }
 }
