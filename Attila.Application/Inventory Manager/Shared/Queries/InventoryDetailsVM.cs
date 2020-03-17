@@ -1,10 +1,8 @@
 ﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Queries;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Attila.Application.Inventory_Manager
+namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
     public class InventoryDetailsVM
     {

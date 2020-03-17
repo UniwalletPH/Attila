@@ -1,4 +1,5 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Shared.Commands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipment.Queries
 {
-    public class GetEquipmentDeliveryQuery : IRequest<IEnumerable<EquipmentsRestockVM>>
+    public class GetEquipmentDeliveryQuery : IRequest<IEnumerable<InventoriesDeliveryVM>>
     {
-        public class GetEquipmentDeliveryQueryHandler : IRequestHandler<GetEquipmentDeliveryQuery, IEnumerable<EquipmentsRestockVM>>
+        public class GetEquipmentDeliveryQueryHandler : IRequestHandler<GetEquipmentDeliveryQuery, IEnumerable<InventoriesDeliveryVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -19,9 +20,9 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<EquipmentsRestockVM>> Handle(GetEquipmentDeliveryQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<InventoriesDeliveryVM>> Handle(GetEquipmentDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDeliveryList = await dbContext.DeliveryDetails.Select(a => new EquipmentsRestockVM
+                var _equipmentDeliveryList = await dbContext.DeliveryDetails.Select(a => new InventoriesDeliveryVM
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,

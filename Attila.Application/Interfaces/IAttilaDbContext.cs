@@ -43,6 +43,8 @@ namespace Attila.Application.Interfaces
 
         public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
+        public DbSet<SupplierDetails> SupplierDetails { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserLogins> UserLogins { get; set; }

@@ -44,6 +44,8 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
+        public DbSet<SupplierDetails> SupplierDetails { get; set; }
+
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserLogins> UserLogins { get; set; }

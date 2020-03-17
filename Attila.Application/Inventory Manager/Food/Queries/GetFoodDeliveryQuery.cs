@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager.Shared.Commands;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Food.Queries
 {
-    public class GetFoodDeliveryQuery : IRequest<IEnumerable<FoodsRestockVM>>
+    public class GetFoodDeliveryQuery : IRequest<IEnumerable<InventoriesDeliveryVM>>
     {
         public DateTime DeliveryDate { get; set; }
 
@@ -20,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
 
         public string Remarks { get; set; }
 
-        public class GetFoodDeliveryQueryHandler : IRequestHandler<GetFoodDeliveryQuery, IEnumerable<FoodsRestockVM>>
+        public class GetFoodDeliveryQueryHandler : IRequestHandler<GetFoodDeliveryQuery, IEnumerable<InventoriesDeliveryVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -29,9 +30,9 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<FoodsRestockVM>> Handle(GetFoodDeliveryQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<InventoriesDeliveryVM>> Handle(GetFoodDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _foodDeliveryList = await dbContext.DeliveryDetails.Select(a => new FoodsRestockVM
+                var _foodDeliveryList = await dbContext.DeliveryDetails.Select(a => new InventoriesDeliveryVM
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,

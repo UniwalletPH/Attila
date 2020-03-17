@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Inventory_Manager
+namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
     public class GetInventoryDetailsQuery : IRequest<InventoryDetailsVM>
     {
@@ -49,8 +49,8 @@ namespace Attila.Application.Inventory_Manager
                 }).ToListAsync();
 
 
-                InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM 
-                { 
+                InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM
+                {
                     EquipmentsDetailsVM = _equipmentDetailsList,
                     FoodsDetailsVM = _foodDetailsList
                 };

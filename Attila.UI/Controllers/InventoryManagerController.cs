@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using Atilla.Application.Food.Commands;
 using Attila.Application.Food.Commands;
 using Attila.Application.Food.Queries;
-using Attila.Application.Inventory_Manager;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager.Shared.Commands;
+using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -104,32 +105,6 @@ namespace Attila.UI.Controllers
                 await mediator.Send(new AddEquipmentInventoryCommand
                 {
                     MyEquipmentsInventoryVM = equipmentInventory
-                });
-                _checker = true;
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
-
-            return Json(_checker);
-        }
-
-
-        [HttpGet]
-        public IActionResult AddEquipmentRestock()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddEquipmentRestock(EquipmentsRestockVM equipmentRestock)
-        {
-            try
-            {
-                await mediator.Send(new AddEquipmentRestockCommand
-                {
-                    MyEquipmentsRestockVM = equipmentRestock
                 });
                 _checker = true;
             }
@@ -365,7 +340,7 @@ namespace Attila.UI.Controllers
 
                 DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
                 {
-                    EquipmentsRestockVMs = _getEquipmentDelivery
+                    InventoryDeliveryVM = _getEquipmentDelivery
                 };
 
 
@@ -508,31 +483,6 @@ namespace Attila.UI.Controllers
                 _checker = false;
             }
 
-            return Json(_checker);
-        }
-
-
-        [HttpGet]
-        public IActionResult AddFoodRestock()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddFoodRestock(FoodsRestockVM foodRestock)
-        {
-            try
-            {
-                await mediator.Send(new AddFoodRestockCommand
-                {
-                    MyFoodRestockVM = foodRestock
-                });
-                _checker = true;
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
             return Json(_checker);
         }
 
@@ -720,7 +670,7 @@ namespace Attila.UI.Controllers
 
                 DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
                 {
-                    FoodsRestockVMs = _getFoodDelivery
+                    InventoryDeliveryVM = _getFoodDelivery
                 };
 
                 return View(deliveryDetailsVM);
@@ -803,5 +753,57 @@ namespace Attila.UI.Controllers
                 throw;
             }
         }
+
+
+        [HttpGet]
+        public IActionResult AddInventoryDelivery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
+        {
+            try
+            {
+                await mediator.Send(new AddInventoryDeliveryCommand
+                {
+                    MyInventoriesDeliveryVM = inventoriesDeliveryVM
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
+
+
+        [HttpGet]
+        public IActionResult AddSupplierDetails()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
+        {
+            try
+            {
+                await mediator.Send(new AddSupplierDetailsCommand
+                {
+                    MySuppliersDetailsVM = suppliersDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+            return Json(_checker);
+        }
+
     }
 }
