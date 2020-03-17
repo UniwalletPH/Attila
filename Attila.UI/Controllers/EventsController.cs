@@ -76,59 +76,7 @@ namespace Attila.UI.Controllers
             return View(_addEventList);
         }
 
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
-        //{
-        //    int _duration = _eventPackage.Duration.Hours;
-        //    string _parsedDurationString = _duration.ToString("hh':'mm");
-        //    TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
-        //    bool flag = true;
-        //    EventPackageVM eventPackageVM = new EventPackageVM
-        //    {
-        //        Code = _eventPackage.Code,
-        //        Description = _eventPackage.Description,
-        //        Duration = _fromStringToTimeSpan,
-        //        Name = _eventPackage.Name,
-        //        NumberOfGuest = _eventPackage.NumberOfGuest,
-        //        Rate = _eventPackage.Rate
-
-        //    };
-
-        //    try
-        //    {
-        //        await mediator.Send(new AddEventPackageCommand
-        //        {
-        //            PackageDetails = eventPackageVM
-        //        });
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        flag = false;
-        //    }
-        //    return Json(flag);
-        //}
-
-        //[HttpGet]
-        //public async Task<IActionResult> Details(int? EventID)
-        //{
-
-
-        //    if (EventID!= null)
-        //    {
-
-        //        var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
-
-        //    }
-
-        //    var _allEventDetails = new ViewEventVM
-        //    {
-        //        EventDetails = _eventDetails
-        //    };
-
-        //    return View( _allEventDetails);
-        //}
+         
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
@@ -143,7 +91,7 @@ namespace Attila.UI.Controllers
                 PackageDetailsID = _eventDetails.Selected,
                 Location = _eventDetails.Event.Location,
                 Remarks = _eventDetails.Event.Remarks,
-                UserID = _eventDetails.Event.UserID,
+                UserID = 1,
                 EventStatus = _eventDetails.Event.EventStatus,
                 EntryTime = _eventDetails.Event.EntryTime,
                 NumberOfGuests = _eventDetails.Event.NumberOfGuests,

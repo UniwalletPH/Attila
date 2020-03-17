@@ -29,7 +29,7 @@ namespace Attila.Domain.Entities
 
         public int UserID { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
 
         public int PackageDetailsID { get; set; }
 
