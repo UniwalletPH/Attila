@@ -12,6 +12,7 @@ using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Application.Inventory_Manager;
 using Attila.Application.Food.Commands;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Attila.Application.Inventory_Manager.Shared.Queries;
 
 namespace Attila.UI.Controllers
 {
