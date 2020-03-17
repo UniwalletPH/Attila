@@ -138,9 +138,9 @@ namespace Attila.UI.Controllers
                 EventName = _eventDetails.Event.EventName,
                 Type = _eventDetails.Event.Type,
                 Description = _eventDetails.Event.Description,
-                EventClientID = _eventDetails.Event.EventClientID,
+                EventClientID = _eventDetails.SelectedClient,
                 EventDate = _eventDetails.Event.EventDate,
-                PackageDetailsID = _eventDetails.Event.PackageDetailsID,
+                PackageDetailsID = _eventDetails.Selected,
                 Location = _eventDetails.Event.Location,
                 Remarks = _eventDetails.Event.Remarks,
                 UserID = _eventDetails.Event.UserID,
@@ -153,6 +153,7 @@ namespace Attila.UI.Controllers
                 ServingType = _eventDetails.Event.ServingType,
                 Theme = _eventDetails.Event.Theme,
                 VenueType = _eventDetails.Event.VenueType
+                
 
 
             };
@@ -160,7 +161,7 @@ namespace Attila.UI.Controllers
              
             try
             {
-                await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
+                await mediator.Send(new AddEventCommand { EventDetails = x });
                 _checker = true; 
             }
             catch (Exception)
@@ -250,15 +251,15 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddMenu(MenuVM _menuDetails)
+        public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
         { 
             bool flag = true;
             MenuVM menuDetails = new MenuVM
             {
 
-                Name = _menuDetails.Name,
-                Description = _menuDetails.Description,
-                MenuCategoryID = _menuDetails.MenuCategoryID
+                Name = _menuDetails.Menu.Name,
+                Description = _menuDetails.Menu.Description,
+                MenuCategoryID = _menuDetails.Selected
 
             };
 
