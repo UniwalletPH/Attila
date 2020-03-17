@@ -11,6 +11,7 @@ using MediatR;
 using Attila.Application.Users.Commands;
 using Attila.Application.Login.Queries;
 using Attila.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Attila.UI.Controllers
 {
@@ -18,11 +19,12 @@ namespace Attila.UI.Controllers
     {
         private readonly IMediator mediator;
         private readonly ISignInManager signInManager;
-
-        public HomeController(IMediator mediator, ISignInManager signInManager)
+        private readonly IHttpContextAccessor context;
+        public HomeController(IMediator mediator, ISignInManager signInManager, IHttpContextAccessor context)
         {
             this.mediator = mediator;
             this.signInManager = signInManager;
+            this.context = context;
         }
 
 
