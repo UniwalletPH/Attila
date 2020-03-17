@@ -28,7 +28,6 @@ namespace Attila.Application.Event.Queries
                 var _viewPaymentStatus = await dbContext.PaymentStatus.Select(a => new PaymentStatusVM 
                 {
                     ID = a.ID,
-                    EventDetails = a.EventDetails,
                     EventDetailsID = a.EventDetailsID,
                     Amount = a.Amount,
                     DateOfPayment = a.DateOfPayment,
