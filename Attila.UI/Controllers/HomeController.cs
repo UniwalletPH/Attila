@@ -47,10 +47,16 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(LoginDetailsVM data)
         {
-            await signInManager.PasswordSignInAsync(data.Username, data.Password);
+            var x = await signInManager.PasswordSignInAsync(data.Username, data.Password);
 
-            return Json(true);
-
+            if (x.Succeeded)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
         }
 
 
