@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager.Shared.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -22,8 +23,7 @@ namespace Attila.UI.Models
         [Required]
         public string Remarks { get; set; }
 
-        public IEnumerable<EquipmentsRestockVM> EquipmentsRestockVMs { get; set; }
+        public IEnumerable<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }
 
-        public IEnumerable<FoodsRestockVM> FoodsRestockVMs { get; set; }
     }
 }
