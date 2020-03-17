@@ -92,8 +92,8 @@ namespace Attila.UI.Controllers
                        });
 
                    }
-                   var _addEventList = new AddEventMenuVM();
-                 _addEventList.MenuList = _list;
+                   var _addEventList = new AddMenuVM();
+                 _addEventList.CategoryList = _list;
                    return View(_addEventList);
               }
 
