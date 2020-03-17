@@ -5,8 +5,8 @@ namespace Attila.Domain.Entities
 {
     public class EventDetails
     {
-        public PackageMenuDetails PackageDetails { get; set; }
-        public ClientDetails EventClient { get; set; }
+        public PackageMenuDetails? PackageDetails { get; set; }
+        public ClientDetails? EventClient { get; set; }
         public int ID { get; set; }
 
         public string Theme { get; set; }
