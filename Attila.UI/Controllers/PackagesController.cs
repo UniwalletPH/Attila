@@ -96,6 +96,63 @@ namespace Attila.UI.Controllers
                  _addEventList.CategoryList = _list;
                    return View(_addEventList);
               }
+        [HttpGet]
+        public async Task<IActionResult> PackageMenu()
+        {
+            var eventPackages = await mediator.Send(new GetEventPackageListQuery());
+            var menuList = await mediator.Send(new GetMenuListQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in eventPackages)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name + item.RatePerHead,
+                });
+            }
+
+            foreach (var item in menuList)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name,
+                });
+            }
+
+            var _packageList = new AddPackageMenuVM();
+            _packageList.PackageList = _list;
+            _packageList.MenuList = _list;
+            return View(_packageList);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPackageMenu(AddPackageMenuVM _packageMenu)
+        {
+            bool flag = true;
+            PackageMenuVM _container = new PackageMenuVM
+            {
+                MenuID = _packageMenu.SelectedMenu,
+                PackageDetailsID = _packageMenu.SelectedPackage
+            };
+
+            try
+            {
+                await mediator.Send(new AddPackageMenuCommand { 
+                
+                    PackageMenu = _container
+                
+                });
+            }
+            catch (Exception)
+            {
+                flag = false;
+            }
+
+            return Json(flag);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
@@ -171,7 +228,6 @@ namespace Attila.UI.Controllers
             MenuCategoryVM _menuCategory = new MenuCategoryVM
             {
                 Category = _menu.MenuCategory.Category,
-                PackageDetailsID = _menu.Selected
             };
             try
             {
