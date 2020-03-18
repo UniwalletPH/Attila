@@ -88,12 +88,12 @@ namespace Attila.UI.Controllers
                   _list.Add(new SelectListItem
                 {
                         Value = item.ID.ToString(),
-                      Text = item.Category
+                        Text = item.Category
                        });
 
                    }
-                   var _addEventList = new AddEventMenuVM();
-                 _addEventList.MenuList = _list;
+                   var _addEventList = new AddMenuVM();
+                 _addEventList.CategoryList = _list;
                    return View(_addEventList);
               }
 
@@ -136,9 +136,6 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
         { 
-
-
-             
             bool flag = true;
             MenuVM menuDetails = new MenuVM
             {
@@ -168,14 +165,19 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menu)
+        public async Task<IActionResult> AddMenuCategory(AddMenuCategoryVM _menu)
         {
             bool flag = true;
+            MenuCategoryVM _menuCategory = new MenuCategoryVM
+            {
+                Category = _menu.MenuCategory.Category,
+                PackageDetailsID = _menu.Selected
+            };
             try
             {
                 await mediator.Send(new AddMenuCategoryCommand
                 {
-                    MenuCategory = _menu
+                    MenuCategory = _menuCategory
                 });
             }
             catch (Exception)

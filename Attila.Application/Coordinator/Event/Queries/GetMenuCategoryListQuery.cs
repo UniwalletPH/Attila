@@ -23,7 +23,6 @@ namespace Attila.Application.Coordinator.Event.Queries
             {
                 var _viewMenuCategoryList = await dbContext.MenuCategories.Select(a => new MenuCategoryVM
                 {
-                    PackageDetailsID = a.PackageDetailsID,
                     Category = a.Category,
                     ID = a.ID
 

@@ -6,7 +6,5 @@
 
         public string Category { get; set; }
 
-        public int PackageDetailsID { get; set; }
-
     }
 }
