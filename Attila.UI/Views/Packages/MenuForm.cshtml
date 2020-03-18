@@ -28,11 +28,11 @@
 <ul class="page-breadcrumb breadcrumb">
 </ul>
 <div class="row">
-    
+
     <!-- Begin: life time stats -->
     <div class="portlet light bordered">
 
-         <div class="portlet-body form">
+        <div class="portlet-body form">
             <form role="form" asp-controller="Packages" asp-action="AddMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                 <div class="form-body">
 
@@ -53,7 +53,7 @@
                         <label>Category Name</label>
                         <input type="text" class="form-control" placeholder="" asp-for="Menu.Description">
                     </div>
-                </div> 
+                </div>
 
 
                 <div class="form-actions">
@@ -61,7 +61,7 @@
                     <button type="button" class="btn default">Cancel</button>
                 </div>
 
-            </form> 
+            </form>
 
 
 
@@ -74,7 +74,12 @@
 
     </div>
 </div>
-<!-- End: life time stats --> 
+<!-- End: life ti
+    me stats -->
+
+
+
+<partial name="partials/_SuccessfulMenu" />
 @section Scripts{
     <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
@@ -94,5 +99,4 @@
         }
 
     </script>
-    <partial name="partials/_SuccessfulRequest" />
 }
