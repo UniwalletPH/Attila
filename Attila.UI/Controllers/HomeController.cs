@@ -12,6 +12,9 @@ using Attila.Application.Users.Commands;
 using Attila.Application.Login.Queries;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using System.Security.Principal;
+using Newtonsoft.Json;
 
 namespace Attila.UI.Controllers
 {
@@ -37,6 +40,8 @@ namespace Attila.UI.Controllers
 
             return View("Login");
         }
+
+       
 
         public IActionResult Privacy()
         {
