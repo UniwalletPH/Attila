@@ -6,22 +6,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
+using MediatR;
+using Attila.Application.Users.Queries;
 
 namespace Attila.UI.Controllers
 {
     public class ProfileController : Controller
     {
-        private readonly ILogger<ProfileController> _logger;
-
-        public ProfileController(ILogger<ProfileController> logger)
+        private readonly IMediator mediator;
+        public static bool _checker;
+        public ProfileController(IMediator mediator)
         {
-            _logger = logger;
+            this.mediator = mediator;
         }
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-                }
+
+            if (User.Identity.Name != null)
+            {
+                //var _user = await mediator.Send(new GetUserDetailsQuery { Username = User.Ide });
+                return View("Profile");
+            }
+
+
+            return Redirect("Login");
+           }
 
         public IActionResult Privacy()
         {

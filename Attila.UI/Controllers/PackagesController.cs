@@ -97,16 +97,17 @@ namespace Attila.UI.Controllers
                    return View(_addEventList);
               }
         [HttpGet]
-        public async Task<IActionResult> PackageMenu()
+        public async Task<IActionResult> PackageMenuForm()
         {
             var eventPackages = await mediator.Send(new GetEventPackageListQuery());
             var menuList = await mediator.Send(new GetMenuListQuery());
 
-            List<SelectListItem> _list = new List<SelectListItem>();
+            List<SelectListItem> _packageslist = new List<SelectListItem>();
 
+            List<SelectListItem> _menulist = new List<SelectListItem>();
             foreach (var item in eventPackages)
             {
-                _list.Add(new SelectListItem
+                _packageslist.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
                     Text = item.Name + item.RatePerHead,
@@ -115,7 +116,7 @@ namespace Attila.UI.Controllers
 
             foreach (var item in menuList)
             {
-                _list.Add(new SelectListItem
+                _menulist.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
                     Text = item.Name,
@@ -123,8 +124,8 @@ namespace Attila.UI.Controllers
             }
 
             var _packageList = new AddPackageMenuVM();
-            _packageList.PackageList = _list;
-            _packageList.MenuList = _list;
+            _packageList.PackageList = _packageslist;
+            _packageList.MenuList = _menulist;
             return View(_packageList);
         }
 
@@ -199,7 +200,7 @@ namespace Attila.UI.Controllers
 
                 Name = _menuDetails.Menu.Name,
                 Description = _menuDetails.Menu.Description,
-                MenuCategoryID = _menuDetails.Menu.MenuCategoryID
+                MenuCategoryID = _menuDetails.Selected
 
             };
 

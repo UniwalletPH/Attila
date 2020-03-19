@@ -30,7 +30,12 @@ namespace Attila.UI.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("~/Login");
+            if (User.Identity.Name!= null)
+            {
+                return Redirect("Dashboard");
+            }
+
+            return View("Login");
         }
 
         public IActionResult Privacy()
@@ -51,12 +56,12 @@ namespace Attila.UI.Controllers
 
             if (x.Succeeded)
             {
-                return Json(true);
+                return Redirect("Dashboard");
             }
-            else
-            {
-                return Json(false);
-            }
+             
+
+                return View("Login");
+             
         }
 
 

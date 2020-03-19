@@ -45,8 +45,7 @@
                 </a>
 
             </li>
-
-@{  if (User.IsInRole("Admin")) {
+             
             <li class="nav-item  ">
                 <a onclick="location.href='@Url.Action("Index", "Clients")'" class="nav-link nav-toggle">
                     <i class="icon-docs"></i>
@@ -61,7 +60,7 @@
                 </a>
 
             </li>
-        } }
+       
             <li class="nav-item  ">
                 <a onclick="location.href='@Url.Action("Login", "Home")'" class="nav-link nav-toggle">
                     <i class="icon-logout"></i>
