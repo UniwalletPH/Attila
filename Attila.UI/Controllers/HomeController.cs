@@ -35,7 +35,7 @@ namespace Attila.UI.Controllers
         {
             if (User.Identity.Name!= null)
             {
-                return Redirect("Dashboard");
+                return Redirect("/Dashboard");
             }
 
             return View("Login");
@@ -48,6 +48,8 @@ namespace Attila.UI.Controllers
             return View();
         }
         [Route("Login")]
+
+
         public IActionResult Login()
         {
             return View();
@@ -61,12 +63,16 @@ namespace Attila.UI.Controllers
 
             if (x.Succeeded)
             {
-                return Redirect("Dashboard");
+                return Redirect("/Dashboard");
             }
-             
+            else {
+
+
 
                 return View("Login");
-             
+            }
+
+
         }
 
 

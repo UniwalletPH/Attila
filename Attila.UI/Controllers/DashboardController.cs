@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
 using MediatR;
+using Attila.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Attila.UI.Controllers
 {
@@ -18,20 +20,28 @@ namespace Attila.UI.Controllers
 
         private readonly IMediator mediator;
 
-        public DashboardController(IMediator mediator)
+        private readonly ISignInManager signInManager;
+        private readonly IHttpContextAccessor context;
+        public DashboardController(IMediator mediator, ISignInManager signInManager, IHttpContextAccessor context)
         {
             this.mediator = mediator;
+            this.signInManager = signInManager;
+            this.context = context;
         }
 
-        [HttpGet]
+        [Route("Dashboard")]
+        [HttpGet]         
         public IActionResult Index()
         {
             if (User.Identity.Name!= null)
             {
                 return View();
             }
+            else
+            {
+                return Redirect("/Login");
+            }
 
-            return Redirect("/Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
