@@ -33,7 +33,8 @@ namespace Attila.UI.Controllers
         [HttpGet]         
         public IActionResult Index()
         {
-            if (User.Identity.Name!= null)
+           
+            if (User != null)
             {
                 return View();
             }
