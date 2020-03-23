@@ -9,6 +9,8 @@ namespace Attila.UI.Models
 {
     public class AddMenuVM
     {
+
+        public IEnumerable<MenuVM> MenuList { get; set; }
         public MenuVM Menu { get; set; }
 
         public List<SelectListItem> CategoryList { get; set; }

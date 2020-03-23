@@ -23,7 +23,8 @@ namespace Attila.UI.Controllers
         private readonly ISignInManager signInManager;
         private readonly IHttpContextAccessor context;
         public DashboardController(IMediator mediator, ISignInManager signInManager, IHttpContextAccessor context)
-        {
+      
+        { 
             this.mediator = mediator;
             this.signInManager = signInManager;
             this.context = context;
@@ -32,9 +33,10 @@ namespace Attila.UI.Controllers
         [Route("Dashboard")]
         [HttpGet]         
         public IActionResult Index()
-        {
-           
-            if (User != null)
+        { 
+             
+             
+            if (User.Identities != null)
             {
                 return View();
             }

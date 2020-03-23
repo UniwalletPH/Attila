@@ -33,12 +33,13 @@ namespace Attila.UI.Controllers
 
         public IActionResult Index()
         {
-            if (User.Identity.Name!= null)
+            if (User.Identities!=null)
             {
+
                 return Redirect("/Dashboard");
             }
-
-            return View("Login");
+            else { return Redirect("/Login"); }
+            
         }
 
        
@@ -60,10 +61,15 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> SignIn(LoginDetailsVM data)
         {
             var x = await signInManager.PasswordSignInAsync(data.Username, data.Password);
-
+         
             if (x.Succeeded)
             {
-                return Redirect("/Dashboard");
+
+                if (User.Identities != null) 
+                { return Redirect("/Dashboard"); } else
+                {
+                    return View("Login");
+                }               
             }
             else {
 
@@ -82,8 +88,19 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-
-        [HttpPost]  
+        [HttpGet]
+        public async Task<IActionResult> SignOut()
+        {
+            //if (User.Identities!=null)
+            //{
+              await signInManager.SignOutAsync(); 
+                return Redirect("/Login");
+            //}
+            //else {
+            //return Redirect("/Login");
+            //}
+        }
+        [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)
         {
             var _return = await mediator.Send(new AddUserCommand { User = user });
@@ -91,7 +108,8 @@ namespace Attila.UI.Controllers
             return Json(_return);
         }
 
- 
+
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
