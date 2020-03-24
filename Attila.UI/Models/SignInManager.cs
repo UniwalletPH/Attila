@@ -89,9 +89,9 @@ namespace Attila.UI.Models
             }
         }
 
-        public Task SignOutAsync()
+        public async Task SignOutAsync()
         {
-            throw new NotImplementedException();
+            await contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

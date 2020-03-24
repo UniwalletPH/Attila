@@ -6,27 +6,47 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
+using MediatR;
+using Attila.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace Attila.UI.Controllers
 {
     public class DashboardController : Controller
     {
-        private readonly ILogger<DashboardController> _logger;
 
-        public DashboardController(ILogger<DashboardController> logger)
-        {
-            _logger = logger;
+
+        public static bool _checker;
+
+        private readonly IMediator mediator;
+
+        private readonly ISignInManager signInManager;
+        private readonly IHttpContextAccessor context;
+        public DashboardController(IMediator mediator, ISignInManager signInManager, IHttpContextAccessor context)
+      
+        { 
+            this.mediator = mediator;
+            this.signInManager = signInManager;
+            this.context = context;
         }
 
+        [Route("Dashboard")]
+        [HttpGet]         
         public IActionResult Index()
-        {
-            return View();
-                }
+        { 
+             
+             
+            if (User.Identities != null)
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        } 
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

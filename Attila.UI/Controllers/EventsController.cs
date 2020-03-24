@@ -26,18 +26,29 @@ namespace Attila.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
-            var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
-            var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
 
-            var _forEvent = new EventViewVM
+
+            if(User.Identities!=null)
             {
-                IncomingEvent = _incomingEvents,
-                PastEvent = _pastEvents,
-                PendingEvent = _pendingEvents
-            };
+                var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
+                var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
+                var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
 
-            return View(_forEvent);
+                var _forEvent = new EventViewVM
+                {
+                    IncomingEvent = _incomingEvents,
+                    PastEvent = _pastEvents,
+                    PendingEvent = _pendingEvents
+                };
+
+                return View(_forEvent);
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
+            
         }
  
 
@@ -45,7 +56,9 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> BookingForm()
         {
-            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            if(User.Identities!=null)
+            {
+                var _packageNames = await mediator.Send(new GetEventPackageQuery());
             var _clientNames = await mediator.Send(new GetClientListQuery());
 
             List<SelectListItem> _list = new List<SelectListItem>();
@@ -74,14 +87,22 @@ namespace Attila.UI.Controllers
             _addEventList.PackageList = _list;
             _addEventList.ClientList = _clientlist;
             return View(_addEventList);
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
         }
 
-         
+
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
 
-            EventDetailsVM x = new EventDetailsVM
+            if (User.Identities!=null)
+            {
+                EventDetailsVM x = new EventDetailsVM
             {
                 EventName = _eventDetails.Event.EventName,
                 Type = _eventDetails.Event.Type,
@@ -118,22 +139,44 @@ namespace Attila.UI.Controllers
             }
             return Json(_checker);
 
-        }
-        public IActionResult Privacy()
-        {
-            return View();
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
         }
 
-    
         [HttpGet]
+        public async Task<IActionResult> Details(int EventID) {
+             
+            var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
+
+            var _allEventDetails = new ViewEventVM
+            {
+                EventDetails = _eventDetails
+            };
+
+            return View(_allEventDetails);
+ 
+    }
+    [HttpGet]
         public async Task<IActionResult> Packages()
         {
-            var _getPackageList = await mediator.Send(new GetEventPackageListQuery());
+            if (User.Identities!=null)
+            {
+                var _getPackageList = await mediator.Send(new GetEventPackageListQuery());
 
-            return View(_getPackageList);
-        }
+                return View(_getPackageList);
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
 
-        public IActionResult PackageForm()
+            }
+
+            public IActionResult PackageForm()
         {
             
             return View();
@@ -142,40 +185,50 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
         {
-            //int _duration = _eventPackage.Duration.Hours;
-            //string _parsedDurationString = _duration.ToString("hh':'mm");
-            //TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
-            bool flag = true;
-            EventPackageVM eventPackageVM = new EventPackageVM
-            {
-                Code = _eventPackage.Code,
-                Description = _eventPackage.Description,
-                //Duration = _fromStringToTimeSpan,
-                Name = _eventPackage.Name,
-                RatePerHead = _eventPackage.RatePerHead
 
-            };
-
-            try
+            if (User.Identities!=null)
             {
-                await mediator.Send(new AddEventPackageCommand
+                //int _duration = _eventPackage.Duration.Hours;
+                //string _parsedDurationString = _duration.ToString("hh':'mm");
+                //TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
+                bool flag = true;
+                EventPackageVM eventPackageVM = new EventPackageVM
                 {
-                    PackageDetails = eventPackageVM
-                });
+                    Code = _eventPackage.Code,
+                    Description = _eventPackage.Description,
+                    //Duration = _fromStringToTimeSpan,
+                    Name = _eventPackage.Name,
+                    RatePerHead = _eventPackage.RatePerHead
 
-            }
-            catch (Exception)
+                };
+
+                try
+                {
+                    await mediator.Send(new AddEventPackageCommand
+                    {
+                        PackageDetails = eventPackageVM
+                    });
+
+                }
+                catch (Exception)
+                {
+                    flag = false;
+                }
+                return Json(flag);
+
+            }else            
             {
-                flag = false;
+                    return Redirect("/Login");
+                }
             }
-            return Json(flag);
-        }
 
 
         [HttpGet]
         public async Task<IActionResult> Menu()
         {
-            var eventPackages = await mediator.Send(new GetEventPackageListQuery()); 
+            if (User.Identities!=null)
+            {
+                var eventPackages = await mediator.Send(new GetEventPackageListQuery()); 
 
             List<SelectListItem> _list = new List<SelectListItem>();
 
@@ -193,6 +246,12 @@ namespace Attila.UI.Controllers
             var _packageList = new AddMenuCategoryVM();
             _packageList.PackageList = _list; 
             return View(_packageList);
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
         }
 
 
@@ -200,8 +259,10 @@ namespace Attila.UI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
-        { 
-            bool flag = true;
+        {
+            if (User.Identities!=null)
+            {
+                bool flag = true;
             MenuVM menuDetails = new MenuVM
             {
 
@@ -224,13 +285,24 @@ namespace Attila.UI.Controllers
                 flag = false;
             }
             return Json(flag);
+
+
         }
+            else
+            {
+                return Redirect("/Login");
+    }
+
+
+}
 
  
         [HttpPost]
         public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menu)
         {
-            bool flag = true;
+            if (User.Identities!=null)
+            {
+                bool flag = true;
             try
             {
                 await mediator.Send(new AddMenuCategoryCommand
@@ -244,9 +316,16 @@ namespace Attila.UI.Controllers
             }
 
             return Json(flag);
-        }
+            } 
+            
+            else
+            {
+                return Redirect("/Login");
+    }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+}
+
+[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

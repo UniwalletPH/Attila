@@ -1,6 +1,6 @@
 ﻿
 @{
-
+    ViewData["Title"] = "Register Account";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
@@ -10,7 +10,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Register Officer
+            Register Account
             <small> </small>
         </h1>
     </div>
@@ -110,8 +110,7 @@
 
         }
 
-        function OnFailure(e) {
-            console.log(e);
+        function OnFailure(e) { 
             alert("Please enter the correct details!");
         }
 

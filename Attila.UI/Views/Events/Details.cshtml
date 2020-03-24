@@ -3,8 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model Attila.UI.Models.ViewEventVM
-
-
+ 
 
 @section Styles{
     <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -115,7 +114,7 @@
                                     </a>
                                 </div>
                             </div>
-                          
+
                             <div class="portlet-body">
                                 <div class="row static-info">
                                     <div class="col-md-5 name"> >Event Code </div>
@@ -129,7 +128,8 @@
                                 </div>
                                 <div class="row static-info">
                                     <div class="col-md-5 name"> Event Place </div>
-                                    <div class="col-md-7 value">  @Model.EventDetails.Location</span>
+                                    <div class="col-md-7 value">
+                                        @Model.EventDetails.Location</span>
                                     </div>
                                 </div>
                                 <div class="row static-info">

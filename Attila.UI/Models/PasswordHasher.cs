@@ -40,7 +40,9 @@ namespace Attila.UI.Models
 
         public bool IsPasswordVerified(byte[] salt, byte[] hashedPassword, string password)
         {
-            throw new NotImplementedException();
+            var _hashedProvidedPass = HashPassword(salt, password);
+
+            return _hashedProvidedPass.SequenceEqual(hashedPassword);
         }
     }
 }

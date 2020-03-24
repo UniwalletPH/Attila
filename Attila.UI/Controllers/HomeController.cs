@@ -12,6 +12,9 @@ using Attila.Application.Users.Commands;
 using Attila.Application.Login.Queries;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using System.Security.Principal;
+using Newtonsoft.Json;
 
 namespace Attila.UI.Controllers
 {
@@ -30,14 +33,24 @@ namespace Attila.UI.Controllers
 
         public IActionResult Index()
         {
-            return Redirect("~/Login");
+            if (User.Identities!=null)
+            {
+
+                return Redirect("/Dashboard");
+            }
+            else { return Redirect("/Login"); }
+            
         }
+
+       
 
         public IActionResult Privacy()
         {
             return View();
         }
         [Route("Login")]
+
+
         public IActionResult Login()
         {
             return View();
@@ -48,15 +61,24 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> SignIn(LoginDetailsVM data)
         {
             var x = await signInManager.PasswordSignInAsync(data.Username, data.Password);
-
+         
             if (x.Succeeded)
             {
-                return Json(true);
+
+                if (User.Identities != null) 
+                { return Redirect("/Dashboard"); } else
+                {
+                    return View("Login");
+                }               
             }
-            else
-            {
-                return Json(false);
+            else {
+
+
+
+                return View("Login");
             }
+
+
         }
 
 
@@ -66,8 +88,19 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-
-        [HttpPost]  
+        [HttpGet]
+        public async Task<IActionResult> SignOut()
+        {
+            //if (User.Identities!=null)
+            //{
+              await signInManager.SignOutAsync(); 
+                return Redirect("/Login");
+            //}
+            //else {
+            //return Redirect("/Login");
+            //}
+        }
+        [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)
         {
             var _return = await mediator.Send(new AddUserCommand { User = user });
@@ -75,7 +108,8 @@ namespace Attila.UI.Controllers
             return Json(_return);
         }
 
- 
+
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
