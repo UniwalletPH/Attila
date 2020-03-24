@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.Domain", "Attila\Attila.Domain.csproj", "{45461776-0ADD-4852-AD7C-682EAE047BE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{45713064-D83E-4829-8E15-C4E7124644CD}"
+	ProjectSection(SolutionItems) = preProject
+		Attila.UI\Views\Reports\HowTo.txt = Attila.UI\Views\Reports\HowTo.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{86F3CC49-56A6-40D4-988C-6F93EE86A147}"
 EndProject
@@ -35,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attila.UI", "Attila.UI\Attila.UI.csproj", "{4C3BD1FD-AEE0-4AF6-AD56-E163C9C9CDEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.UI", "Attila.UI\Attila.UI.csproj", "{4C3BD1FD-AEE0-4AF6-AD56-E163C9C9CDEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
