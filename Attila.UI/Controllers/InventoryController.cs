@@ -11,7 +11,11 @@ using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Application.Food.Commands;
 using Microsoft.AspNetCore.Mvc.Rendering; 
 using Attila.Application.Inventory_Manager.Shared.Queries;
-using Microsoft.AspNetCore.Http; 
+using Microsoft.AspNetCore.Http;
+using Attila.Application.Inventory_Manager.Equipment.Commands;
+using Attila.Application.Inventory_Manager.Equipment.Queries;
+using Attila.Application.Inventory_Manager.Food.Commands;
+using Attila.Application.Inventory_Manager.Shared.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -50,6 +54,10 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
+        public IActionResult AddEquipment()
+        {
+            return View();
+        }
 
 
         [HttpPost]
@@ -77,46 +85,132 @@ namespace Attila.UI.Controllers
                 return Redirect("/Login");
             }
         }
-        public IActionResult AddEquipment()
+
+        [HttpPost]
+        public async Task<IActionResult> AddEquipmentDetails(EquipmentsDetailsVM equipDetails)
         {
-            if (User.Identities!=null)
-            {
-
-                return View();
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
-        }
-        public IActionResult UpdateStocks()
-        {
-
-            if (User.Identities!=null)
-            {
-
-                return View();
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Supplier()
-        {
-
             if (User.Identities != null)
             {
-                 
-                return View();
+                try
+                {
+                    await mediator.Send(new AddEquipmentDetailsCommand
+                    {
+                        MyEquipmentsDetailsVM = equipDetails
+                    });
+                    _checker = true;
+                }
+                catch (Exception)
+                {
+                    _checker = false;
+                }
+
+                return Json(_checker);
             }
             else
             {
                 return Redirect("/Login");
             }
         }
+
+
+        [HttpGet]
+        public IActionResult AddInventoryDelivery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
+        {
+
+            var _inventory = new Attila.Application.Inventory_Manager.Shared.Commands.InventoriesDeliveryVM
+            {
+                DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
+                DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
+                SupplierDetailsID = inventoriesDeliveryVM.SupplierDetailsID,
+                ReceiptImage  = inventoriesDeliveryVM.ReceiptImage,
+                Remarks = inventoriesDeliveryVM.Remarks,
+            };
+            try
+            {
+                await mediator.Send(new AddInventoryDeliveryCommand
+                {
+                    MyInventoriesDeliveryVM = _inventory
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
+
+
+        [HttpGet]
+        public IActionResult AddSupplierDetails()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
+        {
+            try
+            {
+                await mediator.Send(new AddSupplierDetailsCommand
+                {
+                    MySuppliersDetailsVM = suppliersDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+            return Json(_checker);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentInventory()
+        {
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            var getEquipmentRestock = await mediator.Send(new GetEquipmentDeliveryQuery());
+            List<SelectListItem> _list2 = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentRestock)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+                });
+            }
+
+
+            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            {
+                EquipmentDetailsList = _list,
+                EquipmentDeliveryList = _list2
+            };
+
+            return View(equipmentDetailsListVM);
+        }
+
         [HttpGet]
         public async Task<IActionResult> RequestFoodRestock()
         {
@@ -147,6 +241,115 @@ namespace Attila.UI.Controllers
     }
 }
 
+        [HttpGet]
+        public async Task<IActionResult> AddFoodInventory()
+        {
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            var getFoodRestock = await mediator.Send(new GetFoodDeliveryQuery());
+            List<SelectListItem> _list2 = new List<SelectListItem>();
+
+            foreach (var item in getFoodRestock)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+
+                });
+            }
+
+
+            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            {
+                FoodDetailsList = _list,
+                FoodDeliveryList = _list2
+            };
+
+            return View(FoodDetailsListVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
+        {
+
+            var foodDetails = new Attila.Application.Inventory_Manager.Food.Queries.FoodsInventoryVM
+            {
+                FoodDetailsID = foodInventory.FoodDetailsID,
+                FoodRestockID = foodInventory.FoodRestockID,
+                UserID = 1,
+                EncodingDate = DateTime.Now,
+                ItemPrice = foodInventory.ItemPrice,
+                Quantity = foodInventory.Quantity,
+                ExpirationDate = foodInventory.ExpirationDate,
+                Remarks = foodInventory.Remarks
+
+
+
+
+            };
+
+
+
+
+            try
+            {
+                await mediator.Send(new AddFoodInventoryCommand
+                {
+                    MyFoodInventoryVM = foodDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddEquipmentInventory(EquipmentsInventoryVM equipmentInventory)
+        {
+
+            var equipments = new Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsInventoryVM
+            {
+                EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
+                EquipmentDeliveryID = equipmentInventory.EquipmentDeliveryID,
+                UserID = 1,
+                EncodingDate = DateTime.Now,
+                ItemPrice = equipmentInventory.ItemPrice,
+                Quantity = equipmentInventory.Quantity, 
+                Remarks = equipmentInventory.Remarks            
+              };
+            try
+            {
+
+
+              await mediator.Send(new AddEquipmentInventoryCommand
+                {
+                    MyEquipmentsInventoryVM = equipments
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+
+            return Json(_checker);
+        }
 
         [HttpPost]
         public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
@@ -156,6 +359,8 @@ namespace Attila.UI.Controllers
                 FoodsRestockRequestVM _foodRequestDetails = new FoodsRestockRequestVM
                 {
                     FoodDetailsID = foodRestockRequest.FoodDetailsID,
+                    DateTimeRequest = DateTime.Now,
+                    
 
                     Quantity = foodRestockRequest.Quantity,
                     Status = Domain.Enums.Status.Pending,
@@ -164,11 +369,11 @@ namespace Attila.UI.Controllers
                                   
                try
                 {
-                    await mediator.Send(new RequestFoodRestockCommand
+                  var val =   await mediator.Send(new RequestFoodRestockCommand
                     {
                         MyFoodRestockRequestVM = _foodRequestDetails
                     });
-                    _checker = true;
+                    _checker = val;
                 }
                 catch (Exception)
                 {

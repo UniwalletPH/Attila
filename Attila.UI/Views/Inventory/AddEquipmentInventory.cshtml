@@ -1,4 +1,4 @@
-﻿@model Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsDetailsVM
+﻿@model EquipmentInventoryVM 
 
 @{
 
@@ -10,7 +10,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Equipment Details Form
+            Update Equipment Stocks
             <small> </small>
         </h1>
     </div>
@@ -33,54 +33,36 @@
         <div class="portlet light bordered">
 
             <div class="portlet-body form">
-                <form role="form" asp-action="AddEquipmentDetails" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+                <form role="form" asp-action="AddEquipmentInventory" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
 
 
 
                     <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" asp-for="Name" placeholder="">
+                        <label>Equipment Details</label>
+                        @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT CLIENT--", new { @class = "form-control" })
                     </div>
 
                     <div class="form-group">
-                        <label>Code</label>
-                        <input type="text" class="form-control" placeholder="FOOD123" asp-for="Code">
+                        <label>Delivery Details</label>
+                        @Html.DropDownListFor(m => m.EquipmentDeliveryID, Model.EquipmentDeliveryList, "--SELECT CLIENT--", new { @class = "form-control" })
+
                     </div>
                     <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" asp-for="Description" placeholder="">
+                        <label>Price</label>
+                        <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
                     </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" asp-for="Quantity" placeholder="">
+                    </div>
+                  
 
                     <div class="form-group">
-                        <label>Type of Food</label>
-                        <select id="txtType" asp-for="EquipmentType" class="form-control">
-                            <option value=""> -- select an option -- </option>
-                            <option value="1">Consumable</option>
-                            <option value="2">Non-Consumable</option>
-                            <option value="3">Others</option>
-
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Rental Fee</label>
-                        <input type="number" class="form-control" asp-for="RentalFee" placeholder="">
+                        <label>Remarks</label>
+                        <input type="number" class="form-control" asp-for="Remarks" placeholder="">
                     </div>
 
 
-
-
-                    <div class="form-group">
-                        <label>Unit Type </label>
-                        <select id="txtType" asp-for="UnitType" class="form-control">
-                            <option value=""> -- select an option -- </option>
-                            <option value="1">Piece</option>
-                            <option value="2">Box</option>
-                            <option value="3">Dozen</option>
-                            <option value="4">Others</option>
-
-                        </select>
-                    </div>
 
 
 
