@@ -58,7 +58,7 @@ namespace Attila.UI.Controllers
             if (User.Identities!=null)
             {
 
-                return View();
+                return PartialView("~/Views/Packages/Partials/PackageForm.cshtml");
             }
             else
             {
@@ -167,7 +167,7 @@ namespace Attila.UI.Controllers
             var _packageList = new AddPackageMenuVM();
             _packageList.PackageList = _packageslist;
             _packageList.MenuList = _menulist;
-            return View(_packageList); 
+            return PartialView("~/Views/Packages/Partials/PackageMenuForm.cshtml", _packageList); 
             }
             else
             {
