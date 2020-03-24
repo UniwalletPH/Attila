@@ -104,6 +104,20 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Supplier()
+        {
+
+            if (User.Identities != null)
+            {
+                 
+                return View();
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+        }
+        [HttpGet]
         public async Task<IActionResult> RequestFoodRestock()
         {
             if (User.Identities!=null)

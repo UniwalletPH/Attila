@@ -82,7 +82,7 @@
                     </div>
                 </div>
 
-                <table class="table table-striped table-bordered table-hover   order-column events" id="sample_1">
+                <table class="table table-striped table-bordered table-hover   order-column packages" id="sample_1">
                     <thead>
                         <tr>
 
@@ -95,7 +95,7 @@
                     @foreach (var item in Model)
                     {
                         <tbody> 
-                            <tr class="odd gradeX">
+                            <tr class="odd gradeX" data-id="@item.ID">
                                 <td>@item.Code</td>
                                 <td>@item.Name</td>
                                 <td>@item.Description</td>
@@ -136,6 +136,13 @@
             $.get('/Packages/PackageForm');
         }
 
+           $(document).ready(function () {
+            $('.packages tr').click(function () {
+                var _id = $(this).data("id");
+                a = _id;
+                $.post('/Packages/Details', { PackageID: _id });
+            });
+        });
 
 
     </script>

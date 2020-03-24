@@ -32,8 +32,23 @@ namespace Attila.UI.Controllers
 
             return View(eventPackages);
         }
- 
 
+         
+
+
+        [HttpPost]
+        public async Task<IActionResult> Details(int PackageID)
+        {
+            var eventPackages = await mediator.Send(new GetEventPackageListQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+
+
+
+            return View(eventPackages);
+        }
+        
         [HttpGet]
         public async Task<IActionResult> AddEventPackages()
         {
@@ -135,12 +150,58 @@ namespace Attila.UI.Controllers
             }
             
               }
+
+        [HttpGet]
+        public async Task<IActionResult> MenuList()
+        {
+
+            if (User.Identities != null)
+            {
+
+                var _menu = await mediator.Send(new GetMenuListQuery());
+                var _menuCategoryNames = await mediator.Send(new GetMenuCategoryListQuery());
+
+                List<SelectListItem> _list = new List<SelectListItem>();
+
+                foreach (var item in _menuCategoryNames)
+                {
+                    _list.Add(new SelectListItem
+                    {
+                        Value = item.ID.ToString(),
+                        Text = item.Category
+                    });
+
+                }
+
+                AddMenuVM add = new AddMenuVM
+                {
+                    MenuList = _menu,
+                    CategoryList = _list
+
+                };
+                return View(add);
+            }
+            else
+            {
+                return Redirect("/Login");
+            }
+
+
+
+        }
+
+
+
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> PackageMenuForm()
         {
             if (User.Identities!=null)
             {
-  var eventPackages = await mediator.Send(new GetEventPackageListQuery());
+            var eventPackages = await mediator.Send(new GetEventPackageListQuery());
             var menuList = await mediator.Send(new GetMenuListQuery());
 
             List<SelectListItem> _packageslist = new List<SelectListItem>();
@@ -235,33 +296,37 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> MenuList() {
-
+        public async Task<IActionResult> Details() {
             if (User.Identities != null)
             {
+                var eventPackages = await mediator.Send(new GetEventPackageListQuery());
+                var menuList = await mediator.Send(new GetMenuListQuery());
 
-                var _menu = await mediator.Send(new GetMenuListQuery()); 
-                var _menuCategoryNames = await mediator.Send(new GetMenuCategoryListQuery());
+                List<SelectListItem> _packageslist = new List<SelectListItem>();
 
-                List<SelectListItem> _list = new List<SelectListItem>();
-
-                foreach (var item in _menuCategoryNames)
+                List<SelectListItem> _menulist = new List<SelectListItem>();
+                foreach (var item in eventPackages)
                 {
-                    _list.Add(new SelectListItem
+                    _packageslist.Add(new SelectListItem
                     {
                         Value = item.ID.ToString(),
-                        Text = item.Category
+                        Text = item.Name + item.RatePerHead,
                     });
+                }
 
-                } 
-         
-                AddMenuVM add = new AddMenuVM
+                foreach (var item in menuList)
                 {
-                     MenuList = _menu,
-                     CategoryList = _list
-                     
-                };
-                return View(add);
+                    _menulist.Add(new SelectListItem
+                    {
+                        Value = item.ID.ToString(),
+                        Text = item.Name,
+                    });
+                }
+
+                var _packageList = new PackagesVM();
+                _packageList.PackageList = _packageslist;
+                _packageList.MenuList = _menulist;
+                return View(_packageList);
             }
             else
             {
