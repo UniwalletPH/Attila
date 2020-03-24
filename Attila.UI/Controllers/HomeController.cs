@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Attila.Application.Users.Queries; 
+using Microsoft.AspNetCore.Mvc; 
+using Attila.Application.Users.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Users.Commands;
 using Attila.Application.Login.Queries;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
-using System.Security.Principal;
-using Newtonsoft.Json;
-
+using System.Security.Claims; 
 namespace Attila.UI.Controllers
 {
     public class HomeController : Controller
@@ -50,7 +46,6 @@ namespace Attila.UI.Controllers
         }
         [Route("Login")]
 
-
         public IActionResult Login()
         {
             return View();
@@ -66,7 +61,15 @@ namespace Attila.UI.Controllers
             {
 
                 if (User.Identities != null) 
-                { return Redirect("/Dashboard"); } else
+                {
+
+
+                    //Claim _claim = User?.FindFirst(ClaimTypes.UserData); //kinuha yung Identity
+                    //var _userData = _claim?.Value;//Kinuha yung isang claim na laman yung JSON na Details ng User
+                    //var _user = JsonConvert.DeserializeObject<UserVM>(_userData); //tapos desirialize.. Pacheck kung okay 
+                    //var identity = (ClaimsIdentity)User.Identity;
+                    //IEnumerable<Claim> claims = identity.Claims;
+                    return Redirect("/Dashboard"); } else
                 {
                     return View("Login");
                 }               

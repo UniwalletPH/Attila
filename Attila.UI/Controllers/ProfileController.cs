@@ -23,22 +23,15 @@ namespace Attila.UI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
-            if (User.Identity.Name != null)
-            {
-
-                Claim _claim = User?.FindFirst(ClaimTypes.UserData); //kinuha yung Identity
-                var _userData = _claim?.Value;//Kinuha yung isang claim na laman yung JSON na Details ng User
-                var _user = JsonConvert.DeserializeObject<UserVM>(_userData); //tapos desirialize.. Pacheck kung okay 
+            
 
 
-                //var _user = await mediator.Send(new GetUserDetailsQuery { Username = User.Ide });
-                return View("Profile");
-            }
+
+            //var _user = await mediator.Send(new GetUserDetailsQuery { Username = User.Ide });
+            return View();
 
 
-            return Redirect("Login");
-           }
+        }
 
         public IActionResult Privacy()
         {
