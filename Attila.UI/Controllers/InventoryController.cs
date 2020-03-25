@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc; 
+using Microsoft.AspNetCore.Mvc;
 using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Food.Queries;
-using Attila.Application.Inventory_Manager.Food.Queries; 
+using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Application.Food.Commands;
-using Microsoft.AspNetCore.Mvc.Rendering; 
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Microsoft.AspNetCore.Http;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
@@ -123,7 +122,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
         {
 
-            var _inventory = new Attila.Application.Inventory_Manager.Shared.Commands.InventoriesDeliveryVM
+            var _inventory = new InventoriesDeliveryVM
             {
                 DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
                 DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
@@ -284,7 +283,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
         {
 
-            var foodDetails = new Attila.Application.Inventory_Manager.Food.Queries.FoodsInventoryVM
+            var foodDetails = new FoodsInventoryVM
             {
                 FoodDetailsID = foodInventory.FoodDetailsID,
                 FoodRestockID = foodInventory.FoodRestockID,
@@ -323,7 +322,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddEquipmentInventory(EquipmentsInventoryVM equipmentInventory)
         {
 
-            var equipments = new Attila.Application.Inventory_Manager.Equipment.Queries.EquipmentsInventoryVM
+            var equipments = new EquipmentsInventoryVM
             {
                 EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
                 EquipmentDeliveryID = equipmentInventory.EquipmentDeliveryID,
