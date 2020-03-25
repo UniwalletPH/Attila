@@ -9,5 +9,9 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
         public List<EquipmentsDetailsVM> EquipmentsDetailsVM { get; set; }
 
         public List<FoodsDetailsVM> FoodsDetailsVM { get; set; }
+
+        public List<EquipmentsInventoryVM> EquipmentsInventoryVM { get; set; }
+
+        public List<FoodsInventoryVM> FoodsInventoryVM { get; set; }
     }
 }
