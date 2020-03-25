@@ -1,6 +1,4 @@
-﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Application.Inventory_Manager.Shared.Commands;
+﻿using Attila.Application.Inventory_Manager.Shared.Queries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
