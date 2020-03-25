@@ -33,7 +33,7 @@ namespace Attila.Application.Inventory_Manager.Food.Commands
                     Remarks = request.MyFoodInventoryVM.Remarks,
                     UserID = request.MyFoodInventoryVM.UserID,
                     FoodDetailsID = request.MyFoodInventoryVM.FoodDetailsID,
-                    FoodDeliveryID = request.MyFoodInventoryVM.FoodDeliveryID
+                    FoodRestockID = request.MyFoodInventoryVM.FoodRestockID
                 };
 
                 dbContext.FoodInventories.Add(_foodInventory);
