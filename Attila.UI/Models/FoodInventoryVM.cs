@@ -35,7 +35,7 @@ namespace Attila.UI.Models
         public int FoodDetailsID { get; set; }
 
         [Required]
-        public int FoodRestockID { get; set; }
+        public int DeliveryDetailsID { get; set; }
 
         public IEnumerable<FoodsInventoryVM> FoodsInventoryVMs { get; set; }
 
