@@ -48,40 +48,11 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
                 }).ToListAsync();
 
-                var _equipmentStocksList = await dbContext.EquipmentInventories.Select(a => new EquipmentsInventoryVM
-                {
-                    ID = a.ID,
-                    Quantity = a.Quantity,
-                    EncodingDate = a.EncodingDate,
-                    ItemPrice = a.ItemPrice,
-                    Remarks = a.Remarks,
-                    UserID = a.UserID, 
-                    EquipmentDetailsID = a.EquipmentDetailsID,
-                    EquipmentDeliveryID = a.EquipmentDeliveryID
-
-                }).ToListAsync();
-
-                var _foodStocksList = await dbContext.FoodInventories.Select(a => new FoodsInventoryVM 
-                {
-                    ID = a.ID,
-                    Quantity = a.Quantity,
-                    ExpirationDate = a.ExpirationDate,
-                    EncodingDate = a.EncodingDate,
-                    ItemPrice = a.ItemPrice,
-                    Remarks = a.Remarks,
-                    UserID = a.UserID,
-                    FoodDetailsID = a.FoodDetailsID,
-                    FoodDeliveryID = a.FoodDeliveryID
-
-                }).ToListAsync();
-
 
                 InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM
                 {
                     EquipmentsDetailsVM = _equipmentDetailsList,
-                    FoodsDetailsVM = _foodDetailsList,
-                    EquipmentsInventoryVM = _equipmentStocksList,
-                    FoodsInventoryVM = _foodStocksList
+                    FoodsDetailsVM = _foodDetailsList
                 };
 
                 return inventoryDetailsVM;
