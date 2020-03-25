@@ -25,7 +25,8 @@ namespace Attila.Application.Event.Queries
 
             public async Task<IEnumerable<SearchEventVM>> Handle(GetEventListQuery request, CancellationToken cancellationToken)
             {
-                var _viewEventList = await dbContext.EventDetails.Select(a => new SearchEventVM 
+
+                var _viewEventList = await dbContext.EventDetails.Select(a => new SearchEventVM
                 {
                     EventName = a.EventName,
                     Type = a.Type,
@@ -47,7 +48,9 @@ namespace Attila.Application.Event.Queries
                     Theme = a.Theme,
                     VenueType = a.VenueType
 
-                }).ToListAsync();
+                }).Include(a => a.EventClient.Firstname)
+                .Include(a => a.EventClient.Lastname)
+                .ToListAsync();
 
                 return _viewEventList;
             }
