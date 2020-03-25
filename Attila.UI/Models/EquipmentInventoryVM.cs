@@ -29,7 +29,7 @@ namespace Attila.UI.Models
         public int EquipmentDetailsID { get; set; }
 
         [Required]
-        public int EquipmentDeliveryID { get; set; }
+        public int DeliveryDetailsID { get; set; }
 
         public IEnumerable<EquipmentsInventoryVM> EquipmentsInventoryVMs { get; set; }
 

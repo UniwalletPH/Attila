@@ -30,17 +30,18 @@ namespace Attila.UI.Models
         [Required]
         public int UserID { get; set; }
 
+         
         [Required]
         public int FoodDetailsID { get; set; }
 
         [Required]
-        public int FoodRestockID { get; set; }
+        public int DeliveryDetailsID { get; set; }
 
         public IEnumerable<FoodsInventoryVM> FoodsInventoryVMs { get; set; }
 
         public List<SelectListItem> FoodDetailsList { get; set; }
 
-        public List<SelectListItem> FoodDeliveryList { get; set; }
+        public List<SelectListItem> FoodDeliveryList { get; set; } 
 
         public List<SelectListItem> UserList { get; set; }
     }

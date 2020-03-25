@@ -158,19 +158,19 @@
                             <div class="portlet-body">
                                 <div class="row static-info">
                                     <div class="col-md-5 name"> Customer Name: </div>
-                                    <div class="col-md-7 value"> Jhon Doe </div>
+                                    <div class="col-md-7 value"> @Model.EventDetails.Client.Lastname    @Model.EventDetails.Client.Firstname </div>
                                 </div>
                                 <div class="row static-info">
                                     <div class="col-md-5 name"> Email: </div>
-                                    <div class="col-md-7 value"> jhon@doe.com </div>
+                                    <div class="col-md-7 value">  @Model.EventDetails.Client.Email </div>
                                 </div>
                                 <div class="row static-info">
-                                    <div class="col-md-5 name"> State: </div>
-                                    <div class="col-md-7 value"> New York </div>
+                                    <div class="col-md-5 name"> Address: </div>
+                                    <div class="col-md-7 value">  @Model.EventDetails.Client.Address</div>
                                 </div>
                                 <div class="row static-info">
                                     <div class="col-md-5 name"> Phone Number: </div>
-                                    <div class="col-md-7 value"> 12234389 </div>
+                                    <div class="col-md-7 value">  @Model.EventDetails.Client.Contact</div>
                                 </div>
                             </div>
                         </div>
@@ -243,3 +243,4 @@
 
     </div>
 </div>
+ 

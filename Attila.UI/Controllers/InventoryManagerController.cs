@@ -805,5 +805,27 @@ namespace Attila.UI.Controllers
             return Json(_checker);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetSupplierDetails()
+        {
+            try
+            {
+                var _getSupplierDetails = await mediator.Send(new GetSupplierDetailsQuery());
+
+                SupplierDetailsVM supplierDetailsVM = new SupplierDetailsVM
+                {
+                    SupplierDetailsVMs = _getSupplierDetails
+                };
+
+
+                return View(supplierDetailsVM);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

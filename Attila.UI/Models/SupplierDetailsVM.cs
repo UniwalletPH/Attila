@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Attila.Application.Inventory_Manager.Shared.Queries;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,5 +22,7 @@ namespace Attila.UI.Models
 
         [Required]
         public string ContactPersonName { get; set; }
+
+        public IEnumerable<SuppliersDetailsVM> SupplierDetailsVMs { get; set; }
     }
 }

@@ -20,6 +20,6 @@ namespace Attila.Application.Inventory_Manager.Equipment.Queries
 
         public int EquipmentDetailsID { get; set; }
 
-        public int EquipmentDeliveryID { get; set; }
+        public int DeliveryDetailsID { get; set; }
     }
 }

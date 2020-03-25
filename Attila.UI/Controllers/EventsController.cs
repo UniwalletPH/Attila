@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Coordinator.Event.Queries;
 using Attila.Application.Event.Commands;
 using Attila.Application.Coordinator.Event.Commands;
+using Attila.Application.Admin.Queries;
 
 namespace Attila.UI.Controllers
 {
@@ -28,8 +29,9 @@ namespace Attila.UI.Controllers
         {
 
 
-            if(User.Identities!=null)
+            if (User.Identities != null)
             {
+                var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
                 var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
                 var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
                 var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
@@ -38,8 +40,10 @@ namespace Attila.UI.Controllers
                 {
                     IncomingEvent = _incomingEvents,
                     PastEvent = _pastEvents,
-                    PendingEvent = _pendingEvents
+                    PendingEvent = _pendingEvents,
+                    Events = _searchResult
                 };
+
 
                 return View(_forEvent);
             }
@@ -48,45 +52,45 @@ namespace Attila.UI.Controllers
                 return Redirect("/Login");
             }
 
-            
+
         }
- 
+
 
 
         [HttpGet]
         public async Task<IActionResult> BookingForm()
         {
-            if(User.Identities!=null)
+            if (User.Identities != null)
             {
                 var _packageNames = await mediator.Send(new GetEventPackageQuery());
-            var _clientNames = await mediator.Send(new GetClientListQuery());
+                var _clientNames = await mediator.Send(new GetClientListQuery());
 
-            List<SelectListItem> _list = new List<SelectListItem>();
+                List<SelectListItem> _list = new List<SelectListItem>();
 
-            List<SelectListItem> _clientlist = new List<SelectListItem>();
-            foreach (var item in _packageNames)
-            {
-                _list.Add(new SelectListItem
+                List<SelectListItem> _clientlist = new List<SelectListItem>();
+                foreach (var item in _packageNames)
                 {
-                    Value = item.ID.ToString(),
-                    Text = item.Code
-                });
+                    _list.Add(new SelectListItem
+                    {
+                        Value = item.ID.ToString(),
+                        Text = item.Code
+                    });
 
-            }
+                }
 
-            foreach (var item in _clientNames)
-            {
-                _clientlist.Add(new SelectListItem
+                foreach (var item in _clientNames)
                 {
-                    Value = item.ID.ToString(),
-                    Text = item.Firstname + item.Lastname,
-                });
-            }
+                    _clientlist.Add(new SelectListItem
+                    {
+                        Value = item.ID.ToString(),
+                        Text = item.Firstname + item.Lastname,
+                    });
+                }
 
-            var _addEventList = new AddEventVM();
-            _addEventList.PackageList = _list;
-            _addEventList.ClientList = _clientlist;
-            return View(_addEventList);
+                var _addEventList = new AddEventVM();
+                _addEventList.PackageList = _list;
+                _addEventList.ClientList = _clientlist;
+                return View(_addEventList);
             }
             else
             {
@@ -100,44 +104,44 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
 
-            if (User.Identities!=null)
+            if (User.Identities != null)
             {
                 EventDetailsVM x = new EventDetailsVM
-            {
-                EventName = _eventDetails.Event.EventName,
-                Type = _eventDetails.Event.Type,
-                Description = _eventDetails.Event.Description,
-                EventClientID = _eventDetails.SelectedClient,
-                EventDate = _eventDetails.Event.EventDate,
-                PackageDetailsID = _eventDetails.Selected,
-                Location = _eventDetails.Event.Location,
-                Remarks = _eventDetails.Event.Remarks,
-                UserID = 1,
-                EventStatus = _eventDetails.Event.EventStatus,
-                EntryTime = _eventDetails.Event.EntryTime,
-                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
-                ProgramStart = _eventDetails.Event.ProgramStart,
-                ServingTime = _eventDetails.Event.ServingTime,
-                LocationType = _eventDetails.Event.LocationType,
-                ServingType = _eventDetails.Event.ServingType,
-                Theme = _eventDetails.Event.Theme,
-                VenueType = _eventDetails.Event.VenueType
-                
+                {
+                    EventName = _eventDetails.Event.EventName,
+                    Type = _eventDetails.Event.Type,
+                    Description = _eventDetails.Event.Description,
+                    EventClientID = _eventDetails.SelectedClient,
+                    EventDate = _eventDetails.Event.EventDate,
+                    PackageDetailsID = _eventDetails.Selected,
+                    Location = _eventDetails.Event.Location,
+                    Remarks = _eventDetails.Event.Remarks,
+                    UserID = 1,
+                    EventStatus = _eventDetails.Event.EventStatus,
+                    EntryTime = _eventDetails.Event.EntryTime,
+                    NumberOfGuests = _eventDetails.Event.NumberOfGuests,
+                    ProgramStart = _eventDetails.Event.ProgramStart,
+                    ServingTime = _eventDetails.Event.ServingTime,
+                    LocationType = _eventDetails.Event.LocationType,
+                    ServingType = _eventDetails.Event.ServingType,
+                    Theme = _eventDetails.Event.Theme,
+                    VenueType = _eventDetails.Event.VenueType
 
 
-            };
 
-             
-            try
-            {
-                await mediator.Send(new AddEventCommand { EventDetails = x });
-                _checker = true; 
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
-            return Json(_checker);
+                };
+
+
+                try
+                {
+                    await mediator.Send(new AddEventCommand { EventDetails = x });
+                    _checker = true;
+                }
+                catch (Exception)
+                {
+                    _checker = false;
+                }
+                return Json(_checker);
 
             }
             else
@@ -149,18 +153,35 @@ namespace Attila.UI.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Details(int EventID) {
-             
+
             var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
 
-            var _allEventDetails = new ViewEventVM
-            {
-                EventDetails = _eventDetails
+            ViewEventVM viewEventVM = new ViewEventVM { 
+            
+            EventDetails = _eventDetails
+            
+            
             };
-
-            return View(_allEventDetails);
+            return View(viewEventVM);
  
-    }
-    [HttpGet]
+        }
+     
+
+        //[HttpPost]
+        //public async Task<IActionResult> Details(int EventID)
+        //{
+
+        //    var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
+
+        //    var _allEventDetails = new ViewEventVM
+        //    {
+        //        EventDetails = _eventDetails
+        //    };
+
+        //    return View(_allEventDetails);
+
+        //}
+        [HttpGet]
         public async Task<IActionResult> Packages()
         {
             if (User.Identities!=null)

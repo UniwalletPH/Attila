@@ -1,6 +1,5 @@
 ﻿using Attila.Application.Interfaces;
-using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Application.Inventory_Manager.Shared.Commands;
+using Attila.Application.Inventory_Manager.Shared.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;

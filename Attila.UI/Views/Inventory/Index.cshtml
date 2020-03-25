@@ -38,12 +38,10 @@
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <button id="sample_editable_1_new" class="btn sbold green " onClick="onAddFood()">
-                        Add New
-                        <i class="fa fa-plus"></i>
+                        Add New 
                     </button>
                     <button id="sample_editable_1_new" class="btn sbold green " onClick="onRequestFood()">
-                        Request Food Restock
-                        <i class="fa fa-plus"></i>
+                        Request Food Restock 
                     </button>
                 </div>
                 <div class="tools"> </div>
@@ -59,6 +57,7 @@
                         <th>Description</th>
                         <th>Specification</th>
                         <th>Unit</th>
+                        <th>Food Type</th> 
                     </tr>
                 </thead>
 
@@ -97,17 +96,17 @@
                 <div class="caption">
 
                     <button id="sample_editable_1_new" class="btn sbold green " onClick="onAddEquipment()">
-                        Add New 
-                        <i class="fa fa-plus"></i>
-                    </button>
-                </div>
-                <div class="caption">
+                        Add New  
+                    </button> 
                     <button id="sample_editable_1_new" class="btn sbold green " onClick="onRequestEquipment()">
-                        Request Equipment Restock
-                        <i class="fa fa-plus"></i>
+                        Request EquipmentRestock 
                     </button>
                 </div>
                 <div class="actions">
+
+
+
+
 
                     <div class="btn-group">
                         <a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">
@@ -158,24 +157,26 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Contact</th>
-                                <th>Address</th>
+                                <th>Description</th>
+                                <th>Rental Fee</th>
+                                <th>Unit Type</th>
+                                <th>Equipment Type</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             @foreach (var item in Model.EquipmentsDetailsVM)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Description)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.RentalFee)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.UnitType)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.EquipmentType)</td>
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Description)</td>
+                                <td> @Html.DisplayFor(modelItem => item.RentalFee)</td>
+                                <td> @Html.DisplayFor(modelItem => item.UnitType)</td>
+                                <td> @Html.DisplayFor(modelItem => item.EquipmentType)</td>
+                                 
 
 
-                                </tr>
+                            </tr>
                             }
 
 

@@ -22,6 +22,6 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
 
         public int FoodDetailsID { get; set; }
 
-        public int FoodRestockID { get; set; }
+        public int DeliveryDetailsID { get; set; }
     }
 }

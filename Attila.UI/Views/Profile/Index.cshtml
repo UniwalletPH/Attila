@@ -53,10 +53,11 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
 
-                @{ if (User.IsInRole("Admin"))
-                    {                    <div class="profile-userbuttons">
+                @*@{ if (User.IsInRole("Admin"))*@
+                    @*{*@                
+                <div class="profile-userbuttons">
                         <button type="button" class="btn btn-circle red btn-sm" onclick="location.href='@Url.Action("RegisterAccount", "Home")'">Create a Profile</button>
-                    </div>} }
+                    </div>@*} }*@
                 <!-- END SIDEBAR BUTTONS -->
                 <!-- SIDEBAR MENU -->
                 <div class="profile-usermenu">
