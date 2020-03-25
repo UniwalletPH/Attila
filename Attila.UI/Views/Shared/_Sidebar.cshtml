@@ -38,20 +38,31 @@
 
             </li>
             <li class="nav-item  ">
+                <a onclick="location.href='@Url.Action("Index", "Packages")'" class="nav-link nav-toggle">
+                    <i class="icon-diamond"></i>
+                    <span class="title">Packages</span>
+                </a>
+            </li>
+            <li class="nav-item  ">
                 <a onclick="location.href='@Url.Action("Index", "Reports")'" class="nav-link nav-toggle">
-                    <i class="icon-docs"></i>
+                    <i class="icon-folder"></i>
                     <span class="title">Reports</span>
                 </a>
                 </a>
-
             </li>
-             
+
             <li class="nav-item  ">
                 <a onclick="location.href='@Url.Action("Index", "Clients")'" class="nav-link nav-toggle">
-                    <i class="icon-docs"></i>
+                    <i class="icon-user"></i>
                     <span class="title">Clients</span>
-                </a> 
+                </a>
 
+            </li>
+            <li class="nav-item  ">
+                <a onclick="location.href='@Url.Action("Suppliers", "Inventory")'" class="nav-link nav-toggle">
+                    <i class="icon-user"></i>
+                    <span class="title">Suppliers</span>
+                </a>
             </li>
             <li class="nav-item ">
                 <a onclick="location.href='@Url.Action("Index", "Profile")'" class="nav-link nav-toggle">
@@ -60,9 +71,9 @@
                 </a>
 
             </li>
-       
-            <li class="nav-item  ">
-                <a onclick="location.href='@Url.Action("Login", "Home")'" class="nav-link nav-toggle">
+
+            <li onclick="location.href='@Url.Action("SignOut", "Home")'" class="nav-link nav-toggle">
+                <a class="nav-link nav-toggle">
                     <i class="icon-logout"></i>
                     <span class="title">Log out</span>
                 </a>

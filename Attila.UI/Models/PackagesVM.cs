@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {
-    public class AddMenuVM
+    public class PackagesVM
     {
 
-        public IEnumerable<MenuVM> MenuList { get; set; }
-        public MenuVM Menu { get; set; }
 
-        public List<SelectListItem> CategoryList { get; set; }
-
-        public int Selected { get; set; }
+        public EventPackageVM PackageDetails { get; set; }
+        public List<SelectListItem> PackageList {get;set;} 
+        public List<SelectListItem> MenuList { get; set; }
     }
 }

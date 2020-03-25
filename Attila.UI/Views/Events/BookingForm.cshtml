@@ -41,37 +41,36 @@
                         </div>
                         <div class="form-group">
                             <label>Type of Occasion </label>
-                            <select id="txtType" asp-for="Event.Type" class="form-control">
+                            <select id="txtType" asp-for="Event.Type" class="form-control" required>
                                 <option value="Baptismal">Baptismal</option>
                                 <option value="Birthday">Birthday</option>
-                                <option value="Others">Christmas Party</option>
-
                                 <option value="Graduation">Graduation</option>
                                 <option value="Meeting">Meeting </option>
                                 <option value="Wedding">Wedding</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label>Event Name</label>
-                            <input type="text" class="form-control" asp-for="Event.EventName" placeholder="">
+                            <input type="text" class="form-control" asp-for="Event.EventName" placeholder="" required>
                         </div>
                         <div class="form-group">
                             <label>Event Theme  | Color</label>
-                            <input type="text" class="form-control" placeholder="Mermaid /Aqua Blue / Description" asp-for="Event.Theme">
+                            <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="Event.Theme" required>
                         </div>
                         <div class="form-group">
                             <label>Event Theme  | Color | Description</label>
-                            <input type="text" class="form-control" placeholder="Mermaid /Aqua Blue / Description" asp-for="Event.Description">
+                            <input type="text" class="form-control" placeholder="Description" asp-for="Event.Description" required>
                         </div>
 
                         <div class="form-group">
                             <label>Event's Place</label>
-                            <input type="text" class="form-control" asp-for="Event.Location" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City.">
+                            <input type="text" class="form-control" asp-for="Event.Location" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City." required>
                         </div>
                         <div class="form-group">
                             <label>Venue in Condominium or Building?</label>
-                            <select id="txtType" asp-for="Event.VenueType" class="form-control">
+                            <select id="txtType" asp-for="Event.VenueType" class="form-control" required>
                                 <option value="2">Yes</option>
                                 <option value="1">No</option>
 
@@ -79,7 +78,7 @@
                         </div>
                         <div class="form-group">
                             <label>Type of Location</label>
-                            <select id="txtType" asp-for="Event.LocationType" class="form-control">
+                            <select id="txtType" asp-for="Event.LocationType" class="form-control" required>
                                 <option value="1">North Area</option>
                                 <option value="2">South Area</option>
 
@@ -87,22 +86,22 @@
                         </div>
                         <div class="form-group">
                             <label>Event Date</label>
-                            <input class="form-control form-control-inline date-picker" size="16" type="datetime" asp-for="Event.EventDate" />
+                            <input class="form-control form-control-inline date date-picker" size="16" type="datetime" asp-for="Event.EventDate" placeholder="mm/dd/yyyy"  required />
 
                         </div>
 
                         <div class="form-group">
                             <label>Set Up Time </label>
-                            <input type="time" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.EntryTime" />
+                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.EntryTime" required />
                         </div>
                         <div class="form-group">
                             <label>Program Starts At </label>
-                            <input type="time" value="4:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ProgramStart" />
+                            <input type="time" placeholder="1:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ProgramStart" required />
                         </div>
 
                         <div class="form-group">
                             <label>Serving Time </label>
-                            <input type="time" value="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ServingTime" />
+                            <input type="time" placeholder="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ServingTime" required />
                         </div>
 
 
@@ -110,7 +109,7 @@
 
                     <div class="form-group">
                         <label>Buffet Type </label>
-                        <select id="txtType" asp-for="Event.ServingType" class="form-control">
+                        <select id="txtType" asp-for="Event.ServingType" class="form-control" required>
                             <option value="ManageBuffet">Manage Buffet</option>
                             <option value="SelfServiceBuffet">Self-Service Buffet</option>
 
@@ -118,7 +117,7 @@
                     </div>
                     <div class="form-group">
                         <label>Number of Guests</label>
-                        <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests">
+                        <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests" required>
                     </div>
 
                     <div class="form-group">
@@ -128,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3" asp-for="Event.Remarks"></textarea>
+                        <textarea class="form-control" rows="3" asp-for="Event.Remarks" required></textarea>
                     </div>
 
 
@@ -181,7 +180,7 @@
                         <div class="mt-checkbox-list">
                             <label class="mt-checkbox mt-checkbox-outline">
                                 I agree to the Terms & Conditions of the management about their services.
-                                <input type="checkbox" value="1" name="test">
+                                <input type="checkbox" value="1" name="test" required>
                                 <span></span>
                             </label>
 
@@ -219,6 +218,7 @@
     <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
+    <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
         function OnSuccess(e) {

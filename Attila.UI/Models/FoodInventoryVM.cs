@@ -30,6 +30,7 @@ namespace Attila.UI.Models
         [Required]
         public int UserID { get; set; }
 
+         
         [Required]
         public int FoodDetailsID { get; set; }
 
@@ -40,7 +41,7 @@ namespace Attila.UI.Models
 
         public List<SelectListItem> FoodDetailsList { get; set; }
 
-        public List<SelectListItem> FoodDeliveryList { get; set; }
+        public List<SelectListItem> FoodDeliveryList { get; set; } 
 
         public List<SelectListItem> UserList { get; set; }
     }

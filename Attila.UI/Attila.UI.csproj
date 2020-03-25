@@ -50,13 +50,9 @@
 
   <ItemGroup>
     <None Include="Views\Packages\Index.cshtml" />
-    <None Include="Views\Packages\MenuCategoryForm.cshtml" />
-    <None Include="Views\Packages\MenuForm.cshtml" />
-    <None Include="Views\Packages\PackageForm.cshtml" />
-    <None Include="Views\Packages\Packages.cshtml" />
-    <None Include="Views\Packages\partials\_AddMenu.cshtml" />
-    <None Include="Views\Packages\partials\_AddMenuCategory.cshtml" />
-    <None Include="Views\Packages\partials\_AddPackage.cshtml" />
+    <None Include="Views\Packages\partials\MenuCategoryForm.cshtml" />
+    <None Include="Views\Packages\partials\MenuForm.cshtml" />
+    <None Include="Views\Packages\partials\PackageForm.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulCategory.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulMenu.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulPackage.cshtml" />

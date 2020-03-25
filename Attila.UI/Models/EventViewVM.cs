@@ -10,5 +10,8 @@ namespace Attila.UI.Models
         public List<EventVM> IncomingEvent { get; set; }
 
         public List<EventVM> PastEvent { get; set; }
+
+
+        public IEnumerable<Attila.Application.Admin.Event.Queries.EventVM> Events{get;set;}
     }
 }
