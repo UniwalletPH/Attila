@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Inventory_Manager.Shared.Commands
+namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
     public class InventoriesDeliveryVM
     {

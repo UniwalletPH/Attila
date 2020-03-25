@@ -1,9 +1,7 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
