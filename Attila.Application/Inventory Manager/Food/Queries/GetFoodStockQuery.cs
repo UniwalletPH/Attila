@@ -33,7 +33,7 @@ namespace Attila.Application.Food.Queries
                     Remarks = a.Remarks,
                     UserID = a.UserID,
                     FoodDetailsID = a.FoodDetailsID,
-                    FoodRestockID = a.FoodRestockID
+                    FoodDeliveryID = a.FoodDeliveryID
 
                 }).ToListAsync();
 
