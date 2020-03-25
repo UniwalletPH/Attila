@@ -20,7 +20,7 @@ namespace Attila.Domain.Entities
 
         public int FoodDetailsID { get; set; }
 
-        public int FoodDeliveryID { get; set; }
+        public int FoodRestockID { get; set; }
 
         public FoodDetails FoodDetails { get; set; }
 
