@@ -1,0 +1,57 @@
+﻿@model Attila.Application.Coordinator.Event.Queries.EventPackageVM
+
+@{
+
+    ViewData["Title"] = "Package Form"; 
+
+} 
+ 
+
+<div class="modal fade" id="packageform" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form role="form" asp-controller="Packages" asp-action="AddEventPackage" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessPackage" data-ajax-failure="OnFailurePackage">
+
+                <div class="modal-header">
+                    <button type="button" class="close"  data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">Package Form</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Package Code</label>
+                            <input type="text" class="form-control" placeholder="" asp-for="Code">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Package Name</label>
+                            <input type="text" class="form-control" placeholder="" asp-for="Name">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control" asp-for="Description" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Rate Per Head</label>
+                            <input type="number" class="form-control" asp-for="RatePerHead" placeholder="">
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-actions">
+                        <button type="submit"  class="btn blue">Submit</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
