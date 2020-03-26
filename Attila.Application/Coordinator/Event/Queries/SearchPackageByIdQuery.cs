@@ -27,7 +27,7 @@ namespace Attila.Application.Coordinator.Event.Queries
                 var _package = dbContext.PackageMenus
                     .Include(a => a.PackageMenuDetails)
                     .Include(a => a.Menu)
-                    .Where(a => a.PackageMenuDetailsID == request.PackageId).ToList();
+                    .Where(a => a.PackageMenuDetailsID == request.PackageId );
 
                 foreach (var item in _package)
                 {
