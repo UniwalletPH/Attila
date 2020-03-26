@@ -12,7 +12,7 @@ namespace Attila.Application.Coordinator.Event.Commands
 {
     public class AddEventMenuCommand : IRequest<bool>
     {
-        public EventMenuVM EventMenu { get; set; }
+        public List<EventMenuVM> EventMenu { get; set; }
         public class AddEventMenuCommandHandler : IRequestHandler<AddEventMenuCommand, bool>
         {
             public readonly IAttilaDbContext dbContext;
@@ -23,15 +23,23 @@ namespace Attila.Application.Coordinator.Event.Commands
 
             public async Task<bool> Handle(AddEventMenuCommand request, CancellationToken cancellationToken)
             {
-                var _newEventMenu = new EventMenus
+                var _eventMenuList = new List<EventMenuVM>();
+
+                //var _newEventMenu = new EventMenus
+                //{
+                //    EventDetailsID = request.EventMenu.EventDetailsID,
+                //    MenuID = request.EventMenu.MenuID,
+                //};
+                foreach (var item in request.EventMenu)
                 {
-                    EventDetailsID = request.EventMenu.EventDetailsID,
-                    MenuID = request.EventMenu.MenuID,
-                };
-
-                dbContext.EventMenus.Add(_newEventMenu);
-                await dbContext.SaveChangesAsync();
-
+                    var EventMenus = new EventMenuVM
+                    {
+                        EventDetailsID = item.EventDetailsID,
+                        MenuID = item.MenuID
+                    };
+                    _eventMenuList.Add(EventMenus);
+                    await dbContext.SaveChangesAsync();
+                }
                 return true;
             }
         }
