@@ -2,7 +2,7 @@
     ViewData["Title"] = "Packages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model IEnumerable<Attila.Application.Coordinator.Event.Queries.EventPackageVM>
+@model PackagesVM
 
 @section Styles{
     <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
@@ -46,14 +46,14 @@
 
                             <div class="caption">
 
-                                <button id="sample_editable_1_new" class="btn sbold green " onClick="AddPackage()">
+                                <button id="sample_editable_1_new" class="btn sbold green " onClick="AddPackageMenu()">
                                     Add New
                                 </button>
                                 <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("MenuList", "Packages")'">
                                     Go to Menu List
                                 </button>
                             </div>
-                           
+
                         </div>
                         <div class="col-md-6">
                             <div class="btn-group pull-right">
@@ -84,6 +84,8 @@
                 </div>
 
                 <table class="table table-striped table-bordered table-hover   order-column packages" id="sample_1">
+
+
                     <thead>
                         <tr>
 
@@ -93,18 +95,19 @@
                             <th> Rate Per Head </th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model)
-                    {
-                        <tbody> 
+
+                    <tbody>
+                        @foreach (var item in Model.EventPackages)
+                        {
                             <tr class="odd gradeX" data-id="@item.ID">
                                 <td>@item.Code</td>
                                 <td>@item.Name</td>
                                 <td>@item.Description</td>
-                                <td>@item.RatePerHead</td> 
+                                <td>@item.RatePerHead</td>
                             </tr>
+                        }
 
-                        </tbody>
-                    }
+                    </tbody>
 
                 </table>
             </div>
@@ -119,8 +122,10 @@
 
 <partial name="partials/_SuccessfulPackage" />
 
+<partial name="partials/PackageMenuForm" model="new AddPackageMenuVM { MenuList = Model.MenuList , PackageList = Model.PackageList }" />
 <partial name="partials/PackageForm" model=" new Attila.Application.Coordinator.Event.Queries.EventPackageVM {}" />
 
+<partial name="partials/_SuccessfulPackageMenu" />
 @section Scripts {
 
     <script type="text/javascript">
@@ -129,7 +134,7 @@
             $('#packageform').modal('toggle');
 
         }
-        function OnFailurePackage(e) { 
+        function OnFailurePackage(e) {
             alert("failed!");
         }
         function AddPackage() {
@@ -137,15 +142,29 @@
             $.get('/Packages/PackageForm');
         }
 
-           $(document).ready(function () {
+        $(document).ready(function () {
             $('.packages tr').click(function () {
                 var _id = $(this).data("id");
                 a = _id;
-                $.post('/Packages/Details', { PackageID: _id });
+                $.get('/Packages/Details', { PackageID: a });
             });
         });
 
+        
+        function OnFailurePackageMenu(e) {
+            console.log(e);
+            alert("failed!");
+        }
+        function AddPackageMenu() {
+            $("#packagemenuform").modal('show');
+            $.get('/Packages/PackageMenuForm');
+        }
+        function OnSuccessPackageMenu(e) {
+            $("#successpackagemenu").modal('show');
 
+            $('#packagemenuform').modal('toggle');
+
+        }
     </script>
 
 

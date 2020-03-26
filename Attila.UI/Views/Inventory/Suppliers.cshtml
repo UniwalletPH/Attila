@@ -40,7 +40,7 @@
                         Add New
                         <i class="fa fa-plus"></i>
                     </button>
-                     
+
                 </div>
                 <div class="tools"> </div>
             </div>
@@ -62,11 +62,11 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr  >
+                        <tr>
                             <td>  @Html.DisplayFor(modelItem => item.Name)</td>
                             <td> @Html.DisplayFor(modelItem => item.ContactPersonName)</td>
                             <td> @Html.DisplayFor(modelItem => item.ContactNumber)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Address)</td> 
+                            <td> @Html.DisplayFor(modelItem => item.Address)</td>
 
                         </tr>
                     }
@@ -83,12 +83,14 @@
 
 
 </div>
- 
+
 
 <!-- end panel -->
 
- 
-<partial name="partials/_RegisterSupplier.cshtml" model="new SupplierDetailsVM {}" /> 
+
+<partial name="partials/_SuccessfulSupplier" /> 
+
+<partial name="partials/_RegisterSupplier.cshtml" model="new SupplierDetailsVM {}" />
 
 @section Scripts{
 
@@ -101,11 +103,14 @@
     <script type="text/javascript">
         function onAddSupplier() {
             $("#addsupplier").modal('show');
+             
         }
-        function onSuccessSupplier() {
-            $("#successsupplier").modal('show');            
+        function OnSuccessSupplier() {
+            $("#successsupplier").modal('show');
             $("#addsupplier").modal('toggle');
         } 
+
+
 
     </script>
 

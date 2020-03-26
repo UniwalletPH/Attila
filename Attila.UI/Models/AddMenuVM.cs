@@ -11,6 +11,7 @@ namespace Attila.UI.Models
     {
 
         public IEnumerable<MenuVM> MenuList { get; set; }
+         
         public MenuVM Menu { get; set; }
 
         public List<SelectListItem> CategoryList { get; set; }

@@ -21,18 +21,32 @@ namespace Attila.Application.Coordinator.Event.Queries
             }
             public async Task<IEnumerable<MenuVM>> Handle(GetMenuListQuery request, CancellationToken cancellationToken)
             {
-                var _viewMenuList= await dbContext.Menus.Select(a => new MenuVM
+
+
+                var _listMenu = new List<MenuVM>();
+
+
+                var _viewMenuList = dbContext.Menus
+                    .Include(a => a.MenuCategory).ToList();
+
+
+
+                foreach (var item in _viewMenuList)
                 {
-                    Description = a.Description,
-                    ID = a.ID,
-                    MenuCategoryID = a.MenuCategoryID,
-                    Name = a.Name
+                    var _menuList = new MenuVM
+                    {
 
-                }).Include(a => a.MenuCategory.Category)
-                .ToListAsync();
+                        MenuCategory = item.MenuCategory,
+                        Name = item.Name,
+                        Description  = item.Description
+                    };
 
 
-                return _viewMenuList;
+                    _listMenu.Add(_menuList);
+                };
+
+
+                return _listMenu;
             }
         }
     }

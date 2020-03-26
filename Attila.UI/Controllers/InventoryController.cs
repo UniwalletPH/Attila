@@ -119,7 +119,15 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public async Task<IActionResult> Suppliers()
+        {
 
+            var _suppliers = await mediator.Send(new GetSupplierDetailsQuery());
+
+
+            return View(_suppliers);
+        }
         [HttpPost]
         public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
         {

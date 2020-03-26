@@ -63,16 +63,18 @@
 
                 <tbody>
 
-                    @foreach (var item in Model.FoodsDetailsVM)
+                    @foreach (var item in Model.FoodsInventoryVM)
                     {
-                        <tr>
-                            <td>  @Html.DisplayFor(modelItem => item.Name)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Description)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Specification)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Unit)</td>
-                            <td> @Html.DisplayFor(modelItem => item.FoodType)</td>
+                    <tr>
+                        <td>  @Html.DisplayFor(modelItem => item.Quantity)</td>
+                        @*<td> @Html.DisplayFor(modelItem => item.Description)</td>
+                        <td> @Html.DisplayFor(modelItem => item.Specification)</td>
 
-                        </tr>
+                        <td> @Html.DisplayFor(modelItem => item.Qua)</td>
+                        <td> @Html.DisplayFor(modelItem => item.Unit)</td>
+                        <td> @Html.DisplayFor(modelItem => item.FoodType)</*@td>
+
+                    </tr>
                     }
 
 
