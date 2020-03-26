@@ -15,5 +15,6 @@ namespace Attila.Application.Coordinator.Event.Queries
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
+        public MenuCategory MenuCategory { get; set; }
     }
 }

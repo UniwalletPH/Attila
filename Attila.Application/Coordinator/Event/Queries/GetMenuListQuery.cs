@@ -28,7 +28,8 @@ namespace Attila.Application.Coordinator.Event.Queries
                     MenuCategoryID = a.MenuCategoryID,
                     Name = a.Name
 
-                }).ToListAsync();
+                }).Include(a => a.MenuCategory.Category)
+                .ToListAsync();
 
 
                 return _viewMenuList;
