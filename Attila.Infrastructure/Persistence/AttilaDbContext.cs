@@ -5,6 +5,7 @@ using System.Text;
 using Attila.Domain.Entities.Tables;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using System.Linq;
 
 namespace Attila.Infrastructure.Persistence
 {
@@ -55,15 +56,22 @@ namespace Attila.Infrastructure.Persistence
         public DbSet<PackageEquipments> PackageEquipments { get ; set ; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AttilaDbContext(DbContextOptions<AttilaDbContext> dbContextOpt) : base(dbContextOpt)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=AttilaDB;Trusted_Connection=True;MultipleActiveResultSets=true");
-        }
 
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AttilaDbContext).Assembly);
+
+            /// Set all decimal SQL DataType
+            foreach (var _property in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetProperties())
+                .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?)))
+            {
+                _property.SetColumnType("DECIMAL(20,8)");
+            }
         }
 
     }
