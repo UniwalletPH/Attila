@@ -8,9 +8,9 @@ namespace Attila.UI.Models
 {
     public class AddPackageMenuVM
     {
-        public List<SelectListItem> PackageList { get; set; }
-        public List<SelectListItem> MenuList { get; set; }
         public int SelectedPackage { get; set; }
         public int SelectedMenu { get; set; }
+        public List<SelectListItem> PackageList { get; set; }
+        public List<SelectListItem> MenuList { get; set; }
     }
 }

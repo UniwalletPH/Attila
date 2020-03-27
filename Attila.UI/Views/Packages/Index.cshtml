@@ -124,7 +124,8 @@
 </div>
 
 <partial name="partials/_SuccessfulPackage" />
-
+ 
+<partial name="partials/_SuccessfulPackage" model="new PackagesVM { }" />
 <partial name="partials/PackageMenuForm" model="new AddPackageMenuVM { MenuList = Model.MenuList , PackageList = Model.PackageList }" />
 <partial name="partials/PackageForm" model=" new Attila.Application.Coordinator.Event.Queries.EventPackageVM {}" />
 
@@ -149,11 +150,12 @@
             $('.packages tr').click(function () {
                 var _id = $(this).data("id");
                 a = _id;
-                $.get('/Packages/Details', { PackageID: a });
+                 
+                $.get('/Packages/Details', { PackageID: _id });
             });
         });
 
-        
+
         function OnFailurePackageMenu(e) {
             console.log(e);
             alert("failed!");

@@ -27,6 +27,7 @@ namespace Attila.Application.Coordinator.Event.Commands
             {
                 var _addPaymentForEventCommand = new PaymentStatus
                 {
+                    ID =request.MyEventPaymentStatus.ID,
                     EventDetailsID = request.MyEventPaymentStatus.EventDetailsID,
                     Amount = request.MyEventPaymentStatus.Amount,
                     DateOfPayment = DateTime.Now,

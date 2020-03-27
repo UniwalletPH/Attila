@@ -50,12 +50,15 @@
 
   <ItemGroup>
     <None Include="Views\Packages\Index.cshtml" />
+    <None Include="Views\Packages\MenuList.cshtml" />
     <None Include="Views\Packages\partials\MenuCategoryForm.cshtml" />
     <None Include="Views\Packages\partials\MenuForm.cshtml" />
     <None Include="Views\Packages\partials\PackageForm.cshtml" />
+    <None Include="Views\Packages\partials\PackageMenuForm.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulCategory.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulMenu.cshtml" />
     <None Include="Views\Packages\partials\_SuccessfulPackage.cshtml" />
+    <None Include="Views\Packages\partials\_SuccessfulPackageMenu.cshtml" />
   </ItemGroup>
 
 

@@ -34,7 +34,7 @@ namespace Attila.UI.Controllers
                 var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
                 var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
                 var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
-                var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
+                var _pastEvents = await mediator.Send(new GetAllPastEventsQuery {  });
 
                 var _forEvent = new EventViewVM
                 {

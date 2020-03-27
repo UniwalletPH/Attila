@@ -244,7 +244,7 @@ namespace Attila.UI.Controllers
                     });
                 }
 
-                var _packageList = new AddPackageMenuVM();
+                var _packageList = new  AddPackageMenuVM();
                 _packageList.PackageList = _packageslist;
                 _packageList.MenuList = _menulist;
                 return PartialView("~/Views/Packages/Partials/PackageMenuForm.cshtml", _packageList);
@@ -270,7 +270,7 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new AddPackageMenuCommand {
 
-                    PackageMenu = _container
+                    PackageMenu =_container
 
                 });
             }
@@ -281,6 +281,7 @@ namespace Attila.UI.Controllers
 
             return Json(flag);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
@@ -298,7 +299,7 @@ namespace Attila.UI.Controllers
                 RatePerHead = _eventPackage.RatePerHead
 
             };
-
+            
             try
             {
                 await mediator.Send(new AddEventPackageCommand
@@ -319,25 +320,25 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Details(int PackageID){
 
             var package = await mediator.Send(new SearchPackageByIdQuery { PackageId = PackageID });
-            var menulist = await mediator.Send(new GetMenuListQuery());
             var eventPackages = await mediator.Send(new GetEventPackageListQuery { });
-            List<SelectListItem> _menu = new List<SelectListItem>();
+
+            var menulist = await mediator.Send(new GetMenuListQuery());
+
 
             List<SelectListItem> list = new List<SelectListItem>();
+            List<SelectListItem> _list = new List<SelectListItem>();
 
             foreach (var item in menulist)
             {
-                _menu.Add(new SelectListItem
+                _list.Add(new SelectListItem
                 {
-                  Value = item.ID.ToString(),
-                    Text = item.Name
+                    Value = item.ID.ToString(),
+                    Text = item.Name + item.MenuCategory.Category
                 });
+
 
             }
 
-             
-
-      
             foreach (var item in eventPackages)
             {
                 list.Add(new SelectListItem
@@ -347,23 +348,25 @@ namespace Attila.UI.Controllers
                 });
 
             }
+ 
+
+
             var packages = new PackagesVM
             {
-               MenuList = _menu,
-               EventPackages = eventPackages,
-               PackageList = list,
+
+                MenuList = _list,
+                EventPackages = eventPackages,
+                PackageList = list,
               PackageMenu = package
            };
-            return View(packages);
+            return PartialView("~/Views/Packages/Partials/Details", packages);
 
 
         }
 
          
 
-
-
-        [HttpPost]
+[HttpPost]
         public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
         { 
             bool flag = true;
