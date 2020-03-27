@@ -31,11 +31,11 @@ namespace Attila.Application.Users.Commands
             {
                 var _user = new User
                 { 
-                Name = request.User.Name,
-                ContactNumber = request.User.ContactNumber,
-                Email = request.User.Email,
-                Position = request.User.Position,
-                Role = request.User.Role,               
+                    Name = request.User.Name,
+                    ContactNumber = request.User.ContactNumber,
+                    Email = request.User.Email,
+                    Position = request.User.Position,
+                    Role = request.User.Role,               
                 };
 
                 dbContext.Users.Add(_user);
@@ -43,7 +43,7 @@ namespace Attila.Application.Users.Commands
 
                 var salt = passwordHasher.GenerateSalt();
 
-                var _userLogin = new UserLogins
+                var _userLogin = new UserLogin
                 {
                     ID = await mediator.Send(new GetIDQuery { User = _user}),
                     Username = request.User.Username,

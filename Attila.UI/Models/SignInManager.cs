@@ -67,11 +67,12 @@ namespace Attila.UI.Models
 
                 var _claims = new List<Claim>
                 {
-                //new Claim(ClaimTypes.NameIdentifier, _user.UID.ToString(), ClaimValueTypes.String),
-                new Claim(ClaimTypes.Name, _user.Name, ClaimValueTypes.String),
-                new Claim(ClaimTypes.Sid, _sessionUID.ToString(), ClaimValueTypes.String),
-                new Claim(ClaimTypes.UserData,  JsonSerializer.Serialize(_user), ClaimValueTypes.String)
+                    new Claim(ClaimTypes.NameIdentifier, _user.ID.ToString(), ClaimValueTypes.String),
+                    new Claim(ClaimTypes.Name, _user.Name, ClaimValueTypes.String),
+                    new Claim(ClaimTypes.Sid, _sessionUID.ToString(), ClaimValueTypes.String),
+                    new Claim(ClaimTypes.UserData,  JsonSerializer.Serialize(_user), ClaimValueTypes.String)
                 };
+
                 _claims.Add(new Claim(ClaimTypes.Role, _user.Role.ToString(), ClaimValueTypes.String));
 
 
@@ -84,7 +85,6 @@ namespace Attila.UI.Models
             }
             catch (Exception)
             {
-
                 return SignInResult.Failed;
             }
         }

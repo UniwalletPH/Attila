@@ -47,7 +47,7 @@ namespace Attila.Application.Interfaces
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<UserLogins> UserLogins { get; set; }
+        public DbSet<UserLogin> UserLogins { get; set; }
 
         public DbSet<PackageMenus> PackageMenus { get; set; }
 

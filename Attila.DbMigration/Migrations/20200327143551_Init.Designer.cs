@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200327141154_Init")]
+    [Migration("20200327143551_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -617,10 +617,14 @@ namespace Attila.DbMigration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(150)")
+                        .HasMaxLength(150);
 
                     b.Property<string>("Position")
                         .HasColumnType("nvarchar(max)");
@@ -630,26 +634,64 @@ namespace Attila.DbMigration.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = -1,
+                            Email = "admin@acs.com",
+                            Name = "Admin",
+                            Role = (byte)2
+                        });
                 });
 
-            modelBuilder.Entity("Attila.Domain.Entities.UserLogins", b =>
+            modelBuilder.Entity("Attila.Domain.Entities.UserLogin", b =>
                 {
                     b.Property<int>("ID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsTemporaryPassword")
+                        .HasColumnType("bit");
+
                     b.Property<byte[]>("Password")
-                        .HasColumnType("varbinary(max)");
+                        .IsRequired()
+                        .HasColumnType("varbinary(500)")
+                        .HasMaxLength(500);
 
                     b.Property<byte[]>("Salt")
-                        .HasColumnType("varbinary(max)");
+                        .IsRequired()
+                        .HasColumnType("varbinary(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("TemporaryPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(120)")
+                        .HasMaxLength(120);
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.ToTable("UserLogins");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = -1,
+                            IsTemporaryPassword = true,
+                            Password = new byte[] { 0, 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 152, 156, 47, 115, 252, 177, 181, 237, 49, 172, 91, 121, 81, 188, 196, 100, 45, 157, 169, 124, 209, 176, 77, 87, 192, 4, 80, 245, 135, 176, 31, 123 },
+                            Salt = new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 },
+                            TemporaryPassword = "admin",
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Attila.Domain.Entities.DeliveryDetails", b =>
@@ -856,11 +898,11 @@ namespace Attila.DbMigration.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Attila.Domain.Entities.UserLogins", b =>
+            modelBuilder.Entity("Attila.Domain.Entities.UserLogin", b =>
                 {
                     b.HasOne("Attila.Domain.Entities.User", "User")
                         .WithOne("UserLogins")
-                        .HasForeignKey("Attila.Domain.Entities.UserLogins", "ID")
+                        .HasForeignKey("Attila.Domain.Entities.UserLogin", "ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -111,10 +111,10 @@ namespace Attila.DbMigration.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 150, nullable: false),
                     Position = table.Column<string>(nullable: true),
                     ContactNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(maxLength: 100, nullable: false),
                     Role = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
@@ -304,9 +304,11 @@ namespace Attila.DbMigration.Migrations
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Salt = table.Column<byte[]>(nullable: true),
-                    Password = table.Column<byte[]>(nullable: true)
+                    Username = table.Column<string>(maxLength: 120, nullable: false),
+                    Salt = table.Column<byte[]>(maxLength: 500, nullable: false),
+                    Password = table.Column<byte[]>(maxLength: 500, nullable: false),
+                    IsTemporaryPassword = table.Column<bool>(nullable: false),
+                    TemporaryPassword = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -543,6 +545,16 @@ namespace Attila.DbMigration.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "ID", "ContactNumber", "Email", "Name", "Position", "Role" },
+                values: new object[] { -1, null, "admin@acs.com", "Admin", null, (byte)2 });
+
+            migrationBuilder.InsertData(
+                table: "UserLogins",
+                columns: new[] { "ID", "IsTemporaryPassword", "Password", "Salt", "TemporaryPassword", "Username" },
+                values: new object[] { -1, true, new byte[] { 0, 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 152, 156, 47, 115, 252, 177, 181, 237, 49, 172, 91, 121, 81, 188, 196, 100, 45, 157, 169, 124, 209, 176, 77, 87, 192, 4, 80, 245, 135, 176, 31, 123 }, new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 }, "admin", "admin" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_DeliveryDetails_SupplierDetailsID",
                 table: "DeliveryDetails",
@@ -677,6 +689,18 @@ namespace Attila.DbMigration.Migrations
                 name: "IX_PaymentStatus_EventDetailsID",
                 table: "PaymentStatus",
                 column: "EventDetailsID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserLogins_Username",
+                table: "UserLogins",
+                column: "Username",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

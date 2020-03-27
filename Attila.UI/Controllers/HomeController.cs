@@ -18,27 +18,16 @@ namespace Attila.UI.Controllers
     {
         private readonly IMediator mediator;
         private readonly ISignInManager signInManager;
-        private readonly IHttpContextAccessor context;
-        public HomeController(IMediator mediator, ISignInManager signInManager, IHttpContextAccessor context)
+        public HomeController(IMediator mediator, ISignInManager signInManager)
         {
             this.mediator = mediator;
             this.signInManager = signInManager;
-            this.context = context;
         }
-
 
         public IActionResult Index()
         {
-            if (User.Identities!=null)
-            {
-
-                return Redirect("/Dashboard");
-            }
-            else { return Redirect("/Login"); }
-            
+            return Redirect("/Dashboard");
         }
-
-       
 
         public IActionResult Privacy()
         {
@@ -54,37 +43,11 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(LoginDetailsVM data)
         {
-            var x = await signInManager.PasswordSignInAsync(data.Username, data.Password);
-         
-            if (x.Succeeded)
-            {
+            var _signinResult = await signInManager.PasswordSignInAsync(data.Username, data.Password);
 
-                if (User.Identities != null) 
-                {
-
-
-                    //Claim _claim = User?.FindFirst(ClaimTypes.UserData); //kinuha yung Identity
-                    //var _userData = _claim?.Value;//Kinuha yung isang claim na laman yung JSON na Details ng User
-                    //var _user = JsonConvert.DeserializeObject<UserVM>(_userData); //tapos desirialize.. Pacheck kung okay 
-                    //var identity = (ClaimsIdentity)User.Identity;
-                    //IEnumerable<Claim> claims = identity.Claims;
-                    return Redirect("/Dashboard"); } else
-                {
-                    return View("Login");
-                }               
-            }
-            else {
-
-
-
-                return View("Login");
-            }
-
-
+            return Json(_signinResult);
         }
 
-
-        [Route("RegisterAccount")]
         public IActionResult RegisterAccount()
         {
             return View();
@@ -93,14 +56,8 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> SignOut()
         {
-            //if (User.Identities!=null)
-            //{
-              await signInManager.SignOutAsync(); 
-                return Redirect("/Login");
-            //}
-            //else {
-            //return Redirect("/Login");
-            //}
+            await signInManager.SignOutAsync();
+            return Redirect("/");
         }
         [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)

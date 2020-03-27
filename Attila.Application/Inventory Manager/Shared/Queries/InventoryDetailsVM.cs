@@ -6,12 +6,12 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
     public class InventoryDetailsVM
     {
-        public List<EquipmentsDetailsVM> EquipmentsDetailsVM { get; set; }
+        public IEnumerable<EquipmentsDetailsVM> EquipmentsDetailsVM { get; set; } = new List<EquipmentsDetailsVM>();
 
-        public List<FoodsDetailsVM> FoodsDetailsVM { get; set; }
+        public IEnumerable<FoodsDetailsVM> FoodsDetailsVM { get; set; } = new List<FoodsDetailsVM>();
 
-        public List<EquipmentsInventoryVM> EquipmentsInventoryVM { get; set; }
+        public IEnumerable<EquipmentsInventoryVM> EquipmentsInventoryVM { get; set; } = new List<EquipmentsInventoryVM>();
 
-        public List<FoodsInventoryVM> FoodsInventoryVM { get; set; }
+        public IEnumerable<FoodsInventoryVM> FoodsInventoryVM { get; set; } = new List<FoodsInventoryVM>();
     }
 }
