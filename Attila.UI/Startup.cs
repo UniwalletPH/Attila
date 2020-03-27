@@ -24,19 +24,26 @@ namespace Attila.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             services.AddApplication();
             services.AddInfrastructure(Configuration);
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-        .AddCookie(options =>
-        {
-            options.LoginPath = "/Account/Login";
-            options.AccessDeniedPath = "/Error/403";
 
-            options.SlidingExpiration = true;
-            options.ExpireTimeSpan = TimeSpan.FromHours(1);
-        });
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+            services.AddScoped<ISignInManager, SignInManager>();
+            services.AddHttpContextAccessor();
+
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Home/Login";
+                    options.AccessDeniedPath = "/Error/403";
+
+                    options.SlidingExpiration = true;
+                    options.ExpireTimeSpan = TimeSpan.FromHours(1);
+                });
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Admin", authBuilder =>
@@ -44,11 +51,6 @@ namespace Attila.UI
                     authBuilder.RequireRole("Admin");
                 });
             });
-
-
-            services.AddHttpContextAccessor();
-            services.AddScoped<IPasswordHasher, PasswordHasher>();
-            services.AddScoped<ISignInManager, SignInManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,6 +66,7 @@ namespace Attila.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -71,8 +74,9 @@ namespace Attila.UI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-             
+
 
             app.UseEndpoints(endpoints =>
             {

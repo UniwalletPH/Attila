@@ -44,7 +44,6 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-        [Route("Login")]
 
         public IActionResult Login()
         {

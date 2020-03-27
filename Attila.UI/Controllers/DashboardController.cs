@@ -9,13 +9,13 @@ using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
-
-
         public static bool _checker;
 
         private readonly IMediator mediator;
