@@ -1,0 +1,76 @@
+﻿@using Attila.Application.Users.Queries
+
+@{
+    ViewData["Title"] = "User List";
+
+}
+
+@model IEnumerable<UserVM>
+
+@section Styles {
+    <style>
+        .user-each {
+            cursor: pointer;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $('document').ready(function () {
+            $('.user-each').on('click', function () {
+                var _this = this,
+                    _userUID = $(_this).data('userUid');
+
+                window.location = '/User/Profile?uid=' + _userUID;
+            });
+        });
+    </script>
+}
+
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            User List
+            <small> </small>
+        </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <a href="/User/Register" class="btn sbold green">
+                        Add New
+                    </a>
+                </div>
+                <div class="tools"> </div>
+            </div>
+
+            <table class="table table-striped table-bordered table-hover" id="sample_1">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th style="width:200px">Position</th>
+                        <th style="width:200px;">Email</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var _user in Model)
+                    {
+                        <tr class="user-each" data-user-uid="@_user.UID">
+                            <td>@_user.Name</td>
+                            <td>@_user.Position</td>
+                            <td>@_user.Email</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+''

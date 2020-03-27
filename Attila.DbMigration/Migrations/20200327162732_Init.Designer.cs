@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200327143551_Init")]
+    [Migration("20200327162732_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -632,9 +632,15 @@ namespace Attila.DbMigration.Migrations
                     b.Property<byte>("Role")
                         .HasColumnType("tinyint");
 
+                    b.Property<Guid>("UID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ID");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UID")
                         .IsUnique();
 
                     b.ToTable("Users");
@@ -645,7 +651,8 @@ namespace Attila.DbMigration.Migrations
                             ID = -1,
                             Email = "admin@acs.com",
                             Name = "Admin",
-                            Role = (byte)2
+                            Role = (byte)2,
+                            UID = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 

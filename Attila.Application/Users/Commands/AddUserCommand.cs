@@ -29,30 +29,26 @@ namespace Attila.Application.Users.Commands
 
             public async Task<bool> Handle(AddUserCommand request, CancellationToken cancellationToken)
             {
+                var salt = passwordHasher.GenerateSalt();
+
                 var _user = new User
-                { 
+                {
+                    UID = Guid.NewGuid(),
                     Name = request.User.Name,
                     ContactNumber = request.User.ContactNumber,
                     Email = request.User.Email,
                     Position = request.User.Position,
-                    Role = request.User.Role,               
+                    Role = request.User.Role,
+                    UserLogins = new UserLogin
+                    {
+                        Username = request.User.Username,
+                        Salt = salt,
+                        Password = passwordHasher.HashPassword(salt, request.User.Password)
+                    }
                 };
 
                 dbContext.Users.Add(_user);
-                await dbContext.SaveChangesAsync();
 
-                var salt = passwordHasher.GenerateSalt();
-
-                var _userLogin = new UserLogin
-                {
-                    ID = await mediator.Send(new GetIDQuery { User = _user}),
-                    Username = request.User.Username,
-                    Salt = salt,
-                    Password = passwordHasher.HashPassword(salt,request.User.Password)
-                };
-
-               
-                dbContext.UserLogins.Add(_userLogin);
                 await dbContext.SaveChangesAsync();
 
                 return true;

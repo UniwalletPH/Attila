@@ -64,13 +64,18 @@
                     <span class="title">Suppliers</span>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a onclick="location.href='@Url.Action("Index", "Profile")'" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Profile</span>
-                </a>
 
-            </li>
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item ">
+                        <a href="/User/List" class="nav-link nav-toggle">
+                            <i class="icon-user"></i>
+                            <span class="title">User List</span>
+                        </a>
+                    </li>
+                }
+            }
 
             <li onclick="location.href='@Url.Action("SignOut", "Home")'" class="nav-link nav-toggle">
                 <a class="nav-link nav-toggle">

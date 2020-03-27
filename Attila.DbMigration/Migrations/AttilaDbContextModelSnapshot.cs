@@ -630,9 +630,15 @@ namespace Attila.DbMigration.Migrations
                     b.Property<byte>("Role")
                         .HasColumnType("tinyint");
 
+                    b.Property<Guid>("UID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("ID");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UID")
                         .IsUnique();
 
                     b.ToTable("Users");
@@ -643,7 +649,8 @@ namespace Attila.DbMigration.Migrations
                             ID = -1,
                             Email = "admin@acs.com",
                             Name = "Admin",
-                            Role = (byte)2
+                            Role = (byte)2,
+                            UID = new Guid("00000000-0000-0000-0000-000000000000")
                         });
                 });
 

@@ -1,4 +1,5 @@
 ﻿using Attila.Domain.Entities.Enums;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,6 +9,7 @@ namespace Attila.Domain.Entities
     {
         [Key]
         public int ID { get; set; }
+        public Guid UID { get; set; }
 
         public string Name { get; set; }
 

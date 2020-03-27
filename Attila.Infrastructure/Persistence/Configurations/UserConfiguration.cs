@@ -13,6 +13,9 @@ namespace Attila.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            builder.HasIndex(a => a.UID)
+                .IsUnique();
+
             builder.Property(a => a.Name)
                 .HasMaxLength(150)
                 .IsRequired();
@@ -27,6 +30,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
             builder.HasData(new User
             {
                 ID = -1,
+                UID = Guid.Empty,
                 Name = "Admin",
                 Role = AccessRole.Admin,
                 Email = "admin@acs.com"

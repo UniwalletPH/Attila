@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewData["Title"] = "Register Account";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
 @model Attila.Application.Users.Queries.UserVM;
@@ -67,22 +66,13 @@
                         <div class="col-md-6">
 
                             <div class="form-group">
-                                <label class="control-label">Name</label>
+                                <label class="control-label">Full Name</label>
                                 <input asp-for="Name" placeholder="John Smith" class="form-control">
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label">Username</label>
-                                <input asp-for="Username" placeholder="John Smith" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label class="control-label">E-mail</label>
                                 <input type="email" asp-for="Email" placeholder="john.smith@gmail.com" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label">Password</label>
-                                <input type="password" asp-for="Password" class="form-control">
                             </div>
 
                             <div class="form-group">
@@ -106,6 +96,20 @@
                                 </select>
                             </div>
 
+                            <hr />
+
+                            <div class="form-group">
+                                <label class="control-label">Username</label>
+                                <input asp-for="Username" placeholder="John Smith" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label">Password</label>
+                                <input type="password" asp-for="Password" class="form-control">
+                            </div>
+
+
+
 
                             <div class="margin-top-10">
                             </div>
@@ -124,12 +128,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" onclick="location.href='@Url.Action("Login", "Home")'" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close" onclick="location.href='/User/List'" data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Successful Registration</h4>
             </div>
             <div class="modal-body"> User added successfully! </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Login", "Home")'" data-dismiss="modal">Close</button>
+                <button type="button" class="btn dark btn-outline" onclick="location.href='/User/List'" data-dismiss="modal">Close</button>
             </div>
         </div>
         <!-- /.modal-content -->

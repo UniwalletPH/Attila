@@ -265,7 +265,7 @@ namespace Attila.UI.Controllers
             }
 
             var _packageList = new AddMenuCategoryVM();
-            _packageList.PackageList = _list; 
+           // _packageList.PackageList = _list; 
             return View(_packageList);
             }
             else

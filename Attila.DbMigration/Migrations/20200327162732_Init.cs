@@ -111,6 +111,7 @@ namespace Attila.DbMigration.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UID = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(maxLength: 150, nullable: false),
                     Position = table.Column<string>(nullable: true),
                     ContactNumber = table.Column<string>(nullable: true),
@@ -547,8 +548,8 @@ namespace Attila.DbMigration.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "ID", "ContactNumber", "Email", "Name", "Position", "Role" },
-                values: new object[] { -1, null, "admin@acs.com", "Admin", null, (byte)2 });
+                columns: new[] { "ID", "ContactNumber", "Email", "Name", "Position", "Role", "UID" },
+                values: new object[] { -1, null, "admin@acs.com", "Admin", null, (byte)2, new Guid("00000000-0000-0000-0000-000000000000") });
 
             migrationBuilder.InsertData(
                 table: "UserLogins",
@@ -700,6 +701,12 @@ namespace Attila.DbMigration.Migrations
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UID",
+                table: "Users",
+                column: "UID",
                 unique: true);
         }
 

@@ -30,21 +30,10 @@ namespace Attila.UI.Controllers
             this.context = context;
         }
 
-        [Route("Dashboard")]
         [HttpGet]         
         public IActionResult Index()
-        { 
-             
-             
-            if (User.Identities != null)
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
-
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
