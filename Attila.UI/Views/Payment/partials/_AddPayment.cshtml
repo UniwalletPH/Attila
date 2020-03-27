@@ -1,0 +1,50 @@
+﻿ 
+@model EventPaymentVM
+<div class="modal fade" id="addpayment" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Add Payment</h4>
+            </div>
+            <form role="form" asp-controller="Payment" asp-action="AddPayment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
+                <div class="modal-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label  id="eventID"   > </label>
+                            <input type="text" class="form-control" asp-for="EventDetailsID">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Reference Number</label>
+                            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" class="form-control" asp-for="Amount" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks</label>
+                            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-actions">
+                        <button type="submit" class="btn blue">Submit</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

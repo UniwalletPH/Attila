@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200327140835_Init.cs" />
+    <Compile Remove="Migrations\20200327140835_Init.Designer.cs" />
+    <Compile Remove="Migrations\20200327141154_Init.cs" />
+    <Compile Remove="Migrations\20200327141154_Init.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Attila.Infrastructure\Attila.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

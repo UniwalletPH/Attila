@@ -35,7 +35,7 @@ namespace Attila.Application.Coordinator.Event.Queries
                 {
                     var _menuList = new MenuVM
                     {
-
+                        ID = item.ID,
                         MenuCategory = item.MenuCategory,
                         Name = item.Name,
                         Description  = item.Description

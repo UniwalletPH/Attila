@@ -20,7 +20,7 @@ namespace Attila.Domain.Entities
         public AccessRole Role { get; set; }
 
         [InverseProperty("User")]
-        public UserLogins UserLogins { get; set; }
+        public UserLogin UserLogins { get; set; }
 
     }
 }
