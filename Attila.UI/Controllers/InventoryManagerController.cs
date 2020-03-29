@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Attila.UI.Controllers
 {
-    public class InventoryManagerController : Controller
+    public class InventoryManagerController : BaseController
     {
         public static bool _checker;
         private readonly IMediator mediator;

@@ -1,10 +1,20 @@
 ﻿
 @{
     ViewData["Title"] = "Login";
-    Layout = "~/Views/Shared/_homeLayout.cshtml";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
 
 }
 @model Attila.Application.Login.Queries.LoginDetailsVM
+
+@section Styles {
+    <link href="../assets/pages/css/login.css" rel="stylesheet" asp-append-version="true" />
+
+    <style>
+        .login {
+            background-color: #fff !important;
+        }
+    </style>
+}
 
 @section Scripts{
     <script type="text/javascript">

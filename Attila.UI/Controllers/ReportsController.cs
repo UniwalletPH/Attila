@@ -11,7 +11,7 @@ using Attila.Application.Event.Queries;
 
 namespace Attila.UI.Controllers
 {
-    public class ReportsController : Controller
+    public class ReportsController : BaseController
     {
 
         private readonly IMediator mediator;

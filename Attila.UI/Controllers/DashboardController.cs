@@ -13,8 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Attila.UI.Controllers
 {
-    [Authorize]
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         public static bool _checker;
 

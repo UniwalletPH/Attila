@@ -18,7 +18,7 @@ using Attila.Application.Inventory_Manager.Shared.Commands;
 
 namespace Attila.UI.Controllers
 {
-    public class InventoryController : Controller
+    public class InventoryController : BaseController
     {
         public static bool _checker;
 

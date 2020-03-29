@@ -17,7 +17,7 @@ using Attila.Application.Admin.Queries;
 
 namespace Attila.UI.Controllers
 {
-    public class PaymentController : Controller
+    public class PaymentController : BaseController
     {
         private readonly IMediator mediator;
 

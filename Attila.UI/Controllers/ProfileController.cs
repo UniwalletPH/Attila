@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace Attila.UI.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         private readonly IMediator mediator;
         public static bool _checker;

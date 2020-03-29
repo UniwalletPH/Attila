@@ -11,10 +11,12 @@ using Attila.Application.Users.Commands;
 using Attila.Application.Login.Queries;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims; 
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Attila.UI.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IMediator mediator;
         private readonly ISignInManager signInManager;
@@ -29,11 +31,13 @@ namespace Attila.UI.Controllers
             return Redirect("/Dashboard");
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
@@ -41,6 +45,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn(LoginDetailsVM data)
         {
             var _signinResult = await signInManager.PasswordSignInAsync(data.Username, data.Password);

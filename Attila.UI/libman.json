@@ -34,6 +34,38 @@
         "dist/jquery.unobtrusive-ajax.js",
         "dist/jquery.unobtrusive-ajax.min.js"
       ]
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@3.3.7",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "provider": "filesystem",
+      "library": "Vendors/kendo-ui-core/",
+      "destination": "wwwroot/lib/kendo-ui-core",
+      "files": [
+        "js/kendo.core.min.js",
+        "js/kendo.ui.core.min.js",
+        "styles/kendo.common.min.css",
+        "styles/kendo.common-bootstrap.min.css",
+        "styles/kendo.bootstrap.min.css",
+        "styles/kendo.bootstrap-v4.min.css",
+        "styles/Bootstrap/editor.png",
+        "styles/Bootstrap/imagebrowser.png",
+        "styles/Bootstrap/indeterminate.gif",
+        "styles/Bootstrap/loading.gif",
+        "styles/Bootstrap/loading_2x.gif",
+        "styles/Bootstrap/loading-image.gif",
+        "styles/Bootstrap/markers.png",
+        "styles/Bootstrap/markers_2x.png",
+        "styles/Bootstrap/slider-h.gif",
+        "styles/Bootstrap/slider-v.gif",
+        "styles/Bootstrap/sprite.png",
+        "styles/Bootstrap/sprite_2x.png",
+        "styles/Bootstrap/sprite_kpi.png",
+        "styles/Bootstrap/sprite_kpi_2x.png"
+      ]
     }
   ]
 }

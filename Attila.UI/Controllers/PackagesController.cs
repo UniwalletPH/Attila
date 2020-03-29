@@ -16,7 +16,7 @@ using Attila.Application.Coordinator.Event.Commands;
 
 namespace Attila.UI.Controllers
 {
-    public class PackagesController : Controller
+    public class PackagesController : BaseController
     {
         private readonly IMediator mediator;
 
@@ -92,16 +92,7 @@ namespace Attila.UI.Controllers
 
         public IActionResult PackageForm()
         {
-            if (User.Identities != null)
-            {
-
-                return PartialView("~/Views/Packages/Partials/PackageForm.cshtml");
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
-
+            return PartialView("~/Views/Packages/Partials/PackageForm.cshtml");
         }
 
 

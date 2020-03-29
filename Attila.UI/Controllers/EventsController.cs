@@ -17,7 +17,7 @@ using Attila.Application.Admin.Queries;
 
 namespace Attila.UI.Controllers
 {
-    public class EventsController : Controller
+    public class EventsController : BaseController
     {
         private readonly IMediator mediator;
         public static bool _checker;

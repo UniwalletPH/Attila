@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Dashboard\partials\" />
+    <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
   <ItemGroup>

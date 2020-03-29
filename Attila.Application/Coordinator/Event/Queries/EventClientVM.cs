@@ -8,6 +8,7 @@ namespace Attila.Application.Coordinator.Event.Queries
     public class EventClientVM
     {
         public int ID { get; set; }
+
         [Required]
         public string Firstname { get; set; }
         [Required]
