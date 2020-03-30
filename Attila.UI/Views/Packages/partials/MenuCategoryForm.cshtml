@@ -2,11 +2,11 @@
 
 @{
 
-    ViewData["Title"] = "Menu Category Form"; 
+    ViewData["Title"] = "Menu Category Form";
 
 }
 
- 
+
 
 
 <div class="modal fade" id="menucategory" tabindex="-1" role="basic" aria-hidden="true">
@@ -15,7 +15,7 @@
             <form role="form" asp-controller="Packages" asp-action="AddMenuCategory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessCategory" data-ajax-failure="OnFailureCategory">
 
                 <div class="modal-header">
-                    <button type="button" class="close"   data-dismiss="modal" aria-hidden="true"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">Menu Form</h4>
                 </div>
                 <div class="modal-body">
@@ -23,14 +23,14 @@
                     <div class="form-body">
                         <div class="form-group">
                             <label>Category Name</label>
-                            <input type="text" class="form-control" placeholder="" @*asp-for="MenuCategory.Category"*@>
+                            <input type="text" class="form-control" placeholder="" asp-for="Category">
                         </div>
                     </div>
-                     
+
                 </div>
                 <div class="modal-footer">
                     <div class="form-actions">
-                        <button type="submit"   class="btn blue">Submit</button>
+                        <button type="submit" class="btn blue">Submit</button>
                         <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>

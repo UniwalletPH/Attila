@@ -84,11 +84,17 @@
 
         function OnSuccess(e) {
             $("#successrequests").modal('show');
+            if (e == true) {
+                console.log("success");
+                alert("Event menu successfully added!");
+                window.location = "/Events";
+            }
         }
 
         function OnFailure(e) {
             console.log(e);
             alert("failed!");
+            window.location = "/Events/MenuForm";
         }
 
     </script>

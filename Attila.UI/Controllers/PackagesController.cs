@@ -394,7 +394,7 @@ namespace Attila.UI.Controllers
             bool flag = true;
             MenuCategoryVM _menuCategory = new MenuCategoryVM
             {
-                //Category = _menu.MenuCategory.Category,
+                Category = _menu.Category,
             };
             try
             {
