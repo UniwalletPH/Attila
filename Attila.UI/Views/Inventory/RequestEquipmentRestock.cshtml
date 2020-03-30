@@ -39,9 +39,9 @@
 
             </div>
             <div class="portlet-body">
-                <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-controller="Inventory" asp-action="RequestEquipmentRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-group">
-                        <label class="control-label">Food </label>
+                        <label class="control-label">Equipment </label>
                         @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT CLIENT--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
