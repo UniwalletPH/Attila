@@ -31,7 +31,9 @@ namespace Attila.UI.Controllers
 
         public async Task<IActionResult> Profile(Guid uid)
         {
-            return View();
+            var _userProfile = await mediator.Send(new SearchUserByIdQuery { UID = uid});
+
+            return View(_userProfile);
         }
     }
 }

@@ -2,11 +2,11 @@
 
 @{
 
-    ViewData["Title"] = "Package Menu Form"; 
+    ViewData["Title"] = "Package Menu Form";
 }
- 
- 
-  
+
+
+
 <div class="modal fade" id="packagemenuform" tabindex="-1" role="basic" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -21,13 +21,13 @@
                     <div class="form-body">
                         <div class="form-group">
                             <label>Package</label>
-                            @Html.DropDownListFor(m => m.SelectedPackage, Model.PackageList?? new List<SelectListItem>(), "--SELECT PACKAGE--", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.SelectedPackage, Model.PackageList ?? new List<SelectListItem>(), "--SELECT PACKAGE--", new { @class = "form-control" })
 
                         </div>
 
                         <div class="form-group">
                             <label>Menu Name</label>
-                            @Html.DropDownListFor(m => m.SelectedMenu, Model.MenuList?? new List<SelectListItem>(), "--SELECT MENU--", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.SelectedMenu, Model.MenuList ?? new List<SelectListItem>(), "--SELECT MENU--", new { @class = "form-control" })
 
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="form-actions">
-                        <button type="submit"  class="btn blue">Submit</button>
+                        <button type="submit" class="btn blue">Submit</button>
                         <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
