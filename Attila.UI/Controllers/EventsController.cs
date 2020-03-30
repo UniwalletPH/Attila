@@ -28,9 +28,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Index()
         {
 
-
-            if (User.Identities != null)
-            {
+             
                 var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
                 var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
                 var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
@@ -46,11 +44,7 @@ namespace Attila.UI.Controllers
 
 
                 return View(_forEvent);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+            
 
 
         }
@@ -60,8 +54,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> BookingForm()
         {
-            if (User.Identities != null)
-            {
+             
                 var _packageNames = await mediator.Send(new GetEventPackageQuery());
                 var _clientNames = await mediator.Send(new GetClientListQuery());
 
@@ -91,11 +84,8 @@ namespace Attila.UI.Controllers
                 _addEventList.PackageList = _list;
                 _addEventList.ClientList = _clientlist;
                 return View(_addEventList);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+            
+          
 
         }
 
@@ -103,9 +93,7 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
         {
-
-            if (User.Identities != null)
-            {
+             
                 EventDetailsVM x = new EventDetailsVM
                 {
                     EventName = _eventDetails.Event.EventName,
@@ -132,22 +120,11 @@ namespace Attila.UI.Controllers
                 };
 
 
-                try
-                {
-                    await mediator.Send(new AddEventCommand { EventDetails = x });
-                    _checker = true;
-                }
-                catch (Exception)
-                {
-                    _checker = false;
-                }
-                return Json(_checker);
-
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+                 
+                   var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+                   
+                return Json(response);
+ 
 
         }
 
@@ -184,18 +161,13 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Packages()
         {
-            if (User.Identities!=null)
-            {
+             
                 var _getPackageList = await mediator.Send(new GetEventPackageListQuery());
 
                 return View(_getPackageList);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+           
 
-            }
+          }
 
             public IActionResult PackageForm()
         {
@@ -207,8 +179,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
         {
 
-            if (User.Identities!=null)
-            {
+            
                 //int _duration = _eventPackage.Duration.Hours;
                 //string _parsedDurationString = _duration.ToString("hh':'mm");
                 //TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
@@ -222,25 +193,12 @@ namespace Attila.UI.Controllers
                     RatePerHead = _eventPackage.RatePerHead
 
                 };
-
-                try
-                {
-                    await mediator.Send(new AddEventPackageCommand
+ 
+              var response = await mediator.Send(new AddEventPackageCommand
                     {
                         PackageDetails = eventPackageVM
                     });
-
-                }
-                catch (Exception)
-                {
-                    flag = false;
-                }
-                return Json(flag);
-
-            }else            
-            {
-                    return Redirect("/Login");
-                }
+                return Json(response);                
             }
 
 
@@ -281,9 +239,7 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
         {
-            if (User.Identities!=null)
-            {
-                bool flag = true;
+            
             MenuVM menuDetails = new MenuVM
             {
 
@@ -293,58 +249,34 @@ namespace Attila.UI.Controllers
 
             };
 
-            try
-            {
-                await mediator.Send(new AddMenuCommand
+            
+                    var response = await mediator.Send(new AddMenuCommand
                 {
                     PackageMenu = menuDetails
                 });
 
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
-            return Json(flag);
+            
+            return Json(response);
 
+ 
+     
 
-        }
-            else
-            {
-                return Redirect("/Login");
-    }
-
-
-}
+           }
 
  
         [HttpPost]
         public async Task<IActionResult> AddMenuCategory(MenuCategoryVM _menu)
         {
-            if (User.Identities!=null)
-            {
-                bool flag = true;
-            try
-            {
-                await mediator.Send(new AddMenuCategoryCommand
+            
+           
+             var response = await mediator.Send(new AddMenuCategoryCommand
                 {
                     MenuCategory = _menu
                 });
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
 
-            return Json(flag);
-            } 
-            
-            else
-            {
-                return Redirect("/Login");
+            return Json(response);
     }
-
-}
+ 
 
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
