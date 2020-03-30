@@ -154,8 +154,13 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
-         
+         [HttpGet]
 
+         public IActionResult RegisterSupplier()
+        {
+
+                        return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> AddEquipmentInventory()
@@ -294,6 +299,7 @@ namespace Attila.UI.Controllers
                 return Json(response);
             
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
