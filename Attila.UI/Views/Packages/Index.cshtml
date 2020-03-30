@@ -58,31 +58,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-6">
-                            <div class="btn-group pull-right">
-                                <button class="btn green  btn-outline dropdown-toggle" data-toggle="dropdown">
-                                    Tools
-                                    <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="fa fa-print"></i> Print
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="fa fa-file-pdf-o"></i> Save as PDF
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <i class="fa fa-file-excel-o"></i> Export to Excel
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
 
@@ -124,7 +100,7 @@
 </div>
 
 <partial name="partials/_SuccessfulPackage" />
- 
+
 <partial name="partials/_SuccessfulPackage" model="new PackagesVM { }" />
 <partial name="partials/PackageMenuForm" model="new AddPackageMenuVM { MenuList = Model.MenuList , PackageList = Model.PackageList }" />
 <partial name="partials/PackageForm" model=" new Attila.Application.Coordinator.Event.Queries.EventPackageVM {}" />
@@ -132,7 +108,15 @@
 <partial name="partials/_SuccessfulPackageMenu" />
 @section Scripts {
 
+    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
+
+
+
+
+
+
+
         function OnSuccessPackage(e) {
             $("#successpackage").modal('show');
             $('#packageform').modal('toggle');
@@ -149,7 +133,7 @@
             $('.packages tr').click(function () {
                 var _id = $(this).data("id");
                 a = _id;
-                 
+
                 $.get('/Packages/Details', { PackageID: _id });
             });
         });

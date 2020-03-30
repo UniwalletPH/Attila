@@ -5,13 +5,13 @@
 
 @model AddMenuVM
 @section Styles{
-<style>
-     tr.group,
-    tr.group:hover {
-    background-color: #ddd !important;
-    }
-</style>
-   
+    <style>
+        tr.group,
+        tr.group:hover {
+            background-color: #ddd !important;
+        }
+    </style>
+
     <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -97,6 +97,8 @@
 <partial name="partials/MenuCategoryForm.cshtml" model="new AddMenuCategoryVM()" />
 
 @section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
         function OnSuccessMenu(e) {
             $("#successmenu").modal('show');
@@ -123,60 +125,64 @@
         }
 
 
+
+
+
+
         function OnFailureCategory(e) {
             console.log(e);
             alert("failed!");
         }
-      
- 
 
 
-        $(document).ready(function() {
-    table = $('#sample_1').DataTable({ 
-        "columnDefs": [
-            { "visible": false, "targets": 2 }
-        ],
-        "order": [[ 2, 'asc' ]],
-        "displayLength": 25,
-        "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
 
-            api.column(2, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
-                    );
 
-                    last = group;
+        $(document).ready(function () {
+            table = $('#sample_1').DataTable({
+                "columnDefs": [
+                    { "visible": false, "targets": 2 }
+                ],
+                "order": [[2, 'asc']],
+                "displayLength": 25,
+                "drawCallback": function (settings) {
+                    var api = this.api();
+                    var rows = api.rows({ page: 'current' }).nodes();
+                    var last = null;
+
+                    api.column(2, { page: 'current' }).data().each(function (group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before(
+                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+                            );
+
+                            last = group;
+                        }
+                    });
                 }
-            } );
-        }
-    } );
+            });
 
-    // Order by the grouping
-    $('#sample_1 tbody').on( 'click', 'tr.group', function () {
-        var currentOrder = table.order()[0];
-        if ( currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
-            table.order( [ 2, 'desc' ] ).draw();
-        }
-        else {
-            table.order( [ 2, 'asc' ] ).draw();
-        }
-    } );
-} );
+            // Order by the grouping
+            $('#sample_1 tbody').on('click', 'tr.group', function () {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                }
+                else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+        });
     </script>
 
 
 
 
     <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script> 
+    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL PLUGINS -->
     <!-- BEGIN THEME GLOBAL SCRIPTS -->
     <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
     <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS --> 
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="https://cdn.datatables.net/rowgroup/1.1.1/js/dataTables.rowGroup.min.js" type="text/javascript"></script>
 }
