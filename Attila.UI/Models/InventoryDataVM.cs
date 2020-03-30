@@ -8,6 +8,8 @@ namespace Attila.UI.Models
 {
     public class InventoryDataVM
     {
-        public InventoriesVM InventoriesVM { get; set; }
-    }
+        public List<FoodVM> FoodListVM { get; set; }
+
+        public List<EquipmentVM> EquipmentListVM { get; set; }
+    } 
 }

@@ -1,6 +1,6 @@
 ﻿@model Attila.UI.Models.FoodRestockRequestVM
 @{
-    
+
     ViewData["Title"] = "Request Food Restock";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
@@ -42,13 +42,13 @@
                 <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-group">
                         <label class="control-label">Food </label>
-                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT CLIENT--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label class="control-label">Quantity</label>
                         <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
                     </div>
- 
+
                     <div class="margin-top-10">
                         <button type="submit" id="btnSubmit" class="btn green">Submit </button>
                     </div>
@@ -61,6 +61,9 @@
 
 <partial name="partials/_SuccessfulRequest.cshtml" />
 @section Scripts{
+
+
+    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
         function OnSuccess(e) {
             $("#successreq").modal('show');
