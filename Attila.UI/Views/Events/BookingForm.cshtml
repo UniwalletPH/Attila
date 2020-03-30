@@ -86,7 +86,7 @@
                         </div>
                         <div class="form-group">
                             <label>Event Date</label>
-                            <input class="form-control form-control-inline date date-picker" size="16" type="datetime" asp-for="Event.EventDate" placeholder="mm/dd/yyyy"  required />
+                            <input class="form-control form-control-inline date date-picker" size="16" type="datetime" asp-for="Event.EventDate" placeholder="mm/dd/yyyy" required />
 
                         </div>
 
@@ -218,16 +218,35 @@
     <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
+
+    <partial name="_ValidationScriptsPartial" />
     <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        function OnSuccess(e) {
-            $("#successrequests").modal('show');
+        //function OnSuccess(e) {
+        //    $("#successrequests").modal('show');
+        //}
+
+        //function OnFailure(e) {
+        //    console.log(e);
+        //    alert("failed!");
+        //}
+
+          function OnSuccess(result) {
+            if (result == true) {
+                alert("Event successfully added!");
+                window.location = "/Events";
+            }
+
+            else if(result == false){
+                alert("Failed!");
+                window.location = "/Events/BookingForm";
+            }
         }
 
-        function OnFailure(e) {
-            console.log(e);
-            alert("failed!");
+        function OnFailure(result) {
+            alert("Failed!");
+            window.location = "/Events/BookingForm";
         }
 
     </script>
@@ -240,3 +259,21 @@
     <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
 }
+
+@*@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(result) {
+            if (result == true) {
+                alert("Event successfully added!");
+                window.location = "/Events";
+            }
+
+            else {
+                alert("Failed!");
+                window.location = "/Events/BookingForm";
+            }
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}*@

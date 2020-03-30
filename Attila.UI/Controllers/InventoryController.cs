@@ -19,9 +19,7 @@ using Attila.Application.Inventory_Manager.Shared.Commands;
 namespace Attila.UI.Controllers
 {
     public class InventoryController : BaseController
-    {
-        public static bool _checker;
-
+    { 
         private readonly IMediator mediator;
 
         public InventoryController(IMediator mediator)
@@ -32,31 +30,19 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            if (User.Identities != null)
-            {
-                try
-                {
-                    var _getDetails = await mediator.Send(new GetInventoryQuery());
+            
+                var _getDetails = await mediator.Send(new GetInventoryQuery());
 
-                    InventoryDataVM _inventoryDataVM = new InventoryDataVM
-                    {
-                        FoodListVM = _getDetails.FoodListVM,
-                        EquipmentListVM = _getDetails.EquipmentListVM
-                    };
-
-                    return View(_inventoryDataVM);
-                }
-                catch (Exception)
+                InventoryDataVM _inventoryDataVM = new InventoryDataVM
                 {
-                    throw;
-                }
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+                    FoodListVM = _getDetails.FoodListVM,
+                    EquipmentListVM = _getDetails.EquipmentListVM
+                };
+
+                return View(_inventoryDataVM);
+
+            
         }
-
 
         public IActionResult AddFood()
         {
@@ -71,53 +57,26 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFoodDetails(FoodsDetailsVM foodDetails)
         {
-            if (User.Identities != null)
-            {
-                try
-                {
-                    await mediator.Send(new AddFoodDetailsCommand
+           
+                 var response = await mediator.Send(new AddFoodDetailsCommand
                     {
                         MyFoodDetailsVM = foodDetails
                     });
-                    _checker = true;
-                }
-                catch (Exception)
-                {
-                    _checker = false;
-                }
 
-                return Json(_checker);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+            return Json(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddEquipmentDetails(EquipmentsDetailsVM equipDetails)
-        {
-            if (User.Identities != null)
-            {
-                try
-                {
-                    await mediator.Send(new AddEquipmentDetailsCommand
+        { 
+            var response = await mediator.Send(new AddEquipmentDetailsCommand
                     {
                         MyEquipmentsDetailsVM = equipDetails
                     });
-                    _checker = true;
-                }
-                catch (Exception)
-                {
-                    _checker = false;
-                }
-
-                return Json(_checker);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+                     
+               
+                return Json(response);
+ 
         }
 
 
@@ -135,6 +94,45 @@ namespace Attila.UI.Controllers
 
             return View(_suppliers);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> AddFoodInventory()
+        {
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+
+            var getFoodRestock = await mediator.Send(new GetFoodDeliveryQuery());
+            List<SelectListItem> _list2 = new List<SelectListItem>();
+
+            foreach (var item in getFoodRestock)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+
+                });
+            }
+
+
+            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            {
+                FoodDetailsList = _list,
+                FoodDeliveryList = _list2
+            };
+
+            return View(FoodDetailsListVM);
+        }
         [HttpPost]
         public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
         {
@@ -147,35 +145,22 @@ namespace Attila.UI.Controllers
                 ReceiptImage = inventoriesDeliveryVM.ReceiptImage,
                 Remarks = inventoriesDeliveryVM.Remarks,
             };
-            try
-            {
-                await mediator.Send(new AddInventoryDeliveryCommand
+            
+                var response  = await mediator.Send(new AddInventoryDeliveryCommand
                 {
                     MyInventoriesDeliveryVM = _inventory
                 });
-                _checker = true;
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
-
-            return Json(_checker);
-        }
-
-         
-
-        [HttpPost]
-        public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
-        {
-          var response =    await mediator.Send(new AddSupplierDetailsCommand
-            {
-                MySuppliersDetailsVM = suppliersDetails
-            });
-          
+             
             return Json(response);
         }
 
+         [HttpGet]
+
+         public IActionResult RegisterSupplier()
+        {
+
+                        return View();
+        }
 
         [HttpGet]
         public async Task<IActionResult> AddEquipmentInventory()
@@ -218,8 +203,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> RequestFoodRestock()
         {
-            if (User.Identities != null)
-            {
+             
                 var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
                 List<SelectListItem> _list = new List<SelectListItem>();
 
@@ -238,51 +222,9 @@ namespace Attila.UI.Controllers
                 };
 
                 return View(foodDetailsListVM);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+            
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddFoodInventory()
-        {
-            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            foreach (var item in getFoodDetails)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Code + " | " + item.Name + " | " + item.Description
-                });
-            }
-
-
-            var getFoodRestock = await mediator.Send(new GetFoodDeliveryQuery());
-            List<SelectListItem> _list2 = new List<SelectListItem>();
-
-            foreach (var item in getFoodRestock)
-            {
-                _list2.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
-
-                });
-            }
-
-
-            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
-            {
-                FoodDetailsList = _list,
-                FoodDeliveryList = _list2
-            };
-
-            return View(FoodDetailsListVM);
-        }
 
         [HttpPost]
         public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
@@ -300,20 +242,13 @@ namespace Attila.UI.Controllers
                 Remarks = foodInventory.Remarks
             };
 
-            try
-            {
-                await mediator.Send(new AddFoodInventoryCommand
+            
+                var response = await mediator.Send(new AddFoodInventoryCommand
                 {
                     MyFoodInventoryVM = foodDetails
                 });
-                _checker = true;
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
-
-            return Json(_checker);
+          
+            return Json(response);
         }
 
         [HttpPost]
@@ -330,29 +265,20 @@ namespace Attila.UI.Controllers
                 Quantity = equipmentInventory.Quantity,
                 Remarks = equipmentInventory.Remarks
             };
-            try
-            {
-
-
-                await mediator.Send(new AddEquipmentInventoryCommand
+           
+            
+                var response =  await mediator.Send(new AddEquipmentInventoryCommand
                 {
                     MyEquipmentsInventoryVM = equipments
-                });
-                _checker = true;
-            }
-            catch (Exception)
-            {
-                _checker = false;
-            }
-
-            return Json(_checker);
+                }); 
+           
+            return Json(response);
         }
 
         [HttpPost]
         public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
         {
-            if (User.Identities != null)
-            {
+            
                 FoodsRestockRequestVM _foodRequestDetails = new FoodsRestockRequestVM
                 {
                     FoodDetailsID = foodRestockRequest.FoodDetailsID,
@@ -364,25 +290,26 @@ namespace Attila.UI.Controllers
                     UserID = 1
                 };
 
-                try
-                {
-                    var val = await mediator.Send(new RequestFoodRestockCommand
+                
+                    var response = await mediator.Send(new RequestFoodRestockCommand
                     {
                         MyFoodRestockRequestVM = _foodRequestDetails
-                    });
-                    _checker = val;
-                }
-                catch (Exception)
-                {
-                    _checker = false;
-                }
+                    }); 
+                
+                return Json(response);
+            
+        }
 
-                return Json(_checker);
-            }
-            else
+
+        [HttpPost]
+        public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
+        {
+            var response = await mediator.Send(new AddSupplierDetailsCommand
             {
-                return Redirect("/Login");
-            }
+                MySuppliersDetailsVM = suppliersDetails
+            });
+
+            return Json(response);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

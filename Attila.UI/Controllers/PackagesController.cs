@@ -92,11 +92,11 @@ namespace Attila.UI.Controllers
 
         public IActionResult PackageForm()
         {
-            return PartialView("~/Views/Packages/Partials/PackageForm.cshtml");
+            return View();
         }
 
 
-
+        
         [HttpGet]
         public async Task<IActionResult> MenuForm()
         {
@@ -120,7 +120,7 @@ namespace Attila.UI.Controllers
                 }
                 var _addEventList = new AddMenuVM();
                 _addEventList.CategoryList = _list;
-                return PartialView("~/Views/Packages/Partials/MenuForm.cshtml", _addEventList);
+                return View(_addEventList);
 
 
             }
@@ -131,36 +131,13 @@ namespace Attila.UI.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> MenuCategoryForm()
+        public IActionResult MenuCategoryForm()
         {
 
+ 
+                return View();
 
-            if (User.Identities != null)
-            {
-
-                var _menuCategoryNames = await mediator.Send(new GetMenuCategoryListQuery());
-
-                List<SelectListItem> _list = new List<SelectListItem>();
-
-                foreach (var item in _menuCategoryNames)
-                {
-                    _list.Add(new SelectListItem
-                    {
-                        Value = item.ID.ToString(),
-                        Text = item.Category
-                    });
-
-                }
-                var _addEventList = new AddMenuVM();
-                _addEventList.CategoryList = _list;
-                return PartialView("~/Views/Packages/Partials/MenuForm.cshtml", _addEventList);
-
-
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+ 
 
         }
         [HttpGet]
@@ -238,7 +215,7 @@ namespace Attila.UI.Controllers
                 var _packageList = new  AddPackageMenuVM();
                 _packageList.PackageList = _packageslist;
                 _packageList.MenuList = _menulist;
-                return PartialView("~/Views/Packages/Partials/PackageMenuForm.cshtml", _packageList);
+                return View(_packageList);
             }
             else
             {
@@ -350,17 +327,15 @@ namespace Attila.UI.Controllers
                 PackageList = list,
               PackageMenu = package
            };
-            return PartialView("~/Views/Packages/Partials/Details", packages);
+            return View(packages);
 
 
         }
-
          
 
 [HttpPost]
         public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
-        { 
-            bool flag = true;
+        {  
             MenuVM menuDetails = new MenuVM
             {
 
@@ -369,20 +344,13 @@ namespace Attila.UI.Controllers
                 MenuCategoryID = _menuDetails.Selected
 
             };
-
-            try
-            {
-                await mediator.Send(new AddMenuCommand
+            var response = await mediator.Send(new AddMenuCommand
                 {
                     PackageMenu = menuDetails
                 });
 
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
-            return Json(flag);
+          
+            return Json(response);
         }
 
 
@@ -391,24 +359,22 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMenuCategory(AddMenuCategoryVM _menu)
         {
-            bool flag = true;
-            MenuCategoryVM _menuCategory = new MenuCategoryVM
-            {
-                //Category = _menu.MenuCategory.Category,
-            };
-            try
-            {
-                await mediator.Send(new AddMenuCategoryCommand
-                {
-                    MenuCategory = _menuCategory
-                });
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
 
-            return Json(flag);
+            var menu = new MenuCategoryVM { 
+            
+            Category = _menu.Category
+
+            
+            
+            };
+           
+             var response = await mediator.Send(new AddMenuCategoryCommand
+                {
+                    MenuCategory = menu
+                });
+ 
+           
+            return Json(response);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
