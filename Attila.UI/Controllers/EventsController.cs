@@ -104,7 +104,7 @@ namespace Attila.UI.Controllers
                     PackageDetailsID = _eventDetails.Selected,
                     Location = _eventDetails.Event.Location,
                     Remarks = _eventDetails.Event.Remarks,
-                    UserID = 1,
+                    UserID = CurrentUser.ID,
                     EventStatus = _eventDetails.Event.EventStatus,
                     EntryTime = _eventDetails.Event.EntryTime,
                     NumberOfGuests = _eventDetails.Event.NumberOfGuests,
