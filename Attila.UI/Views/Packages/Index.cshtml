@@ -58,7 +58,7 @@
                             </div>
 
                         </div>
-           
+
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
 </div>
 
 <partial name="partials/_SuccessfulPackage" />
- 
+
 <partial name="partials/_SuccessfulPackage" model="new PackagesVM { }" />
 <partial name="partials/PackageMenuForm" model="new AddPackageMenuVM { MenuList = Model.MenuList , PackageList = Model.PackageList }" />
 <partial name="partials/PackageForm" model=" new Attila.Application.Coordinator.Event.Queries.EventPackageVM {}" />
@@ -108,15 +108,15 @@
 <partial name="partials/_SuccessfulPackageMenu" />
 @section Scripts {
 
+    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
 
-     
 
 
 
 
-        
-    <partial name="_ValidationScriptsPartial" />
+
+
         function OnSuccessPackage(e) {
             $("#successpackage").modal('show');
             $('#packageform').modal('toggle');
@@ -133,7 +133,7 @@
             $('.packages tr').click(function () {
                 var _id = $(this).data("id");
                 a = _id;
-                 
+
                 $.get('/Packages/Details', { PackageID: _id });
             });
         });
