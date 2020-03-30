@@ -36,14 +36,15 @@ namespace Attila.UI.Controllers
             {
                 try
                 {
-                    var getDetails = await mediator.Send(new GetInventoryQuery());
+                    var _getDetails = await mediator.Send(new GetInventoryQuery());
 
-                    InventoryDetailsVM _model = new InventoryDetailsVM
+                    InventoryDataVM _inventoryDataVM = new InventoryDataVM
                     {
-                        
+                        FoodListVM = _getDetails.FoodListVM,
+                        EquipmentListVM = _getDetails.EquipmentListVM
                     };
 
-                    return View(_model);
+                    return View(_inventoryDataVM);
                 }
                 catch (Exception)
                 {
