@@ -163,17 +163,29 @@ namespace Attila.UI.Controllers
             return Json(_checker);
         }
 
-         
+
+        [HttpGet]
+        public IActionResult AddSupplierDetails()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddSupplierDetails(SuppliersDetailsVM suppliersDetails)
         {
-          var response =    await mediator.Send(new AddSupplierDetailsCommand
+            try
             {
-                MySuppliersDetailsVM = suppliersDetails
-            });
-          
-            return Json(response);
+                await mediator.Send(new AddSupplierDetailsCommand
+                {
+                    MySuppliersDetailsVM = suppliersDetails
+                });
+                _checker = true;
+            }
+            catch (Exception)
+            {
+                _checker = false;
+            }
+            return Json(_checker);
         }
 
 

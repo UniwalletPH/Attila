@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Attila.Application.Users.Queries
 {
-    class SearchUserByIdQuery
+    class SearchUserByKeywordQuery
     {
     }
 }
