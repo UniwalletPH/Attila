@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
-    public class GetInventoryQuery : IRequest<IEnumerable<InventoriesVM>>
+    public class GetInventoryQuery : IRequest<InventoriesVM>
     {
-        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryQuery, IEnumerable<InventoriesVM>>
+        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryQuery, InventoriesVM>
         {
             private readonly IAttilaDbContext dbContext;
             private readonly IMediator mediator;
@@ -20,15 +20,37 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 this.dbContext = dbContext;
                 this.mediator = mediator;
             }
-            public async Task<IEnumerable<InventoriesVM>> Handle(GetInventoryQuery request, CancellationToken cancellationToken)
+            public async Task<InventoriesVM> Handle(GetInventoryQuery request, CancellationToken cancellationToken)
             {
-                var _inventoryDataList = new List<InventoriesVM>();
+                var _foodListData = new List<FoodVM>();
+                var _equipmentListData = new List<EquipmentVM>();
+                var _inventoryListData = new List<InventoriesVM>();
 
-                var _getInventoryData = dbContext.EquipmentInventories.Include(a => a.EquipmentDetails);
 
-                foreach (var item in _getInventoryData)
+                var _getFoodData = dbContext.FoodInventories.Include(a => a.FoodDetails);
+
+                foreach (var item in _getFoodData)
                 {
-                    var _inventoryAllDetails = new InventoriesVM
+                    var _foodAllDetails = new FoodVM
+                    {
+                        ID = item.ID,
+                        Quantity = item.Quantity,
+                        EncodingDate = item.EncodingDate,
+                        ItemPrice = item.ItemPrice,
+                        Remarks = item.Remarks,
+                        UserID = item.UserID,
+                        FoodDetails = item.FoodDetails
+                    };
+
+                    _foodListData.Add(_foodAllDetails);
+                }
+
+
+                var _getEquipmentData = dbContext.EquipmentInventories.Include(a => a.EquipmentDetails);
+
+                foreach (var item in _getEquipmentData)
+                {
+                    var _equipmentAllDetails = new EquipmentVM
                     {
                         ID = item.ID,
                         Quantity = item.Quantity,
@@ -39,10 +61,17 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EquipmentDetails = item.EquipmentDetails
                     };
 
-                    _inventoryDataList.Add(_inventoryAllDetails);
+                    _equipmentListData.Add(_equipmentAllDetails);
                 }
 
-                return _inventoryDataList;
+                InventoriesVM _inventoryVM = new InventoriesVM 
+                {
+                    FoodListVM = _foodListData,
+                    EquipmentListVM = _equipmentListData
+                };
+
+
+                return _inventoryVM;
             }
         }
     }
