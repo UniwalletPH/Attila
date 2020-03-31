@@ -75,34 +75,18 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> AddPaymentAsync()
+        public IActionResult AddPayment(int EventID)
         {
 
-            var _eventList = await mediator.Send(new GetEventListQuery());
-
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            foreach (var item in _eventList)
+            var eventID = new EventPaymentVM
             {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.EventName
-                });
 
-            }
-            var _addEventPayment = new AddPaymentStatusVM();
-            _addEventPayment.EventList = _list;
-            return View(_addEventPayment);
+                EventDetailsID = EventID
 
-            //var eventID = new EventPaymentVM { 
-            
-            //EventDetailsID = EventID
-            
-            
-            //};
 
-            //return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
+            };
+
+            return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
 
 
         }
@@ -113,11 +97,11 @@ namespace Attila.UI.Controllers
 
             bool flag;
             var payment = new PaymentStatusVM {
-            Amount  = _payment.Payment.Amount,
-            EventDetailsID = _payment.SelectedEvent,
-            ReferenceNumber = _payment.Payment.ReferenceNumber,
+            Amount  = _payment.Amount,
+            EventDetailsID = _payment.EventDetailsID,
+            ReferenceNumber = _payment.ReferenceNumber,
             DateOfPayment = DateTime.Now,
-            Remarks = _payment.Payment.Remarks
+            Remarks = _payment.Remarks
             
             };
                                  
