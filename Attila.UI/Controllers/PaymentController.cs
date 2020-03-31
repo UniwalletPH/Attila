@@ -42,41 +42,109 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> FetchRecord(int EventID)
-        {
-
-            var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
-
-            
-                return View("/Payment/Record", new PaymentVM { Payment = eventPackages });
-             
-        }
-         
-        [Route("Payment/Record")]
-        [HttpGet]
-        public IActionResult Record(PaymentVM _payment)
-        {
-            
-             
-            return View(_payment);
-
-        }
-
-
-
-        [HttpGet]
-        public IActionResult AddPayment(int EventID)
+        public async Task<IActionResult> Record(int EventID)
         {
 
 
-           var eventID = new EventPaymentVM { 
+            var _searchResult = await mediator.Send(new SearchEventByIdQuery
+            {
+                EventId = EventID
+            });
 
-            EventDetailsID = EventID
+            var _eventDetails = new EventDetailsVM
+            {
+                EventName = _searchResult.EventName,
+                EventStatus = _searchResult.EventStatus,
+                EventDate = _searchResult.EventDate,
+                BookingDate = _searchResult.BookingDate,
+                Description = _searchResult.Description,
+                Remarks = _searchResult.Remarks,
+                EntryTime = _searchResult.EntryTime,
+                Location = _searchResult.Location,
+                LocationType = _searchResult.LocationType,
+                NumberOfGuests = _searchResult.NumberOfGuests,
+                ProgramStart = _searchResult.ProgramStart,
+                PackageDetailsID = _searchResult.PackageDetailsID,
+                UserID = _searchResult.UserID,
+                EventClientID = _searchResult.EventClientID,
+                Theme = _searchResult.Theme,
+                ServingType = _searchResult.ServingType,
+                ServingTime = _searchResult.ServingTime,
+                ID = _searchResult.ID,
+                Type = _searchResult.Type,
+
+                VenueType = _searchResult.VenueType,
+
 
 
             };
 
-            return View(eventID);
+            var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
+            var eventDetails = new EventPaymentVM
+            {
+
+                PaymentStatus = eventPackages,
+                EventDetails = _eventDetails
+
+
+
+            };
+
+            return View(eventDetails);
+             
+        }
+         
+      
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddPayment(int EventID)
+        {
+
+
+            var _searchResult = await mediator.Send(new SearchEventByIdQuery
+            {
+                EventId = EventID
+            });
+
+
+            var _eventDetails =  new EventDetailsVM { 
+              EventName =_searchResult.EventName,
+             EventStatus = _searchResult.EventStatus,
+             EventDate =  _searchResult.EventDate,
+             BookingDate = _searchResult.BookingDate,
+             Description = _searchResult.Description,
+             Remarks = _searchResult.Remarks,
+             EntryTime = _searchResult.EntryTime,
+             Location = _searchResult.Location,
+             LocationType = _searchResult.LocationType,
+             NumberOfGuests = _searchResult.NumberOfGuests,
+                ProgramStart    = _searchResult.ProgramStart,
+                PackageDetailsID = _searchResult.PackageDetailsID,
+                UserID = _searchResult.UserID,
+                EventClientID = _searchResult.EventClientID,
+                Theme = _searchResult.Theme,
+                ServingType = _searchResult.ServingType,
+                ServingTime = _searchResult.ServingTime,
+                ID = _searchResult.ID,
+                Type =_searchResult.Type,
+
+                VenueType = _searchResult.VenueType,
+                
+                
+
+            };
+
+           var eventDetails = new EventPaymentVM { 
+
+            EventDetailsID = EventID,
+            EventDetails = _eventDetails
+
+
+
+           };
+
+            return View(eventDetails);
 
         }
 

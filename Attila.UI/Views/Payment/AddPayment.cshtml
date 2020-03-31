@@ -37,11 +37,18 @@
                 <div class="modal-body">
 
                     <div class="form-body">
-                        <div class="form-group">
+
+                        @*<div class="form-group" style="visibility:hidden">
                             <label id="eventID"> Event Name  </label>
                             <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
-                        </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label id="eventID"> Event Name  </label>
+                            <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
 
+                            <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
+                        </div>
+                         
                         <div class="form-group">
                             <label>Reference Number</label>
                             <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">

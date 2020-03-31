@@ -10,7 +10,6 @@ namespace Attila.UI.Models
     public class PaymentVM
     {
         public IEnumerable<Attila.Application.Admin.Event.Queries.EventVM> Events { get; set; }
-        public IEnumerable<PaymentStatusVM> Payment {get;set;} 
-
+  
     }
 }

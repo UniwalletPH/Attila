@@ -88,26 +88,20 @@
  
         $(document).on('click', 'tr .see', function (e) {
             try {
-                a = $(this).closest('tr').attr('data-id');
-                $.get('/Payment/FetchRecord', { EventID: a });
+                 id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("Record", "Payment", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
             }
             catch (err) { alert(err); }
         });
 
         $(document).on('click', 'tr .add-payment', function (e) {
-
-
-
-             
+              
             id = $(this).closest('tr').attr('data-id');
-            $.get('/Payment/AddPayment', { EventID: a }, function () {
+            var url = '@Url.Action("AddPayment", "Payment", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
 
-
-
-                var url = '@Url.Action("AddPayment", "Payment", new { EventID = "__id__" })';
-                window.location.href = url.replace('__id__', id);
-
-             });
+              
         });
 
         

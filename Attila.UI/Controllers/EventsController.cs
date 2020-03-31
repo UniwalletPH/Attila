@@ -131,11 +131,43 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int EventID) {
 
-            var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
 
-            ViewEventVM viewEventVM = new ViewEventVM { 
+
+
+            var x = new EventDetailsVM
+            {
+                EventName = _eventDetails.EventName,
+                Type = _eventDetails.Type,
+                Description = _eventDetails.Description,
+                EventClientID = _eventDetails.EventClientID,
+                EventDate = _eventDetails.EventDate,
+                PackageDetailsID = _eventDetails.PackageDetailsID,                
+                Location = _eventDetails.Location,
+                Remarks = _eventDetails.Remarks,
+                UserID = _eventDetails.UserID,
+                EventStatus = _eventDetails.EventStatus,
+                EntryTime = _eventDetails.EntryTime,
+                NumberOfGuests = _eventDetails.NumberOfGuests,
+                ProgramStart = _eventDetails.ProgramStart,
+                ServingTime = _eventDetails.ServingTime,
+                LocationType = _eventDetails.LocationType,
+                ServingType = _eventDetails.ServingType,
+                Theme = _eventDetails.Theme,
+                VenueType = _eventDetails.VenueType,
+                BookingDate = _eventDetails.BookingDate,
+                ID = _eventDetails.ID
+
+
+
+            };
+
+
+
+            var viewEventVM = new ViewEventVM
+            { 
             
-            EventDetails = _eventDetails
+            Event = x
             
             
             };

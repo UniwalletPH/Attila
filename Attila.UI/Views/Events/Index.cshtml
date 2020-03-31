@@ -55,20 +55,22 @@
                             <th> Event Name </th>
                             <th> Client </th>
                             <th> Coordinator </th>
+
+                            <th>   </th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach (var item in Model.Events)
                         {
-                            <tr  data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
-                                <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
-                                <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
-                              
-                            </tr>
+                        <tr data-id="@item.ID">
+                            <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                            <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
+                            <td> @Html.DisplayFor(modelItem => item.EventName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                            <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
+                            <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td> 
+                        </tr>
                         }
 
 
@@ -298,17 +300,16 @@
 @section Scripts {
  
 
-    <script>
-        var a;
+    <script> 
+         
+            $(document).on('click', 'tr .view', function (e) {
+              
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
 
-        $(document).ready(function () {
-            $('.events tr').click(function () {
-                var _id = $(this).data("id");
-                a = _id;
-                $.get('/Events/Details', { EventID: _id });
-            });
+              
         });
-        
         
     </script>
 
