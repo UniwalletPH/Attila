@@ -80,11 +80,7 @@ namespace Attila.UI.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult AddInventoryDelivery()
-        {
-            return View();
-        }
+        
         [HttpGet]
         public async Task<IActionResult> Suppliers()
         {
@@ -133,6 +129,31 @@ namespace Attila.UI.Controllers
 
             return View(FoodDetailsListVM);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddInventoryDelivery()
+        {
+            var getSupplierDetails = await mediator.Send(new GetSupplierDetailsQuery());
+            List<SelectListItem> _supplierList = new List<SelectListItem>();
+
+            foreach (var item in getSupplierDetails)
+            {
+                _supplierList.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Supplier: " + item.Name
+                });
+            }
+
+            InventoryDeliveryVM InventoryDeliveryListVM = new InventoryDeliveryVM
+            {
+                SupplierDetailsList = _supplierList
+            };
+
+            return View(InventoryDeliveryListVM);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
         {
