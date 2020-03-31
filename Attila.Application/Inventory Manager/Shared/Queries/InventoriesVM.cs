@@ -14,5 +14,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public List<EquipmentVM> EquipmentListVM { get; set; }
 
+        public List<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }
+
     }
 }

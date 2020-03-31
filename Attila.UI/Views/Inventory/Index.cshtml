@@ -3,7 +3,6 @@
 
 }
 @model Attila.UI.Models.InventoryDataVM
-
 @*@section Scripts{
 
         <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
@@ -124,16 +123,12 @@
 
                     <tbody>
 
-                        @*@foreach (var item in Model.FoodListVM)
+                        @*@foreach (var item in Model.InventoryDeliveryVM)
                             {
                                 <tr>
-                                    <td> @Html.DisplayFor(modelItem => item.FoodDetails.Name)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.FoodDetails.Description)</td>
-
-
+                                    <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
                                 </tr>
                             }*@
-
 
                     </tbody>
 
@@ -269,7 +264,7 @@
 
 
                 <table class="display" id="sample_3">
-                    
+
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -310,4 +305,4 @@
 
 
     </div>
-</div> 
+</div>

@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
             {
                 var _foodListData = new List<FoodVM>();
                 var _equipmentListData = new List<EquipmentVM>();
-                var _inventoryListData = new List<InventoriesVM>();
+                var _inventoryDeliveryData = new List<InventoriesDeliveryVM>();
 
 
                 var _getFoodData = dbContext.FoodInventories.Include(a => a.FoodDetails);
@@ -64,10 +65,30 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     _equipmentListData.Add(_equipmentAllDetails);
                 }
 
+
+                var _getInventoryDeliveryList = await mediator.Send(new GetInventoryDeliveryQuery());
+
+                foreach (var item in _getInventoryDeliveryList)
+                {
+                    var _inventoryDelivery = new InventoriesDeliveryVM
+                    {
+                        ID = item.ID,
+                        DeliveryDate = item.DeliveryDate,
+                        ReceiptImage = item.ReceiptImage,
+                        DeliveryPrice = item.DeliveryPrice,
+                        SupplierDetailsID = item.SupplierDetailsID,
+                        Remarks = item.Remarks
+                    };
+                    _inventoryDeliveryData.Add(_inventoryDelivery);
+                }
+
+
+
                 InventoriesVM _inventoryVM = new InventoriesVM 
                 {
                     FoodListVM = _foodListData,
-                    EquipmentListVM = _equipmentListData
+                    EquipmentListVM = _equipmentListData,
+                    InventoryDeliveryVM = _inventoryDeliveryData
                 };
 
 

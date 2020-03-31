@@ -11,5 +11,7 @@ namespace Attila.UI.Models
         public List<FoodVM> FoodListVM { get; set; }
 
         public List<EquipmentVM> EquipmentListVM { get; set; }
+
+        public List<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }
     } 
 }
