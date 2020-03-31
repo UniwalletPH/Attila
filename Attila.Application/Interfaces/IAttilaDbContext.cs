@@ -53,6 +53,8 @@ namespace Attila.Application.Interfaces
 
         public DbSet<PackageEquipments> PackageEquipments { get; set; }
 
+        public DbSet<Notifications> Notifications { get; set; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

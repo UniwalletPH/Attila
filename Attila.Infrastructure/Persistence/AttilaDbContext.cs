@@ -55,6 +55,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<PackageEquipments> PackageEquipments { get ; set ; }
 
+        public DbSet<Notifications> Notifications { get; set ; }
 
         public AttilaDbContext(DbContextOptions<AttilaDbContext> dbContextOpt) : base(dbContextOpt)
         {
