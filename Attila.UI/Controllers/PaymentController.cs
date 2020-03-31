@@ -75,35 +75,49 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult AddPayment(int EventID)
+        public async Task<IActionResult> AddPaymentAsync()
         {
 
+            var _eventList = await mediator.Send(new GetEventListQuery());
 
-            var eventID = new EventPaymentVM { 
-            
-            EventDetailsID = EventID
-            
-            
-            };
+            List<SelectListItem> _list = new List<SelectListItem>();
 
-            return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
+            foreach (var item in _eventList)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EventName
+                });
+
+            }
+            var _addEventPayment = new AddPaymentStatusVM();
+            _addEventPayment.EventList = _list;
+            return View(_addEventPayment);
+
+            //var eventID = new EventPaymentVM { 
+            
+            //EventDetailsID = EventID
+            
+            
+            //};
+
+            //return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPayment(PaymentStatusVM _payment)
+        public async Task<IActionResult> AddPayment(AddPaymentStatusVM _payment)
         {
 
             bool flag;
             var payment = new PaymentStatusVM {
-            Amount  = _payment.Amount,
-            EventDetailsID = _payment.EventDetailsID,
-            ReferenceNumber = _payment.ReferenceNumber,
+            Amount  = _payment.Payment.Amount,
+            EventDetailsID = _payment.SelectedEvent,
+            ReferenceNumber = _payment.Payment.ReferenceNumber,
             DateOfPayment = DateTime.Now,
-            Remarks = _payment.Remarks
-            
-            
+            Remarks = _payment.Payment.Remarks
             
             };
                                  
