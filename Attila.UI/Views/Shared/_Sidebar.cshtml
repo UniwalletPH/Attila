@@ -23,47 +23,77 @@
                 </a>
 
             </li>
-            <li class="nav-item ">
-                <a href="/Inventory" class="nav-link nav-toggle">
-                    <i class="icon-folder"></i>
-                    <span class="title">Inventory</span>
-                </a>
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
+                {
+                    <li class="nav-item ">
+                        <a href="/Inventory" class="nav-link nav-toggle">
+                            <i class="icon-folder"></i>
+                            <span class="title">Inventory</span>
+                        </a>
 
-            </li>
-            <li class="nav-item  ">
-                <a href="/Events" class="nav-link nav-toggle">
-                    <i class="icon-pointer"></i>
-                    <span class="title">Events</span>
-                </a>
+                    </li>
+                } }
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("Coordinator"))
+                {
 
-            </li>
-            <li class="nav-item  ">
-                <a onclick="location.href='@Url.Action("Index", "Packages")'" class="nav-link nav-toggle">
-                    <i class="icon-diamond"></i>
-                    <span class="title">Packages</span>
-                </a>
-            </li>
-            <li class="nav-item  ">
-                <a onclick="location.href='@Url.Action("Index", "Reports")'" class="nav-link nav-toggle">
-                    <i class="icon-folder"></i>
-                    <span class="title">Reports</span>
-                </a>
-                </a>
-            </li>
+                    <li class="nav-item  ">
+                        <a href="/Events" class="nav-link nav-toggle">
+                            <i class="icon-pointer"></i>
+                            <span class="title">Events</span>
+                        </a>
 
-            <li class="nav-item  ">
-                <a onclick="location.href='@Url.Action("Index", "Clients")'" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Clients</span>
-                </a>
+                    </li>
 
-            </li>
-            <li class="nav-item  ">
-                <a onclick="location.href='@Url.Action("Suppliers", "Inventory")'" class="nav-link nav-toggle">
-                    <i class="icon-user"></i>
-                    <span class="title">Suppliers</span>
-                </a>
-            </li>
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Index", "EventPackages")'" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">Packages</span>
+                        </a>
+                    </li>
+                } }
+
+
+
+            @{
+                if (User.IsInRole("Admin"))
+                {
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Index", "Reports")'" class="nav-link nav-toggle">
+                            <i class="icon-folder"></i>
+                            <span class="title">Reports</span>
+                        </a>
+                    </li>
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Index", "Payment")'" class="nav-link nav-toggle">
+                            <i class="icon-wallet"></i>
+                            <span class="title">Payments</span>
+                        </a>
+                    </li>
+                } }
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("Coordinator"))
+                {
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Index", "Clients")'" class="nav-link nav-toggle">
+                            <i class="icon-user"></i>
+                            <span class="title">Clients</span>
+                        </a>
+
+                    </li>
+                } }
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
+                {
+
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Suppliers", "Inventory")'" class="nav-link nav-toggle">
+                            <i class="icon-user"></i>
+                            <span class="title">Suppliers</span>
+                        </a>
+                    </li>
+                } }
 
             @{
                 if (User.IsInRole("Admin"))

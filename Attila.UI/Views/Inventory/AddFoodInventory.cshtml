@@ -91,7 +91,7 @@
 
     <script type="text/javascript">
         function OnSuccess(e) {
-            $("#success").modal('show');
+            $("#successrestock").modal('show');
 
 
         }
@@ -101,8 +101,25 @@
             alert("failed!");
         }
 
-    </script>
-    <partial name="partials/_SuccessfulRegistration" />
+    </script> 
 
     <partial name="_ValidationScriptsPartial" />
 }
+
+
+<div class="modal fade" id="successrestock" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Successful Inventory</h4>
+            </div>
+            <div class="modal-body">Stocks updated successfully! </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

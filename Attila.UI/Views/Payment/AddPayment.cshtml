@@ -1,0 +1,128 @@
+﻿
+@model EventPaymentVM
+
+
+
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            Payment Form
+            <small> </small>
+        </h1>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
+
+        <!-- BEGIN THEME PANEL -->
+        <!-- END THEME PANEL -->
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<!-- END PAGE HEAD-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+</ul>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet light bordered">
+
+            <div class="portlet-body form">
+            </div>
+            <form role="form" asp-controller="Payment" asp-action="AddPayment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
+                <div class="modal-body">
+
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label id="eventID"> </label>
+                            <input type="text" class="form-control" asp-for="EventDetailsID" readonly>@Model.EventDetailsID</input>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Reference Number</label>
+                            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Amount</label>
+                            <input type="number" class="form-control" asp-for="Amount" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label>Remarks</label>
+                            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="form-actions">
+                        <button type="submit" class="btn blue">Submit</button>
+                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+
+            </form>
+
+
+
+
+
+
+        </div>
+
+
+
+    </div>
+</div>
+<!-- End: life time stats -->
+ 
+ 
+@section Scripts{
+    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            $("#success").modal('show');
+
+
+        }
+
+        function OnFailure(e) {
+            console.log(e);
+            alert("failed!");
+        }
+
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+<div class="modal fade" id="success" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"  onclick="location.href='@Url.Action("Index", "Payment")'"aria-hidden="true"></button>
+                <h4 class="modal-title">Successful Payment</h4>
+            </div>
+            <div class="modal-body"> Payment added successfully! </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Payment")'" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+

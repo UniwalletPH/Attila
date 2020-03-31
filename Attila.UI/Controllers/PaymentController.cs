@@ -28,19 +28,14 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Index()
         {
 
-            if (User.Identities != null)
-            {
+            
                 var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery()); 
              
            
 
 
                 return View(_searchResult);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+           
 
 
         }
@@ -52,14 +47,9 @@ namespace Attila.UI.Controllers
 
             var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
 
-            if (eventPackages!=null)
-            {
+            
                 return View("/Payment/Record", new PaymentVM { Payment = eventPackages });
-            }
-            else
-            {
-                return View("/Login");
-            }
+             
         }
          
         [Route("Payment/Record")]
@@ -79,23 +69,21 @@ namespace Attila.UI.Controllers
         {
 
 
-            var eventID = new EventPaymentVM { 
-            
+           var eventID = new EventPaymentVM { 
+
             EventDetailsID = EventID
-            
-            
+
+
             };
 
-            return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
-
+            return View(eventID);
 
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPayment(PaymentStatusVM _payment)
         {
-
-            bool flag;
+             
             var payment = new PaymentStatusVM {
             Amount  = _payment.Amount,
             EventDetailsID = _payment.EventDetailsID,
@@ -108,20 +96,16 @@ namespace Attila.UI.Controllers
             };
                                  
 
-            try
-            {
-                await mediator.Send(new AddPaymentForEventCommand {
+           
+             var response =    await mediator.Send(new AddPaymentForEventCommand {
 
                     MyEventPaymentStatus = payment
 
-                }); flag = true;
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
+                });  
+             
+            
 
-            return Json(flag);
+            return Json(response);
         }
 
          

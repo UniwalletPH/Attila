@@ -1,9 +1,5 @@
 ﻿@model Attila.UI.Models.AddEventVM
-@{
 
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-}
 
 <div class="page-head">
     <!-- BEGIN PAGE TITLE -->
@@ -210,6 +206,25 @@
     <!-- End: life time stats -->
 </div>
 
+
+
+<div class="modal fade" id="successrequests" tabindex="-1" role="basic" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Successful Event Registration</h4>
+            </div>
+            <div class="modal-body"> Event request was sent successfully! Wait for the Management Approval within 7 working days. Thank you!</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 @section Scripts{
     <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
@@ -224,7 +239,7 @@
     <script type="text/javascript">
 
         //function OnSuccess(e) {
-        //    $("#successrequests").modal('show');
+        //    
         //}
 
         //function OnFailure(e) {
@@ -232,13 +247,12 @@
         //    alert("failed!");
         //}
 
-          function OnSuccess(result) {
+        function OnSuccess(result) {
             if (result == true) {
-                alert("Event successfully added!");
-                window.location = "/Events";
+               $("#successrequests").modal('show');
             }
 
-            else if(result == false){
+            else if (result == false) {
                 alert("Failed!");
                 window.location = "/Events/BookingForm";
             }
@@ -261,19 +275,19 @@
 }
 
 @*@section Scripts {
-    <script type="text/javascript">
-        function OnSuccess(result) {
-            if (result == true) {
-                alert("Event successfully added!");
-                window.location = "/Events";
-            }
+        <script type="text/javascript">
+            function OnSuccess(result) {
+                if (result == true) {
+                    alert("Event successfully added!");
+                    window.location = "/Events";
+                }
 
-            else {
-                alert("Failed!");
-                window.location = "/Events/BookingForm";
+                else {
+                    alert("Failed!");
+                    window.location = "/Events/BookingForm";
+                }
             }
-        }
-    </script>
+        </script>
 
-    <partial name="_ValidationScriptsPartial" />
-}*@
+        <partial name="_ValidationScriptsPartial" />
+    }*@

@@ -16,11 +16,11 @@ using Attila.Application.Coordinator.Event.Commands;
 
 namespace Attila.UI.Controllers
 {
-    public class PackagesController : BaseController
+    public class EventPackagesController : BaseController
     {
         private readonly IMediator mediator;
 
-        public PackagesController(IMediator mediator)
+        public EventPackagesController(IMediator mediator)
         {
             this.mediator = mediator;
         }
