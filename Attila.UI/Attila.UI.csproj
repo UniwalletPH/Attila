@@ -51,16 +51,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Packages\Index.cshtml" />
-    <None Include="Views\Packages\MenuList.cshtml" />
-    <None Include="Views\Packages\MenuCategoryForm.cshtml" />
-    <None Include="Views\Packages\MenuForm.cshtml" />
-    <None Include="Views\Packages\PackageForm.cshtml" />
-    <None Include="Views\Packages\PackageMenuForm.cshtml" />
-    <None Include="Views\Packages\partials\_SuccessfulCategory.cshtml" />
-    <None Include="Views\Packages\partials\_SuccessfulMenu.cshtml" />
-    <None Include="Views\Packages\partials\_SuccessfulPackage.cshtml" />
-    <None Include="Views\Packages\partials\_SuccessfulPackageMenu.cshtml" />
+    <None Include="Views\EventPackages\Index.cshtml" />
+    <None Include="Views\EventPackages\MenuList.cshtml" />
+    <None Include="Views\EventPackages\MenuCategoryForm.cshtml" />
+    <None Include="Views\EventPackages\MenuForm.cshtml" />
+    <None Include="Views\EventPackages\PackageForm.cshtml" />
+    <None Include="Views\EventPackages\PackageMenuForm.cshtml" />
   </ItemGroup>
 
 

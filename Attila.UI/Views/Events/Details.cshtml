@@ -1,0 +1,172 @@
+﻿
+@{
+
+
+    ViewData["Title"] = "Event Details";
+}
+
+@model ViewEventVM
+
+ 
+ 
+
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            Event Details
+            <small> </small>
+        </h1>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
+
+        <!-- BEGIN THEME PANEL -->
+        <!-- END THEME PANEL -->
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<!-- END PAGE HEAD-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+</ul>
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet light bordered">
+
+            <div class="portlet-body form">
+                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label>Client Name</label>
+                            <input type="text" class="form-control" asp-for="@Model.Event.EventName" readonly>
+
+
+                           
+                        </div>
+                        <div class="form-group">
+                            <label>Event Date</label>
+                            <input type="hidden" class="form-control form-control-inline" size="16" asp-for="@Model.Event.EventDate"  required />
+
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Occasion </label>
+
+                            <input type="text" class="form-control" asp-for="@Model.Event.Type" readonly>
+                         
+                        </div>
+
+                        <div class="form-group">
+                            <label>Event Name</label>
+                            <input type="text" class="form-control" asp-for="@Model.Event.EventName" placeholder="" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Theme  | Color</label>
+                            <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="@Model.Event.Theme" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label> Description</label>
+                            <input type="hidden" class="form-control" placeholder="Description" asp-for="@Model.Event.Description" readonly>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Event's Place</label>
+                            <input type="text" class="form-control" asp-for="@Model.Event.Location" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Venue in Condominium or Building?</label>
+
+                            <input class="form-control" placeholder="Description" asp-for="@Model.Event.VenueType" readonly>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Location</label>
+                            <input class="form-control" placeholder="Description" asp-for="@Model.Event.LocationType" readonly>
+                          
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Set Up Time </label>
+                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="@Model.Event.EntryTime" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label>Program Starts At </label>
+                            <input type="time" placeholder="1:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="@Model.Event.ProgramStart" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Serving Time </label>
+                            <input type="time" placeholder="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="@Model.Event.ServingTime" readonly />
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Buffet Type </label>
+                        <input type="text"  class="form-control" asp-for="@Model.Event.ServingType" readonly />
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Guests</label>
+                        <input type="number" class="form-control" placeholder="" asp-for="@Model.Event.NumberOfGuests" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Package </label>
+
+                        <input type="text" class="form-control" placeholder="" asp-for="@Model.Event.PackageDetailsID" readonly>
+                     </div>
+                    <div class="form-group">
+                        <label class="control-label">Remarks</label>
+                        <textarea class="form-control" rows="3"     asp-for="@Model.Event.Remarks" readonly></textarea>
+                    </div>
+
+
+                    
+
+                </form>
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <!-- End: life time stats -->
+</div>
+
+
+ 
+
+@section Scripts{
+    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+
+
+    <partial name="_ValidationScriptsPartial" />
+    <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+   
+}
+@section Styles{
+    <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+}
+
+ 

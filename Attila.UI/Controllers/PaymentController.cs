@@ -28,74 +28,130 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Index()
         {
 
-            if (User.Identities != null)
-            {
+            
                 var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery()); 
              
            
 
 
                 return View(_searchResult);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+           
 
 
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> FetchRecord(int EventID)
+        public async Task<IActionResult> Record(int EventID)
         {
 
-            var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
 
-            if (eventPackages!=null)
+            var _searchResult = await mediator.Send(new SearchEventByIdQuery
             {
-                return View("/Payment/Record", new PaymentVM { Payment = eventPackages });
-            }
-            else
+                EventId = EventID
+            });
+
+            var _eventDetails = new EventDetailsVM
             {
-                return View("/Login");
-            }
-        }
-         
-        [Route("Payment/Record")]
-        [HttpGet]
-        public IActionResult Record(PaymentVM _payment)
-        {
-            
-             
-            return View(_payment);
+                EventName = _searchResult.EventName,
+                EventStatus = _searchResult.EventStatus,
+                EventDate = _searchResult.EventDate,
+                BookingDate = _searchResult.BookingDate,
+                Description = _searchResult.Description,
+                Remarks = _searchResult.Remarks,
+                EntryTime = _searchResult.EntryTime,
+                Location = _searchResult.Location,
+                LocationType = _searchResult.LocationType,
+                NumberOfGuests = _searchResult.NumberOfGuests,
+                ProgramStart = _searchResult.ProgramStart,
+                PackageDetailsID = _searchResult.PackageDetailsID,
+                UserID = _searchResult.UserID,
+                EventClientID = _searchResult.EventClientID,
+                Theme = _searchResult.Theme,
+                ServingType = _searchResult.ServingType,
+                ServingTime = _searchResult.ServingTime,
+                ID = _searchResult.ID,
+                Type = _searchResult.Type,
 
-        }
+                VenueType = _searchResult.VenueType,
 
 
 
-        [HttpGet]
-        public IActionResult AddPayment(int EventID)
-        {
-
-
-            var eventID = new EventPaymentVM { 
-            
-            EventDetailsID = EventID
-            
-            
             };
 
-            return PartialView("~/Views/Payment/Partials/_AddPayment.cshtml", eventID);
+            var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
+            var eventDetails = new EventPaymentVM
+            {
 
+                PaymentStatus = eventPackages,
+                EventDetails = _eventDetails
+
+
+
+            };
+
+            return View(eventDetails);
+             
+        }
+         
+      
+
+
+        [HttpGet]
+        public async Task<IActionResult> AddPayment(int EventID)
+        {
+
+
+            var _searchResult = await mediator.Send(new SearchEventByIdQuery
+            {
+                EventId = EventID
+            });
+
+
+            var _eventDetails =  new EventDetailsVM { 
+              EventName =_searchResult.EventName,
+             EventStatus = _searchResult.EventStatus,
+             EventDate =  _searchResult.EventDate,
+             BookingDate = _searchResult.BookingDate,
+             Description = _searchResult.Description,
+             Remarks = _searchResult.Remarks,
+             EntryTime = _searchResult.EntryTime,
+             Location = _searchResult.Location,
+             LocationType = _searchResult.LocationType,
+             NumberOfGuests = _searchResult.NumberOfGuests,
+                ProgramStart    = _searchResult.ProgramStart,
+                PackageDetailsID = _searchResult.PackageDetailsID,
+                UserID = _searchResult.UserID,
+                EventClientID = _searchResult.EventClientID,
+                Theme = _searchResult.Theme,
+                ServingType = _searchResult.ServingType,
+                ServingTime = _searchResult.ServingTime,
+                ID = _searchResult.ID,
+                Type =_searchResult.Type,
+
+                VenueType = _searchResult.VenueType,
+                
+                
+
+            };
+
+           var eventDetails = new EventPaymentVM { 
+
+            EventDetailsID = EventID,
+            EventDetails = _eventDetails
+
+
+
+           };
+
+            return View(eventDetails);
 
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPayment(PaymentStatusVM _payment)
         {
-
-            bool flag;
+             
             var payment = new PaymentStatusVM {
             Amount  = _payment.Amount,
             EventDetailsID = _payment.EventDetailsID,
@@ -108,20 +164,16 @@ namespace Attila.UI.Controllers
             };
                                  
 
-            try
-            {
-                await mediator.Send(new AddPaymentForEventCommand {
+           
+             var response =    await mediator.Send(new AddPaymentForEventCommand {
 
                     MyEventPaymentStatus = payment
 
-                }); flag = true;
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
+                });  
+             
+            
 
-            return Json(flag);
+            return Json(response);
         }
 
          

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Menu";
+    ViewData["Title"] = "Events";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model EventViewVM
@@ -31,13 +31,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <button id="sample_editable_1_new" class="btn sbold green " onClick="addEvent()">
+                                <button id="sample_editable_1_new" class="btn sbold green "onclick="location.href='@Url.Action("BookingForm", "Events")'">
                                     Add New Event
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
                             <div class="btn-group">
-                                <button id="sample_editable_1_new" class="btn sbold green " onClick="addClient()">
+                                <button id="sample_editable_1_new" class="btn sbold green "onclick="location.href='@Url.Action("Register", "Clients")'">
                                     Add New Client
                                     <i class="fa fa-plus"></i>
                                 </button>
@@ -55,20 +55,22 @@
                             <th> Event Name </th>
                             <th> Client </th>
                             <th> Coordinator </th>
+
+                            <th>   </th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach (var item in Model.Events)
                         {
-                            <tr  data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
-                                <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
-                                <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
-                              
-                            </tr>
+                        <tr data-id="@item.ID">
+                            <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                            <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
+                            <td> @Html.DisplayFor(modelItem => item.EventName)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                            <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
+                            <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td> 
+                        </tr>
                         }
 
 
@@ -298,17 +300,16 @@
 @section Scripts {
  
 
-    <script>
-        var a;
+    <script> 
+         
+            $(document).on('click', 'tr .view', function (e) {
+              
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
 
-        $(document).ready(function () {
-            $('.events tr').click(function () {
-                var _id = $(this).data("id");
-                a = _id;
-                $.get('/Events/Details', { EventID: _id });
-            });
+              
         });
-        
         
     </script>
 
