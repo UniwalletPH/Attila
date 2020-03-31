@@ -13,15 +13,15 @@ namespace Attila.UI.Models
         public int ID { get; set; }
         [Required]
         public int EventDetailsID { get; set; }
-        [Required]
-        public EventDetails EventDetails { get; set; }
-        [Required]
-        public decimal Amount { get; set; }
-        [Required]
-        public DateTime DateOfPayment { get; set; }
-        [Required]
-        public string ReferenceNumber { get; set; }
+      
+        public EventDetails? EventDetails { get; set; }
+         
+        public decimal? Amount { get; set; }
+       
+        public DateTime? DateOfPayment { get; set; }
+       
+        public string? ReferenceNumber { get; set; }
 
-        public string Remarks { get; set; }
+        public string? Remarks { get; set; }
     }
 }
