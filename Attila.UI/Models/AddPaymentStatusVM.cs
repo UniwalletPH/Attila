@@ -1,15 +1,15 @@
-﻿using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
+﻿using Attila.Application.Coordinator.Event.Queries;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Attila.Application.Coordinator.Event.Queries
+namespace Attila.UI.Models
 {
-    public class PaymentStatusVM
+    public class AddPaymentStatusVM
     {
-        public int ID { get; set; }
         [Required]
         public int EventDetailsID { get; set; }
         [Required]

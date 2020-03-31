@@ -47,7 +47,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Dashboard\partials\" />
-    <Folder Include="Views\Events\partials\" />
     <Folder Include="wwwroot\lib\" />
   </ItemGroup>
 
@@ -58,6 +57,10 @@
     <None Include="Views\EventPackages\MenuForm.cshtml" />
     <None Include="Views\EventPackages\PackageForm.cshtml" />
     <None Include="Views\EventPackages\PackageMenuForm.cshtml" />
+    <None Include="Views\EventPackages\partials\_SuccessfulCategory.cshtml" />
+    <None Include="Views\EventPackages\partials\_SuccessfulMenu.cshtml" />
+    <None Include="Views\EventPackages\partials\_SuccessfulPackage.cshtml" />
+    <None Include="Views\EventPackages\partials\_SuccessfulPackageMenu.cshtml" />
   </ItemGroup>
 
 

@@ -1,4 +1,4 @@
-﻿@model Attila.Application.Inventory_Manager.Shared.Queries.InventoriesDeliveryVM
+﻿@model Attila.UI.Models.InventoryDeliveryVM
 @{
 
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,7 +11,7 @@
     <div class="page-title">
         <h1>
 
-            Update Food Stocks
+            Add Delivery
             <small> </small>
         </h1>
     </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Supplier</label>
-                        @*@Html.DropDownListFor(m => m.SupplierDetailsID, Model.SupplierDetails, "--SELECT PACKAGE--", new { @class = "form-control" })*@
+                        @Html.DropDownListFor(m => m.SupplierDetailsID, Model.SupplierDetailsList, "-- SELECT SUPPLIER--", new { @class = "form-control" })
                     </div>
 
                     <div class="margin-top-10">
