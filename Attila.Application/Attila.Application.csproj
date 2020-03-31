@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Notification\Quiries\**" />
+    <EmbeddedResource Remove="Notification\Quiries\**" />
+    <None Remove="Notification\Quiries\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Common\Base\" />
+    <Folder Include="Notification\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
