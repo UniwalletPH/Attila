@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
 
             public async Task<bool> Handle(AddSupplierDetailsCommand request, CancellationToken cancellationToken)
             {
-                SupplierDetails supplierDetails = new SupplierDetails
+                Supplier supplierDetails = new Supplier
                 {
                     ID = request.MySuppliersDetailsVM.ID,
                     Name = request.MySuppliersDetailsVM.Name,

@@ -1,17 +1,12 @@
-﻿using Attila.Application.Admin.Event.Queries;
-using Attila.Application.Interfaces;
-using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
+﻿using Attila.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Admin.Queries
+namespace Attila.Application.Admin.Event.Queries
 {
     public class GetAllEventDetailsListQuery : IRequest<List<EventVM>>
     {

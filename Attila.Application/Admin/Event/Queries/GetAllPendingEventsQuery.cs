@@ -1,8 +1,5 @@
 ﻿using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;

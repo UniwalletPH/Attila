@@ -1,9 +1,6 @@
 ﻿using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Attila.Application.Admin.Event.Queries
 {
@@ -35,7 +32,7 @@ namespace Attila.Application.Admin.Event.Queries
 
         public PackageMenuDetails  Package{ get; set; }
 
-        public ClientDetails Client { get; set; }
+        public Client Client { get; set; }
 
         public List<EventAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
 

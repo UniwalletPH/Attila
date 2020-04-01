@@ -1,15 +1,13 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Admin.Equipment.Queries
+namespace Attila.Application.Admin.Event.Queries
 {
     public class GetAdditionalEquipmentRequestListQuery : IRequest<List<EventAdditionalEquipmentRequest>>
     {

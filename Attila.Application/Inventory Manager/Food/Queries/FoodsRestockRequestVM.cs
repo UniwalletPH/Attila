@@ -17,7 +17,7 @@ namespace Attila.Application.Inventory_Manager.Food.Queries
 
         public int FoodDetailsID { get; set; }
 
-        public FoodDetails FoodDetails { get; set; }
+        public Domain.Entities.Food FoodDetails { get; set; }
 
         public Status Status { get; set; }
 
