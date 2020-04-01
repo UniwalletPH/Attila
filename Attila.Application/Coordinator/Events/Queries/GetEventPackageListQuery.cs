@@ -23,7 +23,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
             public async Task<IEnumerable<EventPackageVM>> Handle(GetEventPackageListQuery request, CancellationToken cancellationToken)
             {
-                var _viewEventPackageList = await dbContext.PackageMenuDetails.Select(a => new EventPackageVM
+                var _viewEventPackageList = await dbContext.EventPackages.Select(a => new EventPackageVM
                 {
                    Code = a.Code,
                    Description = a.Description,

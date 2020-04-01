@@ -29,7 +29,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                     EventPackageID = request.PackageMenu.PackageDetailsID
                 };
 
-                dbContext.PackageMenus.Add(_newPackageMenu);
+                dbContext.EventPackageDishes.Add(_newPackageMenu);
                 await dbContext.SaveChangesAsync();
 
                 return true;

@@ -24,7 +24,7 @@ namespace Attila.Application.Coordinator.Events.Queries
             {
                 var _searchedPackage = new List<PackageMenuVM>();
 
-                var _package = dbContext.PackageMenus
+                var _package = dbContext.EventPackageDishes
                     .Include(a => a.EventPackage)
                     .Include(a => a.Dish)
                     .Where(a => a.EventPackageID == request.PackageId );

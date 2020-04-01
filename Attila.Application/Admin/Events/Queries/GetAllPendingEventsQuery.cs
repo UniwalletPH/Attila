@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Events.Queries
 
                 var _listOfPendingEvents = new List<EventVM>();
 
-                var _pendingEvents = dbContext.EventDetails
+                var _pendingEvents = dbContext.Events
                     .Include(a => a.EventPackage)
                     .Include(a => a.Coordinator)
                     .Include(a => a.Client)

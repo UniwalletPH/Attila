@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
                     ContactPersonName = request.MySuppliersDetailsVM.ContactPersonName
                 };
 
-                dbContext.SupplierDetails.Add(supplierDetails);
+                dbContext.Suppliers.Add(supplierDetails);
                 await dbContext.SaveChangesAsync();
 
                 return true;

@@ -35,7 +35,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                     Remarks = request.MyEventPaymentStatus.Remarks
                 };
 
-                dbContext.PaymentStatus.Add(_addPaymentForEventCommand);
+                dbContext.PaymentStatuses.Add(_addPaymentForEventCommand);
                 await dbContext.SaveChangesAsync();
 
                 return true;

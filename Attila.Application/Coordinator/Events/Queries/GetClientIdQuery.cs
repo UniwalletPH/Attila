@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
             }
             public async Task<Client> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
             {
-                var _searchedClient = dbContext.ClientDetails.Where
+                var _searchedClient = dbContext.Clients.Where
                     (a => a.Firstname.Contains(request.FirstName)
                     && a.Lastname.Contains(request.LastName));
 

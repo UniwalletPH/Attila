@@ -32,7 +32,7 @@ namespace Attila.Application.Events.Commands
 
                 };
 
-                dbContext.ClientDetails.Add(_newClient);
+                dbContext.Clients.Add(_newClient);
                 await dbContext.SaveChangesAsync();
 
                 return true;

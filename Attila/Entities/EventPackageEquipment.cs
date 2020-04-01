@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class EventPackageEquipments : BaseAuditedEntity
+    public class EventPackageEquipment : BaseAuditedEntity
     {
         [ForeignKey("Equipment")]
         public int EquipmentID { get; set; }

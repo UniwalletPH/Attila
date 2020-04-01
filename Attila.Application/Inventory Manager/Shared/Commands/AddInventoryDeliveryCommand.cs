@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
                     Remarks = request.MyInventoriesDeliveryVM.Remarks
                 };
 
-                dbContext.DeliveryDetails.Add(_equipmentRestock);
+                dbContext.Deliveries.Add(_equipmentRestock);
                 await dbContext.SaveChangesAsync();
 
                 return true;

@@ -24,7 +24,7 @@ namespace Attila.Application.Events.Queries
 
             public async Task<List<EventPackage>> Handle(GetEventPackageQuery request, CancellationToken cancellationToken)
             {
-                var _viewEventPackage = await dbContext.PackageMenuDetails.ToListAsync();
+                var _viewEventPackage = await dbContext.EventPackages.ToListAsync();
 
                 return _viewEventPackage;
             }

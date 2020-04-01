@@ -25,7 +25,7 @@ namespace Attila.Application.Events.Queries
 
             public async Task<SearchEventVM> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
-                var _searchedEvent = dbContext.EventDetails.Find(request.EventId);
+                var _searchedEvent = dbContext.Events.Find(request.EventId);
 
                 if (_searchedEvent != null)
                 {

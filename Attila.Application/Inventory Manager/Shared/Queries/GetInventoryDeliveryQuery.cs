@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
             }
             public async Task<IEnumerable<InventoriesDeliveryVM>> Handle(GetInventoryDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _getInventoryDeliveryList = await dbContext.DeliveryDetails.Select(a => new InventoriesDeliveryVM 
+                var _getInventoryDeliveryList = await dbContext.Deliveries.Select(a => new InventoriesDeliveryVM 
                 {
                     ID = a.ID,
                     DeliveryDate = a.DeliveryDate,

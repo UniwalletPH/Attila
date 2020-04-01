@@ -30,7 +30,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                     Category = request.MenuCategory.Category,
                 };
 
-                dbContext.MenuCategories.Add(_newMenuCategory);
+                dbContext.DishCategories.Add(_newMenuCategory);
                 await dbContext.SaveChangesAsync();
 
                 return true;

@@ -26,7 +26,7 @@ namespace Attila.Application.Admin.Events.Queries
                 
                 var _listIncomingEvents = new List<EventVM>();
 
-                var _incomingEvents = dbContext.EventDetails
+                var _incomingEvents = dbContext.Events
                     .Include(a => a.EventPackage)
                     .Include(a => a.Client)
                     .Include(a => a.Coordinator).ToList();
