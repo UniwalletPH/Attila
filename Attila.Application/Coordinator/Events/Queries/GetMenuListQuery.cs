@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Coordinator.Event.Queries
+namespace Attila.Application.Coordinator.Events.Queries
 {
     public class GetMenuListQuery : IRequest<IEnumerable<MenuVM>>
     {

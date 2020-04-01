@@ -1,9 +1,9 @@
 ﻿using Attila.Domain.Entities;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using System;
 using System.Collections.Generic;
 
-namespace Attila.Application.Coordinator.Event.Queries
+namespace Attila.Application.Coordinator.Events.Queries
 {
     public class EventDetailsVM
     {

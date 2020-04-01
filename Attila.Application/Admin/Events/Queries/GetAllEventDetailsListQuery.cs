@@ -1,35 +1,37 @@
 ﻿using Attila.Application.Interfaces;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
-namespace Attila.Application.Admin.Event.Queries
+namespace Attila.Application.Admin.Events.Queries
 {
-    public class GetAllPastEventsQuery : IRequest<List<EventVM>>
+    public class GetAllEventDetailsListQuery : IRequest<List<EventVM>>
     {
-        public class GetAllPastEventsQueryHandler : IRequestHandler<GetAllPastEventsQuery, List<EventVM>>
+       
+        public class ViewAllEventDetailsListQueryHandler : IRequestHandler<GetAllEventDetailsListQuery, List<EventVM>>
         {
             private readonly IAttilaDbContext dbContext;
-            public GetAllPastEventsQueryHandler(IAttilaDbContext dbContext)
+
+            public ViewAllEventDetailsListQueryHandler(IAttilaDbContext dbContext)
             {
+
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventVM>> Handle(GetAllPastEventsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventVM>> Handle(GetAllEventDetailsListQuery request, CancellationToken cancellationToken)
             {
-                var _listPastEvents = new List<EventVM>();
+                
+                var _listIncomingEvents = new List<EventVM>();
 
-                var _pastEvents = dbContext.EventDetails
+                var _incomingEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
-                    .Include(a => a.User)
-                    .Where(a => a.EventDate < DateTime.Now);
+                    .Include(a => a.User).ToList();
 
-                foreach (var item in _pastEvents)
+                foreach (var item in _incomingEvents)
                 {
                     var Event = new EventVM
                     {
@@ -47,10 +49,9 @@ namespace Attila.Application.Admin.Event.Queries
                         Remarks = item.Remarks
                     };
 
-                    _listPastEvents.Add(Event);
+                    _listIncomingEvents.Add(Event);
                 }
-
-                return _listPastEvents;
+                return _listIncomingEvents;
             }
         }
     }

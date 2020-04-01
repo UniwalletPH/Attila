@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Admin.Event.Commands
+namespace Attila.Application.Admin.Events.Commands
 {
     public class ApproveEventRequestCommand : IRequest<int>
     {

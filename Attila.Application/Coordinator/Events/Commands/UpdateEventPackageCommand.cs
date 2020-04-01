@@ -1,4 +1,4 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
 using MediatR;
@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Commands
+namespace Attila.Application.Events.Commands
 {
     public class UpdateEventPackageCommand : IRequest<bool>
     {

@@ -1,4 +1,4 @@
-﻿using Attila.Domain.Entities.Enums;
+﻿using Attila.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

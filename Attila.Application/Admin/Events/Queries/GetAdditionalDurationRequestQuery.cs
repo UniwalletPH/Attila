@@ -4,7 +4,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Admin.Event.Queries
+namespace Attila.Application.Admin.Events.Queries
 {
     public class GetAdditionalDurationRequestQuery : IRequest<EventAdditionalDurationRequest>
     {

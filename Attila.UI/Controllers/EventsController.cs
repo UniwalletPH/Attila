@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Attila.Application.Admin.Events.Queries;
+using Attila.Application.Coordinator.Events.Queries;
+using Attila.Application.Events.Commands;
+using Attila.Application.Events.Queries;
 using Attila.UI.Models;
 using MediatR;
-using Attila.Application.Admin.Event.Queries;
-using Attila.Application.Event.Queries;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Attila.Application.Coordinator.Event.Queries;
-using Attila.Application.Event.Commands;
-using Attila.Application.Coordinator.Event.Commands;
-using Attila.Application.Admin.Queries;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {

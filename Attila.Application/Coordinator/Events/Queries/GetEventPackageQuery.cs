@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Queries
+namespace Attila.Application.Events.Queries
 {
     public class GetEventPackageQuery : IRequest<List<PackageMenuDetails>>
     {

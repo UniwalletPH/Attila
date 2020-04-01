@@ -1,11 +1,7 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,6 +10,8 @@ namespace Attila.Application.Events.Commands
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
         public AdditionalDurationRequestListVM AdditionalPackage { get; set; }
+
+       
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;

@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Attila.Application.Admin.Event.Queries
+namespace Attila.Application.Admin.Events.Queries
 {
     public class GetAllPendingEventsQuery : IRequest<List<EventVM>>
     {
@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Event.Queries
                     .Include(a => a.PackageDetails)
                     .Include(a => a.User)
                     .Include(a => a.EventClient)
-                    .Where(a => a.EventStatus == Status.Pending);
+                    .Where(a => a.EventStatus == Status.ForApproval);
 
                 foreach (var item in _pendingEvents)
                 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Attila.Application.Coordinator.Event.Queries
+namespace Attila.Application.Coordinator.Events.Queries
 {
     public class EventClientVM
     {
