@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Food.Commands
+namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class DeleteFoodDetailsCommand : IRequest<bool>
     {

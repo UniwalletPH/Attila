@@ -1,4 +1,4 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Admin.Event.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace Attila.UI.Models
 {
     public class PaymentVM
     {
-        public IEnumerable<Attila.Application.Admin.Event.Queries.EventVM> Events { get; set; }
+        public IEnumerable<EventVM> Events { get; set; }
   
     }
 }

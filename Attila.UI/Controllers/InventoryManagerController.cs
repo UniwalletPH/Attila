@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Atilla.Application.Food.Commands;
-using Attila.Application.Food.Commands;
-using Attila.Application.Food.Queries;
+using Atilla.Application.Inventory_Manager.Food.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Commands;
 using Attila.Application.Inventory_Manager.Equipment.Queries;
 using Attila.Application.Inventory_Manager.Food.Commands;

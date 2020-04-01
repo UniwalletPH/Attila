@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Attila.UI.Models;
 using MediatR;
-using Attila.Application.Food.Queries;
 using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Application.Food.Commands;
+using Attila.Application.Inventory_Manager.Food.Commands;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Microsoft.AspNetCore.Http;
@@ -142,7 +141,7 @@ namespace Attila.UI.Controllers
 
 
                 Quantity = foodRestockRequest.Quantity,
-                Status = Status.Pending,
+                Status = Status.Processing,
                 UserID = 1
             };
 
@@ -268,7 +267,7 @@ namespace Attila.UI.Controllers
                 EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
                 DateTimeRequest = DateTime.Now,
                 Quantity = equipmentRestockRequest.Quantity,
-                Status = Status.Pending,
+                Status = Status.Processing,
                 UserID = CurrentUser.ID
             };
 

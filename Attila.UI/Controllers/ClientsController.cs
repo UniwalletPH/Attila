@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
-using Attila.Application.Coordinator.Event.Queries;
-using Attila.Application.Event.Commands;
+using Attila.Application.Coordinator.Events.Queries;
+using Attila.Application.Events.Commands;
 using MediatR;
-using Attila.Application.Event.Queries;
+using Attila.Application.Events.Queries;
 
 namespace Attila.UI.Controllers
 {

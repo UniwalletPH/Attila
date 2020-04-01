@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Event.Queries
                     .Include(a => a.PackageDetails)
                     .Include(a => a.User)
                     .Include(a => a.EventClient)
-                    .Where(a => a.EventStatus == Status.Pending);
+                    .Where(a => a.EventStatus == Status.ForApproval);
 
                 foreach (var item in _pendingEvents)
                 {

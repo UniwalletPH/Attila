@@ -1,7 +1,7 @@
 ﻿using Attila.Application.Admin.Event.Queries;
-using Attila.Application.Admin.Food.Queries;
-using Attila.Application.Admin.Inventory.Queries;
-using Attila.Application.Event.Queries;
+using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Admin.Equipments.Queries;
+using Attila.Application.Events.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;

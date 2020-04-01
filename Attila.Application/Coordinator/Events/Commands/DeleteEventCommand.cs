@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Commands
+namespace Attila.Application.Events.Commands
 {
     public class DeleteEventCommand : IRequest<bool>
     {

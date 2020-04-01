@@ -1,5 +1,5 @@
 ﻿using Attila.Domain.Entities;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
 using System;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Application.Coordinator.Event.Queries
+namespace Attila.Application.Coordinator.Events.Queries
 {
     public class PackageMenuVM
     {

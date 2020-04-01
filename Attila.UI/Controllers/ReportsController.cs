@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
 using MediatR;
-using Attila.Application.Event.Queries;
+using Attila.Application.Events.Queries;
 
 namespace Attila.UI.Controllers
 {

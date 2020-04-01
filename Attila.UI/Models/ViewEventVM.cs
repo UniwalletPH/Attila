@@ -1,5 +1,5 @@
 ﻿using Attila.Application.Admin.Event.Queries;
-using Attila.Application.Coordinator.Event.Queries;
+using Attila.Application.Coordinator.Events.Queries;
 
 namespace Attila.UI.Models
 {

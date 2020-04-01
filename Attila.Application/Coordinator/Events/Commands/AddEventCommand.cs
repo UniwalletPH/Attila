@@ -1,8 +1,8 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Commands
+namespace Attila.Application.Events.Commands
 {
     public class AddEventCommand : IRequest<int>
     {
@@ -58,7 +58,7 @@ namespace Attila.Application.Event.Commands
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
                     UserID = request.EventDetails.UserID,
-                    EventStatus = Status.Pending,
+                    EventStatus = Status.Processing,
                     EntryTime = request.EventDetails.EntryTime,
                     NumberOfGuests = request.EventDetails.NumberOfGuests,
                     ProgramStart = request.EventDetails.ProgramStart,

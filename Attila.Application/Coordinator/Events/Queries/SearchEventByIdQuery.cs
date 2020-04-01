@@ -1,7 +1,7 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Event.Queries
+namespace Attila.Application.Events.Queries
 {
     public class SearchEventByIdQuery : IRequest<SearchEventVM>
     {

@@ -1,5 +1,5 @@
 ﻿using Attila.Domain.Entities;
-using Attila.Domain.Entities.Enums;
+using Attila.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Food.Commands
+namespace Atilla.Application.Inventory_Manager.Food.Commands
 {
     public class UpdateFoodStockCommand : IRequest<bool>
     {

@@ -1,6 +1,6 @@
 ﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Domain.Entities.Enums;
-using Attila.Domain.Enums;
+using Attila.Domain.Entities;
+using Attila.Domain;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

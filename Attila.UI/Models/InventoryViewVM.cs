@@ -1,5 +1,5 @@
-﻿using Attila.Application.Admin.Food.Queries;
-using Attila.Application.Admin.Inventory.Queries;
+﻿using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Admin.Equipments.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

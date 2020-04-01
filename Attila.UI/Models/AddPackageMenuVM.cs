@@ -1,4 +1,4 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

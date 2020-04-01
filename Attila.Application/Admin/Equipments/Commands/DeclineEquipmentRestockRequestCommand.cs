@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila;
+using Attila.Application.Interfaces;
 using MediatR;
 using System;
 using System.Threading;

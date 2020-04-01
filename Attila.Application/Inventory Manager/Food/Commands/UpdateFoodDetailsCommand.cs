@@ -1,14 +1,14 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Domain.Entities.Enums;
+using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Food.Commands
+namespace Atilla.Application.Inventory_Manager.Food.Commands
 {
     public class UpdateFoodDetailsCommand : IRequest<bool>
     {

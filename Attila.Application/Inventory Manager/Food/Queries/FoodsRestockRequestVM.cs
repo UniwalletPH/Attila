@@ -1,6 +1,6 @@
 ﻿using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;

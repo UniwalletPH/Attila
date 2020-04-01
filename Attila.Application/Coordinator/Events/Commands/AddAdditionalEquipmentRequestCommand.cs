@@ -1,17 +1,16 @@
-﻿using Attila.Application.Coordinator.Event.Queries;
+﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Status = Attila.Domain.Enums.Status;
 
-namespace Attila.Application.Event.Commands
+namespace Attila.Application.Events.Commands
 {
 
     public class AddAdditionalEquipmentRequestCommand : IRequest<bool>
@@ -33,7 +32,7 @@ namespace Attila.Application.Event.Commands
                     EventDetailsID = request.AdditionalEquipment.EventDetailsID,
                     EquipmentDetailsID = request.AdditionalEquipment.EquipmentDetailsID,
                     Quantity = request.AdditionalEquipment.Quantity,
-                    Status = Status.Pending               
+                    Status = Status.Processing               
                 };
 
                 dbContext.EventAdditionalEquipmentRequests.Add(_additionalEquipment);

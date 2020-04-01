@@ -8,12 +8,12 @@ using Microsoft.Extensions.Logging;
 using Attila.UI.Models;
 using MediatR;
 using Attila.Application.Admin.Event.Queries;
-using Attila.Application.Event.Queries;
+using Attila.Application.Events.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Attila.Application.Coordinator.Event.Queries;
-using Attila.Application.Event.Commands;
-using Attila.Application.Coordinator.Event.Commands;
-using Attila.Application.Admin.Queries;
+using Attila.Application.Coordinator.Events.Queries;
+using Attila.Application.Events.Commands;
+using Attila.Application.Coordinator.Events.Commands;
+using Attila.Application.Admin;
 
 namespace Attila.UI.Controllers
 {

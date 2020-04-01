@@ -2,13 +2,13 @@
 using Attila.Application.Inventory_Manager.Food.Queries;
 using Attila.Domain.Entities;
 using Attila.Domain.Entities.Tables;
-using Attila.Domain.Enums;
+using Attila.Domain;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Food.Commands
+namespace Attila.Application.Inventory_Manager.Food.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {
