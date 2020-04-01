@@ -33,7 +33,7 @@ namespace Attila.UI.Controllers
 
             var _getDetails = await mediator.Send(new GetInventoryQuery());
 
-            InventoryDataVM _inventoryDataVM = new InventoryDataVM
+            InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
             {
                 FoodListVM = _getDetails.FoodListVM,
                 EquipmentListVM = _getDetails.EquipmentListVM
@@ -58,7 +58,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            InventoryDeliveryVM InventoryDeliveryListVM = new InventoryDeliveryVM
+            InventoryDeliveryCVM InventoryDeliveryListVM = new InventoryDeliveryCVM
             {
                 SupplierDetailsList = _supplierList
             };
@@ -123,7 +123,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            FoodRestockRequestVM foodDetailsListVM = new FoodRestockRequestVM
+            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
             {
                 FoodDetailsList = _list
             };
@@ -184,7 +184,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
             {
                 FoodDetailsList = _list,
                 FoodDeliveryList = _list2
@@ -252,7 +252,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            EquipmentRestockRequestVM equipmentDetailsListVM = new EquipmentRestockRequestVM
+            EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
             {
                 EquipmentDetailsList = _list
             };
@@ -310,7 +310,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentDetailsList = _list,
                 EquipmentDeliveryList = _list2

@@ -87,7 +87,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentDetailsList = _list,
                 EquipmentDeliveryList = _list2
@@ -124,7 +124,7 @@ namespace Attila.UI.Controllers
             {
                 var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
 
-                EquipmentDetailsVM equipmentDetailsVM = new EquipmentDetailsVM
+                EquipmentDetailsCVM equipmentDetailsVM = new EquipmentDetailsCVM
                 {
                     EquipmentDetailsVMs = _getEquipmentDetails
                 };
@@ -139,7 +139,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> DeleteEquipmentDetails(EquipmentDetailsVM deleteID)
+        public async Task<IActionResult> DeleteEquipmentDetails(EquipmentDetailsCVM deleteID)
         {
             try
             {
@@ -170,7 +170,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            EquipmentRestockRequestVM equipmentDetailsListVM = new EquipmentRestockRequestVM
+            EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
             {
                 EquipmentDetailsList = _list
             };
@@ -215,7 +215,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentDetailsVM equipmentDetailsListVM = new EquipmentDetailsVM
+            EquipmentDetailsCVM equipmentDetailsListVM = new EquipmentDetailsCVM
             {
                 EquipmentDetailsList = _list
             };
@@ -261,7 +261,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            EquipmentInventoryVM equipmentDetailsListVM = new EquipmentInventoryVM
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentDetailsList = _list
             };
@@ -296,7 +296,7 @@ namespace Attila.UI.Controllers
             {
                 var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
 
-                Models.EquipmentDetailsVM equipmentDetailsVM = new Models.EquipmentDetailsVM
+                Models.EquipmentDetailsCVM equipmentDetailsVM = new Models.EquipmentDetailsCVM
                 {
                     EquipmentDetailsVMs = _getEquipmentDetails
                 };
@@ -318,7 +318,7 @@ namespace Attila.UI.Controllers
             {
                 var _getEquipmentStock = await mediator.Send(new GetEquipmentStockQuery());
 
-                EquipmentInventoryVM equipmentInventoryVM = new EquipmentInventoryVM 
+                EquipmentInventoryCVM equipmentInventoryVM = new EquipmentInventoryCVM 
                 {
                     EquipmentsInventoryVMs = _getEquipmentStock
                 };
@@ -338,7 +338,7 @@ namespace Attila.UI.Controllers
             {
                 var _getEquipmentDelivery = await mediator.Send(new GetEquipmentDeliveryQuery());
 
-                DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
+                DeliveryDetailsCVM deliveryDetailsVM = new DeliveryDetailsCVM
                 {
                     InventoryDeliveryVM = _getEquipmentDelivery
                 };
@@ -388,7 +388,7 @@ namespace Attila.UI.Controllers
             {
                 var _searchEquipmentByKeyword = await mediator.Send(new SearchEquipmentByKeywordQuery { SearchedKeyword = equipmentDetailsVM.SearchedKeyword });
 
-                EquipmentDetailsVM equipmentDetails = new EquipmentDetailsVM
+                EquipmentDetailsCVM equipmentDetails = new EquipmentDetailsCVM
                 {
                     EquipmentDetailsVMs = _searchEquipmentByKeyword
                 };
@@ -458,7 +458,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            FoodInventoryVM FoodDetailsListVM = new FoodInventoryVM
+            FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
             {
                 FoodDetailsList = _list,
                 FoodDeliveryList = _list2
@@ -494,7 +494,7 @@ namespace Attila.UI.Controllers
             {
                 var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
 
-                FoodDetailsVM foodDetailsVM = new FoodDetailsVM
+                FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
                 {
                     FoodDetailsVMs = _getFoodDetails
                 };
@@ -538,7 +538,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            FoodRestockRequestVM foodDetailsListVM = new FoodRestockRequestVM
+            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
             {
                 FoodDetailsList = _list
             };
@@ -624,7 +624,7 @@ namespace Attila.UI.Controllers
             {
                 var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
 
-                FoodDetailsVM foodDetailsVM = new FoodDetailsVM
+                FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
                 {
                     FoodDetailsVMs = _getFoodDetails
                 };
@@ -646,7 +646,7 @@ namespace Attila.UI.Controllers
             {
                 var _getFoodStock = await mediator.Send(new GetFoodStockQuery());
 
-                FoodInventoryVM foodInventoryVM = new FoodInventoryVM
+                FoodInventoryCVM foodInventoryVM = new FoodInventoryCVM
                 {
                     FoodsInventoryVMs = _getFoodStock
                 };
@@ -668,7 +668,7 @@ namespace Attila.UI.Controllers
             {
                 var _getFoodDelivery = await mediator.Send(new GetFoodDeliveryQuery());
 
-                DeliveryDetailsVM deliveryDetailsVM = new DeliveryDetailsVM
+                DeliveryDetailsCVM deliveryDetailsVM = new DeliveryDetailsCVM
                 {
                     InventoryDeliveryVM = _getFoodDelivery
                 };
@@ -717,7 +717,7 @@ namespace Attila.UI.Controllers
             {
                 var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = foodsDetailsVM.SearchedKeyword });
 
-                FoodDetailsVM foodDetails = new FoodDetailsVM
+                FoodDetailsCVM foodDetails = new FoodDetailsCVM
                 {
                     FoodDetailsVMs = _searchFoodByKeyword
                 };
@@ -813,7 +813,7 @@ namespace Attila.UI.Controllers
             {
                 var _getSupplierDetails = await mediator.Send(new GetSupplierDetailsQuery());
 
-                SupplierDetailsVM supplierDetailsVM = new SupplierDetailsVM
+                SupplierDetailsCVM supplierDetailsVM = new SupplierDetailsCVM
                 {
                     SupplierDetailsVMs = _getSupplierDetails
                 };

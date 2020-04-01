@@ -56,7 +56,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            var packages = new PackagesVM
+            var packages = new PackagesCVM
             {
                 MenuList = _list,
                 EventPackages = eventPackages,
@@ -118,7 +118,7 @@ namespace Attila.UI.Controllers
                     });
 
                 }
-                var _addEventList = new AddMenuVM();
+                var _addEventList = new AddMenuCVM();
                 _addEventList.CategoryList = _list;
                 return View(_addEventList);
 
@@ -162,7 +162,7 @@ namespace Attila.UI.Controllers
 
                 }
 
-                AddMenuVM add = new AddMenuVM
+                AddMenuCVM add = new AddMenuCVM
                 {
                     MenuList = _menu,
                     CategoryList = _list
@@ -212,7 +212,7 @@ namespace Attila.UI.Controllers
                     });
                 }
 
-                var _packageList = new  AddPackageMenuVM();
+                var _packageList = new  AddPackageMenuCVM();
                 _packageList.PackageList = _packageslist;
                 _packageList.MenuList = _menulist;
                 return View(_packageList);
@@ -225,7 +225,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPackageMenu(AddPackageMenuVM _packageMenu)
+        public async Task<IActionResult> AddPackageMenu(AddPackageMenuCVM _packageMenu)
         {
             bool flag = true;
             PackageMenuVM _container = new PackageMenuVM
@@ -319,7 +319,7 @@ namespace Attila.UI.Controllers
  
 
 
-            var packages = new PackagesVM
+            var packages = new PackagesCVM
             {
 
                 MenuList = _list,
@@ -334,7 +334,7 @@ namespace Attila.UI.Controllers
          
 
 [HttpPost]
-        public async Task<IActionResult> AddMenu(AddMenuVM _menuDetails)
+        public async Task<IActionResult> AddMenu(AddMenuCVM _menuDetails)
         {  
             MenuVM menuDetails = new MenuVM
             {
@@ -357,7 +357,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddMenuCategory(AddMenuCategoryVM _menu)
+        public async Task<IActionResult> AddMenuCategory(AddMenuCategoryCVM _menu)
         {
 
             var menu = new MenuCategoryVM { 

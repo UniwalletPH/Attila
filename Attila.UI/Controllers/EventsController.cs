@@ -34,7 +34,7 @@ namespace Attila.UI.Controllers
                 var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
                 var _pastEvents = await mediator.Send(new GetAllPastEventsQuery {  });
 
-                var _forEvent = new EventViewVM
+                var _forEvent = new EventViewCVM
                 {
                     IncomingEvent = _incomingEvents,
                     PastEvent = _pastEvents,
@@ -80,7 +80,7 @@ namespace Attila.UI.Controllers
                     });
                 }
 
-                var _addEventList = new AddEventVM();
+                var _addEventList = new AddEventCVM();
                 _addEventList.PackageList = _list;
                 _addEventList.ClientList = _clientlist;
                 return View(_addEventList);
@@ -91,7 +91,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddEvent(AddEventVM _eventDetails)
+        public async Task<IActionResult> AddEvent(AddEventCVM _eventDetails)
         {
              
                 EventDetailsVM x = new EventDetailsVM
@@ -164,7 +164,7 @@ namespace Attila.UI.Controllers
 
 
 
-            var viewEventVM = new ViewEventVM
+            var viewEventVM = new ViewEventCVM
             { 
             
             Event = x

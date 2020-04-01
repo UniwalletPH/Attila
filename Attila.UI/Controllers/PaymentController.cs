@@ -80,7 +80,7 @@ namespace Attila.UI.Controllers
             };
 
             var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
-            var eventDetails = new EventPaymentVM
+            var eventDetails = new EventPaymentCVM
             {
 
                 PaymentStatus = eventPackages,
@@ -135,7 +135,7 @@ namespace Attila.UI.Controllers
 
             };
 
-           var eventDetails = new EventPaymentVM { 
+           var eventDetails = new EventPaymentCVM { 
 
             EventDetailsID = EventID,
             EventDetails = _eventDetails
