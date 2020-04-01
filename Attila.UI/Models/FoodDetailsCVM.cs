@@ -1,4 +1,4 @@
-﻿using Attila.Application.Inventory_Manager.Food.Queries;
+﻿using Attila.Application.Inventory_Manager.Foods.Queries;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

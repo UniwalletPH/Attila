@@ -1,4 +1,4 @@
-﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
+﻿using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

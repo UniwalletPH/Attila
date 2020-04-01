@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Atilla.Application.Inventory_Manager.Food.Commands;
-using Attila.Application.Inventory_Manager.Equipment.Commands;
-using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Commands;
-using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Commands;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Commands;
+using Attila.Application.Inventory_Manager.Foods.Queries;
 using Attila.Application.Inventory_Manager.Shared.Commands;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.UI.Models;
@@ -486,18 +485,18 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> DeleteFoodDetails()
+        public IActionResult DeleteFoodDetails()
         {
             try
             {
-                var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+                //var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
 
-                FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
-                {
-                    FoodDetailsVMs = _getFoodDetails
-                };
+                //FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
+                //{
+                //    FoodDetailsVMs = _getFoodDetails
+                //};
 
-                return View(foodDetailsVM);
+                return View();
             }
             catch (Exception)
             {
@@ -616,19 +615,19 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetFoodDetails()
+        public IActionResult GetFoodDetails()
         {
             try
             {
-                var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+                //var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
 
-                FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
-                {
-                    FoodDetailsVMs = _getFoodDetails
-                };
+                //FoodDetailsCVM foodDetailsVM = new FoodDetailsCVM
+                //{
+                //    FoodDetailsVMs = _getFoodDetails
+                //};
 
 
-                return View(foodDetailsVM);
+                return View();
             }
             catch (Exception)
             {
@@ -709,18 +708,18 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> SearchFoodByKeywordResult(FoodsDetailsVM foodsDetailsVM)
+        public IActionResult SearchFoodByKeywordResult(FoodsDetailsVM foodsDetailsVM)
         {
             try
             {
-                var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = foodsDetailsVM.SearchedKeyword });
+                //var _searchFoodByKeyword = await mediator.Send(new SearchFoodByKeywordQuery { SearchedKeyword = foodsDetailsVM.SearchedKeyword });
 
-                FoodDetailsCVM foodDetails = new FoodDetailsCVM
-                {
-                    FoodDetailsVMs = _searchFoodByKeyword
-                };
+                //FoodDetailsCVM foodDetails = new FoodDetailsCVM
+                //{
+                //    FoodDetailsVMs = _searchFoodByKeyword
+                //};
 
-                return View(foodDetails);
+                return View();
 
             }
             catch (Exception)

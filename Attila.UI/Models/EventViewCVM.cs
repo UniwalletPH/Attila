@@ -1,4 +1,4 @@
-﻿using Attila.Application.Admin.Event.Queries;
+﻿using Attila.Application.Admin.Events.Queries;
 using System.Collections.Generic;
 
 namespace Attila.UI.Models
@@ -11,6 +11,6 @@ namespace Attila.UI.Models
 
         public List<EventVM> PastEvent { get; set; }
 
-        public IEnumerable<Attila.Application.Admin.Event.Queries.EventVM> Events{get;set;}
+        public IEnumerable<EventVM> Events{get;set;}
     }
 }

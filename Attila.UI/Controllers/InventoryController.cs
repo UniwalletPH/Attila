@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Attila.UI.Models;
 using MediatR;
-using Attila.Application.Inventory_Manager.Food.Queries;
-using Attila.Application.Inventory_Manager.Food.Commands;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Microsoft.AspNetCore.Http;
-using Attila.Application.Inventory_Manager.Equipment.Commands;
-using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Commands;
 using Attila.Application.Inventory_Manager.Shared.Commands;
+using Attila.Application.Inventory_Manager.Foods.Queries;
+using Attila.Application.Inventory_Manager.Foods.Commands;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Commands;
 
 namespace Attila.UI.Controllers
 {
