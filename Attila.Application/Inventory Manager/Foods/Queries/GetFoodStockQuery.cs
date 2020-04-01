@@ -30,8 +30,8 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
                     UserID = a.InventoryManagerID,
-                    FoodDetailsID = a.FoodDetailsID,
-                    DeliveryDetailsID = a.FoodRestockID
+                    FoodDetailsID = a.FoodID,
+                    DeliveryDetailsID = a.DeliveryID
 
                 }).ToListAsync();
 

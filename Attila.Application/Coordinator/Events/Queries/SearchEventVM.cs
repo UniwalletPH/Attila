@@ -8,7 +8,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 {
     public class SearchEventVM
     {
-        public PackageMenuDetails? PackageDetails { get; set; }
+        public EventPackage? PackageDetails { get; set; }
         public Client? EventClient { get; set; }
         public int ID { get; set; }
 

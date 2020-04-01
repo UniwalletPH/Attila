@@ -13,6 +13,7 @@ namespace Attila.Application.Users.Queries
     public class GetUserDetailsQuery : IRequest<UserVM>
     {
         public string Username { get; set; }
+
         public class GetUserDetailsQueryHandler : IRequestHandler<GetUserDetailsQuery, UserVM>
         {
             private readonly IAttilaDbContext dbContext;

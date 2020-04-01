@@ -15,9 +15,6 @@ namespace Attila.Domain.Entities
 
         public string Contact { get; set; }
 
-        public ICollection<Event> Events { get; set; }
-
-
-
+        public ICollection<Event> Events { get; private set; } = new HashSet<Event>();
     }
 }

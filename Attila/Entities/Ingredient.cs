@@ -5,14 +5,17 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class PackageDish : BaseAuditedEntity
+    public class Ingredient : BaseAuditedEntity
     {
-        public int PackageMenuDetailsID {get; set;}
+        public string Name { get; set; }
 
         public int DishID { get; set; }
 
+        public int FoodID { get; set; }
+
         public Dish Dish { get; set; }
 
-        public PackageMenuDetails PackageMenuDetails { get; set; }
+        public Food Food { get; set; }
+
     }
 }

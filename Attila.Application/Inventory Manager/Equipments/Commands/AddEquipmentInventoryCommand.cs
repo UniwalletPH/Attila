@@ -30,7 +30,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                     ItemPrice = request.MyEquipmentsInventoryVM.ItemPrice,
                     Remarks = request.MyEquipmentsInventoryVM.Remarks,
                     InventoryManagerID = request.MyEquipmentsInventoryVM.UserID,
-                    EquipmentDetailsID = request.MyEquipmentsInventoryVM.EquipmentDetailsID,
+                    EquipmentID = request.MyEquipmentsInventoryVM.EquipmentDetailsID,
                     DeliveryID = request.MyEquipmentsInventoryVM.DeliveryDetailsID
                 };
 

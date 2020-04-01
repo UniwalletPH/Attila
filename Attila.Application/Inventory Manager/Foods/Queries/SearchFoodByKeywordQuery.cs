@@ -24,7 +24,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
             {
                 var _searchedKeywordList = new List<FoodsDetailsVM>();
 
-                var _searchedKeyword = dbContext.FoodDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
+                var _searchedKeyword = dbContext.Foods.Where(a => a.Name.Contains(request.SearchedKeyword) ||
                                                                          a.Code.Contains(request.SearchedKeyword) ||
                                                                          a.Specification.Contains(request.SearchedKeyword) ||
                                                                          a.Description.Contains(request.SearchedKeyword));

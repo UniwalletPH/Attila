@@ -24,7 +24,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
             {
                 var _searchedKeywordList = new List<EquipmentsDetailsVM>();
 
-                var _searchedKeyword = dbContext.EquipmentDetails.Where(a => a.Name.Contains(request.SearchedKeyword) ||
+                var _searchedKeyword = dbContext.Equipments.Where(a => a.Name.Contains(request.SearchedKeyword) ||
                                                                          a.Code.Contains(request.SearchedKeyword) ||
                                                                          a.Description.Contains(request.SearchedKeyword));
 

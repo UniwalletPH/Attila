@@ -20,13 +20,13 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(DeleteFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _deleteFoodDetails = dbContext.FoodDetails.Find(request.DeleteSearchedID);
+                var _deleteFoodDetails = dbContext.Foods.Find(request.DeleteSearchedID);
 
                 if (_deleteFoodDetails != null)
                 {
-                    dbContext.FoodDetails.Remove(_deleteFoodDetails);
+                    dbContext.Foods.Remove(_deleteFoodDetails);
 
-                    var _deleteFoodInventory = dbContext.FoodInventories.Where(a => a.FoodDetailsID == request.DeleteSearchedID).ToList();
+                    var _deleteFoodInventory = dbContext.FoodInventories.Where(a => a.FoodID == request.DeleteSearchedID).ToList();
                     dbContext.FoodInventories.RemoveRange(_deleteFoodInventory);
                 }
                 else

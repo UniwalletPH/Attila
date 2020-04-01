@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
             public async Task<FoodsDetailsVM> Handle(SearchFoodByIdQuery request, CancellationToken cancellationToken)
             {
 
-                Domain.Entities.Food _searchedFoodDetails = dbContext.FoodDetails.Find(request.SearchedID);
+                Domain.Entities.Food _searchedFoodDetails = dbContext.Foods.Find(request.SearchedID);
 
                 if (_searchedFoodDetails != null) 
                 {

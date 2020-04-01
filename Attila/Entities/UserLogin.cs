@@ -6,18 +6,16 @@ namespace Attila.Domain.Entities
 {
     public class UserLogin : BaseAuditedEntity
     {
-        
+        [Key]
         [ForeignKey("User")]
-        public string Username { get; set; }        
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public override int ID { get; set; }
 
+        public string Username { get; set; }
         public byte[] Salt { get; set; }
-
         public byte[] Password { get; set; }
-
         public bool IsTemporaryPassword { get; set; }
-
         public string TemporaryPassword { get; set; }
-
         public User User { get; set; } 
     }
 }

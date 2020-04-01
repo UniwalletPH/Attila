@@ -20,7 +20,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
             }
             public async Task<EquipmentsDetailsVM> Handle(SearchEquipmentByIdQuery request, CancellationToken cancellationToken)
             {
-                Domain.Entities.Equipment _searchedEquipmentDetails = dbContext.EquipmentDetails.Find(request.SearchedID);
+                Domain.Entities.Equipment _searchedEquipmentDetails = dbContext.Equipments.Find(request.SearchedID);
                 
                 if (_searchedEquipmentDetails != null)
                 {

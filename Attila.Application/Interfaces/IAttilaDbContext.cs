@@ -9,13 +9,13 @@ namespace Attila.Application.Interfaces
     public interface IAttilaDbContext
     {
 
-        public DbSet<Equipment> EquipmentDetails { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
 
         public DbSet<EquipmentInventory> EquipmentInventories { get; set; }
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
-        public DbSet<Domain.Entities.Food> FoodDetails { get; set; }
+        public DbSet<Food> Foods { get; set; }
 
         public DbSet<FoodInventory> FoodInventories { get; set; }
 
@@ -23,13 +23,13 @@ namespace Attila.Application.Interfaces
 
         public DbSet<Delivery> DeliveryDetails { get; set; }
 
-        public DbSet<Domain.Entities.Event> EventDetails { get; set; }
+        public DbSet<Event> EventDetails { get; set; }
 
         public DbSet<Client> ClientDetails { get; set; }
 
         public DbSet<EventEquipments> EventEquipments { get; set; }
 
-        public DbSet<PackageMenuDetails> PackageMenuDetails { get; set; }
+        public DbSet<EventPackage> PackageMenuDetails { get; set; }
 
         public DbSet<DishCategory> MenuCategories { get; set; }
 
@@ -37,7 +37,7 @@ namespace Attila.Application.Interfaces
 
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
 
-        public DbSet<EventMenus> EventMenus { get; set; }
+        public DbSet<EventMenu> EventMenus { get; set; }
 
         public DbSet<EventAdditionalDurationRequest> EventAdditionalDurationRequests { get; set; }
 
@@ -49,9 +49,9 @@ namespace Attila.Application.Interfaces
 
         public DbSet<UserLogin> UserLogins { get; set; }
 
-        public DbSet<PackageDish> PackageMenus { get; set; }
+        public DbSet<EventPackageDish> PackageMenus { get; set; }
 
-        public DbSet<PackageEquipments> PackageEquipments { get; set; }
+        public DbSet<EventPackageEquipments> PackageEquipments { get; set; }
 
         public DbSet<Notifications> Notifications { get; set; }
 

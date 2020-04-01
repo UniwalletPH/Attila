@@ -1,30 +1,29 @@
 ﻿using Attila.Domain.Entities.Base;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Attila.Domain.Entities
 {
     public class FoodInventory : BaseAuditedEntity
     {
-        public int Quantity { get; set; }
-
-        public DateTime ExpirationDate { get; set; }
-
-        public DateTime EncodingDate { get; set; }
-
-        public decimal ItemPrice { get; set; }
-
-        public string Remarks { get; set; }
-
+        [ForeignKey("InventoryManager")]
         public int InventoryManagerID { get; set; }
+        [ForeignKey("Food")]
+        public int FoodID { get; set; }
+        [ForeignKey("Delivery")]
+        public int DeliveryID { get; set; }
 
-        public int FoodDetailsID { get; set; }
 
-        public int FoodRestockID { get; set; }
+        public int Quantity { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public DateTime EncodingDate { get; set; }
+        public decimal ItemPrice { get; set; }
+        public string Remarks { get; set; }
+        
+        
 
-        public Food FoodDetails { get; set; }
-
-        public Delivery FoodRestock { get; set; }
-
+        public Food Food { get; set; }
+        public Delivery Delivery { get; set; }
         public User InventoryManager { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(UpdateFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodDetails = dbContext.FoodDetails.Find(request.MyFoodDetailsVM.ID);
+                var _updatedFoodDetails = dbContext.Foods.Find(request.MyFoodDetailsVM.ID);
 
                 if (_updatedFoodDetails != null)
                 {

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class PackageMenuDetails : BaseAuditedEntity
+    public class EventPackage : BaseAuditedEntity
     {
         public string Code { get; set; }
 

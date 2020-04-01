@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
             public async Task<InventoryDetailsVM> Handle(GetInventoryDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDetailsList = await dbContext.EquipmentDetails.Select(a => new EquipmentsDetailsVM
+                var _equipmentDetailsList = await dbContext.Equipments.Select(a => new EquipmentsDetailsVM
                 {
                     ID = a.ID,
                     Code = a.Code,
@@ -33,7 +33,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
                 }).ToListAsync();
 
-                var _foodDetailsList = await dbContext.FoodDetails.Select(a => new FoodsDetailsVM
+                var _foodDetailsList = await dbContext.Foods.Select(a => new FoodsDetailsVM
                 {
                     ID = a.ID,
                     Code = a.Code,
@@ -53,7 +53,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
                     UserID = a.InventoryManagerID,
-                    EquipmentDetailsID = a.EquipmentDetailsID,
+                    EquipmentDetailsID = a.EquipmentID,
                     DeliveryDetailsID = a.DeliveryID
 
                 }).ToListAsync();
@@ -67,8 +67,8 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
                     UserID = a.InventoryManagerID,
-                    FoodDetailsID = a.FoodDetailsID,
-                    DeliveryDetailsID = a.FoodRestockID
+                    FoodDetailsID = a.FoodID,
+                    DeliveryDetailsID = a.DeliveryID
 
                 }).ToListAsync();
 

@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
 
             public async Task<IEnumerable<FoodsDetailsVM>> Handle(GetFoodDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _foodDetailsList = await dbContext.FoodDetails.Select(a => new FoodsDetailsVM
+                var _foodDetailsList = await dbContext.Foods.Select(a => new FoodsDetailsVM
                 { 
                     ID = a.ID,
                     Code = a.Code,

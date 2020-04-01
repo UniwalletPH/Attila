@@ -30,7 +30,7 @@ namespace Attila.Application.Admin.Events.Queries
 
         public User Coordinator { get; set; }
 
-        public PackageMenuDetails  Package{ get; set; }
+        public EventPackage  Package{ get; set; }
 
         public Client Client { get; set; }
 

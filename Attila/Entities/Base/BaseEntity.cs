@@ -8,7 +8,7 @@ namespace Attila.Domain.Entities.Base
     public class BaseEntity
     {
         [Key]
-        public int ID { get; set; }
+        public virtual int ID { get; set; }
 
     }
 }

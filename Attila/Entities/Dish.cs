@@ -13,8 +13,7 @@ namespace Attila.Domain.Entities
 
         public DishCategory DishCategory { get; set; }
 
-        public ICollection<EventMenus> EventMenus { get; set; }
-
-      
+        public ICollection<EventMenu> EventMenus { get; private set; } = new HashSet<EventMenu>();
+        public ICollection<Ingredient> Ingredients { get; private set; } = new HashSet<Ingredient>();
     }
 }

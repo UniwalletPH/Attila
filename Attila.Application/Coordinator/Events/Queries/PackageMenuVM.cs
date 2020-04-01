@@ -15,6 +15,6 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public Dish? Menu { get; set; }
 
-        public PackageMenuDetails? PackageMenuDetails { get; set; }
+        public EventPackage? PackageMenuDetails { get; set; }
     }
 }

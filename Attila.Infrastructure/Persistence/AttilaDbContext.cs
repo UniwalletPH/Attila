@@ -11,13 +11,13 @@ namespace Attila.Infrastructure.Persistence
 {
     public class AttilaDbContext : DbContext, IAttilaDbContext
     {
-        public DbSet<Equipment> EquipmentDetails { get; set; }
+        public DbSet<Equipment> Equipments { get; set; }
 
         public DbSet<EquipmentInventory> EquipmentInventories { get; set; }
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
-        public DbSet<Food> FoodDetails { get; set; }
+        public DbSet<Food> Foods { get; set; }
 
         public DbSet<FoodInventory> FoodInventories { get; set; }
 
@@ -31,7 +31,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EventEquipments> EventEquipments { get; set; }
 
-        public DbSet<PackageMenuDetails> PackageMenuDetails { get; set; }
+        public DbSet<EventPackage> PackageMenuDetails { get; set; }
 
         public DbSet<DishCategory> MenuCategories { get; set; }
 
@@ -39,7 +39,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
 
-        public DbSet<EventMenus> EventMenus { get; set; }
+        public DbSet<EventMenu> EventMenus { get; set; }
 
         public DbSet<EventAdditionalDurationRequest> EventAdditionalDurationRequests { get; set; }
 
@@ -51,9 +51,9 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<UserLogin> UserLogins { get; set; }
 
-        public DbSet<PackageDish> PackageMenus { get ; set; }
+        public DbSet<EventPackageDish> PackageMenus { get ; set; }
 
-        public DbSet<PackageEquipments> PackageEquipments { get ; set ; }
+        public DbSet<EventPackageEquipments> PackageEquipments { get ; set ; }
 
         public DbSet<Notifications> Notifications { get; set ; }
 

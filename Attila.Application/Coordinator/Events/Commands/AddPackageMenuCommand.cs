@@ -23,10 +23,10 @@ namespace Attila.Application.Coordinator.Events.Commands
 
             public async Task<bool> Handle(AddPackageMenuCommand request, CancellationToken cancellationToken)
             {
-                var _newPackageMenu = new PackageDish
+                var _newPackageMenu = new EventPackageDish
                 {
                     DishID = request.PackageMenu.MenuID,
-                    PackageMenuDetailsID = request.PackageMenu.PackageDetailsID
+                    EventPackageID = request.PackageMenu.PackageDetailsID
                 };
 
                 dbContext.PackageMenus.Add(_newPackageMenu);

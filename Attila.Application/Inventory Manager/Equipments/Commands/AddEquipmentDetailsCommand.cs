@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                     EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType
                 };
 
-                dbContext.EquipmentDetails.Add(_equipmentDetails);
+                dbContext.Equipments.Add(_equipmentDetails);
                 await dbContext.SaveChangesAsync();
 
                 return true;

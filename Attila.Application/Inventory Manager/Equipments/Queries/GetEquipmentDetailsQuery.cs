@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
 
             public async Task<IEnumerable<EquipmentsDetailsVM>> Handle(GetEquipmentDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _equipmentDetailsList = await dbContext.EquipmentDetails.Select(a => new EquipmentsDetailsVM
+                var _equipmentDetailsList = await dbContext.Equipments.Select(a => new EquipmentsDetailsVM
                 {
                     ID = a.ID,
                     Code = a.Code,

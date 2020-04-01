@@ -29,7 +29,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                     FoodType = request.MyFoodDetailsVM.FoodType
                 };
 
-                dbContext.FoodDetails.Add(_foodDetails);
+                dbContext.Foods.Add(_foodDetails);
                 await dbContext.SaveChangesAsync();
 
                 return true;

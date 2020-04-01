@@ -28,7 +28,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 var _inventoryDeliveryData = new List<InventoriesDeliveryVM>();
 
 
-                var _getFoodData = dbContext.FoodInventories.Include(a => a.FoodDetails);
+                var _getFoodData = dbContext.FoodInventories.Include(a => a.Food);
 
                 foreach (var item in _getFoodData)
                 {
@@ -40,14 +40,14 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
                         UserID = item.InventoryManagerID,
-                        FoodDetails = item.FoodDetails
+                        FoodDetails = item.Food
                     };
 
                     _foodListData.Add(_foodAllDetails);
                 }
 
 
-                var _getEquipmentData = dbContext.EquipmentInventories.Include(a => a.EquipmentDetails);
+                var _getEquipmentData = dbContext.EquipmentInventories.Include(a => a.Equipment);
 
                 foreach (var item in _getEquipmentData)
                 {
@@ -59,7 +59,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
                         UserID = item.InventoryManagerID,
-                        EquipmentDetails = item.EquipmentDetails
+                        EquipmentDetails = item.Equipment
                     };
 
                     _equipmentListData.Add(_equipmentAllDetails);

@@ -28,7 +28,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
                     UserID = a.InventoryManagerID,
-                    EquipmentDetailsID = a.EquipmentDetailsID,
+                    EquipmentDetailsID = a.EquipmentID,
                     DeliveryDetailsID = a.DeliveryID
 
                 }).ToListAsync();
