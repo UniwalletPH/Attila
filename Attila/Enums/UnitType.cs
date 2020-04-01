@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Attila.Domain.Enums
+namespace Attila
 {
     public enum UnitType : byte
     {
