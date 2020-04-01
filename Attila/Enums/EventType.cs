@@ -9,7 +9,7 @@ namespace Attila
         None = 0,
         Wedding = 1,
         Birthday = 2,
-        Others = 3,
-        Graduation = 4,
+        Graduation = 3,
+        Others = 4,
     }
 }
