@@ -14,7 +14,7 @@ namespace Attila.UI.Models
 
         public int EquipmentDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
+        public Equipment EquipmentDetails { get; set; }
 
         public decimal Rate { get; set; }
 

@@ -46,7 +46,7 @@ namespace Attila.Application.Event.Commands
 
                 //};
 
-               var _newEvent = new EventDetails
+               var _newEvent = new Domain.Entities.Event
                 {
                     EventName = request.EventDetails.EventName,
                     Type = request.EventDetails.Type,

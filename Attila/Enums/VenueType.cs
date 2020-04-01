@@ -6,7 +6,7 @@ namespace Attila
 {
     public enum VenueType : byte
     {
-        None = 1, 
-        Building = 2
+        None = 0,
+        Building = 1
     }
 }

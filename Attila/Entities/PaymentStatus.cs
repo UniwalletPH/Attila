@@ -8,7 +8,7 @@ namespace Attila.Domain.Entities
 
         public int EventDetailsID { get; set; }
 
-        public EventDetails? EventDetails { get; set; }
+        public Event? EventDetails { get; set; }
 
         public decimal Amount { get; set; }
 

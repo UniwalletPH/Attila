@@ -16,7 +16,7 @@ namespace Attila.Application.Coordinator.Event.Queries
         [Required]
         public int EquipmentDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
+        public Equipment EquipmentDetails { get; set; }
 
         [Required]
         public int Quantity { get; set; }

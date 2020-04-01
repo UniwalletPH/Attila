@@ -1,6 +1,6 @@
 ﻿namespace Attila.Domain.Entities
 {
-    public class ClientDetails
+    public class Client
     {
         public int ID { get; set; }
 

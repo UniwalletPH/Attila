@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class SupplierDetails
+    public class Supplier
     {
         public int ID { get; set; }
 

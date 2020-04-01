@@ -13,7 +13,7 @@ namespace Attila.Domain.Entities
 
         public int EquipmentDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
+        public Equipment EquipmentDetails { get; set; }
 
         public Status Status { get; set; }
 

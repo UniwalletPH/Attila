@@ -8,11 +8,11 @@ namespace Attila.Domain.Entities
 
         public int EquipmentDetailsID { get; set; }
 
-        public EquipmentDetails EquipmentDetails { get; set; }
+        public Equipment EquipmentDetails { get; set; }
 
         public int EventDetailsID { get; set; }
 
-        public EventDetails EventDetails { get; set; }
+        public Event EventDetails { get; set; }
 
         public Status Status { get; set; }
 

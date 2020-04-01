@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Equipment.Commands
 
             public async Task<bool> Handle(AddEquipmentDetailsCommand request, CancellationToken cancellationToken)
             {
-                EquipmentDetails _equipmentDetails = new EquipmentDetails
+                Domain.Entities.Equipment _equipmentDetails = new Domain.Entities.Equipment
                 {
                     Code = request.MyEquipmentsDetailsVM.Code,
                     Name = request.MyEquipmentsDetailsVM.Name,
