@@ -19,6 +19,6 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public int UserID { get; set; }
 
-        public Domain.Entities.Equipment EquipmentDetails { get; set; }
+        public EquipmentDetails EquipmentDetails { get; set; }
     }
 }

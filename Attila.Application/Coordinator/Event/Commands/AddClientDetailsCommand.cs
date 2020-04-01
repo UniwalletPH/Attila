@@ -25,7 +25,7 @@ namespace Attila.Application.Event.Commands
 
             public async Task<bool> Handle(AddClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _newClient = new Client
+                var _newClient = new ClientDetails
                 {
                     Firstname = request.EventClient.Firstname,
                     Lastname = request.EventClient.Lastname,

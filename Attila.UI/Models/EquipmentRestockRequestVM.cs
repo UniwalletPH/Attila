@@ -21,7 +21,7 @@ namespace Attila.UI.Models
         public int EquipmentDetailsID { get; set; }
 
         [Required]
-        public Equipment EquipmentDetails { get; set; }
+        public EquipmentDetails EquipmentDetails { get; set; }
 
         [Required]
         public Status Status { get; set; }

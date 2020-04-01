@@ -3,10 +3,10 @@ using System;
 
 namespace Attila.Domain.Entities
 {
-    public class Event
+    public class EventDetails
     {
         public PackageMenuDetails? PackageDetails { get; set; }
-        public Client? EventClient { get; set; }
+        public ClientDetails? EventClient { get; set; }
         public int ID { get; set; }
 
         public string Theme { get; set; }

@@ -22,9 +22,9 @@ namespace Attila.Domain.Entities
 
         public int FoodRestockID { get; set; }
 
-        public Food FoodDetails { get; set; }
+        public FoodDetails FoodDetails { get; set; }
 
-        public Delivery FoodRestock { get; set; }
+        public DeliveryDetails FoodRestock { get; set; }
 
         public User User { get; set; }
     }

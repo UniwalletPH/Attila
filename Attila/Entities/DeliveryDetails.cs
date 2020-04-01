@@ -2,7 +2,7 @@
 
 namespace Attila.Domain.Entities
 {
-    public class Delivery
+    public class DeliveryDetails
     {
         public int ID { get; set; }
 
@@ -16,6 +16,6 @@ namespace Attila.Domain.Entities
 
         public int SupplierDetailsID { get; set; }
 
-        public Supplier SupplierDetails { get; set; }
+        public SupplierDetails SupplierDetails { get; set; }
     }
 }

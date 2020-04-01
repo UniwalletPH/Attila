@@ -35,7 +35,7 @@ namespace Attila.Application.Admin.Event.Queries
 
         public PackageMenuDetails  Package{ get; set; }
 
-        public Client Client { get; set; }
+        public ClientDetails Client { get; set; }
 
         public List<EventAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
 

@@ -8,7 +8,7 @@
 
         public int EventDetailsID { get; set; }
 
-        public Event EventDetails { get; set; }
+        public EventDetails EventDetails { get; set; }
         
         public Menu Menu { get; set; }
 

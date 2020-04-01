@@ -19,7 +19,7 @@ namespace Attila.UI.Models
 
         public int FoodDetailsID { get; set; }
 
-        public Food FoodDetails { get; set; }
+        public FoodDetails FoodDetails { get; set; }
 
         public Status Status { get; set; }
 

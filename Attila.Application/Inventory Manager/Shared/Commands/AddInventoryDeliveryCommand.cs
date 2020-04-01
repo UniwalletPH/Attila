@@ -22,7 +22,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
 
             public async Task<bool> Handle(AddInventoryDeliveryCommand request, CancellationToken cancellationToken)
             {
-                Delivery _equipmentRestock = new Delivery
+                DeliveryDetails _equipmentRestock = new DeliveryDetails
                 {
                     DeliveryDate = request.MyInventoriesDeliveryVM.DeliveryDate,
                     ReceiptImage = request.MyInventoriesDeliveryVM.ReceiptImage,

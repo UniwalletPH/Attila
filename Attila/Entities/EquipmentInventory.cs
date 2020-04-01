@@ -23,9 +23,9 @@ namespace Attila.Domain.Entities
 
         public User User { get; set; }
 
-        public Equipment EquipmentDetails { get; set; }
+        public EquipmentDetails EquipmentDetails { get; set; }
 
-        public Delivery EquipmentRestock { get; set; }
+        public DeliveryDetails EquipmentRestock { get; set; }
 
        
     }

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Event.Queries
 {
-    public class GetClientIdQuery : IRequest<Client>
+    public class GetClientIdQuery : IRequest<ClientDetails>
     {
         public string LastName { get; set; }
         public string FirstName { get; set; }
 
-        public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, Client>
+        public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, ClientDetails>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -24,7 +24,7 @@ namespace Attila.Application.Coordinator.Event.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<Client> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
+            public async Task<ClientDetails> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
             {
                 var _searchedClient = dbContext.ClientDetails.Where
                     (a => a.Firstname.Contains(request.FirstName)

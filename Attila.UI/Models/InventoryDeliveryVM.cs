@@ -19,7 +19,7 @@ namespace Attila.UI.Models
 
         public int SupplierDetailsID { get; set; }
 
-        public Supplier SupplierDetails { get; set; }
+        public SupplierDetails SupplierDetails { get; set; }
 
         public string Remarks { get; set; }
 

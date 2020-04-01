@@ -13,7 +13,7 @@ namespace Attila.Application.Coordinator.Event.Queries
 
         public int EquipmentDetailsID { get; set; }
 
-        public Equipment EquipmentDetails { get; set; }
+        public EquipmentDetails EquipmentDetails { get; set; }
 
         public decimal Rate { get; set; }
 

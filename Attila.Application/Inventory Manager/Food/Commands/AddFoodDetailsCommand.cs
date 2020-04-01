@@ -26,7 +26,7 @@ namespace Attila.Application.Food.Commands
             }
             public async Task<bool> Handle(AddFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                Domain.Entities.Food _foodDetails = new Domain.Entities.Food
+                FoodDetails _foodDetails = new FoodDetails
                 {
                     Code = request.MyFoodDetailsVM.Code,
                     Name = request.MyFoodDetailsVM.Name,
