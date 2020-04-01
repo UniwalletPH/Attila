@@ -142,7 +142,7 @@ namespace Attila.UI.Controllers
 
 
                 Quantity = foodRestockRequest.Quantity,
-                Status = Domain.Enums.Status.Pending,
+                Status = Status.Pending,
                 UserID = 1
             };
 
@@ -268,7 +268,7 @@ namespace Attila.UI.Controllers
                 EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
                 DateTimeRequest = DateTime.Now,
                 Quantity = equipmentRestockRequest.Quantity,
-                Status = Domain.Enums.Status.Pending,
+                Status = Status.Pending,
                 UserID = CurrentUser.ID
             };
 
