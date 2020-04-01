@@ -1,12 +1,9 @@
 ﻿using Attila.Application.Interfaces;
-using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

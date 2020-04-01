@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Foods.Commands
+namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
     public class RequestFoodRestockCommand : IRequest<bool>
     {

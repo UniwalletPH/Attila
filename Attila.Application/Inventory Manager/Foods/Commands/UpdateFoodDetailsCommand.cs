@@ -5,7 +5,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Atilla.Application.Foods.Commands
+namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
     public class UpdateFoodDetailsCommand : IRequest<bool>
     {

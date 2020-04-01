@@ -1,5 +1,5 @@
-﻿using Attila.Application.Inventory_Manager.Equipment.Queries;
-using Attila.Application.Inventory_Manager.Food.Queries;
+﻿using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Queries;
 using System.Collections.Generic;
 
 namespace Attila.Application.Inventory_Manager.Shared.Queries
