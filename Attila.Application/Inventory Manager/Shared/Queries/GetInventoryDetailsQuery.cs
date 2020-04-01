@@ -52,9 +52,9 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     EncodingDate = a.EncodingDate,
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
-                    UserID = a.UserID,
+                    UserID = a.InventoryManagerID,
                     EquipmentDetailsID = a.EquipmentDetailsID,
-                    DeliveryDetailsID = a.EquipmentRestockID
+                    DeliveryDetailsID = a.DeliveryID
 
                 }).ToListAsync();
 
@@ -66,7 +66,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     EncodingDate = a.EncodingDate,
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
-                    UserID = a.UserID,
+                    UserID = a.InventoryManagerID,
                     FoodDetailsID = a.FoodDetailsID,
                     DeliveryDetailsID = a.FoodRestockID
 

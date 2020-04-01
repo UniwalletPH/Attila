@@ -39,7 +39,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.UserID,
+                        UserID = item.InventoryManagerID,
                         FoodDetails = item.FoodDetails
                     };
 
@@ -58,7 +58,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.UserID,
+                        UserID = item.InventoryManagerID,
                         EquipmentDetails = item.EquipmentDetails
                     };
 

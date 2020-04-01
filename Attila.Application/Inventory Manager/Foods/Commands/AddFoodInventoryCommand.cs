@@ -30,7 +30,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                     EncodingDate = DateTime.Now,
                     ItemPrice = request.MyFoodInventoryVM.ItemPrice,
                     Remarks = request.MyFoodInventoryVM.Remarks,
-                    UserID = request.MyFoodInventoryVM.UserID,
+                    InventoryManagerID = request.MyFoodInventoryVM.UserID,
                     FoodDetailsID = request.MyFoodInventoryVM.FoodDetailsID,
                     FoodRestockID = request.MyFoodInventoryVM.DeliveryDetailsID
                 };

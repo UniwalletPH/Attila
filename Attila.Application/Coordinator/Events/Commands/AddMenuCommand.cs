@@ -25,10 +25,10 @@ namespace Attila.Application.Coordinator.Events.Commands
 
             public async Task<bool> Handle(AddMenuCommand request, CancellationToken cancellationToken)
             {
-                var _newMenu = new Menu
+                var _newMenu = new Dish
                 {
                     Description = request.PackageMenu.Description,
-                    MenuCategoryID = request.PackageMenu.MenuCategoryID,
+                    DishCategoryID = request.PackageMenu.MenuCategoryID,
                     Name = request.PackageMenu.Name
                 };
 

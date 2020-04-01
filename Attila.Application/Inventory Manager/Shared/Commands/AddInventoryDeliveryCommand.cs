@@ -27,7 +27,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
                     DeliveryDate = request.MyInventoriesDeliveryVM.DeliveryDate,
                     ReceiptImage = request.MyInventoriesDeliveryVM.ReceiptImage,
                     DeliveryPrice = request.MyInventoriesDeliveryVM.DeliveryPrice,
-                    SupplierDetailsID = request.MyInventoriesDeliveryVM.SupplierDetailsID,
+                    SupplierID = request.MyInventoriesDeliveryVM.SupplierDetailsID,
                     Remarks = request.MyInventoriesDeliveryVM.Remarks
                 };
 

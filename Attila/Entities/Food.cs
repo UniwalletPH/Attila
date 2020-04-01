@@ -1,9 +1,10 @@
-﻿namespace Attila.Domain.Entities
-{
-    public class Food
-    {
-        public int ID { get; set; }
+﻿using Attila.Domain.Entities.Base;
+using System.Collections.Generic;
 
+namespace Attila.Domain.Entities
+{
+    public class Food : BaseAuditedEntity
+    {
         public string Code { get; set; }
 
         public string Name { get; set; }
@@ -15,6 +16,10 @@
         public UnitType Unit { get; set; }
 
         public FoodType FoodType { get; set; }
+
+        public ICollection<FoodInventory> FoodInventories { get; set; }
+
+        public ICollection<FoodRestockRequest> FoodRestockRequests { get; set; }
 
     }
 }

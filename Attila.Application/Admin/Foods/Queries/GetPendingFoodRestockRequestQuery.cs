@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Foods.Queries
 
                 var _pendingFoodRestock = dbContext.FoodRestockRequests
                     .Include(a => a.FoodDetails)
-                    .Include(a => a.User)
+                    .Include(a => a.InventoryManager)
                     .Where(a => a.Status == Status.Processing);
 
                 foreach (var item in _pendingFoodRestock)
@@ -36,7 +36,7 @@ namespace Attila.Application.Admin.Foods.Queries
                         Quantity = item.Quantity,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,
-                        User = item.User
+                        User = item.InventoryManager
                     };
 
                     _listPendingRequest.Add(FoodRestockRequest);

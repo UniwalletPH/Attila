@@ -28,7 +28,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     DeliveryDate = a.DeliveryDate,
                     ReceiptImage = a.ReceiptImage,
                     DeliveryPrice = a.DeliveryPrice,
-                    SupplierDetailsID = a.SupplierDetailsID,
+                    SupplierDetailsID = a.SupplierID,
                     Remarks = a.Remarks
 
                 }).ToListAsync();

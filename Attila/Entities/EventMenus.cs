@@ -1,16 +1,16 @@
-﻿namespace Attila.Domain.Entities
-{
-    public class EventMenus
-    {
-        public int ID { get; set; }
+﻿using Attila.Domain.Entities.Base;
 
-        public int  MenuID {get; set;}
+namespace Attila.Domain.Entities
+{
+    public class EventMenus : BaseAuditedEntity
+    {
+        public int DishID { get; set;}
 
         public int EventDetailsID { get; set; }
 
         public Event EventDetails { get; set; }
         
-        public Menu Menu { get; set; }
+        public Dish Dish { get; set; }
 
     }
 }

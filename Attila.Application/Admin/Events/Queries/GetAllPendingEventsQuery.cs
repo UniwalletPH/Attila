@@ -26,7 +26,7 @@ namespace Attila.Application.Admin.Events.Queries
 
                 var _pendingEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
-                    .Include(a => a.User)
+                    .Include(a => a.Coordinator)
                     .Include(a => a.EventClient)
                     .Where(a => a.EventStatus == Status.ForApproval);
 
@@ -42,7 +42,7 @@ namespace Attila.Application.Admin.Events.Queries
                     Description = item.Description,
                     Type = item.Type,
                     Package = item.PackageDetails,
-                    Coordinator = item.User,
+                    Coordinator = item.Coordinator,
                     Client = item.EventClient,
                     EventStatus = item.EventStatus,
                     Remarks = item.Remarks

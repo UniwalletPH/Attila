@@ -33,9 +33,9 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<PackageMenuDetails> PackageMenuDetails { get; set; }
 
-        public DbSet<MenuCategory> MenuCategories { get; set; }
+        public DbSet<DishCategory> MenuCategories { get; set; }
 
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Dish> Menus { get; set; }
 
         public DbSet<PaymentStatus> PaymentStatus { get; set; }
 
@@ -51,7 +51,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<UserLogin> UserLogins { get; set; }
 
-        public DbSet<PackageMenus> PackageMenus { get ; set; }
+        public DbSet<PackageDish> PackageMenus { get ; set; }
 
         public DbSet<PackageEquipments> PackageEquipments { get ; set ; }
 

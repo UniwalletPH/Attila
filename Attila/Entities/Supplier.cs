@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class Supplier
+    public class Supplier : BaseAuditedEntity
     {
-        public int ID { get; set; }
-
         public string Name { get; set; }
 
         public string Address { get; set; }
@@ -15,5 +14,7 @@ namespace Attila.Domain.Entities
         public string ContactNumber { get; set; }
 
         public string ContactPersonName { get; set; }
+
+        public ICollection<Delivery> Deliveries { get; set; } 
     }
 }

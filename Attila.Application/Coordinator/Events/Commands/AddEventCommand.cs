@@ -53,7 +53,7 @@ namespace Attila.Application.Events.Commands
                     PackageDetailsID = request.EventDetails.PackageDetailsID,
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
-                    UserID = request.EventDetails.UserID,
+                    CoordinatorID = request.EventDetails.UserID,
                     EventStatus = Status.Processing,
                     EntryTime = request.EventDetails.EntryTime,
                     NumberOfGuests = request.EventDetails.NumberOfGuests,

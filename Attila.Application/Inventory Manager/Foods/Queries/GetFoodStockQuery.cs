@@ -29,7 +29,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
                     EncodingDate = a.EncodingDate,
                     ItemPrice = a.ItemPrice,
                     Remarks = a.Remarks,
-                    UserID = a.UserID,
+                    UserID = a.InventoryManagerID,
                     FoodDetailsID = a.FoodDetailsID,
                     DeliveryDetailsID = a.FoodRestockID
 

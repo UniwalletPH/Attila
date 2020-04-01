@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                 var _details = dbContext.EquipmentRestockRequests
                     .Where(a => a.ID == request.RequestID)
                     .Include(a => a.EquipmentDetails)
-                    .Include(a => a.User).SingleOrDefault();
+                    .Include(a => a.InventoryManager).SingleOrDefault();
 
                 var _equipmentRequest = new EquipmentRequestVM
                 {
@@ -37,7 +37,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                     Quantity = _details.Quantity,
                     DateTimeRequest = _details.DateTimeRequest,
                     Status = _details.Status,
-                    User = _details.User
+                    User = _details.InventoryManager
                 };
 
                 return _equipmentRequest;

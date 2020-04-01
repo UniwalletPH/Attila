@@ -1,12 +1,14 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
+using System.Collections.Generic;
 
 namespace Attila.Domain.Entities
 {
-    public class Event
+    public class Event : BaseAuditedEntity
     {
-        public PackageMenuDetails? PackageDetails { get; set; }
-        public Client? EventClient { get; set; }
-        public int ID { get; set; }
+        public PackageMenuDetails PackageDetails { get; set; }
+
+        public Client EventClient { get; set; }
 
         public string Theme { get; set; }
 
@@ -26,9 +28,9 @@ namespace Attila.Domain.Entities
 
         public string Remarks { get; set; }
 
-        public int UserID { get; set; }
+        public int CoordinatorID { get; set; }
 
-        public User? User { get; set; }
+        public User Coordinator { get; set; }
 
         public int PackageDetailsID { get; set; }
 
@@ -46,7 +48,9 @@ namespace Attila.Domain.Entities
 
         public VenueType VenueType { get; set; }
 
-        public LocationType LocationType { get; set; }
+        public LocationType LocationType { get; set; } 
+
+        public ICollection<PaymentStatus> Payments { get; set; }
 
     }
 }

@@ -31,7 +31,7 @@ namespace Attila.Application.Notification.Commands
             {
                 var _notif = new Notifications 
                 {
-                    UserID = request.TargetUserID,
+                    TargetUserID = request.TargetUserID,
                     Description = "NEW REQUEST RECEIVED, click here https://localhost:5001/Notification/"+ request.MethodName+"?id="+ request.RequestID
                    
                 };

@@ -26,7 +26,7 @@ namespace Attila.Application.Admin.Events.Queries
                 var _pastEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
-                    .Include(a => a.User)
+                    .Include(a => a.Coordinator)
                     .Where(a => a.EventDate < DateTime.Now);
 
                 foreach (var item in _pastEvents)
@@ -41,7 +41,7 @@ namespace Attila.Application.Admin.Events.Queries
                         Description = item.Description,
                         Type = item.Type,
                         Package = item.PackageDetails,
-                        Coordinator = item.User,
+                        Coordinator = item.Coordinator,
                         Client = item.EventClient,
                         EventStatus = item.EventStatus,
                         Remarks = item.Remarks

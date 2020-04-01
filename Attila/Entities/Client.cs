@@ -1,4 +1,5 @@
 ﻿using Attila.Domain.Entities.Base;
+using System.Collections.Generic;
 
 namespace Attila.Domain.Entities
 {
@@ -13,6 +14,10 @@ namespace Attila.Domain.Entities
         public string Email { get; set; }
 
         public string Contact { get; set; }
+
+        public ICollection<Event> Events { get; set; }
+
+
 
     }
 }

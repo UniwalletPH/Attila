@@ -1,8 +1,9 @@
-﻿namespace Attila.Domain.Entities.Tables
+﻿using Attila.Domain.Entities.Base;
+
+namespace Attila.Domain.Entities.Tables
 {
-    public class EventEquipments
+    public class EventEquipments : BaseAuditedEntity
     {
-        public int ID { get; set; }
 
         public int EquipmentDetailsID { get; set; }
         

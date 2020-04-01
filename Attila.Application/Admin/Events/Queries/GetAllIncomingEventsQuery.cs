@@ -26,7 +26,7 @@ namespace Attila.Application.Admin.Events.Queries
                 var _incomingEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails) 
                     .Include(a => a.EventClient)
-                    .Include(a => a.User)
+                    .Include(a => a.Coordinator)
                     .Where(a => a.EventStatus == Status.Approved && a.EventDate > DateTime.Now).ToList();
 
                 foreach (var item in _incomingEvents)
@@ -41,7 +41,7 @@ namespace Attila.Application.Admin.Events.Queries
                         Description = item.Description,
                         Type = item.Type,
                         Package = item.PackageDetails,
-                        Coordinator = item.User,
+                        Coordinator = item.Coordinator,
                         Client = item.EventClient,
                         EventStatus = item.EventStatus,
                         Remarks = item.Remarks 

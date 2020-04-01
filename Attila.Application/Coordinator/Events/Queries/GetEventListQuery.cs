@@ -37,7 +37,7 @@ namespace Attila.Application.Events.Queries
                     PackageDetailsID = a.PackageDetailsID,
                     Location = a.Location,
                     Remarks = a.Remarks,
-                    UserID = a.UserID,
+                    UserID = a.CoordinatorID,
                     EventStatus = a.EventStatus,
                     EntryTime = a.EntryTime,
                     NumberOfGuests = a.NumberOfGuests,

@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 
 namespace Attila.Domain.Entities
 {
-    public class PaymentStatus
+    public class PaymentStatus : BaseAuditedEntity
     {
-        public int ID { get; set; }  
-
         public int EventDetailsID { get; set; }
 
-        public Event? EventDetails { get; set; }
+        public Event EventDetails { get; set; }
 
         public decimal Amount { get; set; }
 

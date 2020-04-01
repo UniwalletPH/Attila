@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 
 namespace Attila.Domain.Entities
 {
-    public class EventAdditionalDurationRequest
+    public class EventAdditionalDurationRequest : BaseAuditedEntity
     {
-        public int ID { get; set; }
 
         public TimeSpan Duration { get; set; }   
 

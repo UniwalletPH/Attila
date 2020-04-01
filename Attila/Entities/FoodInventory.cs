@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 
 namespace Attila.Domain.Entities
 {
-    public class FoodInventory
+    public class FoodInventory : BaseAuditedEntity
     {
-        public int ID { get; set; }
-
         public int Quantity { get; set; }
 
         public DateTime ExpirationDate { get; set; }
@@ -16,7 +15,7 @@ namespace Attila.Domain.Entities
 
         public string Remarks { get; set; }
 
-        public int UserID { get; set; }
+        public int InventoryManagerID { get; set; }
 
         public int FoodDetailsID { get; set; }
 
@@ -26,6 +25,6 @@ namespace Attila.Domain.Entities
 
         public Delivery FoodRestock { get; set; }
 
-        public User User { get; set; }
+        public User InventoryManager { get; set; }
     }
 }

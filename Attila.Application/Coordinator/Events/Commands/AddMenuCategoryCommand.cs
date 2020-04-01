@@ -25,7 +25,7 @@ namespace Attila.Application.Coordinator.Events.Commands
 
             public async Task<bool> Handle(AddMenuCategoryCommand request, CancellationToken cancellationToken)
             {
-                var _newMenuCategory = new MenuCategory
+                var _newMenuCategory = new DishCategory
                 {
                     Category = request.MenuCategory.Category,
                 };

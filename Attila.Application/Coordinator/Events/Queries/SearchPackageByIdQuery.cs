@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
                 var _package = dbContext.PackageMenus
                     .Include(a => a.PackageMenuDetails)
-                    .Include(a => a.Menu)
+                    .Include(a => a.Dish)
                     .Where(a => a.PackageMenuDetailsID == request.PackageId );
 
                 foreach (var item in _package)
@@ -34,9 +34,9 @@ namespace Attila.Application.Coordinator.Events.Queries
                     var Packages = new PackageMenuVM
                     {
                         ID = item.ID,
-                        MenuID = item.MenuID,
+                        MenuID = item.DishID,
                         PackageDetailsID = item.PackageMenuDetailsID,
-                        Menu = item.Menu,
+                        Menu = item.Dish,
                         PackageMenuDetails = item.PackageMenuDetails
                     };
                     _searchedPackage.Add(Packages);

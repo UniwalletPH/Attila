@@ -29,9 +29,9 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                     EncodingDate = DateTime.Now,
                     ItemPrice = request.MyEquipmentsInventoryVM.ItemPrice,
                     Remarks = request.MyEquipmentsInventoryVM.Remarks,
-                    UserID = request.MyEquipmentsInventoryVM.UserID,
+                    InventoryManagerID = request.MyEquipmentsInventoryVM.UserID,
                     EquipmentDetailsID = request.MyEquipmentsInventoryVM.EquipmentDetailsID,
-                    EquipmentRestockID = request.MyEquipmentsInventoryVM.DeliveryDetailsID
+                    DeliveryID = request.MyEquipmentsInventoryVM.DeliveryDetailsID
                 };
 
                 dbContext.EquipmentInventories.Add(_equipmentInventory);

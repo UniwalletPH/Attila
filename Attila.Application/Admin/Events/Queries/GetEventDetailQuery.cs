@@ -26,7 +26,7 @@ namespace Attila.Application.Admin.Events.Queries
                 var _eventDetail = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
-                    .Include(a => a.User)
+                    .Include(a => a.Coordinator)
                     .Where(a => a.ID == request.EventID).SingleOrDefault();
 
                 var _additionalEquipment = await mediator.Send(new GetAdditionalEquipmentRequestListQuery {EventID = request.EventID});
@@ -42,7 +42,7 @@ namespace Attila.Application.Admin.Events.Queries
                     Location = _eventDetail.Location,
                     EventDate = _eventDetail.EventDate,
                     Remarks = _eventDetail.Remarks,
-                    Coordinator = _eventDetail.User,
+                    Coordinator = _eventDetail.Coordinator,
                     Client = _eventDetail.EventClient,
                     EventStatus = _eventDetail.EventStatus,
                     Package = _eventDetail.PackageDetails,

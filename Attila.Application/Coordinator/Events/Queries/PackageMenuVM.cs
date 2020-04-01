@@ -13,7 +13,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public int MenuID { get; set; }
 
-        public Menu? Menu { get; set; }
+        public Dish? Menu { get; set; }
 
         public PackageMenuDetails? PackageMenuDetails { get; set; }
     }

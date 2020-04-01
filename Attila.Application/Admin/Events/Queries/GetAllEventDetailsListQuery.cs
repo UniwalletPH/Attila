@@ -29,7 +29,7 @@ namespace Attila.Application.Admin.Events.Queries
                 var _incomingEvents = dbContext.EventDetails
                     .Include(a => a.PackageDetails)
                     .Include(a => a.EventClient)
-                    .Include(a => a.User).ToList();
+                    .Include(a => a.Coordinator).ToList();
 
                 foreach (var item in _incomingEvents)
                 {
@@ -43,7 +43,7 @@ namespace Attila.Application.Admin.Events.Queries
                         Description = item.Description,
                         Type = item.Type,
                         Package = item.PackageDetails,
-                        Coordinator = item.User,
+                        Coordinator = item.Coordinator,
                         Client = item.EventClient,
                         EventStatus = item.EventStatus,
                         Remarks = item.Remarks

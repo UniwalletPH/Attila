@@ -1,13 +1,12 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class PackageEquipments
+    public class PackageEquipments : BaseAuditedEntity
     {
-        public int ID { get; set; }
-
         public int EquipmentDetailsID { get; set; }
 
         public int PackageMenuDetailsID { get; set; }

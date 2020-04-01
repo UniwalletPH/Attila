@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Attila.Domain.Entities.Base;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class Notifications
+    public class Notifications : BaseAuditedEntity
     {
-        public int ID { get; set; }
-
-        public int UserID { get; set; }
+        public int TargetUserID { get; set; }
 
         public string Description { get; set; }
 
-        public User User { get; set; }
+        public User TargetUser { get; set; }
     }
 }
     
