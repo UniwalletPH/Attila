@@ -6,7 +6,6 @@ namespace Attila
 {
     public enum EventType : byte
     {
-        None = 0,
         Wedding = 1,
         Birthday = 2,
         Others = 3,

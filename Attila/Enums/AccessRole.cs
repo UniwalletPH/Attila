@@ -6,10 +6,10 @@ namespace Attila
 {
     public enum AccessRole : byte
     {
-        None = 0,
-        Admin = 1, 
-        Coordinator = 2,
-        Chef = 3, 
-        InventoryManager = 4
+        None = 1,
+        Admin = 2, 
+        Coordinator = 3,
+        Chef = 4, 
+        InventoryManager = 5
     }
 }
