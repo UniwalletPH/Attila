@@ -1,12 +1,7 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

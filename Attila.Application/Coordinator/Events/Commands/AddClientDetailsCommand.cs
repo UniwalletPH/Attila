@@ -1,11 +1,7 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,6 +10,7 @@ namespace Attila.Application.Events.Commands
     public class AddClientDetailsCommand : IRequest<bool>
     {
         public EventClientVM EventClient { get; set; }
+      
         public class AddClientDetailsCommandHandler : IRequestHandler<AddClientDetailsCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;

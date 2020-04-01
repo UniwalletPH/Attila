@@ -1,12 +1,8 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
-using Attila.Domain;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,7 +42,7 @@ namespace Attila.Application.Events.Commands
 
                 //};
 
-               var _newEvent = new Domain.Entities.Event
+               var _newEvent = new Event
                 {
                     EventName = request.EventDetails.EventName,
                     Type = request.EventDetails.Type,
