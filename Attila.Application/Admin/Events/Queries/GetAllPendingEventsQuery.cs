@@ -6,7 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Attila.Application.Admin.Event.Queries
+namespace Attila.Application.Admin.Events.Queries
 {
     public class GetAllPendingEventsQuery : IRequest<List<EventVM>>
     {

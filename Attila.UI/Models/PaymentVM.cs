@@ -1,9 +1,5 @@
-﻿using Attila.Application.Admin.Event.Queries;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using Attila.Application.Admin.Events.Queries;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Attila.UI.Models
 {

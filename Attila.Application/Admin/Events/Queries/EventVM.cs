@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Attila.Application.Admin.Event.Queries
+namespace Attila.Application.Admin.Events.Queries
 {
     public class EventVM
     {
