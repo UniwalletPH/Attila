@@ -6,8 +6,12 @@ namespace Attila
 {
     public enum  Status : byte
     {
-        Pending = 1,
-        Approved = 2,
-        Declined = 3
+        None = 0,
+        Processing = 1,
+        CheckingRequirements = 2,
+        RequirementsComplete = 3,
+        ForApproval = 4,
+        Approved = 5,
+        Declined = 6
     }
 }
