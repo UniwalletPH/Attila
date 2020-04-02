@@ -2,7 +2,7 @@
 
 namespace Attila.Application.Inventory_Manager.Foods.Queries
 {
-    public class FoodsDetailsVM
+    public class FoodDetailsVM
     {
         public int ID { get; set; }
 
@@ -20,6 +20,6 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
 
         public string SearchedKeyword { get; set; }
 
-        public IEnumerable<FoodsDetailsVM> FoodsDetailsVMs { get; set; }
+        public IEnumerable<FoodDetailsVM> FoodsDetailsVMs { get; set; }
     }
 }

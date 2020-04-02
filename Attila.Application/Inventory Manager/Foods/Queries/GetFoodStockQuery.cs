@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Foods.Queries
 {
-    public class GetFoodStockQuery : IRequest<IEnumerable<FoodsInventoryVM>>
+    public class GetFoodStockQuery : IRequest<IEnumerable<FoodInventoryVM>>
     {
 
-        public class GetFoodStockQueryHandler : IRequestHandler<GetFoodStockQuery, IEnumerable<FoodsInventoryVM>>
+        public class GetFoodStockQueryHandler : IRequestHandler<GetFoodStockQuery, IEnumerable<FoodInventoryVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -19,9 +19,9 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
             {
                 this.dbContext = dbContext;
             }
-            public async Task<IEnumerable<FoodsInventoryVM>> Handle(GetFoodStockQuery request, CancellationToken cancellationToken)
+            public async Task<IEnumerable<FoodInventoryVM>> Handle(GetFoodStockQuery request, CancellationToken cancellationToken)
             {
-                var _foodInventoryList = await dbContext.FoodInventories.Select(a => new FoodsInventoryVM 
+                var _foodInventoryList = await dbContext.FoodInventories.Select(a => new FoodInventoryVM 
                 { 
                     ID = a.ID,
                     Quantity = a.Quantity,

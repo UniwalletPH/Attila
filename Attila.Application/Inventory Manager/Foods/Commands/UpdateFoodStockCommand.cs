@@ -9,7 +9,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
     public class UpdateFoodStockCommand : IRequest<bool>
     {
-        public FoodsInventoryVM MyFoodInventoryVM { get; set; }
+        public FoodInventoryVM MyFoodInventoryVM { get; set; }
 
         public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockCommand, bool>
         {
@@ -20,7 +20,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedFoodStock = dbContext.FoodInventories.Find(request.MyFoodInventoryVM.ID);
+                var _updatedFoodStock = dbContext.FoodInventories.Find(request.MyFoodInventoryVM.FoodDetailsID);
 
                 if (_updatedFoodStock != null)
                 {

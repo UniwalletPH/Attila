@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Attila.Domain.Entities;
+using System;
 
 namespace Attila.Application.Inventory_Manager.Foods.Queries
 {
-    public class FoodsInventoryVM
+    public class FoodInventoryVM
     {
         public int ID { get; set; }
 
@@ -21,5 +22,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
         public int FoodDetailsID { get; set; }
 
         public int DeliveryDetailsID { get; set; }
+
+        public Food FoodDetailsVM { get; set; }
     }
 }

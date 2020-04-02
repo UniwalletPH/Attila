@@ -13,6 +13,7 @@ using Attila.Application.Inventory_Manager.Foods.Queries;
 using Attila.Application.Inventory_Manager.Foods.Commands;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Commands;
+using Attila.Application.Notification.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -94,7 +95,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFood(FoodsDetailsVM foodDetails)
+        public async Task<IActionResult> AddFood(FoodDetailsVM foodDetails)
         {
 
             var response = await mediator.Send(new AddFoodDetailsCommand
@@ -142,7 +143,7 @@ namespace Attila.UI.Controllers
 
                 Quantity = foodRestockRequest.Quantity,
                 Status = Status.Processing,
-                UserID = 1
+                UserID = CurrentUser.ID
             };
 
 
@@ -150,6 +151,9 @@ namespace Attila.UI.Controllers
             {
                 MyFoodRestockRequestVM = _foodRequestDetails
             });
+
+            //await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response  });
+
 
             return Json(response);
         }
@@ -193,10 +197,10 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
+        public async Task<IActionResult> AddFoodInventory(FoodInventoryVM foodInventory)
         {
 
-            var foodDetails = new FoodsInventoryVM
+            var foodDetails = new FoodInventoryVM
             {
                 FoodDetailsID = foodInventory.FoodDetailsID,
                 DeliveryDetailsID = foodInventory.DeliveryDetailsID,
@@ -216,6 +220,42 @@ namespace Attila.UI.Controllers
 
             return Json(response);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateFoodStock()
+        {
+            var getFoodStock = await mediator.Send(new GetFoodStockDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodStock)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.FoodDetailsVM.Name + " | Quantity: " + item.Quantity
+                });
+            }
+
+            FoodInventoryCVM foodDetailsListVM = new FoodInventoryCVM
+            {
+                FoodStockDetailsList = _list,
+            };
+
+            return View(FoodDetailsListVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateFoodStock(FoodInventoryVM foodInventory)
+        {
+            var response = await mediator.Send(new UpdateFoodStockCommand
+            {
+                MyFoodInventoryVM = foodInventory
+            });
+
+            return Json(response);
+        }
+
 
 
         [HttpGet]
@@ -341,23 +381,43 @@ namespace Attila.UI.Controllers
 
             return Json(response);
         }
+
+
         [HttpGet]
-        public IActionResult UpdateFoodStock()
+        public async Task<IActionResult> UpdateEquipmentStock()
         {
-            return View();
+            var getEquipmentStock = await mediator.Send(new GetEquipmentStockDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentStock)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EquipmentDetailsVM.Name + " | Quantity: " + item.Quantity
+                });
+            }
+
+
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStock(FoodsInventoryVM foodInventory)
-        { 
-              var response=   await mediator.Send(new UpdateFoodStockCommand
-                {
-                    MyFoodInventoryVM = foodInventory
-                });
-                
-             
+        public async Task<IActionResult> UpdateEquipmentStock(EquipmentsInventoryVM equipmentInventory)
+        {
+            var response = await mediator.Send(new UpdateEquipmentStockCommand
+            {
+                MyEquipmentInventoryVM = equipmentInventory
+            });
+
             return Json(response);
         }
+
 
 
         [HttpGet]
