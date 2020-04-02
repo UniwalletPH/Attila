@@ -14,7 +14,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public DateTime DeliveryDate { get; set; }
 
-        public byte[] ReceiptImage { get; set; }
+        public byte[]? ReceiptImage { get; set; }
 
         public decimal DeliveryPrice { get; set; }
 

@@ -7,9 +7,11 @@ namespace Attila
     public enum EventType : byte
     {
         None = 0,
-        Wedding = 1,
+        Baptismal = 1,
         Birthday = 2,
         Graduation = 3,
-        Others = 4,
+        Meeting = 4,
+        Wedding = 5,
+        Others = 6,
     }
 }

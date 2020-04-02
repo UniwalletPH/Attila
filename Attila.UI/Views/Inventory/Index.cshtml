@@ -3,30 +3,8 @@
 
 }
 @model Attila.UI.Models.InventoryDataCVM
-@*@section Scripts{
+@section Scripts{
 
-        <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-
-        <script src="../assets/pages/scripts/table-datatables-buttons.min.js" type="text/javascript"></script>
-
-
-
-        <partial name="_ValidationScriptsPartial" />
-
-
-
-
-    }
-    @section Styles{
-        <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-        <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-    }*@
-
-
-@section Scripts {
     <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
@@ -36,13 +14,14 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+
+
+
+
 }
-
-
-
-
-
 @section Styles{
+
+
     <style>
         tr.group,
         tr.group:hover {
@@ -53,6 +32,10 @@
     <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
 }
+
+
+
+
 
 
 
@@ -117,7 +100,8 @@
                             <th>Delivery Date</th>
                             <th>Supplier</th>
                             <th>Address</th>
-
+                            <th>
+                            </th>
                         </tr>
                     </thead>
 
@@ -127,12 +111,13 @@
                         {
                             <tr>
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
-                            </tr>
-                            <tr>
+
+
                                 <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
-                            </tr>
-                            <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Supplier.Address)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
+
+                                <td>  <button type="button" class="btn dark btn-outline see">See All</button> </td>
                             </tr>
                         }
 
