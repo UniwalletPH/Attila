@@ -39,11 +39,13 @@ namespace Attila.Application.Users.Commands
                     Email = request.User.Email,
                     Position = request.User.Position,
                     Role = request.User.Role,
+                    CreatedOn = DateTime.Now,
                     UserLogins = new UserLogin
                     {
                         Username = request.User.Username,
                         Salt = salt,
-                        Password = passwordHasher.HashPassword(salt, request.User.Password)
+                        Password = passwordHasher.HashPassword(salt, request.User.Password),
+                        CreatedOn = DateTime.Now
                     }
                 };
 
