@@ -3,6 +3,7 @@ using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.UI.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class EventPackagesController : BaseController
     {
         private readonly IMediator mediator;
@@ -136,6 +138,7 @@ namespace Attila.UI.Controllers
  
 
         }
+     
         [HttpGet]
         public async Task<IActionResult> MenuList()
         {

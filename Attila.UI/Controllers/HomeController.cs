@@ -64,6 +64,11 @@ namespace Attila.UI.Controllers
             await signInManager.SignOutAsync();
             return Redirect("/");
         }
+
+        [Route("/Error/403")]
+        public IActionResult ErrorPage() {  
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)
         {

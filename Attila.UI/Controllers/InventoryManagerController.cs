@@ -730,20 +730,20 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetInventoryDetails()
+        public IActionResult GetInventoryDetails()
         {
             try
             {
-                var _getInventoryDetails = await mediator.Send(new GetInventoryDetailsQuery());
+                //var _getInventoryDetails = await mediator.Send(new GetInventoryDetailsQuery());
 
-                InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM
-                {
-                    EquipmentsDetailsVM = _getInventoryDetails.EquipmentsDetailsVM,
-                    FoodsDetailsVM = _getInventoryDetails.FoodsDetailsVM
-                };
+                //InventoryDetailsVM inventoryDetailsVM = new InventoryDetailsVM
+                //{
+                //    EquipmentsDetailsVM = _getInventoryDetails.EquipmentsDetailsVM,
+                //    FoodsDetailsVM = _getInventoryDetails.FoodsDetailsVM
+                //};
 
 
-                return View(inventoryDetailsVM);
+                return View();
             }
             catch (Exception)
             {
