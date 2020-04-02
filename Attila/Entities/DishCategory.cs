@@ -8,7 +8,8 @@ namespace Attila.Domain.Entities
     {
         public string Category { get; set; }
 
-        public ICollection<Dish> Collection { get; set; }
+
+        public ICollection<Dish> Collection { get; private set; } = new HashSet<Dish>();
 
     }
 }

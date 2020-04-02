@@ -1,7 +1,6 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -29,7 +28,7 @@ namespace Attila.Application.Events.Queries
                 var _viewAdditionalDuration = await dbContext.EventAdditionalDurationRequests.Select(a => new AdditionalDurationRequestListVM 
                 {
                     ID = a.ID,
-                    EventDetailsID = a.EventDetailsID,
+                    EventDetailsID = a.EventID,
                     Duration = a.Duration
                     
                 }).ToListAsync();

@@ -27,7 +27,7 @@ namespace Attila.Application.Events.Commands
                 {
                     var _additionalDuration = new EventAdditionalDurationRequest
                     {
-                        EventDetailsID = request.AdditionalPackage.EventDetailsID,
+                        EventID = request.AdditionalPackage.EventDetailsID,
                         Duration = request.AdditionalPackage.Duration
                     };
 

@@ -17,9 +17,12 @@ namespace Attila.Domain.Entities
 
         public EquipmentType EquipmentType { get; set; }
 
-        public ICollection<EquipmentInventory> EquipmentInventories { get; set; }
 
-        public ICollection<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
-       
+        public ICollection<EventEquipment> EventEquipments { get; private set; } = new HashSet<EventEquipment>();
+        public ICollection<EventPackageEquipment> EventPackageEquipments { get; private set; } = new HashSet<EventPackageEquipment>();
+        public ICollection<EquipmentInventory> EquipmentInventories { get; private set; } = new HashSet<EquipmentInventory>();
+        public ICollection<EquipmentRestockRequest> EquipmentRestockRequests { get; private set; } = new HashSet<EquipmentRestockRequest>();
+        public ICollection<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; private set; } = new HashSet<EventAdditionalEquipmentRequest>();
+
     }
 }

@@ -16,7 +16,10 @@ namespace Attila.Domain.Entities
 
         public decimal RatePerHead { get; set; }
 
-        public ICollection<Event> Events { get; set; }
+
+        public ICollection<Event> Events { get; private set; } = new HashSet<Event>();
+        public ICollection<EventPackageEquipment> EventPackageEquipments { get; private set; } = new HashSet<EventPackageEquipment>();
+        public ICollection<EventPackageDish> EventPackageDishes { get; private set; } = new HashSet<EventPackageDish>();
 
     }
 }

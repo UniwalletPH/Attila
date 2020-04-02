@@ -16,6 +16,7 @@ namespace Attila.Domain.Entities
         public byte[] Password { get; set; }
         public bool IsTemporaryPassword { get; set; }
         public string TemporaryPassword { get; set; }
+
         public User User { get; set; } 
     }
 }

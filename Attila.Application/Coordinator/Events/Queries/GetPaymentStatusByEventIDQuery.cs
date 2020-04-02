@@ -1,12 +1,9 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
-using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +23,7 @@ namespace Attila.Application.Events.Queries
 
             public async Task<IEnumerable<PaymentStatusVM>> Handle(GetPaymentStatusByEventIDQuery request, CancellationToken cancellationToken)
             {
-                var _paymentStatus = dbContext.PaymentStatus.Where(a => a.EventDetailsID == request.EventID);
+                var _paymentStatus = dbContext.PaymentStatus.Where(a => a.EventID == request.EventID);
 
 
 
@@ -41,7 +38,7 @@ namespace Attila.Application.Events.Queries
                         var payment = new PaymentStatusVM { 
                         Amount = item.Amount,
                         DateOfPayment = item.DateOfPayment,
-                        EventDetailsID = item.EventDetailsID,
+                        EventDetailsID = item.EventID,
                         ReferenceNumber = item.ReferenceNumber,
                         Remarks = item.Remarks,
                         ID = item.ID

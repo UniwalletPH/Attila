@@ -20,20 +20,21 @@ namespace Attila.Domain.Entities
 
         public AccessRole Role { get; set; }
 
+
         [InverseProperty("User")]
         public UserLogin UserLogins { get; set; }
 
-        public ICollection<EquipmentInventory> EquipmentInventories { get; set; }
+        public ICollection<EquipmentInventory> EquipmentInventories { get; private set; } = new HashSet<EquipmentInventory>();
 
-        public ICollection<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
+        public ICollection<EquipmentRestockRequest> EquipmentRestockRequests { get; set; } = new HashSet<EquipmentRestockRequest>();
 
-        public ICollection<Event> Events { get; set; }
+        public ICollection<Event> Events { get; private set; } = new HashSet<Event>();
 
-        public ICollection<FoodInventory> FoodInventories { get; set; }
+        public ICollection<FoodInventory> FoodInventories { get; private set; } = new HashSet<FoodInventory>();
 
-        public ICollection<FoodRestockRequest> FoodRestockRequests { get; set; }
+        public ICollection<FoodRestockRequest> FoodRestockRequests { get; private set; } = new HashSet<FoodRestockRequest>();
 
-        public ICollection<Notifications> Notifications { get; set; }
+        public ICollection<Notifications> Notifications { get; private set; } = new HashSet<Notifications>();
 
 
 

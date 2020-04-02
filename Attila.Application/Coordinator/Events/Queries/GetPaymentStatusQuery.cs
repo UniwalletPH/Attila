@@ -1,12 +1,9 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +25,7 @@ namespace Attila.Application.Events.Queries
                 var _viewPaymentStatus = await dbContext.PaymentStatus.Select(a => new PaymentStatusVM 
                 {
                     ID = a.ID,
-                    EventDetailsID = a.EventDetailsID,
+                    EventDetailsID = a.EventID,
                     Amount = a.Amount,
                     DateOfPayment = a.DateOfPayment,
                     ReferenceNumber = a.ReferenceNumber,

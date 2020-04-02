@@ -14,8 +14,6 @@ namespace Attila.Domain.Entities
         [ForeignKey("Dish")]
         public int DishID { get; set; }
         
-
-
         public Dish Dish { get; set; }
         public EventPackage EventPackage { get; set; }
     }

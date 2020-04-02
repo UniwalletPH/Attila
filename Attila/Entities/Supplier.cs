@@ -15,6 +15,7 @@ namespace Attila.Domain.Entities
 
         public string ContactPersonName { get; set; }
 
-        public ICollection<Delivery> Deliveries { get; set; } 
+
+        public ICollection<Delivery> Deliveries { get; private set; } = new HashSet<Delivery>(); 
     }
 }

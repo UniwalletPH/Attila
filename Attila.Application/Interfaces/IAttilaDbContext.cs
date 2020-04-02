@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+﻿using Attila.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
-using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
+using System.Threading.Tasks;
 
 namespace Attila.Application.Interfaces
 {
@@ -27,7 +26,7 @@ namespace Attila.Application.Interfaces
 
         public DbSet<Client> ClientDetails { get; set; }
 
-        public DbSet<EventEquipments> EventEquipments { get; set; }
+        public DbSet<EventEquipment> EventEquipments { get; set; }
 
         public DbSet<EventPackage> PackageMenuDetails { get; set; }
 
@@ -51,7 +50,7 @@ namespace Attila.Application.Interfaces
 
         public DbSet<EventPackageDish> PackageMenus { get; set; }
 
-        public DbSet<EventPackageEquipments> PackageEquipments { get; set; }
+        public DbSet<EventPackageEquipment> PackageEquipments { get; set; }
 
         public DbSet<Notifications> Notifications { get; set; }
 

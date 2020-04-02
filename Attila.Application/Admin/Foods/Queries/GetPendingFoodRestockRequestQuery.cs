@@ -23,7 +23,7 @@ namespace Attila.Application.Admin.Foods.Queries
                 var _listPendingRequest = new List<FoodRequestVM>();
 
                 var _pendingFoodRestock = dbContext.FoodRestockRequests
-                    .Include(a => a.FoodDetails)
+                    .Include(a => a.Food)
                     .Include(a => a.InventoryManager)
                     .Where(a => a.Status == Status.Processing);
 
@@ -32,7 +32,7 @@ namespace Attila.Application.Admin.Foods.Queries
                     var FoodRestockRequest = new FoodRequestVM
                     { 
                         ID = item.ID,
-                        FoodDetails = item.FoodDetails,
+                        FoodDetails = item.Food,
                         Quantity = item.Quantity,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,

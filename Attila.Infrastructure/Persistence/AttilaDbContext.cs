@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Attila.Domain.Entities.Tables;
-using Attila.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Attila.Infrastructure.Persistence
@@ -29,7 +25,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<Client> ClientDetails { get; set; }
 
-        public DbSet<EventEquipments> EventEquipments { get; set; }
+        public DbSet<EventEquipment> EventEquipments { get; set; }
 
         public DbSet<EventPackage> PackageMenuDetails { get; set; }
 
@@ -53,7 +49,7 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EventPackageDish> PackageMenus { get ; set; }
 
-        public DbSet<EventPackageEquipments> PackageEquipments { get ; set ; }
+        public DbSet<EventPackageEquipment> PackageEquipments { get ; set ; }
 
         public DbSet<Notifications> Notifications { get; set ; }
 

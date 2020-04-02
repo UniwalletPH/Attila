@@ -1,11 +1,8 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
 using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +25,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                 var _addPaymentForEventCommand = new PaymentStatus
                 {
                     ID =request.MyEventPaymentStatus.ID,
-                    EventDetailsID = request.MyEventPaymentStatus.EventDetailsID,
+                    EventID = request.MyEventPaymentStatus.EventDetailsID,
                     Amount = request.MyEventPaymentStatus.Amount,
                     DateOfPayment = DateTime.Now,
                     ReferenceNumber = request.MyEventPaymentStatus.ReferenceNumber,
