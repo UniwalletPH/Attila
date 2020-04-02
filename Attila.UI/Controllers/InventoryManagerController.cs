@@ -406,7 +406,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodDetails(FoodsDetailsVM foodDetails)
+        public async Task<IActionResult> AddFoodDetails(FoodDetailsVM foodDetails)
         {
             try
             {
@@ -465,7 +465,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventory(FoodsInventoryVM foodInventory)
+        public async Task<IActionResult> AddFoodInventory(FoodInventoryVM foodInventory)
         {
             try
             {
@@ -505,7 +505,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteFoodDetails(FoodsDetailsVM deleteID)
+        public async Task<IActionResult> DeleteFoodDetails(FoodDetailsVM deleteID)
         {
             try
             {
@@ -571,7 +571,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodDetails(FoodsDetailsVM foodDetails)
+        public async Task<IActionResult> UpdateFoodDetails(FoodDetailsVM foodDetails)
         {
             try
             {
@@ -596,7 +596,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStock(FoodsInventoryVM foodInventory)
+        public async Task<IActionResult> UpdateFoodStock(FoodInventoryVM foodInventory)
         {
             try
             {
@@ -686,7 +686,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SearchFoodById(FoodsInventoryVM foodsInventoryVM)
+        public async Task<IActionResult> SearchFoodById(FoodInventoryVM foodsInventoryVM)
         {
             try
             {
@@ -708,7 +708,7 @@ namespace Attila.UI.Controllers
 
 
         [HttpGet]
-        public IActionResult SearchFoodByKeywordResult(FoodsDetailsVM foodsDetailsVM)
+        public IActionResult SearchFoodByKeywordResult(FoodDetailsVM foodsDetailsVM)
         {
             try
             {
