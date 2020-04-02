@@ -13,6 +13,7 @@ using Attila.Application.Inventory_Manager.Foods.Queries;
 using Attila.Application.Inventory_Manager.Foods.Commands;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Commands;
+using Attila.Application.Notification.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -142,7 +143,7 @@ namespace Attila.UI.Controllers
 
                 Quantity = foodRestockRequest.Quantity,
                 Status = Status.Processing,
-                UserID = 1
+                UserID = CurrentUser.ID
             };
 
 
@@ -150,6 +151,9 @@ namespace Attila.UI.Controllers
             {
                 MyFoodRestockRequestVM = _foodRequestDetails
             });
+
+            //await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response  });
+
 
             return Json(response);
         }

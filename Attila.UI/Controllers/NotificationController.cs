@@ -1,6 +1,7 @@
 ﻿using Attila.Application.Admin.Equipments.Queries;
 using Attila.Application.Admin.Events.Queries;
 using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Notification.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -17,11 +18,14 @@ namespace Attila.UI.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var _notifList = await mediator.Send(new GetNotificationQuery { TargetID = CurrentUser.ID});
+
+            return View(_notifList);
         
         }
+
         [HttpGet]
         public async Task<IActionResult> EventRequestDetails(int id)
         {
