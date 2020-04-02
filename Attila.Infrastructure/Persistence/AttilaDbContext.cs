@@ -53,6 +53,8 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<Notifications> Notifications { get; set ; }
 
+        public DbSet<Ingredient> Ingredients { get; set; }
+
         public AttilaDbContext(DbContextOptions<AttilaDbContext> dbContextOpt) : base(dbContextOpt)
         {
 
