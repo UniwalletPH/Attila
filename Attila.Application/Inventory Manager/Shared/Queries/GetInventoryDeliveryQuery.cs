@@ -22,18 +22,28 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
             }
             public async Task<IEnumerable<InventoriesDeliveryVM>> Handle(GetInventoryDeliveryQuery request, CancellationToken cancellationToken)
             {
-                var _getInventoryDeliveryList = await dbContext.Deliveries.Select(a => new InventoriesDeliveryVM 
+                List<InventoriesDeliveryVM> _inventoryList = new List<InventoriesDeliveryVM>();
+
+
+                var _getInventoryDeliveryList =  dbContext.Deliveries.Include(a => a.Supplier);
+
+                foreach (var item in _getInventoryDeliveryList)
                 {
-                    ID = a.ID,
-                    DeliveryDate = a.DeliveryDate,
-                    ReceiptImage = a.ReceiptImage,
-                    DeliveryPrice = a.DeliveryPrice,
-                    SupplierDetailsID = a.SupplierID,
-                    Remarks = a.Remarks
+                    InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                    {
+                        ID = item.ID,
+                        DeliveryDate = item.DeliveryDate,
+                        ReceiptImage = item.ReceiptImage,
+                        DeliveryPrice = item.DeliveryPrice,
+                        SupplierID = item.SupplierID,
+                        Remarks = item.Remarks,
+                        Supplier = item.Supplier
+                    };
 
-                }).ToListAsync();
+                    _inventoryList.Add(_inventory);
+                }
 
-                return _getInventoryDeliveryList;
+                return _inventoryList;
             }
         }
     }

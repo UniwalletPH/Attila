@@ -15,9 +15,9 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public decimal DeliveryPrice { get; set; }
 
-        public int SupplierDetailsID { get; set; }
+        public int SupplierID { get; set; }
 
-        public Supplier SupplierDetails { get; set; }
+        public Supplier Supplier { get; set; }
 
         public string Remarks { get; set; }
     }

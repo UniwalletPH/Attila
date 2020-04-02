@@ -34,7 +34,8 @@ namespace Attila.UI.Controllers
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
             {
                 FoodListVM = _getDetails.FoodListVM,
-                EquipmentListVM = _getDetails.EquipmentListVM
+                EquipmentListVM = _getDetails.EquipmentListVM,
+                InventoryDeliveryVM = _getDetails.InventoryDeliveryVM
             };
 
             return View(_inventoryDataVM);
@@ -72,7 +73,7 @@ namespace Attila.UI.Controllers
             {
                 DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
                 DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
-                SupplierDetailsID = inventoriesDeliveryVM.SupplierDetailsID,
+                SupplierID = inventoriesDeliveryVM.SupplierID,
                 ReceiptImage = inventoriesDeliveryVM.ReceiptImage,
                 Remarks = inventoriesDeliveryVM.Remarks,
             };

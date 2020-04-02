@@ -10,5 +10,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public List<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }
 
+        public List<SuppliersDetailsVM> SupplierListVM { get; set; }
+
     }
 }
