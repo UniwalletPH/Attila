@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
-    public class GetInventoryQuery : IRequest<InventoriesVM>
+    public class GetInventoryDataQuery : IRequest<InventoriesVM>
     {
-        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryQuery, InventoriesVM>
+        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryDataQuery, InventoriesVM>
         {
             private readonly IAttilaDbContext dbContext;
             private readonly IMediator mediator;
@@ -21,7 +21,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 this.dbContext = dbContext;
                 this.mediator = mediator;
             }
-            public async Task<InventoriesVM> Handle(GetInventoryQuery request, CancellationToken cancellationToken)
+            public async Task<InventoriesVM> Handle(GetInventoryDataQuery request, CancellationToken cancellationToken)
             {
                 var _foodListData = new List<FoodVM>();
                 var _equipmentListData = new List<EquipmentVM>();

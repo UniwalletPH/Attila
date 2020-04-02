@@ -29,7 +29,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var _getDetails = await mediator.Send(new GetInventoryQuery());
+            var _getDetails = await mediator.Send(new GetInventoryDataQuery());
 
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
             {
@@ -53,7 +53,7 @@ namespace Attila.UI.Controllers
                 _supplierList.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Supplier: " + item.Name
+                    Text = item.Name
                 });
             }
 
@@ -346,7 +346,6 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public IActionResult RegisterSupplier()
         {
-
             return View();
         }
 
@@ -367,6 +366,15 @@ namespace Attila.UI.Controllers
         {
             var _suppliers = await mediator.Send(new GetSupplierDetailsQuery());
             return View(_suppliers);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> SearchDeliveryById(int DeliveryID)
+        {
+            var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = DeliveryID });
+
+            return View(_inventoryDelivery);
         }
 
 
