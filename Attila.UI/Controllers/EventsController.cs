@@ -71,7 +71,7 @@ namespace Attila.UI.Controllers
                     _clientlist.Add(new SelectListItem
                     {
                         Value = item.ID.ToString(),
-                        Text = item.Firstname + item.Lastname,
+                        Text = item.Name,
                     });
                 }
 
