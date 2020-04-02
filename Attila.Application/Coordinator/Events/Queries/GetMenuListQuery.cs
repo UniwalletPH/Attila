@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
                 var _listMenu = new List<MenuVM>();
 
 
-                var _viewMenuList = dbContext.Menus
+                var _viewMenuList = dbContext.Dishes
                     .Include(a => a.DishCategory).ToList();
 
 

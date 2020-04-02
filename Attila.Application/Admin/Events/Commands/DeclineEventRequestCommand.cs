@@ -20,7 +20,7 @@ namespace Attila.Application.Admin.Events.Commands
 
             public async Task<int> Handle(DeclineEventRequestCommand request, CancellationToken cancellationToken)
             {
-                var _toDecline = dbContext.EventDetails.Find(request.EventID);
+                var _toDecline = dbContext.Events.Find(request.EventID);
 
                 if (_toDecline != null)
                 {

@@ -21,7 +21,7 @@ namespace Attila.Application.Coordinator.Events.Queries
             }
             public async Task<IEnumerable<MenuCategoryVM>> Handle(GetMenuCategoryListQuery request, CancellationToken cancellationToken)
             {
-                var _viewMenuCategoryList = await dbContext.MenuCategories.Select(a => new MenuCategoryVM
+                var _viewMenuCategoryList = await dbContext.DishCategories.Select(a => new MenuCategoryVM
                 {
                     Category = a.Category,
                     ID = a.ID

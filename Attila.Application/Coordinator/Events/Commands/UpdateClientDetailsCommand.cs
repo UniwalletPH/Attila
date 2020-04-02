@@ -31,7 +31,7 @@ namespace Attila.Application.Events.Commands
 
             public async Task<bool> Handle(UpdateClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedClientDetails = dbContext.ClientDetails.Find(request.ID);
+                var _updatedClientDetails = dbContext.Clients.Find(request.ID);
 
                 _updatedClientDetails.Lastname = request.Lastname;
                 _updatedClientDetails.Firstname = request.Firstname;

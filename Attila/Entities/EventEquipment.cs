@@ -1,18 +1,16 @@
 ﻿using Attila.Domain.Entities.Base;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Attila.Domain.Entities
+namespace Attila.Domain.Entities.Tables
 {
     public class EventEquipment : BaseAuditedEntity
     {
 
-        [ForeignKey("Event")]
-        public int EventID { get; set; }
-        [ForeignKey("Equipment")]
-        public int EquipmentID { get; set; }
+        public int EquipmentDetailsID { get; set; }
         
+        public Equipment EquipmentDetails { get; set; }
 
-        public Equipment Equipment{ get; set; }
-        public Event Event { get; set; }
+        public int EventDetailsID { get; set; }
+
+        public Event EventDetails { get; set; }
     }
 }

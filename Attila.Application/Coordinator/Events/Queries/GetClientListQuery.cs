@@ -22,7 +22,7 @@ namespace Attila.Application.Events.Queries
 
             public async Task<IEnumerable<SearchClientVM>> Handle(GetClientListQuery request, CancellationToken cancellationToken)
             {
-                var _viewClientList = await dbContext.ClientDetails.Select(a => new SearchClientVM 
+                var _viewClientList = await dbContext.Clients.Select(a => new SearchClientVM 
                 {
                     ID = a.ID,
                     Lastname = a.Lastname, 

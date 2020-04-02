@@ -31,7 +31,7 @@ namespace Attila.Application.Events.Commands
 
                 };
 
-                dbContext.PackageMenuDetails.Add(_newPackage);
+                dbContext.EventPackages.Add(_newPackage);
                 await dbContext.SaveChangesAsync();
 
                 return true;

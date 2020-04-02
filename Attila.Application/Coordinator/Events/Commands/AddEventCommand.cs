@@ -66,7 +66,7 @@ namespace Attila.Application.Events.Commands
 
                 };
 
-                dbContext.EventDetails.Add(_newEvent);
+                dbContext.Events.Add(_newEvent);
                 await dbContext.SaveChangesAsync();
 
                 return request.EventDetails.ID;

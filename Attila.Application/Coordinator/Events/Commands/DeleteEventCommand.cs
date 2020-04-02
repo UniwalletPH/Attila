@@ -20,8 +20,8 @@ namespace Attila.Application.Events.Commands
 
             public async Task<bool> Handle(DeleteEventCommand request, CancellationToken cancellationToken)
             {
-                var _eventToDelete = dbContext.EventDetails.Find(request.EventId);
-                dbContext.EventDetails.Remove(_eventToDelete);
+                var _eventToDelete = dbContext.Events.Find(request.EventId);
+                dbContext.Events.Remove(_eventToDelete);
                 await dbContext.SaveChangesAsync();
 
                 return true;

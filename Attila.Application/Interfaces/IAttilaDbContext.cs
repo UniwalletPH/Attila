@@ -1,7 +1,8 @@
-﻿using Attila.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Threading;
+using Attila.Domain.Entities;
+using Attila.Domain.Entities.Tables;
 
 namespace Attila.Application.Interfaces
 {
@@ -20,21 +21,21 @@ namespace Attila.Application.Interfaces
 
         public DbSet<FoodRestockRequest> FoodRestockRequests { get; set; }
 
-        public DbSet<Delivery> DeliveryDetails { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
 
-        public DbSet<Event> EventDetails { get; set; }
+        public DbSet<Event> Events { get; set; }
 
-        public DbSet<Client> ClientDetails { get; set; }
+        public DbSet<Client> Clients { get; set; }
 
         public DbSet<EventEquipment> EventEquipments { get; set; }
 
-        public DbSet<EventPackage> PackageMenuDetails { get; set; }
+        public DbSet<EventPackage> EventPackages { get; set; }
 
-        public DbSet<DishCategory> MenuCategories { get; set; }
+        public DbSet<DishCategory> DishCategories { get; set; }
 
-        public DbSet<Dish> Menus { get; set; }
+        public DbSet<Dish> Dishes { get; set; }
 
-        public DbSet<PaymentStatus> PaymentStatus { get; set; }
+        public DbSet<PaymentStatus> PaymentStatuses { get; set; }
 
         public DbSet<EventMenu> EventMenus { get; set; }
 
@@ -42,15 +43,15 @@ namespace Attila.Application.Interfaces
 
         public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
-        public DbSet<Supplier> SupplierDetails { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<User> Users { get; set; }
 
         public DbSet<UserLogin> UserLogins { get; set; }
 
-        public DbSet<EventPackageDish> PackageMenus { get; set; }
+        public DbSet<EventPackageDish> EventPackageDishes { get; set; }
 
-        public DbSet<EventPackageEquipment> PackageEquipments { get; set; }
+        public DbSet<EventPackageEquipment> EventPackageEquipments { get; set; }
 
         public DbSet<Notifications> Notifications { get; set; }
 

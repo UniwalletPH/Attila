@@ -32,7 +32,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                     Name = request.PackageMenu.Name
                 };
 
-                dbContext.Menus.Add(_newMenu);
+                dbContext.Dishes.Add(_newMenu);
                 await dbContext.SaveChangesAsync();
 
                 return true;

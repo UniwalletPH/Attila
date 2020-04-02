@@ -23,7 +23,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
             public async Task<IEnumerable<SuppliersDetailsVM>> Handle(GetSupplierDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _supplierDetailsList = await dbContext.SupplierDetails.Select(a => new SuppliersDetailsVM 
+                var _supplierDetailsList = await dbContext.Suppliers.Select(a => new SuppliersDetailsVM 
                 { 
                     ID = a.ID,
                     Name = a.Name,
