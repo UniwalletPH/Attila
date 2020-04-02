@@ -82,10 +82,10 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Event Date</label>
-                            <input class="form-control form-control-inline date date-picker" size="16" type="datetime" asp-for="Event.EventDate" placeholder="mm/dd/yyyy" required />
-
+                            <label>Event Date</label> 
+                            <input class="form-control input-medium date-picker"  asp-for="Event.EventDate" size="16" type="text"  placeholder="mm/dd/yyyy"  required />
                         </div>
+                      
 
                         <div class="form-group">
                             <label>Set Up Time </label>
@@ -234,13 +234,13 @@
     <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
-
-    <partial name="_ValidationScriptsPartial" />
     <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <partial name="_ValidationScriptsPartial" /> 
     <script type="text/javascript">
 
         //function OnSuccess(e) {
-        //    
+        //
         //}
 
         //function OnFailure(e) {
@@ -250,7 +250,7 @@
 
         function OnSuccess(result) {
             if (result == true) {
-               $("#successrequests").modal('show');
+                $("#successrequests").modal('show');
             }
 
             else if (result == false) {
@@ -264,7 +264,7 @@
             window.location = "/Events/BookingForm";
         }
 
-    </script> 
+    </script>
 }
 @section Styles{
     <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
@@ -272,6 +272,7 @@
     <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+
 }
 
 @*@section Scripts {

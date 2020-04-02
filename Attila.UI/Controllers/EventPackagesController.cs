@@ -139,9 +139,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> MenuList()
         {
-
-            if (User.Identities != null)
-            {
+ 
 
                 var _menu = await mediator.Send(new GetMenuListQuery());
                 var _menuCategoryNames = await mediator.Send(new GetMenuCategoryListQuery());
@@ -165,12 +163,7 @@ namespace Attila.UI.Controllers
 
                 };
                 return View(add);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
-
+          
 
 
         }
@@ -178,12 +171,10 @@ namespace Attila.UI.Controllers
 
 
 
-
+        
         [HttpGet]
         public async Task<IActionResult> PackageMenuForm()
         {
-            if (User.Identities != null)
-            {
                 var eventPackages = await mediator.Send(new GetEventPackageListQuery());
                 var menuList = await mediator.Send(new GetMenuListQuery());
 
@@ -195,7 +186,7 @@ namespace Attila.UI.Controllers
                     _packageslist.Add(new SelectListItem
                     {
                         Value = item.ID.ToString(),
-                        Text = item.Name + item.RatePerHead,
+                        Text = item.Name + " | " +  item.RatePerHead,
                     });
                 }
 
@@ -212,71 +203,51 @@ namespace Attila.UI.Controllers
                 _packageList.PackageList = _packageslist;
                 _packageList.MenuList = _menulist;
                 return View(_packageList);
-            }
-            else
-            {
-                return Redirect("/Login");
-            }
+            
 
         }
 
         [HttpPost]
         public async Task<IActionResult> AddPackageMenu(AddPackageMenuCVM _packageMenu)
-        {
-            bool flag = true;
+        { 
             PackageMenuVM _container = new PackageMenuVM
             {
                 MenuID = _packageMenu.SelectedMenu,
                 PackageDetailsID = _packageMenu.SelectedPackage
             };
 
-            try
+
+            var response = await mediator.Send(new AddPackageMenuCommand
             {
-                await mediator.Send(new AddPackageMenuCommand {
 
-                    PackageMenu =_container
+                PackageMenu = _container
 
-                });
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
+            });
+            
 
-            return Json(flag);
+            return Json(response);
         }
 
 
         [HttpPost]
         public async Task<IActionResult> AddEventPackage(EventPackageVM _eventPackage)
-        {
-            //int _duration = _eventPackage.Duration.Hours;
-            //string _parsedDurationString = _duration.ToString("hh':'mm");
-            //TimeSpan _fromStringToTimeSpan = TimeSpan.Parse(_parsedDurationString);
-            bool flag = true;
+        {  
             EventPackageVM eventPackageVM = new EventPackageVM
             {
                 Code = _eventPackage.Code,
-                Description = _eventPackage.Description,
-                //Duration = _fromStringToTimeSpan,
+                Description = _eventPackage.Description, 
                 Name = _eventPackage.Name,
                 RatePerHead = _eventPackage.RatePerHead
 
             };
             
-            try
-            {
-                await mediator.Send(new AddEventPackageCommand
+            
+                var response = await mediator.Send(new AddEventPackageCommand
                 {
                     PackageDetails = eventPackageVM
                 });
-
-            }
-            catch (Exception)
-            {
-                flag = false;
-            }
-            return Json(flag);
+ 
+            return Json(response);
         }
 
 
