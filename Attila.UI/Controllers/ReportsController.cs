@@ -12,12 +12,13 @@ using Attila.Application.Admin.Foods.Queries;
 using Attila.Application.Admin.Equipments.Queries;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Application.Admin.Events.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ReportsController : BaseController
     {
-
         private readonly IMediator mediator;
 
         public ReportsController(IMediator mediator)

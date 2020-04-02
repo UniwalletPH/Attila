@@ -10,13 +10,16 @@ using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using MediatR;
 using Attila.Application.Events.Queries;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Attila.UI.Controllers
 {
+
+    [Authorize(Roles= "Admin, Coordinator")]
     public class ClientsController : BaseController
     { 
         private readonly IMediator mediator;
-
+        
         public ClientsController(IMediator mediator)
         {
             this.mediator = mediator;

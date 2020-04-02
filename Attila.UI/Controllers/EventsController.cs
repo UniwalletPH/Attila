@@ -5,6 +5,7 @@ using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
 using Attila.UI.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize(Roles = "Admin, Coordinator")]
     public class EventsController : BaseController
     {
         private readonly IMediator mediator;
