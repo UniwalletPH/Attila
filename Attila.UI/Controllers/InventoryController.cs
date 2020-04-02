@@ -66,14 +66,14 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddInventoryDelivery(InventoriesDeliveryVM inventoriesDeliveryVM)
+        public async Task<IActionResult> AddInventoryDelivery(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
 
             var _inventory = new InventoriesDeliveryVM
             {
                 DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
                 DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
-                SupplierID = inventoriesDeliveryVM.SupplierID,
+                SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
                 ReceiptImage = inventoriesDeliveryVM.ReceiptImage,
                 Remarks = inventoriesDeliveryVM.Remarks,
             };
