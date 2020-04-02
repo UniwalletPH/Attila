@@ -123,12 +123,18 @@
 
                     <tbody>
 
-                        @*@foreach (var item in Model.InventoryDeliveryVM)
-                            {
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
-                                </tr>
-                            }*@
+                        @foreach (var item in Model.InventoryDeliveryVM)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
+                            </tr>
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+                            </tr>
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Supplier.Address)</td>
+                            </tr>
+                        }
 
                     </tbody>
 

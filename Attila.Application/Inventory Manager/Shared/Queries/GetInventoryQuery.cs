@@ -76,12 +76,13 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         DeliveryDate = item.DeliveryDate,
                         ReceiptImage = item.ReceiptImage,
                         DeliveryPrice = item.DeliveryPrice,
-                        SupplierDetailsID = item.SupplierDetailsID,
-                        Remarks = item.Remarks
+                        SupplierID = item.SupplierID,
+                        Remarks = item.Remarks,
+                        Supplier = item.Supplier
                     };
+
                     _inventoryDeliveryData.Add(_inventoryDelivery);
                 }
-
 
 
                 InventoriesVM _inventoryVM = new InventoriesVM 
