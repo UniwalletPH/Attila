@@ -10,9 +10,7 @@ namespace Attila.Application.Coordinator.Events.Queries
         public int ID { get; set; }
 
         [Required]
-        public string Firstname { get; set; }
-        [Required]
-        public string Lastname { get; set; }
+        public string Name { get; set; }
         [Required]
         public string Address { get; set; }
         [Required]

@@ -24,8 +24,7 @@ namespace Attila.Application.Events.Commands
             {
                 var _newClient = new Client
                 {
-                    Firstname = request.EventClient.Firstname,
-                    Lastname = request.EventClient.Lastname,
+                    Name = request.EventClient.Name,
                     Address = request.EventClient.Address,
                     Contact = request.EventClient.Contact,
                     Email = request.EventClient.Email

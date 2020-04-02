@@ -26,8 +26,7 @@ namespace Attila.Application.Events.Queries
                 var _search = new List<SearchClientVM>();
 
                 var _searchedClient = dbContext.Clients.Where
-                    (a => a.Firstname.Contains(request.Keyword)
-                    || a.Lastname.Contains(request.Keyword));
+                    (a => a.Name.Contains(request.Keyword));
 
                 if (_searchedClient != null)
                 {
@@ -38,8 +37,7 @@ namespace Attila.Application.Events.Queries
                             Address = item.Address,
                             Contact = item.Contact,
                             Email = item.Email,
-                            Firstname = item.Firstname,
-                            Lastname = item.Lastname
+                            Name = item.Name,
                         };
                         _search.Add(_result);
                     }

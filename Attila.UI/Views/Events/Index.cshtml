@@ -67,7 +67,7 @@
                             <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                            <td> @Html.DisplayFor(modelItem => item.Client.Name)  </td>
                             <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
                             <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td> 
                         </tr>
@@ -137,7 +137,7 @@
                             <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                            <td> @Html.DisplayFor(modelItem => item.Client.Name)   </td>
                             <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
                             <td onclick="EditEvent()">
                                 <div class="margin-bottom-5">
@@ -201,7 +201,7 @@
                             <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
                             <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                            <td> @Html.DisplayFor(modelItem => item.Client.Name)  </td>
                             <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
                             <td >
                                 <div class="margin-bottom-5">
@@ -277,7 +277,7 @@
                                 <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                                 <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
                                 <td> @Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Client.Firstname) @Html.DisplayFor(modelItem => item.Client.Lastname)   </td>
+                                <td> @Html.DisplayFor(modelItem => item.Client.Name)  </td>
                                 <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
 
 

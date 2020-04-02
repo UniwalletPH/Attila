@@ -10,8 +10,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 {
     public class GetClientIdQuery : IRequest<Client>
     {
-        public string LastName { get; set; }
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
         public class GetClientIdQueryHandler : IRequestHandler<GetClientIdQuery, Client>
         {
@@ -24,8 +23,7 @@ namespace Attila.Application.Coordinator.Events.Queries
             public async Task<Client> Handle(GetClientIdQuery request, CancellationToken cancellationToken)
             {
                 var _searchedClient = dbContext.Clients.Where
-                    (a => a.Firstname.Contains(request.FirstName)
-                    && a.Lastname.Contains(request.LastName));
+                    (a => a.Name.Contains(request.Name));
 
                 if (_searchedClient != null)
                 {

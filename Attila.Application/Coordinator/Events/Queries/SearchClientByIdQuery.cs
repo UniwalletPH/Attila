@@ -31,8 +31,7 @@ namespace Attila.Application.Events.Queries
                         Address = _clientSearched.Address,
                         Contact = _clientSearched.Contact,
                         Email = _clientSearched.Email,
-                        Firstname = _clientSearched.Firstname,
-                        Lastname = _clientSearched.Lastname
+                        Name = _clientSearched.Name,
                     };
                 }
                 else

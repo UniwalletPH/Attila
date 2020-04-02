@@ -45,8 +45,7 @@ namespace Attila.Application.Events.Queries
                     Theme = a.Theme,
                     VenueType = a.VenueType
 
-                }).Include(a => a.EventClient.Firstname)
-                .Include(a => a.EventClient.Lastname)
+                }).Include(a => a.EventClient.Name)
                 .ToListAsync();
 
                 return _viewEventList;
