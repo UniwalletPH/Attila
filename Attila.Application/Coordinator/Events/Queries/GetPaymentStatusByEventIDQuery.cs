@@ -23,7 +23,7 @@ namespace Attila.Application.Events.Queries
 
             public async Task<IEnumerable<PaymentStatusVM>> Handle(GetPaymentStatusByEventIDQuery request, CancellationToken cancellationToken)
             {
-                var _paymentStatus = dbContext.PaymentStatus.Where(a => a.EventID == request.EventID);
+                var _paymentStatus = dbContext.PaymentStatuses.Where(a => a.EventID == request.EventID);
 
 
 

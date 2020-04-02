@@ -1,10 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Attila.Domain.Entities.Tables;
-using Attila.Application.Interfaces;
+﻿using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Attila.Infrastructure.Persistence

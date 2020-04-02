@@ -1,6 +1,6 @@
 ﻿using Attila.Domain.Entities.Base;
 
-namespace Attila.Domain.Entities.Tables
+namespace Attila.Domain.Entities
 {
     public class EventEquipment : BaseAuditedEntity
     {

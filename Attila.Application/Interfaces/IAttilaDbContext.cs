@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
+﻿using Attila.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
-using Attila.Domain.Entities;
-using Attila.Domain.Entities.Tables;
+using System.Threading.Tasks;
 
 namespace Attila.Application.Interfaces
 {
