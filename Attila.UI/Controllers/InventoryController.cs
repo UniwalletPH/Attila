@@ -341,6 +341,23 @@ namespace Attila.UI.Controllers
 
             return Json(response);
         }
+        [HttpGet]
+        public IActionResult UpdateFoodStock()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateFoodStock(FoodsInventoryVM foodInventory)
+        { 
+              var response=   await mediator.Send(new UpdateFoodStockCommand
+                {
+                    MyFoodInventoryVM = foodInventory
+                });
+                
+             
+            return Json(response);
+        }
 
 
         [HttpGet]

@@ -38,25 +38,25 @@
         <div class="portlet light bordered">
 
             <div class="portlet-body form">
-                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-controller="Events" asp-action="Approve" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-body">
                         <div class="form-group">
                             <label>Client Name</label>
                             <input type="text" class="form-control" asp-for="@Model.Event.EventName" readonly>
 
 
-                           
+
                         </div>
                         <div class="form-group">
                             <label>Event Date</label>
-                            <input type="hidden" class="form-control form-control-inline" size="16" asp-for="@Model.Event.EventDate"  required />
+                            <input type="hidden" class="form-control form-control-inline" size="16" asp-for="@Model.Event.EventDate" required />
 
                         </div>
                         <div class="form-group">
                             <label>Type of Occasion </label>
 
                             <input type="text" class="form-control" asp-for="@Model.Event.Type" readonly>
-                         
+
                         </div>
 
                         <div class="form-group">
@@ -80,12 +80,12 @@
                             <label>Venue in Condominium or Building?</label>
 
                             <input class="form-control" placeholder="Description" asp-for="@Model.Event.VenueType" readonly>
-                            
+
                         </div>
                         <div class="form-group">
                             <label>Type of Location</label>
                             <input class="form-control" placeholder="Description" asp-for="@Model.Event.LocationType" readonly>
-                          
+
                         </div>
 
 
@@ -108,8 +108,8 @@
 
                     <div class="form-group">
                         <label>Buffet Type </label>
-                        <input type="text"  class="form-control" asp-for="@Model.Event.ServingType" readonly />
-                        
+                        <input type="text" class="form-control" asp-for="@Model.Event.ServingType" readonly />
+
                     </div>
                     <div class="form-group">
                         <label>Number of Guests</label>
@@ -120,15 +120,16 @@
                         <label>Package </label>
 
                         <input type="text" class="form-control" placeholder="" asp-for="@Model.Event.PackageDetailsID" readonly>
-                     </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3"     asp-for="@Model.Event.Remarks" readonly></textarea>
+                        <textarea class="form-control" rows="3" asp-for="@Model.Event.Remarks" readonly></textarea>
                     </div>
+                    @{ 
 
-
-                    
-
+                        if (User.IsInRole("Admin")) {  
+                    <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
+                    }}
                 </form>
 
 
