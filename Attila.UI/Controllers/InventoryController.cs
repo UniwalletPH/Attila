@@ -233,7 +233,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
+            FoodInventoryCVM foodDetailsListVM = new FoodInventoryCVM
             {
                 FoodStockDetailsList = _list,
             };
@@ -379,6 +379,40 @@ namespace Attila.UI.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> UpdateEquipmentStock()
+        {
+            var getEquipmentStock = await mediator.Send(new GetEquipmentStockDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentStock)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EquipmentDetailsVM.Name + " | Quantity: " + item.Quantity
+                });
+            }
+
+
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateEquipmentStock(EquipmentsInventoryVM equipmentInventory)
+        {
+            var response = await mediator.Send(new UpdateEquipmentStockCommand
+            {
+                MyEquipmentInventoryVM = equipmentInventory
+            });
+
+            return Json(response);
+        }
 
 
 
