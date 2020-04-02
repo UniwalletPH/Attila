@@ -1,4 +1,5 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Coordinator.Events.Queries;
+using Attila.Application.Interfaces;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,18 +8,7 @@ namespace Attila.Application.Events.Commands
 {
     public class UpdateClientDetailsCommand : IRequest<bool>
     {
-        //public EventClient UpdateClient { get; set; }
-        public int ID { get; set; }
-
-        public string Firstname { get; set; }
-
-        public string Lastname { get; set; }
-
-        public string Address { get; set; }
-
-        public string Email { get; set; }
-
-        public string Contact { get; set; }
+        public EventClientVM UpdateClient { get; set; }
 
         public class UpdateClientDetailsCommandHandler : IRequestHandler<UpdateClientDetailsCommand, bool>
         {
@@ -31,13 +21,12 @@ namespace Attila.Application.Events.Commands
 
             public async Task<bool> Handle(UpdateClientDetailsCommand request, CancellationToken cancellationToken)
             {
-                var _updatedClientDetails = dbContext.Clients.Find(request.ID);
+                var _updatedClientDetails = dbContext.Clients.Find(request.UpdateClient.ID);
 
-                _updatedClientDetails.Lastname = request.Lastname;
-                _updatedClientDetails.Firstname = request.Firstname;
-                _updatedClientDetails.Address = request.Address;
-                _updatedClientDetails.Contact = request.Contact;
-                _updatedClientDetails.Email = request.Email;
+                _updatedClientDetails.Name = request.UpdateClient.Name;
+                _updatedClientDetails.Address = request.UpdateClient.Address;
+                _updatedClientDetails.Contact = request.UpdateClient.Contact;
+                _updatedClientDetails.Email = request.UpdateClient.Email;
 
                 await dbContext.SaveChangesAsync();
 

@@ -25,8 +25,7 @@ namespace Attila.Application.Events.Queries
                 var _viewClientList = await dbContext.Clients.Select(a => new SearchClientVM 
                 {
                     ID = a.ID,
-                    Lastname = a.Lastname, 
-                    Firstname = a.Firstname,
+                    
                     Address = a.Address,
                     Email = a.Email,
                     Contact = a.Contact
