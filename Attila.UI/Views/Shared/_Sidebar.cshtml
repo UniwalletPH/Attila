@@ -35,7 +35,7 @@
                     </li>
                 } }
             @{
-                if (User.IsInRole("Admin, Coordinator") )
+                if (User.IsInRole("Admin") || User.IsInRole("Coordinator"))
                 {
 
                     <li class="nav-item  ">

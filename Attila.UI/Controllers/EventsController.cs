@@ -1,4 +1,5 @@
-﻿using Attila.Application.Admin.Events.Queries;
+﻿using Attila.Application.Admin.Events.Commands;
+using Attila.Application.Admin.Events.Queries;
 using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
@@ -171,24 +172,27 @@ namespace Attila.UI.Controllers
         }
      
 
-        //[HttpPost]
-        //public async Task<IActionResult> Details(int EventID)
-        //{
+        [HttpGet]
+        public async Task<IActionResult> Approve(int EventID)
+       {
+                       
+              await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
-        //    var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
 
-        //    var _allEventDetails = new ViewEventVM
-        //    {
-        //        EventDetails = _eventDetails
-        //    };
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
 
-        //    return View(_allEventDetails);
+        public async Task<IActionResult> Decline(int EventID)
+        {
 
-        //}
-        
- 
 
-[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
+
+
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
