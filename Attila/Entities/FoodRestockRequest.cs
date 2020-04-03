@@ -6,8 +6,7 @@ namespace Attila.Domain.Entities
 {
     public class FoodRestockRequest : BaseAuditedEntity
     {
-        [ForeignKey("Food")]
-        public int FoodID { get; set; }
+
         [ForeignKey("InventoryManager")]
         public int InventoryManagerID { get; set; }
 
@@ -15,8 +14,6 @@ namespace Attila.Domain.Entities
         public Status Status { get; set; }
         public DateTime DateTimeRequest { get; set; }
 
-       
-        public Food Food { get; set; }
         public User InventoryManager { get; set; }
     }
 }

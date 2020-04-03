@@ -27,13 +27,11 @@ namespace Attila.Application.Admin.Equipments.Queries
             {
                 var _details = dbContext.EquipmentRestockRequests
                     .Where(a => a.ID == request.RequestID)
-                    .Include(a => a.Equipment)
                     .Include(a => a.InventoryManager).SingleOrDefault();
 
                 var _equipmentRequest = new EquipmentRequestVM
                 {
                     ID = _details.ID,
-                    EquipmentDetails = _details.Equipment,
                     Quantity = _details.Quantity,
                     DateTimeRequest = _details.DateTimeRequest,
                     Status = _details.Status,

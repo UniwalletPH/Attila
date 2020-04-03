@@ -13,7 +13,6 @@ namespace Attila.Domain.Entities
         public FoodType FoodType { get; set; }
 
         public ICollection<FoodInventory> FoodInventories { get; private set; } = new HashSet<FoodInventory>();
-        public ICollection<FoodRestockRequest> FoodRestockRequests { get; private set; } = new HashSet<FoodRestockRequest>();
         public ICollection<Ingredient> Ingredients { get; private set; } = new HashSet<Ingredient>();
 
     }

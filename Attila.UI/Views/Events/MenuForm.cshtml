@@ -30,26 +30,38 @@
     <div class="col-md-12">
         <!-- Begin: life time stats -->
         <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase">Event: @Model.Event.EventName | @Model.Event.EventDate</span>
+                </div>
 
+            </div>
             <div class="portlet-body form">
-                <form role="form" asp-controller="Events" asp-action="AddEventMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                <form role="form" asp-controller="Events" asp-action="AddMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                     <div class="form-body">
                         <div class="form-group">
-                            <label>Event Name</label>
-                            @Html.DropDownListFor(m => m.SelectedEvent, Model.EventList, "--SELECT CLIENT--", new { @class = "form-control" })
+                            <label>Category: </label>
+                            @Html.DropDownListFor(m => m.SelectedMenu, Model.Menu, "--SELECT Menu--", new { @class = "form-control" })
 
                         </div>
                         <div class="form-group">
                             <label>Event Name</label>
-                            @Html.DropDownListFor(m => m.SelectedMenu, Model.MenuList, "--SELECT CLIENT--", new { @class = "form-control" })
+                            @*@foreach (var item in Model.GroupBy(u => u.Name, (key, items) => new { Name = key, Cost = items.Sum(u => u.Cost) }))
+                            {
+                                <tr>
+                                    <td class="js-export-checkbox">
+                                        @Html.CheckBoxFor(modelItem => Model.Menu[i].ToExport)
+                                    </td>
+                                </tr>}*@
+
 
                         </div>
 
-                       
                     </div>
 
-                    
- 
+
+
                     <div class="form-actions">
                         <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
                         <button type="button" class="btn default">Cancel</button>
@@ -89,7 +101,7 @@
                 alert("Event menu successfully added!");
                 window.location = "/Events";
             }
-        }
+        //}
 
         function OnFailure(e) {
             console.log(e);
@@ -97,8 +109,7 @@
             window.location = "/Events/MenuForm";
         }
 
-    </script>
-    <partial name="partials/_SuccessfulRequest" />
+    </script> 
 }
 @section Styles{
     <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />

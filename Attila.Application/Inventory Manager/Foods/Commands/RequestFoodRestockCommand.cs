@@ -26,7 +26,6 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 {
                     Quantity = request.MyFoodRestockRequestVM.Quantity,
                     DateTimeRequest = DateTime.Now,
-                    FoodID = request.MyFoodRestockRequestVM.FoodDetailsID,
                     Status = request.MyFoodRestockRequestVM.Status,
                     InventoryManagerID = request.MyFoodRestockRequestVM.UserID
                 };

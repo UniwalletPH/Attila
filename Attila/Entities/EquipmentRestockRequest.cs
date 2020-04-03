@@ -7,8 +7,6 @@ namespace Attila.Domain.Entities
     public class EquipmentRestockRequest : BaseAuditedEntity
     {
 
-        [ForeignKey("Equipment")]
-        public int EquipmentID { get; set; }
         [ForeignKey("InventoryManager")]
         public int InventoryManagerID { get; set; }
 
@@ -16,7 +14,6 @@ namespace Attila.Domain.Entities
         public DateTime DateTimeRequest { get; set; }
         public Status Status { get; set; }
 
-        public Equipment Equipment { get; set; }
         public User InventoryManager { get; set; }
     }
 }

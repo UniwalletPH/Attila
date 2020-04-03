@@ -55,6 +55,10 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<Ingredient> Ingredients { get; set; }
 
+        public DbSet<FoodRequestCollection> FoodRequestCollections { get ; set; }
+
+        public DbSet<EquipmentRequestCollection> EquipmentRequestCollections { get; set; }
+
         public AttilaDbContext(DbContextOptions<AttilaDbContext> dbContextOpt) : base(dbContextOpt)
         {
 
