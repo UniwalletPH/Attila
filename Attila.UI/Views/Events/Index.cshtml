@@ -69,7 +69,8 @@
                             <td> @Html.DisplayFor(modelItem => item.EventName)</td>
                             <td> @Html.DisplayFor(modelItem => item.Client.Name)  </td>
                             <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
-                            <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td> 
+                            <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td>
+                            <td>    <button type="button" class="btn dark btn-outline add-menu"> Add Menu Details</button>  </td>
                         </tr>
                         }
 
@@ -304,13 +305,26 @@
          
             $(document).on('click', 'tr .view', function (e) {
               
-            id = $(this).closest('tr').attr('data-id');
+                id = $(this).closest('tr').attr('data-id');
+
+
+                
             var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
               
         });
-        
+      
+            $(document).on('click', 'tr .add-menu', function (e) {
+              
+                id = $(this).closest('tr').attr('data-id');
+                
+                
+                var url = '@Url.Action("MenuForm", "Events", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
+
+              
+        });
     </script>
 
 
