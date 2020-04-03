@@ -3,6 +3,7 @@ using Attila.Application.Admin.Events.Queries;
 using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
+using Attila.Application.Notification.Commands;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -119,9 +120,12 @@ namespace Attila.UI.Controllers
 
 
                  
-                   var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+            var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+
+            //Send Notif to Admin
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EventRequestDetails",RequestID = response });
                    
-                return Json(response);
+            return Json(response);
  
 
         }
