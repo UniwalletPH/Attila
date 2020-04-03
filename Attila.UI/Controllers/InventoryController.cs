@@ -394,7 +394,7 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin, nventoryManager")]
+        [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> RegisterSupplier(SuppliersDetailsVM suppliersDetails)
         {
@@ -418,7 +418,7 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> SearchDeliveryById(int DeliveryID)
+        public async Task<IActionResult> Details (int DeliveryID)
         {
             var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = DeliveryID });
 
