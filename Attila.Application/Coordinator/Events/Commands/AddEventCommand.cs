@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Commands
 {
-    public class AddEventCommand : IRequest<bool>
+    public class AddEventCommand : IRequest<int>
     {
         public EventDetailsVM EventDetails { get; set; }
 
-        public class AddEventCommandHandler : IRequestHandler<AddEventCommand, bool>
+        public class AddEventCommandHandler : IRequestHandler<AddEventCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -21,7 +21,7 @@ namespace Attila.Application.Events.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(AddEventCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(AddEventCommand request, CancellationToken cancellationToken)
             {
 
                 //var _newEvent = new EventDetails
@@ -69,7 +69,7 @@ namespace Attila.Application.Events.Commands
                 dbContext.Events.Add(_newEvent);
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return _newEvent.ID;
 
             }
         }

@@ -152,7 +152,8 @@ namespace Attila.UI.Controllers
                 MyFoodRestockRequestVM = _foodRequestDetails
             });
 
-            //await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response  });
+            //Send Notif to Admin
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response  });
 
 
             return Json(response);
@@ -242,7 +243,7 @@ namespace Attila.UI.Controllers
                 FoodStockDetailsList = _list,
             };
 
-            return View(FoodDetailsListVM);
+            return View(foodDetailsListVM);
         }
 
         [HttpPost]
@@ -315,6 +316,9 @@ namespace Attila.UI.Controllers
             {
                 MyEquipmentRestockRequestVM = _equipmentRequestDetails
             });
+
+            //Send Notif to Admin
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EquipmentRequestDetails", RequestID = response });
 
             return Json(response);
         }

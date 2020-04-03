@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipments.Commands
 {
-    public class RequestEquipmentRestockCommand : IRequest<bool>
+    public class RequestEquipmentRestockCommand : IRequest<int>
     {
         public EquipmentsRestockRequestVM MyEquipmentRestockRequestVM { get; set; }
 
-        public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, bool>
+        public class RequestEquipmentRestockCommandHandler : IRequestHandler<RequestEquipmentRestockCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
             public RequestEquipmentRestockCommandHandler(IAttilaDbContext dbContext)
@@ -20,7 +20,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(RequestEquipmentRestockCommand request, CancellationToken cancellationToken)
             {
                 EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
                 {
@@ -34,7 +34,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return _equipmentRestockRequest.ID;
             }
         }
     }
