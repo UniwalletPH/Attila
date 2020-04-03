@@ -9,11 +9,14 @@ using Attila.Application.Inventory_Manager.Shared.Commands;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.UI.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Attila.UI.Controllers
 {
+
+    [Authorize(Roles = "Admin")]
     public class InventoryManagerController : BaseController
     {
         public static bool _checker;
@@ -350,12 +353,16 @@ namespace Attila.UI.Controllers
         }
 
 
+
+        [Authorize(Roles = "InventoryManager")]
+
         [HttpGet]
         public IActionResult SearchEquipmentById()
         {
             return View();
         }
 
+        [Authorize(Roles = "InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> SearchEquipmentById(EquipmentsDetailsVM equipmentsDetailsVM)
         {

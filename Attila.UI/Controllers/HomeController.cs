@@ -26,6 +26,7 @@ namespace Attila.UI.Controllers
             this.signInManager = signInManager;
         }
 
+        [Authorize(Roles = "Admin,Coordinator, InventoryManager")]
         public IActionResult Index()
         {
             return Redirect("/Dashboard");
@@ -53,6 +54,7 @@ namespace Attila.UI.Controllers
             return Json(_signinResult);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult RegisterAccount()
         {
             return View();
@@ -69,6 +71,8 @@ namespace Attila.UI.Controllers
         public IActionResult ErrorPage() {  
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)
         {

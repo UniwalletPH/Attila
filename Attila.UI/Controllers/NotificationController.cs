@@ -3,11 +3,14 @@ using Attila.Application.Admin.Events.Queries;
 using Attila.Application.Admin.Foods.Queries;
 using Attila.Application.Notification.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
+
+    [Authorize(Roles = "Admin,Coordinator,InventoryManager, ")]
     public class NotificationController : BaseController
     {
         private readonly IMediator mediator;

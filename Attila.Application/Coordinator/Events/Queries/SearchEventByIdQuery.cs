@@ -26,6 +26,7 @@ namespace Attila.Application.Events.Queries
                 if (_searchedEvent != null)
                 {
                     return new SearchEventVM {
+                        ID = _searchedEvent.ID,
                         EventName = _searchedEvent.EventName,
                         Type = _searchedEvent.Type,
                         BookingDate = _searchedEvent.BookingDate,
