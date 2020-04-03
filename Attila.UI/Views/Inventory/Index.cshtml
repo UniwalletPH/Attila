@@ -14,9 +14,19 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+    <script> 
+               
+           
+            $(document).on('click', 'tr .see', function (e) {
+              
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("Details", "Inventory", new { DeliveryID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
 
+              
+        });</script>
 
-
+     
 
 }
 @section Styles{
@@ -109,7 +119,7 @@
 
                         @foreach (var item in Model.InventoryDeliveryVM)
                         {
-                            <tr>
+                            <tr data-id="@item.ID">
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
 
 
