@@ -26,7 +26,7 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
-        [Authorize(Roles = "Admin, InventoryManager")]
+        //[Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -44,7 +44,7 @@ namespace Attila.UI.Controllers
         }
 
 
-        [Authorize(Roles = "InventoryManager")]
+        //[Authorize(Roles = "InventoryManager")]
         [HttpGet]
         public async Task<IActionResult> AddInventoryDelivery()
         {
@@ -210,8 +210,7 @@ namespace Attila.UI.Controllers
             {
                 FoodDetailsID = foodInventory.FoodDetailsID,
                 DeliveryDetailsID = foodInventory.DeliveryDetailsID,
-                UserID = 1,
-                EncodingDate = DateTime.Now,
+                UserID = CurrentUser.ID,
                 ItemPrice = foodInventory.ItemPrice,
                 Quantity = foodInventory.Quantity,
                 ExpirationDate = foodInventory.ExpirationDate,
@@ -342,7 +341,7 @@ namespace Attila.UI.Controllers
             {
                 EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
                 DeliveryDetailsID = equipmentInventory.DeliveryDetailsID,
-                UserID = 1,
+                UserID = CurrentUser.ID,
                 EncodingDate = DateTime.Now,
                 ItemPrice = equipmentInventory.ItemPrice,
                 Quantity = equipmentInventory.Quantity,
@@ -416,7 +415,6 @@ namespace Attila.UI.Controllers
 
             return View(_inventoryDelivery);
         }
-
 
          
          

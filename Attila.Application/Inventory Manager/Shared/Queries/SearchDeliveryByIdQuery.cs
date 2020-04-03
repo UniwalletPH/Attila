@@ -27,7 +27,9 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
             {
                 var _getSearchedDeliveryId = dbContext.Deliveries.Include(a => a.Supplier)
                                                                  .Include(a => a.FoodInventories)
+                                                                 .ThenInclude(a => a.Food)
                                                                  .Include(a => a.EquipmentInventories)
+                                                                 .ThenInclude(a => a.Equipment)
                                                                  .Where(a => a.ID == request.DeliveryID).SingleOrDefault();
 
                 InventoriesDeliveryVM _deliveryDetails = new InventoriesDeliveryVM
@@ -39,8 +41,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     Remarks = _getSearchedDeliveryId.Remarks,
                     Supplier = _getSearchedDeliveryId.Supplier,
                     FoodInventory = _getSearchedDeliveryId.FoodInventories,
-                    EquipmentInventory = _getSearchedDeliveryId.EquipmentInventories
-
+                    EquipmentInventory = _getSearchedDeliveryId.EquipmentInventories,
                 };
 
                 return _deliveryDetails;

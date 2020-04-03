@@ -1,4 +1,6 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,7 +30,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 var _inventoryDeliveryData = new List<InventoriesDeliveryVM>();
 
 
-                var _getFoodData = dbContext.FoodInventories.Include(a => a.Food);
+                var _getFoodData = await mediator.Send(new GetFoodStockDetailsQuery());
 
                 foreach (var item in _getFoodData)
                 {
@@ -39,15 +41,15 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.InventoryManagerID,
-                        FoodDetails = item.Food
+                        UserID = item.UserID,
+                        FoodDetails = item.FoodDetailsVM
                     };
 
                     _foodListData.Add(_foodAllDetails);
                 }
 
 
-                var _getEquipmentData = dbContext.EquipmentInventories.Include(a => a.Equipment);
+                var _getEquipmentData = await mediator.Send(new GetEquipmentStockDetailsQuery());
 
                 foreach (var item in _getEquipmentData)
                 {
@@ -58,8 +60,8 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.InventoryManagerID,
-                        EquipmentDetails = item.Equipment
+                        UserID = item.UserID,
+                        EquipmentDetails = item.EquipmentDetailsVM
                     };
 
                     _equipmentListData.Add(_equipmentAllDetails);

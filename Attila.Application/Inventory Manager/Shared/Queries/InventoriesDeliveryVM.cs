@@ -23,6 +23,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public Supplier Supplier { get; set; }
 
+
         public ICollection<FoodInventory> FoodInventory { get; set; }
 
         public ICollection<EquipmentInventory> EquipmentInventory { get; set; }
