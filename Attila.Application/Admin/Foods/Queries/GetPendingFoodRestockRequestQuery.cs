@@ -31,7 +31,6 @@ namespace Attila.Application.Admin.Foods.Queries
                     var FoodRestockRequest = new FoodRequestVM
                     { 
                         ID = item.ID,
-                        Quantity = item.Quantity,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,
                         User = item.InventoryManager

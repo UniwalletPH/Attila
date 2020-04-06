@@ -147,9 +147,6 @@ namespace Attila.UI.Controllers
                     ServingType = _eventDetails.Event.ServingType,
                     Theme = _eventDetails.Event.Theme,
                     VenueType = _eventDetails.Event.VenueType
-
-
-
                 };
 
 
@@ -224,13 +221,13 @@ namespace Attila.UI.Controllers
                        
             var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
+            
             await mediator.Send(new AddNotificationCommand 
             { 
                 Message ="Your request has been Approved",
                 TargetUserID = response.Coordinator.ID,
                 MethodName = "",
                 RequestID = response.ID
-
             });
 
 
@@ -242,6 +239,14 @@ namespace Attila.UI.Controllers
 
 
             var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
+
+            await mediator.Send(new AddNotificationCommand
+            { 
+                Message = "Your request has been Declined",
+                TargetUserID = response.Coordinator.ID,
+                MethodName = "",
+                RequestID = response.ID
+            });
 
 
             return RedirectToAction("Details", new { EventID = EventID });

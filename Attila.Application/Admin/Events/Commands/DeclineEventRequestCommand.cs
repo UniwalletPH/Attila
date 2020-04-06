@@ -1,16 +1,19 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Admin.Events.Queries;
+using Attila.Application.Interfaces;
 using MediatR;
 using System;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Events.Commands
 {
-    public class DeclineEventRequestCommand : IRequest<int>
+    public class DeclineEventRequestCommand : IRequest<EventVM>
     {
        public int EventID { get; set; }
 
-        public class DeclineEventRequestCommandHandler : IRequestHandler<DeclineEventRequestCommand, int>
+        public class DeclineEventRequestCommandHandler : IRequestHandler<DeclineEventRequestCommand, EventVM>
         {
             private readonly IAttilaDbContext dbContext;
             public DeclineEventRequestCommandHandler(IAttilaDbContext dbContext)
@@ -18,17 +21,25 @@ namespace Attila.Application.Admin.Events.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<int> Handle(DeclineEventRequestCommand request, CancellationToken cancellationToken)
+            public async Task<EventVM> Handle(DeclineEventRequestCommand request, CancellationToken cancellationToken)
             {
-                var _toDecline = dbContext.Events.Find(request.EventID);
+                var _toDecline = dbContext.Events
+                    .Where(a => a.ID == request.EventID)
+                    .Include(a => a.Coordinator).SingleOrDefault();
 
                 if (_toDecline != null)
                 {
                     _toDecline.EventStatus = Status.Declined;
-
                     await dbContext.SaveChangesAsync();
 
-                    return _toDecline.ID;
+                    var _toReturn = new EventVM
+                    {
+                        ID = _toDecline.ID,
+                        EventName = _toDecline.EventName,
+                        Coordinator = _toDecline.Coordinator
+                    };
+
+                    return _toReturn;
                 }
                 else
                 {

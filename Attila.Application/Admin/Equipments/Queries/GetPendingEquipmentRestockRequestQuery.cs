@@ -31,7 +31,6 @@ namespace Attila.Application.Admin.Equipments.Queries
                     var Equipments = new EquipmentRequestVM
                     {
                         ID = item.ID,
-                        Quantity = item.Quantity,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,
                         User = item.InventoryManager

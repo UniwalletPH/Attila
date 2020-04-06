@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Foods.Queries
 {
-    public class GetFoodRequestDetailsQuery : IRequest<FoodRequestVM>
+    public class GetFoodRequestDetailsQuery : IRequest<List<FoodCollectionVM>>
     {
         public int RequestID { get; set; }
 
-        public class GetFoodRequestDetailsQueryHandler : IRequestHandler<GetFoodRequestDetailsQuery, FoodRequestVM>
+        public class GetFoodRequestDetailsQueryHandler : IRequestHandler<GetFoodRequestDetailsQuery, List<FoodCollectionVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -23,23 +23,27 @@ namespace Attila.Application.Admin.Foods.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<FoodRequestVM> Handle(GetFoodRequestDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<List<FoodCollectionVM>> Handle(GetFoodRequestDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _request = dbContext.FoodRestockRequests
-                    .Where(a => a.ID == request.RequestID)
-                    .Include(a => a.InventoryManager).SingleOrDefault();
+                var _request = dbContext.FoodRequestCollections
+                    .Where(a => a.FoodRestockRequestID == request.RequestID)
+                    .Include(a => a.Food);
 
-                var _foodRequest = new FoodRequestVM
-                {               
-                    ID = _request.ID,
-                    Quantity = _request.Quantity,
-                    DateTimeRequest = _request.DateTimeRequest,
-                    Status = _request.Status,
-                    User = _request.InventoryManager
+                var _foodCollectionOfRequest = new List<FoodCollectionVM>();
 
-                };
+                foreach (var item in _request)
+                {
+                    var foodReq = new FoodCollectionVM
+                    {
+                        ID = item.ID,
+                        Food = item.Food,
+                        Quantity = item.Quantity
+                    };
 
-                return _foodRequest;
+                    _foodCollectionOfRequest.Add(foodReq);
+                }
+
+                return _foodCollectionOfRequest;
             }
         }
     }

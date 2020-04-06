@@ -7,11 +7,7 @@ namespace Attila.Application.Admin.Foods.Queries
     {
         public int ID { get; set; }
 
-        public int Quantity { get; set; }
-
         public DateTime DateTimeRequest { get; set; }
-
-        public Domain.Entities.Food FoodDetails { get; set; }
 
         public Status Status { get; set; }
 

@@ -11,35 +11,39 @@ using Attila.Application.Admin.Equipments.Commands;
 
 namespace Attila.Application.Admin.Equipments.Queries
 {
-    public class GetEquipmentRequestDetailsQuery : IRequest<EquipmentRequestVM>
+    public class GetEquipmentRequestDetailsQuery : IRequest<List<EquipmentCollectionVM>>
     {
         public int RequestID { get; set; }
-        public class GetEquipmentRequestDetailsQueryHandler : IRequestHandler<GetEquipmentRequestDetailsQuery, EquipmentRequestVM>
+        public class GetEquipmentRequestDetailsQueryHandler : IRequestHandler<GetEquipmentRequestDetailsQuery, List<EquipmentCollectionVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetEquipmentRequestDetailsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-
-
-            public async Task<EquipmentRequestVM> Handle(GetEquipmentRequestDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentCollectionVM>> Handle(GetEquipmentRequestDetailsQuery request, CancellationToken cancellationToken)
             {
-                var _details = dbContext.EquipmentRestockRequests
-                    .Where(a => a.ID == request.RequestID)
-                    .Include(a => a.InventoryManager).SingleOrDefault();
+                
+                var _collection = dbContext.EquipmentRequestCollections
+                    .Where(a => a.EquipmentRestockRequestID == request.RequestID)
+                    .Include(a => a.Equipment);
 
-                var _equipmentRequest = new EquipmentRequestVM
+                var _equipmentRequests = new List<EquipmentCollectionVM>();
+
+                foreach (var item in _collection)
                 {
-                    ID = _details.ID,
-                    Quantity = _details.Quantity,
-                    DateTimeRequest = _details.DateTimeRequest,
-                    Status = _details.Status,
-                    User = _details.InventoryManager
-                };
+                    var _equipment = new EquipmentCollectionVM
+                    {
+                        ID = item.ID,
+                        Equipment = item.Equipment,
+                        Quantity = item.Quantity
+                       
+                    };
 
-                return _equipmentRequest;
+                    _equipmentRequests.Add(_equipment);
+                }
 
+                return _equipmentRequests;
 
             }
         }

@@ -13,6 +13,8 @@ namespace Attila.Domain.Entities
         [ForeignKey("FoodRestockRequest")]
         public int FoodRestockRequestID { get; set; }
 
+        public int Quantity { get; set; }
+
         public Food Food { get; set; }
         public FoodRestockRequest FoodRestockRequest { get; set; }
     }

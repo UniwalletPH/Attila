@@ -63,6 +63,8 @@ namespace Attila.Application.Interfaces
         public DbSet<FoodRequestCollection> FoodRequestCollections { get; set; }
 
         public DbSet<EquipmentRequestCollection> EquipmentRequestCollections { get; set; }
+         
+        public DbSet<EventEquipmentRequestCollection> EventEquipmentRequestCollections { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
