@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Admin.Events.Commands;
 using Attila.Application.Admin.Events.Queries;
+using Attila.Application.Coordinator.Events.Commands;
 using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
@@ -88,6 +89,39 @@ namespace Attila.UI.Controllers
 
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AddAdditionalDishRequest()
+        {
+            var _eventList = await mediator.Send(new GetEventListQuery());
+            List<SelectListItem> _events = new List<SelectListItem>();
+
+            foreach (var item in _eventList)
+            {
+                _events.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EventName,
+                });
+            }
+
+            var _addDishRequest = new AdditionalDishCVM();
+            _addDishRequest.EventList = _events;
+            return View(_addDishRequest);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAdditionalDishRequest(AdditionalDishCVM _additionalDish)
+        {
+            AdditionalDishVM _container = new AdditionalDishVM
+            {
+                EventID = _additionalDish.SelectedEvent,
+                Quantity = _additionalDish.AdditionalDish.Quantity,
+            };
+
+            var response = await mediator.Send(new AddAdditionalDishRequestCommand{AdditionalDish = _container});
+
+            return Json(response);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventCVM _eventDetails)

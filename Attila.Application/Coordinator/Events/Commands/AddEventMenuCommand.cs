@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Interfaces;
+using Attila.Domain.Entities;
 using MediatR;
 using System.Collections.Generic;
 using System.Threading;
@@ -22,21 +23,15 @@ namespace Attila.Application.Coordinator.Events.Commands
 
             public async Task<bool> Handle(AddEventMenuCommand request, CancellationToken cancellationToken)
             {
-                var _eventMenuList = new List<EventMenuVM>();
-
-                //var _newEventMenu = new EventMenus
-                //{
-                //    EventDetailsID = request.EventMenu.EventDetailsID,
-                //    MenuID = request.EventMenu.MenuID,
-                //};
                 foreach (var item in request.EventMenu)
                 {
-                    var EventMenus = new EventMenuVM
+                    var EventMenus = new EventMenu
                     {
-                        EventDetailsID = item.EventDetailsID,
-                        MenuID = item.MenuID
+                        EventID = item.EventDetailsID,
+                        DishID = item.MenuID
+                        
                     };
-                    _eventMenuList.Add(EventMenus);
+                    dbContext.EventMenus.Add(EventMenus);
                     await dbContext.SaveChangesAsync();
                 }
                 return true;
