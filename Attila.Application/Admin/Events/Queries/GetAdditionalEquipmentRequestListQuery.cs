@@ -22,8 +22,7 @@ namespace Attila.Application.Admin.Events.Queries
             }
             public async Task<List<EventAdditionalEquipmentRequest>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _additionalEquipments = dbContext.EventAdditionalEquipmentRequests
-                    .Include(a => a.Equipment)          
+                var _additionalEquipments = dbContext.EventAdditionalEquipmentRequests        
                     .Where(a => a.EventID == request.EventID);
 
                 return _additionalEquipments.ToList();
