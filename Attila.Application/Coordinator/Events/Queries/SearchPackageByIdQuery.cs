@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
                 var _package = dbContext.EventPackageDishes
                     .Include(a => a.EventPackage)
-                    .Include(a => a.Dish)
+                    .Include(a => a.Dish.DishCategory)
                     .Where(a => a.EventPackageID == request.PackageId );
 
                 foreach (var item in _package)
