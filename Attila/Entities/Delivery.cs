@@ -10,6 +10,8 @@ namespace Attila.Domain.Entities
 
         [ForeignKey("Supplier")]
         public int SupplierID { get; set; }
+        public int? FoodRestockRequestID { get; set; }
+        public int? EquipmentRestockRequestID { get; set; }
 
 
         public DateTime DeliveryDate { get; set; }
@@ -23,10 +25,13 @@ namespace Attila.Domain.Entities
 
         public Supplier Supplier { get; set; }
 
-        public ICollection<EquipmentInventory> EquipmentInventories { get; private set; } = new HashSet<EquipmentInventory>();
+        public ICollection<Food> Food { get; private set; } = new HashSet<Food>();
 
         public ICollection<FoodInventory> FoodInventories { get; private set; } = new HashSet<FoodInventory>();
 
+        public ICollection<Equipment> Equipment { get; private set; } = new HashSet<Equipment>();
+
+        public ICollection<EquipmentInventory> EquipmentInventories { get; private set; } = new HashSet<EquipmentInventory>();
 
 
     }

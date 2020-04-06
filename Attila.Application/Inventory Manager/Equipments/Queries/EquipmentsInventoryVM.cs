@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Attila.Domain.Entities;
+using System;
 
 namespace Attila.Application.Inventory_Manager.Equipments.Queries
 {
@@ -21,5 +20,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
         public int EquipmentDetailsID { get; set; }
 
         public int DeliveryDetailsID { get; set; }
+
+        public Equipment EquipmentDetailsVM { get; set; }
     }
 }

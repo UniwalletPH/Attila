@@ -9,7 +9,7 @@
     <!-- BEGIN PAGE TITLE -->
     <div class="page-title">
         <h1>
-            Food Inventory Form
+            Food Details Form
             <small> </small>
         </h1>
     </div>
@@ -37,27 +37,20 @@
 
                     <div class="form-group">
                         <label>Food Details</label>
-                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodStockDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
                     </div>
 
-                    <div class="form-group">
+                    @*<div class="form-group">
                         <label>Delivery Details</label>
                         @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" })
 
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
-                    </div>
+                    </div>*@
+                    
                     <div class="form-group">
                         <label>Quantity</label>
                         <input type="number" class="form-control" asp-for="Quantity" placeholder="">
                     </div>
-                    <div class="form-group">
-                        <label>Expiration Date</label>
-                        <input type="date" class="form-control date-picker " asp-for="ExpirationDate" placeholder="">
-                    </div>
-
+                 
 
 
                     <div class="form-actions">
@@ -101,7 +94,7 @@
             alert("failed!");
         }
 
-    </script> 
+    </script>
 
     <partial name="_ValidationScriptsPartial" />
 }

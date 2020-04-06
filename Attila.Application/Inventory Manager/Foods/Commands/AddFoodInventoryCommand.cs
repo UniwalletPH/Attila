@@ -10,7 +10,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
     public class AddFoodInventoryCommand : IRequest<bool>
     {
-        public FoodsInventoryVM MyFoodInventoryVM { get; set; }
+        public FoodInventoryVM MyFoodInventoryVM { get; set; }
 
         public class AddFoodInventoryCommandHandler : IRequestHandler<AddFoodInventoryCommand, bool>
         {
@@ -23,22 +23,29 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
 
             public async Task<bool> Handle(AddFoodInventoryCommand request, CancellationToken cancellationToken)
             {
-                FoodInventory _foodInventory = new FoodInventory
+                try
                 {
-                    Quantity = request.MyFoodInventoryVM.Quantity,
-                    ExpirationDate = request.MyFoodInventoryVM.ExpirationDate,
-                    EncodingDate = DateTime.Now,
-                    ItemPrice = request.MyFoodInventoryVM.ItemPrice,
-                    Remarks = request.MyFoodInventoryVM.Remarks,
-                    InventoryManagerID = request.MyFoodInventoryVM.UserID,
-                    FoodID = request.MyFoodInventoryVM.FoodDetailsID,
-                    DeliveryID = request.MyFoodInventoryVM.DeliveryDetailsID
-                };
+                    FoodInventory _foodInventory = new FoodInventory
+                    {
+                        Quantity = request.MyFoodInventoryVM.Quantity,
+                        ExpirationDate = request.MyFoodInventoryVM.ExpirationDate,
+                        EncodingDate = DateTime.Now,
+                        ItemPrice = request.MyFoodInventoryVM.ItemPrice,
+                        Remarks = request.MyFoodInventoryVM.Remarks,
+                        InventoryManagerID = request.MyFoodInventoryVM.UserID,
+                        FoodID = request.MyFoodInventoryVM.FoodDetailsID,
+                        DeliveryID = request.MyFoodInventoryVM.DeliveryDetailsID
+                    };
 
-                dbContext.FoodInventories.Add(_foodInventory);
-                await dbContext.SaveChangesAsync();
+                    dbContext.FoodInventories.Add(_foodInventory);
+                    await dbContext.SaveChangesAsync();
 
-                return true;
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
     }

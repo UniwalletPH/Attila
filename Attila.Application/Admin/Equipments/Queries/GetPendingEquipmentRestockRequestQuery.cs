@@ -23,7 +23,6 @@ namespace Attila.Application.Admin.Equipments.Queries
                 var _listPendingRequest = new List<EquipmentRequestVM>();
 
                 var _pendingRequest = dbContext.EquipmentRestockRequests
-                    .Include(a => a.Equipment)
                     .Include(a => a.InventoryManager)
                     .Where(a => a.Status == Status.Processing);
 
@@ -32,7 +31,6 @@ namespace Attila.Application.Admin.Equipments.Queries
                     var Equipments = new EquipmentRequestVM
                     {
                         ID = item.ID,
-                        EquipmentDetails = item.Equipment,
                         Quantity = item.Quantity,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,

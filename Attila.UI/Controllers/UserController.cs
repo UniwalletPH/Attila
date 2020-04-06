@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Users.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -17,18 +18,20 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Register()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> List()
         {
             var _users = await mediator.Send(new ViewUserListQuery());
 
             return View(_users);
         }
-
+        [Authorize(Roles = "Admin,Coordinator,InventoryManager")]
         public async Task<IActionResult> Profile(Guid uid)
         {
             var _userProfile = await mediator.Send(new SearchUserByIdQuery { UID = uid});

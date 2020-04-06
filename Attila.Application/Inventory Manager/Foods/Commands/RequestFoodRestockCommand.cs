@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
-    public class RequestFoodRestockCommand : IRequest<bool>
+    public class RequestFoodRestockCommand : IRequest<int>
     {
         public FoodsRestockRequestVM MyFoodRestockRequestVM { get; set; }
 
-        public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, bool>
+        public class RequestFoodRestockCommandHandler : IRequestHandler<RequestFoodRestockCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
             public RequestFoodRestockCommandHandler(IAttilaDbContext dbContext)
@@ -20,13 +20,12 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 this.dbContext = dbContext;
             }
             
-            public async Task<bool> Handle(RequestFoodRestockCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(RequestFoodRestockCommand request, CancellationToken cancellationToken)
             {
                 FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
                     Quantity = request.MyFoodRestockRequestVM.Quantity,
                     DateTimeRequest = DateTime.Now,
-                    FoodID = request.MyFoodRestockRequestVM.FoodDetailsID,
                     Status = request.MyFoodRestockRequestVM.Status,
                     InventoryManagerID = request.MyFoodRestockRequestVM.UserID
                 };
@@ -34,7 +33,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return _foodRestockRequest.ID;
 
             }
         }

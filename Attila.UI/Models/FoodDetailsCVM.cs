@@ -29,6 +29,6 @@ namespace Attila.UI.Models
         [Required]
         public string SearchedKeyword { get; set; }
 
-        public IEnumerable<FoodsDetailsVM> FoodDetailsVMs { get; set; }
+        public IEnumerable<FoodDetailsVM> FoodDetailsVMs { get; set; }
     }
 }

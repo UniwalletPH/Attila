@@ -4,6 +4,7 @@ using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Queries;
 using Attila.UI.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize(Roles = "Admin, Coordinator")]
     public class PaymentController : BaseController
     {
         private readonly IMediator mediator;

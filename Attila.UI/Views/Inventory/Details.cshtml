@@ -1,0 +1,235 @@
+﻿@{
+    ViewData["Title"] = "Inventory";
+
+}
+@model Attila.Application.Inventory_Manager.Shared.Queries.InventoriesDeliveryVM
+@section Scripts{
+
+    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+
+
+
+
+}
+@section Styles{
+
+
+    <style>
+        tr.group,
+        tr.group:hover {
+            background-color: #ddd !important;
+        }
+    </style>
+
+    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <div class="caption font-dark">
+            <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
+        </div>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
+
+        <!-- BEGIN THEME PANEL -->
+        <!-- END THEME PANEL -->
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<!-- END PAGE HEAD-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+</ul>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold uppercase">DELIVERY DETAILS</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+
+
+                <table class="display" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>Delivery Date</th>
+                            <th>Supplier</th>
+                            <th>Address</th>
+                            <th>  Price</th>
+                            <th> Remarks </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td> @Model.DeliveryDate</td>
+
+                            <td> @Model.Supplier.Name</td>
+
+                            <td> @Model.Supplier.Address</td>
+
+                            <td> @Model.DeliveryPrice</td>
+
+                            <td> @Model.Remarks</td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold uppercase">FOOD</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+
+
+                <table class="display" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
+                            <th>Item Price </th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.FoodInventory)
+                        {
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.ItemPrice)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <!-- BEGIN EXAMPLE TABLE PORTLET-->
+                <div class="portlet light bordered">
+                    <div class="portlet-title">
+                        <div class="caption font-dark">
+                            <span class="caption-subject bold uppercase">EQUIPMENT </span>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body">
+
+
+
+                        <table class="display" id="sample_3">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Unit</th>
+                                    <th>Quantity</th>
+                                    <th>Item Price</th>
+                                    <th>Remarks</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @foreach (var item in Model.EquipmentInventory)
+                                {
+                                    <tr>
+                                        <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.ItemPrice)</td>
+
+                                        <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>

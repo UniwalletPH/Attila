@@ -1,10 +1,13 @@
-﻿using Attila.Application.Admin.Events.Queries;
+﻿using Attila.Application.Admin.Events.Commands;
+using Attila.Application.Admin.Events.Queries;
 using Attila.Application.Coordinator.Events.Commands;
 using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
+using Attila.Application.Notification.Commands;
 using Attila.UI.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
@@ -13,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
+    [Authorize(Roles = "Admin, Coordinator")]
     public class EventsController : BaseController
     {
         private readonly IMediator mediator;
@@ -150,9 +154,12 @@ namespace Attila.UI.Controllers
 
 
                  
-                   var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+            var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+
+            //Send Notif to Admin
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EventRequestDetails",RequestID = response });
                    
-                return Json(response);
+            return Json(response);
  
 
         }
@@ -164,7 +171,7 @@ namespace Attila.UI.Controllers
 
 
 
-            var x = new EventDetailsVM
+            var _details = new EventDetailsVM
             {
                 EventName = _eventDetails.EventName,
                 Type = _eventDetails.Type,
@@ -196,7 +203,7 @@ namespace Attila.UI.Controllers
             var viewEventVM = new ViewEventCVM
             { 
             
-            Event = x
+            Event = _details
             
             
             };
@@ -205,24 +212,100 @@ namespace Attila.UI.Controllers
         }
      
 
-        //[HttpPost]
-        //public async Task<IActionResult> Details(int EventID)
-        //{
+        [HttpGet]
+        public async Task<IActionResult> Approve(int EventID)
+       {
+                       
+              await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
-        //    var _eventDetails = await mediator.Send(new GetEventDetailQuery { EventID = EventID });
 
-        //    var _allEventDetails = new ViewEventVM
-        //    {
-        //        EventDetails = _eventDetails
-        //    };
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
 
-        //    return View(_allEventDetails);
+        public async Task<IActionResult> Decline(int EventID)
+        {
 
-        //}
-        
- 
 
-[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
+
+
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> MenuForm(int EventID)
+        {
+
+
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
+            var x = new EventDetailsVM
+            {
+                EventName = _eventDetails.EventName,
+                Type = _eventDetails.Type,
+                Description = _eventDetails.Description,
+                EventClientID = _eventDetails.EventClientID,
+                EventDate = _eventDetails.EventDate,
+                PackageDetailsID = _eventDetails.PackageDetailsID,
+                Location = _eventDetails.Location,
+                Remarks = _eventDetails.Remarks,
+                UserID = _eventDetails.UserID,
+                EventStatus = _eventDetails.EventStatus,
+                EntryTime = _eventDetails.EntryTime,
+                NumberOfGuests = _eventDetails.NumberOfGuests,
+                ProgramStart = _eventDetails.ProgramStart,
+                ServingTime = _eventDetails.ServingTime,
+                LocationType = _eventDetails.LocationType,
+                ServingType = _eventDetails.ServingType,
+                Theme = _eventDetails.Theme,
+                VenueType = _eventDetails.VenueType,
+                BookingDate = _eventDetails.BookingDate,
+                ID = _eventDetails.ID
+
+
+
+            };
+
+            if (_eventDetails != null)
+            {
+                var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
+                List<SelectListItem> _list = new List<SelectListItem>();
+
+
+
+
+                foreach (var item in _addmenu)
+                {
+                    _list.Add(new SelectListItem
+                    {
+                        Value = item.ID.ToString(),
+                        Text = item.Menu.Name + " | " + item.Menu.DishCategory
+                    });
+                }
+
+
+
+                AddEventMenuCVM eventDetails = new AddEventMenuCVM
+                {
+                    Event = x,
+                    MenuList = _addmenu,
+                    EventID = EventID,
+                    Menu = _list
+
+
+                };
+
+
+                return View(eventDetails);
+
+            }
+            else { return View(); }
+
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

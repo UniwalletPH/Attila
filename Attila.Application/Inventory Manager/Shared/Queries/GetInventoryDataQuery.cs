@@ -1,4 +1,6 @@
 ﻿using Attila.Application.Interfaces;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Queries;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Shared.Queries
 {
-    public class GetInventoryQuery : IRequest<InventoriesVM>
+    public class GetInventoryDataQuery : IRequest<InventoriesVM>
     {
-        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryQuery, InventoriesVM>
+        public class GetInventoryQueryHandler : IRequestHandler<GetInventoryDataQuery, InventoriesVM>
         {
             private readonly IAttilaDbContext dbContext;
             private readonly IMediator mediator;
@@ -21,14 +23,14 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 this.dbContext = dbContext;
                 this.mediator = mediator;
             }
-            public async Task<InventoriesVM> Handle(GetInventoryQuery request, CancellationToken cancellationToken)
+            public async Task<InventoriesVM> Handle(GetInventoryDataQuery request, CancellationToken cancellationToken)
             {
                 var _foodListData = new List<FoodVM>();
                 var _equipmentListData = new List<EquipmentVM>();
                 var _inventoryDeliveryData = new List<InventoriesDeliveryVM>();
 
 
-                var _getFoodData = dbContext.FoodInventories.Include(a => a.Food);
+                var _getFoodData = await mediator.Send(new GetFoodStockDetailsQuery());
 
                 foreach (var item in _getFoodData)
                 {
@@ -39,15 +41,15 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.InventoryManagerID,
-                        FoodDetails = item.Food
+                        UserID = item.UserID,
+                        FoodDetails = item.FoodDetailsVM
                     };
 
                     _foodListData.Add(_foodAllDetails);
                 }
 
 
-                var _getEquipmentData = dbContext.EquipmentInventories.Include(a => a.Equipment);
+                var _getEquipmentData = await mediator.Send(new GetEquipmentStockDetailsQuery());
 
                 foreach (var item in _getEquipmentData)
                 {
@@ -58,8 +60,8 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
-                        UserID = item.InventoryManagerID,
-                        EquipmentDetails = item.Equipment
+                        UserID = item.UserID,
+                        EquipmentDetails = item.EquipmentDetailsVM
                     };
 
                     _equipmentListData.Add(_equipmentAllDetails);

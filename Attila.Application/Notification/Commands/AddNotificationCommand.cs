@@ -32,8 +32,7 @@ namespace Attila.Application.Notification.Commands
                 var _notif = new Notifications 
                 {
                     TargetUserID = request.TargetUserID,
-                    Description = "NEW REQUEST RECEIVED, click here https://localhost:5001/Notification/"+ request.MethodName+"?id="+ request.RequestID
-                   
+                    Description = "New Request Received , <a href =\"/Notification/" + request.MethodName+"?="+request.RequestID+"\"> CLICK HERE </a>"
                 };
 
                 dbContext.Notifications.Add(_notif);

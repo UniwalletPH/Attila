@@ -14,9 +14,19 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+    <script> 
+               
+           
+            $(document).on('click', 'tr .see', function (e) {
+              
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("Details", "Inventory", new { DeliveryID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
 
+              
+        });</script>
 
-
+     
 
 }
 @section Styles{
@@ -109,7 +119,7 @@
 
                         @foreach (var item in Model.InventoryDeliveryVM)
                         {
-                            <tr>
+                            <tr data-id="@item.ID">
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
 
 
@@ -165,6 +175,9 @@
                                 </button>
                                 <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddFoodInventory", "Inventory")'">
                                     Add Food Restock
+                                </button>
+                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("UpdateFoodStock", "Inventory")'">
+                                    Update Food Stock
                                 </button>
                             </div>
 
@@ -245,6 +258,9 @@
                                 </button>
                                 <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">
                                     Add Equipment Restock
+                                </button>
+                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("UpdateEquipmentStock", "Inventory")'">
+                                    Update Equipment Stock
                                 </button>
                             </div>
 

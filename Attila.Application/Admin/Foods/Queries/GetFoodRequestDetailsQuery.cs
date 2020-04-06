@@ -27,13 +27,11 @@ namespace Attila.Application.Admin.Foods.Queries
             {
                 var _request = dbContext.FoodRestockRequests
                     .Where(a => a.ID == request.RequestID)
-                    .Include(a => a.Food)
                     .Include(a => a.InventoryManager).SingleOrDefault();
 
                 var _foodRequest = new FoodRequestVM
                 {               
                     ID = _request.ID,
-                    FoodDetails = _request.Food,
                     Quantity = _request.Quantity,
                     DateTimeRequest = _request.DateTimeRequest,
                     Status = _request.Status,
