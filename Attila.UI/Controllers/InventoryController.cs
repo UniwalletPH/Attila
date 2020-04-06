@@ -161,7 +161,13 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response});
+            await mediator.Send(new AddNotificationCommand 
+            {
+                Message = "New Food Restock Request Received", 
+                TargetUserID = -1, 
+                MethodName = "FoodRequestDetails", 
+                RequestID = response
+            });
 
             return Json(response);
         }
@@ -294,7 +300,13 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EquipmentRequestDetails", RequestID = response });
+            await mediator.Send(new AddNotificationCommand 
+            { 
+                Message="New Equipment Restock Request Received", 
+                TargetUserID = -1, 
+                MethodName = "EquipmentRequestDetails", 
+                RequestID = response 
+            });
 
 
             return Json(response);

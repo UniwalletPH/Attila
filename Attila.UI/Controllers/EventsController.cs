@@ -123,7 +123,13 @@ namespace Attila.UI.Controllers
             var response = await mediator.Send(new AddEventCommand { EventDetails = x });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EventRequestDetails",RequestID = response });
+            await mediator.Send(new AddNotificationCommand 
+            { 
+                Message = "New Event Request Received",
+                TargetUserID = -1,
+                MethodName = "EventRequestDetails",
+                RequestID = response 
+            });
                    
             return Json(response);
  
@@ -182,7 +188,16 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Approve(int EventID)
        {
                        
-              await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
+            var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
+
+            await mediator.Send(new AddNotificationCommand 
+            { 
+                Message ="Your request has been Approved",
+                TargetUserID = response.Coordinator.ID,
+                MethodName = "",
+                RequestID = response.ID
+
+            });
 
 
             return RedirectToAction("Details", new { EventID = EventID });
