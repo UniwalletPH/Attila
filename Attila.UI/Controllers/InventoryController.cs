@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Authorization;
 using Attila.Application.Notification.Commands;
 
 namespace Attila.UI.Controllers
-{ 
+{
     public class InventoryController : BaseController
     {
         private readonly IMediator mediator;
@@ -27,7 +27,8 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
-        //[Authorize(Roles = "Admin, InventoryManager")]
+
+        [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -45,7 +46,7 @@ namespace Attila.UI.Controllers
         }
 
 
-        //[Authorize(Roles = "InventoryManager")]
+        [Authorize(Roles = "InventoryManager")]
         [HttpGet]
         public async Task<IActionResult> AddInventoryDelivery()
         {
@@ -74,7 +75,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddInventoryDelivery(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
 
-            var _inventory = new InventoriesDeliveryVM
+            InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
             {
                 DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
                 DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
@@ -101,67 +102,22 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> AddFood(FoodDetailsVM foodDetails)
+        public async Task<IActionResult> AddFood(FoodDetailsCVM foodDetailsVM)
         {
+            FoodDetailsVM _food = new FoodDetailsVM
+            {
+                Code = foodDetailsVM.Code,
+                Name = foodDetailsVM.Name,
+                Specification = foodDetailsVM.Specification,
+                Description = foodDetailsVM.Description,
+                Unit = foodDetailsVM.Unit,
+                FoodType = foodDetailsVM.FoodType,
+            };
 
             var response = await mediator.Send(new AddFoodDetailsCommand
             {
-                MyFoodDetailsVM = foodDetails
+                MyFoodDetailsVM = _food
             });
-
-            return Json(response);
-        }
-
-
-        [Authorize(Roles = "Admin,  InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> RequestFoodRestock()
-        {
-
-            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            foreach (var item in getFoodDetails)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Code + " | " + item.Name + " | " + item.Description
-                });
-            }
-
-            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
-            {
-                FoodDetailsList = _list
-            };
-
-            return View(foodDetailsListVM);
-        }
-
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpPost]
-        public async Task<IActionResult> RequestFoodRestock(FoodsRestockRequestVM foodRestockRequest)
-        {
-
-            FoodsRestockRequestVM _foodRequestDetails = new FoodsRestockRequestVM
-            {
-                FoodDetailsID = foodRestockRequest.FoodDetailsID,
-                DateTimeRequest = DateTime.Now,
-
-
-                Quantity = foodRestockRequest.Quantity,
-                Status = Status.Processing,
-                UserID = CurrentUser.ID
-            };
-
-
-            var response = await mediator.Send(new RequestFoodRestockCommand
-            {
-                MyFoodRestockRequestVM = _foodRequestDetails
-            });
-
-            //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response});
 
             return Json(response);
         }
@@ -207,44 +163,24 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> AddFoodInventory(FoodInventoryVM foodInventory)
+        public async Task<IActionResult> AddFoodInventory(FoodInventoryCVM foodInventoryVM)
         {
 
-            var foodDetails = new FoodInventoryVM
+            FoodInventoryVM _foodInventory = new FoodInventoryVM
             {
-                FoodDetailsID = foodInventory.FoodDetailsID,
-                DeliveryDetailsID = foodInventory.DeliveryDetailsID,
+                FoodDetailsID = foodInventoryVM.FoodDetailsID,
+                DeliveryDetailsID = foodInventoryVM.DeliveryDetailsID,
                 UserID = CurrentUser.ID,
-                ItemPrice = foodInventory.ItemPrice,
-                Quantity = foodInventory.Quantity,
-                ExpirationDate = foodInventory.ExpirationDate,
-                Remarks = foodInventory.Remarks
+                ItemPrice = foodInventoryVM.ItemPrice,
+                Quantity = foodInventoryVM.Quantity,
+                ExpirationDate = foodInventoryVM.ExpirationDate,
+                Remarks = foodInventoryVM.Remarks
             };
 
 
             var response = await mediator.Send(new AddFoodInventoryCommand
             {
-                MyFoodInventoryVM = foodDetails
-            });
-
-            return Json(response);
-        }
-
-
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpGet]
-        public IActionResult AddEquipment()
-        {
-            return View();
-        }
-        
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpPost]
-        public async Task<IActionResult> AddEquipment(EquipmentsDetailsVM equipDetails)
-        {
-            var response = await mediator.Send(new AddEquipmentDetailsCommand
-            {
-                MyEquipmentsDetailsVM = equipDetails
+                MyFoodInventoryVM = _foodInventory
             });
 
             return Json(response);
@@ -253,12 +189,13 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> RequestEquipmentRestock()
+        public async Task<IActionResult> RequestFoodRestock()
         {
-            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
 
-            foreach (var item in getEquipmentDetails)
+            foreach (var item in getFoodDetails)
             {
                 _list.Add(new SelectListItem
                 {
@@ -267,35 +204,111 @@ namespace Attila.UI.Controllers
                 });
             }
 
-            EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
+            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
             {
-                EquipmentDetailsList = _list
+                FoodDetailsList = _list
             };
 
-            return View(equipmentDetailsListVM);
+            return View(foodDetailsListVM);
         }
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> RequestEquipmentRestock(EquipmentsRestockRequestVM equipmentRestockRequest)
+        public async Task<IActionResult> RequestFoodRestock(FoodRestockRequestCVM foodRestockRequestVM)
         {
-            EquipmentsRestockRequestVM _equipmentRequestDetails = new EquipmentsRestockRequestVM
+
+            FoodsRestockRequestVM _foodRequest = new FoodsRestockRequestVM
             {
-                EquipmentDetailsID = equipmentRestockRequest.EquipmentDetailsID,
+                FoodDetailsID = foodRestockRequestVM.FoodDetailsID,
                 DateTimeRequest = DateTime.Now,
-                Quantity = equipmentRestockRequest.Quantity,
+                Quantity = foodRestockRequestVM.Quantity,
                 Status = Status.Processing,
                 UserID = CurrentUser.ID
             };
 
-            var response = await mediator.Send(new RequestEquipmentRestockCommand
+
+            var response = await mediator.Send(new RequestFoodRestockCommand
             {
-                MyEquipmentRestockRequestVM = _equipmentRequestDetails
+                MyFoodRestockRequestVM = _foodRequest
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EquipmentRequestDetails", RequestID = response });
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "FoodRequestDetails", RequestID = response });
 
+            return Json(response);
+        }
+
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateFoodStock()
+        {
+            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+            FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
+            {
+                FoodDetailsList = _list,
+            };
+
+            return View(FoodDetailsListVM);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateFoodStock(FoodInventoryCVM foodInventoryVM)
+        {
+            FoodInventoryVM _updateFoodStock = new FoodInventoryVM
+            {
+                FoodDetailsID = foodInventoryVM.FoodDetailsID,
+                Quantity = foodInventoryVM.Quantity
+            };
+
+            var response = await mediator.Send(new UpdateFoodStockCommand
+            {
+                MyFoodInventoryVM = _updateFoodStock
+            });
+
+
+            return Json(response);
+        }
+
+
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public IActionResult AddEquipment()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> AddEquipment(EquipmentDetailsCVM equipmentDetailsVM)
+        {
+            EquipmentsDetailsVM _equipment = new EquipmentsDetailsVM
+            {
+                Code = equipmentDetailsVM.Code,
+                Name = equipmentDetailsVM.Name,
+                Description = equipmentDetailsVM.Description,
+                RentalFee = equipmentDetailsVM.RentalFee,
+                UnitType = equipmentDetailsVM.UnitType,
+                EquipmentType = equipmentDetailsVM.EquipmentType,
+            };
+
+            var response = await mediator.Send(new AddEquipmentDetailsCommand
+            {
+                MyEquipmentsDetailsVM = _equipment
+            });
 
             return Json(response);
         }
@@ -342,46 +355,121 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> AddEquipmentInventory(EquipmentsInventoryVM equipmentInventory)
+        public async Task<IActionResult> AddEquipmentInventory(EquipmentInventoryCVM equipmentInventoryVM)
         {
 
-            var equipments = new EquipmentsInventoryVM
+            EquipmentsInventoryVM _equipmentInventory = new EquipmentsInventoryVM
             {
-                EquipmentDetailsID = equipmentInventory.EquipmentDetailsID,
-                DeliveryDetailsID = equipmentInventory.DeliveryDetailsID,
+                EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
+                DeliveryDetailsID = equipmentInventoryVM.DeliveryDetailsID,
                 UserID = CurrentUser.ID,
                 EncodingDate = DateTime.Now,
-                ItemPrice = equipmentInventory.ItemPrice,
-                Quantity = equipmentInventory.Quantity,
-                Remarks = equipmentInventory.Remarks
+                ItemPrice = equipmentInventoryVM.ItemPrice,
+                Quantity = equipmentInventoryVM.Quantity,
+                Remarks = equipmentInventoryVM.Remarks
             };
 
 
             var response = await mediator.Send(new AddEquipmentInventoryCommand
             {
-                MyEquipmentsInventoryVM = equipments
+                MyEquipmentsInventoryVM = _equipmentInventory
             });
 
             return Json(response);
         }
 
-        [Authorize(Roles = "Admin, InventoryManager")]
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
-        public IActionResult UpdateFoodStock()
+        public async Task<IActionResult> RequestEquipmentRestock()
         {
-            return View();
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
+
+            EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
+            {
+                EquipmentDetailsList = _list
+            };
+
+            return View(equipmentDetailsListVM);
         }
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStock(FoodInventoryVM foodInventory)
-        { 
-              var response=   await mediator.Send(new UpdateFoodStockCommand
+        public async Task<IActionResult> RequestEquipmentRestock(EquipmentRestockRequestCVM equipmentRestockRequestVM)
+        {
+            EquipmentsRestockRequestVM _equipmentRequest = new EquipmentsRestockRequestVM
+            {
+                EquipmentDetailsID = equipmentRestockRequestVM.EquipmentDetailsID,
+                DateTimeRequest = DateTime.Now,
+                Quantity = equipmentRestockRequestVM.Quantity,
+                Status = Status.Processing,
+                UserID = CurrentUser.ID
+            };
+
+            var response = await mediator.Send(new RequestEquipmentRestockCommand
+            {
+                MyEquipmentRestockRequestVM = _equipmentRequest
+            });
+
+            //Send Notif to Admin
+            await mediator.Send(new AddNotificationCommand { TargetUserID = -1, MethodName = "EquipmentRequestDetails", RequestID = response });
+
+
+            return Json(response);
+        }
+
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateEquipmentStock()
+        {
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
                 {
-                    MyFoodInventoryVM = foodInventory
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
                 });
-                
-             
+            }
+
+
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
+            {
+                EquipmentDetailsList = _list,
+            };
+
+            return View(equipmentDetailsListVM);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
+        {
+            EquipmentsInventoryVM _updateEquipmentStock = new EquipmentsInventoryVM
+            {
+                EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
+                Quantity = equipmentInventoryVM.Quantity
+            };
+
+            var response = await mediator.Send(new UpdateEquipmentStockCommand
+            {
+                MyEquipmentInventoryVM = _updateEquipmentStock
+            });
+
+
             return Json(response);
         }
 
@@ -417,15 +505,15 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> Details (int DeliveryID)
+        public async Task<IActionResult> Details(int DeliveryID)
         {
             var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = DeliveryID });
 
             return View(_inventoryDelivery);
         }
 
-         
-         
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
