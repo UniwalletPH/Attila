@@ -10,6 +10,8 @@ namespace Attila.Domain.Entities
 
         [ForeignKey("Supplier")]
         public int SupplierID { get; set; }
+        public int? FoodRestockRequestID { get; set; }
+        public int? EquipmentRestockRequestID { get; set; }
 
 
         public DateTime DeliveryDate { get; set; }
