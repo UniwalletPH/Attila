@@ -42,6 +42,8 @@ namespace Attila.Application.Interfaces
 
         public DbSet<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; set; }
 
+        public DbSet<EventAdditionalDishRequest> EventAdditionalDishRequests { get; set; }
+
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<User> Users { get; set; }
@@ -49,6 +51,8 @@ namespace Attila.Application.Interfaces
         public DbSet<UserLogin> UserLogins { get; set; }
 
         public DbSet<EventPackageDish> EventPackageDishes { get; set; }
+
+        public DbSet<EventDishRequest> EventDishRequests { get; set; }
 
         public DbSet<EventPackageEquipment> EventPackageEquipments { get; set; }
 
