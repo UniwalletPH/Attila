@@ -1,16 +1,19 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Admin.Equipments.Queries;
+using Attila.Application.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Equipments.Commands
 {
-    public class ApproveEquipmentRestockRequestCommand : IRequest<int>
+    public class ApproveEquipmentRestockRequestCommand : IRequest<EquipmentRequestVM>
     {
         public int RequestID { get; set; }
 
-        public class ApproveAdditionalEquipmentRequestCommandHandler : IRequestHandler<ApproveEquipmentRestockRequestCommand, int>
+        public class ApproveAdditionalEquipmentRequestCommandHandler : IRequestHandler<ApproveEquipmentRestockRequestCommand, EquipmentRequestVM>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -21,16 +24,25 @@ namespace Attila.Application.Admin.Equipments.Commands
             
             }
 
-            public async  Task<int> Handle(ApproveEquipmentRestockRequestCommand request, CancellationToken cancellationToken)
+            public async  Task<EquipmentRequestVM> Handle(ApproveEquipmentRestockRequestCommand request, CancellationToken cancellationToken)
             {
-                var _requestToApprove = dbContext.EquipmentRestockRequests.Find(request.RequestID);
+                var _requestToApprove = dbContext.EquipmentRestockRequests
+                    .Where(a => a.ID == request.RequestID)
+                    .Include(a => a.InventoryManager).SingleOrDefault();
 
                 if (_requestToApprove != null)
                 {
                     _requestToApprove.Status = Status.Approved;
                     await dbContext.SaveChangesAsync();
 
-                    return _requestToApprove.ID;
+                    var _toReturn = new EquipmentRequestVM
+                    { 
+                        ID = _requestToApprove.ID,
+                        InventoryManager = _requestToApprove.InventoryManager 
+                    
+                    };
+
+                    return _toReturn;
                 }
                 else
                 {

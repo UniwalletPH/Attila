@@ -33,7 +33,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                         ID = item.ID,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,
-                        User = item.InventoryManager
+                        InventoryManager = item.InventoryManager
                     };
 
                     _listPendingRequest.Add(Equipments);

@@ -1,16 +1,19 @@
-﻿using Attila.Application.Interfaces;
+﻿using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Interfaces;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Foods.Commands
 {
-    public class DeclineFoodRestockRequestCommand : IRequest<int>
+    public class DeclineFoodRestockRequestCommand : IRequest<FoodRequestVM>
     {
         public int RequestID { get; set; }
 
-        public class DeclineFoodRestockRequestCommandHandler : IRequestHandler<DeclineFoodRestockRequestCommand, int>
+        public class DeclineFoodRestockRequestCommandHandler : IRequestHandler<DeclineFoodRestockRequestCommand, FoodRequestVM>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -20,17 +23,24 @@ namespace Attila.Application.Admin.Foods.Commands
             
             }
 
-            public async Task<int> Handle(DeclineFoodRestockRequestCommand request, CancellationToken cancellationToken)
+            public async Task<FoodRequestVM> Handle(DeclineFoodRestockRequestCommand request, CancellationToken cancellationToken)
             {
-                var _requestToDecline = dbContext.FoodRestockRequests.Find(request.RequestID);
+                var _requestToDecline = dbContext.FoodRestockRequests
+                    .Where(a => a.ID == request.RequestID)
+                    .Include(a => a.InventoryManager).SingleOrDefault();
 
                 if (_requestToDecline != null)
                 {
                     _requestToDecline.Status = Status.Declined;
-
                     await dbContext.SaveChangesAsync();
 
-                    return _requestToDecline.ID;
+                    var _toReturn = new FoodRequestVM
+                    { 
+                        ID = _requestToDecline.ID,
+                        InventoryManager = _requestToDecline.InventoryManager
+                    };
+
+                    return _toReturn;
                 }
                 else
                 {

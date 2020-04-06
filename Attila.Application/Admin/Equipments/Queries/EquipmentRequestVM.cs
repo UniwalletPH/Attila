@@ -11,6 +11,6 @@ namespace Attila.Application.Admin.Equipments.Queries
 
         public Status Status { get; set; }
 
-        public User User { get; set; }
+        public User InventoryManager { get; set; }
     }
 }
