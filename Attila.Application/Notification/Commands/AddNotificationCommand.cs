@@ -11,6 +11,8 @@ namespace Attila.Application.Notification.Commands
 {
     public class AddNotificationCommand : IRequest<bool>
     {
+        public string Message { get; set; }
+
         public int TargetUserID { get; set; }
      
         public string MethodName { get; set; }
@@ -32,7 +34,7 @@ namespace Attila.Application.Notification.Commands
                 var _notif = new Notifications 
                 {
                     TargetUserID = request.TargetUserID,
-                    Description = "New Request Received , <a href =\"/Notification/" + request.MethodName+"?="+request.RequestID+"\"> CLICK HERE </a>"
+                    Description = request.Message + ", <a href =\"/Notification/" + request.MethodName+"?="+request.RequestID+"\"> CLICK HERE </a>"
                 };
 
                 dbContext.Notifications.Add(_notif);

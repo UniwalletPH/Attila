@@ -19,7 +19,7 @@ namespace Attila.UI.Models
         public string Description { get; set; }
 
         [Required]
-        public string RentalFee { get; set; }
+        public decimal RentalFee { get; set; }
 
         [Required]
         public UnitType UnitType { get; set; }
