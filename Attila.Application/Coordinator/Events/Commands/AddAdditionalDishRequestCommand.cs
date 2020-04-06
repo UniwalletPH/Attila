@@ -26,7 +26,6 @@ namespace Attila.Application.Coordinator.Events.Commands
             {
                 var _additionalDish = new EventAdditionalDishRequest
                 {
-                    DishID = request.AdditionalDish.DishID,
                     EventID = request.AdditionalDish.EventID,
                     Quantity = request.AdditionalDish.Quantity,
                     Status = Status.Processing
