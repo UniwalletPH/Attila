@@ -66,7 +66,7 @@ namespace Attila.UI.Controllers
                     _list.Add(new SelectListItem
                     {
                         Value = item.ID.ToString(),
-                        Text = item.Code
+                        Text = item.Name
                     });
 
                 }
@@ -301,7 +301,7 @@ namespace Attila.UI.Controllers
                     _list.Add(new SelectListItem
                     {
                         Value = item.ID.ToString(),
-                        Text = item.Menu.Name + " | " + item.Menu.DishCategory
+                        Text = item.Menu.Name + " | " + item.Menu.DishCategory.Category
                     });
                 }
 
