@@ -12,6 +12,7 @@ namespace Attila
         RequirementsComplete = 3,
         ForApproval = 4,
         Approved = 5,
+        Completed = 6,
         Declined = 10
     }
 }

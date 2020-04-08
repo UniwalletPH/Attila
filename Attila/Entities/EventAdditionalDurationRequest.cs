@@ -10,6 +10,8 @@ namespace Attila.Domain.Entities
         public int EventID { get; set; }
 
         public TimeSpan Duration { get; set; }   
+        public Status Status { get; set; }
+
 
         public Event Event { get; set; }
     }

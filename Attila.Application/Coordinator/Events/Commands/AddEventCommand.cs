@@ -54,7 +54,7 @@ namespace Attila.Application.Events.Commands
                     Location = request.EventDetails.Location,
                     Remarks = request.EventDetails.Remarks,
                     CoordinatorID = request.EventDetails.UserID,
-                    EventStatus = Status.Processing,
+                    EventStatus = Status.ForApproval,
                     EntryTime = request.EventDetails.EntryTime,
                     NumberOfGuests = request.EventDetails.NumberOfGuests,
                     ProgramStart = request.EventDetails.ProgramStart,
