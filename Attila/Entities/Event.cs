@@ -23,6 +23,7 @@ namespace Attila.Domain.Entities
         public string Description { get; set; }
         public string Location { get; set; }
         public string Remarks { get; set; }
+        public decimal ToPay { get; set; }
         public int NumberOfGuests { get; set; }
         public TimeSpan ProgramStart { get; set; }
         public TimeSpan EntryTime { get; set; }
@@ -37,6 +38,7 @@ namespace Attila.Domain.Entities
         public ICollection<EventEquipment> EventEquipments { get; private set; } = new HashSet<EventEquipment>();
         public ICollection<EventAdditionalDurationRequest> EventAdditionalDurationRequests { get; private set; } = new HashSet<EventAdditionalDurationRequest>();
         public ICollection<EventAdditionalEquipmentRequest> EventAdditionalEquipmentRequests { get; private set; } = new HashSet<EventAdditionalEquipmentRequest>();
+        public ICollection<EventAdditionalDishRequest> EventAdditionalDishRequests { get; set; }
         public ICollection<EventMenu> EventMenus { get; private set; } = new HashSet<EventMenu>();
         public ICollection<PaymentStatus> Payments { get; private set; } = new HashSet<PaymentStatus>();
 
