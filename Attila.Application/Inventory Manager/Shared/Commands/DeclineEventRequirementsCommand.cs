@@ -24,7 +24,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
             {
                 try
                 {
-                    var _declineId = dbContext.Events.Where(a => a.ID == request.DeclineEventID                                                                 a.EventStatus == Status.Approved).SingleOrDefault();
+                    var _declineId = dbContext.Events.Where(a => a.ID == request.DeclineEventID && a.EventStatus == Status.Approved).SingleOrDefault();
 
                     if (_declineId != null)
                     {

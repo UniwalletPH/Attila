@@ -177,11 +177,11 @@ namespace Attila.UI.Controllers
             var _details = new EventDetailsVM
             {
                 EventName = _eventDetails.EventName,
-                Type = _eventDetails.Type,
+                Type = _eventDetails.Type,  
                 Description = _eventDetails.Description,
                 EventClientID = _eventDetails.EventClientID,
                 EventDate = _eventDetails.EventDate,
-                PackageDetailsID = _eventDetails.PackageDetailsID,                
+                PackageDetailsID = _eventDetails.PackageDetailsID,
                 Location = _eventDetails.Location,
                 Remarks = _eventDetails.Remarks,
                 UserID = _eventDetails.UserID,
@@ -200,8 +200,6 @@ namespace Attila.UI.Controllers
 
 
             };
-
-
 
             var viewEventVM = new ViewEventCVM
             { 
