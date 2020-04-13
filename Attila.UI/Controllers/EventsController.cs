@@ -152,8 +152,7 @@ namespace Attila.UI.Controllers
 
                  
             var response = await mediator.Send(new AddEventCommand { EventDetails = x });
-
-            //Send Notif to Admin
+             
             await mediator.Send(new AddNotificationCommand 
             { 
                 Message = "New Event Request Received",
@@ -171,7 +170,30 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Details(int EventID) {
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            var _clientNames = await mediator.Send(new GetClientListQuery());
 
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            List<SelectListItem> _clientlist = new List<SelectListItem>();
+            foreach (var item in _packageNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
+
+            }
+
+            foreach (var item in _clientNames)
+            {
+                _clientlist.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name,
+                });
+            }
 
 
             var _details = new EventDetailsVM
@@ -201,14 +223,13 @@ namespace Attila.UI.Controllers
 
             };
 
-            var viewEventVM = new ViewEventCVM
-            { 
-            
-            Event = _details
-            
-            
-            };
-            return View(viewEventVM);
+
+
+            var _addEventList = new AddEventCVM();
+            _addEventList.PackageList = _list;
+            _addEventList.ClientList = _clientlist;
+            _addEventList.Event = _details;
+            return View(_addEventList);
  
         }
      
@@ -250,6 +271,18 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
+
+              [HttpPost]
+               public async Task<IActionResult> UpdateEvent(AddEventCVM _eventDetails)
+
+         {  
+                       var response =   await mediator.Send(new UpdateEventCommand
+                         {
+                             UpdateEvent = _eventDetails.Event
+                         });
+
+            return RedirectToAction("Details", new { EventID = _eventDetails.Event.ID });
+        }
 
 
 
