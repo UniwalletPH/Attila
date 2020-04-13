@@ -28,7 +28,12 @@ namespace Attila.Application.Events.Commands
                 _updatedEventDetails.Location = request.UpdateEvent.Location;
                 _updatedEventDetails.Type = request.UpdateEvent.Type;
                 _updatedEventDetails.Remarks = request.UpdateEvent.Remarks;
-                
+                _updatedEventDetails.NumberOfGuests = request.UpdateEvent.NumberOfGuests;
+                _updatedEventDetails.ProgramStart = request.UpdateEvent.ProgramStart;
+                _updatedEventDetails.ServingTime = request.UpdateEvent.ServingTime;
+                _updatedEventDetails.Theme = request.UpdateEvent.Theme;
+                _updatedEventDetails.ToPay = request.UpdateEvent.ToPay;
+                _updatedEventDetails.VenueType = request.UpdateEvent.VenueType;
 
                 await dbContext.SaveChangesAsync();
 
