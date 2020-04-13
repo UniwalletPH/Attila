@@ -2,34 +2,33 @@
 using MediatR;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Attila.Application.Admin.Events.Queries
 {
-    public class GetAllPastEventsQuery : IRequest<List<EventVM>>
+    public class GetAllProcessingEventsQuery : IRequest<List<EventVM>>
     {
-        public class GetAllPastEventsQueryHandler : IRequestHandler<GetAllPastEventsQuery, List<EventVM>>
+        public class GetAllProcessingEventsQueryHandler : IRequestHandler<GetAllProcessingEventsQuery, List<EventVM>>
         {
             private readonly IAttilaDbContext dbContext;
-            public GetAllPastEventsQueryHandler(IAttilaDbContext dbContext)
+            public GetAllProcessingEventsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-
-            public async Task<List<EventVM>> Handle(GetAllPastEventsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventVM>> Handle(GetAllProcessingEventsQuery request, CancellationToken cancellationToken)
             {
-                var _listPastEvents = new List<EventVM>();
-
-                var _pastEvents = dbContext.Events
-                    .Include(a => a.EventPackage)
+                var _events = dbContext.Events
                     .Include(a => a.Client)
                     .Include(a => a.Coordinator)
-                    .Where(a => a.EventStatus == Status.Completed && a.EventDate < DateTime.Now).ToList();
+                    .Where(a => a.EventStatus == Status.Processing).ToList();
 
-                foreach (var item in _pastEvents)
+                var _listOfProcessingEvents = new List<EventVM>();
+
+                foreach (var item in _events)
                 {
                     var Event = new EventVM
                     {
@@ -40,17 +39,16 @@ namespace Attila.Application.Admin.Events.Queries
                         EventDate = item.EventDate,
                         Description = item.Description,
                         Type = item.Type,
-                        Package = item.EventPackage,
                         Coordinator = item.Coordinator,
                         Client = item.Client,
                         EventStatus = item.EventStatus,
                         Remarks = item.Remarks
                     };
 
-                    _listPastEvents.Add(Event);
+                    _listOfProcessingEvents.Add(Event);
                 }
 
-                return _listPastEvents;
+                return _listOfProcessingEvents;
             }
         }
     }
