@@ -85,7 +85,7 @@
                         </thead>
                         <tbody>
 
-                            @foreach (var item in Model.Events)
+                            @foreach (var item in Model.ProcessingEvent)
                             {
                             <tr data-id="@item.ID">
                                 <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
@@ -163,7 +163,7 @@
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model.Events)
+                        @foreach (var item in Model.PendingEvent)
                         {
                         <tr data-id="@item.ID">
                             <td>@Html.DisplayFor(modelItem => item.EventDate)</td>

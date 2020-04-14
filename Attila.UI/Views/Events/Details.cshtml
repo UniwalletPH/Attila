@@ -43,7 +43,7 @@
                         <div class="form-group  ">
                             @Html.HiddenFor(model => model.Event.ID)
                             <label>Client Name</label>
-                            <input type="text" class="form-control    " asp-for="@Model.Event.EventClientID" readonly>
+                            <input type="text" class="form-control    " asp-for="@Model.Event.Client.Name" readonly>
 
 
                         </div>
@@ -89,8 +89,8 @@
 
                             <input id="venue" class="form-control editable venue-type" placeholder="Description" asp-for="@Model.Event.VenueType" readonly>
                             <select id="txtType" asp-for="Event.VenueType" class="form-control option-event" required>
-                                <option value="2">Yes</option>
-                                <option value="1">No</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
 
                             </select>
                         </div>
@@ -141,7 +141,7 @@
                     <div class="form-group">
                         <label>Package </label>
 
-                        <input type="text" id="package-type" class="form-control package-type" placeholder="" asp-for="@Model.Event.PackageDetailsID" readonly>
+                        <input type="text" id="package-type" class="form-control package-type" placeholder="" asp-for="@Model.Event.Package.Name" readonly>
                         @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control option-package" })
                     </div>
                     <div class="form-group">
@@ -296,6 +296,9 @@
 
 
             });
+
+        
+
 
      </script> 
 

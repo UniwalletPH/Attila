@@ -30,12 +30,14 @@ namespace Attila.UI.Controllers
 
              
                 var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
+            var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery { });
                 var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
                 var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
                 var _pastEvents = await mediator.Send(new GetAllPastEventsQuery {  });
 
                 var _forEvent = new EventViewCVM
                 {
+                    ProcessingEvent = _processingEvents,
                     IncomingEvent = _incomingEvents,
                     PastEvent = _pastEvents,
                     PendingEvent = _pendingEvents,
@@ -202,8 +204,10 @@ namespace Attila.UI.Controllers
                 Type = _eventDetails.Type,  
                 Description = _eventDetails.Description,
                 EventClientID = _eventDetails.EventClientID,
+                Client = _eventDetails.Client,
                 EventDate = _eventDetails.EventDate,
                 PackageDetailsID = _eventDetails.PackageDetailsID,
+                Package = _eventDetails.Package,
                 Location = _eventDetails.Location,
                 Remarks = _eventDetails.Remarks,
                 UserID = _eventDetails.UserID,

@@ -31,7 +31,11 @@ namespace Attila.Application.Coordinator.Events.Queries
          
         public int PackageDetailsID { get; set; }
 
+        public EventPackage Package { get; set; }
+
         public int EventClientID { get; set; }
+
+        public Client Client { get; set; }
 
         public int NumberOfGuests { get; set; }
 
