@@ -24,12 +24,11 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
             {
                 try
                 {
-                    var _approveId = dbContext.Events.Where(a => a.ID == request.ApproveEventID &&
-                                                                 a.EventStatus == Status.Approved).SingleOrDefault();
+                    var _approveId = dbContext.Events.Where(a => a.ID == request.ApproveEventID).SingleOrDefault();
 
                     if (_approveId != null)
                     {
-                        _approveId.EventStatus = Status.RequirementsComplete;
+                        _approveId.EventStatus = Status.ForApproval;
                         await dbContext.SaveChangesAsync();
                     }
 
