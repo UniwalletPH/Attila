@@ -28,7 +28,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
 
                     if (_approveId != null)
                     {
-                        _approveId.EventStatus = Status.ForApproval;
+                        _approveId.EventStatus = Status.RequirementsComplete;
                         await dbContext.SaveChangesAsync();
                     }
 

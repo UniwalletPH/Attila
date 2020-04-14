@@ -23,7 +23,7 @@ namespace Attila.Application.Coordinator.Events.Commands
             {
                 var _event = dbContext.Events.Find(request.ID);
 
-                _event.EventStatus = Status.CheckingRequirements;
+                _event.EventStatus = Status.ForApproval;
                 await dbContext.SaveChangesAsync();
 
 
