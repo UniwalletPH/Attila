@@ -51,5 +51,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public LocationType LocationType { get; set; }
 
+        public EventAdditionalDishRequest EventAdditionalDishRequest { get; set; }
+
     }
 }

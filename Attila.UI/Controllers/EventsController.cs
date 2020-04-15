@@ -4,6 +4,7 @@ using Attila.Application.Coordinator.Events.Commands;
 using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Application.Notification.Commands;
 using Attila.UI.Models;
 using MediatR;
@@ -134,9 +135,9 @@ namespace Attila.UI.Controllers
                     EventName = _eventDetails.Event.EventName,
                     Type = _eventDetails.Event.Type,
                     Description = _eventDetails.Event.Description,
-                    EventClientID = _eventDetails.SelectedClient,
+                    EventClientID = _eventDetails.Event.EventClientID,
                     EventDate = _eventDetails.Event.EventDate,
-                    PackageDetailsID = _eventDetails.Selected,
+                    PackageDetailsID = _eventDetails.Event.PackageDetailsID,
                     Location = _eventDetails.Event.Location,
                     Remarks = _eventDetails.Event.Remarks,
                     UserID = CurrentUser.ID,
@@ -153,7 +154,7 @@ namespace Attila.UI.Controllers
 
 
                  
-            var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+            var response = await mediator.Send(new AddEventCommand { EventDetails = x});
              
             await mediator.Send(new AddNotificationCommand 
             { 
@@ -163,7 +164,8 @@ namespace Attila.UI.Controllers
                 RequestID = response 
             });
                    
-            return Json(response);
+
+            return Json(true);
  
 
         }
@@ -223,7 +225,7 @@ namespace Attila.UI.Controllers
                 BookingDate = _eventDetails.BookingDate,
                 ID = _eventDetails.ID
 
-
+                
 
             };
 
@@ -359,6 +361,49 @@ namespace Attila.UI.Controllers
             else { return View(); }
 
         }
+        
+        public async Task<IActionResult> Additional()
+        {
+            var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+
+            var _selectListEquipment = new List<SelectListItem>();
+
+            foreach (var item in _equipments)
+            {
+                _selectListEquipment.Add(new SelectListItem
+                { 
+                    Text = item.Name,
+                    Value = item.ID.ToString()               
+                });
+            }
+
+            var _additionalModel = new AdditionalsCVM
+            { 
+                EquipmentList = _selectListEquipment
+            };
+
+
+            return View(_additionalModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAdditionalEquipment(AdditionalsCVM additionals)
+        {
+            return Json(true);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAdditionalDish(AdditionalsCVM additionals)
+        {
+            return Json(true);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
+        {
+            return Json(true);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
