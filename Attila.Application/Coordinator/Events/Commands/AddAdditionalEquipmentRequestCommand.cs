@@ -2,6 +2,7 @@
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,13 +23,16 @@ namespace Attila.Application.Events.Commands
 
             public async Task<bool> Handle(AddAdditionalEquipmentRequestCommand request, CancellationToken cancellationToken)
             {
-                var _additionalEquipment = new EventAdditionalEquipmentRequest
+                var _additionalEquipment = new EventEquipmentRequestCollection
                 {
-                    EventID = request.AdditionalEquipment.EventDetailsID,                 
-                    Status = Status.Processing               
+                    EquipmentID = request.AdditionalEquipment.EquipmentDetailsID,
+                    EventAdditionalEquipmentRequestID = request.AdditionalEquipment.RequestID,
+                    Quantity = request.AdditionalEquipment.Quantity,
+                    CreatedOn = DateTime.Now
+                                
                 };
 
-                dbContext.EventAdditionalEquipmentRequests.Add(_additionalEquipment);
+                dbContext.EventEquipmentRequestCollections.Add(_additionalEquipment);
                 await dbContext.SaveChangesAsync();
 
                 return true;

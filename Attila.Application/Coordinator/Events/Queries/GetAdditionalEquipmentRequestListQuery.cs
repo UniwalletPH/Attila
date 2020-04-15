@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Queries
 {
-    public class GetAdditionalEquipmentRequestListQuery : IRequest<IEnumerable<AdditionalEquipmentRequestListVM>>
+    public class GetAdditionalEquipmentRequestListQuery : IRequest<List<AdditionalEquipmentRequestListVM>>
     {
-        public EventAdditionalEquipmentRequest EquipmentRequest;
+        public int RequestID { get; set; }
 
-        public class GetAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, IEnumerable<AdditionalEquipmentRequestListVM>>
+        public class GetAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, List<AdditionalEquipmentRequestListVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetAdditionalEquipmentRequestListQueryHandler(IAttilaDbContext dbContext)
@@ -22,13 +22,16 @@ namespace Attila.Application.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<AdditionalEquipmentRequestListVM>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<AdditionalEquipmentRequestListVM>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _viewAdditionalEquipment = await dbContext.EventAdditionalEquipmentRequests.Select(a => new AdditionalEquipmentRequestListVM 
+                var _viewAdditionalEquipment = await dbContext.EventEquipmentRequestCollections
+                    .Where(a => a.EventAdditionalEquipmentRequestID == request.RequestID)
+                    .Include(a => a.Equipment)
+                    .Select(a => new AdditionalEquipmentRequestListVM 
                 {
                     ID = a.ID,
-                    EventDetailsID = a.EventID,                 
-                    Status = a.Status
+                    EquipmentDetails = a.Equipment,
+                    Quantity = a.Quantity,  
 
                 }).ToListAsync();
 

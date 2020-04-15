@@ -42,6 +42,40 @@
 
                     <input type="hidden" class="form-control" asp-for="EventID" readonly>
 
+                    @{
+
+                        if (Model.EquipmentRequested != null)
+                        {
+                            <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                                <thead>
+                                    <tr>
+
+                                        <th> Equipment Code </th>
+                                        <th> Equipment </th>
+                                        <th> Requested Quantity </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.EquipmentRequested)
+                                    {
+                                        <tr data-id="@item.ID">
+                                            <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        }
+
+                    }
+
+
                     <div class="form-body">
 
                         <div class="form-group">
@@ -91,13 +125,53 @@
 
                         <input type="hidden" class="form-control" asp-for="EventID" readonly>
 
+
+                        @{
+
+                            if (Model.DishRequested != null)
+                            {
+                                <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                                    <thead>
+                                        <tr>
+
+                                            <th> Dish Name </th>
+                                            <th> Requested Quantity </th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.DishRequested)
+                                        {
+                                            <tr data-id="@item.ID">
+                                                <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+
+
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            }
+
+                        }
+
+
                         <div class="form-body">
 
                             <div class="form-group">
                                 <label>Select Dish </label>
-                                @Html.DropDownListFor(m => m.AdditionalEquipmentRequest.EquipmentDetailsID, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+                                @Html.DropDownListFor(m => m.AdditionalDishRequest.DishID, Model.DishList, "--SELECT DISH--", new { @class = "form-control" })
                             </div>
 
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="text" class="form-control" placeholder="" asp-for="AdditionalDishRequest.Quantity">
                         </div>
 
 

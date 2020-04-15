@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Events.Queries
 {
-    public class GetAdditionalDishRequestListQuery : IRequest<IEnumerable<AdditionalDishVM>>
+    public class GetAdditionalDishRequestListQuery : IRequest<List<AdditionalDishVM>>
     {
-        public EventAdditionalDishRequest AdditionalDish { get; set; }
+        public int RequestID { get; set; }
 
-        public class GetAdditionalDishRequestListQueryHandler : IRequestHandler<GetAdditionalDishRequestListQuery, IEnumerable<AdditionalDishVM>>
+        public class GetAdditionalDishRequestListQueryHandler : IRequestHandler<GetAdditionalDishRequestListQuery, List<AdditionalDishVM>>
         {
             public readonly IAttilaDbContext dbContext;
 
@@ -24,15 +24,18 @@ namespace Attila.Application.Coordinator.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<AdditionalDishVM>> Handle(GetAdditionalDishRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<AdditionalDishVM>> Handle(GetAdditionalDishRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _viewAdditionalDish = await dbContext.EventAdditionalDishRequests.Select(a => new AdditionalDishVM
-                {
-                    ID = a.ID,
-                    EventID = a.EventID,
-                    Status = a.Status
+                var _viewAdditionalDish = await dbContext.EventDishRequests
+                    .Where(a => a.AdditionalDishID == request.RequestID)
+                    .Include(a => a.Dish)                    
+                    .Select(a => new AdditionalDishVM
+                    {
+                        ID = a.ID,
+                        Dish = a.Dish,
+                        Quantity = a.Quantity
 
-                }).Include(a => a.Event.EventName)
+                    })
                     .ToListAsync();
 
                 return _viewAdditionalDish;

@@ -16,6 +16,9 @@ namespace Attila.UI.Models
 
         public List<SelectListItem> EquipmentList { get; set; }
 
+        public List<SelectListItem> DishList { get; set; }
+
+
         public AdditionalDishVM AdditionalDishRequest { get; set; }
 
         public AdditionalEquipmentRequestListVM AdditionalEquipmentRequest { get; set; }
@@ -24,6 +27,8 @@ namespace Attila.UI.Models
 
 
         public List<AdditionalEquipmentRequestListVM> EquipmentRequested { get; set; }
+
+        public List<AdditionalDishVM> DishRequested { get; set; }
 
     }
 }

@@ -483,42 +483,179 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Additional(int EventID)
         {
 
+            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = EventID});
+            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = EventID});
 
-            var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 
-            var _selectListEquipment = new List<SelectListItem>();
-
-            foreach (var item in _equipments)
+            if (_equipmentRequest != null && _dishRequest != null)
             {
-                _selectListEquipment.Add(new SelectListItem
-                { 
-                    Text = item.Name,
-                    Value = item.ID.ToString()               
-                });
+                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { RequestID = _equipmentRequest.RequestID });
+                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { RequestID = _dishRequest.RequestID });
+
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+
+                var _selectListEquipment = new List<SelectListItem>();
+
+                foreach (var item in _equipments)
+                {
+                    _selectListEquipment.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
+                var _dishes = await mediator.Send(new GetAllDishQuery { });
+
+                var _selectListDishes = new List<SelectListItem>();
+
+                foreach (var item in _dishes)
+                {
+                    _selectListDishes.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
+
+                var _additionalModel = new AdditionalsCVM
+                {
+                    EventID = EventID,
+                    EquipmentRequested = _equipmentRequested,
+                    DishRequested = _dishRequested,
+                    DishList = _selectListDishes,
+                    EquipmentList = _selectListEquipment
+                };
+
+
+                return View(_additionalModel);
+
+            }
+            else if (_equipmentRequest != null && _dishRequest == null)
+            {
+                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { RequestID = _equipmentRequest.RequestID });
+
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+
+                var _selectListEquipment = new List<SelectListItem>();
+
+                foreach (var item in _equipments)
+                {
+                    _selectListEquipment.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
+                var _additionalModel = new AdditionalsCVM
+                {
+                    EventID = EventID,
+                    EquipmentList = _selectListEquipment,
+                    EquipmentRequested = _equipmentRequested
+
+                };
+
+
+                return View(_additionalModel);
+
+            }
+            else if (_equipmentRequest == null && _dishRequest != null)
+            {
+                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { RequestID = _dishRequest.RequestID });
+
+                var _dishes = await mediator.Send(new GetAllDishQuery { });
+
+                var _selectListDishes = new List<SelectListItem>();
+
+                foreach (var item in _dishes)
+                {
+                    _selectListDishes.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
+                var _additionalModel = new AdditionalsCVM
+                {
+                    EventID = EventID,
+                    DishRequested = _dishRequested,
+                    DishList = _selectListDishes
+                };
+
+                return View(_additionalModel);
+
             }
 
-            var _additionalModel = new AdditionalsCVM
-            { 
-                EventID = EventID,
-                EquipmentList = _selectListEquipment
-            };
+            else
+            {
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+
+                var _selectListEquipment = new List<SelectListItem>();
+
+                foreach (var item in _equipments)
+                {
+                    _selectListEquipment.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
+                var _dishes = await mediator.Send(new GetAllDishQuery { });
+
+                var _selectListDishes = new List<SelectListItem>();
+
+                foreach (var item in _dishes)
+                {
+                    _selectListDishes.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
 
 
-            return View(_additionalModel);
+                var _additionalModel = new AdditionalsCVM
+                {
+                    EventID = EventID,                
+                    DishList = _selectListDishes,
+                    EquipmentList = _selectListEquipment
+                };
+
+
+                return View(_additionalModel);
+
+
+            }
+
+
+            return View();
+
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> AddAdditionalEquipment(AdditionalsCVM additionals)
         {
 
-            var _additionalEquipmentRequest = new AdditionalEquipmentRequestListVM
-            { 
-                EquipmentDetailsID  = additionals.AdditionalEquipmentRequest.EquipmentDetailsID,
-                EventDetailsID = additionals.EventID,
-                Quantity = additionals.AdditionalEquipmentRequest.Quantity,
-            };
+            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = additionals.EventID });
 
-            var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest});
+            if (_equipmentRequest != null)
+            {
+                var _additionalEquipmentRequest = new AdditionalEquipmentRequestListVM
+                {
+                    EquipmentDetailsID = additionals.AdditionalEquipmentRequest.EquipmentDetailsID,
+                    RequestID = _equipmentRequest.RequestID,
+                    Quantity = additionals.AdditionalEquipmentRequest.Quantity
+                };
+
+                var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
+
+            }
+          
 
             return Json(true);
         }

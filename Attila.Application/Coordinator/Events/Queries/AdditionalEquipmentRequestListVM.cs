@@ -17,5 +17,7 @@ namespace Attila.Application.Coordinator.Events.Queries
         public Status Status { get; set; }
 
         public int Quantity { get; set; }
+
+        public int RequestID { get; set; }
     }
 }
