@@ -6,6 +6,7 @@ namespace Attila.UI.Models
 {
     public class AddEventCVM
     {
+
         public EventDetailsVM Event { get; set; }
 
         public List<SelectListItem>? PackageList { get; set; }

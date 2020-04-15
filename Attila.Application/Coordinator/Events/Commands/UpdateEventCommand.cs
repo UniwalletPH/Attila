@@ -32,13 +32,12 @@ namespace Attila.Application.Events.Commands
                 _updatedEventDetails.EventPackageID = request.UpdateEvent.PackageDetailsID;
                 _updatedEventDetails.Description = request.UpdateEvent.Description;
                 _updatedEventDetails.EventDate = request.UpdateEvent.EventDate;
-                _updatedEventDetails.EventStatus = request.UpdateEvent.EventStatus;
+                _updatedEventDetails.EventStatus = Status.Processing;
                 _updatedEventDetails.Location = request.UpdateEvent.Location;
                 _updatedEventDetails.Type = request.UpdateEvent.Type;
                 _updatedEventDetails.Remarks = request.UpdateEvent.Remarks;
                 _updatedEventDetails.ServingType = request.UpdateEvent.ServingType;
-                _updatedEventDetails.VenueType = request.UpdateEvent.VenueType;
-
+                _updatedEventDetails.VenueType = request.UpdateEvent.VenueType; 
                 
 
                 await dbContext.SaveChangesAsync();
