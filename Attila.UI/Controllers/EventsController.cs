@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+ 
 
 namespace Attila.UI.Controllers
 {
@@ -229,14 +230,120 @@ namespace Attila.UI.Controllers
 
 
 
-            var _addEventList = new AddEventCVM();
+            var _addEventList = new ViewEventCVM();
             _addEventList.PackageList = _list;
             _addEventList.ClientList = _clientlist;
-            _addEventList.Event = _details;
+            _addEventList.EventDetails = _details;
             return View(_addEventList);
  
         }
-     
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int EventID)
+        {
+
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            var _clientNames = await mediator.Send(new GetClientListQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            List<SelectListItem> _clientlist = new List<SelectListItem>();
+            foreach (var item in _packageNames)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
+
+            }
+
+            foreach (var item in _clientNames)
+            {
+                _clientlist.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Name,
+                });
+            }
+
+
+            var _details = new EventDetailsVM
+            {
+                EventName = _eventDetails.EventName,
+                Type = _eventDetails.Type,
+                Description = _eventDetails.Description,
+                EventClientID = _eventDetails.EventClientID,
+                Client = _eventDetails.Client,
+                EventDate = _eventDetails.EventDate,
+                PackageDetailsID = _eventDetails.PackageDetailsID,
+                Package = _eventDetails.Package,
+                Location = _eventDetails.Location,
+                Remarks = _eventDetails.Remarks,
+                UserID = _eventDetails.UserID,
+                EventStatus = _eventDetails.EventStatus,
+                EntryTime = _eventDetails.EntryTime,
+                NumberOfGuests = _eventDetails.NumberOfGuests,
+                ProgramStart = _eventDetails.ProgramStart,
+                ServingTime = _eventDetails.ServingTime,
+                LocationType = _eventDetails.LocationType,
+                ServingType = _eventDetails.ServingType,
+                Theme = _eventDetails.Theme,
+                VenueType = _eventDetails.VenueType,
+                BookingDate = _eventDetails.BookingDate,
+                ID = _eventDetails.ID
+
+
+
+            };
+ 
+
+                List <SelectListItem> OccasionType = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Baptismal", Value = "Baptismal" },
+                new SelectListItem { Text = "Birthday", Value = "Birthday" },
+                new SelectListItem { Text = "Graduation", Value = "Graduation" },
+                new SelectListItem { Text = "Meeting", Value = "Meeting" },
+                new SelectListItem { Text = "Wedding", Value = "Wedding" },
+                new SelectListItem { Text = "Others", Value = "Others" },
+
+            };
+            List <SelectListItem> VenueType = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Yes", Value = "1" },
+                new SelectListItem { Text = "No", Value = "2" }, 
+
+            };
+
+            List<SelectListItem> LocationType = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "North Area", Value = "1" },
+                new SelectListItem { Text = "South Area", Value = "2" }, 
+
+            };
+
+            List<SelectListItem> ServingType = new List<SelectListItem>()
+            {
+                new SelectListItem { Text = "Manage Buffet", Value = "ManageBuffet" },
+                new SelectListItem { Text = "Self Service Buffet", Value = "SelfServiceBuffet" }, 
+
+            };
+            @ViewBag.OccasionType = new SelectList(OccasionType, "Value", "Text", _details.Type);
+            @ViewBag.VenueType = new SelectList(VenueType, "Value", "Text", _details.VenueType);
+            @ViewBag.LocationType = new SelectList(LocationType, "Value", "Text", _details.LocationType);
+            @ViewBag.ServingType = new SelectList(ServingType, "Value", "Text", _details.ServingType);
+
+            @ViewBag.Clients = new SelectList(_clientNames, "ID", "Name", _details.Client.ID);
+
+            @ViewBag.Packages = new SelectList(_packageNames, "ID", "Name", _details.Package.ID);
+            var _addEventList = new ViewEventCVM();
+            _addEventList.PackageList = _list;
+            _addEventList.ClientList = _clientlist;
+            _addEventList.EventDetails = _details;
+            return View(_addEventList);
+
+        }
 
         [HttpGet]
         public async Task<IActionResult> Approve(int EventID)
@@ -277,16 +384,16 @@ namespace Attila.UI.Controllers
 
 
               [HttpPost]
-               public async Task<IActionResult> UpdateEvent(AddEventCVM _eventDetails)
+               public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
 
-         {  
+                      {  
                        var response =   await mediator.Send(new UpdateEventCommand
                          {
-                             UpdateEvent = _eventDetails.Event
+                             UpdateEvent = _eventDetails.EventDetails
                          });
 
-            return RedirectToAction("Details", new { EventID = _eventDetails.Event.ID });
-        }
+            return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
+                     }
 
 
 
