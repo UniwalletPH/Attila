@@ -277,29 +277,28 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Event Date</label>
+                            <label>Event Date</label> 
+                            @Html.EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker", @type = "text", @size = "16",  @Value = Model.EventDetails.EventDate.ToString("mm/dd/yyyy") , @placeholder="mm/dd/yyyy"} })
 
-                            @Html.EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                            <div class="form-group">
+                                <label>Set Up Time </label>
 
-                        <div class="form-group">
-                            <label>Set Up Time </label>
+                                @Html.EditorFor(model => model.EventDetails.EntryTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                            </div>
+                            <div class="form-group">
+                                <label>Program Starts At </label>
 
-                            @Html.EditorFor(model => model.EventDetails.EntryTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                                @Html.EditorFor(model => model.EventDetails.ProgramStart, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                            </div>
+
+                            <div class="form-group">
+                                <label>Serving Time </label>
+
+                                @Html.EditorFor(model => model.EventDetails.ServingTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+                            </div>
+
+
                         </div>
-                        <div class="form-group">
-                            <label>Program Starts At </label>
-
-                            @Html.EditorFor(model => model.EventDetails.ProgramStart, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
-                        </div>
-
-                        <div class="form-group">
-                            <label>Serving Time </label>
-
-                            @Html.EditorFor(model => model.EventDetails.ServingTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
-                        </div>
-
-
-                    </div>
 
                     <div class="form-group">
                         <label>Buffet Type </label>
@@ -449,6 +448,6 @@
     <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
     <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../a ts/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
 }
 

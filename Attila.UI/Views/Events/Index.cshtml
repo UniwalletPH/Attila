@@ -384,7 +384,7 @@
               
         });
         
-        $(document).on('click', 'tr .view-paymentdtg', function (e) {
+        $(document).on('click', 'tr .view-payment', function (e) {
             try {
                  id = $(this).closest('tr').attr('data-id');
             var url = '@Url.Action("Record", "Payment", new { EventID = "__id__" })';
