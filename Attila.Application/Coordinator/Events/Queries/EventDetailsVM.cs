@@ -31,11 +31,7 @@ namespace Attila.Application.Coordinator.Events.Queries
          
         public int PackageDetailsID { get; set; }
 
-        public EventPackage Package { get; set; }
-
         public int EventClientID { get; set; }
-
-        public Client Client { get; set; }
 
         public int NumberOfGuests { get; set; }
 
@@ -50,6 +46,12 @@ namespace Attila.Application.Coordinator.Events.Queries
         public VenueType VenueType { get; set; }
 
         public LocationType LocationType { get; set; }
+
+        public EventPackage Package { get; set; }
+
+        public Client Client { get; set; }
+
+        public decimal ToPay { get; set; }
 
     }
 }
