@@ -7,7 +7,6 @@
 
 @model ViewEventCVM
 
-
 @*<div class="page-head">
         <div class="page-title">
             <h1>
@@ -229,7 +228,7 @@
 
                             @Html.HiddenFor(m => m.EventDetails.ID)
 
-                            
+
                             <label>Client Name</label>
                             @Html.DropDownListFor(model => model.EventDetails.EventClientID, ViewBag.Clients as IEnumerable<SelectListItem>, new { @class = "form-control" })
                         </div>
@@ -280,8 +279,7 @@
                         <div class="form-group">
                             <label>Event Date</label>
 
-                            @Html.EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control", type = "date" ,@Value = Model.EventDetails.EventDate.ToString("yyyy/MM/dd"), } })
-                        </div>
+                            @Html.EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
 
                         <div class="form-group">
                             <label>Set Up Time </label>
@@ -342,17 +340,7 @@
                         }
 
                     }
-
-
-                    
-
-
-
-
                 </form>
-
-
-
 
 
 
@@ -382,6 +370,22 @@
 </div>
 
 
+
+<div class="modal fade" id="failedtoedit" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close update-again" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Failed to Update Event</h4>
+            </div>
+            <div class="modal-body"> Please try again.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline update-again" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
@@ -390,25 +394,27 @@
     <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
-     <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script> 
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
     <script>
 
 
                 var event = '@Model.EventDetails.ID';
             function OnSuccess(result) {
-            if (result == true) {
+            
                 $("#successedit").modal('show');
-            }
+            
 
-            else if (result == false) {
-                alert("Failed!");
-            }
+            
         }
 
         function OnFailure(result) {
-            alert("Failed!");
-            window.location = "/Events/BookingForm";
+       
+                $("#failedtoedit").modal('show');
+          
         }
+        $('input[type=date]').datepicker({
+                  dateFormat: "mm/dd/yyyy" 
+            });
 
          $(document).on('click', '.view', function (e) {
 
@@ -420,8 +426,16 @@
 
 
             });
+        $(document).on('click', '.update-again', function (e) {
 
 
+
+
+            var url = '@Url.Action("Update", "Events", new { EventID = "__id__" })';
+            window.location.href = url.replace('__id__', event);
+
+
+            });
     </script>
 
 

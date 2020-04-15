@@ -395,6 +395,16 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
                      }
 
+        [HttpGet]
+        public async Task<IActionResult> ChangeStatus(int EventID)
+
+        {
+            var response = await mediator.Send(new ChangeEventStatusCommand { 
+               ID = EventID
+            });
+
+            return RedirectToAction("Index");
+        }
 
 
         [HttpGet]
