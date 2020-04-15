@@ -24,8 +24,7 @@ namespace Attila.Application.Events.Commands
             {
                 var _additionalEquipment = new EventAdditionalEquipmentRequest
                 {
-                    EventID = request.AdditionalEquipment.EventDetailsID,
-                    Quantity = request.AdditionalEquipment.Quantity,
+                    EventID = request.AdditionalEquipment.EventDetailsID,                 
                     Status = Status.Processing               
                 };
 

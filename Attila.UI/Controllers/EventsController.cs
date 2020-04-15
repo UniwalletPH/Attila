@@ -482,6 +482,8 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Additional(int EventID)
         {
+
+
             var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 
             var _selectListEquipment = new List<SelectListItem>();

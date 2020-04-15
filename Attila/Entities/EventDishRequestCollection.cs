@@ -6,13 +6,15 @@ using System.Text;
 
 namespace Attila.Domain.Entities
 {
-    public class EventDishRequest : BaseAuditedEntity
+    public class EventDishRequestCollection : BaseAuditedEntity
     {
         [ForeignKey("EventAdditionalDishRequest")]
         public int AdditionalDishID { get; set; }
 
         [ForeignKey("Dish")]
         public int DishID { get; set; }
+
+        public int Quantity { get; set; }
 
         public EventAdditionalDishRequest EventAdditionalDishRequest { get; set; }
         public Dish Dish { get; set; }

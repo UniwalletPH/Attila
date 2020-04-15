@@ -10,9 +10,11 @@ namespace Attila.Domain.Entities
     {
         [ForeignKey("Equipment")]
         public int EquipmentID { get; set; }
+
         [ForeignKey("EventAdditionalEquipmentRequest")]
         public int EventAdditionalEquipmentRequestID { get; set; }
 
+        public int Quantity { get; set; }
 
         public Equipment Equipment { get; set; }
         public EventAdditionalEquipmentRequest EventAdditionalEquipmentRequest { get; set; }

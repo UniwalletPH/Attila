@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Commands
             {
                 foreach (var item in request.EventDishRequest)
                 {
-                    var EventDishRequests = new EventDishRequest
+                    var EventDishRequests = new EventDishRequestCollection
                     {
                         AdditionalDishID = item.AdditionalDishID,
                         DishID = item.DishID

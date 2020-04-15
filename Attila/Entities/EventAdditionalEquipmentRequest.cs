@@ -10,7 +10,7 @@ namespace Attila.Domain.Entities
         public int EventID { get; set; }
 
         public Status Status { get; set; }
-        public int Quantity { get; set; }
+
 
         public Event Event { get; set; }
     }

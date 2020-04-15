@@ -52,7 +52,7 @@ namespace Attila.Application.Interfaces
 
         public DbSet<EventPackageDish> EventPackageDishes { get; set; }
 
-        public DbSet<EventDishRequest> EventDishRequests { get; set; }
+        public DbSet<EventDishRequestCollection> EventDishRequests { get; set; }
 
         public DbSet<EventPackageEquipment> EventPackageEquipments { get; set; }
 

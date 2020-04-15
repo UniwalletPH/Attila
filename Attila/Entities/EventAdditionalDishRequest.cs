@@ -11,8 +11,6 @@ namespace Attila.Domain.Entities
         [ForeignKey("Event")]
         public int EventID { get; set; }
 
-        public int Quantity { get; set; }
-
         public Status Status { get; set; }
 
 

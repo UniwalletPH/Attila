@@ -27,8 +27,7 @@ namespace Attila.Application.Events.Queries
                 var _viewAdditionalEquipment = await dbContext.EventAdditionalEquipmentRequests.Select(a => new AdditionalEquipmentRequestListVM 
                 {
                     ID = a.ID,
-                    EventDetailsID = a.EventID,
-                    Quantity = a.Quantity,                 
+                    EventDetailsID = a.EventID,                 
                     Status = a.Status
 
                 }).ToListAsync();

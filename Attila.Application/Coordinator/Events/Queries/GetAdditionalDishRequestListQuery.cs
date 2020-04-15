@@ -30,7 +30,6 @@ namespace Attila.Application.Coordinator.Events.Queries
                 {
                     ID = a.ID,
                     EventID = a.EventID,
-                    Quantity = a.Quantity,
                     Status = a.Status
 
                 }).Include(a => a.Event.EventName)
