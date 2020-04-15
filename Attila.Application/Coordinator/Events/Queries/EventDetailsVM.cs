@@ -47,6 +47,10 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public LocationType LocationType { get; set; }
 
+        public EventPackage Package { get; set; }
+
+        public Client Client { get; set; }
+
         public decimal ToPay { get; set; }
 
     }
