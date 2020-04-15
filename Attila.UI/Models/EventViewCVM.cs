@@ -5,6 +5,8 @@ namespace Attila.UI.Models
 {
     public class EventViewCVM
     {
+        public List<EventVM> ProcessingEvent { get; set; }
+
         public List<EventVM> PendingEvent { get; set; }
 
         public List<EventVM> IncomingEvent { get; set; }

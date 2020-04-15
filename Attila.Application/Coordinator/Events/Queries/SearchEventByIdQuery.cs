@@ -30,6 +30,8 @@ namespace Attila.Application.Events.Queries
 
                 var _searchedEvent = dbContext.Events
                     .Include(a => a.EventMenus)
+                    .Include(a => a.EventPackage)
+                    .Include(a => a.Client)
                     .Include(a => a.EventAdditionalDurationRequests)
                     .Include(a => a.EventAdditionalEquipmentRequests)
                     .Include(a => a.EventAdditionalDishRequests)
@@ -43,8 +45,10 @@ namespace Attila.Application.Events.Queries
                     BookingDate = _searchedEvent.BookingDate,
                     Description = _searchedEvent.Description,
                     EventClientID = _searchedEvent.ClientID,
+                    Client = _searchedEvent.Client,
                     EventDate = _searchedEvent.EventDate,
                     PackageDetailsID = _searchedEvent.EventPackageID,
+                    Package = _searchedEvent.EventPackage,
                     Location = _searchedEvent.Location,
                     Remarks = _searchedEvent.Remarks,
                     UserID = _searchedEvent.CoordinatorID,
