@@ -479,7 +479,8 @@ namespace Attila.UI.Controllers
 
         }
         
-        public async Task<IActionResult> Additional()
+        [HttpGet]
+        public async Task<IActionResult> Additional(int EventID)
         {
             var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 
@@ -496,6 +497,7 @@ namespace Attila.UI.Controllers
 
             var _additionalModel = new AdditionalsCVM
             { 
+                EventID = EventID,
                 EquipmentList = _selectListEquipment
             };
 
@@ -506,6 +508,16 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalEquipment(AdditionalsCVM additionals)
         {
+
+            var _additionalEquipmentRequest = new AdditionalEquipmentRequestListVM
+            { 
+                EquipmentDetailsID  = additionals.AdditionalEquipmentRequest.EquipmentDetailsID,
+                EventDetailsID = additionals.EventID,
+                Quantity = additionals.AdditionalEquipmentRequest.Quantity,
+            };
+
+            var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest});
+
             return Json(true);
         }
 

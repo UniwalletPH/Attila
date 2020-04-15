@@ -32,7 +32,7 @@
                     <div class="form-body">
                         <div class="form-group">
                             <label>Client Name</label>
-                            @Html.DropDownListFor(m => m.SelectedClient, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.Event.EventClientID, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
 
                         </div>
                         <div class="form-group">
@@ -119,7 +119,7 @@
                     <div class="form-group">
                         <label>Package </label>
 
-                        @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
+                        @Html.DropDownListFor(m => m.Event.PackageDetailsID, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         <label class="control-label">Remarks</label>

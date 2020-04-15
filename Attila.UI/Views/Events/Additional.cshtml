@@ -40,17 +40,23 @@
 
                 <div class="modal-body">
 
+                    <input type="hidden" class="form-control" asp-for="EventID" readonly>
+
                     <div class="form-body">
 
                         <div class="form-group">
                             <label>Select Equipment </label>
-                            @Html.DropDownListFor(m => m.AdditionalEquipmentRequest, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+                            @Html.DropDownListFor(m => m.AdditionalEquipmentRequest.EquipmentDetailsID, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
                         </div>
-    
+
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="text" class="form-control" placeholder="" asp-for="AdditionalEquipmentRequest.Quantity">
                     </div>
 
 
-               </div>
+                </div>
                 <div class="modal-footer">
                     <div class="form-actions">
                         <button type="submit" class="btn blue">Add</button>
@@ -83,31 +89,43 @@
 
                     <div class="form-body">
 
+                        <input type="hidden" class="form-control" asp-for="EventID" readonly>
+
+                        <div class="form-body">
+
+                            <div class="form-group">
+                                <label>Select Dish </label>
+                                @Html.DropDownListFor(m => m.AdditionalEquipmentRequest.EquipmentDetailsID, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+
                         @*<div class="form-group" style="visibility:hidden">
-                            <label id="eventID"> Event Name  </label>
-                            <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
-                        </div>*@
+            <label id="eventID"> Event Name  </label>
+            <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
+        </div>*@
                         @*<div class="form-group">
-                            <label id="eventID"> Event Name  </label>
-                            <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
+            <label id="eventID"> Event Name  </label>
+            <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
 
-                            <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
-                        </div>
+            <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
+        </div>
 
-                        <div class="form-group">
-                            <label>Reference Number</label>
-                            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
-                        </div>
+        <div class="form-group">
+            <label>Reference Number</label>
+            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
+        </div>
 
 
-                        <div class="form-group">
-                            <label>Amount</label>
-                            <input type="number" class="form-control" asp-for="Amount" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label>Remarks</label>
-                            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
-                        </div>*@
+        <div class="form-group">
+            <label>Amount</label>
+            <input type="number" class="form-control" asp-for="Amount" placeholder="">
+        </div>
+        <div class="form-group">
+            <label>Remarks</label>
+            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
+        </div>*@
                     </div>
 
 

@@ -11,11 +11,13 @@ namespace Attila.UI.Models
     public class AdditionalsCVM
     {
       
+        public int EventID { get; set; }
+
         public List<SelectListItem> EquipmentList { get; set; }
 
-        public List<AdditionalDishVM> AdditionalDishRequest { get; set; }
+        public AdditionalDishVM AdditionalDishRequest { get; set; }
 
-        public List<AdditionalEquipmentRequestListVM> AdditionalEquipmentRequest { get; set; }
+        public AdditionalEquipmentRequestListVM AdditionalEquipmentRequest { get; set; }
 
         public AdditionalDurationRequestListVM AdditionalDurationRequest { get; set; }
     }

@@ -8,6 +8,7 @@ namespace Attila.UI.Models
     {
 
         public EventDetailsVM EventDetails { get; set; } 
+
         public List<SelectListItem>? PackageList { get; set; }
 
         public List<SelectListItem>? ClientList { get; set; }
