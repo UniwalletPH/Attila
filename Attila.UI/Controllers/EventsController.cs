@@ -162,7 +162,7 @@ namespace Attila.UI.Controllers
             { 
                 Message = "New Event Request Received",
                 TargetUserID = -1,
-                MethodName = "EventRequestDetails",
+                MethodName = "Event/Details",
                 RequestID = response 
             });
                    
