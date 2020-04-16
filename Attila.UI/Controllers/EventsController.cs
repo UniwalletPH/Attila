@@ -489,8 +489,8 @@ namespace Attila.UI.Controllers
 
             if (_equipmentRequest != null && _dishRequest != null)
             {
-                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { RequestID = _equipmentRequest.RequestID });
-                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { RequestID = _dishRequest.RequestID });
+                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { EventID = _equipmentRequest.EventID });
+                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { EventID = _dishRequest.EventID });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 
@@ -534,7 +534,7 @@ namespace Attila.UI.Controllers
             }
             else if (_equipmentRequest != null && _dishRequest == null)
             {
-                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { RequestID = _equipmentRequest.RequestID });
+                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentRequestListQuery { EventID = _equipmentRequest.EventID });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 
@@ -577,7 +577,7 @@ namespace Attila.UI.Controllers
             }
             else if (_equipmentRequest == null && _dishRequest != null)
             {
-                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { RequestID = _dishRequest.RequestID });
+                var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { EventID = _dishRequest.EventID });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
 

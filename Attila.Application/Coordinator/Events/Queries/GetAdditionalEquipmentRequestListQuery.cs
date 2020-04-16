@@ -12,7 +12,7 @@ namespace Attila.Application.Events.Queries
 {
     public class GetAdditionalEquipmentRequestListQuery : IRequest<List<AdditionalEquipmentRequestListVM>>
     {
-        public int RequestID { get; set; }
+        public int EventID { get; set; }
 
         public class GetAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, List<AdditionalEquipmentRequestListVM>>
         {
@@ -25,7 +25,7 @@ namespace Attila.Application.Events.Queries
             public async Task<List<AdditionalEquipmentRequestListVM>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
             {
                 var _viewAdditionalEquipment = await dbContext.EventEquipmentRequestCollections
-                    .Where(a => a.EventAdditionalEquipmentRequestID == request.RequestID)
+                    .Where(a => a.EventAdditionalEquipmentRequestID == request.EventID)
                     .Include(a => a.Equipment)
                     .Select(a => new AdditionalEquipmentRequestListVM 
                 {

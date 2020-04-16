@@ -10,19 +10,26 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Queries
 {
-    public class SearchEventByIdQuery : IRequest<List<EventDetailsVM>>
+    public class SearchEventByIdQuery : IRequest<EventDetailsVM>
     {
+       
         public int EventId { get; set; }
-
-        public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, List<EventDetailsVM>>
+        
+        public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, EventDetailsVM>
         {
+            private readonly IMediator mediator;
             private readonly IAttilaDbContext dbContext;
             public SearchEventByIdQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<EventDetailsVM>> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
+            public SearchEventByIdQueryHandler(IMediator mediator)
+            {
+                this.mediator = mediator;
+            }
+
+            public async Task<EventDetailsVM> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
                 //var _searchedEvent = dbContext.Events.Find(request.EventId);
 
@@ -35,7 +42,11 @@ namespace Attila.Application.Events.Queries
                     .Include(a => a.EventAdditionalDurationRequests)
                     .Include(a => a.EventAdditionalEquipmentRequests)
                     .Include(a => a.EventAdditionalDishRequests)
-                    .Where(a => a.ID == request.EventId);
+                    .Where(a => a.ID == request.EventId).ToList();
+
+                var _additionalEquipment = await mediator.Send(new GetAdditionalEquipmentRequestListQuery { EventID = request.EventId });
+                var _additionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery { EventID = request.EventId });
+                var _additionalDish = await mediator.Send(new GetAdditionalDishRequestListQuery { EventID = request.EventId });
 
                 foreach (var item in _searchedEvent)
                 {
@@ -66,9 +77,9 @@ namespace Attila.Application.Events.Queries
                     };
                     _searchEventList.Add(Events);
                 }
-                
 
-                return _searchEventList;
+
+                return _searchEventList.SingleOrDefault();
             }
         }
     }
