@@ -176,30 +176,30 @@
 
 
                         @*<div class="form-group" style="visibility:hidden">
-            <label id="eventID"> Event Name  </label>
-            <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
-        </div>*@
+                                <label id="eventID"> Event Name  </label>
+                                <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
+                            </div>*@
                         @*<div class="form-group">
-            <label id="eventID"> Event Name  </label>
-            <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
+                                <label id="eventID"> Event Name  </label>
+                                <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
 
-            <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
-        </div>
+                                <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
+                            </div>
 
-        <div class="form-group">
-            <label>Reference Number</label>
-            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
-        </div>
+                            <div class="form-group">
+                                <label>Reference Number</label>
+                                <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
+                            </div>
 
 
-        <div class="form-group">
-            <label>Amount</label>
-            <input type="number" class="form-control" asp-for="Amount" placeholder="">
-        </div>
-        <div class="form-group">
-            <label>Remarks</label>
-            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
-        </div>*@
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" class="form-control" asp-for="Amount" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Remarks</label>
+                                <input type="number" class="form-control" asp-for="Remarks" placeholder="">
+                            </div>*@
                     </div>
 
 
@@ -237,30 +237,30 @@
                     <div class="form-body">
 
                         @*<div class="form-group" style="visibility:hidden">
-                            <label id="eventID"> Event Name  </label>
-                            <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
-                        </div>*@
+                                <label id="eventID"> Event Name  </label>
+                                <input type="text" class="form-control" asp-for="EventDetailsID" readonly> </input>
+                            </div>*@
                         @*<div class="form-group">
-                            <label id="eventID"> Event Name  </label>
-                            <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
+                                <label id="eventID"> Event Name  </label>
+                                <input type="text" class="form-control" asp-for="EventDetails.EventName" readonly>   </input>
 
-                            <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
-                        </div>
+                                <input type="hidden" class="form-control" asp-for="EventDetailsID" readonly>   </input>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Reference Number</label>
-                            <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
-                        </div>
+                            <div class="form-group">
+                                <label>Reference Number</label>
+                                <input type="text" class="form-control" placeholder="" asp-for="ReferenceNumber">
+                            </div>
 
 
-                        <div class="form-group">
-                            <label>Amount</label>
-                            <input type="number" class="form-control" asp-for="Amount" placeholder="">
-                        </div>
-                        <div class="form-group">
-                            <label>Remarks</label>
-                            <input type="number" class="form-control" asp-for="Remarks" placeholder="">
-                        </div>*@
+                            <div class="form-group">
+                                <label>Amount</label>
+                                <input type="number" class="form-control" asp-for="Amount" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label>Remarks</label>
+                                <input type="number" class="form-control" asp-for="Remarks" placeholder="">
+                            </div>*@
                     </div>
 
 
@@ -284,3 +284,44 @@
     </div>
 </div>
 <!-- End: life time stats -->
+
+
+@section Scripts{
+    
+
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            $("#success").modal('show');
+
+
+        }
+
+        function OnFailure(e) {
+            console.log(e);
+            alert("failed!");
+        }
+
+    </script>
+
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+<div class="modal fade" id="success" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="location.href='@Url.Action("Additional", "Events",new { EventID = Model.EventID })'" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Successful</h4>
+            </div>
+            <div class="modal-body"> Additional Added successfully! </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Additional", "Events",new { EventID = Model.EventID })'" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
