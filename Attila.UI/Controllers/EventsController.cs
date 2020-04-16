@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
  
 
@@ -166,7 +167,7 @@ namespace Attila.UI.Controllers
             });
                    
 
-            return Json(true);
+            return Json(response);
  
 
         }
@@ -445,20 +446,14 @@ namespace Attila.UI.Controllers
             if (_eventDetails != null)
             {
                 var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
+                var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery{});
+
                 List<SelectListItem> _list = new List<SelectListItem>();
 
+               
 
 
-
-                foreach (var item in _addmenu)
-                {
-                    _list.Add(new SelectListItem
-                    {
-                        Value = item.ID.ToString(),
-                        Text = item.Menu.Name + " | " + item.Menu.DishCategory.Category
-                    });
-                }
-
+                var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
 
 
                 AddEventMenuCVM eventDetails = new AddEventMenuCVM
@@ -466,9 +461,8 @@ namespace Attila.UI.Controllers
                     Event = x,
                     MenuList = _addmenu,
                     EventID = EventID,
-                    Menu = _list
-
-
+                    Menu = _list,
+                    Groupings = _dishGroupbyCategory                    
                 };
 
 
@@ -478,7 +472,34 @@ namespace Attila.UI.Controllers
             else { return View(); }
 
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenu(AddEventMenuCVM addEvent)
+        {
+            var _evntMenu = new List<EventMenuVM>();
+
+
+            foreach (var item in addEvent.SelectedMenu)
+            {
+                var _menu = new EventMenuVM
+                { 
+                    EventDetailsID = addEvent.EventID,
+                    DishID = item
+                };
+
+                _evntMenu.Add(_menu);
+            }
+
+
+            var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu});
+
+
+            return Json(_rVal);
+        }
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> Additional(int EventID)
         {
@@ -679,6 +700,8 @@ namespace Attila.UI.Controllers
 
                 var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
 
+                return Json(_rV);
+
             }
             else
             { 
@@ -693,10 +716,11 @@ namespace Attila.UI.Controllers
 
                 var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
 
+
+                return Json(_rVal);
+
             }
           
-
-            return Json(true);
         }
 
         [HttpPost]

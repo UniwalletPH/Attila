@@ -1,5 +1,8 @@
 ﻿@model Attila.UI.Models.AddEventCVM
 
+@{
+    ViewData["Title"] = "Booking Form";
+}
 
 <div class="page-head">
     <!-- BEGIN PAGE TITLE -->
@@ -265,11 +268,11 @@
             alert("Failed!");
             window.location = "/Events/BookingForm";
         }
-       
 
 
 
-    </script> 
+
+    </script>
 }
 @section Styles{
     <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
@@ -279,7 +282,7 @@
     <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
 
 }
- 
+
 
 
 

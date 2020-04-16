@@ -28,7 +28,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                     var EventMenus = new EventMenu
                     {
                         EventID = item.EventDetailsID,
-                        DishID = item.MenuID
+                        DishID = item.DishID
                         
                     };
                     dbContext.EventMenus.Add(EventMenus);

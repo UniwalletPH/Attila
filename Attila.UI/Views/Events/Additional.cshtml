@@ -1,5 +1,8 @@
 ﻿@model AdditionalsCVM
 
+@{
+    ViewData["Title"] = "Additional  ";
+}
 
 
 <div class="page-head">
@@ -36,7 +39,7 @@
             </div>
             <div class="portlet-body form">
             </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalEquipment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+            <form role="form" asp-controller="Events" asp-action="AddAdditionalEquipment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessEquipment" data-ajax-failure="OnFailure">
 
                 <div class="modal-body">
 
@@ -117,7 +120,7 @@
             </div>
             <div class="portlet-body form">
             </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalDish" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+            <form role="form" asp-controller="Events" asp-action="AddAdditionalDish" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessDish" data-ajax-failure="OnFailure">
 
                 <div class="modal-body">
 
@@ -230,7 +233,7 @@
             </div>
             <div class="portlet-body form">
             </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalDuration" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+            <form role="form" asp-controller="Events" asp-action="AddAdditionalDuration" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessHours" data-ajax-failure="OnFailure">
 
                 <div class="modal-body">
 
@@ -286,42 +289,121 @@
 <!-- End: life time stats -->
 
 
-@section Scripts{
-    
-
-    <script type="text/javascript">
-        function OnSuccess(e) {
-            $("#success").modal('show');
-
-
-        }
-
-        function OnFailure(e) {
-            console.log(e);
-            alert("failed!");
-        }
-
-    </script>
-
-
-    <partial name="_ValidationScriptsPartial" />
-}
-
-
-
-<div class="modal fade" id="success" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="success-dish" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" onclick="location.href='@Url.Action("Additional", "Events",new { EventID = Model.EventID })'" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Successful</h4>
+                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"> Added Successfully.</h4>
             </div>
-            <div class="modal-body"> Additional Added successfully! </div>
+            <div class="modal-body">Dish Added to Event successfully.</div>
             <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Additional", "Events",new { EventID = Model.EventID })'" data-dismiss="modal">Close</button>
+                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade" id="success-equipment" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"> Added Successfully.</h4>
+            </div>
+            <div class="modal-body">Equipment Added to Event successfully.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="success-hours" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title"> Added Successfully.</h4>
+            </div>
+            <div class="modal-body">Your Additional Hours has been Added to Event successfully.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="failedtoadd" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close update-again" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Failed to Add in Event</h4>
+            </div>
+            <div class="modal-body"> Please try again.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline update-again" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function OnSuccessDish(result) {
+
+            $("#success-dish").modal('show');
+
+
+
+        }
+        function OnSuccessHours(result) {
+
+            $("#success-hours").modal('show');
+
+
+
+        }
+        function OnSuccessEquipment(result) {
+
+            $("#success-equipment").modal('show');
+
+
+
+        }
+        function OnFailure(result) {
+
+            $("#failedtoadd").modal('show');
+
+        }
+
+                var event = '@Model.EventID';
+    $(document).on('click', '.view', function (e) {
+
+
+
+
+    var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
+    window.location.href = url.replace('__id__', event);
+
+
+    });
+    $(document).on('click', '.update-again', function (e) {
+
+
+
+
+    var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
+    window.location.href = url.replace('__id__', event);
+
+
+    });
+    </script>
+
+
+
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

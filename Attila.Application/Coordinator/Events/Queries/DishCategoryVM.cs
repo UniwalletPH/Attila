@@ -4,12 +4,10 @@ using System.Text;
 
 namespace Attila.Application.Coordinator.Events.Queries
 {
-    public class EventMenuVM
+    public class DishCategoryVM
     {
         public int ID { get; set; }
 
-        public int DishID { get; set; }
-
-        public int EventDetailsID { get; set; }
+        public string Category { get; set; }
     }
 }
