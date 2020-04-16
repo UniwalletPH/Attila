@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
  
 
@@ -445,20 +446,14 @@ namespace Attila.UI.Controllers
             if (_eventDetails != null)
             {
                 var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
+                var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery{});
+
                 List<SelectListItem> _list = new List<SelectListItem>();
 
+               
 
 
-
-                foreach (var item in _addmenu)
-                {
-                    _list.Add(new SelectListItem
-                    {
-                        Value = item.ID.ToString(),
-                        Text = item.Menu.Name + " | " + item.Menu.DishCategory.Category
-                    });
-                }
-
+                var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
 
 
                 AddEventMenuCVM eventDetails = new AddEventMenuCVM
@@ -466,9 +461,8 @@ namespace Attila.UI.Controllers
                     Event = x,
                     MenuList = _addmenu,
                     EventID = EventID,
-                    Menu = _list
-
-
+                    Menu = _list,
+                    Groupings = _dishGroupbyCategory                    
                 };
 
 
@@ -478,7 +472,16 @@ namespace Attila.UI.Controllers
             else { return View(); }
 
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> AddMenu(AddEventCVM addEvent)
+        {
+            return Json(true);
+        }
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> Additional(int EventID)
         {

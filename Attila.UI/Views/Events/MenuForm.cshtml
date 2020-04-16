@@ -48,15 +48,40 @@
                         <div class="form-group">
                             <label>Event Name</label>
                             @*@foreach (var item in Model.GroupBy(u => u.Name, (key, items) => new { Name = key, Cost = items.Sum(u => u.Cost) }))
-                            {
-                                <tr>
-                                    <td class="js-export-checkbox">
-                                        @Html.CheckBoxFor(modelItem => Model.Menu[i].ToExport)
-                                    </td>
-                                </tr>}*@
+            {
+                <tr>
+                    <td class="js-export-checkbox">
+                        @Html.CheckBoxFor(modelItem => Model.Menu[i].ToExport)
+                    </td>
+                </tr>}*@
+
+
+
 
 
                         </div>
+                        @{
+                            foreach (var group in Model.Groupings)
+                            {
+                                <div class="form-group">
+                                    <h1>@group.Key.Category</h1>
+                                </div>
+
+                                foreach (var item in group)
+                                {
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox"
+                                                   name="Selected"
+                                                   value="@item.ID"
+                                                   @*@if (Model.SelectedMenu.Contains(item.Menu.Name)) { <text> checked </text>  }*@ /> @item.Menu.Name
+                                         </label>
+                                     </div>
+                                }
+
+                            }
+
+                        }
 
                     </div>
 
