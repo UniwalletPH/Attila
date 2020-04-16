@@ -1,0 +1,261 @@
+﻿
+@{
+
+
+    ViewData["Title"] = "Event Details";
+}
+
+@model Attila.Application.Admin.Events.Queries.EventVM 
+
+
+
+ 
+
+  
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet light bordered">
+
+            <div class="portlet-body form">
+                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                    <div class="form-body">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Event Name</label>
+
+                                <input type="text" class="form-control details" asp-for="EventName" placeholder="" readonly>
+                            </div>
+                            <label>Client Name</label>
+
+                            <input type="text" class="form-control details" asp-for="Client.Name" placeholder="" readonly>
+
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Occasion </label>
+
+                            <input type="text" class="form-control details" asp-for="Type" placeholder="" readonly>
+                         
+                        </div>
+
+                       
+                        <div class="form-group">
+                            <label>Event Theme  | Color</label>
+                            <input type="text" class="form-control details" placeholder="Mermaid /Aqua "  readonly> 
+                        </div>
+                        <div class="form-group">
+                            <label>Event Description</label>
+
+                            <input type="text" class="form-control details" placeholder="Description" asp-for="Description" readonly> 
+                        </div>
+
+                        <div class="form-group">
+                            <label>Event's Place</label>
+
+                            <input type="text" class="form-control details" asp-for="Location" readonly>
+                                </div>
+                        <div class="form-group">
+                            <label>Venue in Condominium or Building?</label>
+
+                            <input type="text" class="form-control details"   readonly>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Location</label>
+
+                            <input type="text" class="form-control details"  readonly>
+                          
+                        </div>
+                        <div class="form-group">
+                            <label>Event Date</label>
+
+                            <input type="text" class="form-control details" asp-for="EventDate" readonly>
+                          </div>
+
+                        <div class="form-group">
+                            <label>Set Up Time </label>
+
+                            <input type="text" class="form-control details"   readonly> 
+                        </div>
+                        <div class="form-group">
+                            <label>Program Starts At </label>
+
+                            <input type="text" class="form-control details"   readonly> 
+                        </div>
+
+                        <div class="form-group">
+                            <label>Serving Time </label>
+
+                            <input type="text" class="form-control details"  readonly> 
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Buffet Type </label>
+
+                        <input type="text" class="form-control details"   readonly> 
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Guests</label>
+
+                        <input type="text" class="form-control details"  readonly> 
+                    </div>
+
+                    <div class="form-group">
+                        <label>Package </label>
+
+                        <input type="text" class="form-control details" asp-for="Package.Name" readonly> 
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Remarks</label>
+
+                        <textarea class="form-control details" asp-for="Remarks" readonly> </textarea> 
+                    </div>
+                    @if (Model.EventStatus.ToString() == "Approved")
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+
+                            <label>Payment  </label>
+                            <input type="number" class="form-control" placeholder="" readonly>
+                              
+                        }
+                    }
+
+
+
+                    @if (Model.EventStatus.ToString() != "Approved")
+                    {
+
+                        if (User.IsInRole("Coordinator"))
+                        {
+                            <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+
+
+                            
+                        }
+                        if (User.IsInRole("Admin"))
+                        {
+
+
+
+
+                            <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
+                            <button type="button" id="btnDecline" class="btn blue">Reject</button>
+                        }
+                    }
+
+
+
+
+                </form>
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="successedit" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">Successful Event Update</h4>
+            </div>
+            <div class="modal-body"> Event updated successfully.</div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+
+    <script>
+            function OnSuccess(result) {
+            if (result == true) {
+                $("#successedit").modal('show');
+            }
+
+            else if (result == false) {
+                alert("Failed!");
+            }
+        }
+
+        function OnFailure(result) {
+            alert("Failed!");
+            window.location = "/Events/BookingForm";
+        }
+
+
+
+         
+                var event = '@Model.ID';
+            $(document).on('click', ' #btnEdit', function (e) {
+               id = $(this).val();
+
+
+                var url = '@Url.Action("Update", "Events", new { EventID = "__id__"  })';
+                window.location.href = url.replace('__id__', event)
+
+
+            });
+         $(document).on('click', ' #btnSubmit', function (e) {
+               id = $(this).val();
+
+
+                var url = '@Url.Action("Approve", "Events", new { EventID = "__id__"  })';
+                window.location.href = url.replace('__id__', event)
+
+
+            });
+
+
+
+
+            $(document).on('click', ' #btnDecline', function (e) {
+               id = $(this).val();
+
+
+                var url = '@Url.Action("Decline", "Events", new { EventID = "__id__"  })';
+                window.location.href = url.replace('__id__', event)
+
+
+            });
+
+    </script>
+
+
+
+    <partial name="_ValidationScriptsPartial" />
+    <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+
+}
+@section Styles{
+    <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../a ts/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+}
+

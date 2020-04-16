@@ -37,7 +37,8 @@ namespace Attila.Application.Events.Commands
                 _updatedEventDetails.Type = request.UpdateEvent.Type;
                 _updatedEventDetails.Remarks = request.UpdateEvent.Remarks;
                 _updatedEventDetails.ServingType = request.UpdateEvent.ServingType;
-                _updatedEventDetails.VenueType = request.UpdateEvent.VenueType; 
+                _updatedEventDetails.VenueType = request.UpdateEvent.VenueType;
+                _updatedEventDetails.ClientID = request.UpdateEvent.EventClientID;
                 
 
                 await dbContext.SaveChangesAsync();

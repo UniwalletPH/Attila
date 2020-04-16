@@ -11,11 +11,11 @@ namespace Attila.UI.Controllers
 {
 
     [Authorize(Roles = "Admin,Coordinator,InventoryManager, ")]
-    public class NotificationController : BaseController
+    public class NotificationsController : BaseController
     {
         private readonly IMediator mediator;
 
-        public NotificationController(IMediator mediator)
+        public NotificationsController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -33,7 +33,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> EventRequestDetails(int id)
         {
             var _details = await mediator.Send(new GetEventDetailQuery { EventID = id });
-
+          
             return View(_details);
         }
 
@@ -41,7 +41,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> FoodRequestDetails(int id)
         {
             var _details = await mediator.Send(new GetFoodRequestDetailsQuery { RequestID = id });
-
+     
             return View(_details);
         }
 
