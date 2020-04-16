@@ -33,7 +33,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> EventRequestDetails(int id)
         {
             var _details = await mediator.Send(new GetEventDetailQuery { EventID = id });
-
+          
             return View(_details);
         }
 
@@ -41,7 +41,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> FoodRequestDetails(int id)
         {
             var _details = await mediator.Send(new GetFoodRequestDetailsQuery { RequestID = id });
-
+     
             return View(_details);
         }
 
