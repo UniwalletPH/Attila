@@ -1,6 +1,6 @@
-﻿using Attila.Application.Admin.Equipments.Queries;
-using Attila.Application.Admin.Events.Queries;
+﻿using Attila.Application.Admin.Equipments.Queries; 
 using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Events.Queries;
 using Attila.Application.Notification.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -32,7 +32,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EventRequestDetails(int id)
         {
-            var _details = await mediator.Send(new GetEventDetailQuery { EventID = id });
+            var _details = await mediator.Send(new SearchEventByIdQuery { EventId = id });
           
             return View(_details);
         }
