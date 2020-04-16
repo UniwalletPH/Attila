@@ -19,15 +19,12 @@ namespace Attila.Application.Events.Queries
         {
             private readonly IMediator mediator;
             private readonly IAttilaDbContext dbContext;
-            public SearchEventByIdQueryHandler(IAttilaDbContext dbContext)
+            public SearchEventByIdQueryHandler(IAttilaDbContext dbContext, IMediator mediator)
             {
                 this.dbContext = dbContext;
-            }
-
-            public SearchEventByIdQueryHandler(IMediator mediator)
-            {
                 this.mediator = mediator;
             }
+
 
             public async Task<EventDetailsVM> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
