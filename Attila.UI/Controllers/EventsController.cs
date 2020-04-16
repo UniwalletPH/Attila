@@ -166,7 +166,7 @@ namespace Attila.UI.Controllers
             });
                    
 
-            return Json(true);
+            return Json(response);
  
 
         }
@@ -679,6 +679,8 @@ namespace Attila.UI.Controllers
 
                 var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
 
+                return Json(_rV);
+
             }
             else
             { 
@@ -693,10 +695,11 @@ namespace Attila.UI.Controllers
 
                 var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
 
+
+                return Json(_rVal);
+
             }
           
-
-            return Json(true);
         }
 
         [HttpPost]

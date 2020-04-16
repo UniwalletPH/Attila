@@ -46,12 +46,7 @@
 
                     </li>
 
-                    <li class="nav-item  ">
-                        <a onclick="location.href='@Url.Action("Index", "EventPackages")'" class="nav-link nav-toggle">
-                            <i class="icon-diamond"></i>
-                            <span class="title">Packages</span>
-                        </a>
-                    </li>
+
                 } }
 
 
@@ -59,6 +54,12 @@
             @{
                 if (User.IsInRole("Admin"))
                 {
+                    <li class="nav-item  ">
+                        <a onclick="location.href='@Url.Action("Index", "EventPackages")'" class="nav-link nav-toggle">
+                            <i class="icon-diamond"></i>
+                            <span class="title">Packages</span>
+                        </a>
+                    </li>
                     <li class="nav-item  ">
                         <a onclick="location.href='@Url.Action("Index", "Reports")'" class="nav-link nav-toggle">
                             <i class="icon-folder"></i>
