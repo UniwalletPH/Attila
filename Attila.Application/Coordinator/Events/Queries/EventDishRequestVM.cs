@@ -10,6 +10,9 @@ namespace Attila.Application.Coordinator.Events.Queries
         public int AdditionalDishID { get; set; }
         public int DishID { get; set; }
 
+        public int Quantity { get; set; }
+
+        public int RequestID { get; set; }
 
         public EventAdditionalDishRequest EventAdditionalDishRequest { get; set; }
         public Dish Dish { get; set; }

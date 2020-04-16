@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
 
             public async Task<List<AdditionalDishVM>> Handle(GetAdditionalDishRequestListQuery request, CancellationToken cancellationToken)
             {
-                var _viewAdditionalDish = await dbContext.EventDishRequests
+                var _viewAdditionalDish = await dbContext.EventDishRequestCollection
                     .Where(a => a.AdditionalDishID == request.RequestID)
                     .Include(a => a.Dish)                    
                     .Select(a => new AdditionalDishVM

@@ -549,11 +549,25 @@ namespace Attila.UI.Controllers
                     });
                 }
 
+                var _dishes = await mediator.Send(new GetAllDishQuery { });
+
+                var _selectListDishes = new List<SelectListItem>();
+
+                foreach (var item in _dishes)
+                {
+                    _selectListDishes.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
+
                 var _additionalModel = new AdditionalsCVM
                 {
                     EventID = EventID,
                     EquipmentList = _selectListEquipment,
-                    EquipmentRequested = _equipmentRequested
+                    EquipmentRequested = _equipmentRequested,
+                    DishList = _selectListDishes
 
                 };
 
@@ -564,6 +578,19 @@ namespace Attila.UI.Controllers
             else if (_equipmentRequest == null && _dishRequest != null)
             {
                 var _dishRequested = await mediator.Send(new GetAdditionalDishRequestListQuery { RequestID = _dishRequest.RequestID });
+
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+
+                var _selectListEquipment = new List<SelectListItem>();
+
+                foreach (var item in _equipments)
+                {
+                    _selectListEquipment.Add(new SelectListItem
+                    {
+                        Text = item.Name,
+                        Value = item.ID.ToString()
+                    });
+                }
 
                 var _dishes = await mediator.Send(new GetAllDishQuery { });
 
@@ -582,7 +609,8 @@ namespace Attila.UI.Controllers
                 {
                     EventID = EventID,
                     DishRequested = _dishRequested,
-                    DishList = _selectListDishes
+                    DishList = _selectListDishes,
+                    EquipmentList = _selectListEquipment
                 };
 
                 return View(_additionalModel);
@@ -631,10 +659,7 @@ namespace Attila.UI.Controllers
 
             }
 
-
-            return View();
-
-            
+   
         }
 
         [HttpPost]
@@ -655,6 +680,20 @@ namespace Attila.UI.Controllers
                 var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
 
             }
+            else
+            { 
+                var _requestID = await mediator.Send(new CreateAdditionalEquipmentRequestCommand { EventID = additionals.EventID});
+
+                var _additionalEquipmentRequest = new AdditionalEquipmentRequestListVM
+                {
+                    EquipmentDetailsID = additionals.AdditionalEquipmentRequest.EquipmentDetailsID,
+                    RequestID = _requestID,
+                    Quantity = additionals.AdditionalEquipmentRequest.Quantity
+                };
+
+                var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand { AdditionalEquipment = _additionalEquipmentRequest });
+
+            }
           
 
             return Json(true);
@@ -663,6 +702,33 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDish(AdditionalsCVM additionals)
         {
+            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = additionals.EventID });
+
+            if (_dishRequest != null)
+            {
+                var _additionalDishRequest = new EventDishRequestVM
+                {
+                    DishID = additionals.AdditionalDishRequest.DishID,
+                    RequestID = _dishRequest.RequestID,
+                    Quantity = additionals.AdditionalDishRequest.Quantity
+                };
+
+                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand { Dish = _additionalDishRequest });
+            }
+            else
+            {
+                var _requestID = await mediator.Send(new CreateAdditionalDishRequestCommand { EventID = additionals.EventID});
+
+                var _additionalDishRequest = new EventDishRequestVM
+                {
+                    DishID = additionals.AdditionalDishRequest.DishID,
+                    RequestID = _requestID,
+                    Quantity = additionals.AdditionalDishRequest.Quantity
+                };
+
+                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand { Dish = _additionalDishRequest });
+            }
+
             return Json(true);
         }
 

@@ -31,7 +31,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                         AdditionalDishID = item.AdditionalDishID,
                         DishID = item.DishID
                     };
-                    dbContext.EventDishRequests.Add(EventDishRequests);
+                    dbContext.EventDishRequestCollection.Add(EventDishRequests);
                     await dbContext.SaveChangesAsync();
                 }
                 return true;
