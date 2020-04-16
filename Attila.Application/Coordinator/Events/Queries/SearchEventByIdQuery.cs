@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Queries
 {
-    public class SearchEventByIdQuery : IRequest<EventDetailsVM>
+    public class SearchEventByIdQuery : IRequest<List<EventDetailsVM>>
     {
         public int EventId { get; set; }
 
-        public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, EventDetailsVM>
+        public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, List<EventDetailsVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public SearchEventByIdQueryHandler(IAttilaDbContext dbContext)
@@ -22,7 +22,7 @@ namespace Attila.Application.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<EventDetailsVM> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
+            public async Task<List<EventDetailsVM>> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
                 //var _searchedEvent = dbContext.Events.Find(request.EventId);
 
@@ -35,35 +35,40 @@ namespace Attila.Application.Events.Queries
                     .Include(a => a.EventAdditionalDurationRequests)
                     .Include(a => a.EventAdditionalEquipmentRequests)
                     .Include(a => a.EventAdditionalDishRequests)
-                    .Where(a => a.ID == request.EventId).SingleOrDefault();
+                    .Where(a => a.ID == request.EventId);
 
-                var Events = new EventDetailsVM
+                foreach (var item in _searchedEvent)
                 {
-                    ID = _searchedEvent.ID,
-                    EventName = _searchedEvent.EventName,
-                    Type = _searchedEvent.Type,
-                    BookingDate = _searchedEvent.BookingDate,
-                    Description = _searchedEvent.Description,
-                    EventClientID = _searchedEvent.ClientID,
-                    Client = _searchedEvent.Client,
-                    EventDate = _searchedEvent.EventDate,
-                    PackageDetailsID = _searchedEvent.EventPackageID,
-                    Package = _searchedEvent.EventPackage,
-                    Location = _searchedEvent.Location,
-                    Remarks = _searchedEvent.Remarks,
-                    UserID = _searchedEvent.CoordinatorID,
-                    EventStatus = _searchedEvent.EventStatus,
-                    EntryTime = _searchedEvent.EntryTime,
-                    NumberOfGuests = _searchedEvent.NumberOfGuests,
-                    ProgramStart = _searchedEvent.ProgramStart,
-                    ServingTime = _searchedEvent.ServingTime,
-                    LocationType = _searchedEvent.LocationType,
-                    ServingType = _searchedEvent.ServingType,
-                    Theme = _searchedEvent.Theme,
-                    VenueType = _searchedEvent.VenueType
-                };
+                    var Events = new EventDetailsVM
+                    {
+                        ID = item.ID,
+                        EventName = item.EventName,
+                        Type = item.Type,
+                        BookingDate = item.BookingDate,
+                        Description = item.Description,
+                        EventClientID = item.ClientID,
+                        Client = item.Client,
+                        EventDate = item.EventDate,
+                        PackageDetailsID = item.EventPackageID,
+                        Package = item.EventPackage,
+                        Location = item.Location,
+                        Remarks = item.Remarks,
+                        UserID = item.CoordinatorID,
+                        EventStatus = item.EventStatus,
+                        EntryTime = item.EntryTime,
+                        NumberOfGuests = item.NumberOfGuests,
+                        ProgramStart = item.ProgramStart,
+                        ServingTime = item.ServingTime,
+                        LocationType = item.LocationType,
+                        ServingType = item.ServingType,
+                        Theme = item.Theme,
+                        VenueType = item.VenueType
+                    };
+                    _searchEventList.Add(Events);
+                }
+                
 
-                return Events;
+                return _searchEventList;
             }
         }
     }
