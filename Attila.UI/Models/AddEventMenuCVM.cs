@@ -17,7 +17,9 @@ namespace Attila.UI.Models
 
         public List<SelectListItem> Menu { get; set; }
 
-        public int SelectedMenu { get; set; }  
+
+
+        public List<int> SelectedMenu { get; set; }  
         
        public IEnumerable<IGrouping<DishCategory,PackageMenuVM>> Groupings { get; set; }
  

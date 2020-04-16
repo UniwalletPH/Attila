@@ -474,9 +474,27 @@ namespace Attila.UI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddMenu(AddEventCVM addEvent)
+        public async Task<IActionResult> AddMenu(AddEventMenuCVM addEvent)
         {
-            return Json(true);
+            var _evntMenu = new List<EventMenuVM>();
+
+
+            foreach (var item in addEvent.SelectedMenu)
+            {
+                var _menu = new EventMenuVM
+                { 
+                    EventDetailsID = addEvent.EventID,
+                    DishID = item
+                };
+
+                _evntMenu.Add(_menu);
+            }
+
+
+            var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu});
+
+
+            return Json(_rVal);
         }
 
 

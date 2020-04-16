@@ -8,7 +8,7 @@ namespace Attila.Application.Coordinator.Events.Queries
     {
         public int ID { get; set; }
 
-        public int MenuID { get; set; }
+        public int DishID { get; set; }
 
         public int EventDetailsID { get; set; }
     }
