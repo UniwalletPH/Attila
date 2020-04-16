@@ -1,8 +1,6 @@
 ﻿@model Attila.UI.Models.AddEventMenuCVM
 @{
-
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
+    ViewData["Title"] = "Menu Form";
 }
 
 <div class="page-head">
@@ -48,12 +46,12 @@
                         <div class="form-group">
                             <label>Event Name</label>
                             @*@foreach (var item in Model.GroupBy(u => u.Name, (key, items) => new { Name = key, Cost = items.Sum(u => u.Cost) }))
-                            {
-                                <tr>
-                                    <td class="js-export-checkbox">
-                                        @Html.CheckBoxFor(modelItem => Model.Menu[i].ToExport)
-                                    </td>
-                                </tr>}*@
+                                {
+                                    <tr>
+                                        <td class="js-export-checkbox">
+                                            @Html.CheckBoxFor(modelItem => Model.Menu[i].ToExport)
+                                        </td>
+                                    </tr>}*@
 
 
                         </div>
@@ -101,15 +99,15 @@
                 alert("Event menu successfully added!");
                 window.location = "/Events";
             }
-        //}
+            //}
 
-        function OnFailure(e) {
-            console.log(e);
-            alert("failed!");
-            window.location = "/Events/MenuForm";
-        }
+            function OnFailure(e) {
+                console.log(e);
+                alert("failed!");
+                window.location = "/Events/MenuForm";
+            }
 
-    </script> 
+    </script>
 }
 @section Styles{
     <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
