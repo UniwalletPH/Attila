@@ -73,7 +73,10 @@ namespace Attila.Application.Events.Queries
                         LocationType = item.LocationType,
                         ServingType = item.ServingType,
                         Theme = item.Theme,
-                        VenueType = item.VenueType
+                        VenueType = item.VenueType,
+                        AdditionalDish = _additionalDish,
+                        AdditionalDuration = _additionalDuration,
+                        AdditionalEquipment = _additionalEquipment
                     };
                     _searchEventList.Add(Events);
                 }

@@ -9,7 +9,7 @@ namespace Attila.Application.Events.Commands
 {
     public class AddAdditionalDurationRequestCommand : IRequest<bool>
     {
-        public AdditionalDurationRequestListVM AdditionalPackage { get; set; }
+        public AdditionalDurationRequestVM AdditionalPackage { get; set; }
 
        
         public class AddAdditionalDurationRequestCommandHandler : IRequestHandler<AddAdditionalDurationRequestCommand, bool>

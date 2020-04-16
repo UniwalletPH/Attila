@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Queries
 {
-    public class GetAdditionalDurationRequestListQuery : IRequest<IEnumerable<AdditionalDurationRequestListVM>>
+    public class GetAdditionalDurationRequestListQuery : IRequest<List<AdditionalDurationRequestVM>>
     {
         public int EventID { get; set; }
 
-        public class GetAdditionalDurationReuestListQueryHandler : IRequestHandler<GetAdditionalDurationRequestListQuery, IEnumerable<AdditionalDurationRequestListVM>>
+        public class GetAdditionalDurationReuestListQueryHandler : IRequestHandler<GetAdditionalDurationRequestListQuery, List<AdditionalDurationRequestVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -23,12 +23,12 @@ namespace Attila.Application.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<AdditionalDurationRequestListVM>> Handle(GetAdditionalDurationRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<AdditionalDurationRequestVM>> Handle(GetAdditionalDurationRequestListQuery request, CancellationToken cancellationToken)
             {
                 var _viewAdditionalDuration = await dbContext.EventAdditionalDurationRequests
                     .Where(a => a.EventID == request.EventID)
                     .Include(a => a.Event)
-                    .Select(a => new AdditionalDurationRequestListVM 
+                    .Select(a => new AdditionalDurationRequestVM 
                 {
                     ID = a.ID,
                     EventDetailsID = a.EventID,

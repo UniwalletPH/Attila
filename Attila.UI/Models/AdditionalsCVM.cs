@@ -23,7 +23,7 @@ namespace Attila.UI.Models
 
         public AdditionalEquipmentRequestListVM AdditionalEquipmentRequest { get; set; }
 
-        public AdditionalDurationRequestListVM AdditionalDurationRequest { get; set; }
+        public AdditionalDurationRequestVM AdditionalDurationRequest { get; set; }
 
 
         public List<AdditionalEquipmentRequestListVM> EquipmentRequested { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Attila.Application.Coordinator.Events.Queries
 {
-    public class AdditionalDurationRequestListVM
+    public class AdditionalDurationRequestVM
     {
         public int ID { get; set; }
 
