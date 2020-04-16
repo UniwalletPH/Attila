@@ -4,14 +4,16 @@ using Attila.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    partial class AttilaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200416061011_AdditionalsTableModified")]
+    partial class AdditionalsTableModified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

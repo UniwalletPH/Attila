@@ -95,7 +95,7 @@
                                 <td> @Html.DisplayFor(modelItem => item.Coordinator.Name) | @Html.DisplayFor(modelItem => item.Coordinator.Position)  </td>
                                 <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td>
                                 <td>    <button type="button" class="btn dark btn-outline add-menu"> Add Menu Details</button>  </td>
-                                <td>    <button type="button" class="btn dark btn-outline add-menu"> Add Additional</button>  </td>
+                                <td>    <button type="button" class="btn dark btn-outline add-additional"> Add Additional</button>  </td>
 
                                 <td>    <button type="button" class="btn dark btn-outline change-status"> Submit For Approval</button>  </td>
                             </tr>
@@ -349,7 +349,16 @@
 
             });
 
+             $(document).on('click', 'tr .add-additional', function (e) {
 
+                id = $(this).closest('tr').attr('data-id');
+
+
+                var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
+                window.location.href = url.replace('__id__', id);
+
+
+            });
         
             $(document).on('click', 'tr .change-status', function (e) {
 
