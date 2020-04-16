@@ -31,7 +31,7 @@ namespace Attila.Application.Events.Commands
                 _updatedEventDetails.NumberOfGuests = request.UpdateEvent.NumberOfGuests;
                 _updatedEventDetails.EventPackageID = request.UpdateEvent.PackageDetailsID;
                 _updatedEventDetails.Description = request.UpdateEvent.Description;
-                _updatedEventDetails.EventDate = request.UpdateEvent.EventDate;
+                _updatedEventDetails.EventDate = request.UpdateEvent.EventDate.Date;
                 _updatedEventDetails.EventStatus = Status.Processing;
                 _updatedEventDetails.Location = request.UpdateEvent.Location;
                 _updatedEventDetails.Type = request.UpdateEvent.Type;
