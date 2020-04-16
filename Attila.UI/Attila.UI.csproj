@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Notification\**" />
     <Compile Remove="Views\Old\**" />
-    <Content Remove="Views\Notification\**" />
     <Content Remove="Views\Old\**" />
-    <EmbeddedResource Remove="Views\Notification\**" />
     <EmbeddedResource Remove="Views\Old\**" />
-    <None Remove="Views\Notification\**" />
     <None Remove="Views\Old\**" />
   </ItemGroup>
 

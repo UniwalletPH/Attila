@@ -11,11 +11,11 @@ namespace Attila.UI.Controllers
 {
 
     [Authorize(Roles = "Admin,Coordinator,InventoryManager, ")]
-    public class NotificationsController : BaseController
+    public class NotificationController : BaseController
     {
         private readonly IMediator mediator;
 
-        public NotificationsController(IMediator mediator)
+        public NotificationController(IMediator mediator)
         {
             this.mediator = mediator;
         }
