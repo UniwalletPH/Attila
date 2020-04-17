@@ -29,13 +29,7 @@ namespace Attila.UI.Controllers
         
         }
 
-        [HttpGet]
-        public async Task<IActionResult> EventRequestDetails(int id)
-        {
-            var _details = await mediator.Send(new SearchEventByIdQuery { EventId = id });
-          
-            return View(_details);
-        }
+      
 
         [HttpGet]
         public async Task<IActionResult> FoodRequestDetails(int id)
