@@ -71,6 +71,9 @@ namespace Attila.Application.Events.Queries
                         ServingType = item.ServingType,
                         Theme = item.Theme,
                         VenueType = item.VenueType,
+                        ToPay = item.ToPay,
+                        EventMenu = item.EventMenus,
+
                         AdditionalDish = _additionalDish,
                         AdditionalDuration = _additionalDuration,
                         AdditionalEquipment = _additionalEquipment
