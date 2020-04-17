@@ -162,7 +162,7 @@ namespace Attila.UI.Controllers
             { 
                 Message = "New Event Request Received",
                 TargetUserID = -1,
-                MethodName = "EventRequestDetails",
+                MethodName = "Event/Details",
                 RequestID = response 
             });
                    
@@ -225,7 +225,11 @@ namespace Attila.UI.Controllers
                 Theme = _eventDetails.Theme,
                 VenueType = _eventDetails.VenueType,
                 BookingDate = _eventDetails.BookingDate,
-                ID = _eventDetails.ID
+                ID = _eventDetails.ID,
+               AdditionalDish =_eventDetails.AdditionalDish,
+               AdditionalDuration = _eventDetails.AdditionalDuration,
+               AdditionalEquipment= _eventDetails.AdditionalEquipment,
+               ToPay = _eventDetails.ToPay
 
                 
 
