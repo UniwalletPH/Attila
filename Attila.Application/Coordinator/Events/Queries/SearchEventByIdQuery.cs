@@ -28,61 +28,70 @@ namespace Attila.Application.Events.Queries
 
             public async Task<EventDetailsVM> Handle(SearchEventByIdQuery request, CancellationToken cancellationToken)
             {
-                //var _searchedEvent = dbContext.Events.Find(request.EventId);
-
-                var _searchEventList = new List<EventDetailsVM>();
-
+   
                 var _searchedEvent = dbContext.Events
                     .Include(a => a.EventMenus)
                     .Include(a => a.EventPackage)
                     .Include(a => a.Client)
-                    .Include(a => a.EventAdditionalDurationRequests)
-                    .Include(a => a.EventAdditionalEquipmentRequests)
-                    .Include(a => a.EventAdditionalDishRequests)
-                    .Where(a => a.ID == request.EventId).ToList();
+                    .Where(a => a.ID == request.EventId).SingleOrDefault();
 
-                var _additionalEquipment = await mediator.Send(new GetAdditionalEquipmentRequestListQuery { EventID = request.EventId });
-                var _additionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery { EventID = request.EventId });
-                var _additionalDish = await mediator.Send(new GetAdditionalDishRequestListQuery { EventID = request.EventId });
+                var _additionalEquipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery 
+                { 
+                    EventID = request.EventId
+                });
 
-                foreach (var item in _searchedEvent)
+                var _additionalDishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery 
+                { 
+                    EventID = request.EventId
+                });
+
+                var _collectionAdditionalEquipment = await mediator.Send(new GetAdditionalEquipmentCollectionQuery 
+                { 
+                    EventAdditionalEquipmentRequestID =  _additionalEquipmentRequest.RequestID
+                });
+
+                var _collectionAdditionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery 
+                { 
+                    EventID = request.EventId 
+                });
+
+                var _collectionAdditionalDish = await mediator.Send(new GetAdditionalDishCollectionQuery 
+                { 
+                    EventAdditionalDishRequestID = _additionalDishRequest.RequestID 
+                });
+
+                var _fullEventDetails = new EventDetailsVM
                 {
-                    var Events = new EventDetailsVM
-                    {
-                        ID = item.ID,
-                        EventName = item.EventName,
-                        Type = item.Type,
-                        BookingDate = item.BookingDate,
-                        Description = item.Description,
-                        EventClientID = item.ClientID,
-                        Client = item.Client,
-                        EventDate = item.EventDate,
-                        PackageDetailsID = item.EventPackageID,
-                        Package = item.EventPackage,
-                        Location = item.Location,
-                        Remarks = item.Remarks,
-                        UserID = item.CoordinatorID,
-                        EventStatus = item.EventStatus,
-                        EntryTime = item.EntryTime,
-                        NumberOfGuests = item.NumberOfGuests,
-                        ProgramStart = item.ProgramStart,
-                        ServingTime = item.ServingTime,
-                        LocationType = item.LocationType,
-                        ServingType = item.ServingType,
-                        Theme = item.Theme,
-                        VenueType = item.VenueType,
-                        ToPay = item.ToPay,
-                        EventMenu = item.EventMenus,
+                    ID = _searchedEvent.ID,
+                    EventName = _searchedEvent.EventName,
+                    Type = _searchedEvent.Type,
+                    BookingDate = _searchedEvent.BookingDate,
+                    Description = _searchedEvent.Description,
+                    EventClientID = _searchedEvent.ClientID,
+                    Client = _searchedEvent.Client,
+                    EventDate = _searchedEvent.EventDate,
+                    PackageDetailsID = _searchedEvent.EventPackageID,
+                    Package = _searchedEvent.EventPackage,
+                    Location = _searchedEvent.Location,
+                    Remarks = _searchedEvent.Remarks,
+                    UserID = _searchedEvent.CoordinatorID,
+                    EventStatus = _searchedEvent.EventStatus,
+                    EntryTime = _searchedEvent.EntryTime,
+                    NumberOfGuests = _searchedEvent.NumberOfGuests,
+                    ProgramStart = _searchedEvent.ProgramStart,
+                    ServingTime = _searchedEvent.ServingTime,
+                    LocationType = _searchedEvent.LocationType,
+                    ServingType = _searchedEvent.ServingType,
+                    Theme = _searchedEvent.Theme,
+                    VenueType = _searchedEvent.VenueType,
+                    ToPay = _searchedEvent.ToPay,
+                    EventMenu = _searchedEvent.EventMenus,
+                    AdditionalDish = _collectionAdditionalDish,
+                    AdditionalDuration = _collectionAdditionalDuration,
+                    AdditionalEquipment = _collectionAdditionalEquipment
+                };
 
-                        AdditionalDish = _additionalDish,
-                        AdditionalDuration = _additionalDuration,
-                        AdditionalEquipment = _additionalEquipment
-                    };
-                    _searchEventList.Add(Events);
-                }
-
-
-                return _searchEventList.SingleOrDefault();
+                return _fullEventDetails;
             }
         }
     }

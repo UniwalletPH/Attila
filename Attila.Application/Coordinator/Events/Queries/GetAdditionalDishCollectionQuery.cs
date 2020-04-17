@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Events.Queries
 {
-    public class GetAdditionalDishRequestListQuery : IRequest<List<AdditionalDishVM>>
+    public class GetAdditionalDishCollectionQuery : IRequest<List<AdditionalDishVM>>
     {
-        public int EventID { get; set; }
+        public int EventAdditionalDishRequestID { get; set; }
 
-        public class GetAdditionalDishRequestListQueryHandler : IRequestHandler<GetAdditionalDishRequestListQuery, List<AdditionalDishVM>>
+        public class GetAdditionalDishRequestListQueryHandler : IRequestHandler<GetAdditionalDishCollectionQuery, List<AdditionalDishVM>>
         {
             public readonly IAttilaDbContext dbContext;
 
@@ -24,10 +24,10 @@ namespace Attila.Application.Coordinator.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<AdditionalDishVM>> Handle(GetAdditionalDishRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<AdditionalDishVM>> Handle(GetAdditionalDishCollectionQuery request, CancellationToken cancellationToken)
             {
                 var _viewAdditionalDish = await dbContext.EventDishRequestCollection
-                    .Where(a => a.AdditionalDishID == request.EventID)
+                    .Where(a => a.AdditionalDishID == request.EventAdditionalDishRequestID)
                     .Include(a => a.Dish)                    
                     .Select(a => new AdditionalDishVM
                     {

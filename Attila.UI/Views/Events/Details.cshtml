@@ -164,7 +164,8 @@
 
                                             <th> Equipment Code </th>
                                             <th> Equipment </th>
-                                            <th> Requested Quantity </th>
+                                            <th> Quantity </th>
+                                            <th> Unit  </th>
 
                                         </tr>
                                     </thead>
@@ -176,6 +177,8 @@
                                                 <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
+
 
                                             </tr>
                                         }
@@ -228,11 +231,13 @@
                             {
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label>Hours</label>
-                                        <input type="time" class="form-control" placeholder="" asp-for="EventDetails.AdditionalDuration" readonly>
+                                        <label>Additional Duration </label>
                                     </div>
 
+                                     @Html.DisplayFor(x => x.EventDetails.AdditionalDuration[0].Duration)
                                 </div>
+
+                               
 
 
                             }

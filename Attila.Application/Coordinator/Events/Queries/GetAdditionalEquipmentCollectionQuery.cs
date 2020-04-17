@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Events.Queries
 {
-    public class GetAdditionalEquipmentRequestListQuery : IRequest<List<AdditionalEquipmentRequestListVM>>
+    public class GetAdditionalEquipmentCollectionQuery : IRequest<List<AdditionalEquipmentRequestListVM>>
     {
-        public int EventID { get; set; }
+        public int EventAdditionalEquipmentRequestID { get; set; }
 
-        public class GetAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentRequestListQuery, List<AdditionalEquipmentRequestListVM>>
+        public class GetAdditionalEquipmentRequestListQueryHandler : IRequestHandler<GetAdditionalEquipmentCollectionQuery, List<AdditionalEquipmentRequestListVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetAdditionalEquipmentRequestListQueryHandler(IAttilaDbContext dbContext)
@@ -22,10 +22,10 @@ namespace Attila.Application.Events.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<AdditionalEquipmentRequestListVM>> Handle(GetAdditionalEquipmentRequestListQuery request, CancellationToken cancellationToken)
+            public async Task<List<AdditionalEquipmentRequestListVM>> Handle(GetAdditionalEquipmentCollectionQuery request, CancellationToken cancellationToken)
             {
                 var _viewAdditionalEquipment = await dbContext.EventEquipmentRequestCollections
-                    .Where(a => a.EventAdditionalEquipmentRequestID == request.EventID)
+                    .Where(a => a.EventAdditionalEquipmentRequestID == request.EventAdditionalEquipmentRequestID)
                     .Include(a => a.Equipment)
                     .Select(a => new AdditionalEquipmentRequestListVM 
                 {

@@ -53,9 +53,9 @@
                                 <thead>
                                     <tr>
 
-                                        <th> Equipment Code </th>
-                                        <th> Equipment </th>
+                                        <th> Equipment</th>
                                         <th> Requested Quantity </th>
+                                        <th> Unit </th>
 
                                     </tr>
                                 </thead>
@@ -64,9 +64,9 @@
                                     @foreach (var item in Model.EquipmentRequested)
                                     {
                                         <tr data-id="@item.ID">
-                                            <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
-                                            <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
                                             <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
 
                                         </tr>
                                     }
