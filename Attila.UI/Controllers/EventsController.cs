@@ -800,6 +800,7 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {
+
             return Json(true);
         }
 

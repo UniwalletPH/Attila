@@ -214,8 +214,6 @@
                                             <tr data-id="@item.ID">
                                                 <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-
-
                                             </tr>
                                         }
 
@@ -231,20 +229,21 @@
                             {
                                 <div class="form-body">
                                     <div class="form-group">
-                                        <label>Additional Duration </label>
+                                        <label>Additional Duration [Hours]</label>
                                     </div>
 
-                                     @Html.DisplayFor(x => x.EventDetails.AdditionalDuration[0].Duration)
+                                    @foreach (var item in Model.EventDetails.AdditionalDuration)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.Duration.Hours)
+                                    }
+
+
                                 </div>
-
-                               
-
-
                             }
 
                         }
 
-
+                        
 </form>
 
 
