@@ -208,43 +208,78 @@
 
                                     @Html.DisplayFor(modelItem => item.Duration.Hours)
                                 }
-
-
                             }
 
                         }
-                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
+                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved" || Model.EventDetails.EventStatus.ToString() == "Declined")
                             {
                                 if (User.IsInRole("Admin"))
                                 {
 
-                                <label>Payment  </label>
-                                <input type="number" class="form-control" placeholder="" readonly>
+                                    <label>Payment  </label>
+                                    <input type="number" class="form-control" placeholder="" readonly>
 
-                                    }
+                                }
+                                else if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                                    </text>
                                 }
                             }
-
-
-                        @{ if (Model.EventDetails.EventStatus.ToString() != "Approved" || Model.EventDetails.EventStatus.ToString() != "Declined")
+                            else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
                             {
-
-
-                                <text>
-                                    <button type="button" id="btnEdit" class="btn blue"> Edit</button>
-
-
-                                </text>
-
-
-
-
-                                <text>
-                                    <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
-                                    <button type="button" id="btnDecline" class="btn blue">Reject</button>
-                                </text>
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
+                                        <button type="button" id="btnDecline" class="btn blue">Reject</button>
+                                    </text>
+                                }
+                                else if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                                    </text>
                                 }
                             }
+                            else if (Model.EventDetails.EventStatus.ToString() == "Processing")
+                            {
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                                    </text>
+                                }
+                               
+                            }
+
+
+
+
+
+                        }
+
+
+                        @*@{ if (Model.EventDetails.EventStatus.ToString() != "Approved" || Model.EventDetails.EventStatus.ToString() != "Declined")
+            {
+
+
+                <text>
+                    <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+
+
+                </text>
+
+
+
+
+                <text>
+                    <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
+                    <button type="button" id="btnDecline" class="btn blue">Reject</button>
+                </text>
+            }
+        }*@
 
 </form>
 
