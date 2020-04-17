@@ -420,33 +420,7 @@ namespace Attila.UI.Controllers
 
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
-            var x = new EventDetailsVM
-            {
-                EventName = _eventDetails.EventName,
-                Type = _eventDetails.Type,
-                Description = _eventDetails.Description,
-                EventClientID = _eventDetails.EventClientID,
-                EventDate = _eventDetails.EventDate,
-                PackageDetailsID = _eventDetails.PackageDetailsID,
-                Location = _eventDetails.Location,
-                Remarks = _eventDetails.Remarks,
-                UserID = _eventDetails.UserID,
-                EventStatus = _eventDetails.EventStatus,
-                EntryTime = _eventDetails.EntryTime,
-                NumberOfGuests = _eventDetails.NumberOfGuests,
-                ProgramStart = _eventDetails.ProgramStart,
-                ServingTime = _eventDetails.ServingTime,
-                LocationType = _eventDetails.LocationType,
-                ServingType = _eventDetails.ServingType,
-                Theme = _eventDetails.Theme,
-                VenueType = _eventDetails.VenueType,
-                BookingDate = _eventDetails.BookingDate,
-                ID = _eventDetails.ID
-
-
-
-            };
-
+           
             if (_eventDetails != null)
             {
                 var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
@@ -462,7 +436,7 @@ namespace Attila.UI.Controllers
 
                 AddEventMenuCVM eventDetails = new AddEventMenuCVM
                 {
-                    Event = x,
+                    Event = _eventDetails,
                     MenuList = _addmenu,
                     EventID = EventID,
                     Menu = _list,

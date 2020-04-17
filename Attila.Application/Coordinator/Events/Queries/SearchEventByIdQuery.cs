@@ -2,8 +2,6 @@
 using Attila.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -35,30 +33,6 @@ namespace Attila.Application.Events.Queries
                     .Include(a => a.Client)
                     .Where(a => a.ID == request.EventId).SingleOrDefault();
 
-                var _additionalEquipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery 
-                { 
-                    EventID = request.EventId
-                });
-
-                var _additionalDishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery 
-                { 
-                    EventID = request.EventId
-                });
-
-                var _collectionAdditionalEquipment = await mediator.Send(new GetAdditionalEquipmentCollectionQuery 
-                { 
-                    EventAdditionalEquipmentRequestID =  _additionalEquipmentRequest.RequestID
-                });
-
-                var _collectionAdditionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery 
-                { 
-                    EventID = request.EventId 
-                });
-
-                var _collectionAdditionalDish = await mediator.Send(new GetAdditionalDishCollectionQuery 
-                { 
-                    EventAdditionalDishRequestID = _additionalDishRequest.RequestID 
-                });
 
                 var _fullEventDetails = new EventDetailsVM
                 {
@@ -86,10 +60,56 @@ namespace Attila.Application.Events.Queries
                     VenueType = _searchedEvent.VenueType,
                     ToPay = _searchedEvent.ToPay,
                     EventMenu = _searchedEvent.EventMenus,
-                    AdditionalDish = _collectionAdditionalDish,
-                    AdditionalDuration = _collectionAdditionalDuration,
-                    AdditionalEquipment = _collectionAdditionalEquipment
+                    
                 };
+
+
+                var _additionalEquipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery 
+                { 
+                    EventID = request.EventId
+                });
+
+                if (_additionalEquipmentRequest != null)
+                {
+                    var _collectionAdditionalEquipment = await mediator.Send(new GetAdditionalEquipmentCollectionQuery
+                    {
+                        EventAdditionalEquipmentRequestID = _additionalEquipmentRequest.RequestID
+                    });
+
+                    _fullEventDetails.AdditionalEquipment = _collectionAdditionalEquipment;
+                }
+
+
+
+                var _additionalDishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery 
+                { 
+                    EventID = request.EventId
+                });
+
+
+                if (_additionalDishRequest != null)
+                {
+                    var _collectionAdditionalDish = await mediator.Send(new GetAdditionalDishCollectionQuery
+                    {
+                        EventAdditionalDishRequestID = _additionalDishRequest.RequestID
+                    });
+
+                    _fullEventDetails.AdditionalDish = _collectionAdditionalDish;
+                }
+
+
+
+                var _collectionAdditionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery 
+                { 
+                    EventID = request.EventId 
+                });
+
+                if (_collectionAdditionalDuration != null)
+                {
+                    _fullEventDetails.AdditionalDuration = _collectionAdditionalDuration;
+                }
+
+               
 
                 return _fullEventDetails;
             }
