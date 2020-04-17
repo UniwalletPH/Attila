@@ -162,7 +162,7 @@ namespace Attila.UI.Controllers
             { 
                 Message = "New Event Request Received",
                 TargetUserID = -1,
-                MethodName = "Event/Details",
+                MethodName = "/Events/Details",
                 RequestID = response 
             });
                    
@@ -363,7 +363,7 @@ namespace Attila.UI.Controllers
             { 
                 Message ="Your request has been Approved",
                 TargetUserID = response.Coordinator.ID,
-                MethodName = "",
+                MethodName = "/Events/Details",
                 RequestID = response.ID
             });
 
@@ -381,7 +381,7 @@ namespace Attila.UI.Controllers
             { 
                 Message = "Your request has been Declined",
                 TargetUserID = response.Coordinator.ID,
-                MethodName = "",
+                MethodName = "/Events/Details",
                 RequestID = response.ID
             });
 
@@ -514,7 +514,7 @@ namespace Attila.UI.Controllers
 
             if (_equipmentRequest != null && _dishRequest != null)
             {
-                var _equipmentRequested = await mediator.Send(new Application.Events.Queries.GetAdditionalEquipmentCollectionQuery 
+                var _equipmentRequested = await mediator.Send(new GetAdditionalEquipmentCollectionQuery 
                 {
                     EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID 
                 });

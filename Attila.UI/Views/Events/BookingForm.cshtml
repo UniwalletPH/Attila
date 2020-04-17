@@ -253,15 +253,9 @@
         //    alert("failed!");
         //}
 
-        function OnSuccess(result) {
-            if (result == true) {
+        function OnSuccess(result) { 
                 $("#successrequests").modal('show');
-            }
-
-            else if (result == false) {
-                alert("Failed!");
-                window.location = "/Events/BookingForm";
-            }
+             
         }
 
         function OnFailure(result) {
