@@ -3,6 +3,7 @@ using Attila.Application.Inventory_Manager.Foods.Queries;
 using Attila.Domain.Entities;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,15 +26,28 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
                     DateTimeRequest = DateTime.Now,
-                    Status = request.MyFoodRestockRequestVM.Status,
+                    Status = Status.Processing,
                     InventoryManagerID = request.MyFoodRestockRequestVM.UserID
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
+
+
+                foreach (var item in request.MyFoodRestockRequestVM.FoodRequestCollection)
+                {
+                    FoodRequestCollection _foodRequestCollection = new FoodRequestCollection 
+                    {
+                        FoodID = item.FoodID,
+                        FoodRestockRequestID = _foodRestockRequest.ID,
+                        Quantity = item.Quantity
+                    };
+
+                    dbContext.FoodRequestCollections.Add(_foodRequestCollection);
+                }
+
+
                 await dbContext.SaveChangesAsync();
-
                 return _foodRestockRequest.ID;
-
             }
         }
     }
