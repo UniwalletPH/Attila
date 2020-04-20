@@ -27,7 +27,7 @@ namespace Attila.Application.Admin.Foods.Queries
             {
                 var _request = dbContext.FoodRequestCollections
                     .Where(a => a.FoodRestockRequestID == request.RequestID)
-                    .Include(a => a.Food);
+                    .Include(a => a.Food).ToList();
 
                 var _foodCollectionOfRequest = new List<FoodCollectionVM>();
 

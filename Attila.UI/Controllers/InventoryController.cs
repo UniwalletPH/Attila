@@ -95,7 +95,20 @@ namespace Attila.UI.Controllers
                 MyInventoriesDeliveryVM = _inventory
             });
 
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Delivery",
+                TargetUserID = -1,
+                MethodName = "/Inventory/Details",
+                RequestID = response
+
+            });
+
             return Json(response);
+
+           
+
+
         }
 
 
@@ -523,9 +536,9 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> Details(int DeliveryID)
+        public async Task<IActionResult> Details(int id)
         {
-            var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = DeliveryID });
+            var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = id });
 
             return View(_inventoryDelivery);
         }

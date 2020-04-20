@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Shared.Commands
 {
-    public class AddInventoryDeliveryCommand : IRequest<bool>
+    public class AddInventoryDeliveryCommand : IRequest<int>
     {
         public InventoriesDeliveryVM MyInventoriesDeliveryVM { get; set; }
 
-        public class AddInventoryDeliveryCommandHandler : IRequestHandler<AddInventoryDeliveryCommand, bool>
+        public class AddInventoryDeliveryCommandHandler : IRequestHandler<AddInventoryDeliveryCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -20,7 +20,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(AddInventoryDeliveryCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(AddInventoryDeliveryCommand request, CancellationToken cancellationToken)
             {
                 Delivery _equipmentRestock = new Delivery
                 {
@@ -34,7 +34,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
                 dbContext.Deliveries.Add(_equipmentRestock);
                 await dbContext.SaveChangesAsync();
 
-                return true;
+                return _equipmentRestock.ID;
             }
         }
     }
