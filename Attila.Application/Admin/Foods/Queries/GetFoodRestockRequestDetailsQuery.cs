@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Foods.Queries
 {
-    public class GetFoodRequestDetailsQuery : IRequest<List<FoodCollectionVM>>
+    public class GetFoodRestockRequestDetailsQuery : IRequest<List<FoodCollectionVM>>
     {
         public int RequestID { get; set; }
 
-        public class GetFoodRequestDetailsQueryHandler : IRequestHandler<GetFoodRequestDetailsQuery, List<FoodCollectionVM>>
+        public class GetFoodRequestDetailsQueryHandler : IRequestHandler<GetFoodRestockRequestDetailsQuery, List<FoodCollectionVM>>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -23,7 +23,7 @@ namespace Attila.Application.Admin.Foods.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<List<FoodCollectionVM>> Handle(GetFoodRequestDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<List<FoodCollectionVM>> Handle(GetFoodRestockRequestDetailsQuery request, CancellationToken cancellationToken)
             {
                 var _request = dbContext.FoodRequestCollections
                     .Where(a => a.FoodRestockRequestID == request.RequestID)

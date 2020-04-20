@@ -15,6 +15,8 @@ using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Commands;
 using Microsoft.AspNetCore.Authorization;
 using Attila.Application.Notification.Commands;
+using Attila.Application.Admin.Equipments.Queries;
+using Attila.Application.Admin.Foods.Queries;
 
 namespace Attila.UI.Controllers
 {
@@ -34,12 +36,16 @@ namespace Attila.UI.Controllers
         {
 
             var _getDetails = await mediator.Send(new GetInventoryDataQuery());
+            var _pendingEquipmentRestockRequests = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
+            var _pendingFoodRestockRequests = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
 
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
             {
                 FoodListVM = _getDetails.FoodListVM,
                 EquipmentListVM = _getDetails.EquipmentListVM,
-                InventoryDeliveryVM = _getDetails.InventoryDeliveryVM
+                InventoryDeliveryVM = _getDetails.InventoryDeliveryVM,
+                EquipmentRequestList = _pendingEquipmentRestockRequests,
+                FoodRequestList = _pendingFoodRestockRequests
             };
 
             return View(_inventoryDataVM);

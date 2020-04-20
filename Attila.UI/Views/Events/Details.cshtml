@@ -240,12 +240,15 @@
                                         </div>
 
                                     </div>
-
-                                    @Html.DisplayFor(modelItem => item.Duration.Hours)
+                                    <div class="form-group">
+                                        @Html.DisplayFor(modelItem => item.Duration.Hours)
+                                    </div>
+                                  
                                 }
                             }
 
                         }
+
                         @{ if (Model.EventDetails.EventStatus.ToString() == "Approved" || Model.EventDetails.EventStatus.ToString() == "Declined")
                             {
                                 if (User.IsInRole("Admin"))

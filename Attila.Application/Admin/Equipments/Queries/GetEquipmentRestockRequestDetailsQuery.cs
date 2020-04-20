@@ -11,17 +11,18 @@ using Attila.Application.Admin.Equipments.Commands;
 
 namespace Attila.Application.Admin.Equipments.Queries
 {
-    public class GetEquipmentRequestDetailsQuery : IRequest<List<EquipmentCollectionVM>>
+    public class GetEquipmentRestockRequestDetailsQuery : IRequest<List<EquipmentCollectionVM>>
     {
         public int RequestID { get; set; }
-        public class GetEquipmentRequestDetailsQueryHandler : IRequestHandler<GetEquipmentRequestDetailsQuery, List<EquipmentCollectionVM>>
+
+        public class GetEquipmentRequestDetailsQueryHandler : IRequestHandler<GetEquipmentRestockRequestDetailsQuery, List<EquipmentCollectionVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public GetEquipmentRequestDetailsQueryHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<List<EquipmentCollectionVM>> Handle(GetEquipmentRequestDetailsQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentCollectionVM>> Handle(GetEquipmentRestockRequestDetailsQuery request, CancellationToken cancellationToken)
             {
                 
                 var _collection = dbContext.EquipmentRequestCollections
@@ -32,7 +33,7 @@ namespace Attila.Application.Admin.Equipments.Queries
 
                 foreach (var item in _collection)
                 {
-                    var _equipment = new EquipmentCollectionVM
+                    var EquipmentCollection = new EquipmentCollectionVM
                     {
                         ID = item.ID,
                         Equipment = item.Equipment,
@@ -40,7 +41,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                        
                     };
 
-                    _equipmentRequests.Add(_equipment);
+                    _equipmentRequests.Add(EquipmentCollection);
                 }
 
                 return _equipmentRequests;

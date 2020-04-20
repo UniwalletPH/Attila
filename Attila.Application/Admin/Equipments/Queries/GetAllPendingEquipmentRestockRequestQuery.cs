@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Admin.Equipments.Queries
 {
-    public class GetPendingEquipmentRestockRequestQuery : IRequest<IEnumerable<EquipmentRequestVM>>
+    public class GetAllPendingEquipmentRestockRequestQuery : IRequest<List<EquipmentRequestVM>>
     {
-        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<GetPendingEquipmentRestockRequestQuery, IEnumerable<EquipmentRequestVM>>
+        public class ViewPendingEquipmentRestockRequestQueryHandler : IRequestHandler<GetAllPendingEquipmentRestockRequestQuery, List<EquipmentRequestVM>>
         {
             private readonly IAttilaDbContext dbContext;
             public ViewPendingEquipmentRestockRequestQueryHandler(IAttilaDbContext dbContext)
@@ -18,7 +18,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                 this.dbContext = dbContext;
             }
 
-            public async Task<IEnumerable<EquipmentRequestVM>> Handle(GetPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
+            public async Task<List<EquipmentRequestVM>> Handle(GetAllPendingEquipmentRestockRequestQuery request, CancellationToken cancellationToken)
             {
                 var _listPendingRequest = new List<EquipmentRequestVM>();
 
@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Equipments.Queries
 
                 foreach (var item in _pendingRequest)
                 {
-                    var Equipments = new EquipmentRequestVM
+                    var EquipmentRestockRequestList = new EquipmentRequestVM
                     {
                         ID = item.ID,
                         DateTimeRequest = item.DateTimeRequest,
@@ -36,7 +36,7 @@ namespace Attila.Application.Admin.Equipments.Queries
                         InventoryManager = item.InventoryManager
                     };
 
-                    _listPendingRequest.Add(Equipments);
+                    _listPendingRequest.Add(EquipmentRestockRequestList);
                 }
 
                 return _listPendingRequest;

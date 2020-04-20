@@ -28,8 +28,8 @@ namespace Attila.UI.Controllers
          
         public async Task<IActionResult> Index()
         {
-            var _pendingFoodReq = await mediator.Send(new GetPendingFoodRestockRequestQuery { });
-            var _pendingEquimentReq = await mediator.Send(new GetPendingEquipmentRestockRequestQuery { });
+            var _pendingFoodReq = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
+            var _pendingEquimentReq = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
             var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
             var _getInventoryDeliveryList = await mediator.Send(new GetInventoryDeliveryQuery());
 
