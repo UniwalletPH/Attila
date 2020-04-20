@@ -176,75 +176,15 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Details(int EventID) {
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
-            var _packageNames = await mediator.Send(new GetEventPackageQuery());
-            var _clientNames = await mediator.Send(new GetClientListQuery());
-
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            List<SelectListItem> _clientlist = new List<SelectListItem>();
-            foreach (var item in _packageNames)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Name
-                });
-
-            }
-
-            foreach (var item in _clientNames)
-            {
-                _clientlist.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Name,
-                });
-            }
-
-
-            var _details = new EventDetailsVM
-            {
-                EventName = _eventDetails.EventName,
-                Type = _eventDetails.Type,  
-                Description = _eventDetails.Description,
-                EventClientID = _eventDetails.EventClientID,
-                Client = _eventDetails.Client,
-                EventDate = _eventDetails.EventDate,
-                PackageDetailsID = _eventDetails.PackageDetailsID,
-                Package = _eventDetails.Package,
-                Location = _eventDetails.Location,
-                Remarks = _eventDetails.Remarks,
-                UserID = _eventDetails.UserID,
-                EventStatus = _eventDetails.EventStatus,
-                EntryTime = _eventDetails.EntryTime,
-                NumberOfGuests = _eventDetails.NumberOfGuests,
-                ProgramStart = _eventDetails.ProgramStart,
-                ServingTime = _eventDetails.ServingTime,
-                LocationType = _eventDetails.LocationType,
-                ServingType = _eventDetails.ServingType,
-                Theme = _eventDetails.Theme,
-                VenueType = _eventDetails.VenueType,
-                BookingDate = _eventDetails.BookingDate,
-                ID = _eventDetails.ID,
-               AdditionalDish =_eventDetails.AdditionalDish,
-               AdditionalDuration = _eventDetails.AdditionalDuration,
-               AdditionalEquipment= _eventDetails.AdditionalEquipment,
-               ToPay = _eventDetails.ToPay,
-               EventMenu = _eventDetails.EventMenu
-
-                
-
-            };
-
-
-
-            var _addEventList = new ViewEventCVM();
-            _addEventList.PackageList = _list;
-            _addEventList.ClientList = _clientlist;
-            _addEventList.EventDetails = _details;
-            return View(_addEventList);
+            
+            return View (new ViewEventCVM
+            { 
+                EventDetails = _eventDetails          
+            });
  
         }
+
+
 
         [HttpGet]
         public async Task<IActionResult> Update(int EventID)

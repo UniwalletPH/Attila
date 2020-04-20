@@ -28,7 +28,6 @@ namespace Attila.Application.Events.Queries
             {
    
                 var _searchedEvent = dbContext.Events
-                    .Include(a => a.EventMenus)
                     .Include(a => a.EventPackage)
                     .Include(a => a.Client)
                     .Where(a => a.ID == request.EventId).SingleOrDefault();
@@ -58,9 +57,7 @@ namespace Attila.Application.Events.Queries
                     ServingType = _searchedEvent.ServingType,
                     Theme = _searchedEvent.Theme,
                     VenueType = _searchedEvent.VenueType,
-                    ToPay = _searchedEvent.ToPay,
-                    EventMenu = _searchedEvent.EventMenus,
-                    
+                    ToPay = _searchedEvent.ToPay,     
                 };
 
 
@@ -109,6 +106,15 @@ namespace Attila.Application.Events.Queries
                     _fullEventDetails.AdditionalDuration = _collectionAdditionalDuration;
                 }
 
+                var _eventMenu = await mediator.Send(new GetEventMenuQuery 
+                { 
+                    EventId = request.EventId
+                });
+
+                if (_eventMenu != null)
+                {
+                    _fullEventDetails.EventMenu = _eventMenu;
+                }
                
 
                 return _fullEventDetails;

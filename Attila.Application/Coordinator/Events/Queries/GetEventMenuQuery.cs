@@ -26,7 +26,7 @@ namespace Attila.Application.Coordinator.Events.Queries
                 var _eventMenuList = new List<EventMenuVM>();
                 var _eventMenuDetails = await dbContext.EventMenus
                     .Include(a => a.Event)
-                    .Include(a => a.Dish)
+                    .Include(a => a.Dish.DishCategory)
                     .Where(a => a.EventID == request.EventId)
                     .ToListAsync();
 
