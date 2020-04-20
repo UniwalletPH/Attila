@@ -235,20 +235,15 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> RequestFoodRestock(FoodRestockRequestCVM foodRestockRequestVM)
         {
-
-            FoodsRestockRequestVM _foodRequest = new FoodsRestockRequestVM
+            FoodsRestockRequestVM _foodRequestCollection = new FoodsRestockRequestVM
             {
-                FoodDetailsID = foodRestockRequestVM.FoodDetailsID,
-                DateTimeRequest = DateTime.Now,
-                Quantity = foodRestockRequestVM.Quantity,
-                Status = Status.Processing,
-                UserID = CurrentUser.ID
+                UserID = CurrentUser.ID,
+                FoodRequestCollection = foodRestockRequestVM.FoodRequestCollectionCVM
             };
-
 
             var response = await mediator.Send(new RequestFoodRestockCommand
             {
-                MyFoodRestockRequestVM = _foodRequest
+                MyFoodRestockRequestVM = _foodRequestCollection
             });
 
             //Send Notif to Admin
@@ -434,11 +429,8 @@ namespace Attila.UI.Controllers
         {
             EquipmentsRestockRequestVM _equipmentRequest = new EquipmentsRestockRequestVM
             {
-                EquipmentDetailsID = equipmentRestockRequestVM.EquipmentDetailsID,
-                DateTimeRequest = DateTime.Now,
-                Quantity = equipmentRestockRequestVM.Quantity,
-                Status = Status.Processing,
-                UserID = CurrentUser.ID
+                UserID = CurrentUser.ID,
+                EquipmentRequestCollection = equipmentRestockRequestVM.EquipmentRequestCollectionCVM
             };
 
             var response = await mediator.Send(new RequestEquipmentRestockCommand
