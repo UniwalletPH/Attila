@@ -3,6 +3,7 @@ using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Domain.Entities;
 using MediatR;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,15 +25,28 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
             {
                 EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
                 {
-
                     DateTimeRequest = DateTime.Now,
-                    Status = request.MyEquipmentRestockRequestVM.Status,
+                    Status = Status.Processing,
                     InventoryManagerID = request.MyEquipmentRestockRequestVM.UserID
                 };
 
                 dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
-                await dbContext.SaveChangesAsync();
 
+
+                foreach (var item in request.MyEquipmentRestockRequestVM.EquipmentRequestCollection)
+                {
+                    EquipmentRequestCollection _equipmentRequestCollection = new EquipmentRequestCollection 
+                    {
+                        EquipmentID = item.EquipmentID,
+                        EquipmentRestockRequestID = _equipmentRestockRequest.ID,
+                        Quantity = item.Quantity
+                    };
+
+                    dbContext.EquipmentRequestCollections.Add(_equipmentRequestCollection);
+                }
+
+
+                await dbContext.SaveChangesAsync();
                 return _equipmentRestockRequest.ID;
             }
         }
