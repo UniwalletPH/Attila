@@ -14,19 +14,43 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
-    <script> 
-               
-           
+    <script>
+
+
+
             $(document).on('click', 'tr .see', function (e) {
-              
+
             id = $(this).closest('tr').attr('data-id');
             var url = '@Url.Action("Details", "Inventory", new { DeliveryID = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
-              
-        });</script>
 
-     
+            });
+        
+            $(document).on('click', 'tr .view-request-food', function (e) { 
+
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("FoodRestockRequestDetails", "Inventory", new { DeliveryID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
+
+
+            });
+        
+            $(document).on('click', 'tr .view-request-equipment', function (e) {
+
+            id = $(this).closest('tr').attr('data-id');
+            var url = '@Url.Action("EquipmentRestockRequestDetails", "Inventory", new { DeliveryID = "__id__" })';
+            window.location.href = url.replace('__id__', id);
+
+
+            });
+
+
+
+
+    </script>
+
+
 
 }
 @section Styles{
@@ -295,6 +319,153 @@
                                 <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.EquipmentType)</td>
 
                             </tr>
+                        }
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+
+    </div>
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold uppercase">FOOD RESTOCK REQUEST  </span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+
+                            <div class="caption"> 
+                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("RequestFoodRestock", "Inventory")'">
+                                    Request Food Restock
+                                </button>
+                               
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <table class="display" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>Request Date</th>
+                            <th>Status</th>
+
+                            <th>Inventory Manager </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.FoodRequestList)
+                        {
+                        <tr data-id="@item.ID">
+                            <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                            <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+
+                            <td>    <button type="button" class="btn dark btn-outline view-request-food"> View Details</button>  </td>
+
+                        </tr>
+                        }
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold uppercase">EQUIPMENT RESTOCK REQUEST</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+
+
+                            <div class="caption">
+                                
+                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">
+                                    Add Equipment Restock
+                                </button>
+                              
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <table class="display" id="sample_3">
+
+                    <thead>
+                        <tr>
+                            <th>Date of Request</th>
+                            <th>Status</th>
+                            <th>Inventory Manager </th>
+                            <th>   </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.EquipmentRequestList)
+                        {
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                            <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+
+                            <td>    <button type="button" class="btn dark btn-outline view-request-equipment"> View Details</button>  </td>
+
+                        </tr>
                         }
 
 
