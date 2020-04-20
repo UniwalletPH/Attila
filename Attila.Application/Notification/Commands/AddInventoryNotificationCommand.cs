@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Notification.Commands
 {
-    public class AddNotificationCommand : IRequest<bool>
+    public class AddInventoryNotificationCommand : IRequest<bool>
     {
         public string Message { get; set; }
 
@@ -20,7 +20,7 @@ namespace Attila.Application.Notification.Commands
         public int RequestID { get; set; }
 
 
-        public class AddNotificationCommandHandler : IRequestHandler<AddNotificationCommand, bool>
+        public class AddNotificationCommandHandler : IRequestHandler<AddInventoryNotificationCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
 
@@ -29,12 +29,12 @@ namespace Attila.Application.Notification.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(AddNotificationCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(AddInventoryNotificationCommand request, CancellationToken cancellationToken)
             {
                 var _notif = new Notifications 
                 {
                     TargetUserID = request.TargetUserID,
-                    Description = request.Message + ", <a href =\"" + request.MethodName+ "?EventID=" + request.RequestID+"\"> CLICK HERE </a>",
+                    Description = request.Message + ", <a href =\"" + request.MethodName+ "?id=" + request.RequestID+"\"> CLICK HERE </a>",
                     CreatedOn = DateTime.Now
                 };
 

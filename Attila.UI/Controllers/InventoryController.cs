@@ -239,11 +239,11 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand 
+            await mediator.Send(new AddInventoryNotificationCommand 
             { 
                 Message = "New Food Restock Request",
                 TargetUserID = -1,
-                MethodName = "FoodRequestDetails",
+                MethodName = "/Inventory/FoodRestockRequestDetails",
                 RequestID = response 
             });
 
@@ -434,11 +434,11 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddNotificationCommand 
+            await mediator.Send(new AddInventoryNotificationCommand 
             { 
                 Message = "New Equipment Restock Request",
                 TargetUserID = -1,
-                MethodName = "EquipmentRequestDetails",
+                MethodName = "/Inventory/EquipmentRestockRequestDetails",
                 RequestID = response 
             });
 
@@ -536,6 +536,22 @@ namespace Attila.UI.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FoodRestockRequestDetails(int id)
+        {
+            var _details = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
+
+            return View(_details);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EquipmentRestockRequestDetails(int id)
+        {
+            var _details = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
+
+            return View(_details);
         }
     }
 }

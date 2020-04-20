@@ -31,21 +31,21 @@ namespace Attila.UI.Controllers
 
       
 
-        [HttpGet]
-        public async Task<IActionResult> FoodRequestDetails(int id)
-        {
-            var _details = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
+        //[HttpGet]
+        //public async Task<IActionResult> FoodRequestDetails(int id)
+        //{
+        //    var _details = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
      
-            return View(_details);
-        }
+        //    return View(_details);
+        //}
 
-        [HttpGet]
-        public async Task<IActionResult> EquipmentRequestDetails(int id)
-        {
-            var _details = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
+        //[HttpGet]
+        //public async Task<IActionResult> EquipmentRequestDetails(int id)
+        //{
+        //    var _details = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
 
-            return View(_details);
-        }
+        //    return View(_details);
+        //}
 
     }
 }

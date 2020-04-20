@@ -158,7 +158,7 @@ namespace Attila.UI.Controllers
                  
             var response = await mediator.Send(new AddEventCommand { EventDetails = x});
              
-            await mediator.Send(new AddNotificationCommand 
+            await mediator.Send(new AddEventNotificationCommand 
             { 
                 Message = "New Event Request Received",
                 TargetUserID = -1,
@@ -300,7 +300,7 @@ namespace Attila.UI.Controllers
             var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
             
-            await mediator.Send(new AddNotificationCommand 
+            await mediator.Send(new AddEventNotificationCommand 
             { 
                 Message ="Your request has been Approved",
                 TargetUserID = response.Coordinator.ID,
@@ -318,7 +318,7 @@ namespace Attila.UI.Controllers
 
             var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
 
-            await mediator.Send(new AddNotificationCommand
+            await mediator.Send(new AddEventNotificationCommand
             { 
                 Message = "Your request has been Declined",
                 TargetUserID = response.Coordinator.ID,

@@ -1,0 +1,123 @@
+﻿@{
+    ViewData["Title"] = "Equipment Restock Request Details";
+
+}
+@model List<Attila.Application.Admin.Equipments.Queries.EquipmentCollectionVM>
+@section Scripts{
+
+    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+
+
+
+
+}
+@section Styles{
+
+
+    <style>
+        tr.group,
+        tr.group:hover {
+            background-color: #ddd !important;
+        }
+    </style>
+
+    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <div class="caption font-dark">
+            <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
+        </div>
+    </div>
+    <!-- END PAGE TITLE -->
+    <!-- BEGIN PAGE TOOLBAR -->
+    <div class="page-toolbar">
+
+        <!-- BEGIN THEME PANEL -->
+        <!-- END THEME PANEL -->
+    </div>
+    <!-- END PAGE TOOLBAR -->
+</div>
+<!-- END PAGE HEAD-->
+<!-- BEGIN PAGE BREADCRUMB -->
+<ul class="page-breadcrumb breadcrumb">
+</ul>
+
+ 
+<div class="row">
+
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <span class="caption-subject bold uppercase">FOOD</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+
+
+                <table class="display" id="sample_2">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
+                            <th>Item Price </th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                   
+                        <tr>
+
+                            @foreach (var item in Model) { 
+                            <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
+
+                            <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
+
+                            <td> @Html.DisplayFor(modelItem => item.Equipment.EquipmentType)</td>
+
+                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                            }
+                        </tr>
+                       
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+
+
+
+
+
+         
+
+    </div>
