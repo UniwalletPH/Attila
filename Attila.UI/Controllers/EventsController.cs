@@ -229,7 +229,8 @@ namespace Attila.UI.Controllers
                AdditionalDish =_eventDetails.AdditionalDish,
                AdditionalDuration = _eventDetails.AdditionalDuration,
                AdditionalEquipment= _eventDetails.AdditionalEquipment,
-               ToPay = _eventDetails.ToPay
+               ToPay = _eventDetails.ToPay,
+               EventMenu = _eventDetails.EventMenu
 
                 
 

@@ -158,6 +158,43 @@
                             }
 
                         }
+
+
+                        @{
+
+                            if (Model.EventDetails.EventMenu != null)
+                            {
+
+                                <div class="form-group">
+                                    <label class="control-label">Menu</label>
+
+                                </div>
+                                <table class="table table-striped table-bordered table-hover order-column events" id="sample_3">
+                                    <thead>
+                                        <tr>
+
+                                            <th> Dish Name </th>
+                                            <th> Category</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.EventDetails.EventMenu)
+                                        {
+                                            <tr data-id="@item.ID">
+                                                <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.Dish.DishCategory)</td>
+                                            </tr>
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            }
+
+                        }
                         @{
 
                             if (Model.EventDetails.AdditionalDish != null)
@@ -251,7 +288,7 @@
                                         <button type="button" id="btnEdit" class="btn blue"> Edit</button>
                                     </text>
                                 }
-                               
+
                             }
 
 
