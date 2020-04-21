@@ -1,5 +1,7 @@
 ﻿@{
-    ViewData["Title"] = "Inventory";
+    ViewData["Title"] = "FOOD RESTOCK REQUEST";
+
+ 
 
 }
 @model List<Attila.Application.Admin.Foods.Queries.FoodCollectionVM>
@@ -14,7 +16,6 @@
     <!-- END THEME GLOBAL SCRIPTS -->
     <!-- BEGIN PAGE LEVEL SCRIPTS -->
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
-
 
 
 
@@ -37,29 +38,7 @@
 
 
 
-
-
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <div class="caption font-dark">
-            <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
-        </div>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
+ 
 
 
 <div class="row">
@@ -69,45 +48,87 @@
         <div class="portlet light bordered">
             <div class="portlet-title">
                 <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">FOOD</span>
+                    <span class="caption-subject bold uppercase">FOOD RESTOCK REQUEST </span>
                 </div>
 
             </div>
             <div class="portlet-body">
 
 
-                <table class="display" id="sample_2">
+                <table class="display" id="sample_3">
                     <thead>
                         <tr>
                             <th>Code</th>
                             <th>Name</th>
-                            <th>Unit</th>
+                            <th>Description</th>
                             <th>Quantity</th>
-                            <th>Item Price </th>
-                            <th>Remarks</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                   
-                        <tr>
 
-                            @foreach (var item in Model) { 
-                            <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
 
-                            <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
+                                <td> @Html.DisplayFor(modelItem => item.ID)</td>
 
-                            <td> @Html.DisplayFor(modelItem => item.Food.Description)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
 
-                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                            }
-                        </tr>
-                       
+                                <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Food.Description)</td>
+
+                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+
+                            </tr>
+                        }
 
                     </tbody>
 
 
                 </table>
+                @*@{ if (Model.EventDetails.EventStatus.ToString() == "Approved" || Model.EventDetails.EventStatus.ToString() == "Declined")
+                    {
+                         if (User.IsInRole("InventoryManager"))
+                        {
+                            <text>
+                                <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                            </text>
+                        }
+                    }
+                    else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <text>
+                                <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
+                                <button type="button" id="btnDecline" class="btn blue">Reject</button>
+                            </text>
+                        }
+                        else if (User.IsInRole("Coordinator"))
+                        {
+                            <text>
+                                <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                            </text>
+                        }
+                    }
+                    else if (Model.ToString() == "Processing")
+                    {
+                        if (User.IsInRole("Coordinator"))
+                        {
+                            <text>
+                                <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                            </text>
+                        }
+
+                    }
+
+
+
+
+
+                }*@
 
 
             </div>
@@ -117,3 +138,5 @@
 
 
     </div>
+
+</div>

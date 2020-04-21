@@ -21,7 +21,7 @@
             $(document).on('click', 'tr .see', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-            var url = '@Url.Action("Details", "Inventory", new { DeliveryID = "__id__" })';
+            var url = '@Url.Action("Details", "Inventory", new { id = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
 
@@ -30,7 +30,7 @@
             $(document).on('click', 'tr .view-request-food', function (e) { 
 
             id = $(this).closest('tr').attr('data-id');
-            var url = '@Url.Action("FoodRestockRequestDetails", "Inventory", new { DeliveryID = "__id__" })';
+            var url = '@Url.Action("FoodRestockRequestDetails", "Inventory", new { id = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
 
@@ -39,7 +39,7 @@
             $(document).on('click', 'tr .view-request-equipment', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-            var url = '@Url.Action("EquipmentRestockRequestDetails", "Inventory", new { DeliveryID = "__id__" })';
+            var url = '@Url.Action("EquipmentRestockRequestDetails", "Inventory", new { id = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
 
