@@ -46,7 +46,7 @@
                         <thead>
                             <tr>
 
-                                <th> Food Name </th>
+                                <th> Item </th>
                                 <th> Quantity </th>
 
 
@@ -56,15 +56,14 @@
 
 
                             <tr>
-                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[0].FoodID, Model.FoodDetailsList, "--SELECT--", new { @class = "form-control" })</td>
+                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[0].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
                                 <td><input type="text" asp-for="FoodRequestCollectionCVM[0].Quantity" placeholder="" class="form-control"></td>
                             </tr>
                             <tr>
-                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[1].FoodID, Model.FoodDetailsList, "--SELECT--", new { @class = "form-control" })</td>
+                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[1].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
                                 <td><input type="text" asp-for="FoodRequestCollectionCVM[1].Quantity" placeholder="" class="form-control"></td>
                             </tr>
-
-
+                           
 
                         </tbody>
                     </table>
