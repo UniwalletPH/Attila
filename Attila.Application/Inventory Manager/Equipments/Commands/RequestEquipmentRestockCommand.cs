@@ -31,6 +31,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 };
 
                 dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);
+                await dbContext.SaveChangesAsync();
 
 
                 foreach (var item in request.MyEquipmentRestockRequestVM.EquipmentRequestCollection)

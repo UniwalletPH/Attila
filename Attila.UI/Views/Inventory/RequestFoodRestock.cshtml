@@ -40,7 +40,8 @@
             </div>
             <div class="portlet-body">
                 <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                   
+
+
 
                     <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
                         <thead>
@@ -55,6 +56,8 @@
                         <tbody>
 
 
+
+
                             <tr>
                                 <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[0].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
                                 <td><input type="text" asp-for="FoodRequestCollectionCVM[0].Quantity" placeholder="" class="form-control"></td>
@@ -63,20 +66,24 @@
                                 <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[1].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
                                 <td><input type="text" asp-for="FoodRequestCollectionCVM[1].Quantity" placeholder="" class="form-control"></td>
                             </tr>
-                           
+
 
                         </tbody>
                     </table>
-    
-    
-    @*<div class="form-group">
-                        <label class="control-label">Food </label>
-                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "-- SELECT FOOD --", new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Quantity</label>
-                        <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
-                    </div>*@
+
+                    
+
+
+                    @*<div class="form-group">
+            <label class="control-label">Food </label>
+            @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "-- SELECT FOOD --", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="control-label">Quantity</label>
+            <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
+        </div>*@
+
+
 
                     <div class="margin-top-10">
                         <button type="submit" id="btnSubmit" class="btn green">Submit </button>
@@ -103,6 +110,11 @@
             console.log(e);
             alert("Please enter the correct details!");
         }
+
+    });
+
+
+
 
     </script>
 }

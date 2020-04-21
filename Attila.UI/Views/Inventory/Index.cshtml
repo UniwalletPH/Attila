@@ -458,7 +458,7 @@
 
                         @foreach (var item in Model.EquipmentRequestList)
                         {
-                        <tr>
+                        <tr data-id="@item.ID">
                             <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
                             <td> @Html.DisplayFor(modelItem => item.Status)</td>
                             <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>

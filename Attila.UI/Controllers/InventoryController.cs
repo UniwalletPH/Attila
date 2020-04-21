@@ -539,15 +539,27 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> FoodRestockRequestDetails(int id)
         {
-            var _details = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
+            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id});
+            var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
 
-            return View(_details);
+            return View(new FoodRestockRequestDetailsCVM {
+            
+                FoodRequest = _requestDetails,
+                FoodCollection = _foodCollection
+            });
         }
 
         [HttpGet]
         public async Task<IActionResult> EquipmentRestockRequestDetails(int id)
         {
-            var _details = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
+            var _requestDetails = await mediator.Send(new GetEquipmentRequestDetailsQuery { ID = id});
+            var _equipmentRequestCollection = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
+
+            var _details = new EquipmentRestockRequestDetailsCVM
+            { 
+                EquipmentRequest = _requestDetails,
+                EquipmentCollection = _equipmentRequestCollection
+            };
 
             return View(_details);
         }
