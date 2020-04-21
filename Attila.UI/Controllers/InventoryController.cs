@@ -412,7 +412,7 @@ namespace Attila.UI.Controllers
                 _list.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                    Text = item.Code + " | " + item.Name + " | " + item.UnitType
                 });
             }
 

@@ -40,14 +40,41 @@
             </div>
             <div class="portlet-body">
                 <form role="form" asp-controller="Inventory" asp-action="RequestEquipmentRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                    <div class="form-group">
-                        <label class="control-label">Equipment </label>
-                        @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Quantity</label>
-                        <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
-                    </div>
+
+                    <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                        <thead>
+                            <tr>
+
+                                <th> Item </th>
+                                <th> Quantity </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td>@Html.DropDownListFor(m => m.EquipmentRequestCollectionCVM[0].EquipmentID, Model.EquipmentDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
+                                <td><input type="text" asp-for="EquipmentRequestCollectionCVM[0].Quantity" placeholder="" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <td>@Html.DropDownListFor(m => m.EquipmentRequestCollectionCVM[1].EquipmentID, Model.EquipmentDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
+                                <td><input type="text" asp-for="EquipmentRequestCollectionCVM[1].Quantity" placeholder="" class="form-control"></td>
+                            </tr>
+                          
+
+                        </tbody>
+                    </table>
+
+
+                    @*<div class="form-group">
+            <label class="control-label">Equipment </label>
+            @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label class="control-label">Quantity</label>
+            <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
+        </div>*@
 
                     <div class="margin-top-10">
                         <button type="submit" id="btnSubmit" class="btn green">Submit </button>
