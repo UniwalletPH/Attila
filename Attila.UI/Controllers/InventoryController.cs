@@ -180,6 +180,7 @@ namespace Attila.UI.Controllers
             return View(FoodDetailsListVM);
         }
 
+        //Add Food Inventory
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> AddFoodInventory(FoodInventoryCVM foodInventoryVM)
@@ -205,7 +206,7 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
-
+        //Request Food Restock
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
         public async Task<IActionResult> RequestFoodRestock()
@@ -230,7 +231,7 @@ namespace Attila.UI.Controllers
 
             return View(foodDetailsListVM);
         }
-
+        // RequestFoodRestock
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> RequestFoodRestock(FoodRestockRequestCVM foodRestockRequestVM)
