@@ -31,7 +31,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
-
+                await dbContext.SaveChangesAsync();
 
                 foreach (var item in request.MyFoodRestockRequestVM.FoodRequestCollection)
                 {

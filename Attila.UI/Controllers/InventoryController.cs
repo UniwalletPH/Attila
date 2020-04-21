@@ -219,7 +219,7 @@ namespace Attila.UI.Controllers
                 _list.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                    Text = item.Code + " | " + item.Name + " | " + item.Unit
                 });
             }
 
@@ -535,14 +535,6 @@ namespace Attila.UI.Controllers
             return View(_inventoryDelivery);
         }
 
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
         [HttpGet]
         public async Task<IActionResult> FoodRestockRequestDetails(int id)
         {
@@ -558,5 +550,14 @@ namespace Attila.UI.Controllers
 
             return View(_details);
         }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+      
     }
 }
