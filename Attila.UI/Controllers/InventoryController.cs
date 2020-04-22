@@ -17,6 +17,9 @@ using Microsoft.AspNetCore.Authorization;
 using Attila.Application.Notification.Commands;
 using Attila.Application.Admin.Equipments.Queries;
 using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Admin.Foods.Commands;
+using Atilla.Application.Admin.Equipments.Commands;
+using Attila.Application.Admin.Equipments.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -207,8 +210,11 @@ namespace Attila.UI.Controllers
         }
 
         //Request Food Restock
+
+
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
+
         public async Task<IActionResult> RequestFoodRestock()
         {
 
@@ -537,6 +543,7 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
+         
         public async Task<IActionResult> FoodRestockRequestDetails(int id)
         {
             var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id});
@@ -563,6 +570,71 @@ namespace Attila.UI.Controllers
 
             return View(_details);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeclineFoodRequest(int id)
+        {
+            var _requestDetails = await mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = id });
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Declined Food Restock Request",
+                TargetUserID = _requestDetails.InventoryManager.ID,
+                MethodName = "/Inventory/FoodRestockRequestDetails",
+                RequestID = _requestDetails.ID
+            });
+
+            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
+        }
+         
+
+    [HttpGet]
+        public async Task<IActionResult> ApproveFoodRequest(int id)
+        {
+            var _requestDetails = await mediator.Send(new ApproveFoodRestockRequestCommand { RequestID = id });
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Approved Food Restock Request",
+                TargetUserID = _requestDetails.InventoryManager.ID,
+                MethodName = "/Inventory/FoodRestockRequestDetails",
+                RequestID = _requestDetails.ID
+            });
+
+            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);      
+    }
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> ApproveEquipmentRequest(int id)       
+        {
+            var _requestDetails = await mediator.Send(new ApproveEquipmentRestockRequestCommand { RequestID = id });
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Approved Equipment Restock Request",
+                TargetUserID = _requestDetails.InventoryManager.ID,
+                MethodName = "/Inventory/EquipmentRestockRequestDetails",
+                RequestID = _requestDetails.ID
+            });
+            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
+         }
+         
+
+
+
+[HttpGet]
+        public async Task<IActionResult> DeclineEquipmentRequest(int id)
+        {
+            var _requestDetails = await mediator.Send(new DeclineEquipmentRestockRequestCommand { RequestID = id });
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Declined Equipment Restock Request",
+                TargetUserID = _requestDetails.InventoryManager.ID,
+                MethodName = "/Inventory/EquipmentRestockRequestDetails",
+                RequestID = _requestDetails.ID
+            });
+            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
