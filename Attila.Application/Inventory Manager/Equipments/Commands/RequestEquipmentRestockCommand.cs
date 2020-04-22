@@ -26,7 +26,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 EquipmentRestockRequest _equipmentRestockRequest = new EquipmentRestockRequest
                 {
                     DateTimeRequest = DateTime.Now,
-                    Status = Status.Processing,
+                    Status = Status.ForApproval,
                     InventoryManagerID = request.MyEquipmentRestockRequestVM.UserID
                 };
 
