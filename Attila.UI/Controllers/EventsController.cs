@@ -715,6 +715,14 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {
+            var _add = new AdditionalDurationRequestVM
+            { 
+                Duration = additionals.AdditionalDurationRequest.Duration,
+                EventDetailsID = additionals.EventID,
+
+            };
+
+            var _rVal = await mediator.Send(new AddAdditionalDurationRequestCommand { AdditionalPackage = _add });
 
             return Json(true);
         }

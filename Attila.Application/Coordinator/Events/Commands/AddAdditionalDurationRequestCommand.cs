@@ -2,6 +2,7 @@
 using Attila.Application.Interfaces;
 using Attila.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,22 +24,19 @@ namespace Attila.Application.Events.Commands
 
             public async Task<bool> Handle(AddAdditionalDurationRequestCommand request, CancellationToken cancellationToken)
             {
-                if(request.AdditionalPackage.Duration != null && request.AdditionalPackage.Rate != 0 && request.AdditionalPackage.EventDetailsID != 0)
-                {
+                
                     var _additionalDuration = new EventAdditionalDurationRequest
                     {
                         EventID = request.AdditionalPackage.EventDetailsID,
-                        Duration = request.AdditionalPackage.Duration
+                        Duration = request.AdditionalPackage.Duration,
+                        CreatedOn = DateTime.Now,
+                        Status = Status.Processing
                     };
 
                     dbContext.EventAdditionalDurationRequests.Add(_additionalDuration);
                     await dbContext.SaveChangesAsync();
                     return true;
-                }
-                else
-                {
-                    return false;
-                }
+               
                 
             }
         }

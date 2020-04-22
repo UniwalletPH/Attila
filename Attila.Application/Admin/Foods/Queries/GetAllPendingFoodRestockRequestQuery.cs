@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Foods.Queries
 
                 var _pendingFoodRestock = dbContext.FoodRestockRequests
                     .Include(a => a.InventoryManager)
-                    .Where(a => a.Status == Status.Processing);
+                    .Where(a => a.Status == Status.ForApproval);
 
                 foreach (var item in _pendingFoodRestock)
                 {

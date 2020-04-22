@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Equipments.Queries
 
                 var _pendingRequest = dbContext.EquipmentRestockRequests
                     .Include(a => a.InventoryManager)
-                    .Where(a => a.Status == Status.Processing);
+                    .Where(a => a.Status == Status.ForApproval);
 
                 foreach (var item in _pendingRequest)
                 {
