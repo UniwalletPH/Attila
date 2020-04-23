@@ -1,6 +1,5 @@
 ﻿using Attila.Application.Interfaces;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Attila.Application.Inventory_Manager.Shared.Queries
+namespace Attila.Application.Users.Queries
 {
     public class GetInventoryManagerListQuery : IRequest<IEnumerable<UserVM>>
     {
@@ -22,16 +21,26 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
             public async Task<IEnumerable<UserVM>> Handle(GetInventoryManagerListQuery request, CancellationToken cancellationToken)
             {
-                var _inventoryManagerList = await dbContext.Users.Select(a => new UserVM
+                List<UserVM> _inventoryManagerList = new List<UserVM>();
+
+                var _getInventoryManagerList = dbContext.Users.Where(a => a.Role == AccessRole.InventoryManager);
+
+
+                foreach (var item in _getInventoryManagerList)
                 {
-                    UID = a.UID,
-                    Name = a.Name,
-                    Position = a.Position,
-                    ContactNumber = a.ContactNumber,
-                    Role = a.Role
+                    UserVM _inventoryManagerData = new UserVM
+                    {
+                        ID = item.ID,
+                        UID = item.UID,
+                        Name = item.Name,
+                        Position = item.Position,
+                        ContactNumber = item.ContactNumber,
+                        Email = item.Email,
+                        Role = item.Role
 
-                }).ToListAsync();
-
+                    };
+                    _inventoryManagerList.Add(_inventoryManagerData);
+                }
 
                 return _inventoryManagerList;
 

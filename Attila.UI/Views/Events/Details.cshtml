@@ -243,13 +243,13 @@
                                     <div class="form-group">
                                         @Html.DisplayFor(modelItem => item.Duration.Hours)
                                     </div>
-                                  
+
                                 }
                             }
 
                         }
 
-                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved" || Model.EventDetails.EventStatus.ToString() == "Declined")
+                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
                             {
                                 if (User.IsInRole("Admin"))
                                 {
@@ -261,7 +261,7 @@
                                 else if (User.IsInRole("Coordinator"))
                                 {
                                     <text>
-                                        <button type="button" id="btnEdit" class="btn blue"> Edit</button>
+                                        <button type="button" id="btnComplete" class="btn blue"> Complete</button>
                                     </text>
                                 }
                             }
@@ -291,7 +291,24 @@
                                 }
 
                             }
-
+                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            {
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnDelete" class="btn blue"> Delete</button>
+                                    </text>
+                                }
+                            }
+                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            {
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnDelete" class="btn blue"> Delete</button>
+                                    </text>
+                                }
+                            }
 
 
 
@@ -398,7 +415,16 @@
 
 
             });
+        
+         $(document).on('click', ' #btnComplete', function (e) {
+               id = $(this).val();
 
+
+                var url = '@Url.Action("ChangeStatusToCompleted", "Events", new { EventID = "__id__"  })';
+                window.location.href = url.replace('__id__', event)
+
+
+            });
 
 
 
