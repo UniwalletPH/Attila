@@ -5,7 +5,9 @@ using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Application.Notification.Commands;
+using Attila.Application.Users.Queries;
 using Attila.UI.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,7 +21,6 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
-    [Authorize(Roles = "Admin, Coordinator")]
     public class EventsController : BaseController
     {
         private readonly IMediator mediator;
@@ -28,6 +29,8 @@ namespace Attila.UI.Controllers
         {
             this.mediator = mediator;
         }
+
+        [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         public async Task<IActionResult> Index()
         {
 
@@ -56,6 +59,7 @@ namespace Attila.UI.Controllers
 
 
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> BookingForm()
         {
@@ -94,6 +98,7 @@ namespace Attila.UI.Controllers
 
         }
 
+        [Authorize(Roles = "Coordinator")]
         [HttpGet]
         public async Task<IActionResult> AddAdditionalDishRequest()
         {
@@ -114,6 +119,8 @@ namespace Attila.UI.Controllers
             return View(_addDishRequest);
         }
 
+        [Authorize(Roles = "Coordinator")]
+
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDishRequest(AdditionalDishCVM _additionalDish)
         {
@@ -128,6 +135,7 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
+        [Authorize(Roles = "Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventCVM _eventDetails)
         {
@@ -172,6 +180,7 @@ namespace Attila.UI.Controllers
 
         }
 
+        [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         [HttpGet]
         public async Task<IActionResult> Details(int EventID) {
 
@@ -185,6 +194,7 @@ namespace Attila.UI.Controllers
         }
 
 
+        [Authorize(Roles = "Admin, Coordinator")]
 
         [HttpGet]
         public async Task<IActionResult> Update(int EventID)
@@ -293,6 +303,7 @@ namespace Attila.UI.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Approve(int EventID)
        {
@@ -307,11 +318,26 @@ namespace Attila.UI.Controllers
                 MethodName = "/Events/Details",
                 RequestID = response.ID
             });
+           var inventoryManagerList= await mediator.Send(new GetInventoryManagerListQuery());
 
+            foreach (var item in inventoryManagerList)
+            { 
+                await mediator.Send(new AddEventNotificationCommand
+                {
 
+                    
+                    Message = "An event has been Approved",
+                    TargetUserID = item.ID,
+                    MethodName = "/Events/Details",
+                    RequestID = response.ID
+                }); ;
+
+            }
+     
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Decline(int EventID)
         {
 
@@ -330,8 +356,9 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
+        [Authorize(Roles = "Coordinator")]
 
-              [HttpPost]
+        [HttpPost]
                public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
 
                       {  
@@ -343,6 +370,7 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
                      }
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> ChangeStatus(int EventID)
 
@@ -355,6 +383,7 @@ namespace Attila.UI.Controllers
         }
 
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> MenuForm(int EventID)
         {
@@ -392,6 +421,7 @@ namespace Attila.UI.Controllers
 
         }
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddMenu(AddEventMenuCVM addEvent)
         {
@@ -418,6 +448,7 @@ namespace Attila.UI.Controllers
 
 
 
+        [Authorize(Roles = "Coordinator")]
 
         [HttpGet]
         public async Task<IActionResult> Additional(int EventID)
@@ -615,6 +646,7 @@ namespace Attila.UI.Controllers
    
         }
 
+        [Authorize(Roles = "Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddAdditionalEquipment(AdditionalsCVM additionals)
         {
@@ -667,6 +699,7 @@ namespace Attila.UI.Controllers
           
         }
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDish(AdditionalsCVM additionals)
         {
@@ -712,6 +745,7 @@ namespace Attila.UI.Controllers
             return Json(true);
         }
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {

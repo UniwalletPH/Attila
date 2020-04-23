@@ -243,13 +243,13 @@
                                     <div class="form-group">
                                         @Html.DisplayFor(modelItem => item.Duration.Hours)
                                     </div>
-                                  
+
                                 }
                             }
 
                         }
 
-                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved" || Model.EventDetails.EventStatus.ToString() == "Declined")
+                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
                             {
                                 if (User.IsInRole("Admin"))
                                 {
@@ -290,6 +290,15 @@
                                     </text>
                                 }
 
+                            }
+                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            {
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    <text>
+                                        <button type="button" id="btnDelete" class="btn blue"> Delete</button>
+                                    </text>
+                                }
                             }
 
 
