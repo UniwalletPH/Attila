@@ -251,18 +251,28 @@
 
                         @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
                             {
-                                if (User.IsInRole("Admin"))
+                                if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
                                 {
 
                                     <label>Payment  </label>
                                     <input type="number" class="form-control" placeholder="" readonly>
 
+                                    <label>Status  </label>
+                                    <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
                                 }
                                 else if (User.IsInRole("Coordinator"))
                                 {
+                                    <label>Payment  </label>
+                                    <input type="number" class="form-control" placeholder="" readonly>
+
+                                    <label>Status  </label>
+                                    <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
+ 
                                     <text>
-                                        <button type="button" id="btnComplete" class="btn blue"> Complete</button>
+                        <br />
+                                        <button type="button" id="btnComplete" class="btn blue">Change Event Status To Completed</button>
                                     </text>
+
                                 }
                             }
                             else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
@@ -300,14 +310,20 @@
                                     </text>
                                 }
                             }
-                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            else if (Model.EventDetails.EventStatus.ToString() == "Completed")
                             {
-                                if (User.IsInRole("Coordinator"))
-                                {
-                                    <text>
-                                        <button type="button" id="btnDelete" class="btn blue"> Delete</button>
-                                    </text>
-                                }
+
+
+                                <label>Payment  </label>
+                                <input type="number" class="form-control" placeholder="" readonly>
+
+                                <label>Status  </label>
+
+                                <text>
+                                    <label>Status  </label>
+                                    <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
+                                </text>
+
                             }
 
 
@@ -420,7 +436,7 @@
                id = $(this).val();
 
 
-                var url = '@Url.Action("ChangeStatusToCompleted", "Events", new { EventID = "__id__"  })';
+                var url = '@Url.Action("ChangeEventStatusToCompleted", "Events", new { EventID = "__id__"  })';
                 window.location.href = url.replace('__id__', event)
 
 

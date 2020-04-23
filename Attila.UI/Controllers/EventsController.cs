@@ -369,7 +369,21 @@ namespace Attila.UI.Controllers
 
             return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
                      }
+    
 
+
+              [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEventStatusToCompleted(int EventID)
+
+        {
+            var response = await mediator.Send(new ChangeEventStatusToCompletedCommand
+            {  
+                EventID = EventID
+            });
+
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> ChangeStatus(int EventID)
@@ -379,7 +393,7 @@ namespace Attila.UI.Controllers
                ID = EventID
             });
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { EventID = EventID });
         }
 
 
