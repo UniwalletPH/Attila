@@ -109,7 +109,7 @@ namespace Attila.UI.Controllers
 
             return Json(response);
 
-           
+
 
 
         }
@@ -254,12 +254,12 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddInventoryNotificationCommand 
-            { 
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
                 Message = "New Food Restock Request",
                 TargetUserID = -1,
                 MethodName = "/Inventory/FoodRestockRequestDetails",
-                RequestID = response 
+                RequestID = response
             });
 
             return Json(response);
@@ -446,12 +446,12 @@ namespace Attila.UI.Controllers
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddInventoryNotificationCommand 
-            { 
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
                 Message = "New Equipment Restock Request",
                 TargetUserID = -1,
                 MethodName = "/Inventory/EquipmentRestockRequestDetails",
-                RequestID = response 
+                RequestID = response
             });
 
 
@@ -543,14 +543,15 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]
-         
+
         public async Task<IActionResult> FoodRestockRequestDetails(int id)
         {
-            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id});
+            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
             var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
 
-            return View(new FoodRestockRequestDetailsCVM {
-            
+            return View(new FoodRestockRequestDetailsCVM
+            {
+
                 FoodRequest = _requestDetails,
                 FoodCollection = _foodCollection
             });
@@ -559,11 +560,11 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> EquipmentRestockRequestDetails(int id)
         {
-            var _requestDetails = await mediator.Send(new GetEquipmentRequestDetailsQuery { ID = id});
+            var _requestDetails = await mediator.Send(new GetEquipmentRequestDetailsQuery { ID = id });
             var _equipmentRequestCollection = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
 
             var _details = new EquipmentRestockRequestDetailsCVM
-            { 
+            {
                 EquipmentRequest = _requestDetails,
                 EquipmentCollection = _equipmentRequestCollection
             };
@@ -585,9 +586,9 @@ namespace Attila.UI.Controllers
 
             return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
         }
-         
 
-    [HttpGet]
+
+        [HttpGet]
         public async Task<IActionResult> ApproveFoodRequest(int id)
         {
             var _requestDetails = await mediator.Send(new ApproveFoodRestockRequestCommand { RequestID = id });
@@ -599,15 +600,16 @@ namespace Attila.UI.Controllers
                 RequestID = _requestDetails.ID
             });
 
-            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);      
-    }
+            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
+        }
 
 
 
         [HttpGet]
-        public async Task<IActionResult> ApproveEquipmentRequest(int id)       
+        public async Task<IActionResult> ApproveEquipmentRequest(int id)
         {
             var _requestDetails = await mediator.Send(new ApproveEquipmentRestockRequestCommand { RequestID = id });
+
             await mediator.Send(new AddInventoryNotificationCommand
             {
                 Message = "New Approved Equipment Restock Request",
@@ -615,16 +617,16 @@ namespace Attila.UI.Controllers
                 MethodName = "/Inventory/EquipmentRestockRequestDetails",
                 RequestID = _requestDetails.ID
             });
+
             return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
-         }
-         
+        }
 
 
-
-[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> DeclineEquipmentRequest(int id)
         {
             var _requestDetails = await mediator.Send(new DeclineEquipmentRestockRequestCommand { RequestID = id });
+
             await mediator.Send(new AddInventoryNotificationCommand
             {
                 Message = "New Declined Equipment Restock Request",
@@ -632,6 +634,7 @@ namespace Attila.UI.Controllers
                 MethodName = "/Inventory/EquipmentRestockRequestDetails",
                 RequestID = _requestDetails.ID
             });
+
             return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
         }
 
@@ -643,6 +646,6 @@ namespace Attila.UI.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-      
+
     }
 }
