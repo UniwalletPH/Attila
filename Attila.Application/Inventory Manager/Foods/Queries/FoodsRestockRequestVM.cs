@@ -15,7 +15,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
         public User User { get; set; }
         public Food FoodDetails { get; set; }
 
-
-        public List<FoodsRequestCollectionVM> FoodRequestCollection { get; set; }
+        public int Quantity { get; set; }
+        //public List<FoodsRequestCollectionVM> FoodRequestCollection { get; set; }
     }
 }

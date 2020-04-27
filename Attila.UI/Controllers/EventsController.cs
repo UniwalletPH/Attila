@@ -5,6 +5,7 @@ using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Events.Commands;
 using Attila.Application.Events.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Commands;
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Application.Notification.Commands;
 using Attila.Application.Users.Queries;
@@ -389,7 +390,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> ChangeStatus(int EventID)
 
         {
-            var response = await mediator.Send(new ChangeEventStatusCommand { 
+            var response = await mediator.Send(new ChangeRequestStatusCommand { 
                ID = EventID
             });
 

@@ -25,18 +25,17 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(AddFoodRequestCollectionCommand request, CancellationToken cancellationToken)
             {
-                foreach (var item in request.MyFoodRestockRequestVM.FoodRequestCollection)
-                {
+            
                     FoodRequestCollection _foodRequestCollection = new FoodRequestCollection
                     {
-                        FoodID = item.FoodID,
+                        FoodID = request.MyFoodRestockRequestVM.FoodDetails.ID,
                         FoodRestockRequestID = request.FoodRestockID,
-                        Quantity = item.Quantity
+                        Quantity = request.MyFoodRestockRequestVM.Quantity
                     };
 
-                    dbContext.FoodRequestCollections.Add(_foodRequestCollection);
-                }
 
+
+                dbContext.FoodRequestCollections.Add(_foodRequestCollection);
                 await dbContext.SaveChangesAsync();
 
                 return true;

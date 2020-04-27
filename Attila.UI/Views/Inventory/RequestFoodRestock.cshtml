@@ -1,5 +1,5 @@
 ﻿@model Attila.UI.Models.FoodRestockRequestCVM
-@{
+@{  
 
     ViewData["Title"] = "Request Food Restock";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,56 +39,77 @@
 
             </div>
             <div class="portlet-body">
+
+
+
+
+
                 <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                    <input type="hidden" class="form-control" asp-for="FoodRequest.ID" readonly>
 
 
+                    @{
 
-                    <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
-                        <thead>
-                            <tr>
+                        if (Model.FoodCollection != null)
+                        {
+                            <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                                <thead>
+                                    <tr>
 
-                                <th> Item </th>
-                                <th> Quantity </th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody>
+                                        <th> Name </th>
+                                        <th> Requested Quantity </th>
 
 
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.FoodCollection)
+                                    {
+                                        <tr data-id="@item.ID">
+                                            <td>@Html.DisplayFor(modelItem => item.Food.Name)</td>
+                                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
 
 
-                            <tr>
-                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[0].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
-                                <td><input type="text" asp-for="FoodRequestCollectionCVM[0].Quantity" placeholder="" class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>@Html.DropDownListFor(m => m.FoodRequestCollectionCVM[1].FoodID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })</td>
-                                <td><input type="text" asp-for="FoodRequestCollectionCVM[1].Quantity" placeholder="" class="form-control"></td>
-                            </tr>
+                                        </tr>
+                                    }
 
 
-                        </tbody>
-                    </table>
+                                </tbody>
+                            </table>
+                        }
+
+                    }
+
+ 
+                             
 
 
+                            <div class="form-body">
 
+                                <div class="form-group">
+                                    <label>Select Food </label>
+                                    @Html.DropDownListFor(m => m.FoodDetails.ID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control" })
+                                </div>
 
-                    @*<div class="form-group">
-                            <label class="control-label">Food </label>
-                            @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "-- SELECT FOOD --", new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Quantity</label>
-                            <input type="text" asp-for="Quantity" placeholder="John Smith" class="form-control">
-                        </div>*@
+                            </div>
 
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" asp-for="Quantity" min=0 placeholder="" class="form-control">
+                            </div>
+                            
+
+                     
 
 
                     <div class="margin-top-10">
                         <button type="submit" id="btnSubmit" class="btn green">Submit </button>
                     </div>
                 </form>
+
+
+
             </div>
         </div>
     </div>
@@ -102,12 +123,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal" aria-hidden="true"></button>
+                <button type="button" class="close edit-request-food"  data-dismiss="modal" aria-hidden="true"></button>
                 <h4 class="modal-title">Successful Request</h4>
             </div>
             <div class="modal-body">Restock request has been sent successfully! </div>
             <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal">Close</button>
+                <button type="button" class="btn dark btn-outline edit-request-food" o data-dismiss="modal">Close</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -129,10 +150,21 @@
             alert("Please enter the correct details!");
         }
 
-            
+        function addField(n) {
+             var tr = n.parentNode.parentNode.cloneNode(true);
+            document.getElementById('sample_1').appendChild(tr);
 
 
 
+        }
+    var id = @Model.FoodRequest.ID
+         $(document).on('click', '.edit-request-food', function (e) { 
+              
+                var url =window.location.href = '/Inventory/RequestFoodRestock?id=' + id; 
+            window.location.href = url.replace('__id__', id);
+
+
+            });
 
     </script>
 }

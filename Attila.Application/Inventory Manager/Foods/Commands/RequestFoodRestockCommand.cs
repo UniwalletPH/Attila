@@ -33,17 +33,17 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
                 await dbContext.SaveChangesAsync();
 
-                foreach (var item in request.MyFoodRestockRequestVM.FoodRequestCollection)
-                {
-                    FoodRequestCollection _foodRequestCollection = new FoodRequestCollection 
-                    {
-                        FoodID = item.FoodID,
-                        FoodRestockRequestID = _foodRestockRequest.ID,
-                        Quantity = item.Quantity
-                    };
+                //foreach (var item in request.MyFoodRestockRequestVM.FoodRequestCollection)
+                //{
+                //    FoodRequestCollection _foodRequestCollection = new FoodRequestCollection 
+                //    {
+                //        FoodID = item.FoodID,
+                //        FoodRestockRequestID = _foodRestockRequest.ID,
+                //        Quantity = item.Quantity
+                //    };
 
-                    dbContext.FoodRequestCollections.Add(_foodRequestCollection);
-                }
+                //    dbContext.FoodRequestCollections.Add(_foodRequestCollection);
+                //}
 
 
                 await dbContext.SaveChangesAsync();

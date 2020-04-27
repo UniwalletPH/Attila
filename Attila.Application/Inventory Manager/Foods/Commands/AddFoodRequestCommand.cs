@@ -12,7 +12,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
     public class AddFoodRequestCommand : IRequest<int>
     {
-        public FoodsRestockRequestVM MyFoodRestockRequestVM { get; set; }
+        public int ID { get; set; }
 
         public class AddFoodRequestCommandHandler : IRequestHandler<AddFoodRequestCommand, int>
         {
@@ -27,8 +27,8 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 FoodRestockRequest _foodRestockRequest = new FoodRestockRequest
                 {
                     DateTimeRequest = DateTime.Now,
-                    Status = Status.ForApproval,
-                    InventoryManagerID = request.MyFoodRestockRequestVM.UserID
+                    Status = Status.Processing,
+                    InventoryManagerID = request.ID
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);
