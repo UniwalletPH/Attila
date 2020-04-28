@@ -10,12 +10,12 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
         public DateTime DateTimeRequest { get; set; }
         public Status Status { get; set; }
         public int UserID { get; set; }
+        public int Quantity { get; set; }
 
 
         public User User { get; set; }
         public Food FoodDetails { get; set; }
 
-        public int Quantity { get; set; }
         //public List<FoodsRequestCollectionVM> FoodRequestCollection { get; set; }
     }
 }
