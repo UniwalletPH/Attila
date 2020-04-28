@@ -53,6 +53,31 @@
 
             });
         
+            $(document).on('click', 'tr .view-request-eq', function (e) { 
+
+            id = $(this).closest('tr').attr('data-id');
+                var url =window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id; 
+            window.location.href = url.replace('__id__', id);
+
+
+            });
+        $(document).on('click', 'tr .edit-request-eq', function (e) { 
+
+            id = $(this).closest('tr').attr('data-id');
+                var url =window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id; 
+            window.location.href = url.replace('__id__', id);
+
+
+        });
+
+         $(document).on('click', 'tr .submit-request-eq', function (e) { 
+
+            id = $(this).closest('tr').attr('data-id');
+                var url =window.location.href = '/Inventory/ChangeEquipmentRequestStatus?id=' + id; 
+            window.location.href = url.replace('__id__', id);
+
+
+            });
             $(document).on('click', 'tr .view-request-equipment', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
@@ -447,11 +472,11 @@
 
 
                             <div class="caption">
-                                
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">
+
+                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("CreateEquipmentRequest", "Inventory")'">
                                     Add Equipment Restock
                                 </button>
-                              
+
                             </div>
 
                         </div>
@@ -479,7 +504,9 @@
                             <td> @Html.DisplayFor(modelItem => item.Status)</td>
                             <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
 
-                            <td>    <button type="button" class="btn dark btn-outline view-request-equipment"> View Details</button>  </td>
+                            <td>    <button type="button" class="btn dark btn-outline view-request-eq"> View Details</button>  </td>
+                            <td>    <button type="button" class="btn dark btn-outline edit-request-eq"> Edit Details</button>  </td>
+                            <td>    <button type="button" class="btn dark btn-outline submit-request-eq"> Submit For Approval</button>  </td>
 
                         </tr>
                         }

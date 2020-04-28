@@ -11,10 +11,10 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
     public class ChangeRequestStatusCommand : IRequest<bool>
     {
         public int ID { get; set; }
-        public class ChangeEventStatusCommandHandler : IRequestHandler<ChangeRequestStatusCommand, bool>
+        public class ChangeRequestStatusCommandHandler : IRequestHandler<ChangeRequestStatusCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
-            public ChangeEventStatusCommandHandler(IAttilaDbContext dbContext)
+            public ChangeRequestStatusCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }

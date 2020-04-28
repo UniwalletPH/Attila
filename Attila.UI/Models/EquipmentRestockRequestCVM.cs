@@ -1,4 +1,5 @@
-﻿using Attila.Application.Inventory_Manager.Equipments.Queries;
+﻿using Attila.Application.Admin.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Domain.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,20 +11,14 @@ namespace Attila.UI.Models
     public class EquipmentRestockRequestCVM
     {
         public int ID { get; set; }
-
-        [Required]
+         
         public int Quantity { get; set; }
-
-        [Required]
+         
         public DateTime DateTimeRequest { get; set; }
-
-        [Required]
-        public Status Status { get; set; }
-
-        [Required]
+         
+        public Status Status { get; set; } 
         public int UserID { get; set; }
-
-        [Required]
+         
         public int EquipmentDetailsID { get; set; }
 
 
@@ -33,6 +28,8 @@ namespace Attila.UI.Models
 
         public List<SelectListItem> EquipmentDetailsList { get; set; }
         public List<SelectListItem> UserList { get; set; }
+        public EquipmentRequestVM EquipmentRequest { get; set; }
+        public List<EquipmentCollectionVM> EquipmentCollection { get; set; }
         public List<EquipmentsRequestCollectionVM> EquipmentRequestCollectionCVM { get; set; }
 
     }

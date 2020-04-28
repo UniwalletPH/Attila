@@ -208,8 +208,7 @@ namespace Attila.UI.Controllers
 
             return Json(response);
         }
-
-        //Request Food Restock
+         
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
@@ -220,6 +219,17 @@ namespace Attila.UI.Controllers
             var id = await mediator.Send(new AddFoodRequestCommand { ID = CurrentUser.ID});
 
             return Redirect("/Inventory/RequestFoodRestock?id=" + id);
+        }
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpGet]
+
+        public async Task<IActionResult> CreateEquipmentRequest()
+        {
+
+            var id = await mediator.Send(new AddEquipmentRequestCommand { ID = CurrentUser.ID });
+
+            return Redirect("/Inventory/RequestEquipmentRestock?id=" + id);
         }
 
         [Authorize(Roles = "Admin,  InventoryManager")]
@@ -310,6 +320,29 @@ namespace Attila.UI.Controllers
          
     }
 
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEquipmentRequestStatus(int id)
+        {
+
+
+            var response = await mediator.Send(new Application.Inventory_Manager.Equipments.Commands.ChangeEquipmentRequestStatusCommand
+            {
+                ID = id
+
+            });
+
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Equipment Restock Request",
+                TargetUserID = -1,
+                MethodName = "/Inventory/EquipmentRestockRequestDetails",
+                RequestID = id
+            });
+
+            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
+
+        }
 
 
 
@@ -457,8 +490,10 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> RequestEquipmentRestock()
+        public async Task<IActionResult> RequestEquipmentRestock(int id)
         {
+
+
             var getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
 
@@ -470,12 +505,20 @@ namespace Attila.UI.Controllers
                     Text = item.Code + " | " + item.Name + " | " + item.UnitType
                 });
             }
+            var _requestDetails = await mediator.Send(new GetEquipmentRequestDetailsQuery { ID = id });
+            var _equipmentRequestCollection = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
 
             EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
             {
-                EquipmentDetailsList = _list
-            };
+                EquipmentDetailsList = _list,
 
+                EquipmentRequest = _requestDetails,
+                EquipmentCollection = _equipmentRequestCollection
+            };
+             ;
+
+        
+             
             return View(equipmentDetailsListVM);
         }
 
@@ -486,25 +529,28 @@ namespace Attila.UI.Controllers
             EquipmentsRestockRequestVM _equipmentRequest = new EquipmentsRestockRequestVM
             {
                 UserID = CurrentUser.ID,
-                EquipmentRequestCollection = equipmentRestockRequestVM.EquipmentRequestCollectionCVM
+                Quantity = equipmentRestockRequestVM.Quantity,
+                EquipmentDetails = equipmentRestockRequestVM.EquipmentDetails
+              
             };
 
-            var response = await mediator.Send(new RequestEquipmentRestockCommand
+            var response = await mediator.Send(new AddEquipmentRequestCollectionCommand
             {
-                MyEquipmentRestockRequestVM = _equipmentRequest
+                EquipmentRestockID = equipmentRestockRequestVM.EquipmentRequest.ID,
+                 MyEquipmentRestockRequestVM = _equipmentRequest
             });
 
             //Send Notif to Admin
-            await mediator.Send(new AddInventoryNotificationCommand
-            {
-                Message = "New Equipment Restock Request",
-                TargetUserID = -1,
-                MethodName = "/Inventory/EquipmentRestockRequestDetails",
-                RequestID = response
-            });
+            //await mediator.Send(new AddInventoryNotificationCommand
+            //{
+            //    Message = "New Equipment Restock Request",
+            //    TargetUserID = -1,
+            //    MethodName = "/Inventory/EquipmentRestockRequestDetails",
+            //    RequestID = equipmentRestockRequestVM.EquipmentRequest.ID
+            //});
 
 
-            return Json(response);
+            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + equipmentRestockRequestVM.EquipmentRequest.ID);
         }
 
 
