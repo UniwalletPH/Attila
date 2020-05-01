@@ -31,6 +31,7 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
+
         [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         public async Task<IActionResult> Index()
         {
@@ -88,10 +89,9 @@ namespace Attila.UI.Controllers
             _addEventList.PackageList = _list;
             _addEventList.ClientList = _clientlist;
             return View(_addEventList);
-
-
-
         }
+
+
 
         [Authorize(Roles = "Coordinator")]
         [HttpGet]
@@ -114,8 +114,9 @@ namespace Attila.UI.Controllers
             return View(_addDishRequest);
         }
 
-        [Authorize(Roles = "Coordinator")]
 
+
+        [Authorize(Roles = "Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDishRequest(AdditionalDishCVM _additionalDish)
         {
@@ -129,6 +130,7 @@ namespace Attila.UI.Controllers
 
             return Json(response);
         }
+
 
         [Authorize(Roles = "Coordinator")]
         [HttpPost]
@@ -157,23 +159,11 @@ namespace Attila.UI.Controllers
                 VenueType = _eventDetails.Event.VenueType
             };
 
-
-
             var response = await mediator.Send(new AddEventCommand { EventDetails = x });
 
-            await mediator.Send(new AddEventNotificationCommand
-            {
-                Message = "New Event Request Received",
-                TargetUserID = -1,
-                MethodName = "/Events/Details",
-                RequestID = response
-            });
-
-
             return Json(response);
-
-
         }
+
 
         [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         [HttpGet]
@@ -190,8 +180,8 @@ namespace Attila.UI.Controllers
         }
 
 
-        [Authorize(Roles = "Admin, Coordinator")]
 
+        [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> Update(int EventID)
         {
@@ -247,9 +237,6 @@ namespace Attila.UI.Controllers
                 VenueType = _eventDetails.VenueType,
                 BookingDate = _eventDetails.BookingDate,
                 ID = _eventDetails.ID
-
-
-
             };
 
 
@@ -298,6 +285,7 @@ namespace Attila.UI.Controllers
             return View(_addEventList);
 
         }
+
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -380,13 +368,22 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
+
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
-        public async Task<IActionResult> ChangeStatus(int EventID)
+        public async Task<IActionResult> ChangeEventStatusToForApproval(int EventID)
         {
             var response = await mediator.Send(new ChangeEventStatusCommand
             {
                 ID = EventID
+            });
+
+            await mediator.Send(new AddEventNotificationCommand
+            {
+                Message = "New Event For Approval Recieved",
+                TargetUserID = -1,
+                MethodName = "/Events/Details",
+                RequestID = response
             });
 
             return RedirectToAction("Details", new { EventID = EventID });
@@ -409,10 +406,14 @@ namespace Attila.UI.Controllers
                 List<SelectListItem> _list = new List<SelectListItem>();
 
 
-
-
                 var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
+                var _selected = await mediator.Send(new GetEventMenuQuery { EventId = EventID});
+                var _selectedMenu = new List<int>();
 
+                foreach (var item in _selected)
+                {
+                    _selectedMenu.Add(item.DishID);
+                }
 
                 AddEventMenuCVM eventDetails = new AddEventMenuCVM
                 {
@@ -420,7 +421,8 @@ namespace Attila.UI.Controllers
                     MenuList = _addmenu,
                     EventID = EventID,
                     Menu = _list,
-                    Groupings = _dishGroupbyCategory
+                    Groupings = _dishGroupbyCategory ,
+                    SelectedMenu = _selectedMenu
                 };
 
 
@@ -436,17 +438,27 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddMenu(AddEventMenuCVM addEvent)
         {
             var _evntMenu = new List<EventMenuVM>();
+            var _selected = await mediator.Send(new GetEventMenuQuery {EventId = addEvent.EventID });
+            var _selectedMenu = new List<int>();
+            foreach (var item in _selected)
+            {
+                _selectedMenu.Add(item.DishID);
+            }
 
 
             foreach (var item in addEvent.SelectedMenu)
             {
-                var _menu = new EventMenuVM
+                if (!_selectedMenu.Contains(item))
                 {
-                    EventDetailsID = addEvent.EventID,
-                    DishID = item
-                };
+                    var _menu = new EventMenuVM
+                    {
+                        EventDetailsID = addEvent.EventID,
+                        DishID = item
+                    };
 
-                _evntMenu.Add(_menu);
+                    _evntMenu.Add(_menu);
+                }
+               
             }
 
 
