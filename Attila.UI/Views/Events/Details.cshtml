@@ -1,17 +1,11 @@
 ﻿
 @{
-
-
     ViewData["Title"] = "Event Details";
 }
 
 @model ViewEventCVM
-
  
-
-
-
-  
+ 
 <div class="row">
     <div class="col-md-12">
         <!-- Begin: life time stats -->
@@ -37,7 +31,6 @@
                             <input type="text" class="form-control details" asp-for="EventDetails.Type" placeholder="" readonly>
 
                         </div>
-
 
                         <div class="form-group">
                             <label>Event Theme  | Color</label>
@@ -89,8 +82,6 @@
                             <input type="text" class="form-control details" asp-for="EventDetails.ServingTime" readonly>
                         </div>
 
-
-
                         <div class="form-group">
                             <label>Buffet Type </label>
 
@@ -113,27 +104,21 @@
                             <textarea class="form-control details" asp-for="EventDetails.Remarks" readonly> </textarea>
                         </div>
 
-                        @{
 
+                        @{
                             if (Model.EventDetails.EventMenu != null)
                             {
-
                                 <div class="form-group">
                                     <label class="control-label">Menu</label>
-
                                 </div>
                                 <table class="table table-striped table-bordered table-hover order-column events" id="sample_3">
                                     <thead>
                                         <tr>
-
                                             <th> Dish Name </th>
                                             <th> Category</th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var item in Model.EventDetails.EventMenu)
                                         {
                                             <tr data-id="@item.ID">
@@ -145,34 +130,25 @@
                                     </tbody>
                                 </table>
                             }
-
                         }
 
-
-
                         @{
-
                             if (Model.EventDetails.AdditionalEquipment != null)
                             { <div class="form-group">
-
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Additional Equipments</label>
-
                                 </div>
                                 <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
                                     <thead>
                                         <tr>
-
                                             <th> Equipment Code </th>
                                             <th> Equipment </th>
                                             <th> Quantity </th>
                                             <th> Unit  </th>
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var item in Model.EventDetails.AdditionalEquipment)
                                         {
                                             <tr data-id="@item.ID">
@@ -180,40 +156,28 @@
                                                 <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
-
-
                                             </tr>
                                         }
-
-
                                     </tbody>
                                 </table>
                             }
-
                         }
 
 
                         @{
-
                             if (Model.EventDetails.AdditionalDish != null)
                             {
-
                                 <div class="form-group">
                                     <label class="control-label">Additional Dish</label>
-
                                 </div>
                                 <table class="table table-striped table-bordered table-hover order-column events" id="sample_2">
                                     <thead>
                                         <tr>
-
                                             <th> Dish Name </th>
                                             <th> Requested Quantity </th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var item in Model.EventDetails.AdditionalDish)
                                         {
                                             <tr data-id="@item.ID">
@@ -221,15 +185,12 @@
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
                                             </tr>
                                         }
-
-
                                     </tbody>
                                 </table>
                             }
-
                         }
-                        @{
 
+                        @{
                             if (Model.EventDetails.AdditionalDuration != null)
                             {
                                 @foreach (var item in Model.EventDetails.AdditionalDuration)
@@ -238,41 +199,34 @@
                                         <div class="form-group">
                                             <label>Additional Duration [Hours]</label>
                                         </div>
-
+                                        <div class="form-group">
+                                            @Html.DisplayFor(modelItem => item.Duration.Hours)
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        @Html.DisplayFor(modelItem => item.Duration.Hours)
-                                    </div>
-
                                 }
                             }
-
                         }
+
 
                         @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
                             {
                                 if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
                                 {
-
-                                    <label>Payment  </label>
-                                    <input type="number" class="form-control" placeholder="" readonly>
-
-                                    <label>Status  </label>
+                                    <label>Status</label>
                                     <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
                                 }
                                 else if (User.IsInRole("Coordinator"))
                                 {
-                                    <label>Payment  </label>
-                                    <input type="number" class="form-control" placeholder="" readonly>
-
                                     <label>Status  </label>
                                     <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
- 
-                                    <text>
-                        <br />
-                                        <button type="button" id="btnComplete" class="btn blue">Change Event Status To Completed</button>
-                                    </text>
 
+                                    if (Model.EventDetails.EventDate <= DateTime.Now)
+                                    {
+                                        <text>
+                                            <br />
+                                            <button type="button" id="btnComplete" class="btn blue">Change Status To Completed</button>
+                                        </text>
+                                    }
                                 }
                             }
                             else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
@@ -311,62 +265,18 @@
                                 }
                             }
                             else if (Model.EventDetails.EventStatus.ToString() == "Completed")
-                            {
-
-
-                                <label>Payment  </label>
-                                <input type="number" class="form-control" placeholder="" readonly>
-
-                                <label>Status  </label>
-
+                            {      
                                 <text>
                                     <label>Status  </label>
                                     <input type="text" class="form-control" placeholder="" asp-for=@Model.EventDetails.EventStatus readonly>
                                 </text>
-
                             }
-
-
-
-
                         }
-
-
-                        @*@{ if (Model.EventDetails.EventStatus.ToString() != "Approved" || Model.EventDetails.EventStatus.ToString() != "Declined")
-            {
-
-
-                <text>
-                    <button type="button" id="btnEdit" class="btn blue"> Edit</button>
-
-
-                </text>
-
-
-
-
-                <text>
-                    <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
-                    <button type="button" id="btnDecline" class="btn blue">Reject</button>
-                </text>
-            }
-        }*@
-
-</form>
-
-
-
-
-
-
+                </form>
             </div>
-
-
-
         </div>
     </div>
 </div>
-
 
 
 <div class="modal fade" id="successedit" tabindex="-1" aria-hidden="true">

@@ -27,7 +27,7 @@ namespace Attila.Application.Admin.Events.Queries
                     .Include(a => a.EventPackage)
                     .Include(a => a.Client)
                     .Include(a => a.Coordinator)
-                    .Where(a => a.EventStatus == Status.Completed && a.EventDate < DateTime.Now).ToList();
+                    .Where(a => a.EventDate < DateTime.Now).ToList();
 
                 foreach (var item in _pastEvents)
                 {

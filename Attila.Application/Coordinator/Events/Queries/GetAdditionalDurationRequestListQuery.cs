@@ -36,7 +36,15 @@ namespace Attila.Application.Events.Queries
                     
                 }).ToListAsync();
 
-                return _viewAdditionalDuration;
+                if (_viewAdditionalDuration != null)
+                {
+                    return _viewAdditionalDuration;
+                }
+                else
+                {
+                    return null;
+                }
+                
             }
         }
     }

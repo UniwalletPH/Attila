@@ -101,7 +101,7 @@ namespace Attila.Application.Events.Queries
                     EventID = request.EventId 
                 });
 
-                if (_collectionAdditionalDuration != null)
+                if (_collectionAdditionalDuration.Any())
                 {
                     _fullEventDetails.AdditionalDuration = _collectionAdditionalDuration;
                 }
@@ -111,7 +111,7 @@ namespace Attila.Application.Events.Queries
                     EventId = request.EventId
                 });
 
-                if (_eventMenu != null)
+                if (_eventMenu.Any())
                 {
                     _fullEventDetails.EventMenu = _eventMenu;
                 }

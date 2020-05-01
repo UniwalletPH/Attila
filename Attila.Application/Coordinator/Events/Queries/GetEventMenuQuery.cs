@@ -42,7 +42,16 @@ namespace Attila.Application.Coordinator.Events.Queries
                     };
                     _eventMenuList.Add(EventMenuList);
                 }
-                return _eventMenuList;
+
+                if (_eventMenuList != null)
+                {
+                    return _eventMenuList;
+                }
+                else
+                {
+                    return null;
+                }
+               
             }
         }
     }

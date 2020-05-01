@@ -386,7 +386,7 @@ namespace Attila.UI.Controllers
                 RequestID = response
             });
 
-            return RedirectToAction("Details", new { EventID = EventID });
+            return RedirectToAction("Index");
         }
 
 
