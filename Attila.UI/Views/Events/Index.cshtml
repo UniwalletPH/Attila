@@ -468,7 +468,7 @@
                                 <th> Event Name </th>
                                 <th> Client </th>
                                 <th> Coordinator </th>
-                                <th>  </th> 
+                                <th>  </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -482,7 +482,7 @@
                                     <td> @Html.DisplayFor(modelItem => item.Client.Name)  </td>
                                     <td> @Html.DisplayFor(modelItem => item.Coordinator.Name)   </td>
 
-                                    <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td> 
+                                    <td>    <button type="button" class="btn dark btn-outline view"> See Event Details</button>  </td>
 
                                 </tr>
                             }
@@ -549,8 +549,9 @@
             var url = '@Url.Action("ChangeStatus", "Events", new { EventID = "__id__" })';
             window.location.href = url.replace('__id__', id);
 
-
             });
+
+
             $(document).on('click', 'tr .view', function (e) {
 
                 id = $(this).closest('tr').attr('data-id');
@@ -559,8 +560,6 @@
 
             var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
             window.location.href = url.replace('__id__', id);
-
-
             });
 
 

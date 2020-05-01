@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
- 
+
 
 namespace Attila.UI.Controllers
 {
@@ -34,28 +34,22 @@ namespace Attila.UI.Controllers
         [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         public async Task<IActionResult> Index()
         {
-
-             
-                var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
+            var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
             var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery { });
-                var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
-                var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
-                var _pastEvents = await mediator.Send(new GetAllPastEventsQuery {  });
+            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
+            var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
+            var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
 
-                var _forEvent = new EventViewCVM
-                {
-                    ProcessingEvent = _processingEvents,
-                    IncomingEvent = _incomingEvents,
-                    PastEvent = _pastEvents,
-                    PendingEvent = _pendingEvents,
-                    Events = _searchResult
-                };
+            var _forEvent = new EventViewCVM
+            {
+                ProcessingEvent = _processingEvents,
+                IncomingEvent = _incomingEvents,
+                PastEvent = _pastEvents,
+                PendingEvent = _pendingEvents,
+                Events = _searchResult
+            };
 
-
-                return View(_forEvent);
-            
-
-
+            return View(_forEvent);
         }
 
 
@@ -64,38 +58,38 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> BookingForm()
         {
-             
-                var _packageNames = await mediator.Send(new GetEventPackageQuery());
-                var _clientNames = await mediator.Send(new GetClientListQuery());
 
-                List<SelectListItem> _list = new List<SelectListItem>();
+            var _packageNames = await mediator.Send(new GetEventPackageQuery());
+            var _clientNames = await mediator.Send(new GetClientListQuery());
 
-                List<SelectListItem> _clientlist = new List<SelectListItem>();
-                foreach (var item in _packageNames)
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            List<SelectListItem> _clientlist = new List<SelectListItem>();
+            foreach (var item in _packageNames)
+            {
+                _list.Add(new SelectListItem
                 {
-                    _list.Add(new SelectListItem
-                    {
-                        Value = item.ID.ToString(),
-                        Text = item.Name
-                    });
+                    Value = item.ID.ToString(),
+                    Text = item.Name
+                });
 
-                }
+            }
 
-                foreach (var item in _clientNames)
+            foreach (var item in _clientNames)
+            {
+                _clientlist.Add(new SelectListItem
                 {
-                    _clientlist.Add(new SelectListItem
-                    {
-                        Value = item.ID.ToString(),
-                        Text = item.Name,
-                    });
-                }
+                    Value = item.ID.ToString(),
+                    Text = item.Name,
+                });
+            }
 
-                var _addEventList = new AddEventCVM();
-                _addEventList.PackageList = _list;
-                _addEventList.ClientList = _clientlist;
-                return View(_addEventList);
-            
-          
+            var _addEventList = new AddEventCVM();
+            _addEventList.PackageList = _list;
+            _addEventList.ClientList = _clientlist;
+            return View(_addEventList);
+
+
 
         }
 
@@ -131,7 +125,7 @@ namespace Attila.UI.Controllers
                 Quantity = _additionalDish.AdditionalDish.Quantity,
             };
 
-            var response = await mediator.Send(new AddAdditionalDishRequestCommand{AdditionalDish = _container});
+            var response = await mediator.Send(new AddAdditionalDishRequestCommand { AdditionalDish = _container });
 
             return Json(response);
         }
@@ -140,58 +134,59 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventCVM _eventDetails)
         {
-             
-                EventDetailsVM x = new EventDetailsVM
-                {
-                    EventName = _eventDetails.Event.EventName,
-                    Type = _eventDetails.Event.Type,
-                    Description = _eventDetails.Event.Description,
-                    EventClientID = _eventDetails.Event.EventClientID,
-                    EventDate = _eventDetails.Event.EventDate,
-                    PackageDetailsID = _eventDetails.Event.PackageDetailsID,
-                    Location = _eventDetails.Event.Location,
-                    Remarks = _eventDetails.Event.Remarks,
-                    UserID = CurrentUser.ID,
-                    EventStatus = _eventDetails.Event.EventStatus,
-                    EntryTime = _eventDetails.Event.EntryTime,
-                    NumberOfGuests = _eventDetails.Event.NumberOfGuests,
-                    ProgramStart = _eventDetails.Event.ProgramStart,
-                    ServingTime = _eventDetails.Event.ServingTime,
-                    LocationType = _eventDetails.Event.LocationType,
-                    ServingType = _eventDetails.Event.ServingType,
-                    Theme = _eventDetails.Event.Theme,
-                    VenueType = _eventDetails.Event.VenueType
-                };
+
+            EventDetailsVM x = new EventDetailsVM
+            {
+                EventName = _eventDetails.Event.EventName,
+                Type = _eventDetails.Event.Type,
+                Description = _eventDetails.Event.Description,
+                EventClientID = _eventDetails.Event.EventClientID,
+                EventDate = _eventDetails.Event.EventDate,
+                PackageDetailsID = _eventDetails.Event.PackageDetailsID,
+                Location = _eventDetails.Event.Location,
+                Remarks = _eventDetails.Event.Remarks,
+                UserID = CurrentUser.ID,
+                EventStatus = _eventDetails.Event.EventStatus,
+                EntryTime = _eventDetails.Event.EntryTime,
+                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
+                ProgramStart = _eventDetails.Event.ProgramStart,
+                ServingTime = _eventDetails.Event.ServingTime,
+                LocationType = _eventDetails.Event.LocationType,
+                ServingType = _eventDetails.Event.ServingType,
+                Theme = _eventDetails.Event.Theme,
+                VenueType = _eventDetails.Event.VenueType
+            };
 
 
-                 
-            var response = await mediator.Send(new AddEventCommand { EventDetails = x});
-             
-            await mediator.Send(new AddEventNotificationCommand 
-            { 
+
+            var response = await mediator.Send(new AddEventCommand { EventDetails = x });
+
+            await mediator.Send(new AddEventNotificationCommand
+            {
                 Message = "New Event Request Received",
                 TargetUserID = -1,
                 MethodName = "/Events/Details",
-                RequestID = response 
+                RequestID = response
             });
-                   
+
 
             return Json(response);
- 
+
 
         }
 
         [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         [HttpGet]
-        public async Task<IActionResult> Details(int EventID) {
+        public async Task<IActionResult> Details(int EventID)
+        {
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
-            
-            return View (new ViewEventCVM
-            { 
-                EventDetails = _eventDetails          
+
+            return View(new ViewEventCVM
+            {
+                EventDetails = _eventDetails
             });
- 
+
         }
 
 
@@ -256,9 +251,9 @@ namespace Attila.UI.Controllers
 
 
             };
- 
 
-                List <SelectListItem> OccasionType = new List<SelectListItem>()
+
+            List<SelectListItem> OccasionType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "Baptismal", Value = "Baptismal" },
                 new SelectListItem { Text = "Birthday", Value = "Birthday" },
@@ -268,24 +263,24 @@ namespace Attila.UI.Controllers
                 new SelectListItem { Text = "Others", Value = "Others" },
 
             };
-            List <SelectListItem> VenueType = new List<SelectListItem>()
+            List<SelectListItem> VenueType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "Yes", Value = "1" },
-                new SelectListItem { Text = "No", Value = "2" }, 
+                new SelectListItem { Text = "No", Value = "2" },
 
             };
 
             List<SelectListItem> LocationType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "North Area", Value = "1" },
-                new SelectListItem { Text = "South Area", Value = "2" }, 
+                new SelectListItem { Text = "South Area", Value = "2" },
 
             };
 
             List<SelectListItem> ServingType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "Manage Buffet", Value = "ManageBuffet" },
-                new SelectListItem { Text = "Self Service Buffet", Value = "SelfServiceBuffet" }, 
+                new SelectListItem { Text = "Self Service Buffet", Value = "SelfServiceBuffet" },
 
             };
             @ViewBag.OccasionType = new SelectList(OccasionType, "Value", "Text", _details.Type);
@@ -307,26 +302,26 @@ namespace Attila.UI.Controllers
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Approve(int EventID)
-       {
-                       
+        {
+
             var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
-            
-            await mediator.Send(new AddEventNotificationCommand 
-            { 
-                Message ="Your request has been Approved",
+
+            await mediator.Send(new AddEventNotificationCommand
+            {
+                Message = "Your request has been Approved",
                 TargetUserID = response.Coordinator.ID,
                 MethodName = "/Events/Details",
                 RequestID = response.ID
             });
-           var inventoryManagerList= await mediator.Send(new GetInventoryManagerListQuery());
+            var inventoryManagerList = await mediator.Send(new GetInventoryManagerListQuery());
 
             foreach (var item in inventoryManagerList)
-            { 
+            {
                 await mediator.Send(new AddEventNotificationCommand
                 {
 
-                    
+
                     Message = "An event has been Approved",
                     TargetUserID = item.ID,
                     MethodName = "/Events/Details",
@@ -334,7 +329,7 @@ namespace Attila.UI.Controllers
                 }); ;
 
             }
-     
+
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
@@ -346,7 +341,7 @@ namespace Attila.UI.Controllers
             var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
 
             await mediator.Send(new AddEventNotificationCommand
-            { 
+            {
                 Message = "Your request has been Declined",
                 TargetUserID = response.Coordinator.ID,
                 MethodName = "/Events/Details",
@@ -360,38 +355,38 @@ namespace Attila.UI.Controllers
         [Authorize(Roles = "Coordinator")]
 
         [HttpPost]
-               public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
-
-                      {  
-                       var response =   await mediator.Send(new UpdateEventCommand
-                         {
-                             UpdateEvent = _eventDetails.EventDetails
-                         });
-
-            return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
-                     }
-    
-
-
-              [Authorize(Roles = "Admin, Coordinator")]
-        [HttpGet]
-        public async Task<IActionResult> ChangeEventStatusToCompleted(int EventID)
+        public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
 
         {
+            var response = await mediator.Send(new UpdateEventCommand
+            {
+                UpdateEvent = _eventDetails.EventDetails
+            });
+
+            return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
+        }
+
+
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEventStatusToCompleted(int EventID)
+        {
             var response = await mediator.Send(new ChangeEventStatusToCompletedCommand
-            {  
+            {
                 EventID = EventID
             });
 
             return RedirectToAction("Details", new { EventID = EventID });
         }
+
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> ChangeStatus(int EventID)
-
         {
-            var response = await mediator.Send(new ChangeRequestStatusCommand { 
-               ID = EventID
+            var response = await mediator.Send(new ChangeEventStatusCommand
+            {
+                ID = EventID
             });
 
             return RedirectToAction("Details", new { EventID = EventID });
@@ -405,15 +400,15 @@ namespace Attila.UI.Controllers
 
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
-           
+
             if (_eventDetails != null)
             {
                 var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
-                var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery{});
+                var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery { });
 
                 List<SelectListItem> _list = new List<SelectListItem>();
 
-               
+
 
 
                 var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
@@ -425,7 +420,7 @@ namespace Attila.UI.Controllers
                     MenuList = _addmenu,
                     EventID = EventID,
                     Menu = _list,
-                    Groupings = _dishGroupbyCategory                    
+                    Groupings = _dishGroupbyCategory
                 };
 
 
@@ -446,7 +441,7 @@ namespace Attila.UI.Controllers
             foreach (var item in addEvent.SelectedMenu)
             {
                 var _menu = new EventMenuVM
-                { 
+                {
                     EventDetailsID = addEvent.EventID,
                     DishID = item
                 };
@@ -455,7 +450,7 @@ namespace Attila.UI.Controllers
             }
 
 
-            var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu});
+            var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu });
 
 
             return Json(_rVal);
@@ -469,20 +464,20 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Additional(int EventID)
         {
 
-            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = EventID});
-            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = EventID});
+            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = EventID });
+            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = EventID });
 
 
             if (_equipmentRequest != null && _dishRequest != null)
             {
-                var _equipmentRequested = await mediator.Send(new GetAdditionalEquipmentCollectionQuery 
+                var _equipmentRequested = await mediator.Send(new GetAdditionalEquipmentCollectionQuery
                 {
-                    EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID 
+                    EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID
                 });
 
-                var _dishRequested = await mediator.Send(new GetAdditionalDishCollectionQuery 
-                { 
-                    EventAdditionalDishRequestID = _dishRequest.RequestID 
+                var _dishRequested = await mediator.Send(new GetAdditionalDishCollectionQuery
+                {
+                    EventAdditionalDishRequestID = _dishRequest.RequestID
                 });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
@@ -493,7 +488,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name +"|"+ item.UnitType,
+                        Text = item.Name + "|" + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }
@@ -527,9 +522,9 @@ namespace Attila.UI.Controllers
             }
             else if (_equipmentRequest != null && _dishRequest == null)
             {
-                var _equipmentRequested = await mediator.Send(new GetAdditionalEquipmentCollectionQuery 
-                { 
-                    EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID 
+                var _equipmentRequested = await mediator.Send(new GetAdditionalEquipmentCollectionQuery
+                {
+                    EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID
                 });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
@@ -573,9 +568,9 @@ namespace Attila.UI.Controllers
             }
             else if (_equipmentRequest == null && _dishRequest != null)
             {
-                var _dishRequested = await mediator.Send(new GetAdditionalDishCollectionQuery 
-                { 
-                    EventAdditionalDishRequestID = _dishRequest.RequestID 
+                var _dishRequested = await mediator.Send(new GetAdditionalDishCollectionQuery
+                {
+                    EventAdditionalDishRequestID = _dishRequest.RequestID
                 });
 
                 var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
@@ -647,7 +642,7 @@ namespace Attila.UI.Controllers
 
                 var _additionalModel = new AdditionalsCVM
                 {
-                    EventID = EventID,                
+                    EventID = EventID,
                     DishList = _selectListDishes,
                     EquipmentList = _selectListEquipment
                 };
@@ -658,7 +653,7 @@ namespace Attila.UI.Controllers
 
             }
 
-   
+
         }
 
         [Authorize(Roles = "Coordinator")]
@@ -666,9 +661,9 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddAdditionalEquipment(AdditionalsCVM additionals)
         {
 
-            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery 
-            { 
-                EventID = additionals.EventID 
+            var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery
+            {
+                EventID = additionals.EventID
             });
 
             if (_equipmentRequest != null)
@@ -680,18 +675,18 @@ namespace Attila.UI.Controllers
                     Quantity = additionals.AdditionalEquipmentRequest.Quantity
                 };
 
-                var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand 
-                { 
-                    AdditionalEquipment = _additionalEquipmentRequest 
+                var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand
+                {
+                    AdditionalEquipment = _additionalEquipmentRequest
                 });
 
                 return Json(_rV);
 
             }
             else
-            { 
-                var _requestID = await mediator.Send(new CreateAdditionalEquipmentRequestCommand 
-                { 
+            {
+                var _requestID = await mediator.Send(new CreateAdditionalEquipmentRequestCommand
+                {
                     EventID = additionals.EventID
                 });
 
@@ -702,25 +697,25 @@ namespace Attila.UI.Controllers
                     Quantity = additionals.AdditionalEquipmentRequest.Quantity
                 };
 
-                var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand 
-                { 
-                    AdditionalEquipment = _additionalEquipmentRequest 
+                var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand
+                {
+                    AdditionalEquipment = _additionalEquipmentRequest
                 });
 
 
                 return Json(_rVal);
 
             }
-          
+
         }
 
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDish(AdditionalsCVM additionals)
         {
-            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery 
-            { 
-                EventID = additionals.EventID 
+            var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery
+            {
+                EventID = additionals.EventID
             });
 
             if (_dishRequest != null)
@@ -732,15 +727,15 @@ namespace Attila.UI.Controllers
                     Quantity = additionals.AdditionalDishRequest.Quantity
                 };
 
-                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand 
-                { 
-                    Dish = _additionalDishRequest 
+                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand
+                {
+                    Dish = _additionalDishRequest
                 });
             }
             else
             {
-                var _requestID = await mediator.Send(new CreateAdditionalDishRequestCommand 
-                { 
+                var _requestID = await mediator.Send(new CreateAdditionalDishRequestCommand
+                {
                     EventID = additionals.EventID
                 });
 
@@ -751,9 +746,9 @@ namespace Attila.UI.Controllers
                     Quantity = additionals.AdditionalDishRequest.Quantity
                 };
 
-                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand 
-                { 
-                    Dish = _additionalDishRequest 
+                var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand
+                {
+                    Dish = _additionalDishRequest
                 });
             }
 
@@ -765,7 +760,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {
             var _add = new AdditionalDurationRequestVM
-            { 
+            {
                 Duration = additionals.AdditionalDurationRequest.Duration,
                 EventDetailsID = additionals.EventID,
 
