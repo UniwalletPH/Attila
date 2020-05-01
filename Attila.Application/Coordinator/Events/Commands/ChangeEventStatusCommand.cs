@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Attila.Application.Coordinator.Events.Commands
 {
-    public class ChangeEventStatusCommand : IRequest<bool>
+    public class ChangeEventStatusCommand : IRequest<int>
     {
         public int ID { get; set; }
-        public class ChangeEventStatusCommandHandler : IRequestHandler<ChangeEventStatusCommand, bool>
+        public class ChangeEventStatusCommandHandler : IRequestHandler<ChangeEventStatusCommand, int>
         {
             private readonly IAttilaDbContext dbContext;
             public ChangeEventStatusCommandHandler(IAttilaDbContext dbContext)
@@ -19,7 +19,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(ChangeEventStatusCommand request, CancellationToken cancellationToken)
+            public async Task<int> Handle(ChangeEventStatusCommand request, CancellationToken cancellationToken)
             {
                 var _event = dbContext.Events.Find(request.ID);
 
@@ -27,7 +27,7 @@ namespace Attila.Application.Coordinator.Events.Commands
                 await dbContext.SaveChangesAsync();
 
 
-                return true;
+                return _event.ID;
 
             }
         }

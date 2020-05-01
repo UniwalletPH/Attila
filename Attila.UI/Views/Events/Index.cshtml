@@ -278,7 +278,6 @@
 
                             @foreach (var item in Model.IncomingEvent)
                             {
-
                                 <tr data-id="@item.ID">
                                     <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                                     <td> @Html.DisplayFor(modelItem => item.BookingDate)</td>
@@ -377,7 +376,7 @@
 
      $(document).on('click', 'tr .change-status', function (e) {
         id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("ChangeStatus", "Events", new { EventID = "__id__" })';
+        var url = '@Url.Action("ChangeEventStatusToForApproval", "Events", new { EventID = "__id__" })';
         window.location.href = url.replace('__id__', id);
     });  
 

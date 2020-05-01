@@ -57,7 +57,10 @@
                                         <label>
                                             <input type="checkbox"
                                                    name="SelectedMenu"
-                                                   value="@item.MenuID" /> @item.Menu.Name
+                                                   value="@item.MenuID" @if(Model.SelectedMenu.Contains(item.MenuID))
+                               {
+                                   <text> checked </text> 
+                               } /> @item.Menu.Name
                                             </label>
                                         }
                                     }
