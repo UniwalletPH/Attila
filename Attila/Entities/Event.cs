@@ -41,6 +41,7 @@ namespace Attila.Domain.Entities
         public ICollection<EventAdditionalDishRequest> EventAdditionalDishRequests { get; private set; } = new HashSet<EventAdditionalDishRequest>();
         public ICollection<EventMenu> EventMenus { get; private set; } = new HashSet<EventMenu>();
         public ICollection<PaymentStatus> Payments { get; private set; } = new HashSet<PaymentStatus>();
+        public ICollection<EventFee> EventFees { get; private set; } = new HashSet<EventFee>();
 
 
     }
