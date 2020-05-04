@@ -55,15 +55,17 @@
                                     {
                                         <div class="checkbox"></div>
                                         <label>
-                                            <input type="checkbox"
+                                            <input type="checkbox"  
                                                    name="SelectedMenu"
-                                                   value="@item.MenuID" @if(Model.SelectedMenu.Contains(item.MenuID))
-                               {
+                                                   class="@group.Key.Category"
+                                                   onclick="CheckBox('.@group.Key.Category')"
+                                                   value="@item.MenuID" @if (Model.SelectedMenu.Contains(item.MenuID))
+                                                   {
                                    <text> checked </text> 
-                               } /> @item.Menu.Name
+                                                   } /> @item.Menu.Name
                                             </label>
-                                        }
                                     }
+                                }
                             }
                         </div>
 
@@ -88,10 +90,18 @@
 
 @section Scripts{
     <script>
+        
         function OnSuccess(e) {
 
             $("#success").modal('show');
         }   
+        
+        function CheckBox(x) {
+            $(x).click(function () {
+                $(x).not(this).prop('checked', false);
+            });   
+        }
+
 
     </script>
 

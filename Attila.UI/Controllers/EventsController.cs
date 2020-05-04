@@ -308,8 +308,6 @@ namespace Attila.UI.Controllers
             {
                 await mediator.Send(new AddEventNotificationCommand
                 {
-
-
                     Message = "An event has been Approved",
                     TargetUserID = item.ID,
                     MethodName = "/Events/Details",
