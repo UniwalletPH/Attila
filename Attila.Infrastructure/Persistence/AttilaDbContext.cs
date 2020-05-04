@@ -23,6 +23,8 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<Event> Events { get; set; }
 
+        public DbSet<EventFee> EventFees { get; set; }
+
         public DbSet<Client> Clients { get; set; }
 
         public DbSet<EventEquipment> EventEquipments { get; set; }
