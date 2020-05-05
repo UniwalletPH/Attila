@@ -12,7 +12,7 @@ namespace Attila.Application.Users.Queries
 {
     public class SearchUserByIdQuery : IRequest<UserVM>
     {
-        public Guid UID { get; set; }
+        public int ID { get; set; }
 
         public class SearchUserByIdQueryHandler : IRequestHandler<SearchUserByIdQuery, UserVM>
         {
@@ -25,7 +25,7 @@ namespace Attila.Application.Users.Queries
             public async Task<UserVM> Handle(SearchUserByIdQuery request, CancellationToken cancellationToken)
             {
                 var _data = dbContext.Users
-                    .Where(a => a.UID == request.UID)
+                    .Where(a => a.ID == request.ID)
                     .Include(a => a.UserLogins)
                     .SingleOrDefault();
 

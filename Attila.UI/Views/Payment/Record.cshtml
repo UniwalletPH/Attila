@@ -1,72 +1,68 @@
-﻿
-@{
+﻿@{
 
 
-    ViewData["Title"] = "Records";
+    ViewData["Title"] = "Payment";
 }
 @model EventPaymentCVM
 
-
-@section Styles{
-    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-}
  
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
 
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase"> Event : @Model.EventDetails.EventName    |    @Model.EventDetails.EventDate  |  @Model.EventDetails.Location</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Event Payment</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Record</p>
                 </div>
-
+                <div class="col-sm-6 col-md-6 col-lg-12 col-xl-12 text-right">
+                    <p class="text-primary m-0 font-weight-bold">  Event : @Model.EventDetails.EventName    |    @Model.EventDetails.EventDate  |  @Model.EventDetails.Location </p>
+                </div>
             </div>
-            <div class="portlet-body">
+        </div>
+        <div class="card-body">
 
-                <table class="table table-striped table-bordered table-hover order-column events" id="records">
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th></th>
-                            <th> Reference Number </th>
+                            <th> Reference No. </th>
                             <th> Date Of Payment </th>
                             <th> Amount </th>
                             <th> Remarks </th>
                         </tr>
                     </thead>
                     <tbody>
+                       
+                            @{int rowNo = 0;}
+                            @foreach (var item in Model.PaymentStatus)
+                            {
+                                <tr>
 
 
-
-                        @{int rowNo = 0;}
-                        @foreach (var item in Model.PaymentStatus)
-                        {
-                            <tr>
-
-
-                                <td>  @(rowNo += 1)</td>
-                                <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Amount)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Remarks)    </td>
+                                    <td>  @(rowNo += 1)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Amount)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Remarks) </td>
 
 
-                            </tr>
-                        }
-                    </tbody>
+                                </tr>
+                            }
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong></strong></td>
+                            <td><strong>Reference No.</strong></td>
+                            <td><strong>Date of Payment</strong></td>
+                            <td><strong>Amount</strong></td>
+                            <td><strong>Remarks</strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
+
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>

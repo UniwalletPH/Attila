@@ -3,7 +3,7 @@
 @model EventClientVM
 
 @{
-    ViewData["Title"] = "Add Client";
+    ViewData["Title"] = "Clients";
 }
 
 @section Scripts{
@@ -25,63 +25,73 @@
 
     <partial name="_ValidationScriptsPartial" />
 }
+ 
 
-<div class="page-head">
-    <div class="page-title">
-        <h1>
-            Register Client
-            <small> </small>
-        </h1>
-    </div>
-</div>
 
-<div class="row">
-    <div class="col-md-12">
-        <form asp-controller="Clients"
-              asp-action="AddClientDetails"
-              data-ajax="true"
-              data-ajax-method="POST"
-              data-ajax-success="OnSuccess"
-              data-ajax-begin="OnBegin"
-              data-ajax-failure="OnFailure">
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">  Client Form </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+                            <form asp-controller="Clients"
+                                  asp-action="AddClientDetails"
+                                  data-ajax="true"
+                                  data-ajax-method="POST"
+                                  data-ajax-success="OnSuccess"
+                                  data-ajax-begin="OnBegin"
+                                  data-ajax-failure="OnFailure">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="food_details"><strong>Name</strong></label>
+                                            <input type="text" asp-for="Name" placeholder="John Smith" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
 
-            <div class="portlet light bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-speech font-green"></i>
-                        <span class="caption-subject bold font-green uppercase">Client Profile</span>
-                    </div>
-                    <div class="actions">
-                        <button id="btnSubmit" type="submit" class="btn green">Register </button>
-                    </div>
-                </div>
-                <div class="portlet-body">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="address"><strong>Email Address</strong></label>
 
-                    <div class="form-group">
-                        <label class="control-label">Name : </label>
-                        <input type="text" asp-for="Name" placeholder="John Smith" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">E-mail Address</label>
-                        <input type="email" asp-for="Email" placeholder="john.smith@gmail.com" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Home Address</label>
-                        <input type="text" asp-for="Address" placeholder="Sample St. Sample City" class="form-control">
+
+                                            <input type="email" asp-for="Email" placeholder="john.smith@gmail.com" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="ContactNumber"><strong>Contact</strong></label>
+                                            <input type="text" class="form-control" placeholder="09XXXXXX /  02XXXXXX" asp-for="Contact">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="address"><strong>Address</strong></label>
+
+                                            <input type="text" asp-for="Address" placeholder="Sample St. Sample City" class="form-control">
+
+                                        </div>
+                                    </div>
+                                </div>
+                               
+
+
+                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
+
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label">Mobile Number</label>
-                        <input type="tel" asp-for="Contact" placeholder="+63 912345678" class="form-control">
-                    </div>
-                    
-
-                    <div class="form-group">
-                        <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3" placeholder=""></textarea>
-                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>

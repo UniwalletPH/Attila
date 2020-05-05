@@ -4,88 +4,79 @@
 }
 @model Attila.UI.Models.InventoryDataCVM
 @section Scripts{
-
-    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+     
     <script>
 
+         
 
-
-            $(document).on('click', 'tr .see', function (e) {
-
-            id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/Details?id=' + id;
-            window.location.href = url.replace('__id__', id);
-
-
-            });
-        
-            $(document).on('click', 'tr .view-request-food', function (e) { 
+        $(document).on('click', 'tr .see', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/FoodRestockRequestDetails?id=' + id; 
-            window.location.href = url.replace('__id__', id);
-
-
-            });
-        $(document).on('click', 'tr .edit-request-food', function (e) { 
-
-            id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/RequestFoodRestock?id=' + id; 
+            var url = window.location.href = '/Inventory/Details?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
         });
 
-         $(document).on('click', 'tr .submit-request-food', function (e) { 
+        $(document).on('click', 'tr .view-request-food', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/ChangeRequestStatus?id=' + id; 
+            var url = window.location.href = '/Inventory/FoodRestockRequestDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
-            });
-        
-            $(document).on('click', 'tr .view-request-eq', function (e) { 
+        });
+        $(document).on('click', 'tr .edit-request-food', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id; 
-            window.location.href = url.replace('__id__', id);
-
-
-            });
-        $(document).on('click', 'tr .edit-request-eq', function (e) { 
-
-            id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id; 
+            var url = window.location.href = '/Inventory/RequestFoodRestock?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
         });
 
-         $(document).on('click', 'tr .submit-request-eq', function (e) { 
+        $(document).on('click', 'tr .submit-request-food', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/ChangeEquipmentRequestStatus?id=' + id; 
+            var url = window.location.href = '/Inventory/ChangeRequestStatus?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
-            });
-            $(document).on('click', 'tr .view-request-equipment', function (e) {
+        });
+
+        $(document).on('click', 'tr .view-request-eq', function (e) {
 
             id = $(this).closest('tr').attr('data-id');
-                var url =window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id;
+            var url = window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
-            });
+        });
+        $(document).on('click', 'tr .edit-request-eq', function (e) {
+
+            id = $(this).closest('tr').attr('data-id');
+            var url = window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id;
+            window.location.href = url.replace('__id__', id);
+
+
+        });
+
+        $(document).on('click', 'tr .submit-request-eq', function (e) {
+
+            id = $(this).closest('tr').attr('data-id');
+            var url = window.location.href = '/Inventory/ChangeEquipmentRequestStatus?id=' + id;
+            window.location.href = url.replace('__id__', id);
+
+
+        });
+        $(document).on('click', 'tr .view-request-equipment', function (e) {
+
+            id = $(this).closest('tr').attr('data-id');
+            var url = window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id;
+            window.location.href = url.replace('__id__', id);
+
+
+        });
 
 
 
@@ -94,97 +85,41 @@
 
 
 
-}
-@section Styles{
-
-
-    <style>
-        tr.group,
-        tr.group:hover {
-            background-color: #ddd !important;
-        }
-    </style>
-
-    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-}
+} 
+     
 
 
 
 
 
-
-
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <div class="caption font-dark">
-            <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
-        </div>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">DELIVERY</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Inventory</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Deliveries</p>
                 </div>
-
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>
+                </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                            <div class="caption">
-
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">
-                                    Add New Delivery
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_1">
+        </div>
+        <div class="card-body">
+ 
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Delivery Date</th>
+                            <th>Date of Delivery</th>
                             <th>Supplier</th>
-                            <th>Address</th>
-                            <th>
-                            </th>
+                            <th>Price</th>
+                            <th> </th> 
                         </tr>
                     </thead>
-
-                    <tbody>
-
-                        @foreach (var item in Model.InventoryDeliveryVM)
-                        {
+                    <tbody> 
+                            @foreach (var item in Model.InventoryDeliveryVM)
+                            {
                             <tr data-id="@item.ID">
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
 
@@ -193,65 +128,44 @@
 
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
 
-                                <td>  <button type="button" class="btn dark btn-outline see">See All</button> </td>
+                                <td>  <button type="button" class="btn btn-primary border rounded  see">See All</button> </td>
                             </tr>
-                        }
-
-                    </tbody>
-
-
+                        } 
+                        </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Date of Delivery</strong></td>
+                            <td><strong>Supplier</strong></td>
+                            <td><strong>Price</strong></td>
+                            <td><strong> </strong></td>  
+                        </tr>
+                    </tfoot>
                 </table>
-
-
             </div>
+          
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>
-
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">FOOD </span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <div style="margin: 10px;">
+        <div class="row">
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Add Food", "Inventory")'">Register New Food</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddFoodInventory", "Inventory")'">Add Food Stock</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("UpdateFoodStock", "Inventory")'">Update Food Stock</button></div>
+        </div>
+    </div>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Food Info</p>
                 </div>
-
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                            <div class="caption">
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddFood", "Inventory")'">
-                                    Add New
-                                </button>
-                                
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddFoodInventory", "Inventory")'">
-                                    Add Food Restock
-                                </button>
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("UpdateFoodStock", "Inventory")'">
-                                    Update Food Stock
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_2">
+        </div>
+        <div class="card-body">
+           
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -259,12 +173,10 @@
                             <th>Specification</th>
                             <th>Quantity</th>
                             <th>Unit</th>
-                            <th>Food Type</th>
+                            <th>Type</th>
                         </tr>
                     </thead>
-
                     <tbody>
-
                         @foreach (var item in Model.FoodListVM)
                         {
                             <tr>
@@ -277,63 +189,43 @@
 
                             </tr>
                         }
-
-
                     </tbody>
-
-
+                    <tfoot>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Description</strong></td>
+                            <td><strong>Specification</strong></td>
+                            <td><strong>Quantity</strong></td>
+                            <td><strong>Unit</strong></td>
+                            <td><strong>Type</strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
-
-
             </div>
+            
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">EQUIPMENT</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <div style="margin: 10px;">
+        <div class="row">
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipment", "Inventory")'">Register New Equipment</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">Add Equipment Stock</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("UpdateEquipmentStock", "Inventory")'">Update Equipment Stock</button></div>
+        </div>
+    </div>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Equipment Info</p>
                 </div>
-
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                            <div class="caption">
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddEquipment", "Inventory")'">
-                                    Add New
-                                </button>
-                                 
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">
-                                    Add Equipment Restock
-                                </button>
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("UpdateEquipmentStock", "Inventory")'">
-                                    Update Equipment Stock
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_3">
-
+        </div>
+        <div class="card-body">
+           
+            <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -341,7 +233,7 @@
                             <th>Rental Fee</th>
                             <th>Quantity</th>
                             <th>Unit Type</th>
-                            <th>Equipment Type</th>
+                            <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -358,172 +250,136 @@
 
                             </tr>
                         }
-
-
                     </tbody>
-
-
-                </table>
-
-
-            </div>
-        </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
-    </div>
-</div>
-
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">FOOD RESTOCK REQUEST  </span>
-                </div>
-
-            </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                            <div class="caption"> 
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("CreateFoodRequest", "Inventory")'">
-                                    Request Food Restock
-                                </button>
-                               
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_2">
-                    <thead>
+                    <tfoot>
                         <tr>
-                            <th>Request Date</th>
-                            <th>Status</th>
-
-                            <th>Inventory Manager </th>
-                            <th> </th>
-                            <th> </th>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Description</strong></td>
+                            <td><strong>Rental Fee</strong></td>
+                            <td><strong>Quantity</strong></td>
+                            <td><strong>Type</strong></td>
+                            <td><strong>Salary</strong></td>
                         </tr>
-                    </thead>
-
-                    <tbody>
-
-                        @foreach (var item in Model.FoodRequestList)
-                        {
-                        <tr data-id="@item.ID">
-                            <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                            <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
-
-                            <td>    <button type="button" class="btn dark btn-outline view-request-food"> View Details</button>  </td>
-                            <td>    <button type="button" class="btn dark btn-outline edit-request-food"> Edit Details</button>  </td>
-                            <td>    <button type="button" class="btn dark btn-outline submit-request-food"> Submit For Approval</button>  </td>
-
-                        </tr>
-                        }
-
-
-                    </tbody>
-
-
+                    </tfoot>
                 </table>
-
-
             </div>
+            
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">EQUIPMENT RESTOCK REQUEST</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Requests</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Food Restock Requests</p>
                 </div>
-
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("CreateFoodRequest", "Inventory")'">Add</button></p>
+                </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
-
-
-                            <div class="caption">
-
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("CreateEquipmentRequest", "Inventory")'">
-                                    Add Equipment Restock
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_3">
-
+        </div>
+        <div class="card-body">
+            
+            <div class="table-responsive table mt-2" id="dataTable-2" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>Date of Request</th>
                             <th>Status</th>
-                            <th>Inventory Manager </th>
-                            <th>   </th>
+                            <th>Requested by</th>
+                            <th> </th>
+                            <th> </th>
+
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        @foreach (var item in Model.EquipmentRequestList)
+                        @foreach (var item in Model.FoodRequestList)
                         {
-                        <tr data-id="@item.ID">
-                            <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                            <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                            <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+                            <tr data-id="@item.ID">
+                                <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
 
-                            <td>    <button type="button" class="btn dark btn-outline view-request-eq"> View Details</button>  </td>
-                            <td>    <button type="button" class="btn dark btn-outline edit-request-eq"> Edit Details</button>  </td>
-                            <td>    <button type="button" class="btn dark btn-outline submit-request-eq"> Submit For Approval</button>  </td>
+                                <td>    <button type="button" class="btn btn-primary border rounded   view-request-food"> View Details</button>  </td>
+                                <td>    <button type="button" class="btn btn-primary border rounded  edit-request-food"> Edit Details</button>  </td>
+                                <td>    <button type="button" class="btn btn-primary border rounded  submit-request-food"> Submit For Approval</button>  </td>
 
-                        </tr>
+                            </tr>
                         }
-
-
                     </tbody>
-
-
+                    <tfoot>
+                        <tr>
+                            <td><strong>Date of Request</strong></td>
+                            <td><strong>Status</strong></td>
+                            <td><strong>Requested by</strong></td>
+                            <td><strong> </strong></td>
+                            <td><strong></strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
-
-
+            </div>
+          
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="margin-top: 10px;">
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Equipment Restock Requests</p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("CreateEquipmentRequest", "Inventory")'>type="button">Add</button></p>
+                </div>
             </div>
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
+        <div class="card-body">
+           
+            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Date of Request</th>
+                            <th>Status</th>
+                            <th>Requested by</th>
+                            <th> </th>
+                            <th> </th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.EquipmentRequestList)
+                        {
+                            <tr data-id="@item.ID">
+                                <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
 
+                                <td>    <button type="button" class="btn btn-primary border rounded  view-request-eq"> View Details</button>  </td>
+                                <td>    <button type="button" class="btn btn-primary border rounded  edit-request-eq"> Edit Details</button>  </td>
+                                <td>    <button type="button" class="btn btn-primary border rounded  submit-request-eq"> Submit For Approval</button>  </td>
 
-
-
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Date of Request</strong></td>
+                            <td><strong>Status</strong></td>
+                            <td><strong>Requested by</strong></td>
+                            <td><strong></strong></td>
+                            <td><strong></strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+           
+        </div>
     </div>
 </div>
