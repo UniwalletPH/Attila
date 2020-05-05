@@ -75,6 +75,10 @@ namespace Attila.Application.Events.Queries
 
                     _fullEventDetails.AdditionalEquipment = _collectionAdditionalEquipment;
                 }
+                else
+                {
+                    _fullEventDetails.AdditionalEquipment = null;
+                }
 
 
 
@@ -93,6 +97,10 @@ namespace Attila.Application.Events.Queries
 
                     _fullEventDetails.AdditionalDish = _collectionAdditionalDish;
                 }
+                else
+                {
+                    _fullEventDetails.AdditionalDish = null;
+                };
 
 
 

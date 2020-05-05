@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "ServiceCharge";
+}
+@model ServiceChargeCVM
+
+<div class="row">
+        <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption font-dark">
+                        <i class="icon-settings font-dark"></i>
+                        <span class="caption-subject bold uppercase">Service Fee</span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="table-toolbar">
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Item</th>
+                                <th>Price Per Quantity</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.EventFees)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Item)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PricePerQuantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.TotalPrice)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    <div class="btn-group">
+                        <button  class="btn sbold green add" data-id="@Model.EventID">
+                            Add Service Charge
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{ 
+
+    <script>
+
+        var id = @Model.EventID;
+         $(document).on('click', '.add', function (e) {               
+            var url = window.location.href = '/Events/AddServiceCharge?id=' + id; 
+            window.location.href = url.replace('__id__', id);
+
+
+            });
+
+    </script>
+
+}

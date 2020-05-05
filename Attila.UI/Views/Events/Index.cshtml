@@ -135,7 +135,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn dark btn-outline view">View Event Details</button></td>
-                                    <td><button type="button" class="btn dark btn-outline update-price">View Service Charges</button></td>
+                                    <td><button type="button" class="btn dark btn-outline service-charge">View Service Charges</button></td>
                                     <td><button type="button" class="btn dark btn-outline view-payment">View Payment</button></td>
                                     <td><button type="button" class="btn dark btn-outline add-payment">Add Payment</button></td>
                                 </tr>
@@ -184,7 +184,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn dark btn-outline view"> View Event Details</button></td>
-                                    <td><button type="button" class="btn dark btn-outline update-price"> View Service Charges</button></td>
+                                    <td><button type="button" class="btn dark btn-outline service-charge"> View Service Charges</button></td>
                                     <td><button type="button" class="btn dark btn-outline view-payment"> View Payment</button></td>
                                     <td><button type="button" class="btn dark btn-outline add-payment"> Add Payment</button></td>
                                 </tr>
@@ -235,7 +235,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn dark btn-outline view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn dark btn-outline update-price">View Service Charges</button>  </td>
+                                    <td><button type="button" class="btn dark btn-outline service-charge">View Service Charges</button>  </td>
                                     <td><button type="button" class="btn dark btn-outline view-payment">View Payment</button>  </td>
                                     <td><button type="button" class="btn dark btn-outline add-payment">Add Payment</button>  </td>
                                 </tr>
@@ -391,6 +391,13 @@
         var url = '@Url.Action("AddPayment", "Payment", new { EventID = "__id__" })';
         window.location.href = url.replace('__id__', id);
     });  
+
+     $(document).on('click', 'tr .service-charge', function (e) {
+        id = $(this).closest('tr').attr('data-id');
+        var url = '@Url.Action("ServiceCharge", "Events", new { EventID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
+    });  
+
 
       $(document).on('click', 'tr .view-payment', function (e) {
          try {

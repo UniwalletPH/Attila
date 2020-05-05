@@ -136,32 +136,13 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddEvent(AddEventCVM _eventDetails)
         {
+            _eventDetails.Event.UserID = CurrentUser.ID;
 
-            EventDetailsVM x = new EventDetailsVM
-            {
-                EventName = _eventDetails.Event.EventName,
-                Type = _eventDetails.Event.Type,
-                Description = _eventDetails.Event.Description,
-                EventClientID = _eventDetails.Event.EventClientID,
-                EventDate = _eventDetails.Event.EventDate,
-                PackageDetailsID = _eventDetails.Event.PackageDetailsID,
-                Location = _eventDetails.Event.Location,
-                Remarks = _eventDetails.Event.Remarks,
-                UserID = CurrentUser.ID,
-                EventStatus = _eventDetails.Event.EventStatus,
-                EntryTime = _eventDetails.Event.EntryTime,
-                NumberOfGuests = _eventDetails.Event.NumberOfGuests,
-                ProgramStart = _eventDetails.Event.ProgramStart,
-                ServingTime = _eventDetails.Event.ServingTime,
-                LocationType = _eventDetails.Event.LocationType,
-                ServingType = _eventDetails.Event.ServingType,
-                Theme = _eventDetails.Event.Theme,
-                VenueType = _eventDetails.Event.VenueType
-            };
+            var response = await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
 
-            var response = await mediator.Send(new AddEventCommand { EventDetails = x });
 
-            return Json(response);
+
+            return Json(true);
         }
 
 
@@ -315,6 +296,87 @@ namespace Attila.UI.Controllers
                 }); ;
 
             }
+
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = response.ID});
+
+            var _initialFee = new AdditionalEventFeeVM
+            {
+                Description = "Initial Fee (Package * No. of Guest)",
+                EventID = response.ID,
+                Item = "Package-" + _eventDetails.Package.Name,
+                Quantity = _eventDetails.NumberOfGuests,
+                PricePerQuantity = _eventDetails.Package.RatePerHead,             
+            };
+
+            var _rVal =await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _initialFee});
+
+            if (_eventDetails.VenueType == VenueType.Building)
+            {
+                var _serviceFee = new AdditionalEventFeeVM
+                { 
+                    Description = "Service Fee for Venue in Condominium or Bldg.",
+                    Item = "Service Fee",
+                    EventID = response.ID,
+                    Quantity = 1,
+                    PricePerQuantity = 3500,
+                };
+
+                var _rValue = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _serviceFee});
+            }
+
+            if (_eventDetails.AdditionalEquipment != null)
+            {
+                foreach (var item in _eventDetails.AdditionalEquipment)
+                {
+                    var _additionalEquipmentFee = new AdditionalEventFeeVM
+                    { 
+                        EventID = response.ID,
+                        Description = "Additional Equipment Fee",
+                        Item = item.EquipmentDetails.Name,
+                        Quantity = item.Quantity,
+                        PricePerQuantity = item.EquipmentDetails.RentalFee                   
+                    };
+
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalEquipmentFee});
+
+                }
+            }
+
+            if (_eventDetails.AdditionalDish != null)
+            {
+                foreach (var item in _eventDetails.AdditionalDish)
+                {
+                    var _additionalDishFee = new AdditionalEventFeeVM
+                    { 
+                        EventID = response.ID,
+                        Description ="Additional Dish Fee",
+                        Item = item.Dish.Name,
+                        PricePerQuantity = 2500,
+                        Quantity = item.Quantity,                       
+                    };
+
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDishFee});
+                }
+            }
+
+            if (_eventDetails.AdditionalDuration.Any())
+            {
+                foreach (var item in _eventDetails.AdditionalDuration)
+                {
+                    var _additionalDurationFee = new AdditionalEventFeeVM
+                    { 
+                        EventID = response.ID,
+                        Description = "Additional Duration Fee",
+                        Item = "Service Hour",
+                        PricePerQuantity = 1500,
+                        Quantity = item.Duration.Hours,
+                    };
+
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDurationFee});
+                }
+            }
+
+           
 
             return RedirectToAction("Details", new { EventID = EventID });
         }
@@ -684,7 +746,7 @@ namespace Attila.UI.Controllers
                     RequestID = _equipmentRequest.RequestID,
                     Quantity = additionals.AdditionalEquipmentRequest.Quantity
                 };
-
+                //fee
                 var _rV = await mediator.Send(new AddAdditionalEquipmentRequestCommand
                 {
                     AdditionalEquipment = _additionalEquipmentRequest
@@ -706,7 +768,7 @@ namespace Attila.UI.Controllers
                     RequestID = _requestID,
                     Quantity = additionals.AdditionalEquipmentRequest.Quantity
                 };
-
+                //fee
                 var _rVal = await mediator.Send(new AddAdditionalEquipmentRequestCommand
                 {
                     AdditionalEquipment = _additionalEquipmentRequest
@@ -736,7 +798,7 @@ namespace Attila.UI.Controllers
                     RequestID = _dishRequest.RequestID,
                     Quantity = additionals.AdditionalDishRequest.Quantity
                 };
-
+                //fee
                 var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand
                 {
                     Dish = _additionalDishRequest
@@ -755,7 +817,7 @@ namespace Attila.UI.Controllers
                     RequestID = _requestID,
                     Quantity = additionals.AdditionalDishRequest.Quantity
                 };
-
+                //fee
                 var _rVal = await mediator.Send(new AddAdditionalDishRequestCollectionCommand
                 {
                     Dish = _additionalDishRequest
@@ -781,6 +843,40 @@ namespace Attila.UI.Controllers
             return Json(true);
         }
 
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ServiceCharge(int EventID)
+        {
+            var _rValue = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID});
+            var _ViewData = new ServiceChargeCVM
+            { 
+                EventID = EventID,
+                EventFees = _rValue
+            };
+
+            return View(_ViewData);
+        }
+
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public IActionResult AddServiceCharge(int id)
+        {
+            var ServiceFee = new AdditionalEventFeeVM
+            {
+                EventID = id
+            };
+            return View(ServiceFee);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddServiceCharge(AdditionalEventFeeVM data)
+        {
+            var _rVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = data});
+
+            return Json(true);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

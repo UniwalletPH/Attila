@@ -1,0 +1,64 @@
+﻿@using Attila.Application.Coordinator.Events.Queries
+@{
+    ViewData["Title"] = "AddServiceCharge";
+}
+@model AdditionalEventFeeVM
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- Begin: life time stats -->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase">Service Charge</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+            </div>
+            <form role="form" asp-controller="Events" asp-action="AddServiceCharge" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessEquipment">
+
+                <input type="hidden" class="form-control" asp-for="EventID" readonly>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" asp-for="Description" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label>Item</label>
+                    <input type="text" class="form-control" asp-for="Item" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="text" class="form-control" asp-for="Quantity" placeholder="" required>
+                </div>
+                <div class="form-group">
+                    <label>Price Per Quantity</label>
+                    <input type="text" class="form-control" asp-for="PricePerQuantity" placeholder="" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="btnAdd" class="btn blue">Add Service Charge</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End: life time stats -->
+
+
+@section Scripts{
+    <script>
+        function OnSuccessDish(result) {
+
+            $("#success-dish").modal('show');
+        }
+
+    </script>
+
+
+
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
