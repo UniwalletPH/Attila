@@ -359,7 +359,7 @@ namespace Attila.UI.Controllers
                 }
             }
 
-            if (_eventDetails.AdditionalDuration.Any())
+            if (_eventDetails.AdditionalDuration != null)
             {
                 foreach (var item in _eventDetails.AdditionalDuration)
                 {

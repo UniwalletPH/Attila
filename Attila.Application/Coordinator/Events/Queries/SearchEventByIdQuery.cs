@@ -113,6 +113,10 @@ namespace Attila.Application.Events.Queries
                 {
                     _fullEventDetails.AdditionalDuration = _collectionAdditionalDuration;
                 }
+                else
+                {
+                    _fullEventDetails.AdditionalDuration = null;
+                }
 
                 var _eventMenu = await mediator.Send(new GetEventMenuQuery 
                 { 
