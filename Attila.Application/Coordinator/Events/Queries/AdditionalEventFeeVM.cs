@@ -15,5 +15,7 @@ namespace Attila.Application.Coordinator.Events.Queries
         public int Quantity { get; set; }
 
         public decimal PricePerQuantity { get; set; }
+
+        public decimal TotalPrice { get; set; }
     }
 }
