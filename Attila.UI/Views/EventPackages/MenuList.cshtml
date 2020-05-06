@@ -12,77 +12,46 @@
         }
     </style>
 
-    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/rowgroup/1.1.1/css/rowGroup.dataTables.min.css" rel="stylesheet" />
 }
 
+ 
 
 
 
 
 
 
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Menu</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold"></p>
                 </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold">
+                        <button class="btn btn-primary" type="button"  onclick="location.href='@Url.Action("MenuCategoryForm", "EventPackages")'">Add New Category</button>
+                        <button class="btn btn-primary" type="button"  onclick="location.href='@Url.Action("MenuForm", "EventPackages")'">Add New Dish</button> 
 
+                    </p>
+
+                </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
+        </div>
+        <div class="card-body">
 
-
-                            <div class="caption">
-
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("MenuForm", "EventPackages")'">
-                                    Add New Menu
-                                </button>
-                                <button class="btn sbold green " onclick="location.href='@Url.Action("MenuCategoryForm", "EventPackages")'">
-                                    Add New Category
-                                </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_1">
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table    my-0" id="data_" >
                     <thead>
                         <tr>
-
+                             
                             <th> Name </th>
                             <th> Description </th>
-                            <td> Menu Category</td>
+                            <th> Category</th>
                         </tr>
                     </thead>
-
-
                     <tbody>
                         @foreach (var item in Model.MenuList)
                         {
@@ -95,83 +64,74 @@
 
                         }
 
-                    </tbody>
 
+                    </tbody>
+                     
                 </table>
 
-
             </div>
+
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>
 @section Scripts {
-     
+
     <script type="text/javascript">
 
 
 
 
-
-
-
-        function OnFailureCategory(e) {
-            console.log(e);
-            alert("failed!");
+         
+        $(document).ready(function() {
+    $('#data_').DataTable( {
+        order: [[2, 'asc']],
+        rowGroup: {
+            dataSrc: 2
         }
+    } );
+} );
 
 
 
+        //$(document).ready(function () {
+        //    table = $('#dataTable').DataTable({
+        //        "columnDefs": [
+        //            { "visible": false, "targets": 2 }
+        //        ],
+        //        "order": [[2, 'asc']],
+        //        "displayLength": 25,
+        //        "drawCallback": function (settings) {
+        //            var api = this.api();
+        //            var rows = api.rows({ page: 'current' }).nodes();
+        //            var last = null;
 
-        $(document).ready(function () {
-            table = $('#sample_1').DataTable({
-                "columnDefs": [
-                    { "visible": false, "targets": 2 }
-                ],
-                "order": [[2, 'asc']],
-                "displayLength": 25,
-                "drawCallback": function (settings) {
-                    var api = this.api();
-                    var rows = api.rows({ page: 'current' }).nodes();
-                    var last = null;
+        //            api.column(2, { page: 'current' }).data().each(function (group, i) {
+        //                if (last !== group) {
+        //                    $(rows).eq(i).before(
+        //                        '<tr class="group"><td colspan="5">' + group + '</td></tr>'
+        //                    );
 
-                    api.column(2, { page: 'current' }).data().each(function (group, i) {
-                        if (last !== group) {
-                            $(rows).eq(i).before(
-                                '<tr class="group"><td colspan="5">' + group + '</td></tr>'
-                            );
+        //                    last = group;
+        //                }
+        //            });
+        //        }
+        //    });
 
-                            last = group;
-                        }
-                    });
-                }
-            });
-
-            // Order by the grouping
-            $('#sample_1 tbody').on('click', 'tr.group', function () {
-                var currentOrder = table.order()[0];
-                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    table.order([2, 'desc']).draw();
-                }
-                else {
-                    table.order([2, 'asc']).draw();
-                }
-            });
-        });
+        //    // Order by the grouping
+        //    $('#sample_1 tbody').on('click', 'tr.group', function () {
+        //        var currentOrder = table.order()[0];
+        //        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+        //            table.order([2, 'desc']).draw();
+        //        }
+        //        else {
+        //            table.order([2, 'asc']).draw();
+        //        }
+        //    });
+        //});
     </script>
 
 
 
-
-    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+     
     <script src="https://cdn.datatables.net/rowgroup/1.1.1/js/dataTables.rowGroup.min.js" type="text/javascript"></script>
 }
