@@ -1,53 +1,93 @@
-﻿@model PackagesCVM
+﻿
 
+@model PackageDetailsCVM
 @{
 
-    ViewData["Title"] = "Menu Form";
-    
-} 
-            <form role="form" asp-controller="EventPackages" asp-action="AddMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessMenu" data-ajax-failure="OnFailureMenu">
+    ViewData["Title"] = "Details";
 
-                <div class="modal-header">
-                    <button type="button" class="close" onclick="location.href='@Url.Action("Index", "EventPackages")'" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title">Menu Form</h4>
+} <div class="container-fluid">
+    <h3 class="text-dark mb-4">  Package  </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" >
+
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold">
+
+                                            @foreach (var item in Model.MenuList)
+                                            { 
+                                                @item.PackageMenuDetails.Code
+                                                break;
+                                            }
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  text-right">
+
+                                        
+
+                                                <button class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("Index", "EventPackages")'"type="button">Back </button>
+                                        
+
+                                    </div>
+                                </div>
+                            </div>
+                          
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="hidden" class="form-control"  readonly>
+                                                <div class="form-group">
+                                                    <label for="food_details"><strong>Food Details</strong></label>
+
+                                                    <div class="form-actions">
+                                                        @{
+                                                            foreach (var group in Model.Groupings)
+                                                            {
+                                                                <div class="form-group">
+                                                                    <h4>[@group.Key.Category] [Select one item] </h4>
+                                                                </div>
+
+                                                                foreach (var item in group)
+                                                                {
+                                                                    <div class="checkbox"></div>
+                                                                    
+
+
+                                                                            <ul>
+                                                                                <li><label>  @item.Menu.Name</label></li> 
+                                                                            </ul>
+                                                                            }
+                                                                            }
+                                                                            }
+</div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                          
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-body">
-
-                    <div class="form-body">
-
-
-                        <table class="display" id="sample_1">
-                            <thead>
-                                <tr>
-
-                                    <th> Name </th>
-                                    <th> Description </th>
-                                    <td> Menu Category</td>
-                                </tr>
-                            </thead>
-
-
-                            <tbody>
-                                @*@foreach ( var item in Model.PackageMenu)
-                                {
-                                     
-
-                                }*@
-
-                            </tbody>
-
-                        </table>
-                    </div>
+            </div>
+        </div> 
 
 
 
 
-                </div>
-                <div class="modal-footer">
-                    <div class="form-actions">
-                        <button type="submit" class="btn blue">Submit</button>
-                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
 
-            </form> 
+
+    </div>
+</div>
+
+
+
+
+

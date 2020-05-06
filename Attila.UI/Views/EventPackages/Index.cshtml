@@ -54,18 +54,22 @@
                             <th> Name </th>
                             <th> Description </th>
                             <th> Rate Per Head </th>
+
+                            <th>   </th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach (var item in Model.EventPackages)
                         {
-                            <tr class="odd gradeX" data-id="@item.ID">
-                                <td>@item.Code</td>
-                                <td>@item.Name</td>
-                                <td>@item.Description</td>
-                                <td>@item.RatePerHead</td>
-                            </tr>
+                        <tr class="odd gradeX" data-id="@item.ID">
+                            <td>@item.Code</td>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>@item.RatePerHead</td>
+                            <td><button type="button" class="btn btn-primary border rounded view"> View Menu</button>  </td>
+
+                        </tr>
                         }
 
 
@@ -76,6 +80,8 @@
                             <td><strong>Name</strong></td>
                             <td><strong>Description</strong></td>
                             <td><strong>RatePerHead</strong></td>
+
+                            <td><strong> </strong></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -95,16 +101,13 @@
 
 
 
+         
 
-        $(document).ready(function () {
-            $('.packages tr').click(function () {
-                var _id = $(this).data("id");
-                a = _id;
-
-                $.get('/Packages/Details', { PackageID: _id });
-            });
-        });
-
+        $(document).on('click', 'tr .view', function (e) {
+        id = $(this).closest('tr').attr('data-id');
+        var url = '@Url.Action("Details", "EventPackages", new { PackageID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
+    });
 
 
 
