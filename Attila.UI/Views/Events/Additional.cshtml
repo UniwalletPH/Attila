@@ -4,143 +4,211 @@
     ViewData["Title"] = "Additional  ";
 }
 
+ 
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Additional Details</h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Events" asp-action="AddAdditionalDish" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                        <div class="card shadow mb-3">
 
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>
-            Additionals
-            <small> </small>
-        </h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
+                            <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"> </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        <p class="text-primary m-0 font-weight-bold">
+                                            <button class="btn btn-primary btn-sm" type="submit">Add </button>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Dish</strong></label>
 
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-    <div class="col-md-12">
-        <!-- Begin: life time stats -->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">Additional Equipment</span>
-                </div>
+                                                @Html.DropDownListFor(m => m.AdditionalDishRequest.DishID, Model.DishList, "--SELECT DISH--", new { @class = "form-control" })
 
-            </div>
-            <div class="portlet-body form">
-            </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalEquipment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessEquipment" data-ajax-failure="OnFailure">
-
-                <div class="modal-body">
-
-                    <input type="hidden" class="form-control" asp-for="EventID" readonly>
-
-                    @{
-
-                        if (Model.EquipmentRequested != null)
-                        {
-                            <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
-                                <thead>
-                                    <tr>
-
-                                        <th> Equipment</th>
-                                        <th> Requested Quantity </th>
-                                        <th> Unit </th>
-
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach (var item in Model.EquipmentRequested)
-                                    {
-                                        <tr data-id="@item.ID">
-                                            <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
-                                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                            <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
-
-                                        </tr>
-                                    }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Quantity</strong></label>
+                                                <input type="number" class="form-control" placeholder="" asp-for="AdditionalDishRequest.Quantity">
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-                                </tbody>
-                            </table>
-                        }
 
-                    }
+                                </div>
+                            </div>
 
-
-                    <div class="form-body">
-
-                        <div class="form-group">
-                            <label>Select Equipment </label>
-                            @Html.DropDownListFor(m => m.AdditionalEquipmentRequest.EquipmentDetailsID, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
                         </div>
 
-                    </div>
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="text" class="form-control" placeholder="" asp-for="AdditionalEquipmentRequest.Quantity">
-                    </div>
-
-
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <div class="form-actions">
-                        <button type="submit" class="btn blue">Add</button>
-                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-
-            </form>
-
-
-
-
-
-
-        </div>
-
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">Additional Dish</span>
-                </div>
-
             </div>
-            <div class="portlet-body form">
-            </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalDish" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessDish" data-ajax-failure="OnFailure">
-
-                <div class="modal-body">
-
-                    <div class="form-body">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Events" asp-action="AddAdditionalEquipment" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
 
                         <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"> </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        <p class="text-primary m-0 font-weight-bold">
+                                            <button class="btn btn-primary btn-sm" type="submit">Add </button>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Equipment</strong></label>
+
+                                                @Html.DropDownListFor(m => m.AdditionalEquipmentRequest.EquipmentDetailsID, Model.EquipmentList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Quantity</strong></label>
+
+                                                <input type="number" asp-for="AdditionalEquipmentRequest.Quantity" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
 
 
-                        @{
 
-                            if (Model.DishRequested != null)
-                            {
-                                <table class="table table-striped table-bordered table-hover order-column events" id="sample_1">
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Events" asp-action="AddAdditionalDuration" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
+                        <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"> </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        <p class="text-primary m-0 font-weight-bold">
+                                            <button class="btn btn-primary btn-sm" type="submit">Add </button>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Additional Hours</strong></label>                                              
+                                                @Html.TextBoxFor(x => x.AdditionalDurationRequest.Duration, "{0:hh\\:mm}")
+                                                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-4">
+            
+             
+
+            @{
+                if (Model.EquipmentRequested.Count != 0)
+                {
+                    <div class="card mb-3">
+
+                        <div class="card-body text-center shadow">
+
+                            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                                <table class="table dataTable my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th> Equipment Code </th>
+                                            <th> Equipment </th>
+                                            <th> Quantity </th>
+                                            <th> Unit  </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                            <th> Dish Name </th>
+                                        @foreach (var item in Model.EquipmentRequested)
+                                        {
+                                            <tr data-id="@item.ID">
+                                                <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><strong>Code</strong></td>
+                                            <td><strong>Name</strong></td>
+                                            <td><strong>Quantity</strong></td>
+                                            <td><strong>Unit</strong></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div> } }
+
+            @{
+                if (Model.DishRequested.Count != 0)
+                {
+                    <div class="card mb-3">
+
+                        <div class="card-body text-center shadow">
+
+                            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                                <table class="table dataTable my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th> Dish</th>
                                             <th> Requested Quantity </th>
-
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,212 +218,46 @@
                                             <tr data-id="@item.ID">
                                                 <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-
-
                                             </tr>
                                         }
-
-
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><strong>Dish</strong></td>
+                                            <td><strong>Requested Quantity</strong></td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
-                            }
 
-                        }
-
-
-                        <div class="form-body">
-
-                            <div class="form-group">
-                                <label>Select Dish </label>
-                                @Html.DropDownListFor(m => m.AdditionalDishRequest.DishID, Model.DishList, "--SELECT DISH--", new { @class = "form-control" })
                             </div>
 
+
+
+
+
                         </div>
-
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="text" class="form-control" placeholder="" asp-for="AdditionalDishRequest.Quantity">
-                        </div>
-
-
-                        
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <div class="form-actions">
-                        <button type="submit" class="btn blue">Add</button>
-                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-
-            </form>
-
-
-
-
-
-
-        </div>
-
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">Additional Duration</span>
-                </div>
-
-            </div>
-            <div class="portlet-body form">
-            </div>
-            <form role="form" asp-controller="Events" asp-action="AddAdditionalDuration" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccessHours" data-ajax-failure="OnFailure">
-
-                <div class="modal-body">
-
-                    <input type="hidden" class="form-control" asp-for="EventID" readonly>
-
-
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label>Hours [hh:mm]</label>
-                        </div>
-                        @Html.TextBoxFor(x => x.AdditionalDurationRequest.Duration, "{0:hh\\:mm}")
-                    </div>
-
-
-                </div>
-                <div class="modal-footer">
-                    <div class="form-actions">
-                        <button type="submit" class="btn blue">Add</button>
-                        <button type="button" class="btn default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-
-            </form>
-
-
-
-
-
-
-        </div>
-
-    </div>
-</div>
-<!-- End: life time stats -->
-
-
-<div class="modal fade" id="success-dish" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"> Added Successfully.</h4>
-            </div>
-            <div class="modal-body">Dish Added to Event successfully.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="success-equipment" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"> Added Successfully.</h4>
-            </div>
-            <div class="modal-body">Equipment Added to Event successfully.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="success-hours" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"> Added Successfully.</h4>
-            </div>
-            <div class="modal-body">Your Additional Hours has been Added to Event successfully.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="failedtoadd" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close update-again" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Failed to Add in Event</h4>
-            </div>
-            <div class="modal-body"> Please try again.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline update-again" data-dismiss="modal">Close</button>
-            </div>
+                    </div> } }
         </div>
     </div>
 </div>
 
 @section Scripts{
     <script>
-        function OnSuccessDish(result) {
+        function OnSuccess(result) {           
 
-            $("#success-dish").modal('show');
-
-
-
+         id = @Model.EventID
+        var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
         }
-        function OnSuccessHours(result) {
-
-            $("#success-hours").modal('show');
 
 
 
-        }
-        function OnSuccessEquipment(result) {
-
-            $("#success-equipment").modal('show');
-
-
-
-        }
         function OnFailure(result) {
-
-            $("#failedtoadd").modal('show');
+            alert("failed");
 
         }
 
-                var event = '@Model.EventID';
-    $(document).on('click', '.view', function (e) {
-
-
-
-
-    var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
-    window.location.href = url.replace('__id__', event);
-
-
-    });
-    $(document).on('click', '.update-again', function (e) {
-
-
-
-
-    var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
-    window.location.href = url.replace('__id__', event);
-
-
-    });
+    
     </script>
 
 

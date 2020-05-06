@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Coordinator")]
     public class EventPackagesController : BaseController
     {
         private readonly IMediator mediator;

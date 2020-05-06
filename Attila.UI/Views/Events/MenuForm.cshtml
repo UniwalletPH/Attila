@@ -3,104 +3,207 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-}
+} 
 
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>
-            Menu Form
-            <small> </small>
-        </h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
 
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-    <div class="col-md-12">
-        <!-- Begin: life time stats -->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <i class="icon-settings font-dark"></i>
-                    <span class="caption-subject bold uppercase">Event: @Model.Event.EventName | @Model.Event.EventDate</span>
-                </div>
 
-            </div>
-            <div class="portlet-body form">
-                <form role="form" asp-controller="Events" asp-action="AddMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                    <div class="form-body">
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">  Menu Form </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Events" asp-action="AddMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
 
-                        <input type="hidden" class="form-control" asp-for="EventID" readonly>
-
-                        <div class="form-actions">
-                            @{
-                                foreach (var group in Model.Groupings)
-                                {
-                                    <div class="form-group">
-                                        <h2>[@group.Key.Category]  -- Select One --</h2>
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold">Event: @Model.Event.EventName | @Model.Event.EventDate</p>
                                     </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  text-right">
 
-                                    foreach (var item in group)
-                                    {
-                                        <div class="checkbox"></div>
-                                        <label>
-                                            <input type="checkbox"  
-                                                   name="SelectedMenu"
-                                                   class="@group.Key.Category"
-                                                   onclick="CheckBox('.@group.Key.Category')"
-                                                   value="@item.MenuID" @if (Model.SelectedMenu.Contains(item.MenuID))
-                                                   {
-                                   <text> checked </text> 
-                                                   } /> @item.Menu.Name
-                                            </label>
-                                    }
-                                }
+                                        @{ if (Model.SelectedMenu.Count != 0)
+                                            {
+
+
+                                                <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
+                                            }
+                                            else
+                                            {
+
+                                                <button class="btn btn-primary btn-sm" id="btnSubmit" type="submit">Submit </button>}
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                            @{ if (Model.SelectedMenu.Count != 0)
+                                {
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                                                <div class="form-group">
+                                                    <label for="food_details"><strong>Food Details</strong></label>
+
+                                                    <div class="form-actions">
+                                                        @{
+                                                            foreach (var group in Model.Groupings)
+                                                            {
+                                                                <div class="form-group">
+                                                                    <h2>[@group.Key.Category]  -- Select One --</h2>
+                                                                </div>
+
+                                                                foreach (var item in group)
+                                                                {
+                                                                    <div class="checkbox"></div>
+                                                                    <label>
+                                                                        <input disabled="disabled" type="checkbox"
+                                                                               name="SelectedMenu"
+                                                                               class="@group.Key.Category"
+                                                                               onclick="CheckBox('.@group.Key.Category')"
+                                                                               value="@item.MenuID" @if (Model.SelectedMenu.Contains(item.MenuID)) { <text> checked </text> } /> @item.Menu.Name
+                                                                        </label>
+                                                                    }
+                                                                }
+                                                        }
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>}
+                                else
+                                {
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                                                <div class="form-group">
+                                                    <label for="food_details"><strong>Food Details</strong></label>
+
+                                                    <div class="form-actions">
+                                                        @{
+                                                            foreach (var group in Model.Groupings)
+                                                            {
+                                                                <div class="form-group">
+                                                                    <h2>[@group.Key.Category]  -- Select One --</h2>
+                                                                </div>
+
+                                                                foreach (var item in group)
+                                                                {
+                                                                    <div class="checkbox"></div>
+                                                                    <label>
+                                                                        <input type="checkbox"
+                                                                               name="SelectedMenu"
+                                                                               class="@group.Key.Category"
+                                                                               onclick="CheckBox('.@group.Key.Category')"
+                                                                               value="@item.MenuID" @if (Model.SelectedMenu.Contains(item.MenuID)) { <text> checked </text> } /> @item.Menu.Name
+                                                                        </label>
+                                                                    }
+                                                                }
+                                                        }
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>}
                             }
                         </div>
-
-                    </div>
-
-
-                    <div class="form-actions">
-                        <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
-                        <button type="button" class="btn default">Cancel</button>
-                    </div>
-
-                </form>
-
+                    </form>
+                </div>
             </div>
+        </div> @{ if (Model.SelectedMenu.Count != 0)
+            {
+                <div class="col-lg-4">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h4 class="text-primary font-weight-bold m-0">Selected Dish</h4>
+                        </div>
+                        <ul class="list-group list-group-flush">
+
+                            <li class="list-group-item">
+                                <div class="row align-items-center no-gutters">
+                                    <div class="col mr-2">
+                                        <p class="mb-0" id="result"> </p><span class="text-xs"> </span>
+                                    </div>
+
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>} }
 
 
 
-        </div>
+
+
+
     </div>
-    <!-- End: life time stats -->
 </div>
+
+
+
+
+
+
+
+
+
 
 @section Scripts{
     <script>
+         $(document).ready(function () {
+
+                 var result = $('input[type="checkbox"]:checked')
+
+                 if (result.length > 0) {
+                     var resultString = result.length + " checkboxe(s) checked <br/><br/>"
+
+                     result.each(function () {
+                         resultString+=  $.trim($(this).parent().text()) + "<br/>";
+                     });
+
+                     $('#result').html(resultString);
+
+                 }
+                 else {
+                     $('#result').html(" No checkbox  is checked");
+                 }
+
+         });
         
+        var id = '@Model.EventID'
         function OnSuccess(e) {
 
-            $("#success").modal('show');
-        }   
-        
+        var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
+
+
+        }
+
         function CheckBox(x) {
             $(x).click(function () {
                 $(x).not(this).prop('checked', false);
-            });   
+            });
         }
+        $(document).on('click', '#btnEdit', function (e) {
+             
+            var url = window.location.href = '/Events/UpdateMenu?EventID=' + id;
+            window.location.href = url.replace('__id__', id);
+
+
+        });
 
 
     </script>
@@ -110,18 +213,3 @@
 
 }
 
-
-<div class="modal fade" id="success" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title"> Added Successfully.</h4>
-            </div>
-            <div class="modal-body">Menus Added to Event successfully.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>

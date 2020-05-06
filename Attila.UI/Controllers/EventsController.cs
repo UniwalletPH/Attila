@@ -527,6 +527,83 @@ namespace Attila.UI.Controllers
 
             return Json(_rVal);
         }
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> UpdateMenu(int EventID)
+        {
+
+
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
+
+            if (_eventDetails != null)
+            {
+                var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = _eventDetails.PackageDetailsID });
+                var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery { });
+
+                List<SelectListItem> _list = new List<SelectListItem>();
+
+
+                var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
+                var _selected = await mediator.Send(new GetEventMenuQuery { EventId = EventID });
+                var _selectedMenu = new List<int>();
+
+                foreach (var item in _selected)
+                {
+                    _selectedMenu.Add(item.DishID);
+                }
+
+                AddEventMenuCVM eventDetails = new AddEventMenuCVM
+                {
+                    Event = _eventDetails,
+                    MenuList = _addmenu,
+                    EventID = EventID,
+                    Menu = _list,
+                    Groupings = _dishGroupbyCategory,
+                    SelectedMenu = _selectedMenu
+                };
+
+
+                return View(eventDetails);
+
+            }
+            else { return View(); }
+
+        }
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateMenu(AddEventMenuCVM addEvent)
+        {
+            var _evntMenu = new List<EventMenuVM>();
+            var _selected = await mediator.Send(new GetEventMenuQuery { EventId = addEvent.EventID });
+            var _selectedMenu = new List<int>();
+            foreach (var item in _selected)
+            {
+                _selectedMenu.Add(item.DishID);
+            }
+
+
+            foreach (var item in addEvent.SelectedMenu)
+            {
+                if (!_selectedMenu.Contains(item))
+                {
+                    var _menu = new EventMenuVM
+                    {
+                        EventDetailsID = addEvent.EventID,
+                        DishID = item
+                    };
+
+                    _evntMenu.Add(_menu);
+                }
+
+            }
+
+
+            var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu });
+
+
+            return Json(_rVal);
+        }
 
 
 
@@ -538,7 +615,7 @@ namespace Attila.UI.Controllers
 
             var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = EventID });
             var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = EventID });
-
+          
 
             if (_equipmentRequest != null && _dishRequest != null)
             {
