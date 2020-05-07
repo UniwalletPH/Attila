@@ -241,12 +241,12 @@
                         @foreach (var item in Model.EquipmentListVM)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Description)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.RentalFee)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                <td>@Html.DisplayFor(modelItem => item.RentalFee)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
-                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.EquipmentType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.UnitType)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EquipmentType)</td>
 
                             </tr>
                         }
