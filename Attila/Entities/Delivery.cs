@@ -14,6 +14,7 @@ namespace Attila.Domain.Entities
         public int? EquipmentRestockRequestID { get; set; }
 
 
+        [Column(TypeName = "date")]
         public DateTime DeliveryDate { get; set; }
 
         public byte[] ReceiptImage { get; set; }

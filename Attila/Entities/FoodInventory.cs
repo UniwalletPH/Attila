@@ -15,7 +15,9 @@ namespace Attila.Domain.Entities
 
 
         public int Quantity { get; set; }
+        [Column(TypeName = "date")]
         public DateTime ExpirationDate { get; set; }
+        [Column(TypeName = "date")]
         public DateTime EncodingDate { get; set; }
         public decimal ItemPrice { get; set; }
         public string Remarks { get; set; }
