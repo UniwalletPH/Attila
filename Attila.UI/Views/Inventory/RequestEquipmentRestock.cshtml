@@ -73,7 +73,7 @@
                             </table>
                         }
 
-                    } 
+                    }
 
                     <div class="form-body">
 
@@ -88,7 +88,7 @@
                         <label>Quantity</label>
                         <input type="number" asp-for="Quantity" min=1 placeholder="" class="form-control">
                     </div>
-                      
+
                     <div class="margin-top-10">
                         <button type="submit" id="btnSubmit" class="btn green">Submit </button>
                     </div>
@@ -99,46 +99,134 @@
     </div>
 
 </div>
- 
-@section Scripts{
 
 
-    <partial name="_ValidationScriptsPartial" />
-    <script type="text/javascript">
+
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Equipment Restock Request </h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+
+                            <form role="form" asp-controller="Inventory" asp-action="RequestEquipmentRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                                <input type="hidden" class="form-control" asp-for="EquipmentRequest.ID" readonly>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Food </strong></label>
+                                            @Html.DropDownListFor(m => m.EquipmentDetails.ID, Model.EquipmentDetailsList, "----SELECT ITEM----", new { @class = "form-control" })
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Quantity</strong></label>
+                                            <input type="number" asp-for="Quantity" min=1 placeholder="" class="form-control" required>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+
+    if (Model.EquipmentCollection != null)
+    {
+        <div class="container-fluid" style="margin-top: 10px;">
+            <div style="margin: 10px;">
+                <div class="row">
+                </div>
+            </div>
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <p class="text-primary m-0 font-weight-bold">Food Request Info</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                        <table class="table dataTable my-0" id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Unit</th>
+                                    <th>Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.EquipmentCollection)
+                                {
+                                    <tr data-id="@item.ID">
+                                        <td>@Html.DisplayFor(modelItem => item.Equipment.Name)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>Unit</strong></td>
+                                    <td><strong>Quantity</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        } }
+
+        @section Scripts{
+
+
+            <partial name="_ValidationScriptsPartial" />
+            <script type="text/javascript">
         function OnSuccess(e) {
-            $("#successreq").modal('show');
 
+          var id = @Model.EquipmentRequest.ID
+
+             var url =window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id;
+            window.location.href = url.replace('__id__', id);
 
         }
 
-        function OnFailure(e) { 
+        function OnFailure(e) {
             alert("Please enter the correct details!");
         }
           var id = @Model.EquipmentRequest.ID
-         $(document).on('click', '.up', function (e) { 
-              
-                var url =window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id; 
+         $(document).on('click', '.up', function (e) {
+
+                var url =window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id;
             window.location.href = url.replace('__id__', id);
 
 
             });
 
-    </script>
-}
-
-<div class="modal fade" id="successreq" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close up"  data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Successful Request</h4>
-            </div>
-            <div class="modal-body">Restock request has been sent successfully! </div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline up"  data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+            </script>
+        }

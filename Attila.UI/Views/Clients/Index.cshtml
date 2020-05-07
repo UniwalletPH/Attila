@@ -5,120 +5,75 @@
 }
 @model IEnumerable<SearchClientVM>
 
-@section Scripts {
-    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
-}
+ 
 
 
 
+ 
+
+ 
 
 
-@section Styles{
-    <style>
-        tr.group,
-        tr.group:hover {
-            background-color: #ddd !important;
-        }
-    </style>
-
-    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-}
-
-
-
-
-
-
-
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Clients</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold"></p>
                 </div>
-
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold">
+                        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Register", "Clients")'">Add</button>
+                    </p>
+                </div>
             </div>
-            <div class="portlet-body">
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-6">
+        </div>
+        <div class="card-body">
 
-
-                            <div class="caption">
-
-                                <button id="sample_editable_1_new" class="btn sbold green " onclick="location.href='@Url.Action("Register", "Clients")'">
-                                    Add New Client
-                                </button>
-                             
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <table class="display" id="sample_1">
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Contact</th>
+                            <th>Contact Number</th>
                             <th>Address</th>
                         </tr>
                     </thead>
-
                     <tbody>
+
                         @foreach (var _item in Model)
                         {
-                            <tr>
-                                <td>@($"{_item.Name}")</td>
-                                <td>@_item.Email</td>
-                                <td>@_item.Contact</td>
-                                <td>@_item.Address</td>
+                        <tr>
 
-                            </tr>
+                            <td>@($"{_item.Name}")</td>
+                            <td>@_item.Email</td>
+                            <td>@_item.Contact</td>
+                            <td>@_item.Address</td>
+
+                        </tr>
                         }
+
                     </tbody>
-
-
+                    <tfoot>
+                        <tr>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Email</strong></td>
+                            <td><strong>Contact Number</strong></td>
+                            <td><strong>Address</strong></td>
+                        </tr>
+                    </tfoot>
                 </table>
 
-
             </div>
+
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
     </div>
 </div>
+
+
+
+
+
+

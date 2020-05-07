@@ -3,97 +3,83 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-}
+} 
 
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>
-            Food Inventory Form
-            <small> </small>
-        </h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-    <div class="col-md-12">
-        <!-- Begin: life time stats -->
-        <div class="portlet light bordered">
-
-            <div class="portlet-body form">
-                <form role="form" asp-action="AddFoodInventory" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">  Food Inventory Form </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3"></div>
+                        <div class="card-body">
+                            <form role="form" asp-action="AddFoodInventory" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="food_details"><strong>Food Details</strong></label>
+                                            @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="delivery_details"><strong>Delivery Details</strong></label>
+                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" })
 
 
-                    <div class="form-group">
-                        <label>Food Details</label>
-                        @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="quantity_"><strong>Quantity</strong></label>
+
+
+                                            <input type="number" class="form-control" asp-for="Quantity" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="quantity_"><strong>Price</strong></label>
+
+
+                                            <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="exp_date"><strong>Expiration Date</strong></label>
+
+                                            <input type="date" class="form-control" asp-for="ExpirationDate" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Delivery Details</label>
-                        @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" })
-
-                    </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" class="form-control" asp-for="Quantity" placeholder="">
-                    </div>
-                    <div class="form-group">
-                        <label>Expiration Date</label>
-                        <input type="date" class="form-control date-picker " asp-for="ExpirationDate" placeholder="">
-                    </div>
-
-
-
-                    <div class="form-actions">
-                        <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
-                        <button type="button" class="btn default">Cancel</button>
-                    </div>
-
-                </form>
-
-
-
-
-
-
+                </div>
             </div>
-
-
-
         </div>
     </div>
-    <!-- End: life time stats -->
 </div>
 
 @section Scripts{
-    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
-
+     
     <script type="text/javascript">
-        function OnSuccess(e) {
-            $("#successrestock").modal('show');
+        function OnSuccess(e) { 
 
-
+            window.location.href="/Inventory/Index"
         }
 
         function OnFailure(e) {
@@ -101,25 +87,7 @@
             alert("failed!");
         }
 
-    </script> 
+    </script>
 
     <partial name="_ValidationScriptsPartial" />
-}
-
-
-<div class="modal fade" id="successrestock" tabindex="-1" role="basic" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Successful Inventory</h4>
-            </div>
-            <div class="modal-body">Stocks updated successfully! </div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Inventory")'" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+} 

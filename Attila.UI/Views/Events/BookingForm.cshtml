@@ -4,257 +4,346 @@
     ViewData["Title"] = "Booking Form";
 }
 
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>
-            Booking Form
-            <small> </small>
-        </h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
 
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-    <div class="col-md-12">
-        <!-- Begin: life time stats -->
-        <div class="portlet light bordered">
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">New Event </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
 
-            <div class="portlet-body form">
-                <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                    <div class="form-body">
-                        <div class="form-group">
-                            <label>Client Name</label>
-                            @Html.DropDownListFor(m => m.Event.EventClientID, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
-
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Occasion </label>
-                            <select id="txtType" asp-for="Event.Type" class="form-control" required>
-                                <option value="None">--SELECT TYPE OF OCCASION--</option>
-                                <option value="Baptismal">Baptismal</option>
-                                <option value="Birthday">Birthday</option>
-                                <option value="Graduation">Graduation</option>
-                                <option value="Meeting">Meeting </option>
-                                <option value="Wedding">Wedding</option>
-                                <option value="Others">Others</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event Name</label>
-                            <input type="text" class="form-control" asp-for="Event.EventName" placeholder="" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Event Theme  | Color</label>
-                            <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="Event.Theme" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Event Description</label>
-                            <input type="text" class="form-control" placeholder="Description" asp-for="Event.Description" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event's Place</label>
-                            <input type="text" class="form-control" asp-for="Event.Location" placeholder="Juan's Events Place, Brgy. San Lorenzo, Quezon City." required>
-                        </div>
-                        <div class="form-group">
-                            <label>Venue is in Condominium/Building?</label>
-                            <select id="txtType" asp-for="Event.VenueType" class="form-control" required>
-                                <option value="1">Yes</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Location</label>
-                            <select id="txtType" asp-for="Event.LocationType" class="form-control" required>
-                                <option value="1">North Area</option>
-                                <option value="2">South Area</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Event Date</label>
-                            <input class="form-control input-medium date-picker" asp-for="Event.EventDate" size="16" type="text" placeholder="mm/dd/yyyy" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Set Up Time </label>
-                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.EntryTime" required />
-                        </div>
-                        <div class="form-group">
-                            <label>Program Starts At </label>
-                            <input type="time" placeholder="1:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ProgramStart" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Serving Time </label>
-                            <input type="time" placeholder="2:30 PM" data-format="hh:mm A" class="form-control clockface_1" asp-for="Event.ServingTime" required />
-                        </div>
+                    <form role="form" asp-controller="Events" asp-action="AddEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"> </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        <p class="text-primary m-0 font-weight-bold"> <button class="btn btn-primary btn-sm" type="submit">Register Event</button></p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Client</strong></label>
+                                                @Html.DropDownListFor(m => m.Event.EventClientID, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Event Type</strong></label>
+                                                <select id="txtType" asp-for="Event.Type" class="form-control" required>
+                                                    <option value="None">--SELECT TYPE OF OCCASION--</option>
+                                                    <option value="Baptismal">Baptismal</option>
+                                                    <option value="Birthday">Birthday</option>
+                                                    <option value="Graduation">Graduation</option>
+                                                    <option value="Meeting">Meeting </option>
+                                                    <option value="Wedding">Wedding</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
 
 
-                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event Name</strong></label>
 
-                    <div class="form-group">
-                        <label>Buffet Type </label>
-                        <select id="txtType" asp-for="Event.ServingType" class="form-control" required>
-                            <option value="ManageBuffet">Manage Buffet</option>
-                            <option value="SelfServiceBuffet">Self-Service Buffet</option>
+                                                <input type="text" asp-for="Event.EventName" placeholder="John Smith's 70th Birthday" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event Date</strong></label>
 
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Guests</label>
-                        <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests" required>
-                    </div>
+                                                <input type="date" asp-for="Event.EventDate" placeholder="John Smith's 70th Birthday" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Theme</strong></label>
 
-                    <div class="form-group">
-                        <label>Package </label>
 
-                        @Html.DropDownListFor(m => m.Event.PackageDetailsID, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Remarks</label>
-                        <textarea class="form-control" rows="3" asp-for="Event.Remarks" required></textarea>
-                    </div>
+                                                <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="Event.Theme" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Description</strong></label>
+
+                                                <input type="text" asp-for="Event.Description" placeholder="For Friends and Family" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event's Location</strong></label>
+
+
+                                                <input type="text" class="form-control" placeholder="Address" asp-for="Event.Location" required>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Location Type</strong></label>
+                                                <select id="txtType" asp-for="Event.LocationType" class="form-control" required>
+                                                    <option value="1">North Area - Min. 50,000PHP</option>
+                                                    <option value="2">South Area - Max. 35,000PHP </option>
 
-                    <div class="portlet light bordered">
-                        <div class="portlet-title">
-                            <div class="caption">
-                                <span class="caption-subject  font-orange bold uppercase">Terms & Conditions</span>
+                                                </select>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Entry Time</strong></label>
+                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="Event.EntryTime" required />
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Program Starts at </strong></label>
+                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="Event.ProgramStart" required />
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Serving Time </strong></label>
+                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="Event.ServingTime" required />
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Serving Type </strong></label>
+                                                <select id="txtType" asp-for="Event.ServingType" class="form-control" required>
+                                                    <option value="ManageBuffet">Manage Buffet</option>
+                                                    <option value="SelfServiceBuffet">Self-Service Buffet</option>
+
+                                                </select>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Is Venue in Building/Condominium?</strong></label>
+                                                <select id="txtType" asp-for="Event.VenueType" class="form-control" required>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+
+                                                <label for="first_name"><strong>Event Package</strong></label>
+                                                @Html.DropDownListFor(m => m.Event.PackageDetailsID, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Number of Guests</strong></label>
+                                                <input type="number" class="form-control" placeholder="" asp-for="Event.NumberOfGuests" required>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Remarks</strong></label>
+
+
+                                                <textarea class="form-control" rows="4" asp-for="Event.Remarks" name="remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong> </strong></label>
+
+                                                <div class="row align-items-center no-gutters">
+                                                    <div class="col mr-2">
+                                                        <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-3"  ><label class="custom-control-label" for="formCheck-3"></label></div>
+
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <h6 class="mb-0"><strong>I agree to the Terms & Conditions of the management about their services.</strong></h6><span class="text-xs"></span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
+
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h4 class="text-primary font-weight-bold m-0">Terms & Conditions</h4>
+                                </div>
+                                <ul class="list-group list-group-flush">
+
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0">Minimum of  <strong>35, 000 PHP</strong>  is required for a Catering Service in South Area, while <strong>50, 000 PHP</strong>  in North Area.</h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Additional Transportation Fee</strong>  (actual cost may vary based on the location on the extent of actual set up).</h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Final Menu</strong>  choices should be 2 weeks before the event date, while 1 week for the <strong>final number of attendees</strong>.</h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>All catering equipment   (tables, chairs, buffet and dinning set-up) is strictly to be used for Arleneâ€™s Catering Services only.</strong></h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Additional fee </strong>for any catering equipment requested by client..</h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0">Service Fee for Venue in Condominium or Bldg. is  <strong>3,500 PHP.</strong></h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Additional P 1,000.00 per Hour </strong>beyond the prior agreed time.</h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Any loss or damage of catering equipment and centerpieces,  will be charged to client.</strong></h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Services are limited  to 4 hours for lunch and dinner only, 3 hours for cocktails, exclusive of set/up preparations.</strong></h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row align-items-center no-gutters">
+                                            <div class="col mr-2">
+                                                <h6 class="mb-0"><strong>Php 5,000.00 down payment upon signing the booking form</strong>, remaining balance should be <strong>paid on the day of the event.</strong></h6><span class="text-xs"> </span>
+                                            </div>
+
+                                        </div>
+                                    </li>
+
+
+
+
+
+
+                                </ul>
+
+                            </div>
+
+
                         </div>
-                        <div class="portlet-body">
-                            <div class="well">
-                                <h4>Minimum  </h4> of 35, 000 PHP  is required for a Catering Service in South Area, while P 50,000.00 in North Area.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Additional Transportation Fee</h4> (actual cost may vary based on the location on the extent of actual set up).
-                            </div>
 
-                            <div class="well">
-                                <h4>Final Menu </h4> choices should be 2 weeks before the event date, while 1 week for the final number of attendees.
-                            </div>
-                            <div class="well well-large">
-                                <h4>All catering equipment </h4> (tables, chairs, buffet and dinning set-up) is strictly to be used for Arleneâ€™s Catering Services only.
-                            </div>
-
-                            <div class="well">
-                                <h4>Additional fee   </h4> for any catering equipment requested by client.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Any loss or damage of catering equipment and centerpieces,</h4>  will be charged to client.
-                            </div>
-
-                            <div class="well">
-                                <h4>Service Fee for Venue in Condominium or Bldg.  </h4>is 3,500 PHP.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Services are limited  </h4> to 4 hours for lunch and dinner only, 3 hours for cocktails, exclusive of set/up preparations.
-                            </div>
-
-
-                            <div class="well">
-                                <h4>Additional P 1,000.00 per Hour </h4>beyond the prior agreed time.
-                            </div>
-                            <div class="well well-large">
-                                <h4>Php 5,000.00 down payment upon signing the booking form,   </h4>remaining balance should be paid on the day of the event
-                            </div>
-                        </div>
-                        <div class="mt-checkbox-list">
-                            <label class="mt-checkbox mt-checkbox-outline">
-                                I agree to the Terms & Conditions of the management about their services.
-                                <input type="checkbox" value="1" name="test" required>
-                                <span></span>
-                            </label>
-
-
-                        </div>
-
-
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" id="btnSubmit" class="btn blue">Submit</button>
-                        <button type="button" class="btn default">Cancel</button>
-                    </div>
-
-                </form>
-
-
-
-
-
-
+                    </form>
+                </div>
             </div>
-
-
-
         </div>
     </div>
-    <!-- End: life time stats -->
-</div>
-
-
-
-<div class="modal fade" id="successrequests" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Successful Event Registration</h4>
-            </div>
-            <div class="modal-body"> Event request was sent successfully! Wait for the Management Approval within 7 working days. Thank you!</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline" onclick="location.href='@Url.Action("Index", "Events")'" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+</div> 
 
 @section Scripts{
-    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
-
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-
-    <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL SCRIPTS -->
 
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
 
-        //function OnSuccess(e) {
-        //
-        //}
 
-        //function OnFailure(e) {
-        //    console.log(e);
-        //    alert("failed!");
-        //}
-
-        function OnSuccess(result) { 
-                $("#successrequests").modal('show');
-             
+        function OnSuccess(result) {
+            window.location.href = "/Events/Index";
         }
 
         function OnFailure(result) {
@@ -267,15 +356,5 @@
 
     </script>
 }
-@section Styles{
-    <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
-
-}
-
-
 
 

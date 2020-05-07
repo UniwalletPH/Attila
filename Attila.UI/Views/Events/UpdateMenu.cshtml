@@ -1,0 +1,161 @@
+﻿@model Attila.UI.Models.AddEventMenuCVM
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+ 
+
+
+
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">  Menu Form </h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Events" asp-action="UpdateMenu" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold">Event: @Model.Event.EventName | @Model.Event.EventDate</p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  text-right">
+                                        <button class="btn btn-primary btn-sm" id="btnSubmit" type="submit">Submit </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <input type="hidden" class="form-control" asp-for="EventID" readonly>
+                                        <div class="form-group">
+                                            <label for="food_details"><strong>Food Details</strong></label>
+
+                                            <div class="form-actions">
+                                                @{
+                                                    foreach (var group in Model.Groupings)
+                                                    {
+                                                        <div class="form-group">
+                                                            <h2>[@group.Key.Category]  -- Select One --</h2>
+                                                        </div>
+
+                                                        foreach (var item in group)
+                                                        {
+                                                            <div class="checkbox"></div>
+                                                            <label>
+                                                                <input type="checkbox"
+                                                                       name="SelectedMenu"
+                                                                       class="@group.Key.Category"
+                                                                       onclick="CheckBox('.@group.Key.Category')"
+                                                                       value="@item.MenuID" @if (Model.SelectedMenu.Contains(item.MenuID)) { <text> checked </text> } /> @item.Menu.Name
+                                                                </label>
+                                                            }
+                                                        }
+                                                }
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h4 class="text-primary font-weight-bold m-0">Terms & Conditions</h4>
+                </div>
+                <ul class="list-group list-group-flush">
+
+                    <li class="list-group-item">
+                        <div class="row align-items-center no-gutters">
+                            <div class="col mr-2">
+                                <p class="mb-0" id="result"> </p><span class="text-xs"> </span>
+                            </div>
+
+                        </div>
+                    </li>
+                     
+
+
+
+
+
+
+                </ul>
+
+            </div>
+
+        </div> 
+ 
+
+
+
+             
+         
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section Scripts{
+    <script>
+         $(document).ready(function () { 
+           
+                 var result = $('input[type="checkbox"]:checked')  
+
+                 if (result.length > 0) {
+                     var resultString = result.length + " checkboxe(s) checked <br/><br/>"
+
+                     result.each(function () {
+                         resultString+=  $.trim($(this).parent().text()) + "<br/>";
+                     });
+
+                     $('#result').html(resultString);
+
+                 }
+                 else {
+                     $('#result').html(" No checkbox  is checked");
+                 }
+              
+         });
+        function OnSuccess(e) {
+
+        var id = '@Model.EventID'
+        var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
+
+
+        }
+
+        function CheckBox(x) {
+            $(x).click(function () {
+                $(x).not(this).prop('checked', false);
+            });
+        }
+
+
+    </script>
+
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+

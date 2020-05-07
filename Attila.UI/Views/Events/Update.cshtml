@@ -6,415 +6,243 @@
 }
 
 @model ViewEventCVM
+ 
 
-@*<div class="page-head">
-        <div class="page-title">
-            <h1>
-                Event Details
-                <small> </small>
-            </h1>
-        </div>
-        <div class="page-toolbar">
-
-        </div>
-    </div>
-    <ul class="page-breadcrumb breadcrumb">
-    </ul>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Update Event Details </h3>
     <div class="row">
-        <div class="col-md-12">
-            <div class="portlet light bordered">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
 
-                <div class="portlet-body form">
-                    <form role="form" asp-controller="Events" asp-action="UpdateEvent" data-ajax="true" data-ajax-method="post"  >
-                        <div class="form-body">
-                            <div class="form-group  ">
-                                @Html.HiddenFor(model => model.Event.ID)
-                                <label>Client Name</label>
+                    <form role="form" asp-controller="Events" asp-action="UpdateEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
 
-                                <input type="text" class="form-control    " asp-for="@Model.EventDetails.EventClientID" readonly>
+                                    @Html.HiddenFor(m => m.EventDetails.ID)
 
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"> </p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        
+                                        @if (Model.EventDetails.EventStatus.ToString() != "Approved")
+                                        {
 
-                            </div>
-                            <div class="form-group">
-                                <label>Event Date</label>
-                                <input type="date" class="form-control  editable form-control-inline" size="16" asp-for="@Model.Event.EventDate" readonly/>
+                                            if (User.IsInRole("Coordinator"))
+                                            {
+                                                <p class="text-primary m-0 font-weight-bold"> <button class="btn btn-primary btn-sm" type="submit">Save</button></p>
+                                            }
 
-                            </div>
-                            <div class="form-group">
-                                <label>Type of Occasion </label>
-
-                                <input type="text" class="form-control editable occasion-type " asp-for="@Model.Event.Type" readonly>
-                                <select id="txtType" asp-for="Event.Type" class="form-control option-occasion " required>
-                                    <option value="None">--SELECT TYPE OF OCCASION--</option>
-                                    <option value="Baptismal">Baptismal</option>
-                                    <option value="Birthday">Birthday</option>
-                                    <option value="Graduation">Graduation</option>
-                                    <option value="Meeting">Meeting </option>
-                                    <option value="Wedding">Wedding</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Event Name</label>
-                                <input type="text" class="form-control editable" asp-for="@Model.Event.EventName" placeholder="" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Event Theme  | Color</label>
-                                <input type="text" class="form-control editable" placeholder="Mermaid /Aqua " asp-for="@Model.Event.Theme" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label> Description</label>
-                                <input type="hidden" class="form-control editable" placeholder="Description" asp-for="@Model.Event.Description" readonly>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Event's Place</label>
-                                <input type="text" class="form-control editable" asp-for="@Model.Event.Location" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Venue in Condominium or Building?</label>
-
-                                <input id="venue" class="form-control editable venue-type" placeholder="Description" asp-for="@Model.Event.VenueType" readonly>
-                                <select id="txtType" asp-for="Event.VenueType" class="form-control option-event" required>
-                                    <option value="2">Yes</option>
-                                    <option value="1">No</option>
-
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Type of Location</label>
-                                <input class="form-control editable area-type" id="area" placeholder="Location" asp-for="@Model.Event.LocationType" readonly>
-                                <select id="txtType" asp-for="Event.LocationType" class="form-control option-area" required>
-                                    <option value="1">North Area</option>
-                                    <option value="2">South Area</option>
-
-                                </select>
-
-
-                            </div>
-
-
-                            <div class="form-group">
-                                <label>Set Up Time </label>
-                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control editable clockface_1" asp-for="@Model.Event.EntryTime" readonly />
-                            </div>
-                            <div class="form-group">
-                                <label>Program Starts At </label>
-                                <input type="time" placeholder="1:30 PM" data-format="hh:mm A" class="form-control editable clockface_1" asp-for="@Model.Event.ProgramStart" readonly />
-                            </div>
-
-                            <div class="form-group">
-                                <label>Serving Time </label>
-                                <input type="time" placeholder="2:30 PM" data-format="hh:mm A" class="form-control editable  clockface_1" asp-for="@Model.Event.ServingTime" readonly />
-                            </div>
-
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Buffet Type </label>
-                            <input type="text" id="buffet-type" class="form-control serving-type" asp-for="@Model.Event.ServingType" readonly />
-                            <select id="txtType" asp-for="Event.ServingType" class="form-control option-serving" required>
-                                <option value="ManageBuffet">Manage Buffet</option>
-                                <option value="SelfServiceBuffet">Self-Service Buffet</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Number of Guests</label>
-                            <input type="number" class="form-control editable" placeholder="" asp-for="@Model.Event.NumberOfGuests" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Package </label>
-
-                            <input type="text" id="package-type" class="form-control package-type" placeholder="" asp-for="@Model.Event.PackageDetailsID" readonly>
-                            @Html.DropDownListFor(m => m.Selected, Model.PackageList, "--SELECT PACKAGE--", new { @class = "form-control option-package" })
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Remarks</label>
-                            <textarea class="form-control editable " rows="3" asp-for="@Model.Event.Remarks" readonly></textarea>
-                        </div>
-                        <div class="form-group status">
-                            <label class="control-label">Status</label>
-                            <input type="text" class="form-control " placeholder="" asp-for="@Model.Event.EventStatus" readonly />
-                        </div>
-
-                        @if (Model.Event.EventStatus.ToString() == "Approved")
-                        {
-                            if (User.IsInRole("Admin"))
-                            {
-
-                                <label>Payment  </label>
-                                <input type="number" class="form-control" placeholder="" readonly>
-
-
-
-                            }
-                        }
-
-
-
-                        @if (Model.Event.EventStatus.ToString() != "Approved")
-                        {
-
-                            if (User.IsInRole("Coordinator"))
-                            {
-                                <button type="button" id="btnEdit" class="btn blue"> Edit</button>
-
-
-                                <div class="form-actions">
-                                    <button type="submit" id="btnSave" class="btn blue"> Save</button>
+                                        }
+                                    </div>
                                 </div>
-                            }
-                            if (User.IsInRole("Admin"))
-                            {
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Client</strong></label>
+                                                @Html.DropDownListFor(model => model.EventDetails.EventClientID, ViewBag.Clients as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Event Type</strong></label>
+
+                                                @Html.DropDownListFor(model => model.EventDetails.Type, ViewBag.OccasionType as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event Name</strong></label>
+
+                                                @Html.EditorFor(model => model.EventDetails.EventName, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event Date</strong></label>
+                                                @Html.EditorFor(model => model.EventDetails.EventDate ,new { htmlAttributes = new { @class = "form-control form-control-inline datepicker" ,  @Value = @Model.EventDetails.EventDate.ToShortDateString() } })
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Theme</strong></label>
+
+
+                                                @Html.EditorFor(model => model.EventDetails.Theme, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Description</strong></label>
+
+                                                @Html.EditorFor(model => model.EventDetails.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Event Location</strong></label>
+
+                                                @Html.EditorFor(model => model.EventDetails.Location, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Location Area</strong></label>
+
+                                                @Html.DropDownListFor(model => model.EventDetails.LocationType, ViewBag.LocationType as IEnumerable<SelectListItem>, new { @class = "form-control" })
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Set Up Time</strong></label>
+                                                @Html.EditorFor(model => model.EventDetails.EntryTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Program Starts at </strong></label>
+                                                @Html.EditorFor(model => model.EventDetails.ProgramStart, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Serving Time </strong></label> 
+
+                                                @Html.EditorFor(model => model.EventDetails.ServingTime, new { htmlAttributes = new { @class = "form-control", @type = "time"  } })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Serving Type </strong></label>
+
+                                                @Html.EditorFor(model => model.EventDetails.NumberOfGuests, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Is Venue in Building/Condominium?</strong></label>
+
+                                                @Html.DropDownListFor(model => model.EventDetails.VenueType, ViewBag.VenueType as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+
+                                                <label for="first_name"><strong>Event Package</strong></label>
+                                                @Html.DropDownListFor(model => model.EventDetails.PackageDetailsID, ViewBag.Packages as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Number of Guests</strong></label>
+                                                @Html.EditorFor(model => model.EventDetails.NumberOfGuests, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="first_name"><strong>Remarks</strong></label>
+
+
+                                                @Html.EditorFor(model => model.EventDetails.Remarks, new { htmlAttributes = new { @class = "form-control" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
 
 
-                                <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
-                                <button type="button" id="btnDecline" class="btn blue">Reject</button>
-                            }
-                        }
+                        </div>
+
                     </form>
-
-
-
-
-
-
                 </div>
-
-
-
-            </div>
-        </div>
-    </div>*@
-
-
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <h1>
-            Booking Form
-            <small> </small>
-        </h1>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-<div class="row">
-    <div class="col-md-12">
-        <!-- Begin: life time stats -->
-        <div class="portlet light bordered">
-
-            <div class="portlet-body form">
-                <form role="form" asp-controller="Events" asp-action="UpdateEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                    <div class="form-body">
-                        <div class="form-group">
-
-                            @Html.HiddenFor(m => m.EventDetails.ID)
-
-
-                            <label>Client Name</label>
-                            @Html.DropDownListFor(model => model.EventDetails.EventClientID, ViewBag.Clients as IEnumerable<SelectListItem>, new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Occasion </label>
-                            @Html.DropDownListFor(model => model.EventDetails.Type, ViewBag.OccasionType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event Name</label>
-                            @Html.EditorFor(model => model.EventDetails.EventName, new { htmlAttributes = new { @class = "form-control" } })
-
-
-
-                        </div>
-                        <div class="form-group">
-                            <label>Event Theme  | Color</label>
-
-                            @Html.EditorFor(model => model.EventDetails.Theme, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="form-group">
-                            <label>Event Description</label>
-
-
-                            @Html.EditorFor(model => model.EventDetails.Description, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event's Place</label>
-
-
-                            @Html.EditorFor(model => model.EventDetails.Location, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="form-group">
-                            <label>Type of Location</label>
-
-                            @Html.DropDownListFor(model => model.EventDetails.LocationType, ViewBag.LocationType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-                        </div>
-                        <div class="form-group">
-                            <label>Venue in Condominium or Building?</label>
-
-                            @Html.DropDownListFor(model => model.EventDetails.VenueType, ViewBag.VenueType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-                        </div>
-
-                        <div class="form-group">
-                            <label>Event Date</label> 
-                            @Html.EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control form-control-inline input-medium date-picker", @type = "text", @size = "16",  @Value = Model.EventDetails.EventDate.ToString("mm/dd/yyyy") , @placeholder="mm/dd/yyyy"} })
-
-                            <div class="form-group">
-                                <label>Set Up Time </label>
-
-                                @Html.EditorFor(model => model.EventDetails.EntryTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
-                            </div>
-                            <div class="form-group">
-                                <label>Program Starts At </label>
-
-                                @Html.EditorFor(model => model.EventDetails.ProgramStart, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
-                            </div>
-
-                            <div class="form-group">
-                                <label>Serving Time </label>
-
-                                @Html.EditorFor(model => model.EventDetails.ServingTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
-                            </div>
-
-
-                        </div>
-
-                    <div class="form-group">
-                        <label>Buffet Type </label>
-                        @Html.DropDownListFor(model => model.EventDetails.ServingType, ViewBag.ServingType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Guests</label>
-
-                        @Html.EditorFor(model => model.EventDetails.NumberOfGuests, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-                    </div>
-
-                    <div class="form-group">
-                        <label>Package </label>
-
-
-                        @Html.DropDownListFor(model => model.EventDetails.PackageDetailsID, ViewBag.Packages as IEnumerable<SelectListItem>, new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Remarks</label>
-
-                        @Html.EditorFor(model => model.EventDetails.Remarks, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-
-
-
-
-                    @if (Model.EventDetails.EventStatus.ToString() != "Approved")
-                    {
-
-                        if (User.IsInRole("Coordinator"))
-                        {
-
-
-                            <div class="form-actions">
-                                <button type="submit" id="btnSave" class="btn blue"> Save</button>
-                            </div>
-                        }
-
-                    }
-                </form>
-
-
-
-            </div>
-
-
-
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="successedit" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close view" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Successful Event Update</h4>
-            </div>
-            <div class="modal-body"> Event updated successfully.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline view" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="failedtoedit" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close update-again" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title">Failed to Update Event</h4>
-            </div>
-            <div class="modal-body"> Please try again.</div>
-            <div class="modal-footer">
-                <button type="button" class="btn dark btn-outline update-again" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts{
-    <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
 
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
     <script>
 
-
+        
                 var event = '@Model.EventDetails.ID';
             function OnSuccess(result) {
-            
-                $("#successedit").modal('show');
-            
 
-            
+
+
+
+        var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
+        window.location.href = url.replace('__id__', event);
+
+
         }
 
         function OnFailure(result) {
-       
-                $("#failedtoedit").modal('show');
-          
-        }
-        $('input[type=date]').datepicker({
-                  dateFormat: "mm/dd/yyyy" 
-            });
 
+                $("#failedtoedit").modal('show');
+
+        }
+          
          $(document).on('click', '.view', function (e) {
 
 
@@ -434,20 +262,12 @@
             window.location.href = url.replace('__id__', event);
 
 
-            });
+        });
+        
     </script>
 
 
 
-    <partial name="_ValidationScriptsPartial" />
-    <script src="../assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
+    <partial name="_ValidationScriptsPartial" /> 
 
-}
-@section Styles{
-    <link href="../assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
-}
-
+} 

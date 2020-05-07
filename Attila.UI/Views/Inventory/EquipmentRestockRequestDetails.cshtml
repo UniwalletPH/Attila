@@ -45,132 +45,81 @@
 
 
 
-}
-@section Styles{
+} 
+ 
 
+    <div class="container-fluid"  >
+        <h3 class="text-dark mb-4">Equipment Request Details</h3>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <p class="text-primary m-0 font-weight-bold"> Date Requested :   @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
 
-    <style>
-        tr.group,
-        tr.group:hover {
-            background-color: #ddd !important;
-        }
-    </style>
+                        <p class="text-primary m-0 font-weight-bold"> Status :   @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
 
-    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
-}
-
-
-
-
-
-
-
-
-<div class="page-head">
-    <!-- BEGIN PAGE TITLE -->
-    <div class="page-title">
-        <div class="caption font-dark">
-            <span class="caption-subject bold uppercase">@ViewData["Title"]</span>
-        </div>
-    </div>
-    <!-- END PAGE TITLE -->
-    <!-- BEGIN PAGE TOOLBAR -->
-    <div class="page-toolbar">
-
-        <!-- BEGIN THEME PANEL -->
-        <!-- END THEME PANEL -->
-    </div>
-    <!-- END PAGE TOOLBAR -->
-</div>
-<!-- END PAGE HEAD-->
-<!-- BEGIN PAGE BREADCRUMB -->
-<ul class="page-breadcrumb breadcrumb">
-</ul>
-
-
-<div class="row">
-
-    <div class="col-md-12">
-        <!-- BEGIN EXAMPLE TABLE PORTLET-->
-        <div class="portlet light bordered">
-            <div class="portlet-title">
-                <div class="caption font-dark">
-                    <span class="caption-subject bold uppercase">EQUIPMENT REQUEST DETAILS</span>
+                        <p class="text-primary m-0 font-weight-bold"> Requested By:   @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                        <p class="text-primary m-0 font-weight-bold">
+                        @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
+                    </div>
                 </div>
-
             </div>
-            <div class="portlet-body">
+            <div class="card-body">
 
-                <div class="form-group">
-                    <label>
-                        DATE REQUESTED:  @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest)
-                    </label><br>
-                </div>
-                <div class="form-group">
-                    <label>
-                        STATUS:  @Html.DisplayFor(a => a.EquipmentRequest.Status)
-                    </label><br>
-                </div>
-                <div class="form-group">
-                    <label>
-                        INVENTORY MANAGER: @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name)
-                    </label><br>
-                </div>
-
-
-                <table class="display" id="sample_2">
-                    <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Unit</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        @foreach (var item in Model.EquipmentCollection)
-                        {
+                <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                    <table class="table dataTable my-0" id="dataTable">
+                        <thead>
                             <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Unit</th>
+                                <th>Quantity</th>
                             </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.EquipmentCollection)
+                            {
+                                <tr>
+                                    <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                </tr>
 
-                        }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><strong>Code</strong></td>
+                                <td><strong>Name</strong></td>
+                                <td><strong>Unit</strong></td>
+                                <td><strong>Quantity</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
 
-                    </tbody>
 
-
-                </table>
-                @{ if (Model.EquipmentRequest.Status.ToString() == "ForApproval")
-                    {
-                        if (User.IsInRole("Admin"))
+                    @{ if (Model.EquipmentRequest.Status.ToString() == "ForApproval")
                         {
-                            <text>
-                                <button type="button" id="btnSubmit" class="btn blue"> Approve</button>
-                                <button type="button" id="btnDecline" class="btn blue">Reject</button>
-                            </text>
-                        }
-                        else if (User.IsInRole("InventoryManager"))
-                        {
-                            <text>
-                                <button type="button" id="btnEdit" class="btn blue"> Edit</button>
-                            </text>
+                            if (User.IsInRole("Admin"))
+                            {
+                                <text>
+                                    <button class="btn btn-primary" type="button" id="btnSubmit" >Approve</button> 
+                                    <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
+                                </text>
+                            }
+                            else if (User.IsInRole("InventoryManager"))
+                            {
+                                <text>
+                                    <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
+                                </text>
+                            }
                         }
                     }
-                }
+                </div>
+
             </div>
         </div>
-        <!-- END EXAMPLE TABLE PORTLET-->
-
-
-
-
-
-
-
     </div>

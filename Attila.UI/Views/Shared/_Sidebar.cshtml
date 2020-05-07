@@ -1,8 +1,5 @@
-﻿<div class="page-sidebar-wrapper">
-    <!-- BEGIN SIDEBAR -->
-    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-    <div class="page-sidebar ">
+﻿@*<div class="page-sidebar-wrapper">
+      <div class="page-sidebar ">
 
         <ul class="page-sidebar-menu   " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
 
@@ -12,8 +9,7 @@
                         <img src="../assets/apps/img/logo.svg" alt="logo" class=" btn-block logo-default" />
                     </a>
                     <div class="menu-toggler sidebar-toggler">
-                        <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
-                    </div>
+                     </div>
                 </div>
 
 
@@ -41,17 +37,17 @@
 
                     </li>
                 } }
-     
-                    <li class="nav-item  ">
-                        <a href="/Events" class="nav-link nav-toggle">
-                            <i class="icon-pointer"></i>
-                            <span class="title">Events</span>
-                        </a>
 
-                    </li>
+            <li class="nav-item  ">
+                <a href="/Events" class="nav-link nav-toggle">
+                    <i class="icon-pointer"></i>
+                    <span class="title">Events</span>
+                </a>
+
+            </li>
 
 
-                 
+
 
 
             @{
@@ -121,8 +117,55 @@
 
 
 
+        </ul> 
+    </div> 
+</div>*@
+
+
+<nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion p-0">
+    <div class="container-fluid d-flex flex-column p-0" id="header">
+        <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+            <div class="sidebar-brand-icon"><img class="logo-icon" src="/assets/img/icon.png"></div>
+            <div class="sidebar-brand-text mx-1"><img class="logo-text" src="/assets/img/logo-name.png"></div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <ul class="nav navbar-nav text-ligh btn-group" role="group" id="accordionSidebar">
+
+
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="Dashboard" href="/Dashboard/Index"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="Events" href="/Events/Index"><i class="far fa-calendar-alt"></i><span>Events</span></a></li>
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("Coordinator"))
+                {
+
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="Packages" href="/EventPackages/Index"><i class="fa fa-cubes"></i><span>Packages</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="Clients" href="/Clients/Index"><i class="fa fa-users"></i><span>Clients</span></a></li>
+
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="Payment" href="/Payment/Index"><i class="fas fa-file-invoice-dollar"></i><span>Payment</span></a></li>
+                }
+            }
+            @{
+                if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
+                {
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Index"><i class="fa fa-tasks"></i><span>Inventory</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" id="Suppliers" href="/Inventory/Suppliers"><i class="fas fa-asterisk"></i><span>Suppliers</span></a></li>
+
+                }}
+
+            <li class="nav-item" role="presentation"><a class="nav-link" id="Profile" href="/User/Profile"><i class="fas fa-user"></i><span>Profile</span></a></li>
+            @if (User.IsInRole("Admin"))
+            {
+
+                <li class="nav-item" role="presentation"><a class="nav-link" id="UserList" href="/User/List"><i class="fas fa-table"></i><span>Users List</span></a></li>
+            }
+            <li class="nav-item" role="presentation"><a class="nav-link" id="LogOut" href="/Home/SignOut"><i class="fas fa-sign-out-alt"></i><span>Log Out</span></a></li>
+
+
+
+
+
         </ul>
-        <!-- END SIDEBAR MENU -->
     </div>
-    <!-- END SIDEBAR -->
-</div>
+</nav>

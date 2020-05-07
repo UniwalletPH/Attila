@@ -32,9 +32,9 @@ namespace Attila.UI.Controllers
             return View(_users);
         }
         [Authorize(Roles = "Admin,Coordinator,InventoryManager")]
-        public async Task<IActionResult> Profile(Guid uid)
+        public async Task<IActionResult> Profile()
         {
-            var _userProfile = await mediator.Send(new SearchUserByIdQuery { UID = uid});
+            var _userProfile = await mediator.Send(new SearchUserByIdQuery { ID = CurrentUser.ID});
 
             return View(_userProfile);
         }

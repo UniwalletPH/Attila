@@ -10,6 +10,8 @@ using MediatR;
 using Attila.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using Attila.Application.Notification.Queries;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Attila.UI.Controllers
 {
@@ -41,5 +43,8 @@ namespace Attila.UI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+
+
+     
+    } 
 }

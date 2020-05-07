@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Coordinator")]
     public class EventPackagesController : BaseController
     {
         private readonly IMediator mediator;
@@ -257,47 +258,26 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int PackageID){
 
-            var package = await mediator.Send(new SearchPackageByIdQuery { PackageId = PackageID });
-            var eventPackages = await mediator.Send(new GetEventPackageListQuery { });
+            var _addmenu = await mediator.Send(new SearchPackageByIdQuery { PackageId = PackageID });
+            var _dishCategories = await mediator.Send(new GetAllDishCategoryQuery { });
 
-            var menulist = await mediator.Send(new GetMenuListQuery());
-
-
-            List<SelectListItem> list = new List<SelectListItem>();
             List<SelectListItem> _list = new List<SelectListItem>();
 
-            foreach (var item in menulist)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Name + item.MenuCategory.Category
-                });
+
+            var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory); 
+            var _selectedMenu = new List<int>();
+
+          
+            PackageDetailsCVM eventDetails = new PackageDetailsCVM
+            {  
+                
+                MenuList = _addmenu, 
+                Menu = _list,
+                Groupings = _dishGroupbyCategory
+            };
 
 
-            }
-
-            foreach (var item in eventPackages)
-            {
-                list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Name + item.RatePerHead
-                });
-
-            }
- 
-
-
-            var packages = new PackagesCVM
-            {
-
-                MenuList = _list,
-                EventPackages = eventPackages,
-                PackageList = list,
-              PackageMenu = package
-           };
-            return View(packages);
+            return View(eventDetails);
 
 
         }
