@@ -38,6 +38,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                     {
                         ID = item.ID,
                         Quantity = item.Quantity,
+                        ExpirationDate = item.ExpirationDate,
                         EncodingDate = item.EncodingDate,
                         ItemPrice = item.ItemPrice,
                         Remarks = item.Remarks,
@@ -50,6 +51,27 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
 
                 var _getEquipmentData = await mediator.Send(new GetEquipmentStockDetailsQuery());
+                var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
+                //var _getEquipment
+
+                foreach (var equipmentDetails in _getEquipmentDetails)
+                {
+                    var _getEquipmentInventory = await dbContext.EquipmentInventories.Where(a => a.EquipmentID == equipmentDetails.ID).ToListAsync();
+
+                    int _totalEquipmentQuantity = new int();
+
+
+                    foreach (var item in _getEquipmentInventory)
+                    {
+                        _totalEquipmentQuantity += item.Quantity;
+                    }
+
+                    var _equipmentStockDetails = new EquipmentVM
+                    {
+                        
+                    }
+                }
+
 
                 foreach (var item in _getEquipmentData)
                 {

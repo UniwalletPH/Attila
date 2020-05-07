@@ -11,6 +11,8 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public int Quantity { get; set; }
 
+        public DateTime ExpirationDate { get; set; }
+
         public DateTime EncodingDate { get; set; }
 
         public decimal ItemPrice { get; set; }
