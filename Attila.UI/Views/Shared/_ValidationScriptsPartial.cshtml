@@ -1,3 +1,37 @@
-﻿<script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.js" asp-append-version="true"></script>
-<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+﻿<style>
+    .k-tooltip-validation {
+        display: none !important;
+    }
+
+    input.form-control.k-invalid,
+    .k-dropdown-wrap.k-invalid > input.k-input,
+    .k-numeric-wrap.k-invalid > input.k-input {
+        -webkit-box-shadow: inset 0 -2px 0 #ffb4b4;
+        box-shadow: inset 0 -2px 0 #ffb4b4;
+    }
+</style>
+
+<script>
+    function OnFailure(e) {
+        console.log(e);
+        AppNotification.error(e);
+        $('form :input').prop('disabled', false);
+    }
+
+    function OnBegin(e) {
+        $('form :input').prop('disabled', true);
+    }
+
+    $('form').attr('data-ajax-begin', 'OnBegin');
+    $('form').attr('data-ajax-failure', 'OnFailure');
+    $('form').attr('data-ajax', true);
+    $('form').attr('data-ajax-method', 'POST');
+</script>
+
+<script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+<script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+
+<script type="text/javascript">
+    $("form").kendoValidator();
+</script>

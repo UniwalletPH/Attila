@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Error_500";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Error_500</h2>
+
+<span style="color:#c59696;">@Model.Error.Message</span>
+<br />
+
+
+<div>
+    <b>Stacktrace:</b> <br />
+    @Html.Raw(Model.Error.StackTrace)
+</div>

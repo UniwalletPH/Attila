@@ -1,0 +1,68 @@
+﻿<script type="text/javascript">
+    (function ($win) {
+        if ($win['AppNotification'] == null) {
+            $win['AppNotification'] = {};
+        }
+
+        $win['AppNotification'] = {
+            error: function (exception) {
+                try {
+                    console.log('Error: ', exception);
+
+                    var _notif = $('#appNotif').data('kendoNotification');
+
+                    if (_notif == null) {
+                        console.error(exception);
+                    }
+                    else {
+                        var _err = exception.responseJSON;
+
+                        _err['documentTitle'] = document.getElementsByTagName("title")[0].innerHTML;
+
+                        _notif.show(_err, 'error');
+                    }
+                } catch (e) {
+                    console.log('console-error', e);
+                }
+            },
+            message: function (msg, title) {
+                var _title = title || document.getElementsByTagName("title")[0].innerHTML;
+                var _message = msg || 'A request error has occured';
+
+                var _notif = $('#appNotif').data('kendoNotification');
+
+                if (_notif == null) {
+                    console.log(_message, _title);
+                }
+                else {
+                    _notif.show({ title: _title, message: _message }, 'success');
+                }
+            }
+        };
+
+    })(window);
+</script>
+
+<script id="ErrorNotificationTemplate" type="text/x-kendo-template">
+    <div style="margin:5px;">
+        <label class="global-error-alert-label">#=documentTitle#</label> <i class="global-error-alert ion-alert-circled pull-right"></i>
+        <div class="global-error-alert-msg" title="#=type#">#= message #</div>
+    </div>
+</script>
+
+<script id="MessageNotificationTemplate" type="text/x-kendo-template">
+    <div style="margin:5px;">
+        <label>#= title #</label> <i class="k-icon k-i-success pull-right"></i>
+        <div>#= message #</div>
+    </div>
+</script>
+
+@(Html.Kendo().Notification().Name("appNotif")
+    .Button(true)
+    .AutoHideAfter(4000)
+    .Width(300)
+    .Templates(t =>
+    {
+        t.Add().Type("error").ClientTemplateID("ErrorNotificationTemplate");
+        t.Add().Type("success").ClientTemplateID("MessageNotificationTemplate");
+    }))

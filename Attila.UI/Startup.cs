@@ -1,6 +1,8 @@
 using Attila.Application;
 using Attila.Application.Interfaces;
 using Attila.Infrastructure;
+using Attila.UI.Common;
+using Attila.UI.Middlewares;
 using Attila.UI.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +33,9 @@ namespace Attila.UI
             services.AddScoped<ISignInManager, SignInManager>();
             services.AddHttpContextAccessor();
 
+            services.AddKendo();
+
+
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
 
@@ -58,14 +63,16 @@ namespace Attila.UI
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseExceptionHandler("/Error/500");
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -73,6 +80,7 @@ namespace Attila.UI
             app.UseBrowserLink();
 
             app.UseRouting();
+            app.UseMiddleware(typeof(ErrorHandlingMiddleware));
 
             app.UseAuthentication();
             app.UseAuthorization();
