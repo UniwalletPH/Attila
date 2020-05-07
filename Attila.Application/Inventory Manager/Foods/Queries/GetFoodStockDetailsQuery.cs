@@ -32,6 +32,7 @@ namespace Attila.Application.Inventory_Manager.Foods.Queries
                     {
                         ID = item.ID,
                         Quantity = item.Quantity,
+                        ExpirationDate = item.ExpirationDate,
                         FoodDetailsVM = item.Food
                     };
 
