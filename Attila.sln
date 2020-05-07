@@ -36,7 +36,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.UI", "Attila.UI\Atti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{9F759951-BD29-45E3-8455-911C67757225}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Attila.DbMigration", "Attila.DbMigration\Attila.DbMigration.csproj", "{610CE693-FBFC-410A-8296-62AE79F66CBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Attila.DbMigration", "Attila.DbMigration\Attila.DbMigration.csproj", "{610CE693-FBFC-410A-8296-62AE79F66CBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{DAFB7CE7-D236-49D0-A3B9-539FBEA0ECE7}"
+	ProjectSection(SolutionItems) = preProject
+		Lib\Kendo.Mvc.dll = Lib\Kendo.Mvc.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

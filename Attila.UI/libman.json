@@ -7,12 +7,13 @@
       "destination": "wwwroot/lib/jquery/"
     },
     {
-      "provider": "unpkg",
-      "library": "jquery-validation-unobtrusive@3.2.11",
-      "destination": "wwwroot/lib/jquery-validation-unobtrusive/",
+      "library": "jquery-validate@1.19.1",
+      "destination": "wwwroot/lib/jquery-validate/",
       "files": [
-        "dist/jquery.validate.unobtrusive.js",
-        "dist/jquery.validate.unobtrusive.min.js"
+        "jquery.validate.js",
+        "jquery.validate.min.js",
+        "additional-methods.js",
+        "additional-methods.min.js"
       ]
     },
     {
@@ -27,44 +28,69 @@
       ]
     },
     {
-      "provider": "unpkg",
       "library": "jquery-ajax-unobtrusive@3.2.6",
-      "destination": "wwwroot/lib/jquery-ajax-unobtrusive/",
+      "destination": "wwwroot/lib/jquery-ajax-unobtrusive/"
+    },
+    {
+      "library": "twitter-bootstrap@4.4.1",
+      "destination": "wwwroot/lib/bootstrap/",
       "files": [
-        "dist/jquery.unobtrusive-ajax.js",
-        "dist/jquery.unobtrusive-ajax.min.js"
+        "css/bootstrap.min.css",
+        "css/bootstrap.min.css.map",
+        "js/bootstrap.bundle.js",
+        "js/bootstrap.bundle.min.js",
+        "js/bootstrap.bundle.min.js.map"
       ]
     },
     {
-      "provider": "unpkg",
-      "library": "bootstrap@3.3.7",
-      "destination": "wwwroot/lib/bootstrap/"
+      "provider": "jsdelivr",
+      "library": "font-awesome@4.7.0",
+      "destination": "wwwroot/lib/font-awesome/",
+      "files": [
+        "css/font-awesome.css",
+        "css/font-awesome.css.map",
+        "css/font-awesome.min.css",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2",
+        "fonts/FontAwesome.otf"
+      ]
     },
     {
       "provider": "filesystem",
-      "library": "Vendors/kendo-ui-core/",
-      "destination": "wwwroot/lib/kendo-ui-core",
+      "library": "Vendors/Telerik UI for ASP.NET Core/",
+      "destination": "wwwroot/lib/kendo-ui/",
       "files": [
-        "js/kendo.core.min.js",
-        "js/kendo.ui.core.min.js",
-        "styles/kendo.common.min.css",
-        "styles/kendo.common-bootstrap.min.css",
-        "styles/kendo.bootstrap.min.css",
-        "styles/kendo.bootstrap-v4.min.css",
-        "styles/Bootstrap/editor.png",
-        "styles/Bootstrap/imagebrowser.png",
-        "styles/Bootstrap/indeterminate.gif",
-        "styles/Bootstrap/loading.gif",
-        "styles/Bootstrap/loading_2x.gif",
-        "styles/Bootstrap/loading-image.gif",
-        "styles/Bootstrap/markers.png",
-        "styles/Bootstrap/markers_2x.png",
-        "styles/Bootstrap/slider-h.gif",
-        "styles/Bootstrap/slider-v.gif",
-        "styles/Bootstrap/sprite.png",
-        "styles/Bootstrap/sprite_2x.png",
-        "styles/Bootstrap/sprite_kpi.png",
-        "styles/Bootstrap/sprite_kpi_2x.png"
+        "js/kendo.all.min.js",
+        "js/kendo.all.min.js.map",
+        "js/kendo.aspnetmvc.min.js",
+        "js/kendo.aspnetmvc.min.js.map",
+        "styles/kendo.default-v2.min.css",
+        "styles/kendo.default-v2.min.css.map",
+        "styles/fonts/glyphs/KendoUIGlyphs.eot",
+        "styles/fonts/glyphs/KendoUIGlyphs.svg",
+        "styles/fonts/glyphs/KendoUIGlyphs.ttf",
+        "styles/fonts/glyphs/KendoUIGlyphs.woff",
+        "styles/fonts/glyphs/WebComponentsIcons.eot",
+        "styles/fonts/glyphs/WebComponentsIcons.svg",
+        "styles/fonts/glyphs/WebComponentsIcons.ttf",
+        "styles/fonts/glyphs/WebComponentsIcons.woff",
+        "styles/Default/editor.png",
+        "styles/Default/imagebrowser.png",
+        "styles/Default/indeterminate.gif",
+        "styles/Default/loading.gif",
+        "styles/Default/loading_2x.gif",
+        "styles/Default/loading-image.gif",
+        "styles/Default/markers.png",
+        "styles/Default/markers_2x.png",
+        "styles/Default/slider-h.gif",
+        "styles/Default/slider-v.gif",
+        "styles/Default/sprite.png",
+        "styles/Default/sprite_2x.png",
+        "styles/Default/sprite_kpi.png",
+        "styles/Default/sprite_kpi_2x.png"
       ]
     }
   ]

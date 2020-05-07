@@ -1,19 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Old\**" />
-    <Content Remove="Views\Old\**" />
-    <EmbeddedResource Remove="Views\Old\**" />
-    <None Remove="Views\Old\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.1" />
-    <PackageReference Include="Kendo.for.AspNet.Core" Version="2019.1.115" />
     <PackageReference Include="MediatR" Version="8.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.1" />
@@ -47,19 +39,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Dashboard\partials\" />
-    <Folder Include="wwwroot\lib\" />
+    <Reference Include="Kendo.Mvc">
+      <HintPath>..\Lib\Kendo.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\EventPackages\Index.cshtml" />
-    <None Include="Views\EventPackages\MenuList.cshtml" />
-    <None Include="Views\EventPackages\MenuCategoryForm.cshtml" />
-    <None Include="Views\EventPackages\MenuForm.cshtml" />
-    <None Include="Views\EventPackages\PackageForm.cshtml" />
-    <None Include="Views\EventPackages\PackageMenuForm.cshtml" />
-  </ItemGroup>
-
-
 
 </Project>
