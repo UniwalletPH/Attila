@@ -1,25 +1,25 @@
-﻿using System;
+﻿using Atilla.Application.Admin.Equipments.Commands;
+using Attila.Application.Admin.Equipments.Commands;
+using Attila.Application.Admin.Equipments.Queries;
+using Attila.Application.Admin.Foods.Commands;
+using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Inventory_Manager.Equipments.Commands;
+using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Foods.Commands;
+using Attila.Application.Inventory_Manager.Foods.Queries;
+using Attila.Application.Inventory_Manager.Shared.Commands;
+using Attila.Application.Inventory_Manager.Shared.Queries;
+using Attila.Application.Notification.Commands;
+using Attila.UI.Models;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Attila.UI.Models;
-using MediatR;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Attila.Application.Inventory_Manager.Shared.Queries;
-using Microsoft.AspNetCore.Http;
-using Attila.Application.Inventory_Manager.Shared.Commands;
-using Attila.Application.Inventory_Manager.Foods.Queries;
-using Attila.Application.Inventory_Manager.Foods.Commands;
-using Attila.Application.Inventory_Manager.Equipments.Queries;
-using Attila.Application.Inventory_Manager.Equipments.Commands;
-using Microsoft.AspNetCore.Authorization;
-using Attila.Application.Notification.Commands;
-using Attila.Application.Admin.Equipments.Queries;
-using Attila.Application.Admin.Foods.Queries;
-using Attila.Application.Admin.Foods.Commands;
-using Atilla.Application.Admin.Equipments.Commands;
-using Attila.Application.Admin.Equipments.Commands;
 
 namespace Attila.UI.Controllers
 {
@@ -122,16 +122,16 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> AddFood(FoodDetailsCVM foodDetailsVM)
+        public async Task<IActionResult> AddFood(FoodDetailsCVM foodDetailsCVM)
         {
             FoodDetailsVM _food = new FoodDetailsVM
             {
-                Code = foodDetailsVM.Code,
-                Name = foodDetailsVM.Name,
-                Specification = foodDetailsVM.Specification,
-                Description = foodDetailsVM.Description,
-                Unit = foodDetailsVM.Unit,
-                FoodType = foodDetailsVM.FoodType,
+                Code = foodDetailsCVM.Code,
+                Name = foodDetailsCVM.Name,
+                Specification = foodDetailsCVM.Specification,
+                Description = foodDetailsCVM.Description,
+                Unit = foodDetailsCVM.Unit,
+                FoodType = foodDetailsCVM.FoodType,
             };
 
             var response = await mediator.Send(new AddFoodDetailsCommand
@@ -167,7 +167,7 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate
 
                 });
             }
