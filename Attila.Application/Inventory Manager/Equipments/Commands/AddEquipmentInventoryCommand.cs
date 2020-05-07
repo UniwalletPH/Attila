@@ -3,6 +3,7 @@ using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Domain.Entities;
 using MediatR;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

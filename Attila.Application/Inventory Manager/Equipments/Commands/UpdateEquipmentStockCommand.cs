@@ -25,7 +25,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
 
                 if (_updatedEquipmentStock != null)
                 {
-                    _updatedEquipmentStock.Quantity = request.MyEquipmentInventoryVM.Quantity;
+                    _updatedEquipmentStock.Quantity -= request.MyEquipmentInventoryVM.Quantity;
 
                     await dbContext.SaveChangesAsync();
 
