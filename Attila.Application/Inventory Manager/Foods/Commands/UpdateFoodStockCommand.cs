@@ -20,16 +20,27 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
             {
+                bool response = new bool();
+
                 var _updatedFoodStock = dbContext.FoodInventories.Find(request.MyFoodInventoryVM.FoodDetailsID);
 
                 if (_updatedFoodStock != null)
                 {
-                    _updatedFoodStock.Quantity = request.MyFoodInventoryVM.Quantity;
+                    _updatedFoodStock.Quantity -= request.MyFoodInventoryVM.Quantity;
 
-                    await dbContext.SaveChangesAsync();
+                    if (_updatedFoodStock.Quantity > 0)
+                    {
+                        await dbContext.SaveChangesAsync();
+                        response = true;
+                    }
+                    else
+                    {
+                        response = false;
+                    }
 
-                    return true;
+                    return response;
                 }
+
                 else
                 {
                     throw new Exception("Food ID does not exist!");
