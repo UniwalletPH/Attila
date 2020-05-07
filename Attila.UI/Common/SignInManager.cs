@@ -12,7 +12,7 @@ using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Attila.UI.Models
+namespace Attila.UI.Common
 {
     public class SignInManager : ISignInManager
     {

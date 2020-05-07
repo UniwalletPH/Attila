@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace Attila.UI.Models
+namespace Attila.UI.Common
 {
     public class PasswordHasher : IPasswordHasher
     {
