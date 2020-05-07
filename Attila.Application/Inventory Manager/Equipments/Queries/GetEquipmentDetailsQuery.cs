@@ -27,6 +27,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
                     Code = a.Code,
                     Name = a.Name,
                     Description = a.Description,
+                    RentalFee = a.RentalFee,
                     UnitType = a.UnitType,
                     EquipmentType = a.EquipmentType
 

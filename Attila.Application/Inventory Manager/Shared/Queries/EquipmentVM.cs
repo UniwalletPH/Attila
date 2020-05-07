@@ -19,6 +19,16 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
         public int UserID { get; set; }
 
-        public Equipment EquipmentDetails { get; set; }
+        public string Code { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal RentalFee { get; set; }
+
+        public UnitType UnitType { get; set; }
+
+        public EquipmentType EquipmentType { get; set; }
     }
 }
