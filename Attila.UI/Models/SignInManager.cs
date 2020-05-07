@@ -31,30 +31,20 @@ namespace Attila.UI.Models
 
         public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
         {
-            try
+            var _l = await mediator.Send(new VerifyUserLoginQuery { Username = userName });
+
+
+            if (_l == null)
             {
-                var _l = await mediator.Send(new VerifyUserLoginQuery { Username = userName });
-
-
-                if (_l == null)
-                {
-                    throw new Exception("Invalid username or password");
-                }
-
-                if (!passwordHasher.IsPasswordVerified(_l.Salt, _l.Password, password))
-                {
-                    throw new Exception("invalid username or password");
-                }
-
-                return await SignInAsync(userName);
+                throw new Exception("Invalid username or password");
             }
-            catch (Exception ex)
+
+            if (!passwordHasher.IsPasswordVerified(_l.Salt, _l.Password, password))
             {
-                var _result = SignInResult.Failed;
-                _result.Message = ex.Message;
-
-                return _result;
+                throw new Exception("invalid username or password");
             }
+
+            return await SignInAsync(userName);
         }
 
         public async Task<SignInResult> SignInAsync(string userName)
@@ -85,7 +75,7 @@ namespace Attila.UI.Models
             }
             catch (Exception)
             {
-                return SignInResult.Failed;
+                throw new Exception("invalid username or password");
             }
         }
 

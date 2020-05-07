@@ -5,105 +5,27 @@
 
 }
 @model Attila.Application.Login.Queries.LoginDetailsVM
- 
 
-@section Scripts{
+@section Scripts {
     <script type="text/javascript">
         function OnSuccess(e) {
-            if (e.succeeded) {
-                window.location = '/';
-            }
-            else {
-                $('#Username').prop('disabled', false);
-                $('#Password').prop('disabled', false);
-                $('#btnSubmit').prop('disabled', false);
-
-                $("#failed").modal('show');
-            }
-        }
-
-        function OnBegin(e) {
-            $('#Username').prop('disabled', true);
-            $('#Password').prop('disabled', true);
-            $('#btnSubmit').prop('disabled', true);
+            window.location = '/';
         }
     </script>
 
     <partial name="_ValidationScriptsPartial" />
 }
 
-@*<form class="login-form"
-          asp-controller="Home"
-          asp-action="SignIn"
-          data-ajax="true"
-          data-ajax-method="POST"
-          data-ajax-begin="OnBegin"
-          data-ajax-success="OnSuccess">
-
-        <div class="form-title">
-            <span class="form-title">Welcome.</span>
-            <span class="form-subtitle">Please login.</span>
-        </div>
-        <div class="alert alert-danger display-hide">
-            <button class="close" data-close="alert"></button>
-            <span> Enter any username and password. </span>
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Username</label>
-            <input class="form-control form-control-solid placeholder-no-fix"
-                   asp-for="Username"
-                   autocomplete="off"
-                   placeholder="Username" />
-        </div>
-        <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9">Password</label>
-            <input class="form-control form-control-solid placeholder-no-fix"
-                   type="password"
-                   asp-for="Password"
-                   autocomplete="off"
-                   placeholder="Password" />
-        </div>
-        <div class="form-actions">
-            <button id="btnSubmit" type="submit"
-                    class="btn  btn-block uppercase"
-                    style="background-color:#ff7300!important; color: #fff">
-                Login
-            </button>
-        </div>
-
-
-
-
-        <div class="modal fade" id="failed" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                        <h4 class="modal-title">Login failed</h4>
-                    </div>
-                    <div class="modal-body">Invalid username or password. </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </form>*@
-
 <!-- Start: Login Form Clean -->
 <div class="login-clean">
-    <form  asp-controller="Home"
+    <form asp-controller="Home"
           asp-action="SignIn"
-          data-ajax="true"
-          data-ajax-method="POST"
-          data-ajax-begin="OnBegin"
           data-ajax-success="OnSuccess">
 
         <h2 class="sr-only">Login Form</h2>
         <div class="illustration"><img class="login-logo-icon" src="/assets/img/logo.svg"></div>
-        <div class="form-group"><input class="form-control" type="text"   asp-for="Username" placeholder="Username"></div>
-        <div class="form-group"><input class="form-control" type="password"   asp-for="Password" name="password" placeholder="Password"></div>
+        <div class="form-group"><input class="form-control" type="text" asp-for="Username" placeholder="Username"></div>
+        <div class="form-group"><input class="form-control" type="password" asp-for="Password" name="password" placeholder="Password"></div>
         <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Log In</button></div>
     </form>
 </div>
