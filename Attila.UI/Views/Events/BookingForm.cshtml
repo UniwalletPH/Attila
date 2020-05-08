@@ -63,8 +63,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Event Date</strong></label>
-
-                                                <input type="date" asp-for="Event.EventDate" placeholder="John Smith's 70th Birthday" class="form-control" required>
+                                                <kendo-datepicker name="datepicker" format="dd-MM-yyyy" for="Event.EventDate" style="width: 100%"  />
                                             </div>
                                         </div>
                                     </div>
@@ -122,9 +121,9 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Entry Time</strong></label>
+                                                <!-- Change EntryTime DataType to use Kendo Time Picker -->
+                                                @*<kendo-timepicker name="timepicker" for="Event.EntryTime"  style="width: 100%"  />*@
                                                 <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="Event.EntryTime" required />
-
-
                                             </div>
                                         </div>
                                     </div>
