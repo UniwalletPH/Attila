@@ -27,7 +27,8 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 {
                     DateTimeRequest = DateTime.Now,
                     Status = Status.Processing,
-                    InventoryManagerID = request.ID
+                    InventoryManagerID = request.ID,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.EquipmentRestockRequests.Add(_equipmentRestockRequest);

@@ -29,7 +29,8 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                     Specification = request.MyFoodDetailsVM.Specification,
                     Description = request.MyFoodDetailsVM.Description,
                     Unit = request.MyFoodDetailsVM.Unit,
-                    FoodType = request.MyFoodDetailsVM.FoodType
+                    FoodType = request.MyFoodDetailsVM.FoodType,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.Foods.Add(_foodDetails);

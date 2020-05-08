@@ -29,7 +29,8 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 {
                     FoodID = request.MyFoodRestockRequestVM.FoodDetails.ID,
                     FoodRestockRequestID = request.FoodRestockID,
-                    Quantity = request.MyFoodRestockRequestVM.Quantity
+                    Quantity = request.MyFoodRestockRequestVM.Quantity,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.FoodRequestCollections.Add(_foodRequestCollection);
