@@ -78,19 +78,9 @@
 
         });
 
-
-
-
     </script>
-
-
-
 } 
      
-
-
-
-
 
 <div class="container-fluid" style="margin-top: 10px;">
     <h3 class="text-dark mb-4">Inventory</h3>
@@ -122,13 +112,9 @@
                             {
                             <tr data-id="@item.ID">
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
-
-
                                 <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
-
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
-
-                                <td>  <button type="button" class="btn btn-primary border rounded  see">See All</button> </td>
+                                <td><button type="button" class="btn btn-primary border rounded  see">See All</button> </td>
                             </tr>
                         } 
                         </tbody>
@@ -149,7 +135,7 @@
 <div class="container-fluid" style="margin-top: 10px;">
     <div style="margin: 10px;">
         <div class="row">
-            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Add Food", "Inventory")'">Register New Food</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddFood", "Inventory")'">Register New Food</button></div>
             <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddFoodInventory", "Inventory")'">Add Food Stock</button></div>
             <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("UpdateFoodStock", "Inventory")'">Update Food Stock</button></div>
         </div>
@@ -172,6 +158,7 @@
                             <th>Description</th>
                             <th>Specification</th>
                             <th>Quantity</th>
+                            <th>Expiration Date</th>
                             <th>Unit</th>
                             <th>Type</th>
                         </tr>
@@ -179,15 +166,16 @@
                     <tbody>
                         @foreach (var item in Model.FoodListVM)
                         {
-                            <tr>
-                                <td> @Html.DisplayFor(modelItem => item.FoodDetails.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.FoodDetails.Description)</td>
-                                <td> @Html.DisplayFor(modelItem => item.FoodDetails.Specification)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                <td> @Html.DisplayFor(modelItem => item.FoodDetails.Unit)</td>
-                                <td> @Html.DisplayFor(modelItem => item.FoodDetails.FoodType)</td>
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.FoodDetails.Name)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FoodDetails.Description)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FoodDetails.Specification)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td> @Html.DisplayFor(modelItem => item.ExpirationDate)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FoodDetails.Unit)</td>
+                            <td> @Html.DisplayFor(modelItem => item.FoodDetails.FoodType)</td>
 
-                            </tr>
+                        </tr>
                         }
                     </tbody>
                     <tfoot>

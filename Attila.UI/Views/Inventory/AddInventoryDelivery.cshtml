@@ -35,8 +35,6 @@
                                             <label for="supplier"><strong>Supplier</strong></label>
                                             @Html.DropDownListFor(m => m.SupplierDetailsID, Model.SupplierDetailsList, "-- SELECT SUPPLIER--", new { @class = "form-control"  })
 
-
-                                             
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +43,7 @@
                                         <div class="form-group">
                                             <label for="first_name"><strong>Price</strong></label> 
 
-                                            <input type="number" asp-for="DeliveryPrice" placeholder="John Smith" class="form-control" required>
+                                            <input type="number" asp-for="DeliveryPrice" placeholder="999.99" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
@@ -53,9 +51,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="first_name"><strong>Remarks</strong></label>
-
-
-                                            <textarea class="form-control" rows="4" asp-for="Remarks" readonly name="remarks"></textarea>
+                                            <textarea class="form-control" rows="4" asp-for="Remarks" name="remarks"></textarea>
                                         </div>
                                     </div>
                                 </div>

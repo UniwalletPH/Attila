@@ -2,6 +2,7 @@
 using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Commands
             {
                 Delivery _equipmentRestock = new Delivery
                 {
+                    CreatedOn = DateTime.Now,
                     DeliveryDate = request.MyInventoriesDeliveryVM.DeliveryDate,
                     ReceiptImage = request.MyInventoriesDeliveryVM.ReceiptImage,
                     DeliveryPrice = request.MyInventoriesDeliveryVM.DeliveryPrice,

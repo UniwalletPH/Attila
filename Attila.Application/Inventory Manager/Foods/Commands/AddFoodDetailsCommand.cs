@@ -1,6 +1,8 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Foods.Queries;
+using Attila.Domain.Entities;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,8 +21,9 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             }
             public async Task<bool> Handle(AddFoodDetailsCommand request, CancellationToken cancellationToken)
             {
-                Domain.Entities.Food _foodDetails = new Domain.Entities.Food
+                Food _foodDetails = new Food
                 {
+                    CreatedOn = DateTime.Now,
                     Code = request.MyFoodDetailsVM.Code,
                     Name = request.MyFoodDetailsVM.Name,
                     Specification = request.MyFoodDetailsVM.Specification,

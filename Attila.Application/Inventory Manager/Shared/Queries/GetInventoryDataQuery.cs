@@ -50,9 +50,7 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
                 }
 
 
-                //var _getEquipmentData = await mediator.Send(new GetEquipmentStockDetailsQuery());
                 var _getEquipmentDetails = await mediator.Send(new GetEquipmentDetailsQuery());
-
 
                 foreach (var equipmentDetails in _getEquipmentDetails)
                 {
@@ -78,23 +76,6 @@ namespace Attila.Application.Inventory_Manager.Shared.Queries
 
                     _equipmentListData.Add(_equipmentStockDetails);
                 }
-
-
-                //foreach (var item in _getEquipmentData)
-                //{
-                //    var _equipmentAllDetails = new EquipmentVM
-                //    {
-                //        ID = item.ID,
-                //        Quantity = item.Quantity,
-                //        EncodingDate = item.EncodingDate,
-                //        ItemPrice = item.ItemPrice,
-                //        Remarks = item.Remarks,
-                //        UserID = item.UserID,
-                //        EquipmentDetails = item.EquipmentDetailsVM
-                //    };
-
-                //    _equipmentListData.Add(_equipmentAllDetails);
-                //}
 
 
                 var _getInventoryDeliveryList = await mediator.Send(new GetInventoryDeliveryQuery());
