@@ -99,7 +99,7 @@ namespace Attila.UI.Controllers
             {
                 MyInventoriesDeliveryVM = _inventory
             });
-
+           
             var result = await mediator.Send(new AddInventoryNotificationCommand
             {
                 Message = "New Delivery",

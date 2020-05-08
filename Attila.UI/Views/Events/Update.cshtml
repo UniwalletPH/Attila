@@ -71,8 +71,14 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Event Date</strong></label>
-                                                @Html.EditorFor(model => model.EventDetails.EventDate ,new { htmlAttributes = new { @class = "form-control form-control-inline datepicker" ,  @Value = @Model.EventDetails.EventDate.ToShortDateString() } })
-                                             </div>
+                                                @*@Html.Kendo().EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control form-control-inline datepicker", @Value = @Model.EventDetails.EventDate.ToShortDateString() } })*@
+
+
+                                                <kendo-datepicker name="datepicker" class="form-control" format="MM-dd-yyyy" for="EventDetails.EventDate" value="Model.EventDetails.EventDate" style="width: 100%" placeholder="mm/dd/yyyy" />
+
+
+
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">

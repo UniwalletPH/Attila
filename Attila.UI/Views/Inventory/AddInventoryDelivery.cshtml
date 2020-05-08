@@ -36,8 +36,8 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="address"><strong>Delivery Date</strong></label>
-                                            <input type="date" asp-for="DeliveryDate"  class="form-control" required>
+                                            <label for="address"><strong>Delivery Date</strong></label> 
+                                            <kendo-datepicker name="datepicker" class="form-control" format="MM-dd-yyyy" for="DeliveryDate" value="Model.DeliveryDate" style="width: 100%" placeholder="mm/dd/yyyy" />
                                         </div>
                                     </div>
                                 </div>
