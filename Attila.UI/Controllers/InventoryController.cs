@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Attila.UI.Controllers
@@ -86,30 +87,56 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddInventoryDelivery(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
 
-            InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
-            {
-                DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
-                DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
-                SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
-                ReceiptImage = inventoriesDeliveryVM.ReceiptImage,
-                Remarks = inventoriesDeliveryVM.Remarks,
-            };
-
-             var response =await mediator.Send(new AddInventoryDeliveryCommand
-            {
-                MyInventoriesDeliveryVM = _inventory
-            });
            
-            var result = await mediator.Send(new AddInventoryNotificationCommand
+                if (inventoriesDeliveryVM.file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        inventoriesDeliveryVM.file.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        string s = Convert.ToBase64String(fileBytes);
+
+
+
+                        InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                        {
+                            DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
+                            DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
+                            SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
+                            ReceiptImage = fileBytes,
+                            Remarks = inventoriesDeliveryVM.Remarks,
+                        };
+
+                        var response = await mediator.Send(new AddInventoryDeliveryCommand
+                        {
+                            MyInventoriesDeliveryVM = _inventory
+                        });
+
+                        var result = await mediator.Send(new AddInventoryNotificationCommand
+                        {
+                            Message = "New Delivery",
+                            TargetUserID = -1,
+                            MethodName = "/Inventory/Details",
+                            RequestID = response
+
+                        });
+
+                        return Json(result);
+                    }
+            }
+            else
             {
-                Message = "New Delivery",
-                TargetUserID = -1,
-                MethodName = "/Inventory/Details",
-                RequestID = response
+                return Json(false);
+            }
+            
+           
 
-            });
+          
+             
 
-            return Json(result);
+
+           
+         
         }
 
 
@@ -712,6 +739,48 @@ namespace Attila.UI.Controllers
 
             return View(_inventoryDelivery);
         }
+
+ 
+
+
+    [Authorize(Roles = "Admin, InventoryManager")]
+    [HttpPost]
+    public async Task<IActionResult> UploadReceipt(InventoryDeliveryCVM inventoriesDeliveryVM)
+    {
+
+
+        if (inventoriesDeliveryVM.file.Length > 0)
+        {
+            using (var ms = new MemoryStream())
+            {
+                inventoriesDeliveryVM.file.CopyTo(ms);
+                var fileBytes = ms.ToArray();
+                string s = Convert.ToBase64String(fileBytes);
+
+
+
+                InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                {
+                    ID = inventoriesDeliveryVM.ID,
+                    ReceiptImage = fileBytes, 
+                };
+
+                var response = await mediator.Send(new UploadReceiptImageCommand
+                {
+                    MyInventoriesDeliveryVM = _inventory
+                });
+
+                
+
+                return Json(response);
+            }
+            
+        }
+        else
+        {
+            return Json(false);
+        }
+    }
 
 
 

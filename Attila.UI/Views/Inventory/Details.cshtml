@@ -5,23 +5,46 @@
 @model Attila.Application.Inventory_Manager.Shared.Queries.InventoriesDeliveryVM
 @section Scripts{
 
-    <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-    <script src="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL PLUGINS -->
-    <!-- BEGIN THEME GLOBAL SCRIPTS -->
-    <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-    <!-- END THEME GLOBAL SCRIPTS -->
-    <!-- BEGIN PAGE LEVEL SCRIPTS -->
-    <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+
+    var id = @Model.ID
+        function OnSuccess(e){
+
+            var url = window.location.href = '/Inventory/Details?id=' + id;
+            window.location.href = url.replace('__id__', id);
+        }
+        
+   function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('#image').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
+
+$("#imgInp").change(function() {
+  readURL(this);
+});
 
 
 
-     }
+
+    </script>
 
 
 
- 
+}
+
+
+
+
 
 
 <div class="container-fluid">
@@ -60,36 +83,62 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <div class="form-group"><label for="first_name"><strong>Remarks</strong></label>
-                                        
-                                        
-                                        <textarea class="form-control" rows="4" asp-for="Remarks" readonly name="remarks"></textarea></div>
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Remarks</strong></label>
+
+
+                                            <textarea class="form-control" rows="4" asp-for="Remarks" readonly name="remarks"></textarea>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
+                                </div> 
                             </form>
                         </div>
                     </div>
                     <div class="card shadow">
                         <div class="card-body">
-                            <form>
-                                <div class="form-group">
+
+
+
+                            @if (Model.ReceiptImage == null)
+                            {<form role="form" asp-controller="Inventory" enctype="multipart/form-data" asp-action="UploadReceipt" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
+
+                                    <div class="form-group">
+                                        <div class="form-row">
+
+                                            <div class="col"><label class="col-form-label" for="address"><strong>Receipt</strong></label></div>
+
+                                            <div class="col text-sm-right"><button class="btn btn-primary btn-sm upload" type="submit">Upload</button></div>
+                                        </div>
+                                    </div>
                                     <div class="form-row">
-                                        <div class="col"><label class="col-form-label" for="address"><strong>Receipt</strong></label></div>
-                                        <div class="col text-sm-right"><button class="btn btn-primary btn-sm" type="submit">Upload</button></div>
+                                        <div class="col">
+                                            <div class="form-group"><label for="city">   Choose a file to upload... </label></div>
+                                            <img id="image" class="img-fluid" />
+                                            <input type='file' class="form-control" id="imgInp" name="file" />
+
+                                            <input type='hidden' class="form-control" asp-for="ID" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group"><label for="city"><strong>Image</strong></label></div>
+
+                                </form>
+                            }
+                            @if (Model.ReceiptImage != null)
+                            {
+                        <div class="form-group">
+                            <div class="form-row">
+
+                                <div class="col"><label class="col-form-label" for="address"><strong>Receipt</strong></label></div>
+                            </div> <div class="form-row">
+                                <div class="col">
+                                    <div class="form-group text-center">
+                                        <img src="data:image;base64,@Convert.ToBase64String(Model.ReceiptImage)" id="image" class="img-fluid" />
                                     </div>
+
+
                                 </div>
-                                <div class="form-group text-center"><img class="border rounded-0 border-dark"></div>
-                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Save</button></div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                        </div>}
             </div>
         </div>
     </div>

@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-12">
 
-                    <form role="form" asp-controller="Inventory" asp-action="AddInventoryDelivery" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                    <form role="form" asp-controller="Inventory"  enctype="multipart/form-data" asp-action="AddInventoryDelivery" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                         <div class="card shadow mb-3">
                             <div class="card-header py-3">
 
@@ -36,7 +36,7 @@
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="address"><strong>Delivery Date</strong></label> 
+                                            <label for="address"><strong>Delivery Date</strong></label>
                                             <kendo-datepicker name="datepicker" class="form-control" format="MM-dd-yyyy" for="DeliveryDate" value="Model.DeliveryDate" style="width: 100%" placeholder="mm/dd/yyyy" />
                                         </div>
                                     </div>
@@ -63,10 +63,22 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="first_name"><strong>Remarks</strong></label>
-                                            <textarea class="form-control"  asp-for="Remarks" name="remarks"></textarea>
+                                            <textarea class="form-control" asp-for="Remarks" name="remarks"></textarea>
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
+
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Receipt Image [Optional]</strong></label>
+
+                                            <img   id="image" class="img-fluid" />
+                                            <input type='file' class="form-control" id="imgInp" name="file" />
+                                        </div>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -91,11 +103,21 @@
 
 
         }
+   function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      $('#image').attr('src', e.target.result);
+    }
+    
+    reader.readAsDataURL(input.files[0]); // convert to base64 string
+  }
+}
 
-        function OnFailure(e) {
-            alert("Please enter the correct details!");
-            windows.location.href = "/Inventory/Index"
-        }
-
+$("#imgInp").change(function() {
+  readURL(this);
+});
+   
     </script>
 } 

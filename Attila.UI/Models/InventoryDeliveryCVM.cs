@@ -1,7 +1,9 @@
 ﻿using Attila.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Attila.UI.Models
 {
@@ -20,6 +22,10 @@ namespace Attila.UI.Models
         public Supplier SupplierDetails { get; set; }
 
         public string Remarks { get; set; }
+
+
+        [FileExtensions(Extensions = "jpg,jpeg,png,pdf")]
+        public IFormFile file { get; set; }
 
         public List<SelectListItem> SupplierDetailsList { get; set; }
 
