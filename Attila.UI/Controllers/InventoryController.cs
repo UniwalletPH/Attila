@@ -41,6 +41,7 @@ namespace Attila.UI.Controllers
             var _getDetails = await mediator.Send(new GetInventoryDataQuery());
             var _pendingEquipmentRestockRequests = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
             var _pendingFoodRestockRequests = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
+            //var _getFoodToExpireList = await mediator.Send(new ExpirationDateNotificationQuery());
 
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
             {
