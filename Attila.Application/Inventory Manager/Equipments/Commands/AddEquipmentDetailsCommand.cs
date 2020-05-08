@@ -1,6 +1,7 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
 using MediatR;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,7 +29,8 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                     Description = request.MyEquipmentsDetailsVM.Description,
                     RentalFee = request.MyEquipmentsDetailsVM.RentalFee,
                     UnitType = request.MyEquipmentsDetailsVM.UnitType,
-                    EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType
+                    EquipmentType = request.MyEquipmentsDetailsVM.EquipmentType,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.Equipments.Add(_equipmentDetails);

@@ -28,7 +28,8 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
                 {
                     DateTimeRequest = DateTime.Now,
                     Status = Status.Processing,
-                    InventoryManagerID = request.ID
+                    InventoryManagerID = request.ID,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.FoodRestockRequests.Add(_foodRestockRequest);

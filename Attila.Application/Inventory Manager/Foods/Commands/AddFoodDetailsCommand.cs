@@ -23,13 +23,13 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
             {
                 Food _foodDetails = new Food
                 {
-                    CreatedOn = DateTime.Now,
                     Code = request.MyFoodDetailsVM.Code,
                     Name = request.MyFoodDetailsVM.Name,
                     Specification = request.MyFoodDetailsVM.Specification,
                     Description = request.MyFoodDetailsVM.Description,
                     Unit = request.MyFoodDetailsVM.Unit,
-                    FoodType = request.MyFoodDetailsVM.FoodType
+                    FoodType = request.MyFoodDetailsVM.FoodType,
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.Foods.Add(_foodDetails);
