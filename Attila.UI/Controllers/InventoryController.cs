@@ -95,12 +95,12 @@ namespace Attila.UI.Controllers
                 Remarks = inventoriesDeliveryVM.Remarks,
             };
 
-            var response = await mediator.Send(new AddInventoryDeliveryCommand
+             var response =await mediator.Send(new AddInventoryDeliveryCommand
             {
                 MyInventoriesDeliveryVM = _inventory
             });
 
-            await mediator.Send(new AddInventoryNotificationCommand
+            var result = await mediator.Send(new AddInventoryNotificationCommand
             {
                 Message = "New Delivery",
                 TargetUserID = -1,
@@ -109,7 +109,7 @@ namespace Attila.UI.Controllers
 
             });
 
-            return Json(response);
+            return Json(result);
         }
 
 
