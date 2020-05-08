@@ -1,4 +1,5 @@
-﻿using Attila.Application.Users.Queries;
+﻿using Attila.Application.Users.Commands;
+using Attila.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,27 @@ namespace Attila.UI.Controllers
             var _userProfile = await mediator.Send(new SearchUserByIdQuery { ID = CurrentUser.ID});
 
             return View(_userProfile);
+        }
+        [Authorize(Roles = "Admin,Coordinator,InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> UploadChanges(UserVM userVM)
+        {
+
+            UserVM userDetails = new UserVM
+            {
+                Username = userVM.Username,
+                Name = userVM.Name,
+                ID = CurrentUser.ID
+
+
+
+
+            };
+            var _userProfile = await mediator.Send(new UpdateUserCommand { user = userDetails });
+             
+
+
+            return Json(_userProfile);
         }
     }
 }

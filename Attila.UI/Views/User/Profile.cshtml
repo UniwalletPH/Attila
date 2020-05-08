@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Profile";
 }
- 
+
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Profile</h3>
     <div class="row mb-3">
@@ -79,7 +79,8 @@
                             <p class="text-primary m-0 font-weight-bold">User Settings</p>
                         </div>
                         <div class="card-body">
-                            <form >
+                            <form role="form" asp-controller="User" asp-action="UploadChanges" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -90,7 +91,8 @@
                                         <div class="form-group">
                                             <label for="email"><strong>Email Address</strong></label>
                                             <input class="form-control" type="email" placeholder="@Model.Email" name="email" readonly>
-                                             
+                                            <input class="form-control" type="hidden" placeholder="@Model.ID"  readonly>
+
                                         </div>
                                     </div>
                                 </div>
@@ -149,5 +151,23 @@
         </div>
     </div>
 </div>
+@section Scripts{
 
+
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+         
+        function OnSuccess(e){
+
+            var url = window.location.href = '/User/Profile' 
+        }
  
+
+
+
+    </script>
+
+
+
+}
