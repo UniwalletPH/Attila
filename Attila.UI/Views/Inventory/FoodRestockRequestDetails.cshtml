@@ -8,7 +8,7 @@
 @model FoodRestockRequestDetailsCVM
 @section Scripts{
 
-     
+
 
     <script>
 
@@ -21,7 +21,7 @@
 
 
             });
-         
+
             $(document).on('click', ' #btnDecline', function (e) {
 
 
@@ -32,68 +32,13 @@
             });</script>
 
 
-} 
+}
 
 
-<div class="container-fluid" style="margin-top: 10px;">
-    <h3 class="text-dark mb-4">Inventory</h3>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Food Restock Request Details</h3>
     <div class="card shadow">
         <div class="card-header py-3">
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p class="text-primary m-0 font-weight-bold">Food Request Details</p>
-                </div>
-                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                    <p class="text-primary m-0 font-weight-bold">
-                    @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button>*@
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="card-body">
-
-            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
-                    <thead>
-                        <tr>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>Unit</th>
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.FoodCollection)
-                        {
-                            <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                            </tr>
-
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><strong>Code</strong></td>
-                            <td><strong>Name</strong></td>
-                            <td><strong>Unit</strong></td>
-                            <td><strong>Quantity</strong></td>
-                        </tr>
-                    </tfoot>
-                </table>
- 
-            </div>
-
-        </div>
-    </div>
-</div>
-
- 
-@*<div class="container-fluid" >
-    <h3 class="text-dark mb-4">Food Request Details</h3>
-    <div class="card shadow"> 
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <p class="text-primary m-0 font-weight-bold"> Date Requested :   @Html.DisplayFor(a => a.FoodRequest.DateTimeRequest) </p>
@@ -104,11 +49,10 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
                     <p class="text-primary m-0 font-weight-bold">
-                        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button>
-                    </p>
+                        @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
                 </div>
             </div>
-        
+        </div>
         <div class="card-body">
 
             <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
@@ -165,4 +109,4 @@
 
         </div>
     </div>
-</div>*@
+</div>

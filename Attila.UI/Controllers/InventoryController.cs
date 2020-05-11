@@ -42,15 +42,20 @@ namespace Attila.UI.Controllers
             var _getDetails = await mediator.Send(new GetInventoryDataQuery());
             var _pendingEquipmentRestockRequests = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
             var _pendingFoodRestockRequests = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
+            var _forApprovalEquipmentRequests = await mediator.Send(new GetAllForApprovalEquipmentRequestQuery { });
+            var _forApprovalFoodRequests = await mediator.Send(new GetAllForApprovalFoodRequestQuery { });
+
             //var _getFoodToExpireList = await mediator.Send(new ExpirationDateNotificationQuery());
 
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
-            {
+            {                
                 FoodListVM = _getDetails.FoodListVM,
                 EquipmentListVM = _getDetails.EquipmentListVM,
                 InventoryDeliveryVM = _getDetails.InventoryDeliveryVM,
                 EquipmentRequestList = _pendingEquipmentRestockRequests,
-                FoodRequestList = _pendingFoodRestockRequests
+                FoodRequestList = _pendingFoodRestockRequests,
+                ForApprovalEquipmentRequestList = _forApprovalEquipmentRequests,
+                ForApprovalFoodRequestList = _forApprovalFoodRequests
             };
 
             return View(_inventoryDataVM);
@@ -614,7 +619,6 @@ namespace Attila.UI.Controllers
 
             return View(new FoodRestockRequestDetailsCVM
             {
-
                 FoodRequest = _requestDetails,
                 FoodCollection = _foodCollection
             });

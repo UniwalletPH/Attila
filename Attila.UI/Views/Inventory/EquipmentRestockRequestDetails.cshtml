@@ -18,18 +18,13 @@
 
     <script>
 
-
-
-
-             var  id =@Model.EquipmentRequest.ID;
+        var  id =@Model.EquipmentRequest.ID;
         $(document).on('click', ' #btnSubmit', function (e) {
 
+         var url = '@Url.Action("ApproveEquipmentRequest", "Inventory", new { id = "__id__"  })';
+         window.location.href = url.replace('__id__', id)
 
-                var url = '@Url.Action("ApproveEquimentRequest", "Inventory", new { id = "__id__"  })';
-                window.location.href = url.replace('__id__', id)
-
-
-            });
+        });
 
 
 
