@@ -10,7 +10,6 @@ namespace Attila.Application.Events.Queries
 {
     public class SearchEventByIdQuery : IRequest<EventDetailsVM>
     {
-       
         public int EventId { get; set; }
         
         public class SearchEventByIdQueryHandler : IRequestHandler<SearchEventByIdQuery, EventDetailsVM>
@@ -75,6 +74,7 @@ namespace Attila.Application.Events.Queries
 
                     _fullEventDetails.AdditionalEquipment = _collectionAdditionalEquipment;
                 }
+
                 else
                 {
                     _fullEventDetails.AdditionalEquipment = null;
@@ -87,7 +87,6 @@ namespace Attila.Application.Events.Queries
                     EventID = request.EventId
                 });
 
-
                 if (_additionalDishRequest != null)
                 {
                     var _collectionAdditionalDish = await mediator.Send(new GetAdditionalDishCollectionQuery
@@ -97,11 +96,11 @@ namespace Attila.Application.Events.Queries
 
                     _fullEventDetails.AdditionalDish = _collectionAdditionalDish;
                 }
+
                 else
                 {
                     _fullEventDetails.AdditionalDish = null;
                 };
-
 
 
                 var _collectionAdditionalDuration = await mediator.Send(new GetAdditionalDurationRequestListQuery 
@@ -113,10 +112,12 @@ namespace Attila.Application.Events.Queries
                 {
                     _fullEventDetails.AdditionalDuration = _collectionAdditionalDuration;
                 }
+
                 else
                 {
                     _fullEventDetails.AdditionalDuration = null;
                 }
+
 
                 var _eventMenu = await mediator.Send(new GetEventMenuQuery 
                 { 

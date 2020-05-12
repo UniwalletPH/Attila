@@ -18,6 +18,8 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public int Quantity { get; set; }
 
+        public int InventoryQuantity { get; set; }
+
         public int RequestID { get; set; }
     }
 }

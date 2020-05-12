@@ -29,10 +29,8 @@
 
                                                         <label>Status:  </label>
                                                         <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
-
-
-
                                                     }
+
                                                     else if (User.IsInRole("Coordinator"))
                                                     {
                                                         <label>Status:  </label>
@@ -41,54 +39,51 @@
                                                         if (Model.EventDetails.EventDate <= DateTime.Now)
                                                         {
                                                             <text>
-
                                                                 <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Change Status To Completed</button>
-
                                                             </text>
                                                         }
                                                     }
                                                 }
+
                                                 else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
                                                 {
                                                     if (User.IsInRole("Admin"))
                                                     {
                                                         <text>
-
                                                             <button class="btn btn-primary btn-sm" id="btnSubmit" type="button">Approve </button>
-
-
                                                             <button class="btn btn-primary btn-sm" id="btnDecline" type="button">Decline </button>
                                                         </text>
                                                     }
+
                                                     else if (User.IsInRole("Coordinator"))
                                                     {
                                                         <text>
-
                                                             <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
                                                         </text>
                                                     }
                                                 }
+
                                                 else if (Model.EventDetails.EventStatus.ToString() == "Processing")
                                                 {
                                                     if (User.IsInRole("Coordinator"))
                                                     {
                                                         <text>
-
                                                             <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
                                                         </text>
                                                     }
 
                                                 }
+
                                                 else if (Model.EventDetails.EventStatus.ToString() == "Declined")
                                                 {
                                                     if (User.IsInRole("Coordinator"))
                                                     {
                                                         <text>
-
                                                             <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete </button>
                                                         </text>
                                                     }
                                                 }
+
                                                 else if (Model.EventDetails.EventStatus.ToString() == "Completed")
                                                 {
                                                     <text>
@@ -113,6 +108,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -122,6 +118,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -131,6 +128,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -141,6 +139,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -151,6 +150,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -160,6 +160,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -169,19 +170,15 @@
                                         </div>
                                     </div>
 
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Location Area</strong></label>
                                                 <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.LocationType" readonly>
-
-
-
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -192,37 +189,33 @@
                                         </div>
                                     </div>
 
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Set Up Time</strong></label>
                                                 <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.EntryTime" readonly />
-
-
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Program Starts at </strong></label>
                                                 <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ProgramStart" readonly />
-
-
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Serving Time </strong></label>
                                                 <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ServingTime" readonly />
-
-
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -233,12 +226,9 @@
                                         </div>
                                     </div>
 
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-
                                                 <label for="first_name"><strong>Package</strong></label>
                                                 <input type="text" class="form-control" asp-for="EventDetails.Package.Name" readonly />
                                             </div>
@@ -250,29 +240,21 @@
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Number of Guests</strong></label>
                                                 <input type="number" class="form-control" placeholder="" asp-for="EventDetails.NumberOfGuests" readonly>
-
                                             </div>
                                         </div>
                                     </div>
-
-
 
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Remarks</strong></label>
-
-
                                                 <textarea class="form-control" rows="4" asp-for="EventDetails.Remarks" name="remarks" readonly></textarea>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -312,13 +294,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-
                             </div>
-
-
-
-
-
                         </div>
                     </div> } }
             
@@ -332,13 +308,9 @@
                                 <h6 class="text-primary font-weight-bold m-0">Additional Duration [Hours]  @Html.DisplayFor(modelItem => item.Duration.Hours)</h6>
                             </div>
                         </div>
-                        
                     }
                 }
             }
-
-
-
 
             @{
                 if (Model.EventDetails.AdditionalEquipment != null)
@@ -354,7 +326,7 @@
                                             <th> Equipment Code </th>
                                             <th> Equipment </th>
                                             <th> Quantity </th>
-                                            <th> Unit  </th>
+                                            <th> Inventory Stock  </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -365,7 +337,7 @@
                                                 <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
                                                 <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                                <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.UnitType)</td>
+                                                <td> @Html.DisplayFor(modelItem => item.InventoryQuantity)</td>
                                             </tr>
                                         }
                                     </tbody>

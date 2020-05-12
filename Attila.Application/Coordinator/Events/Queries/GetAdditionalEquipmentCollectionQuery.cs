@@ -35,6 +35,21 @@ namespace Attila.Application.Events.Queries
 
                 }).ToListAsync();
 
+
+                foreach (var item in _viewAdditionalEquipment)
+                {
+                    var _getequipmentStockList = dbContext.EquipmentInventories.Where(a => a.EquipmentID == item.EquipmentDetails.ID);
+
+                    int _equipmentTotalStock = new int();
+
+                    foreach (var stockItem in _getequipmentStockList)
+                    {
+                        _equipmentTotalStock += stockItem.Quantity;
+                    }
+
+                    item.InventoryQuantity = _equipmentTotalStock;
+                }
+
                 return _viewAdditionalEquipment;
             }
         }
