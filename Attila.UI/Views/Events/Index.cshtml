@@ -6,12 +6,6 @@
 
 
 
-
-
-
-
-
-
 @if (User.IsInRole("Coordinator"))
 {
     <div class="container-fluid" style="margin-top: 10px;">
@@ -22,8 +16,7 @@
             <div class="row">
                 <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("BookingForm", "Events")'">Book an Event</button></div>
                 <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Register", "Clients")'">Register a Client</button></div>
-
-                <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Index", "Packages")'">Event Packages</button></div>
+                <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Index", "EventPackages")'">Event Packages</button></div>
             </div>
         </div>
         <div class="card shadow">
@@ -190,9 +183,8 @@
                     <table class="table dataTable my-0" id="dataTable">
                         <thead>
                             <tr>
-
-                                <th>Event Date</th>
                                 <th>Booking Date</th>
+                                <th>Event Date</th>
                                 <th>Event Name</th>
                                 <th>Client</th>
                                 <th>Coordinator</th>
@@ -207,8 +199,8 @@
                             @foreach (var item in Model.IncomingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
@@ -221,8 +213,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td><strong>Event Date</strong></td>
                                 <td><strong>Booking Date</strong></td>
+                                <td><strong>Event Date</strong></td>
                                 <td><strong>Name</strong></td>
                                 <td><strong>Client</strong></td>
                                 <td><strong>Coordinator</strong></td>
@@ -255,7 +247,7 @@
             </div>
             <div class="card-body">
 
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info"> 
+                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
                     <table class="table dataTable my-0 responsive  display" id="dataTable">
                         <thead>
                             <tr>
@@ -302,7 +294,7 @@
                             </tr>
                         </tfoot>
                     </table>
-                 </div> 
+                </div>
 
             </div>
         </div>
@@ -311,67 +303,67 @@
 @if (User.IsInRole("InventoryManager"))
 {
 
-<div class="container-fluid" style="margin-top: 10px;">
+    <div class="container-fluid" style="margin-top: 10px;">
 
-    
+
         <h3 class="text-dark mb-4">Events</h3>
-    <div style="margin: 10px;">
-        <div class="row">
-        </div>
-    </div>
-    <div class="card shadow">
-        <div class="card-header py-3">
+        <div style="margin: 10px;">
             <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p class="text-primary m-0 font-weight-bold">Incoming</p>
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <p class="text-primary m-0 font-weight-bold">Incoming</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="card-body">
+            <div class="card-body">
 
-            <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                <table class="table dataTable my-0" id="dataTable">
-                    <thead>
-                        <tr>
+                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
+                    <table class="table dataTable my-0" id="dataTable">
+                        <thead>
+                            <tr>
 
-                            <th>Event Date</th>
-                            <th>Booking Date</th>
-                            <th>Event Name</th>
-                            <th>Client</th>
-                            <th>Coordinator</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        @foreach (var item in Model.IncomingEvent)
-                        {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                <th>Event Date</th>
+                                <th>Booking Date</th>
+                                <th>Event Name</th>
+                                <th>Client</th>
+                                <th>Coordinator</th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td><strong>Event Date</strong></td>
-                            <td><strong>Booking Date</strong></td>
-                            <td><strong>Name</strong></td>
-                            <td><strong>Client</strong></td>
-                            <td><strong>Coordinator</strong></td>
-                            <td><strong></strong></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
 
+                            @foreach (var item in Model.IncomingEvent)
+                            {
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><strong>Event Date</strong></td>
+                                <td><strong>Booking Date</strong></td>
+                                <td><strong>Name</strong></td>
+                                <td><strong>Client</strong></td>
+                                <td><strong>Coordinator</strong></td>
+                                <td><strong></strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 
 
     <div class="container-fluid" style="margin-top: 10px;">
@@ -438,20 +430,6 @@
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @section Scripts {
