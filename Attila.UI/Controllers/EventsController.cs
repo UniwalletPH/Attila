@@ -297,7 +297,7 @@ namespace Attila.UI.Controllers
 
             }
 
-            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = response.ID});
+            var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = response.ID });
 
             var _initialFee = new AdditionalEventFeeVM
             {
@@ -305,15 +305,15 @@ namespace Attila.UI.Controllers
                 EventID = response.ID,
                 Item = "Package-" + _eventDetails.Package.Name,
                 Quantity = _eventDetails.NumberOfGuests,
-                PricePerQuantity = _eventDetails.Package.RatePerHead,             
+                PricePerQuantity = _eventDetails.Package.RatePerHead,
             };
 
-            var _rVal =await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _initialFee});
+            var _rVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _initialFee });
 
             if (_eventDetails.VenueType == VenueType.Building)
             {
                 var _serviceFee = new AdditionalEventFeeVM
-                { 
+                {
                     Description = "Service Fee for Venue in Condominium or Bldg.",
                     Item = "Service Fee",
                     EventID = response.ID,
@@ -321,7 +321,7 @@ namespace Attila.UI.Controllers
                     PricePerQuantity = 3500,
                 };
 
-                var _rValue = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _serviceFee});
+                var _rValue = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _serviceFee });
             }
 
             if (_eventDetails.AdditionalEquipment != null)
@@ -329,15 +329,15 @@ namespace Attila.UI.Controllers
                 foreach (var item in _eventDetails.AdditionalEquipment)
                 {
                     var _additionalEquipmentFee = new AdditionalEventFeeVM
-                    { 
+                    {
                         EventID = response.ID,
                         Description = "Additional Equipment Fee",
                         Item = item.EquipmentDetails.Name,
                         Quantity = item.Quantity,
-                        PricePerQuantity = item.EquipmentDetails.RentalFee                   
+                        PricePerQuantity = item.EquipmentDetails.RentalFee
                     };
 
-                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalEquipmentFee});
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalEquipmentFee });
 
                 }
             }
@@ -347,15 +347,15 @@ namespace Attila.UI.Controllers
                 foreach (var item in _eventDetails.AdditionalDish)
                 {
                     var _additionalDishFee = new AdditionalEventFeeVM
-                    { 
+                    {
                         EventID = response.ID,
-                        Description ="Additional Dish Fee",
+                        Description = "Additional Dish Fee",
                         Item = item.Dish.Name,
                         PricePerQuantity = 2500,
-                        Quantity = item.Quantity,                       
+                        Quantity = item.Quantity,
                     };
 
-                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDishFee});
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDishFee });
                 }
             }
 
@@ -364,7 +364,7 @@ namespace Attila.UI.Controllers
                 foreach (var item in _eventDetails.AdditionalDuration)
                 {
                     var _additionalDurationFee = new AdditionalEventFeeVM
-                    { 
+                    {
                         EventID = response.ID,
                         Description = "Additional Duration Fee",
                         Item = "Service Hour",
@@ -372,11 +372,11 @@ namespace Attila.UI.Controllers
                         Quantity = item.Duration.Hours,
                     };
 
-                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDurationFee});
+                    var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDurationFee });
                 }
             }
 
-           
+
 
             return RedirectToAction("Details", new { EventID = EventID });
         }
@@ -467,7 +467,7 @@ namespace Attila.UI.Controllers
 
 
                 var _dishGroupbyCategory = _addmenu.GroupBy(_addmenu => _addmenu.Menu.DishCategory);
-                var _selected = await mediator.Send(new GetEventMenuQuery { EventId = EventID});
+                var _selected = await mediator.Send(new GetEventMenuQuery { EventId = EventID });
                 var _selectedMenu = new List<int>();
 
                 foreach (var item in _selected)
@@ -481,7 +481,7 @@ namespace Attila.UI.Controllers
                     MenuList = _addmenu,
                     EventID = EventID,
                     Menu = _list,
-                    Groupings = _dishGroupbyCategory ,
+                    Groupings = _dishGroupbyCategory,
                     SelectedMenu = _selectedMenu
                 };
 
@@ -498,7 +498,7 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddMenu(AddEventMenuCVM addEvent)
         {
             var _evntMenu = new List<EventMenuVM>();
-            var _selected = await mediator.Send(new GetEventMenuQuery {EventId = addEvent.EventID });
+            var _selected = await mediator.Send(new GetEventMenuQuery { EventId = addEvent.EventID });
             var _selectedMenu = new List<int>();
             foreach (var item in _selected)
             {
@@ -518,7 +518,7 @@ namespace Attila.UI.Controllers
 
                     _evntMenu.Add(_menu);
                 }
-               
+
             }
 
 
@@ -608,14 +608,12 @@ namespace Attila.UI.Controllers
 
 
         [Authorize(Roles = "Coordinator")]
-
         [HttpGet]
         public async Task<IActionResult> Additional(int EventID)
         {
-
             var _equipmentRequest = await mediator.Send(new FindAdditionalEquipmentRequestByEventIDQuery { EventID = EventID });
             var _dishRequest = await mediator.Send(new FindAdditionalDishRequestByEventIDQuery { EventID = EventID });
-          
+
 
             if (_equipmentRequest != null && _dishRequest != null)
             {
@@ -925,9 +923,9 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> ServiceCharge(int EventID)
         {
-            var _rValue = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID});
+            var _rValue = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID });
             var _ViewData = new ServiceChargeCVM
-            { 
+            {
                 EventID = EventID,
                 EventFees = _rValue
             };
@@ -950,7 +948,7 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddServiceCharge(AdditionalEventFeeVM data)
         {
-            var _rVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = data});
+            var _rVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = data });
 
             return Json(true);
         }
