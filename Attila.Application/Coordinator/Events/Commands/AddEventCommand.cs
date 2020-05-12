@@ -45,7 +45,7 @@ namespace Attila.Application.Events.Commands
                     ServingType = request.EventDetails.ServingType,
                     Theme = request.EventDetails.Theme,
                     VenueType = request.EventDetails.VenueType,
-                    
+                    CreatedOn = DateTime.Now
                 };
 
                 dbContext.Events.Add(_newEvent);
