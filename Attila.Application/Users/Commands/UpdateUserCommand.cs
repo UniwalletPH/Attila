@@ -28,13 +28,13 @@ namespace Attila.Application.Users.Commands
                 var _data = dbContext.Users
                     .Find(request.user.ID);
 
-                _data.UserLogins.Username = request.user.Username; 
                 _data.Name = request.user.Name;
                 await dbContext.SaveChangesAsync();
 
-
-
-
+                var _qVal = dbContext.UserLogins.Find(request.user.ID);
+                _qVal.Username = request.user.Username;
+                await dbContext.SaveChangesAsync();
+              
 
                 return true;
             }
