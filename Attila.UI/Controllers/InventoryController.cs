@@ -48,7 +48,7 @@ namespace Attila.UI.Controllers
             //var _getFoodToExpireList = await mediator.Send(new ExpirationDateNotificationQuery());
 
             InventoryDataCVM _inventoryDataVM = new InventoryDataCVM
-            {                
+            {
                 FoodListVM = _getDetails.FoodListVM,
                 EquipmentListVM = _getDetails.EquipmentListVM,
                 InventoryDeliveryVM = _getDetails.InventoryDeliveryVM,
@@ -92,56 +92,57 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> AddInventoryDelivery(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
 
-           
-                if (inventoriesDeliveryVM.file.Length > 0)
+
+            if (inventoriesDeliveryVM.file.Length > 0)
+            {
+                using (var ms = new MemoryStream())
                 {
-                    using (var ms = new MemoryStream())
+                    inventoriesDeliveryVM.file.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    string s = Convert.ToBase64String(fileBytes);
+
+
+
+                    InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
                     {
-                        inventoriesDeliveryVM.file.CopyTo(ms);
-                        var fileBytes = ms.ToArray();
-                        string s = Convert.ToBase64String(fileBytes);
+                        DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
+                        DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
+                        SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
+                        ReceiptImage = fileBytes,
+                        Remarks = inventoriesDeliveryVM.Remarks,
+                    };
 
+                    var response = await mediator.Send(new AddInventoryDeliveryCommand
+                    {
+                        MyInventoriesDeliveryVM = _inventory
+                    });
 
+                    var result = await mediator.Send(new AddInventoryNotificationCommand
+                    {
+                        Message = "New Delivery",
+                        TargetUserID = -1,
+                        MethodName = "/Inventory/Details",
+                        RequestID = response
 
-                        InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
-                        {
-                            DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
-                            DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
-                            SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
-                            ReceiptImage = fileBytes,
-                            Remarks = inventoriesDeliveryVM.Remarks,
-                        };
+                    });
 
-                        var response = await mediator.Send(new AddInventoryDeliveryCommand
-                        {
-                            MyInventoriesDeliveryVM = _inventory
-                        });
-
-                        var result = await mediator.Send(new AddInventoryNotificationCommand
-                        {
-                            Message = "New Delivery",
-                            TargetUserID = -1,
-                            MethodName = "/Inventory/Details",
-                            RequestID = response
-
-                        });
-
-                        return Json(result);
-                    }
+                    return Json(result);
+                }
             }
             else
             {
                 return Json(false);
             }
-            
-           
-
-          
-             
+        }
 
 
-           
-         
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> DeliveryDetails(int id)
+        {
+            var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = id });
+
+            return View(_inventoryDelivery);
         }
 
 
@@ -290,7 +291,7 @@ namespace Attila.UI.Controllers
         {
             var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
             var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
-              
+
             var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
 
@@ -354,16 +355,16 @@ namespace Attila.UI.Controllers
         {
             var response = await mediator.Send(new ChangeRequestStatusCommand
             {
-                 ID = id
+                ID = id
 
             });
-             
-           await mediator.Send(new AddInventoryNotificationCommand
+
+            await mediator.Send(new AddInventoryNotificationCommand
             {
-              Message = "New Food Restock Request",
+                Message = "New Food Restock Request",
                 TargetUserID = -1,
                 MethodName = "/Inventory/FoodRestockRequestDetails",
-             RequestID = id
+                RequestID = id
             });
 
             return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
@@ -554,7 +555,7 @@ namespace Attila.UI.Controllers
                 EquipmentRequest = _requestDetails,
                 EquipmentCollection = _equipmentRequestCollection
             };
-             
+
             return View(equipmentDetailsListVM);
         }
 
@@ -573,7 +574,7 @@ namespace Attila.UI.Controllers
             var response = await mediator.Send(new AddEquipmentRequestCollectionCommand
             {
                 EquipmentRestockID = equipmentRestockRequestVM.EquipmentRequest.ID,
-                 MyEquipmentRestockRequestVM = _equipmentRequest
+                MyEquipmentRestockRequestVM = _equipmentRequest
             });
 
             //Send Notif to Admin
@@ -735,56 +736,49 @@ namespace Attila.UI.Controllers
         }
 
 
+
+
+
+
+
         [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
+        [HttpPost]
+        public async Task<IActionResult> UploadReceipt(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
-            var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = id });
-
-            return View(_inventoryDelivery);
-        }
-
- 
 
 
-    [Authorize(Roles = "Admin, InventoryManager")]
-    [HttpPost]
-    public async Task<IActionResult> UploadReceipt(InventoryDeliveryCVM inventoriesDeliveryVM)
-    {
-
-
-        if (inventoriesDeliveryVM.file.Length > 0)
-        {
-            using (var ms = new MemoryStream())
+            if (inventoriesDeliveryVM.file.Length > 0)
             {
-                inventoriesDeliveryVM.file.CopyTo(ms);
-                var fileBytes = ms.ToArray();
-                string s = Convert.ToBase64String(fileBytes);
-
-
-
-                InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                using (var ms = new MemoryStream())
                 {
-                    ID = inventoriesDeliveryVM.ID,
-                    ReceiptImage = fileBytes, 
-                };
+                    inventoriesDeliveryVM.file.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    string s = Convert.ToBase64String(fileBytes);
 
-                var response = await mediator.Send(new UploadReceiptImageCommand
-                {
-                    MyInventoriesDeliveryVM = _inventory
-                });
 
-                
 
-                return Json(response);
+                    InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                    {
+                        ID = inventoriesDeliveryVM.ID,
+                        ReceiptImage = fileBytes,
+                    };
+
+                    var response = await mediator.Send(new UploadReceiptImageCommand
+                    {
+                        MyInventoriesDeliveryVM = _inventory
+                    });
+
+
+
+                    return Json(response);
+                }
+
             }
-            
+            else
+            {
+                return Json(false);
+            }
         }
-        else
-        {
-            return Json(false);
-        }
-    }
 
 
 
