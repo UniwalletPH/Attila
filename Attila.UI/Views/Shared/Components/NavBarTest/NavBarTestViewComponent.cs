@@ -8,6 +8,11 @@ namespace Attila.UI.Views.Shared.Components.NavBarTest
 {
     public class NavBarTestViewComponent : ViewComponent
     {
+        public NavBarTestViewComponent()
+        {
+
+        }
+
         public async Task<IViewComponentResult> InvokeAsync()
         {
             return View();

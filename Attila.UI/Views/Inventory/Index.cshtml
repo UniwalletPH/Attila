@@ -131,8 +131,8 @@
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Name)</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Description)</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Specification)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                <td> @Html.DisplayFor(modelItem => item.ExpirationDate)</td>
+                                <td> @($"{item.Quantity:n2}")</td>
+                                <td> @($"{item.ExpirationDate:MMM dd, yyyy}")</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Unit)</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.FoodType)</td>
 
