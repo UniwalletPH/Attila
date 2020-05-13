@@ -923,10 +923,11 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> ServiceCharge(int EventID)
         {
+            var _eventDetail = await mediator.Send(new SearchEventByIdQuery { EventId = EventID});
             var _rValue = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID });
             var _ViewData = new ServiceChargeCVM
             {
-                EventID = EventID,
+                Event = _eventDetail,
                 EventFees = _rValue
             };
 
