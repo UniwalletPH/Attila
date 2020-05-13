@@ -141,7 +141,6 @@ namespace Attila.UI.Controllers
             var response = await mediator.Send(new AddEventCommand { EventDetails = _eventDetails.Event });
 
 
-
             return Json(true);
         }
 
