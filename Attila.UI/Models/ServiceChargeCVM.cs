@@ -8,7 +8,7 @@ namespace Attila.UI.Models
 {
     public class ServiceChargeCVM
     {
-        public int EventID { get; set; }
+        public EventDetailsVM Event { get; set; }
 
         public List<AdditionalEventFeeVM> EventFees { get; set; }
     }
