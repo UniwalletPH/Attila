@@ -131,11 +131,6 @@
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
-
-
                                 </tr>
                             }
                         </tbody>
@@ -159,9 +154,6 @@
             </div>
         </div>
     </div>
-
-
-
 
 
     <div class="container-fluid" style="margin-top: 10px;">
@@ -198,17 +190,21 @@
 
                             @foreach (var item in Model.IncomingEvent)
                             {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
+                            <tr data-id="@item.ID">
+                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
+                                <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
+                                @if (User.IsInRole("Coordinator"))
+                                {
                                     <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
-                                </tr>
+                                }
+
+                            </tr>
                             }
                         </tbody>
                         <tfoot>

@@ -26,14 +26,8 @@
                                         <p class="text-primary m-0 font-weight-bold"> <button class="btn btn-primary btn-sm" type="submit">Register</button></p>
                                     </div>
                                 </div>
-
-
-
-
-                               
                             </div>
                             <div class="card-body">
-
 
                                 <div class="form-row">
                                     <div class="col">
@@ -51,7 +45,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -65,8 +58,6 @@
                                         <div class="form-group">
                                             <label for="description"><strong>Rental Fee</strong></label>
                                             <input type="number" class="form-control" asp-for="RentalFee" placeholder="">
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -85,29 +76,22 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="unit"><strong>Unit</strong></label>
-
-                                            <select class="form-control" required>
+                                            <select class="form-control" required asp-for="UnitType">
                                                 <optgroup label="Unit">
                                                     <option value="" disabled selected>Select your option</option>
                                                     <option value="1">Piece</option>
                                                     <option value="2">Box</option>
                                                     <option value="3">Dozen</option>
                                                     <option value="4">Others</option>
-
                                                 </optgroup>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
-
-                                
-
                             </div>
                         </div>
 
@@ -123,7 +107,6 @@
     <script type="text/javascript">
         function OnSuccess(e) {
             window.location.href = "/Inventory/Index"
-
         }
 
         function OnFailure(e) {
@@ -131,7 +114,6 @@
         }
 
     </script>
-
 
     <partial name="_ValidationScriptsPartial" />
 }

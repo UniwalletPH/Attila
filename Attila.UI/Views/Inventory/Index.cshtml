@@ -9,7 +9,7 @@
 
         $(document).on('click', 'tr .view-delivery-details', function (e) {
             id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/DeliveryDetails?id=' + id;
+            var url = window.location.href = '/Inventory/ViewDeliveryDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
         });
 
@@ -26,16 +26,12 @@
         });
 
         $(document).on('click', 'tr .view-fr', function (e) {
-
             id = $(this).closest('tr').attr('data-id');
             var url = window.location.href = '/Inventory/FoodRestockRequestDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
         });
 
-
-
         $(document).on('click', 'tr .view-er', function (e) {
-
             id = $(this).closest('tr').attr('data-id');
             var url = window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
@@ -235,7 +231,7 @@
                             <p class="text-primary m-0 font-weight-bold">Food Restock Requests</p>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("CreateFoodRequest", "Inventory")'">Add</button></p>
+                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddFoodRestockRequest", "Inventory")'">Add</button></p>
                         </div>
                     </div>
                 </div>
@@ -285,7 +281,7 @@
                             <p class="text-primary m-0 font-weight-bold">Equipment Restock Requests</p>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("CreateEquipmentRequest", "Inventory")'" type="button">Add</button></p>
+                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("AddEquipmentRestockRequest", "Inventory")'" type="button">Add</button></p>
                         </div>
                     </div>
                 </div>
@@ -342,7 +338,7 @@
                             <p class="text-primary m-0 font-weight-bold">Pending Food Restock Requests</p>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("CreateFoodRequest", "Inventory")'">Add</button></p>
+                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddFoodRestockRequest", "Inventory")'">Add</button></p>
                         </div>
                     </div>
                 </div>

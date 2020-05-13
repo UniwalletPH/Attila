@@ -634,7 +634,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name + "|" + item.UnitType,
+                        Text = item.Name + " | " + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }

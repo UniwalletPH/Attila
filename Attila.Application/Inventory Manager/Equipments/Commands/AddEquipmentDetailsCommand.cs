@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Domain.Entities;
 using MediatR;
 using System;
 using System.Threading;
@@ -22,7 +23,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
 
             public async Task<bool> Handle(AddEquipmentDetailsCommand request, CancellationToken cancellationToken)
             {
-                Domain.Entities.Equipment _equipmentDetails = new Domain.Entities.Equipment
+                Equipment _equipmentDetails = new Equipment
                 {
                     Code = request.MyEquipmentsDetailsVM.Code,
                     Name = request.MyEquipmentsDetailsVM.Name,

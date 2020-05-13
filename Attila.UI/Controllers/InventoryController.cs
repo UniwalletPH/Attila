@@ -138,7 +138,7 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> DeliveryDetails(int id)
+        public async Task<IActionResult> ViewDeliveryDetails(int id)
         {
             var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = id });
 
@@ -152,7 +152,6 @@ namespace Attila.UI.Controllers
         {
             return View();
         }
-
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
@@ -215,7 +214,6 @@ namespace Attila.UI.Controllers
             return View(FoodDetailsListVM);
         }
 
-
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> AddFoodInventory(FoodInventoryCVM foodInventoryVM)
@@ -265,7 +263,6 @@ namespace Attila.UI.Controllers
             return View(FoodDetailsListVM);
         }
 
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> UpdateFoodStock(FoodInventoryCVM foodInventoryVM)
@@ -285,120 +282,12 @@ namespace Attila.UI.Controllers
         }
 
 
-        [Authorize(Roles = "Admin,  InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> RequestFoodRestock(int id)
-        {
-            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
-            var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
-
-            var getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            foreach (var item in getFoodDetails)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.Code + " | " + item.Name + " | " + item.Unit
-                });
-            }
-
-            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
-            {
-                ID = _requestDetails.ID,
-
-                FoodRequest = _requestDetails,
-                FoodCollection = _foodCollection,
-                FoodDetailsList = _list,
-            };
-
-            return View(foodDetailsListVM);
-        }
-
-
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpPost]
-        public async Task<IActionResult> RequestFoodRestock(FoodRestockRequestCVM foodRestockRequestVM)
-        {
-            FoodsRestockRequestVM _foodRequestCollection = new FoodsRestockRequestVM
-            {
-                UserID = CurrentUser.ID,
-                Quantity = foodRestockRequestVM.Quantity,
-                FoodDetails = foodRestockRequestVM.FoodDetails
-            };
-
-            var response = await mediator.Send(new AddFoodRequestCollectionCommand
-            {
-
-                FoodRestockID = foodRestockRequestVM.FoodRequest.ID,
-                MyFoodRestockRequestVM = _foodRequestCollection,
-
-            });
-
-            //Send Notif to Admin
-            //await mediator.Send(new AddInventoryNotificationCommand
-            //{
-            //    Message = "New Food Restock Request",
-            //    TargetUserID = -1,
-            //    MethodName = "/Inventory/FoodRestockRequestDetails",
-            //    RequestID = _foodRequestCollection.ID
-            //});
-
-            return Json(response);
-        }
-
-
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> ChangeRequestStatus(int id)
-        {
-            var response = await mediator.Send(new ChangeRequestStatusCommand
-            {
-                ID = id
-
-            });
-
-            await mediator.Send(new AddInventoryNotificationCommand
-            {
-                Message = "New Food Restock Request",
-                TargetUserID = -1,
-                MethodName = "/Inventory/FoodRestockRequestDetails",
-                RequestID = id
-            });
-
-            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
-        }
-
-
-        [Authorize(Roles = "Admin, InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> ChangeEquipmentRequestStatus(int id)
-        {
-            var response = await mediator.Send(new Application.Inventory_Manager.Equipments.Commands.ChangeEquipmentRequestStatusCommand
-            {
-                ID = id
-            });
-
-            await mediator.Send(new AddInventoryNotificationCommand
-            {
-                Message = "New Equipment Restock Request",
-                TargetUserID = -1,
-                MethodName = "/Inventory/EquipmentRestockRequestDetails",
-                RequestID = id
-            });
-
-            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
-        }
-
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
         public IActionResult AddEquipment()
         {
             return View();
         }
-
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
@@ -460,7 +349,6 @@ namespace Attila.UI.Controllers
             return View(equipmentDetailsListVM);
         }
 
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> AddEquipmentInventory(EquipmentInventoryCVM equipmentInventoryVM)
@@ -510,7 +398,6 @@ namespace Attila.UI.Controllers
             return View(equipmentDetailsListVM);
         }
 
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> UpdateEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
@@ -529,6 +416,86 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> AddFoodRestockRequest()
+        {
+            var id = await mediator.Send(new AddFoodRequestCommand { ID = CurrentUser.ID });
+
+            return Redirect("/Inventory/RequestFoodRestock?id=" + id);
+        }
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> RequestFoodRestock(int id)
+        {
+            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
+            var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
+            var _getFoodDetails = await mediator.Send(new GetFoodDetailsQuery());
+
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in _getFoodDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Unit
+                });
+            }
+
+            FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
+            {
+                ID = _requestDetails.ID,
+
+                FoodRequest = _requestDetails,
+                FoodCollection = _foodCollection,
+                FoodDetailsList = _list,
+            };
+
+            return View(foodDetailsListVM);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> RequestFoodRestock(FoodRestockRequestCVM foodRestockRequestVM)
+        {
+            FoodsRestockRequestVM _foodRequestCollection = new FoodsRestockRequestVM
+            {
+                UserID = CurrentUser.ID,
+                Quantity = foodRestockRequestVM.Quantity,
+                FoodDetails = foodRestockRequestVM.FoodDetails
+            };
+
+            var response = await mediator.Send(new AddFoodRequestCollectionCommand
+            {
+                FoodRestockID = foodRestockRequestVM.FoodRequest.ID,
+                MyFoodRestockRequestVM = _foodRequestCollection,
+
+            });
+
+            //Send Notif to Admin
+            //await mediator.Send(new AddInventoryNotificationCommand
+            //{
+            //    Message = "New Food Restock Request",
+            //    TargetUserID = -1,
+            //    MethodName = "/Inventory/FoodRestockRequestDetails",
+            //    RequestID = _foodRequestCollection.ID
+            //});
+
+            return Json(response);
+        }
+
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> AddEquipmentRestockRequest()
+        {
+            var id = await mediator.Send(new AddEquipmentRequestCommand { ID = CurrentUser.ID });
+
+            return Redirect("/Inventory/RequestEquipmentRestock?id=" + id);
+        }
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]
@@ -559,7 +526,6 @@ namespace Attila.UI.Controllers
             return View(equipmentDetailsListVM);
         }
 
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> RequestEquipmentRestock(EquipmentRestockRequestCVM equipmentRestockRequestVM)
@@ -587,29 +553,7 @@ namespace Attila.UI.Controllers
             //});
 
             return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + equipmentRestockRequestVM.EquipmentRequest.ID);
-        }
-
-
-
-        [Authorize(Roles = "Admin,  InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> CreateFoodRequest()
-        {
-
-            var id = await mediator.Send(new AddFoodRequestCommand { ID = CurrentUser.ID });
-
-            return Redirect("/Inventory/RequestFoodRestock?id=" + id);
-        }
-
-
-        [Authorize(Roles = "Admin,  InventoryManager")]
-        [HttpGet]
-        public async Task<IActionResult> CreateEquipmentRequest()
-        {
-            var id = await mediator.Send(new AddEquipmentRequestCommand { ID = CurrentUser.ID });
-
-            return Redirect("/Inventory/RequestEquipmentRestock?id=" + id);
-        }
+        }    
 
 
         [HttpGet]
@@ -624,7 +568,6 @@ namespace Attila.UI.Controllers
                 FoodCollection = _foodCollection
             });
         }
-
 
         [HttpGet]
         public async Task<IActionResult> EquipmentRestockRequestDetails(int id)
@@ -713,7 +656,6 @@ namespace Attila.UI.Controllers
             return View();
         }
 
-
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> RegisterSupplier(SuppliersDetailsVM suppliersDetails)
@@ -736,9 +678,47 @@ namespace Attila.UI.Controllers
         }
 
 
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeRequestStatus(int id)
+        {
+            var response = await mediator.Send(new ChangeRequestStatusCommand
+            {
+                ID = id
+
+            });
+
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Food Restock Request",
+                TargetUserID = -1,
+                MethodName = "/Inventory/FoodRestockRequestDetails",
+                RequestID = id
+            });
+
+            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
+        }
 
 
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEquipmentRequestStatus(int id)
+        {
+            var response = await mediator.Send(new Application.Inventory_Manager.Equipments.Commands.ChangeEquipmentRequestStatusCommand
+            {
+                ID = id
+            });
 
+            await mediator.Send(new AddInventoryNotificationCommand
+            {
+                Message = "New Equipment Restock Request",
+                TargetUserID = -1,
+                MethodName = "/Inventory/EquipmentRestockRequestDetails",
+                RequestID = id
+            });
+
+            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
+        }
 
 
         [Authorize(Roles = "Admin, InventoryManager")]
@@ -756,7 +736,6 @@ namespace Attila.UI.Controllers
                     string s = Convert.ToBase64String(fileBytes);
 
 
-
                     InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
                     {
                         ID = inventoriesDeliveryVM.ID,
@@ -768,18 +747,14 @@ namespace Attila.UI.Controllers
                         MyInventoriesDeliveryVM = _inventory
                     });
 
-
-
                     return Json(response);
                 }
-
             }
             else
             {
                 return Json(false);
             }
         }
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
