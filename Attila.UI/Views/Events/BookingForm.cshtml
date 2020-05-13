@@ -71,8 +71,6 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Theme</strong></label>
-
-
                                                 <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="Event.Theme" required>
                                             </div>
                                         </div>
@@ -82,7 +80,7 @@
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Description</strong></label>
 
-                                                <input type="text" asp-for="Event.Description" placeholder="For Friends and Family" class="form-control" required>
+                                                <input type="text" asp-for="Event.Description" placeholder="Birthday/Wedding/Graduation" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -103,11 +101,7 @@
                                                 <select id="txtType" asp-for="Event.LocationType" class="form-control" required>
                                                     <option value="1">North Area - Min. 50,000PHP</option>
                                                     <option value="2">South Area - Min. 35,000PHP </option>
-
                                                 </select>
-
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -193,10 +187,10 @@
 
                                                 <div class="row align-items-center no-gutters">
                                                     <div class="col mr-2">
-                                                        <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-3"  ><label class="custom-control-label" for="formCheck-3"></label></div>
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <h6 class="mb-0"><strong>I agree to the Terms & Conditions of the management about their services.</strong></h6><span class="text-xs"></span>
+                                                        <div class="custom-control custom-checkbox"><input class="custom-control-input" type="checkbox" id="formCheck-3"  >
+                                                        <label class="custom-control-label" for="formCheck-3">
+                                                            <strong>I agree to the Terms & Conditions of the management about their services indicated below.</strong>
+                                                        </label></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -293,19 +287,9 @@
 
                                         </div>
                                     </li>
-
-
-
-
-
-
                                 </ul>
-
                             </div>
-
-
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -318,7 +302,6 @@
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
 
-
         function OnSuccess(result) {
             window.location.href = "/Events/Index";
         }
@@ -327,9 +310,6 @@
             alert("Failed!");
             window.location = "/Events/BookingForm";
         }
-
-
-
 
     </script>
 }
