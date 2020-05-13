@@ -7,9 +7,9 @@
 @section Scripts{
     <script>
 
-        $(document).on('click', 'tr .see', function (e) {
+        $(document).on('click', 'tr .view-delivery-details', function (e) {
             id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/Details?id=' + id;
+            var url = window.location.href = '/Inventory/DeliveryDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
         });
 
@@ -79,7 +79,7 @@
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
                                 <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
                                 <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
-                                <td><button type="button" class="btn btn-primary border rounded  see">See All</button> </td>
+                                <td><button type="button" class="btn btn-primary border rounded  view-delivery-details">View Details</button> </td>
                             </tr>
                         }
                     </tbody>
