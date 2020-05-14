@@ -20,8 +20,18 @@
         });
 
          $(document).on('click', 'tr .del-food', function (e) {
-            id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/DeleteFoodRequest=' + id;
+             deleteId = $(this).closest('tr').attr('data-id');
+             $.post('/Inventory/DeleteFoodRequest', { id: deleteId })
+             .done(function (result) {
+                                if (result == true) {
+                                    alert("Food request successfully deleted!");
+                                    window.location = "/Inventory/Index";
+                                }
+                                else {
+                                    alert("Failed!");
+                                    window.location = "/Inventory/Index";
+                                }
+                            });
         });
 
         $(document).on('click', 'tr .view-request-equip', function (e) {
@@ -31,9 +41,18 @@
         });
 
         $(document).on('click', 'tr .del-equip', function (e) {
-            id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/DeleteEquipmentRequest=' + id;
-            window.location.href = url.replace('__id__', id);
+            deleteId = $(this).closest('tr').attr('data-id');
+            $.post('/Inventory/DeleteEquipmentRequest', { id: deleteId })
+             .done(function (result) {
+                                if (result == true) {
+                                    alert("Equipment request successfully deleted!");
+                                    window.location = "/Inventory/Index";
+                                }
+                                else {
+                                    alert("Failed!");
+                                    window.location = "/Inventory/Index";
+                                }
+                            });
         });
 
         $(document).on('click', 'tr .view-fr', function (e) {

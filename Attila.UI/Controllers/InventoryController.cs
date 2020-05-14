@@ -526,9 +526,8 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteFoodRequest(int id)
         {
-            var _deleteRequest = await mediator.Send(new DeleteEquipmentRestockRequestCommand { DeleteRequestID = id });
-
-            return Json(_deleteRequest);
+            var _result = await mediator.Send(new DeleteFoodRestockRequestCommand { DeleteRequestID = id });
+            return Json(_result);
         }
 
 
@@ -623,9 +622,8 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteEquipmentRequest(int id)
         {
-            var _deleteRequest = await mediator.Send(new DeleteEquipmentRestockRequestCommand { DeleteRequestID = id });
-
-            return Json(_deleteRequest);
+            var _result = await mediator.Send(new DeleteEquipmentRestockRequestCommand { DeleteRequestID = id });
+            return Json(_result);
         }
 
 
