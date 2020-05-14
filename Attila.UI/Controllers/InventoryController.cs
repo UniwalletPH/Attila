@@ -487,6 +487,16 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteFoodRequest(int id)
+        {
+            var _deleteRequest = await mediator.Send(new DeleteEquipmentRestockRequestCommand { DeleteRequestID = id });
+
+            return Json(_deleteRequest);
+        }
+
+
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]

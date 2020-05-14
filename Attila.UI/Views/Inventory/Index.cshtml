@@ -19,7 +19,7 @@
             window.location.href = url.replace('__id__', id);
         });
 
-        $(document).on('click', 'tr .view-request-eq', function (e) {
+        $(document).on('click', 'tr .view-request-equip', function (e) {
             id = $(this).closest('tr').attr('data-id');
             var url = window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id;
             window.location.href = url.replace('__id__', id);
@@ -245,17 +245,19 @@
                                     <th>Status</th>
                                     <th>Requested by</th>
                                     <th> </th>
+                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.FoodRequestList)
                                 {
-                                    <tr data-id="@item.ID">
-                                        <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
-                                        <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
-                                    </tr>
+                                <tr data-id="@item.ID">
+                                    <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded" onclick="location.href='@Url.Action("DeleteFoodRequest", "Inventory")'"> Delete Request </button>  </td>
+                                </tr>
                                 }
                             </tbody>
                             <tfoot>
@@ -295,19 +297,19 @@
                                     <th>Status</th>
                                     <th>Requested by</th>
                                     <th> </th>
-
+                                    <th> </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.EquipmentRequestList)
                                 {
-                                    <tr data-id="@item.ID">
-                                        <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
-                                        <td> <button type="button" class="btn btn-primary border rounded  view-request-eq"> View Request Details</button>  </td>
-
-                                    </tr>
+                                <tr data-id="@item.ID">
+                                    <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+                                    <td> <button type="button" class="btn btn-primary border rounded  view-request-equip"> View Request Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded" onclick="location.href='@Url.Action("DeleteEquipmentRequest", "Inventory")'"> Delete Request </button>  </td>
+                                </tr>
                                 }
                             </tbody>
                             <tfoot>
