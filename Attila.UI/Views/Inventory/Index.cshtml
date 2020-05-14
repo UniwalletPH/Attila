@@ -367,9 +367,13 @@
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <p class="text-primary m-0 font-weight-bold">Pending Food Restock Requests</p>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddFoodRestockRequest", "Inventory")'">Add</button></p>
-                        </div>
+                        @if (User.IsInRole("InventoryManager"))
+                        {
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddFoodRestockRequest", "Inventory")'">Add</button></p>
+                            </div>
+                        }
+
                     </div>
                 </div>
                 <div class="card-body">
@@ -417,9 +421,12 @@
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                             <p class="text-primary m-0 font-weight-bold">Pending Equipment Restock Requests</p>
                         </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("AddEquipmentRestockRequest", "Inventory")'" type="button">Add</button></p>
-                        </div>
+                        @if (User.IsInRole("InventoryManager"))
+                        {
+                            <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("AddEquipmentRestockRequest", "Inventory")'" type="button">Add</button></p>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="card-body">
