@@ -20,8 +20,20 @@
         });
 
          $(document).on('click', 'tr .del-food', function (e) {
-            id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/DeleteFoodRequest=' + id;
+             deleteId = $(this).closest('tr').attr('data-id');
+             $.post('/Inventory/DeleteFoodRequest', { id: deleteId })
+             .done(function (result) {
+                                if (result == true) {
+                                    alert("Equipment details successfully added!");
+                                    window.location = "/Inventory/Index";
+                                }
+                                else {
+                                    alert("Failed!");
+                                    window.location = "/Inventory/Index";
+                                }
+                            });
+             //var url = window.location.href = '/Inventory/DeleteFoodRequest=' + id;
+             //window.location.href = url.replace('__id__', id);
         });
 
         $(document).on('click', 'tr .view-request-equip', function (e) {
