@@ -2,30 +2,55 @@
 
 @model List<Attila.Application.Notification.Queries.NotifVM>
 
+@if (Model.Count != 0)
+{
+    <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+        <div class="nav-item dropdown no-arrow">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter">@Model.Count.ToString()</span><i class="fas fa-bell fa-fw"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
+                 role="menu">
+                <h6 class="dropdown-header">Notifications</h6>
+                @foreach (var _item in Model.OrderByDescending(_item => _item.Date).Take(10))
+                {
+                    <a class="d-flex align-items-center dropdown-item" href="@_item.Description">
+                        <div class="mr-3">
+                            @*<div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>*@
+                        </div>
+                        <div>
 
-
-
-<li class="nav-item dropdown no-arrow mx-1" role="presentation">
-    <div class="nav-item dropdown no-arrow">
-        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
-        <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
-             role="menu">
-            <h6 class="dropdown-header">Notifications</h6>
-            @foreach (var _item in Model.OrderByDescending(_item => _item.Date).Take(10))
-            {
-                <a class="d-flex align-items-center dropdown-item" href="@_item.Description">
-                    <div class="mr-3">
-                        @*<div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>*@
-                    </div>
-                    <div>
-
-                        <span class="small text-gray-500">@_item.Date </span>
-                        <p >@_item.Message  </p> 
-                    </div>
-                </a>
-            }
-            <a class="text-center dropdown-item small text-gray-500" href="/Notification/Index">Show All Notifications</a>
+                            <span class="small text-gray-500">@_item.Date </span>
+                            <p class="text-uppercase">@_item.Message  </p>
+                        </div>
+                    </a>
+                }
+                <a class="text-center dropdown-item small text-gray-500" href="/Notification/Index">Show All Notifications</a>
+            </div>
         </div>
-    </div>
-</li>
- 
+    </li>
+}
+else
+{
+
+
+    <li class="nav-item dropdown no-arrow mx-1" role="presentation">
+        <div class="nav-item dropdown no-arrow">
+            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="badge badge-danger badge-counter">3+</span><i class="fas fa-bell fa-fw"></i></a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-list dropdown-menu-right animated--grow-in"
+                 role="menu">
+                <h6 class="dropdown-header">Notifications</h6> 
+                
+                    <a class="d-flex align-items-center dropdown-item" href="#">
+                        <div class="mr-3">
+                            @*<div class="bg-success icon-circle"><i class="fas fa-donate text-white"></i></div>*@
+                        </div>
+                        <div>
+
+                            <span class="small text-gray-500">  </span>
+                            <p>No Notification</p>
+                        </div>
+             
+                <a class="text-center dropdown-item small text-gray-500" href="/Notification/Index">Show All Notifications</a>
+            </div>
+        </div>
+    </li>
+}

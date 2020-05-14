@@ -439,7 +439,7 @@ namespace Attila.UI.Controllers
 
             await mediator.Send(new AddEventNotificationCommand
             {
-                Message = "New Event For Approval Recieved",
+                Message = "New Event For Approval",
                 TargetUserID = -1,
                 MethodName = "/Events/Details",
                 RequestID = response

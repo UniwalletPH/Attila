@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Attila.Application.Notification.Queries;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Attila.Application.Admin.Events.Queries;
 
 namespace Attila.UI.Controllers
 {
@@ -33,9 +34,23 @@ namespace Attila.UI.Controllers
         }
 
         [HttpGet]         
-        public IActionResult Index()
+        public async Task<IActionResult>  Index()
         {
-            return View();
+
+
+            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
+            var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
+            var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
+
+            var _forEvent = new EventViewCVM
+            { 
+                IncomingEvent = _incomingEvents,
+                PastEvent = _pastEvents,
+                PendingEvent = _pendingEvents
+            };
+
+
+            return View(_forEvent);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
