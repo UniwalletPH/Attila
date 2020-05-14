@@ -11,6 +11,8 @@ namespace Attila.Application.Inventory_Manager.Equipments.Queries
         public Status Status { get; set; }
         public int UserID { get; set; }
         public int Quantity { get; set; }
+        public decimal EstimatedPrice { get; set; }
+        public decimal TotalEstimatedPrice { get; set; }
 
 
         public User User { get; set; }

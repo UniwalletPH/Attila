@@ -31,6 +31,7 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                     EquipmentID = request.MyEquipmentRestockRequestVM.EquipmentDetails.ID,
                     EquipmentRestockRequestID = request.EquipmentRestockID,
                     Quantity = request.MyEquipmentRestockRequestVM.Quantity,
+                    EstimatedPrice = request.MyEquipmentRestockRequestVM.EstimatedPrice,
                     CreatedOn = DateTime.Now
                 };
 

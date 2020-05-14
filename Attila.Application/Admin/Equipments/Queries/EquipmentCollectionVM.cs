@@ -10,5 +10,7 @@ namespace Attila.Application.Admin.Equipments.Queries
         public int ID { get; set; }
         public Equipment Equipment { get; set; }
         public int Quantity { get; set; }
+        public decimal EstimatedPrice { get; set; }
+        public decimal TotalEstimatedPrice { get; set; }
     }
 }

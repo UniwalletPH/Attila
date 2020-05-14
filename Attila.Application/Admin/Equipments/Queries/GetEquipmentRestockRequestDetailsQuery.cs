@@ -37,8 +37,9 @@ namespace Attila.Application.Admin.Equipments.Queries
                     {
                         ID = item.ID,
                         Equipment = item.Equipment,
-                        Quantity = item.Quantity
-                       
+                        Quantity = item.Quantity,
+                        EstimatedPrice = item.EstimatedPrice,
+                        TotalEstimatedPrice = item.Quantity*item.EstimatedPrice
                     };
 
                     _equipmentRequests.Add(EquipmentCollection);
