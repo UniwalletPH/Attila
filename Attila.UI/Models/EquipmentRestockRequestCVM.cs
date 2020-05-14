@@ -13,7 +13,10 @@ namespace Attila.UI.Models
         public int ID { get; set; }
          
         public int Quantity { get; set; }
-         
+        public decimal EstimatedPrice { get; set; }
+
+        public decimal TotalEstimatedPrice { get; set; }
+
         public DateTime DateTimeRequest { get; set; }
          
         public Status Status { get; set; } 

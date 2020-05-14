@@ -20,101 +20,95 @@
 
         var  id =@Model.EquipmentRequest.ID;
         $(document).on('click', ' #btnSubmit', function (e) {
-
          var url = '@Url.Action("ApproveEquipmentRequest", "Inventory", new { id = "__id__"  })';
          window.location.href = url.replace('__id__', id)
 
         });
 
-
-
-
             $(document).on('click', ' #btnDecline', function (e) {
-
-
                 var url = '@Url.Action("DeclineEquipmentRequest", "Inventory", new { id = "__id__"  })';
                 window.location.href = url.replace('__id__', id)
-
-
             });</script>
+}
 
 
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Equipment Request Details</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold"> Date Requested :   @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
 
-} 
- 
+                    <p class="text-primary m-0 font-weight-bold"> Status :   @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
 
-    <div class="container-fluid"  >
-        <h3 class="text-dark mb-4">Equipment Request Details</h3>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold"> Date Requested :   @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
-
-                        <p class="text-primary m-0 font-weight-bold"> Status :   @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
-
-                        <p class="text-primary m-0 font-weight-bold"> Requested By:   @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                        <p class="text-primary m-0 font-weight-bold">
+                    <p class="text-primary m-0 font-weight-bold"> Requested By:   @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                    <p class="text-primary m-0 font-weight-bold">
                         @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
-                    </div>
                 </div>
             </div>
-            <div class="card-body">
+        </div>
+        <div class="card-body">
 
-                <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Code</th>
-                                <th>Name</th>
-                                <th>Unit</th>
-                                <th>Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.EquipmentCollection)
-                            {
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                </tr>
-
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Code</strong></td>
-                                <td><strong>Name</strong></td>
-                                <td><strong>Unit</strong></td>
-                                <td><strong>Quantity</strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-
-
-                    @{ if (Model.EquipmentRequest.Status.ToString() == "ForApproval")
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Unit</th>
+                            <th>Quantity</th>
+                            <th>Estimated Price Per Unit</th>
+                            <th>Total Estimated Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.EquipmentCollection)
                         {
-                            if (User.IsInRole("Admin"))
-                            {
-                                <text>
-                                    <button class="btn btn-primary" type="button" id="btnSubmit" >Approve</button> 
-                                    <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
-                                </text>
-                            }
-                            @*else if (User.IsInRole("InventoryManager"))
+                            <tr>
+                                <td> @Html.DisplayFor(modelItem => item.Equipment.Code)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
+                                <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
+                            </tr>
+
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Code</strong></td>
+                            <td><strong>Name</strong></td>
+                            <td><strong>Unit</strong></td>
+                            <td><strong>Quantity</strong></td>
+                            <td><strong>Estimated Price Per Unit</strong></td>
+                            <td><strong>Total Estimated Price</strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+
+                @{ if (Model.EquipmentRequest.Status.ToString() == "ForApproval")
+                    {
+                        if (User.IsInRole("Admin"))
+                        {
+                            <text>
+                                <button class="btn btn-primary" type="button" id="btnSubmit">Approve</button>
+                                <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
+                            </text>
+                        }
+                        @*else if (User.IsInRole("InventoryManager"))
                             {
                                 <text>
                                     <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
                                 </text>
                             }*@
-                        }
                     }
-                </div>
-
+                }
             </div>
         </div>
     </div>
+</div>

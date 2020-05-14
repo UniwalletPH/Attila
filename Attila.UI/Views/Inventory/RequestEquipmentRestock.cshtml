@@ -25,16 +25,23 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="supplier"><strong>Equipment</strong></label>
-                                                    @Html.DropDownListFor(m => m.EquipmentDetails.ID, Model.EquipmentDetailsList, "----SELECT ITEM----", new { @class = "form-control", @id="dropdown_equipment" })
+                                                    @Html.DropDownListFor(m => m.EquipmentDetails.ID, Model.EquipmentDetailsList, "----SELECT ITEM----", new { @class = "form-control", @id = "dropdown_equipment" })
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-row">
                                             <div class="col">
                                                 <div class="form-group">
-                                                    <label for="first_name"><strong>Quantity</strong></label>
+                                                    <label><strong>Quantity</strong></label>
                                                     <input type="number" asp-for="Quantity" min=1 placeholder="" class="form-control" required>
-
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label><strong>Estimated Price Per Equipment Unit</strong></label>
+                                                    <input type="number" asp-for="EstimatedPrice" placeholder="00.00" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -51,19 +58,16 @@
 </div>
 
 @{
-
     if (Model.EquipmentCollection != null)
     {
-        <div class="container-fluid">           
+        <div class="container-fluid">
             <div class="card shadow">
                 <div class="card-header py-3">
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                            <p class="text-primary m-0 font-weight-bold"> Date Requested :   @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
-
-                            <p class="text-primary m-0 font-weight-bold"> Status :   @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
-
-                            <p class="text-primary m-0 font-weight-bold"> Requested By:   @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
+                            <p class="text-primary m-0 font-weight-bold"> Date Requested: @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
+                            <p class="text-primary m-0 font-weight-bold"> Status: @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
+                            <p class="text-primary m-0 font-weight-bold"> Requested By: @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
                             <p class="text-primary m-0 font-weight-bold">
@@ -80,6 +84,8 @@
                                     <th>Name</th>
                                     <th>Unit</th>
                                     <th>Quantity</th>
+                                    <th>Estimated Price Per Unit</th>
+                                    <th>Estimated Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -90,6 +96,8 @@
                                         <td> @Html.DisplayFor(modelItem => item.Equipment.Name)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Equipment.UnitType)</td>
                                         <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
                                     </tr>
 
                                 }
@@ -100,6 +108,8 @@
                                     <td><strong>Name</strong></td>
                                     <td><strong>Unit</strong></td>
                                     <td><strong>Quantity</strong></td>
+                                    <td><strong>Estimated Price Per Unit</strong></td>
+                                    <td><strong>Estimated Total Price</strong></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -119,18 +129,17 @@
                                     </text>
                                 }
                                 @*else if (User.IsInRole("InventoryManager"))
-                                {
-                                    <text>
-                                        <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
-                                    </text>
-                                }*@
+                                    {
+                                        <text>
+                                            <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
+                                        </text>
+                                    }*@
                             }
                         }
                     </div>
                 </div>
             </div>
         </div>
-
     }
 }
 
@@ -168,7 +177,7 @@
 
          $('#dropdown_equipment').change(function (){
                   var drpValue = $('#dropdown_equipment').val();
-            if (drpValue == "Add New Equipment") { 
+            if (drpValue == "Add New Equipment") {
 
                 window.location.href = "/Inventory/AddEquipment";
             }
