@@ -33,13 +33,16 @@
 
                                                     else if (User.IsInRole("Coordinator"))
                                                     {
-                                                        <label>Status:  </label>
-                                                        <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
+
+
+
+                                                        <label>Status:<input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly></label>
+                                                 
 
                                                         if (Model.EventDetails.EventDate <= DateTime.Now)
                                                         {
-                                                            <text>
-                                                                <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Change Status To Completed</button>
+                                                            <text> 
+                                                                <button class="btn btn-primary btn-sm"  id="btnComplete" type="button">Change Status To Completed</button>
                                                             </text>
                                                         }
                                                     }

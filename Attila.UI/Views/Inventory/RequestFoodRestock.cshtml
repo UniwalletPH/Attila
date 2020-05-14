@@ -104,8 +104,10 @@
 
                         @{
                             if (Model.FoodRequest.Status.ToString() == "Processing")
-                            {
+                            {  if (User.IsInRole("InventoryManager"))
+                                {
                                 <div class="form-group"><button id="btnSubmit" class="btn btn-primary">Submit Request</button></div>
+                                }
                             }
                             else if (Model.FoodRequest.Status.ToString() == "ForApproval")
                             {
@@ -116,12 +118,7 @@
                                         <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
                                     </text>
                                 }
-                                else if (User.IsInRole("InventoryManager"))
-                                {
-                                    <text>
-                                        <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
-                                    </text>
-                                }
+                                
                             }
                         }
                     </div>

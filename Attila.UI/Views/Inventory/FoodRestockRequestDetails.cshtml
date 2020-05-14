@@ -49,8 +49,28 @@
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
                     <p class="text-primary m-0 font-weight-bold">
+
+                        @{ if (Model.FoodRequest.Status.ToString() == "ForApproval")
+                            {
+                                if (User.IsInRole("Admin"))
+                                {
+                                    <text>
+                                        <button class="btn btn-primary" type="button" id="btnSubmit">Approve</button>
+                                        <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
+                                    </text>
+                                }
+
+                            }
+                            @*else if (User.IsInRole("InventoryManager"))
+                            {
+                                <text>
+                                    <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
+                                </text>
+                            }*@
+                        }
+
                         @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
-                </div>
+</div>
             </div>
         </div>
         <div class="card-body">
@@ -88,23 +108,7 @@
                 </table>
 
 
-                @{ if (Model.FoodRequest.Status.ToString() == "ForApproval")
-                    {
-                        if (User.IsInRole("Admin"))
-                        {
-                            <text>
-                                <button class="btn btn-primary" type="button" id="btnSubmit">Approve</button>
-                                <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
-                            </text>
-                        }
-                        else if (User.IsInRole("InventoryManager"))
-                        {
-                            <text>
-                                <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
-                            </text>
-                        }
-                    }
-                }
+              
             </div>
 
         </div>
