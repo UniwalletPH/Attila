@@ -37,7 +37,9 @@ namespace Attila.Application.Admin.Foods.Queries
                     {
                         ID = item.ID,
                         Food = item.Food,
-                        Quantity = item.Quantity
+                        Quantity = item.Quantity,
+                        EstimatedPrice = item.EstimatedPrice,
+                        TotalEstimatedPrice = item.Quantity*item.EstimatedPrice
                     };
 
                     _foodCollectionOfRequest.Add(foodReq);

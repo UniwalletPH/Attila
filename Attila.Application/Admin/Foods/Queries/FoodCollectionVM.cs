@@ -13,5 +13,8 @@ namespace Attila.Application.Admin.Foods.Queries
 
         public int Quantity { get; set; }
 
+        public decimal EstimatedPrice { get; set; }
+
+        public decimal TotalEstimatedPrice { get; set; }
     }
 }
