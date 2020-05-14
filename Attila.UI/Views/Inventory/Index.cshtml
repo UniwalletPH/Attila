@@ -19,9 +19,20 @@
             window.location.href = url.replace('__id__', id);
         });
 
+         $(document).on('click', 'tr .del-food', function (e) {
+            id = $(this).closest('tr').attr('data-id');
+            var url = window.location.href = '/Inventory/DeleteFoodRequest=' + id;
+        });
+
         $(document).on('click', 'tr .view-request-equip', function (e) {
             id = $(this).closest('tr').attr('data-id');
             var url = window.location.href = '/Inventory/RequestEquipmentRestock?id=' + id;
+            window.location.href = url.replace('__id__', id);
+        });
+
+        $(document).on('click', 'tr .del-equip', function (e) {
+            id = $(this).closest('tr').attr('data-id');
+            var url = window.location.href = '/Inventory/DeleteEquipmentRequest=' + id;
             window.location.href = url.replace('__id__', id);
         });
 
@@ -35,8 +46,6 @@
             id = $(this).closest('tr').attr('data-id');
             var url = window.location.href = '/Inventory/EquipmentRestockRequestDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
-
-
         });
 
     </script>
@@ -256,7 +265,7 @@
                                     <td> @Html.DisplayFor(modelItem => item.Status)</td>
                                     <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded" onclick="location.href='@Url.Action("DeleteFoodRequest", "Inventory")'"> Delete Request </button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded  del-food"> Delete Request </button>  </td>
                                 </tr>
                                 }
                             </tbody>
@@ -308,7 +317,7 @@
                                     <td> @Html.DisplayFor(modelItem => item.Status)</td>
                                     <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                     <td> <button type="button" class="btn btn-primary border rounded  view-request-equip"> View Request Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded" onclick="location.href='@Url.Action("DeleteEquipmentRequest", "Inventory")'"> Delete Request </button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded   del-equip"> Delete Request </button>  </td>
                                 </tr>
                                 }
                             </tbody>
