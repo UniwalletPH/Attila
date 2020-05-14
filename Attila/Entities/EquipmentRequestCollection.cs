@@ -16,6 +16,8 @@ namespace Attila.Domain.Entities
 
         public int Quantity { get; set; }
 
+        public decimal EstimatedPrice { get; set; }
+
         public Equipment Equipment { get; set; }
 
         public EquipmentRestockRequest EquipmentRestockRequest { get; set; }
