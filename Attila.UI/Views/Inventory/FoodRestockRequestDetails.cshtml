@@ -7,33 +7,19 @@
 
 @model FoodRestockRequestDetailsCVM
 @section Scripts{
-
-
-
     <script>
-
              var  id =@Model.FoodRequest.ID;
-        $(document).on('click', ' #btnSubmit', function (e) {
-
-
+             $(document).on('click', ' #btnSubmit', function (e) {
                 var url = '@Url.Action("ApproveFoodRequest", "Inventory", new { id = "__id__"  })';
                 window.location.href = url.replace('__id__', id)
-
 
             });
 
             $(document).on('click', ' #btnDecline', function (e) {
-
-
                 var url = '@Url.Action("DeclineFoodRequest", "Inventory", new { id = "__id__"  })';
                 window.location.href = url.replace('__id__', id)
-
-
             });</script>
-
-
 }
-
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Food Restock Request Details</h3>
@@ -62,15 +48,15 @@
 
                             }
                             @*else if (User.IsInRole("InventoryManager"))
-                            {
-                                <text>
-                                    <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
-                                </text>
-                            }*@
+                                {
+                                    <text>
+                                        <button type="button" id="btnEdit" class="btn btn-primary"> Edit</button>
+                                    </text>
+                                }*@
                         }
 
                         @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
-</div>
+                </div>
             </div>
         </div>
         <div class="card-body">
@@ -83,18 +69,21 @@
                             <th>Name</th>
                             <th>Unit</th>
                             <th>Quantity</th>
+                            <th>Estimated Price Per Unit</th>
+                            <th>Total Estimated Price</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.FoodCollection)
                         {
-                            <tr>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                            </tr>
-
+                        <tr>
+                            <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
+                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
+                            <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
+                        </tr>
                         }
                     </tbody>
                     <tfoot>
@@ -103,14 +92,12 @@
                             <td><strong>Name</strong></td>
                             <td><strong>Unit</strong></td>
                             <td><strong>Quantity</strong></td>
+                            <td><strong>Estimated Price Per Unit</strong></td>
+                            <td><strong>Total Estimated Price</strong></td>
                         </tr>
                     </tfoot>
                 </table>
-
-
-              
             </div>
-
         </div>
     </div>
 </div>

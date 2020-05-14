@@ -14,6 +14,8 @@ namespace Attila.UI.Models
 
         public Food FoodDetails { get; set; }
         public int Quantity { get; set; }
+        public decimal EstimatedPrice { get; set; }
+        public decimal TotalEstimatedPrice { get; set; }
         public FoodRequestVM FoodRequest { get; set; }
         public List<FoodCollectionVM> FoodCollection { get; set; }
         public List<SelectListItem> FoodDetailsList { get; set; }
