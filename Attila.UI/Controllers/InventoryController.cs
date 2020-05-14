@@ -487,6 +487,19 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> FoodRestockRequestDetails(int id)
+        {
+            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
+            var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
+
+            return View(new FoodRestockRequestDetailsCVM
+            {
+                FoodRequest = _requestDetails,
+                FoodCollection = _foodCollection
+            });
+        }
+
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpPost]
         public async Task<IActionResult> DeleteFoodRequest(int id)
@@ -495,7 +508,6 @@ namespace Attila.UI.Controllers
 
             return Json(_deleteRequest);
         }
-
 
 
         [Authorize(Roles = "Admin,  InventoryManager")]
@@ -563,20 +575,6 @@ namespace Attila.UI.Controllers
             //});
 
             return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + equipmentRestockRequestVM.EquipmentRequest.ID);
-        }    
-
-
-        [HttpGet]
-        public async Task<IActionResult> FoodRestockRequestDetails(int id)
-        {
-            var _requestDetails = await mediator.Send(new GetFoodRequestDetailsQuery { ID = id });
-            var _foodCollection = await mediator.Send(new GetFoodRestockRequestDetailsQuery { RequestID = id });
-
-            return View(new FoodRestockRequestDetailsCVM
-            {
-                FoodRequest = _requestDetails,
-                FoodCollection = _foodCollection
-            });
         }
 
         [HttpGet]
@@ -593,6 +591,16 @@ namespace Attila.UI.Controllers
 
             return View(_details);
         }
+
+        [Authorize(Roles = "Admin,  InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> DeleteEquipmentRequest(int id)
+        {
+            var _deleteRequest = await mediator.Send(new DeleteEquipmentRestockRequestCommand { DeleteRequestID = id });
+
+            return Json(_deleteRequest);
+        }
+
 
 
         [HttpGet]
