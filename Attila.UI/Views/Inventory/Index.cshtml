@@ -23,15 +23,15 @@
              deleteId = $(this).closest('tr').attr('data-id');
              $.post('/Inventory/DeleteFoodRequest', { id: deleteId })
              .done(function (result) {
-                                if (result == true) {
-                                    alert("Food request successfully deleted!");
-                                    window.location = "/Inventory/Index";
-                                }
-                                else {
-                                    alert("Failed!");
-                                    window.location = "/Inventory/Index";
-                                }
-                            });
+                  if (result == true) {
+                      alert("Food request successfully deleted!");
+                      window.location = "/Inventory/Index";
+                  }
+                  else {
+                      alert("Failed!");
+                      window.location = "/Inventory/Index";
+                  }
+             });
         });
 
         $(document).on('click', 'tr .view-request-equip', function (e) {
@@ -293,8 +293,8 @@
                                     <td><strong>Date of Request</strong></td>
                                     <td><strong>Status</strong></td>
                                     <td><strong>Requested by</strong></td>
-                                    <td><strong> </strong></td>
-
+                                    <td>  </td>
+                                    <td>  </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -345,8 +345,8 @@
                                     <td><strong>Date of Request</strong></td>
                                     <td><strong>Status</strong></td>
                                     <td><strong>Requested by</strong></td>
-                                    <td><strong></strong></td>
-
+                                    <td>  </td>
+                                    <td>  </td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -418,7 +418,7 @@
                             <p class="text-primary m-0 font-weight-bold">Pending Equipment Restock Requests</p>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("CreateEquipmentRequest", "Inventory")'" type="button">Add</button></p>
+                            <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" onclick="location.href='@Url.Action("AddEquipmentRestockRequest", "Inventory")'" type="button">Add</button></p>
                         </div>
                     </div>
                 </div>

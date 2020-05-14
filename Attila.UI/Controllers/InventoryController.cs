@@ -487,6 +487,7 @@ namespace Attila.UI.Controllers
             {
                 UserID = CurrentUser.ID,
                 Quantity = foodRestockRequestVM.Quantity,
+                EstimatedPrice = foodRestockRequestVM.EstimatedPrice,
                 FoodDetails = foodRestockRequestVM.FoodDetails
             };
 
@@ -494,7 +495,6 @@ namespace Attila.UI.Controllers
             {
                 FoodRestockID = foodRestockRequestVM.FoodRequest.ID,
                 MyFoodRestockRequestVM = _foodRequestCollection,
-
             });
 
             //Send Notif to Admin
@@ -566,7 +566,6 @@ namespace Attila.UI.Controllers
             EquipmentRestockRequestCVM equipmentDetailsListVM = new EquipmentRestockRequestCVM
             {
                 EquipmentDetailsList = _list,
-
                 EquipmentRequest = _requestDetails,
                 EquipmentCollection = _equipmentRequestCollection
             };
@@ -582,6 +581,7 @@ namespace Attila.UI.Controllers
             {
                 UserID = CurrentUser.ID,
                 Quantity = equipmentRestockRequestVM.Quantity,
+                EstimatedPrice = equipmentRestockRequestVM.EstimatedPrice,
                 EquipmentDetails = equipmentRestockRequestVM.EquipmentDetails
             };
 
