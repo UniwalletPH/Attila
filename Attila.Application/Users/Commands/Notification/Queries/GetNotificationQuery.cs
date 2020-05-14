@@ -29,7 +29,10 @@ namespace Attila.Application.Notification.Queries
                     .Select(a => new NotifVM
                     {
                         Description = a.Description,
-                        TargetUserID = a.TargetUserID
+                        TargetUserID = a.TargetUserID,
+                        Message = a.Messages,
+                        Date = a.CreatedOn
+                        
 
                     }).ToListAsync();
 

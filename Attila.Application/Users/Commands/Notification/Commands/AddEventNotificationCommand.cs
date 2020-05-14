@@ -34,10 +34,11 @@ namespace Attila.Application.Notification.Commands
                 var _notif = new Notifications 
                 {
                     TargetUserID = request.TargetUserID,
-                    Description = request.Message + ", <a href =\"" + request.MethodName+ "?EventID=" + request.RequestID+"\"> CLICK HERE </a>",
+                    Description =  request.MethodName+ "?EventID=" + request.RequestID ,
+                    Messages = request.Message,
                     CreatedOn = DateTime.Now
                 };
-
+              
                 dbContext.Notifications.Add(_notif);
                 await dbContext.SaveChangesAsync();
 

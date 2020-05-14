@@ -26,7 +26,7 @@ namespace Attila.UI.Controllers
                 {
                     return null;
                 }
-
+               
                 return User.Identity.GetUserData();
             }
         }

@@ -33,8 +33,9 @@ namespace Attila.Application.Notification.Commands
             {
                 var _notif = new Notifications 
                 {
-                    TargetUserID = request.TargetUserID,
-                    Description = request.Message + ", <a href =\"" + request.MethodName+ "?id=" + request.RequestID+"\"> CLICK HERE </a>",
+                    TargetUserID = request.TargetUserID, 
+                    Description = request.MethodName + "?id=" + request.RequestID,
+                    Messages = request.Message,
                     CreatedOn = DateTime.Now
                 };
 
