@@ -9,7 +9,7 @@
 
         $(document).on('click', 'tr .view-delivery-details', function (e) {
             id = $(this).closest('tr').attr('data-id');
-            var url = window.location.href = '/Inventory/ViewDeliveryDetails?id=' + id;
+            var url = window.location.href = '/Inventory/DeliveryDetails?id=' + id;
             window.location.href = url.replace('__id__', id);
         });
 

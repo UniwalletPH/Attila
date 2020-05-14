@@ -20,7 +20,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="food_details"><strong>Food Details</strong></label>
-                                            @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodDetailsList, "--SELECT FOOD--", new { @class = "form-control" , @id="dropdown_food" })
                                         </div>
                                     </div>
                                 </div>
@@ -28,7 +28,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="delivery_details"><strong>Delivery Details</strong></label>
-                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" , @id="dropdown_delivery" })
 
 
 
@@ -87,6 +87,22 @@
             console.log(e);
             alert("failed!");
         }
+        
+        $('#dropdown_food').change(function (){
+                  var drpValue = $('#dropdown_food').val();
+            if (drpValue == "Add New Food") { 
+
+                window.location.href = "/Inventory/AddFood";
+            }
+        });
+        
+        $('#dropdown_delivery').change(function (){
+                  var drpValue = $('#dropdown_delivery').val();
+            if (drpValue == "Add New Delivery") { 
+
+                window.location.href = "/Inventory/AddInventoryDelivery";
+            }
+            });
 
     </script>
 

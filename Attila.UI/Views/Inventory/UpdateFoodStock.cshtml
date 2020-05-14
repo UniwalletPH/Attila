@@ -31,7 +31,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="address"><strong>Food</strong></label>
-                                                @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodStockDetailsList, "--SELECT FOOD--", new { @class = "form-control" })
+                                                @Html.DropDownListFor(m => m.FoodDetailsID, Model.FoodStockDetailsList, "--SELECT FOOD--", new { @class = "form-control", @id="dropdown_food" })
                                             </div>
                                         </div>
                                     </div>
@@ -73,7 +73,13 @@
             
              window.location.href = '/Inventory/Index';
         };
+            $('#dropdown_food').change(function (){
+                  var drpValue = $('#dropdown_food').val();
+            if (drpValue == "Add New Food") { 
 
+                window.location.href = "/Inventory/AddFood";
+            }
+            });
              
         </script>
 

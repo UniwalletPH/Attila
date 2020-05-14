@@ -77,7 +77,11 @@ namespace Attila.UI.Controllers
                     Text = item.Name
                 });
             }
-
+            _supplierList.Add(new SelectListItem
+            {
+                Value = "Add New Supplier",
+                Text = "Add New Supplier"
+            });
             InventoryDeliveryCVM InventoryDeliveryListVM = new InventoryDeliveryCVM
             {
                 SupplierDetailsList = _supplierList
@@ -138,7 +142,7 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> ViewDeliveryDetails(int id)
+        public async Task<IActionResult> DeliveryDetails(int id)
         {
             var _inventoryDelivery = await mediator.Send(new SearchDeliveryByIdQuery { DeliveryID = id });
 
@@ -192,6 +196,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
+            _list.Add(new SelectListItem { Text = "Add New Food", Value = "Add New Food" });
             var getFoodRestock = await mediator.Send(new GetFoodDeliveryQuery());
             List<SelectListItem> _list2 = new List<SelectListItem>();
 
@@ -204,6 +209,7 @@ namespace Attila.UI.Controllers
 
                 });
             }
+            _list2.Add(new SelectListItem { Text = "Add New Delivery", Value = "Add New Delivery" });
 
             FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
             {
@@ -254,6 +260,8 @@ namespace Attila.UI.Controllers
                     Text = item.FoodDetailsVM.Code + " | " + item.FoodDetailsVM.Name + " | Quantity: " + item.Quantity
                 });
             }
+
+            _list.Add(new SelectListItem { Text = "Add New Food", Value = "Add New Food" });
 
             FoodInventoryCVM FoodDetailsListVM = new FoodInventoryCVM
             {
@@ -327,7 +335,11 @@ namespace Attila.UI.Controllers
                     Text = item.Code + " | " + item.Name + " | " + item.Description
                 });
             }
-
+            _list.Add(new SelectListItem
+            {
+                Value = "Add New Equipment",
+                Text = "Add New Equipment"
+            });
             var getEquipmentRestock = await mediator.Send(new GetEquipmentDeliveryQuery());
             List<SelectListItem> _list2 = new List<SelectListItem>();
 
@@ -340,6 +352,11 @@ namespace Attila.UI.Controllers
                 });
             }
 
+            _list2.Add(new SelectListItem
+            {
+                Value = "Add New Delivery",
+                Text = "Add New Delivery"
+            });
             EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentDetailsList = _list,
@@ -390,6 +407,7 @@ namespace Attila.UI.Controllers
                 });
             }
 
+            _list.Add(new SelectListItem { Text = "Add New Equipment", Value = "Add New Equipment" });
             EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentStockDetailsList = _list,
@@ -444,7 +462,11 @@ namespace Attila.UI.Controllers
                     Text = item.Code + " | " + item.Name + " | " + item.Unit
                 });
             }
-
+            _list.Add(new SelectListItem
+            {
+                Value = "Add New Food",
+                Text = "Add New Food"
+            });
             FoodRestockRequestCVM foodDetailsListVM = new FoodRestockRequestCVM
             {
                 ID = _requestDetails.ID,
@@ -534,6 +556,11 @@ namespace Attila.UI.Controllers
                     Text = item.Code + " | " + item.Name + " | " + item.UnitType
                 });
             }
+            _list.Add(new SelectListItem
+            {
+                Value = "Add New Equipment",
+                Text = "Add New Equipment"
+            });
             var _requestDetails = await mediator.Send(new GetEquipmentRequestDetailsQuery { ID = id });
             var _equipmentRequestCollection = await mediator.Send(new GetEquipmentRestockRequestDetailsQuery { RequestID = id });
 

@@ -37,7 +37,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="supplier"><strong>Supplier</strong></label>
-                                            @Html.DropDownListFor(m => m.SupplierDetailsID, Model.SupplierDetailsList, "-- SELECT SUPPLIER--", new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.SupplierDetailsID, Model.SupplierDetailsList, "-- SELECT SUPPLIER--", new { @class = "form-control", @id= "dropdown_supplier" })
 
                                         </div>
                                     </div>
@@ -91,10 +91,10 @@
 
         }
    function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
+        if (input.files && input.files[0]) {
+             var reader = new FileReader();
     
-    reader.onload = function(e) {
+         reader.onload = function(e) {
       $('#image').attr('src', e.target.result);
     }
     
@@ -105,6 +105,14 @@
 $("#imgInp").change(function() {
   readURL(this);
 });
+        
+        $('#dropdown_supplier').change(function (){
+                  var drpValue = $('#dropdown_supplier').val();
+            if (drpValue == "Add New Supplier") { 
+
+                window.location.href = "/Inventory/RegisterSupplier";
+            }
+            });
    
     </script>
 } 

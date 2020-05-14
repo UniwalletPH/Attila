@@ -31,7 +31,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="address"><strong>Equipment</strong></label>
-                                                @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentStockDetailsList, "--SELECT Equipment--", new { @class = "form-control" })
+                                                @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentStockDetailsList, "--SELECT Equipment--", new { @class = "form-control", @id="dropdown_equipment" })
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +72,15 @@
             alert("failed!");
 
              window.location.href = '/Inventory/Index';
-        };
+            };
+            
+            $('#dropdown_equipment').change(function (){
+                  var drpValue = $('#dropdown_equipment').val();
+            if (drpValue == "Add New Equipment") { 
+
+                window.location.href = "/Inventory/AddEquipment";
+            }
+            });
 
 
         </script>

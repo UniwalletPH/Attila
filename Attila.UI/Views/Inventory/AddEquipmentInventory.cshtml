@@ -23,7 +23,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="eqpdetails"><strong>Food Details</strong></label>
-                                            @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control", @id="dropdown_equipment" })
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="delivery_details"><strong>Delivery Details</strong></label>
-                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.EquipmentDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" })
+                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.EquipmentDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" , @id="dropdown_delivery"})
 
 
 
@@ -92,6 +92,22 @@
             console.log(e);
             alert("failed!");
         }
+         $('#dropdown_equipment').change(function (){
+                  var drpValue = $('#dropdown_equipment').val();
+            if (drpValue == "Add New Equipment") { 
+
+                window.location.href = "/Inventory/AddEquipment";
+            }
+        });
+        
+        $('#dropdown_delivery').change(function (){
+                  var drpValue = $('#dropdown_delivery').val();
+            if (drpValue == "Add New Delivery") { 
+
+                window.location.href = "/Inventory/AddInventoryDelivery";
+            }
+            });
+
 
     </script>
 

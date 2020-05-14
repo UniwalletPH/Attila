@@ -85,6 +85,8 @@ namespace Attila.UI.Controllers
                 });
             }
 
+            _clientlist.Add(new SelectListItem { Text = "Add New Client", Value = "Add New Client" });
+
             var _addEventList = new AddEventCVM();
             _addEventList.PackageList = _list;
             _addEventList.ClientList = _clientlist;

@@ -28,7 +28,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="address"><strong>Client</strong></label>
-                                                @Html.DropDownListFor(m => m.Event.EventClientID, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" })
+                                                @Html.DropDownListFor(m => m.Event.EventClientID, Model.ClientList, "--SELECT CLIENT--", new { @class = "form-control" , @id="dropdown_client"})
                                             </div>
                                         </div>
                                     </div>
@@ -310,7 +310,15 @@
             alert("Failed!");
             window.location = "/Events/BookingForm";
         }
+        $('#dropdown_client').change(function (){
+                  var drpValue = $('#dropdown_client').val();
+            if (drpValue == "Add New Client") { 
 
+                window.location.href = "/Clients/Register";
+            }
+        });
+        
+      
     </script>
 }
 
