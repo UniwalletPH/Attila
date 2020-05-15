@@ -11,6 +11,7 @@ namespace Attila.Domain.Entities
         public int InventoryManagerID { get; set; }
         public Status Status { get; set; }
         public DateTime DateTimeRequest { get; set; }
+        public string Remarks { get; set; }
 
         public User InventoryManager { get; set; }
     }

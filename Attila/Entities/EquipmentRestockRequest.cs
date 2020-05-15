@@ -12,6 +12,7 @@ namespace Attila.Domain.Entities
 
         public DateTime DateTimeRequest { get; set; }
         public Status Status { get; set; }
+        public string Remarks { get; set; }
 
         public User InventoryManager { get; set; }
     }
