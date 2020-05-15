@@ -37,6 +37,7 @@ namespace Atilla.Application.Admin.Equipments.Commands
                     var _toReturn = new EquipmentRequestVM
                     { 
                         ID = _requestToDecline.ID,
+                        Remarks = _requestToDecline.Remarks,
                         InventoryManager = _requestToDecline.InventoryManager
                     };
 

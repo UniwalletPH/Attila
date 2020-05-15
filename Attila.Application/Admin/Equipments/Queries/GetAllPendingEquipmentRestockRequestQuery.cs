@@ -24,7 +24,7 @@ namespace Attila.Application.Admin.Equipments.Queries
 
                 var _pendingRequest = dbContext.EquipmentRestockRequests
                     .Include(a => a.InventoryManager)
-                    .Where(a => a.Status == Status.ForApproval || a.Status == Status.Processing);
+                    .Where(a => a.Status == Status.ForApproval || a.Status == Status.Processing || a.Status == Status.Declined);
 
                 foreach (var item in _pendingRequest)
                 {
@@ -33,7 +33,8 @@ namespace Attila.Application.Admin.Equipments.Queries
                         ID = item.ID,
                         DateTimeRequest = item.DateTimeRequest,
                         Status = item.Status,
-                        InventoryManager = item.InventoryManager
+                        InventoryManager = item.InventoryManager,
+                        Remarks = item.Remarks
                     };
 
                     _listPendingRequest.Add(EquipmentRestockRequestList);
