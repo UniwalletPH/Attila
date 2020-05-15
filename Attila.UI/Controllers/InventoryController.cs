@@ -246,7 +246,7 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> UpdateFoodStock()
+        public async Task<IActionResult> CheckOutFoodStock()
         {
             var getFoodDetails = await mediator.Send(new GetFoodStockDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
@@ -272,7 +272,7 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> UpdateFoodStock(FoodInventoryCVM foodInventoryVM)
+        public async Task<IActionResult> CheckOutFoodStock(FoodInventoryCVM foodInventoryVM)
         {
             FoodInventoryVM _updateFoodStock = new FoodInventoryVM
             {
@@ -280,7 +280,7 @@ namespace Attila.UI.Controllers
                 Quantity = foodInventoryVM.Quantity
             };
 
-            var response = await mediator.Send(new UpdateFoodStockCommand
+            var response = await mediator.Send(new CheckOutFoodStockCommand
             {
                 MyFoodInventoryVM = _updateFoodStock
             });
@@ -389,10 +389,9 @@ namespace Attila.UI.Controllers
             return Json(response);
         }
 
-
-        [Authorize(Roles = "Admin, InventoryManager")]
+        [Authorize(Roles = "InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> UpdateEquipmentStock()
+        public async Task<IActionResult> CheckInEquipmentStock()
         {
             var getEquipmentDetails = await mediator.Send(new GetEquipmentStockDetailsQuery());
             List<SelectListItem> _list = new List<SelectListItem>();
@@ -417,22 +416,64 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> UpdateEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
+        public async Task<IActionResult> CheckInEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
         {
-            EquipmentsInventoryVM _updateEquipmentStock = new EquipmentsInventoryVM
+            EquipmentsInventoryVM _checkInEquipment = new EquipmentsInventoryVM
             {
                 EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
                 Quantity = equipmentInventoryVM.Quantity
             };
 
-            var response = await mediator.Send(new UpdateEquipmentStockCommand
+            var response = await mediator.Send(new CheckInEquipmentStockCommand
             {
-                MyEquipmentInventoryVM = _updateEquipmentStock
+                MyEquipmentInventoryVM = _checkInEquipment
             });
 
             return Json(response);
         }
 
+        [Authorize(Roles = "InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> CheckOutEquipmentStock()
+        {
+            var getEquipmentDetails = await mediator.Send(new GetEquipmentStockDetailsQuery());
+            List<SelectListItem> _list = new List<SelectListItem>();
+
+            foreach (var item in getEquipmentDetails)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.EquipmentDetailsVM.Code + " | " + item.EquipmentDetailsVM.Name + " | " + item.EquipmentDetailsVM.Description + " | Quantity: " + item.Quantity
+                });
+            }
+
+            _list.Add(new SelectListItem { Text = "Add New Equipment", Value = "Add New Equipment" });
+            EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
+            {
+                EquipmentStockDetailsList = _list,
+            };
+
+            return View(equipmentDetailsListVM);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpPost]
+        public async Task<IActionResult> CheckOutEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
+        {
+            EquipmentsInventoryVM _checkOutEquipment = new EquipmentsInventoryVM
+            {
+                EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
+                Quantity = equipmentInventoryVM.Quantity
+            };
+
+            var response = await mediator.Send(new CheckOutEquipmentStockCommand
+            {
+                MyEquipmentInventoryVM = _checkOutEquipment
+            });
+
+            return Json(response);
+        }
 
         [Authorize(Roles = "Admin,  InventoryManager")]
         [HttpGet]

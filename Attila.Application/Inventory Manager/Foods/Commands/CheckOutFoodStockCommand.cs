@@ -2,23 +2,25 @@
 using Attila.Application.Inventory_Manager.Foods.Queries;
 using MediatR;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Foods.Commands
 {
-    public class UpdateFoodStockCommand : IRequest<bool>
+    public class CheckOutFoodStockCommand : IRequest<bool>
     {
         public FoodInventoryVM MyFoodInventoryVM { get; set; }
 
-        public class UpdateFoodStockInventoryCommandHandler : IRequestHandler<UpdateFoodStockCommand, bool>
+        public class CheckOutFoodStockCommandHandler : IRequestHandler<CheckOutFoodStockCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
-            public UpdateFoodStockInventoryCommandHandler(IAttilaDbContext dbContext)
+            public CheckOutFoodStockCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
-            public async Task<bool> Handle(UpdateFoodStockCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(CheckOutFoodStockCommand request, CancellationToken cancellationToken)
             {
                 bool response = new bool();
 
@@ -40,14 +42,12 @@ namespace Attila.Application.Inventory_Manager.Foods.Commands
 
                     return response;
                 }
-
                 else
                 {
                     throw new Exception("Food ID does not exist!");
                 }
-                
+
             }
         }
     }
 }
-

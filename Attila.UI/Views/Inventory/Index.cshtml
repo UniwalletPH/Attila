@@ -19,19 +19,19 @@
             window.location.href = url.replace('__id__', id);
         });
 
-         $(document).on('click', 'tr .del-food', function (e) {
-             deleteId = $(this).closest('tr').attr('data-id');
-             $.post('/Inventory/DeleteFoodRequest', { id: deleteId })
-             .done(function (result) {
-                  if (result == true) {
-                      alert("Food request successfully deleted!");
-                      window.location = "/Inventory/Index";
-                  }
-                  else {
-                      alert("Failed!");
-                      window.location = "/Inventory/Index";
-                  }
-             });
+        $(document).on('click', 'tr .del-food', function (e) {
+            deleteId = $(this).closest('tr').attr('data-id');
+            $.post('/Inventory/DeleteFoodRequest', { id: deleteId })
+                .done(function (result) {
+                    if (result == true) {
+                        alert("Food request successfully deleted!");
+                        window.location = "/Inventory/Index";
+                    }
+                    else {
+                        alert("Failed!");
+                        window.location = "/Inventory/Index";
+                    }
+                });
         });
 
         $(document).on('click', 'tr .view-request-equip', function (e) {
@@ -43,16 +43,16 @@
         $(document).on('click', 'tr .del-equip', function (e) {
             deleteId = $(this).closest('tr').attr('data-id');
             $.post('/Inventory/DeleteEquipmentRequest', { id: deleteId })
-             .done(function (result) {
-                                if (result == true) {
-                                    alert("Equipment request successfully deleted!");
-                                    window.location = "/Inventory/Index";
-                                }
-                                else {
-                                    alert("Failed!");
-                                    window.location = "/Inventory/Index";
-                                }
-                            });
+                .done(function (result) {
+                    if (result == true) {
+                        alert("Equipment request successfully deleted!");
+                        window.location = "/Inventory/Index";
+                    }
+                    else {
+                        alert("Failed!");
+                        window.location = "/Inventory/Index";
+                    }
+                });
         });
 
         $(document).on('click', 'tr .view-fr', function (e) {
@@ -126,7 +126,7 @@
         <div class="row">
             <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddFood", "Inventory")'">Register New Food</button></div>
             <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddFoodInventory", "Inventory")'">Add Food Stock</button></div>
-            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("UpdateFoodStock", "Inventory")'">Update Food Stock</button></div>
+            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("CheckOutFoodStock", "Inventory")'">Check Out Food Stock</button></div>
         </div>
     </div>
     <div class="card shadow">
@@ -186,9 +186,10 @@
 <div class="container-fluid" style="margin-top: 10px;">
     <div style="margin: 10px;">
         <div class="row">
-            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipment", "Inventory")'">Register New Equipment</button></div>
-            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">Add Equipment Stock</button></div>
-            <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("UpdateEquipmentStock", "Inventory")'">Update Equipment Stock</button></div>
+            <div class="col-3 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipment", "Inventory")'">Register New Equipment</button></div>
+            <div class="col-3 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("AddEquipmentInventory", "Inventory")'">Add Equipment Stock</button></div>
+            <div class="col-3 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("CheckInEquipmentStock", "Inventory")'">Check In Equipment Stock</button></div>
+            <div class="col-3 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("CheckOutEquipmentStock", "Inventory")'">Check Out Equipment Stock</button></div>
         </div>
     </div>
     <div class="card shadow">
@@ -280,14 +281,14 @@
                             <tbody>
                                 @foreach (var item in Model.FoodRequestList)
                                 {
-                                <tr data-id="@item.ID">
-                                    <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded  del-food"> Delete Request </button>  </td>
-                                </tr>
+                                    <tr data-id="@item.ID">
+                                        <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+                                        <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
+                                        <td><button type="button" class="btn btn-primary border rounded  del-food"> Delete Request </button>  </td>
+                                    </tr>
                                 }
                             </tbody>
                             <tfoot>
@@ -335,14 +336,14 @@
                             <tbody>
                                 @foreach (var item in Model.EquipmentRequestList)
                                 {
-                                <tr data-id="@item.ID">
-                                    <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Status)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
-                                    <td> <button type="button" class="btn btn-primary border rounded  view-request-equip"> View Request Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded   del-equip"> Delete Request </button>  </td>
-                                </tr>
+                                    <tr data-id="@item.ID">
+                                        <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
+                                        <td> <button type="button" class="btn btn-primary border rounded  view-request-equip"> View Request Details</button>  </td>
+                                        <td><button type="button" class="btn btn-primary border rounded   del-equip"> Delete Request </button>  </td>
+                                    </tr>
                                 }
                             </tbody>
                             <tfoot>

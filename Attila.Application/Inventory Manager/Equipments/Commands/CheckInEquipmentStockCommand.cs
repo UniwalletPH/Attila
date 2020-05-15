@@ -2,31 +2,32 @@
 using Attila.Application.Inventory_Manager.Equipments.Queries;
 using MediatR;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Attila.Application.Inventory_Manager.Equipments.Commands
 {
-    public class UpdateEquipmentStockCommand : IRequest<bool>
+    public class CheckInEquipmentStockCommand : IRequest<bool>
     {
         public EquipmentsInventoryVM MyEquipmentInventoryVM { get; set; }
 
-        public class UpdateEquipmentStockCommandHandler : IRequestHandler<UpdateEquipmentStockCommand, bool>
+        public class CheckInEquipmentStockCommandHandler : IRequestHandler<CheckInEquipmentStockCommand, bool>
         {
             private readonly IAttilaDbContext dbContext;
-            public UpdateEquipmentStockCommandHandler(IAttilaDbContext dbContext)
+            public CheckInEquipmentStockCommandHandler(IAttilaDbContext dbContext)
             {
                 this.dbContext = dbContext;
             }
 
-            public async Task<bool> Handle(UpdateEquipmentStockCommand request, CancellationToken cancellationToken)
+            public async Task<bool> Handle(CheckInEquipmentStockCommand request, CancellationToken cancellationToken)
             {
-                var _updatedEquipmentStock = dbContext.EquipmentInventories.Find(request.MyEquipmentInventoryVM.ID);
+                var _getEquipmentStockDetails = dbContext.EquipmentInventories.Find(request.MyEquipmentInventoryVM.EquipmentDetailsID);
 
-                if (_updatedEquipmentStock != null)
+                if (_getEquipmentStockDetails != null)
                 {
-                    _updatedEquipmentStock.Quantity -= request.MyEquipmentInventoryVM.Quantity;
-
+                    _getEquipmentStockDetails.Quantity += request.MyEquipmentInventoryVM.Quantity;
                     await dbContext.SaveChangesAsync();
 
                     return true;
@@ -39,4 +40,3 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
         }
     }
 }
-
