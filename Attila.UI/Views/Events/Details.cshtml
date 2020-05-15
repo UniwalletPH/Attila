@@ -24,7 +24,7 @@
 
                                             @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
                                                 {
-                                                    if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
+                                                    if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))   
                                                     {
 
                                                         <label>Status:  </label>
