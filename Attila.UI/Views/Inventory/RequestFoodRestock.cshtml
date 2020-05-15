@@ -12,41 +12,42 @@
         if (Model.FoodRequest.Status == Attila.Status.Processing)
         {
             <div class="row">
-                s
                 <div class="col-lg-12">
                     <div class="row">
                         <div class="col-12">
                             <div class="card shadow mb-3">
-                                <div class="card-header py-3"></div>
+                                <div class="card-header py-3 text-right">
+                                    <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddFood", "Inventory")'">Add Food</button></p>
+                                </div>
                                 <div class="card-body">
-                                        <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                                            <input type="hidden" class="form-control" asp-for="FoodRequest.ID" readonly>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label><strong>Food </strong></label>
-                                                        @Html.DropDownListFor(m => m.FoodDetails.ID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control", @id = "dropdown_food" })
-                                                    </div>
+                                    <form role="form" asp-controller="Inventory" asp-action="RequestFoodRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                                        <input type="hidden" class="form-control" asp-for="FoodRequest.ID" readonly>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label><strong>Food </strong></label>
+                                                    @Html.DropDownListFor(m => m.FoodDetails.ID, Model.FoodDetailsList, "----SELECT ITEM----", new { @class = "form-control", @id = "dropdown_food" })
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label><strong>Quantity</strong></label>
-                                                        <input type="number" asp-for="Quantity" min=1 placeholder="" class="form-control" required>
-                                                    </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label><strong>Quantity</strong></label>
+                                                    <input type="number" asp-for="Quantity" min=1 placeholder="" class="form-control" required>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group">
-                                                        <label><strong>Estimated Price Per Food Unit</strong></label>
-                                                        <input type="number" asp-for="EstimatedPrice" placeholder="00.00" class="form-control" required>
-                                                    </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label><strong>Estimated Price Per Food Unit</strong></label>
+                                                    <input type="number" asp-for="EstimatedPrice" placeholder="00.00" class="form-control" required>
                                                 </div>
                                             </div>
-                                            <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Add to Request</button></div>
-                                        </form>
+                                        </div>
+                                        <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Add to Request</button></div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -97,14 +98,14 @@
                             <tbody>
                                 @foreach (var item in Model.FoodCollection)
                                 {
-                                <tr>
-                                    <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
-                                </tr>
+                                    <tr>
+                                        <td> @Html.DisplayFor(modelItem => item.Food.Code)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Food.Name)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Food.Unit)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
+                                        <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
+                                    </tr>
                                 }
                             </tbody>
                             <tfoot>
@@ -121,9 +122,10 @@
 
                         @{
                             if (Model.FoodRequest.Status.ToString() == "Processing")
-                            {  if (User.IsInRole("InventoryManager"))
+                            {
+                                if (User.IsInRole("InventoryManager"))
                                 {
-                                <div class="form-group"><button id="btnSubmit" class="btn btn-primary">Submit Request</button></div>
+                                    <div class="form-group"><button id="btnSubmit" class="btn btn-primary">Submit Request</button></div>
                                 }
                             }
                             else if (Model.FoodRequest.Status.ToString() == "ForApproval")
@@ -135,7 +137,7 @@
                                         <button type="button" id="btnDecline" class="btn btn-primary">Reject</button>
                                     </text>
                                 }
-                                
+
                             }
                         }
                     </div>
@@ -174,11 +176,11 @@
          });
             $('#dropdown_food').change(function (){
                   var drpValue = $('#dropdown_food').val();
-            if (drpValue == "Add New Food") { 
+            if (drpValue == "Add New Food") {
 
                 window.location.href = "/Inventory/AddFood";
             }
         });
-        
+
     </script>
 }

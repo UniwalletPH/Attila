@@ -17,7 +17,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card shadow mb-3">
-                                <div class="card-header py-3"></div>
+                                <div class="card-header py-3">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+                                        <p class="text-primary m-0 font-weight-bold"><button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddEquipment", "Inventory")'">Add Equipment</button></p>
+                                    </div>
+                                </div>
                                 <div class="card-body">
                                     <form role="form" asp-controller="Inventory" asp-action="RequestEquipmentRestock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                                         <input type="hidden" class="form-control" asp-for="EquipmentRequest.ID" readonly>
@@ -72,12 +76,7 @@
                                 {
                                     <p class="text-primary m-0 font-weight-bold"> Remarks: @Html.DisplayFor(a => a.EquipmentRequest.Remarks) </p>
                                 }
-
                             }
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                            <p class="text-primary m-0 font-weight-bold">
-                                @*<button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("AddInventoryDelivery", "Inventory")'">Add</button></p>*@
                         </div>
                     </div>
                 </div>
@@ -105,7 +104,6 @@
                                         <td> @Html.DisplayFor(modelItem => item.EstimatedPrice)</td>
                                         <td> @Html.DisplayFor(modelItem => item.TotalEstimatedPrice)</td>
                                     </tr>
-
                                 }
                             </tbody>
                             <tfoot>
