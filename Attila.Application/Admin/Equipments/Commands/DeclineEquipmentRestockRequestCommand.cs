@@ -15,6 +15,8 @@ namespace Atilla.Application.Admin.Equipments.Commands
     {
         public int RequestID { get; set; }
 
+        public string Remarks { get; set; }
+
         public class DeclineAdditionalEquipmentRequestCommandHandler : IRequestHandler<DeclineEquipmentRestockRequestCommand, EquipmentRequestVM>
         {
             private readonly IAttilaDbContext dbContext;
@@ -32,6 +34,8 @@ namespace Atilla.Application.Admin.Equipments.Commands
                 if (_requestToDecline != null)
                 {
                     _requestToDecline.Status = Status.Declined;
+                    _requestToDecline.Remarks = request.Remarks;
+
                     await dbContext.SaveChangesAsync();
 
                     var _toReturn = new EquipmentRequestVM

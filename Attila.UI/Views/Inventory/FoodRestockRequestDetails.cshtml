@@ -8,16 +8,25 @@
 @model FoodRestockRequestDetailsCVM
 @section Scripts{
     <script>
-             var id = @Model.FoodRequest.ID;
-             $(document).on('click', ' #btnSubmit', function (e) {
-                var url = '@Url.Action("ApproveFoodRequest", "Inventory", new { id = "__id__"  })';
-                window.location.href = url.replace('__id__', id)
-            });
+        var id = @Model.FoodRequest.ID;
 
-            $(document).on('click', ' #btnDecline', function (e) {
-                var url = '@Url.Action("DeclineFoodRequest", "Inventory", new { id = "__id__"  })';
-                window.location.href = url.replace('__id__', id)
+        $(document).on('click', ' #btnSubmit', function (e) {
+            var url = '@Url.Action("ApproveFoodRequest", "Inventory", new { id = "__id__"  })';
+            window.location.href = url.replace('__id__', id)
+        });
+
+        $('document').ready(function () {
+            $('#btnDecline').on('click', function () {
+                var declineRemarks = prompt("Reason of Rejecting");
+                $.post('/Inventory/DeclineFoodRequest', { id: id, remarks: declineRemarks })
+                    .done(function (r) {
+                        window.location = "/Inventory/FoodRestockRequestDetails?id=" + id;
+                    })
+                    .fail(function (err) {
+                        console.log("Fail");
+                    })
             });
+        })
     </script>
 }
 
@@ -30,12 +39,7 @@
                     <p class="text-primary m-0 font-weight-bold"> Date Requested: @Html.DisplayFor(a => a.FoodRequest.DateTimeRequest) </p>
                     <p class="text-primary m-0 font-weight-bold"> Status: @Html.DisplayFor(a => a.FoodRequest.Status) </p>
                     <p class="text-primary m-0 font-weight-bold"> Requested By: @Html.DisplayFor(a => a.FoodRequest.InventoryManager.Name) </p>
-                    @{  if (User.IsInRole("Admin") && Model.FoodRequest.Status.ToString() == "ForApproval")
-                        {
-                            <label for="specification"><strong>Remarks:</strong></label>
-                            <input type="text" class="form-control" id="txtRemarks" placeholder="Reason of rejecting">
-                        }
-
+                    @{
                         if (Model.FoodRequest.Status.ToString() == "Declined")
                         {
                             <p class="text-primary m-0 font-weight-bold"> Remarks: @Html.DisplayFor(a => a.FoodRequest.Remarks) </p>
@@ -49,7 +53,7 @@
                             {
                                 <text>
                                     <button class="btn btn-primary" type="button" id="btnSubmit">Approve</button>
-                                    <button class="btn btn-primary" type="button" id="btnDecline" >Reject</button>
+                                    <button class="btn btn-primary" type="button" id="btnDecline">Reject</button>
                                 </text>
 
                             }

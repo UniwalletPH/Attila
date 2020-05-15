@@ -32,7 +32,8 @@ namespace Attila.Application.Admin.Equipments.Queries
                     ID = _qVal.ID,
                     DateTimeRequest = _qVal.DateTimeRequest,
                     InventoryManager = _qVal.InventoryManager,
-                    Status = _qVal.Status
+                    Status = _qVal.Status,
+                    Remarks = _qVal.Remarks
                 };
 
                 return _requestDetails;

@@ -17,21 +17,27 @@
     <script src="../assets/pages/scripts/table-datatables-managed.min.js" type="text/javascript"></script>
 
     <script>
+        var id = @Model.EquipmentRequest.ID;
 
-        var  id =@Model.EquipmentRequest.ID;
         $(document).on('click', ' #btnSubmit', function (e) {
-         var url = '@Url.Action("ApproveEquipmentRequest", "Inventory", new { id = "__id__"  })';
-         window.location.href = url.replace('__id__', id)
-
+            var url = '@Url.Action("ApproveEquipmentRequest", "Inventory", new { id = "__id__"  })';
+            window.location.href = url.replace('__id__', id)
         });
 
-            $(document).on('click', ' #btnDecline', function (e) {
-                var url = '@Url.Action("DeclineEquipmentRequest", "Inventory", new { id = "__id__"  })';
-                window.location.href = url.replace('__id__', id)
+        $('document').ready(function () {
+            $('#btnDecline').on('click', function () {
+                var declineRemarks = prompt("Reason of Rejecting");
+                $.post('/Inventory/DeclineEquipmentRequest', { id: id, remarks: declineRemarks })
+                    .done(function (r) {
+                        window.location = "/Inventory/EquipmentRestockRequestDetails?id=" + id;
+                    })
+                    .fail(function (err) {
+                        console.log("Fail");
+                    })
             });
+        })
     </script>
 }
-
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Equipment Request Details</h3>
@@ -42,11 +48,7 @@
                     <p class="text-primary m-0 font-weight-bold"> Date Requested: @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
                     <p class="text-primary m-0 font-weight-bold"> Status: @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
                     <p class="text-primary m-0 font-weight-bold"> Requested By: @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
-                    @{ if (User.IsInRole("Admin") && Model.EquipmentRequest.Status.ToString() == "ForApproval")
-                        {
-                            <label for="specification"><strong>Remarks:</strong></label>
-                            <input type="text" class="form-control" id="txtRemarks" placeholder="Reason of rejecting">
-                        }
+                    @{
                         if (Model.EquipmentRequest.Status.ToString() == "Declined")
                         {
                             <p class="text-primary m-0 font-weight-bold"> Remarks: @Html.DisplayFor(a => a.EquipmentRequest.Remarks) </p>

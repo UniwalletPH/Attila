@@ -642,7 +642,7 @@ namespace Attila.UI.Controllers
             return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> DeclineFoodRequest(int id, string remarks)
         {
             var _requestDetails = await mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = id, Remarks = remarks });
@@ -654,7 +654,7 @@ namespace Attila.UI.Controllers
                 RequestID = _requestDetails.ID
             });
 
-            return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
+            return Json(true);
         }
 
 
@@ -674,10 +674,10 @@ namespace Attila.UI.Controllers
             return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> DeclineEquipmentRequest(int id)
+        [HttpPost]
+        public async Task<IActionResult> DeclineEquipmentRequest(int id, string remarks)
         {
-            var _requestDetails = await mediator.Send(new DeclineEquipmentRestockRequestCommand { RequestID = id });
+            var _requestDetails = await mediator.Send(new DeclineEquipmentRestockRequestCommand { RequestID = id, Remarks = remarks });
 
             await mediator.Send(new AddInventoryNotificationCommand
             {
@@ -687,7 +687,7 @@ namespace Attila.UI.Controllers
                 RequestID = _requestDetails.ID
             });
 
-            return Redirect("/Inventory/EquipmentRestockRequestDetails?id=" + id);
+            return Json(true);
         }
 
 
