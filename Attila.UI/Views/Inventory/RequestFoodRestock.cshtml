@@ -68,6 +68,12 @@
                             <p class="text-primary m-0 font-weight-bold"> Date Requested: @Html.DisplayFor(a => a.FoodRequest.DateTimeRequest) </p>
                             <p class="text-primary m-0 font-weight-bold"> Status: @Html.DisplayFor(a => a.FoodRequest.Status) </p>
                             <p class="text-primary m-0 font-weight-bold"> Requested By: @Html.DisplayFor(a => a.FoodRequest.InventoryManager.Name) </p>
+                            @{ if (User.IsInRole("InventoryManager") && Model.FoodRequest.Status.ToString() == "Declined")
+                                {
+                                    <p class="text-primary m-0 font-weight-bold"> Remarks: @Html.DisplayFor(a => a.FoodRequest.Remarks) </p>
+                                }
+
+                            }
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
                             <p class="text-primary m-0 font-weight-bold">
