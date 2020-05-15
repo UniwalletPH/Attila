@@ -38,7 +38,6 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-
             var _getDetails = await mediator.Send(new GetInventoryDataQuery());
             var _pendingEquipmentRestockRequests = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
             var _pendingFoodRestockRequests = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
@@ -643,10 +642,10 @@ namespace Attila.UI.Controllers
             return Redirect("/Inventory/FoodRestockRequestDetails?id=" + id);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> DeclineFoodRequest(int id)
+        [HttpGet]
+        public async Task<IActionResult> DeclineFoodRequest(int id, string remarks)
         {
-            var _requestDetails = await mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = id });
+            var _requestDetails = await mediator.Send(new DeclineFoodRestockRequestCommand { RequestID = id, Remarks = remarks });
             await mediator.Send(new AddInventoryNotificationCommand
             {
                 Message = "New Declined Food Restock Request",
