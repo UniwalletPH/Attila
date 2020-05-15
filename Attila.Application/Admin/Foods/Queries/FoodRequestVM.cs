@@ -11,6 +11,8 @@ namespace Attila.Application.Admin.Foods.Queries
 
         public Status Status { get; set; }
 
+        public string Remarks { get; set; }
+
         public User InventoryManager { get; set; }
 
     }

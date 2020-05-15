@@ -27,8 +27,6 @@ namespace Attila.Application.Admin.Foods.Commands
                     .Where(a => a.ID == request.RequestID)
                     .Include(a => a.InventoryManager).SingleOrDefault();
 
-                  
-
                 if (_requestToApproved != null)
                 {
                     _requestToApproved.Status = Status.Approved;

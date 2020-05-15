@@ -13,6 +13,8 @@ namespace Attila.Application.Admin.Foods.Commands
     {
         public int RequestID { get; set; }
 
+        public string Remarks { get; set; }
+
         public class DeclineFoodRestockRequestCommandHandler : IRequestHandler<DeclineFoodRestockRequestCommand, FoodRequestVM>
         {
             private readonly IAttilaDbContext dbContext;
@@ -32,11 +34,14 @@ namespace Attila.Application.Admin.Foods.Commands
                 if (_requestToDecline != null)
                 {
                     _requestToDecline.Status = Status.Declined;
+                    _requestToDecline.Remarks = request.Remarks;
+
                     await dbContext.SaveChangesAsync();
 
                     var _toReturn = new FoodRequestVM
                     { 
                         ID = _requestToDecline.ID,
+                        Remarks = _requestToDecline.Remarks,
                         InventoryManager = _requestToDecline.InventoryManager
                     };
 
