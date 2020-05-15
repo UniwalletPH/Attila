@@ -1,10 +1,6 @@
-﻿
-@{
-
-
+﻿@{
     ViewData["Title"] = "Update Event Details";
 }
-
 @model ViewEventCVM
  
 
@@ -14,7 +10,6 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-12">
-
                     <form role="form" asp-controller="Events" asp-action="UpdateEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
                         <div class="card shadow mb-3">
                             <div class="card-header py-3">
@@ -25,8 +20,7 @@
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
                                         <p class="text-primary m-0 font-weight-bold"> </p>
                                     </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                                        
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">                                       
                                         @if (Model.EventDetails.EventStatus.ToString() != "Approved")
                                         {
 
@@ -43,7 +37,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="address"><strong>Client</strong></label>
-                                                @Html.DropDownListFor(model => model.EventDetails.EventClientID, ViewBag.Clients as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                                @Html.DropDownListFor(model => model.EventDetails.EventClientID, Model.Client, new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
@@ -51,10 +45,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Event Type</strong></label>
-
                                                 @Html.DropDownListFor(model => model.EventDetails.Type, ViewBag.OccasionType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -62,7 +53,6 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Event Name</strong></label>
-
                                                 @Html.EditorFor(model => model.EventDetails.EventName, new { htmlAttributes = new { @class = "form-control" } })
                                             </div>
                                         </div>
@@ -70,14 +60,8 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="first_name"><strong>Event Date</strong></label>
-                                                @*@Html.Kendo().EditorFor(model => model.EventDetails.EventDate, new { htmlAttributes = new { @class = "form-control form-control-inline datepicker", @Value = @Model.EventDetails.EventDate.ToShortDateString() } })*@
-
-
-                                                <kendo-datepicker name="datepicker" class="form-control" format="MM-dd-yyyy" for="EventDetails.EventDate" value="Model.EventDetails.EventDate" style="width: 100%" placeholder="mm/dd/yyyy" />
-
-
-
+                                                <label for="first_name"><strong>Event Date</strong></label>         
+                                                <kendo-datepicker name="datepicker" class="form-control" format="dd/MM/yyyy" for="EventDetails.EventDate" value="Model.EventDetails.EventDate" style="width: 100%" placeholder="dd/MM/yyyy" />
                                             </div>
                                         </div>
                                     </div>
@@ -85,8 +69,6 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Theme</strong></label>
-
-
                                                 @Html.EditorFor(model => model.EventDetails.Theme, new { htmlAttributes = new { @class = "form-control" } })
                                             </div>
                                         </div>
@@ -109,24 +91,14 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Location Area</strong></label>
-
                                                 @Html.DropDownListFor(model => model.EventDetails.LocationType, ViewBag.LocationType as IEnumerable<SelectListItem>, new { @class = "form-control" })
-
-
-
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
@@ -151,9 +123,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Serving Time </strong></label> 
-
                                                 @Html.EditorFor(model => model.EventDetails.ServingTime, new { htmlAttributes = new { @class = "form-control", @type = "time"  } })
-
                                             </div>
                                         </div>
                                     </div>
@@ -161,20 +131,14 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Serving Type </strong></label>
-
-                                                @Html.EditorFor(model => model.EventDetails.NumberOfGuests, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-
-
+                                                @Html.DropDownListFor(model => model.EventDetails.ServingType, ViewBag.ServingType as IEnumerable<SelectListItem>, new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Is Venue in Building/Condominium?</strong></label>
-
                                                 @Html.DropDownListFor(model => model.EventDetails.VenueType, ViewBag.VenueType as IEnumerable<SelectListItem>, new { @class = "form-control" })
                                             </div>
                                         </div>
@@ -182,9 +146,8 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-
                                                 <label for="first_name"><strong>Event Package</strong></label>
-                                                @Html.DropDownListFor(model => model.EventDetails.PackageDetailsID, ViewBag.Packages as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                                @Html.DropDownListFor(model => model.EventDetails.PackageDetailsID, Model.Package, new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
@@ -194,19 +157,13 @@
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Number of Guests</strong></label>
                                                 @Html.EditorFor(model => model.EventDetails.NumberOfGuests, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-
                                             </div>
                                         </div>
                                     </div>
-
-
-
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="first_name"><strong>Remarks</strong></label>
-
-
                                                 @Html.EditorFor(model => model.EventDetails.Remarks, new { htmlAttributes = new { @class = "form-control" } })
                                             </div>
                                         </div>
@@ -229,17 +186,11 @@
 @section Scripts{
 
     <script>
-
-        
-                var event = '@Model.EventDetails.ID';
-            function OnSuccess(result) {
-
-
-
+        var event = '@Model.EventDetails.ID';
+        function OnSuccess(result) {
 
         var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
         window.location.href = url.replace('__id__', event);
-
 
         }
 
@@ -251,22 +202,15 @@
           
          $(document).on('click', '.view', function (e) {
 
-
-
-
             var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
             window.location.href = url.replace('__id__', event);
 
+         });
 
-            });
         $(document).on('click', '.update-again', function (e) {
-
-
-
 
             var url = '@Url.Action("Update", "Events", new { EventID = "__id__" })';
             window.location.href = url.replace('__id__', event);
-
 
         });
         

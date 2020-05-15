@@ -172,27 +172,30 @@ namespace Attila.UI.Controllers
             var _packageNames = await mediator.Send(new GetEventPackageQuery());
             var _clientNames = await mediator.Send(new GetClientListQuery());
 
-            List<SelectListItem> _list = new List<SelectListItem>();
-
-            List<SelectListItem> _clientlist = new List<SelectListItem>();
+            List<SelectListItem> _packagelist = new List<SelectListItem>();
+      
             foreach (var item in _packageNames)
             {
-                _list.Add(new SelectListItem
+                _packagelist.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = item.Name
+                    Text = item.Name,                    
                 });
 
             }
+            var _packageSelectList = new SelectList(_packagelist,"Value","Text", _eventDetails.PackageDetailsID);
+
+            List<SelectListItem> _clientlist = new List<SelectListItem>();
 
             foreach (var item in _clientNames)
             {
                 _clientlist.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = item.Name,
+                    Text = item.Name,                    
                 });
             }
+            var _clientSelectList = new SelectList(_clientlist,"Value","Text", _eventDetails.EventClientID);
 
 
             var _details = new EventDetailsVM
@@ -235,7 +238,7 @@ namespace Attila.UI.Controllers
             List<SelectListItem> VenueType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "Yes", Value = "1" },
-                new SelectListItem { Text = "No", Value = "2" },
+                new SelectListItem { Text = "No", Value = "0" },
 
             };
 
@@ -261,8 +264,9 @@ namespace Attila.UI.Controllers
 
             @ViewBag.Packages = new SelectList(_packageNames, "ID", "Name", _details.Package.ID);
             var _addEventList = new ViewEventCVM();
-            _addEventList.PackageList = _list;
-            _addEventList.ClientList = _clientlist;
+
+            _addEventList.Package = _packageSelectList;
+            _addEventList.Client = _clientSelectList;
             _addEventList.EventDetails = _details;
             return View(_addEventList);
 
