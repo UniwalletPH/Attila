@@ -62,8 +62,8 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="first_name"><strong>Event Date</strong></label>
-                                                <kendo-datepicker name="datepicker" format="MM-dd-yyyy" for="Event.EventDate" style="width: 100%" placeholder="mm/dd/yyyy" />
+                                                <label for="first_name"><strong>Date of Event</strong></label>
+                                                <kendo-datepicker name="datepicker" format="dd/MM/yyyy" for="Event.EventDate" style="width: 100%" placeholder="dd/MM/yyyy" />
                                             </div>
                                         </div>
                                     </div>
@@ -97,7 +97,7 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="supplier"><strong>Location Type</strong></label>
+                                                <label for="supplier"><strong>Location Area</strong></label>
                                                 <select id="txtType" asp-for="Event.LocationType" class="form-control" required>
                                                     <option value="1">North Area - Min. 50,000PHP</option>
                                                     <option value="2">South Area - Min. 35,000PHP </option>
