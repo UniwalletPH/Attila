@@ -13,6 +13,8 @@ namespace Attila.Infrastructure.Persistence
 
         public DbSet<EquipmentRestockRequest> EquipmentRestockRequests { get; set; }
 
+        public DbSet<EquipmentTracking> EquipmentTracking { get; set; }
+
         public DbSet<Food> Foods { get; set; }
 
         public DbSet<FoodInventory> FoodInventories { get; set; }
