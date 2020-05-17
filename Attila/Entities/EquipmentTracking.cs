@@ -11,14 +11,11 @@ namespace Attila.Domain.Entities
         [ForeignKey("Event")]
         public int EventID { get; set; }
 
-        [ForeignKey("EventAdditionalEquipmentRequest")]
-        public int EventAdditionalEquipmentRequestID { get; set; }
-
         [ForeignKey("Equipment")]
         public int EquipmentID { get; set; }
 
-        [ForeignKey("User")]
-        public int UserID { get; set; }
+        [ForeignKey("InventoryManager")]
+        public int InventoryManagerID { get; set; }
 
         public int Quantity { get; set; }
         public DateTime TrackingDate { get; set; }
@@ -26,8 +23,7 @@ namespace Attila.Domain.Entities
         public string Remarks { get; set; }
 
         public Event Event { get; set; }
-        public EventAdditionalEquipmentRequest EventAdditionalEquipmentRequest { get; set; }
         public Equipment Equipment { get; set; }
-        public User User { get; set; }
+        public User InventoryManager { get; set; }
     }
 }

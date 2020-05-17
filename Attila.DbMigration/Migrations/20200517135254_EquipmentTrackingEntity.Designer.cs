@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200517101904_EquipmentTrackingEntity")]
+    [Migration("20200517135254_EquipmentTrackingEntity")]
     partial class EquipmentTrackingEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2135,10 +2135,10 @@ namespace Attila.DbMigration.Migrations
                     b.Property<int>("EquipmentID")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventAdditionalEquipmentRequestID")
+                    b.Property<int>("EventID")
                         .HasColumnType("int");
 
-                    b.Property<int>("EventID")
+                    b.Property<int>("InventoryManagerID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -2153,18 +2153,13 @@ namespace Attila.DbMigration.Migrations
                     b.Property<DateTime>("TrackingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("EquipmentID");
 
-                    b.HasIndex("EventAdditionalEquipmentRequestID");
-
                     b.HasIndex("EventID");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("InventoryManagerID");
 
                     b.ToTable("EquipmentTracking");
                 });
@@ -10535,21 +10530,15 @@ namespace Attila.DbMigration.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Attila.Domain.Entities.EventAdditionalEquipmentRequest", "EventAdditionalEquipmentRequest")
-                        .WithMany()
-                        .HasForeignKey("EventAdditionalEquipmentRequestID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Attila.Domain.Entities.Event", "Event")
                         .WithMany()
                         .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Attila.Domain.Entities.User", "User")
+                    b.HasOne("Attila.Domain.Entities.User", "InventoryManager")
                         .WithMany()
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("InventoryManagerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

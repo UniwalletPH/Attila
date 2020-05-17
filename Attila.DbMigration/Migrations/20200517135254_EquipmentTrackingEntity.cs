@@ -15,9 +15,8 @@ namespace Attila.DbMigration.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     EventID = table.Column<int>(nullable: false),
-                    EventAdditionalEquipmentRequestID = table.Column<int>(nullable: false),
                     EquipmentID = table.Column<int>(nullable: false),
-                    UserID = table.Column<int>(nullable: false),
+                    InventoryManagerID = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     TrackingDate = table.Column<DateTime>(nullable: false),
                     TrackingAction = table.Column<byte>(nullable: false),
@@ -31,25 +30,19 @@ namespace Attila.DbMigration.Migrations
                         column: x => x.EquipmentID,
                         principalTable: "Equipments",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EquipmentTracking_EventAdditionalEquipmentRequests_EventAdditionalEquipmentRequestID",
-                        column: x => x.EventAdditionalEquipmentRequestID,
-                        principalTable: "EventAdditionalEquipmentRequests",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_EquipmentTracking_Events_EventID",
                         column: x => x.EventID,
                         principalTable: "Events",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_EquipmentTracking_Users_UserID",
-                        column: x => x.UserID,
+                        name: "FK_EquipmentTracking_Users_InventoryManagerID",
+                        column: x => x.InventoryManagerID,
                         principalTable: "Users",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -58,19 +51,14 @@ namespace Attila.DbMigration.Migrations
                 column: "EquipmentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentTracking_EventAdditionalEquipmentRequestID",
-                table: "EquipmentTracking",
-                column: "EventAdditionalEquipmentRequestID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_EquipmentTracking_EventID",
                 table: "EquipmentTracking",
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipmentTracking_UserID",
+                name: "IX_EquipmentTracking_InventoryManagerID",
                 table: "EquipmentTracking",
-                column: "UserID");
+                column: "InventoryManagerID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
