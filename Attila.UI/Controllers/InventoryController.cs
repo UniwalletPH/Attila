@@ -96,8 +96,45 @@ namespace Attila.UI.Controllers
         {
 
 
-            if (inventoriesDeliveryVM.file.Length > 0)
+            if (inventoriesDeliveryVM.file == null)
             {
+
+                InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
+                {
+                    DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
+                    DeliveryPrice = inventoriesDeliveryVM.DeliveryPrice,
+                    SupplierID = inventoriesDeliveryVM.SupplierDetailsID,
+                    ReceiptImage = null,
+                    Remarks = inventoriesDeliveryVM.Remarks,
+                };
+
+                var response = await mediator.Send(new AddInventoryDeliveryCommand
+                {
+                    MyInventoriesDeliveryVM = _inventory
+                });
+
+                var result = await mediator.Send(new AddInventoryNotificationCommand
+                {
+                    Message = "New Delivery",
+                    TargetUserID = -1,
+                    MethodName = "/Inventory/Details",
+                    RequestID = response
+
+                });
+
+                return Json(result);
+
+
+
+
+
+
+
+
+
+
+            }
+            else if (inventoriesDeliveryVM.file.Length > 0){
                 using (var ms = new MemoryStream())
                 {
                     inventoriesDeliveryVM.file.CopyTo(ms);
@@ -131,6 +168,8 @@ namespace Attila.UI.Controllers
 
                     return Json(result);
                 }
+
+
             }
             else
             {
