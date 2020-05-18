@@ -27,8 +27,16 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
+                                                <label for="address"><strong>Event</strong></label>
+                                                @Html.DropDownListFor(m => m.EventDetailsID, Model.ProcessingEventsList, "--SELECT EVENT--", new { @class = "form-control"})
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
                                                 <label for="address"><strong>Equipment</strong></label>
-                                                @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentStockDetailsList, "--SELECT Equipment--", new { @class = "form-control", @id = "dropdown_equipment" })
+                                                @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentStockDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control", @id = "dropdown_equipment" })
                                             </div>
                                         </div>
                                     </div>

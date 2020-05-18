@@ -6,8 +6,6 @@
 
 }
 
- 
-
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">  Equipment Inventory Form </h3>
@@ -15,15 +13,22 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-12">
-                    <div class="card shadow mb-3">
-                        <div class="card-header py-3"></div>
-                        <div class="card-body">
-                            <form role="form" asp-action="AddEquipmentInventory" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+                    <form role="form" asp-action="AddEquipmentInventory" asp-controller="Inventory" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+                                        <p class="text-primary m-0 font-weight-bold"> <button class="btn btn-primary btn-sm" type="submit">Submit</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="eqpdetails"><strong>Food Details</strong></label>
-                                            @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control", @id="dropdown_equipment" })
+                                            @Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentDetailsList, "--SELECT EQUIPMENT--", new { @class = "form-control", @id = "dropdown_equipment" })
                                         </div>
                                     </div>
                                 </div>
@@ -31,10 +36,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="delivery_details"><strong>Delivery Details</strong></label>
-                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.EquipmentDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" , @id="dropdown_delivery"})
-
-
-
+                                            @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.EquipmentDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control", @id = "dropdown_delivery" })
                                         </div>
                                     </div>
                                 </div>
@@ -42,8 +44,6 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="quantity_"><strong>Quantity</strong></label>
-
-
                                             <input type="number" class="form-control" asp-for="Quantity" placeholder="">
                                         </div>
                                     </div>
@@ -53,7 +53,6 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="exp_date"><strong>Price</strong></label>
-
                                             <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
                                         </div>
                                     </div>
@@ -62,17 +61,13 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="remarks"><strong>Remarks</strong></label>
-
-
                                             <input class="form-control" asp-for="Remarks" placeholder="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
-                            </form>
+                            </div>
                         </div>
-                    </div>
-
+                    </form>
                 </div>
             </div>
         </div>
@@ -83,7 +78,7 @@
 
     <script type="text/javascript">
         function OnSuccess(e) {
-            window.location.href="/Inventory/Index"
+            window.location.href = "/Inventory/Index"
 
 
         }
@@ -92,21 +87,21 @@
             console.log(e);
             alert("failed!");
         }
-         $('#dropdown_equipment').change(function (){
-                  var drpValue = $('#dropdown_equipment').val();
-            if (drpValue == "Add New Equipment") { 
+        $('#dropdown_equipment').change(function () {
+            var drpValue = $('#dropdown_equipment').val();
+            if (drpValue == "Add New Equipment") {
 
                 window.location.href = "/Inventory/AddEquipment";
             }
         });
-        
-        $('#dropdown_delivery').change(function (){
-                  var drpValue = $('#dropdown_delivery').val();
-            if (drpValue == "Add New Delivery") { 
+
+        $('#dropdown_delivery').change(function () {
+            var drpValue = $('#dropdown_delivery').val();
+            if (drpValue == "Add New Delivery") {
 
                 window.location.href = "/Inventory/AddInventoryDelivery";
             }
-            });
+        });
 
 
     </script>

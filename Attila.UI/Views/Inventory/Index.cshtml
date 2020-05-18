@@ -99,12 +99,12 @@
                     <tbody>
                         @foreach (var item in Model.InventoryDeliveryVM)
                         {
-                            <tr data-id="@item.ID">
-                                <td> @Html.DisplayFor(modelItem => item.DeliveryDate)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
-                                <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
-                                <td><button type="button" class="btn btn-primary border rounded  view-delivery-details">View Details</button> </td>
-                            </tr>
+                        <tr data-id="@item.ID">
+                            <td> @($"{item.DeliveryDate: MMM dd, yyyy}")</td>
+                            <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+                            <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
+                            <td><button type="button" class="btn btn-primary border rounded  view-delivery-details">View Details</button> </td>
+                        </tr>
                         }
                     </tbody>
                     <tfoot>
@@ -173,6 +173,7 @@
                             <td><strong>Description</strong></td>
                             <td><strong>Specification</strong></td>
                             <td><strong>Quantity</strong></td>
+                            <td><strong>Expiration Date</strong></td>
                             <td><strong>Unit</strong></td>
                             <td><strong>Type</strong></td>
                         </tr>
