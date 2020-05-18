@@ -583,7 +583,6 @@ namespace Attila.UI.Controllers
 
                     _evntMenu.Add(_menu);
                 }
-
             }
 
             var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu });
@@ -618,11 +617,22 @@ namespace Attila.UI.Controllers
 
                 foreach (var item in _equipments)
                 {
-                    _selectListEquipment.Add(new SelectListItem
+                    if (item.EquipmentType.ToString() == "NonConsumable")
                     {
-                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
-                        Value = item.ID.ToString()
-                    });
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
+                    else
+                    {
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
                 }
 
                 var _dishes = await mediator.Send(new GetAllDishQuery { });
@@ -663,11 +673,22 @@ namespace Attila.UI.Controllers
 
                 foreach (var item in _equipments)
                 {
-                    _selectListEquipment.Add(new SelectListItem
+                    if (item.EquipmentType.ToString() == "NonConsumable")
                     {
-                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
-                        Value = item.ID.ToString()
-                    });
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
+                    else
+                    {
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
                 }
 
                 var _dishes = await mediator.Send(new GetAllDishQuery { });
@@ -692,7 +713,6 @@ namespace Attila.UI.Controllers
 
                 };
 
-
                 return View(_additionalModel);
 
             }
@@ -709,11 +729,22 @@ namespace Attila.UI.Controllers
 
                 foreach (var item in _equipments)
                 {
-                    _selectListEquipment.Add(new SelectListItem
+                    if (item.EquipmentType.ToString() == "NonConsumable")
                     {
-                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
-                        Value = item.ID.ToString()
-                    });
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
+                    else
+                    {
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
                 }
 
                 var _dishes = await mediator.Send(new GetAllDishQuery { });
@@ -749,11 +780,22 @@ namespace Attila.UI.Controllers
 
                 foreach (var item in _equipments)
                 {
-                    _selectListEquipment.Add(new SelectListItem
+                    if (item.EquipmentType.ToString() == "NonConsumable")
                     {
-                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
-                        Value = item.ID.ToString()
-                    });
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
+                    else
+                    {
+                        _selectListEquipment.Add(new SelectListItem
+                        {
+                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Value = item.ID.ToString()
+                        });
+                    }
                 }
 
                 var _dishes = await mediator.Send(new GetAllDishQuery { });
