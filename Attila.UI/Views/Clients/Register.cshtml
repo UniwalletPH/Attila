@@ -25,7 +25,7 @@
 
     <partial name="_ValidationScriptsPartial" />
 }
- 
+
 
 
 <div class="container-fluid">
@@ -34,16 +34,22 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-12">
-                    <div class="card shadow mb-3">
-                        <div class="card-header py-3"></div>
-                        <div class="card-body">
-                            <form asp-controller="Clients"
-                                  asp-action="AddClientDetails"
-                                  data-ajax="true"
-                                  data-ajax-method="POST"
-                                  data-ajax-success="OnSuccess"
-                                  data-ajax-begin="OnBegin"
-                                  data-ajax-failure="OnFailure">
+                    <form asp-controller="Clients"
+                          asp-action="AddClientDetails"
+                          data-ajax="true"
+                          data-ajax-method="POST"
+                          data-ajax-success="OnSuccess"
+                          data-ajax-begin="OnBegin"
+                          data-ajax-failure="OnFailure">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+                                        <p class="text-primary m-0 font-weight-bold"> <button class="btn btn-primary btn-sm" type="submit">Submit</button></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -81,15 +87,9 @@
                                         </div>
                                     </div>
                                 </div>
-                               
-
-
-                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Submit</button></div>
-
-                            </form>
+                            </div>
                         </div>
-                    </div>
-
+                    </form>
                 </div>
             </div>
         </div>

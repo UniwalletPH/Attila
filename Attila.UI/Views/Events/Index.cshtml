@@ -45,14 +45,13 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
-
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.ProcessingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.EventDate)</td>
+                                    <td> @($"{item.EventDate: MM/dd/yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
@@ -61,8 +60,6 @@
                                     <td><button type="button" class="btn btn-primary border rounded add-menu">Add Menu Details</button>  </td>
                                     <td><button type="button" class="btn btn-primary border rounded add-additional">Add Additionals</button>  </td>
                                     <td><button type="button" class="btn btn-primary border rounded change-status">Submit For Approval</button>  </td>
-
-
                                 </tr>
                             }
                         </tbody>
@@ -420,11 +417,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 }
 
 

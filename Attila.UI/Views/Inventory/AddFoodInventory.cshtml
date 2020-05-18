@@ -29,9 +29,6 @@
                                         <div class="form-group">
                                             <label for="delivery_details"><strong>Delivery Details</strong></label>
                                             @Html.DropDownListFor(m => m.DeliveryDetailsID, Model.FoodDeliveryList, "--SELECT DELIVERY--", new { @class = "form-control" , @id="dropdown_delivery" })
-
-
-
                                         </div>
                                     </div>
                                 </div>
@@ -49,8 +46,6 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="quantity_"><strong>Price</strong></label>
-
-
                                             <input type="number" class="form-control" asp-for="ItemPrice" placeholder="">
                                         </div>
                                     </div>

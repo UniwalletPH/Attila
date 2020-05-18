@@ -99,12 +99,12 @@
                     <tbody>
                         @foreach (var item in Model.InventoryDeliveryVM)
                         {
-                        <tr data-id="@item.ID">
-                            <td> @($"{item.DeliveryDate: MMM dd, yyyy}")</td>
-                            <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
-                            <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
-                            <td><button type="button" class="btn btn-primary border rounded  view-delivery-details">View Details</button> </td>
-                        </tr>
+                            <tr data-id="@item.ID">
+                                <td> @($"{item.DeliveryDate: MM/dd/yyyy}")</td>
+                                <td> @Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+                                <td> @Html.DisplayFor(modelItem => item.DeliveryPrice)</td>
+                                <td><button type="button" class="btn btn-primary border rounded  view-delivery-details">View Details</button> </td>
+                            </tr>
                         }
                     </tbody>
                     <tfoot>
@@ -160,7 +160,7 @@
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Description)</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Specification)</td>
                                 <td> @($"{item.Quantity:n2}")</td>
-                                <td> @($"{item.ExpirationDate:MMM dd, yyyy}")</td>
+                                <td> @($"{item.ExpirationDate: MM/dd/yyyy}")</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.Unit)</td>
                                 <td> @Html.DisplayFor(modelItem => item.FoodDetails.FoodType)</td>
 
@@ -284,7 +284,14 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        @{ if (item.Status.ToString() == "ForApproval")
+                                            {
+                                                <td> @Html.DisplayName("For Approval")</td>
+                                            }
+                                            else
+                                            {
+                                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                            }}
                                         <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
                                         <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                         <td><button type="button" class="btn btn-primary border rounded  view-request-food"> View Request Details</button>  </td>
@@ -339,7 +346,14 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        @{ if (item.Status.ToString() == "ForApproval")
+                                            {
+                                                <td> @Html.DisplayName("For Approval")</td>
+                                            }
+                                            else
+                                            {
+                                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                            }}
                                         <td> @Html.DisplayFor(modelItem => item.Remarks)</td>
                                         <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                         <td> <button type="button" class="btn btn-primary border rounded  view-request-equip"> View Request Details</button>  </td>
@@ -401,7 +415,14 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        @{ if (item.Status.ToString() == "ForApproval")
+                                            {
+                                                <td> @Html.DisplayName("For Approval")</td>
+                                            }
+                                            else
+                                            {
+                                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                            }}
                                         <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                         <td><button type="button" class="btn btn-primary border rounded  view-fr"> View Request Details</button>  </td>
                                     </tr>
@@ -447,7 +468,6 @@
                                     <th>Status</th>
                                     <th>Requested by</th>
                                     <th> </th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -455,10 +475,16 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                        @{ if (item.Status.ToString() == "ForApproval")
+                                            {
+                                                <td> @Html.DisplayName("For Approval")</td>
+                                            }
+                                            else
+                                            {
+                                                <td> @Html.DisplayFor(modelItem => item.Status)</td>
+                                            }}
                                         <td> @Html.DisplayFor(modelItem => item.InventoryManager.Name)</td>
                                         <td> <button type="button" class="btn btn-primary border rounded  view-er"> View Request Details</button>  </td>
-
                                     </tr>
                                 }
                             </tbody>
@@ -468,7 +494,6 @@
                                     <td><strong>Status</strong></td>
                                     <td><strong>Requested by</strong></td>
                                     <td><strong></strong></td>
-
                                 </tr>
                             </tfoot>
                         </table>
