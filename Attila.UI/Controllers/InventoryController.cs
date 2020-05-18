@@ -5,6 +5,7 @@ using Attila.Application.Admin.Foods.Commands;
 using Attila.Application.Admin.Foods.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Commands;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Application.Inventory_Manager.Events.Queries;
 using Attila.Application.Inventory_Manager.Foods.Commands;
 using Attila.Application.Inventory_Manager.Foods.Queries;
 using Attila.Application.Inventory_Manager.Shared.Commands;
@@ -94,11 +95,8 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddInventoryDelivery(InventoryDeliveryCVM inventoriesDeliveryVM)
         {
-
-
             if (inventoriesDeliveryVM.file == null)
             {
-
                 InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
                 {
                     DeliveryDate = inventoriesDeliveryVM.DeliveryDate,
@@ -123,24 +121,15 @@ namespace Attila.UI.Controllers
                 });
 
                 return Json(result);
-
-
-
-
-
-
-
-
-
-
             }
-            else if (inventoriesDeliveryVM.file.Length > 0){
+
+            else if (inventoriesDeliveryVM.file.Length > 0)
+            {
                 using (var ms = new MemoryStream())
                 {
                     inventoriesDeliveryVM.file.CopyTo(ms);
                     var fileBytes = ms.ToArray();
                     string s = Convert.ToBase64String(fileBytes);
-
 
 
                     InventoriesDeliveryVM _inventory = new InventoriesDeliveryVM
@@ -168,8 +157,6 @@ namespace Attila.UI.Controllers
 
                     return Json(result);
                 }
-
-
             }
             else
             {
@@ -243,7 +230,7 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate
+                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate.ToString("MMM, dd, yyyy")
 
                 });
             }
@@ -476,7 +463,10 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> CheckOutEquipmentStock()
         {
             var getEquipmentDetails = await mediator.Send(new GetEquipmentStockDetailsQuery());
+            var getApprovedEquipment = await mediator.Send(new GetApprovedEventsQuery());
+
             List<SelectListItem> _list = new List<SelectListItem>();
+            List<SelectListItem> _list2 = new List<SelectListItem>();
 
             foreach (var item in getEquipmentDetails)
             {
@@ -487,10 +477,21 @@ namespace Attila.UI.Controllers
                 });
             }
 
+            foreach (var item in getApprovedEquipment)
+            {
+                _list2.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = "Event Name: " + item.EventName + " | Event Date:" + item.EventDate + " | Event Status: " + item.EventStatus
+                });
+            }
+
             _list.Add(new SelectListItem { Text = "Add New Equipment", Value = "Add New Equipment" });
+
             EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
                 EquipmentStockDetailsList = _list,
+                ProcessingEventsList = _list2
             };
 
             return View(equipmentDetailsListVM);
@@ -502,8 +503,10 @@ namespace Attila.UI.Controllers
         {
             EquipmentsInventoryVM _checkOutEquipment = new EquipmentsInventoryVM
             {
+                EventDetailsID = equipmentInventoryVM.EventDetailsID,
                 EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
-                Quantity = equipmentInventoryVM.Quantity
+                Quantity = equipmentInventoryVM.Quantity,
+                UserID = CurrentUser.ID
             };
 
             var response = await mediator.Send(new CheckOutEquipmentStockCommand
