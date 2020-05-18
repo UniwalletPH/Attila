@@ -3,8 +3,7 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-} 
-
+}
 
 
 <div class="container-fluid">
@@ -19,19 +18,17 @@
                             <div class="card-header py-3">
                                 <div class="row">
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <p class="text-primary m-0 font-weight-bold">Event: @Model.Event.EventName | @Model.Event.EventDate</p>
+                                        <p class="text-primary m-0 font-weight-bold">Event Name: @Model.Event.EventName</p>
+                                        <p class="text-primary m-0 font-weight-bold">Event Date: @($"{Model.Event.EventDate: MM/dd/yyyy}")</p>
                                     </div>
                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6  text-right">
 
                                         @{ if (Model.SelectedMenu.Count != 0)
                                             {
-
-
                                                 <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
                                             }
                                             else
                                             {
-
                                                 <button class="btn btn-primary btn-sm" id="btnSubmit" type="submit">Submit </button>}
                                         }
 
@@ -69,12 +66,9 @@
                                                                 }
                                                         }
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>}
                                 else
                                 {
@@ -107,12 +101,9 @@
                                                                 }
                                                         }
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>}
                             }
                         </div>
@@ -122,44 +113,24 @@
         </div> @{ if (Model.SelectedMenu.Count != 0)
             {
                 <div class="col-lg-4">
-
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h4 class="text-primary font-weight-bold m-0">Selected Dish</h4>
                         </div>
                         <ul class="list-group list-group-flush">
-
                             <li class="list-group-item">
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
                                         <p class="mb-0" id="result"> </p><span class="text-xs"> </span>
                                     </div>
-
                                 </div>
                             </li>
-
                         </ul>
-
                     </div>
-
                 </div>} }
-
-
-
-
-
 
     </div>
 </div>
-
-
-
-
-
-
-
-
-
 
 @section Scripts{
     <script>
@@ -168,7 +139,7 @@
                  var result = $('input[type="checkbox"]:checked')
 
                  if (result.length > 0) {
-                     var resultString = result.length + " checkboxe(s) checked <br/><br/>"
+                     var resultString = result.length + " checkbox(es) selected <br/><br/>"
 
                      result.each(function () {
                          resultString+=  $.trim($(this).parent().text()) + "<br/>";
@@ -178,18 +149,15 @@
 
                  }
                  else {
-                     $('#result').html(" No checkbox  is checked");
+                     $('#result').html("No checkbox selected");
                  }
-
          });
-        
+
         var id = '@Model.EventID'
         function OnSuccess(e) {
 
         var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
         window.location.href = url.replace('__id__', id);
-
-
         }
 
         function CheckBox(x) {
@@ -198,18 +166,13 @@
             });
         }
         $(document).on('click', '#btnEdit', function (e) {
-             
+
             var url = window.location.href = '/Events/UpdateMenu?EventID=' + id;
             window.location.href = url.replace('__id__', id);
-
-
         });
-
 
     </script>
 
-
     <partial name="_ValidationScriptsPartial" />
-
 }
 

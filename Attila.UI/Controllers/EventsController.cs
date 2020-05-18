@@ -157,9 +157,7 @@ namespace Attila.UI.Controllers
             {
                 EventDetails = _eventDetails
             });
-
         }
-
 
 
         [Authorize(Roles = "Admin, Coordinator")]
@@ -268,7 +266,6 @@ namespace Attila.UI.Controllers
             _addEventList.Client = _clientSelectList;
             _addEventList.EventDetails = _details;
             return View(_addEventList);
-
         }
 
 
@@ -276,9 +273,7 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Approve(int EventID)
         {
-
             var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
-
 
             await mediator.Send(new AddEventNotificationCommand
             {
@@ -342,7 +337,6 @@ namespace Attila.UI.Controllers
                     };
 
                     var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalEquipmentFee });
-
                 }
             }
 
@@ -379,8 +373,6 @@ namespace Attila.UI.Controllers
                     var _retVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _additionalDurationFee });
                 }
             }
-
-
 
             return RedirectToAction("Details", new { EventID = EventID });
         }
@@ -522,21 +514,18 @@ namespace Attila.UI.Controllers
 
                     _evntMenu.Add(_menu);
                 }
-
             }
-
 
             var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu });
 
 
             return Json(_rVal);
         }
+
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> UpdateMenu(int EventID)
         {
-
-
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
 
             if (_eventDetails != null)
@@ -566,12 +555,10 @@ namespace Attila.UI.Controllers
                     SelectedMenu = _selectedMenu
                 };
 
-
                 return View(eventDetails);
 
             }
             else { return View(); }
-
         }
 
         [Authorize(Roles = "Admin, Coordinator")]
@@ -602,13 +589,10 @@ namespace Attila.UI.Controllers
 
             }
 
-
             var _rVal = await mediator.Send(new AddEventMenuCommand { EventMenu = _evntMenu });
-
 
             return Json(_rVal);
         }
-
 
 
         [Authorize(Roles = "Coordinator")]
@@ -631,7 +615,7 @@ namespace Attila.UI.Controllers
                     EventAdditionalDishRequestID = _dishRequest.RequestID
                 });
 
-                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery());
 
                 var _selectListEquipment = new List<SelectListItem>();
 
@@ -639,7 +623,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name + " | " + item.UnitType,
+                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }
@@ -657,7 +641,6 @@ namespace Attila.UI.Controllers
                     });
                 }
 
-
                 var _additionalModel = new AdditionalsCVM
                 {
                     EventID = EventID,
@@ -666,7 +649,6 @@ namespace Attila.UI.Controllers
                     DishList = _selectListDishes,
                     EquipmentList = _selectListEquipment
                 };
-
 
                 return View(_additionalModel);
 
@@ -678,7 +660,7 @@ namespace Attila.UI.Controllers
                     EventAdditionalEquipmentRequestID = _equipmentRequest.RequestID
                 });
 
-                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery());
 
                 var _selectListEquipment = new List<SelectListItem>();
 
@@ -686,7 +668,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name,
+                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }
@@ -724,7 +706,7 @@ namespace Attila.UI.Controllers
                     EventAdditionalDishRequestID = _dishRequest.RequestID
                 });
 
-                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery());
 
                 var _selectListEquipment = new List<SelectListItem>();
 
@@ -732,7 +714,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name,
+                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }
@@ -764,7 +746,7 @@ namespace Attila.UI.Controllers
 
             else
             {
-                var _equipments = await mediator.Send(new GetAllEquipmentsQuery { });
+                var _equipments = await mediator.Send(new GetAllEquipmentsQuery());
 
                 var _selectListEquipment = new List<SelectListItem>();
 
@@ -772,7 +754,7 @@ namespace Attila.UI.Controllers
                 {
                     _selectListEquipment.Add(new SelectListItem
                     {
-                        Text = item.Name,
+                        Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                         Value = item.ID.ToString()
                     });
                 }
@@ -790,7 +772,6 @@ namespace Attila.UI.Controllers
                     });
                 }
 
-
                 var _additionalModel = new AdditionalsCVM
                 {
                     EventID = EventID,
@@ -798,13 +779,8 @@ namespace Attila.UI.Controllers
                     EquipmentList = _selectListEquipment
                 };
 
-
                 return View(_additionalModel);
-
-
             }
-
-
         }
 
         [Authorize(Roles = "Coordinator")]
