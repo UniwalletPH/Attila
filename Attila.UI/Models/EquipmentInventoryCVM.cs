@@ -29,6 +29,9 @@ namespace Attila.UI.Models
         public int EquipmentDetailsID { get; set; }
 
         [Required]
+        public int EventDetailsID { get; set; }
+
+        [Required]
         public int DeliveryDetailsID { get; set; }
 
         public IEnumerable<EquipmentsInventoryVM> EquipmentsInventoryVMs { get; set; }
@@ -40,5 +43,7 @@ namespace Attila.UI.Models
         public List<SelectListItem> EquipmentDeliveryList { get; set; }
 
         public List<SelectListItem> UserList { get; set; }
+
+        public List<SelectListItem> ProcessingEventsList { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Attila.Application.Interfaces;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
+using Attila.Domain.Entities;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,19 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                 if (_getEquipmentStockDetails != null)
                 {
                     _getEquipmentStockDetails.Quantity -= request.MyEquipmentInventoryVM.Quantity;
+
+                    EquipmentTracking _checkOutRecord = new EquipmentTracking
+                    {
+                        EventID = request.MyEquipmentInventoryVM.EventDetailsID,
+                        EquipmentID = request.MyEquipmentInventoryVM.EquipmentDetailsID,
+                        InventoryManagerID = request.MyEquipmentInventoryVM.UserID,
+                        Quantity = request.MyEquipmentInventoryVM.Quantity,
+                        TrackingDate = DateTime.Now,
+                        TrackingAction = EquipmentAction.CheckOut,
+                        Remarks = request.MyEquipmentInventoryVM.Remarks
+                    };
+
+                    dbContext.EquipmentTracking.Add(_checkOutRecord);
 
                     if (_getEquipmentStockDetails.Quantity > 0)
                     {
