@@ -10,260 +10,261 @@
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-12">
-
-                    <form role="form" asp-controller="EventDetails." asp-action="EditEvent" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
-                        <div class="card shadow mb-3">
-                            <div class="card-header py-3">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                        <p class="text-primary m-0 font-weight-bold"> </p>
-                                    </div>
-                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                                        <p class="text-primary m-0 font-weight-bold">
+                    <div class="card shadow mb-3">
+                        <div class="card-header py-3">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <p class="text-primary m-0 font-weight-bold"> </p>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                    <p class="text-primary m-0 font-weight-bold">
 
 
-                                            @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
+                                        @{ if (Model.EventDetails.EventStatus.ToString() == "Approved")
+                                            {
+                                                if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))
                                                 {
-                                                    if (User.IsInRole("Admin") || User.IsInRole("InventoryManager"))   
-                                                    {
 
-                                                        <label>Status:  </label>
-                                                        <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
-                                                    }
-
-                                                    else if (User.IsInRole("Coordinator"))
-                                                    {
-
-
-
-                                                        <label>Status:<input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly></label>
-                                                 
-
-                                                        if (Model.EventDetails.EventDate <= DateTime.Now)
-                                                        {
-                                                            <text> 
-                                                                <button class="btn btn-primary btn-sm"  id="btnComplete" type="button">Change Status To Completed</button>
-                                                            </text>
-                                                        }
-                                                    }
+                                                    <label>Status:  </label>
+                                                    <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
                                                 }
 
-                                                else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
+                                                else if (User.IsInRole("Coordinator"))
                                                 {
-                                                    if (User.IsInRole("Admin"))
-                                                    {
-                                                        <text>
-                                                            <button class="btn btn-primary btn-sm" id="btnSubmit" type="button">Approve </button>
-                                                            <button class="btn btn-primary btn-sm" id="btnDecline" type="button">Decline </button>
-                                                        </text>
-                                                    }
+                                                    <label>Status:<input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly></label>
 
-                                                    else if (User.IsInRole("Coordinator"))
+                                                    if (Model.EventDetails.EventDate <= DateTime.Now)
                                                     {
                                                         <text>
-                                                            <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
+                                                            <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Change Status To Completed</button>
                                                         </text>
                                                     }
                                                 }
+                                            }
 
-                                                else if (Model.EventDetails.EventStatus.ToString() == "Processing")
-                                                {
-                                                    if (User.IsInRole("Coordinator"))
-                                                    {
-                                                        <text>
-                                                            <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
-                                                        </text>
-                                                    }
-
-                                                }
-
-                                                else if (Model.EventDetails.EventStatus.ToString() == "Declined")
-                                                {
-                                                    if (User.IsInRole("Coordinator"))
-                                                    {
-                                                        <text>
-                                                            <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete </button>
-                                                        </text>
-                                                    }
-                                                }
-
-                                                else if (Model.EventDetails.EventStatus.ToString() == "Completed")
+                                            else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
+                                            {
+                                                if (User.IsInRole("Admin"))
                                                 {
                                                     <text>
-                                                        <label>Status:  </label>
-                                                        <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
+                                                        <button class="btn btn-primary btn-sm" id="btnSubmit" type="button">Approve </button>
+                                                        <button class="btn btn-primary btn-sm" id="btnDecline" type="button">Decline </button>
+                                                    </text>
+                                                }
+
+                                                else if (User.IsInRole("Coordinator"))
+                                                {
+                                                    <text>
+                                                        <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
                                                     </text>
                                                 }
                                             }
 
+                                            else if (Model.EventDetails.EventStatus.ToString() == "Processing")
+                                            {
+                                                if (User.IsInRole("Coordinator"))
+                                                {
+                                                    <text>
+                                                        <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit </button>
+                                                    </text>
+                                                }
 
-                                        </p>
+                                            }
+
+                                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                                            {
+                                                if (User.IsInRole("Coordinator"))
+                                                {
+                                                    <text>
+                                                        <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete </button>
+                                                    </text>
+                                                }
+                                            }
+
+                                            else if (Model.EventDetails.EventStatus.ToString() == "Completed")
+                                            {
+                                                <text>
+                                                    <label>Status:  </label>
+                                                    <input type="text" class="form-control" asp-for=@Model.EventDetails.EventStatus placeholder="" readonly>
+                                                </text>
+                                            }
+                                        }
+
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="address"><strong>Client</strong></label>
+
+                                            <input type="text" class="form-control " asp-for="EventDetails.Client.Name" placeholder="" readonly>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="address"><strong>Client</strong></label>
 
-                                                <input type="text" class="form-control " asp-for="EventDetails.Client.Name" placeholder="" readonly>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Event Name</strong></label>
 
-                                            </div>
+                                            <input type="text" asp-for="EventDetails.EventName" placeholder="John Smith's 70th Birthday" class="form-control" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Event Name</strong></label>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Event Date</strong></label>
 
-                                                <input type="text" asp-for="EventDetails.EventName" placeholder="John Smith's 70th Birthday" class="form-control" readonly>
-                                            </div>
+                                            <input type="date" asp-for="EventDetails.EventDate" class="form-control" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Event Date</strong></label>
-
-                                                <input type="date" asp-for="EventDetails.EventDate"  class="form-control" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Type</strong></label>
+                                            <input type="text" class="form-control details" asp-for="EventDetails.Type" placeholder="" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Type</strong></label>
-
-
-                                                <input type="text" class="form-control details" asp-for="EventDetails.Type" placeholder="" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Theme</strong></label>
+                                            <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="EventDetails.Theme" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Theme</strong></label>
-
-
-                                                <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="EventDetails.Theme" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Description</strong></label>
+                                            <input type="text" asp-for="EventDetails.Description" placeholder="For Friends and Family" class="form-control" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Description</strong></label>
-
-                                                <input type="text" asp-for="EventDetails.Description" placeholder="For Friends and Family" class="form-control" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Event Location</strong></label>
+                                            <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.Location" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Event Location</strong></label>
-                                                <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.Location" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Location Area</strong></label>
+                                            <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.LocationType" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="supplier"><strong>Location Area</strong></label>
-                                                <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.LocationType" readonly>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Venue in a Building/Condominium</strong></label>
+                                            @{ if (Model.EventDetails.VenueType.ToString() == "BuildingOrCondo")
+                                                {
+                                                    <input type="text" class="form-control" value="Yes" readonly />
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" class="form-control" value="No" readonly />
+                                                }}
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Venue in a Building/Condominium</strong></label>
-
-                                                <input type="text" class="form-control" asp-for="EventDetails.VenueType" readonly />
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Set Up Time</strong></label>
+                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.EntryTime" readonly />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="supplier"><strong>Set Up Time</strong></label>
-                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.EntryTime" readonly />
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Program Starts at </strong></label>
+                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ProgramStart" readonly />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="supplier"><strong>Program Starts at </strong></label>
-                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ProgramStart" readonly />
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Serving Time </strong></label>
+                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ServingTime" readonly />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="supplier"><strong>Serving Time </strong></label>
-                                                <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ServingTime" readonly />
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="supplier"><strong>Serving Type </strong></label>
+                                            @{ if (Model.EventDetails.ServingType.ToString() == "ManageBuffet")
+                                                {
+                                                    <input type="text" class="form-control" value="Manage Buffet" readonly />
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" class="form-control" value="Self-Service Buffet" readonly />
+                                                }}
+
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="supplier"><strong>Serving Type </strong></label>
-                                                <input type="text" class="form-control" asp-for="EventDetails.ServingType" readonly />
-
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Package</strong></label>
+                                            <input type="text" class="form-control" asp-for="EventDetails.Package.Name" readonly />
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Package</strong></label>
-                                                <input type="text" class="form-control" asp-for="EventDetails.Package.Name" readonly />
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Number of Guests</strong></label>
+                                            <input type="number" class="form-control" placeholder="" asp-for="EventDetails.NumberOfGuests" readonly>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Number of Guests</strong></label>
-                                                <input type="number" class="form-control" placeholder="" asp-for="EventDetails.NumberOfGuests" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Remarks</strong></label>
-                                                <textarea class="form-control" rows="4" asp-for="EventDetails.Remarks" name="remarks" readonly></textarea>
-                                            </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Remarks</strong></label>
+                                            <textarea class="form-control" rows="4" asp-for="EventDetails.Remarks" name="remarks" readonly></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-       
-        
+
+
         <div class="col-lg-4">
             @{
                 if (Model.EventDetails.EventMenu != null)
@@ -300,7 +301,7 @@
                             </div>
                         </div>
                     </div> } }
-            
+
             @{
                 if (Model.EventDetails.AdditionalDuration != null)
                 {
@@ -353,13 +354,7 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-
                             </div>
-
-
-
-
-
                         </div>
                     </div> } }
 
@@ -395,23 +390,15 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-
                             </div>
-
-
-
-
-
                         </div>
                     </div> } }
-               </div>
-            </div></div>
-
-
+        </div>
+    </div>
+</div>
 
 
 @section Scripts{
-
 
     <script>
             function OnSuccess(result) {
@@ -429,9 +416,6 @@
             window.location = "/Events/BookingForm";
         }
 
-
-
-
                 var event = '@Model.EventDetails.ID';
             $(document).on('click', ' #btnEdit', function (e) {
                id = $(this).val();
@@ -440,15 +424,14 @@
                 var url = '@Url.Action("Update", "Events", new { EventID = "__id__"  })';
                 window.location.href = url.replace('__id__', event)
 
-
             });
+
          $(document).on('click', ' #btnSubmit', function (e) {
                id = $(this).val();
 
 
                 var url = '@Url.Action("Approve", "Events", new { EventID = "__id__"  })';
                 window.location.href = url.replace('__id__', event)
-
 
             });
 
@@ -462,8 +445,6 @@
 
             });
 
-
-
             $(document).on('click', ' #btnDecline', function (e) {
                id = $(this).val();
 
@@ -471,15 +452,9 @@
                 var url = '@Url.Action("Decline", "Events", new { EventID = "__id__"  })';
                 window.location.href = url.replace('__id__', event)
 
-
             });
 
     </script>
 
-
-
     <partial name="_ValidationScriptsPartial" />
-
-     
-
-} 
+}

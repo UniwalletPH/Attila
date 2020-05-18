@@ -4,9 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
 }
- 
-
-
 
 
 <div class="container-fluid">
@@ -57,12 +54,9 @@
                                                         }
                                                 }
                                             </div>
-
-
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </form>
@@ -85,41 +79,18 @@
 
                         </div>
                     </li>
-                     
-
-
-
-
-
-
                 </ul>
-
             </div>
-
-        </div> 
- 
-
-
-
-             
-         
+        </div>
     </div>
 </div>
 
 
-
-
-
-
-
-
-
-
 @section Scripts{
     <script>
-         $(document).ready(function () { 
-           
-                 var result = $('input[type="checkbox"]:checked')  
+         $(document).ready(function () {
+
+                 var result = $('input[type="checkbox"]:checked')
 
                  if (result.length > 0) {
                      var resultString = result.length + " checkboxe(s) checked <br/><br/>"
@@ -134,15 +105,13 @@
                  else {
                      $('#result').html(" No checkbox  is checked");
                  }
-              
+
          });
         function OnSuccess(e) {
 
         var id = '@Model.EventID'
         var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
         window.location.href = url.replace('__id__', id);
-
-
         }
 
         function CheckBox(x) {
@@ -151,11 +120,7 @@
             });
         }
 
-
     </script>
-
-
     <partial name="_ValidationScriptsPartial" />
-
 }
 

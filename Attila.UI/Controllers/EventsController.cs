@@ -54,7 +54,6 @@ namespace Attila.UI.Controllers
         }
 
 
-
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> BookingForm()
@@ -94,7 +93,6 @@ namespace Attila.UI.Controllers
         }
 
 
-
         [Authorize(Roles = "Coordinator")]
         [HttpGet]
         public async Task<IActionResult> AddAdditionalDishRequest()
@@ -115,7 +113,6 @@ namespace Attila.UI.Controllers
             _addDishRequest.EventList = _events;
             return View(_addDishRequest);
         }
-
 
 
         [Authorize(Roles = "Coordinator")]
@@ -249,7 +246,7 @@ namespace Attila.UI.Controllers
             List<SelectListItem> ServingType = new List<SelectListItem>()
             {
                 new SelectListItem { Text = "Manage Buffet", Value = "ManageBuffet" },
-                new SelectListItem { Text = "Self Service Buffet", Value = "SelfServiceBuffet" },
+                new SelectListItem { Text = "Self-Service Buffet", Value = "SelfServiceBuffet" },
 
             };
             @ViewBag.OccasionType = new SelectList(OccasionType, "Value", "Text", _details.Type);
@@ -309,7 +306,7 @@ namespace Attila.UI.Controllers
 
             var _rVal = await mediator.Send(new AddAdditionalEventChargeCommand { MyAdditionalEventFeeVM = _initialFee });
 
-            if (_eventDetails.VenueType == VenueType.Building)
+            if (_eventDetails.VenueType == VenueType.BuildingOrCondo)
             {
                 var _serviceFee = new AdditionalEventFeeVM
                 {
