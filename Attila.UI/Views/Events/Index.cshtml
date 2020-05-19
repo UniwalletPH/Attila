@@ -50,17 +50,17 @@
                         <tbody>
                             @foreach (var item in Model.ProcessingEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded add-menu">Add Menu Details</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded add-additional">Add Additionals</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded change-status">Submit For Approval</button>  </td>
-                            </tr>
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded add-menu">Add Menu Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded add-additional">Add Additionals</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded change-status">Submit For Approval</button>  </td>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
@@ -121,14 +121,14 @@
                         <tbody>
                             @foreach (var item in Model.PendingEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                            </tr>
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
@@ -186,21 +186,21 @@
 
                             @foreach (var item in Model.IncomingEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                @if (User.IsInRole("Coordinator"))
-                                {
-                                    <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
-                                }
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
+                                    @if (User.IsInRole("Coordinator"))
+                                    {
+                                        <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
+                                    }
 
-                            </tr>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
@@ -223,7 +223,6 @@
         </div>
     </div>
 
-
     <div class="container-fluid" style="margin-top: 10px;">
         <div style="margin: 10px;">
             <div class="row">
@@ -233,7 +232,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Past</p>
+                        <p class="text-primary m-0 font-weight-bold">Completed</p>
                     </div>
                 </div>
             </div>
@@ -256,19 +255,85 @@
                         </thead>
                         <tbody>
 
-                            @foreach (var item in Model.PastEvent)
+                            @foreach (var item in Model.CompletedEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td><strong>Booking Date</strong></td>
+                                <td><strong>Event Name</strong></td>
+                                <td><strong>Event Date</strong></td>
+                                <td><strong>Client</strong></td>
+                                <td><strong>Coordinator</strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
+                                <td><strong></strong></td>
                             </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="margin-top: 10px;">
+        <div style="margin: 10px;">
+            <div class="row">
+            </div>
+        </div>
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                        <p class="text-primary m-0 font-weight-bold">Closed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+
+                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
+                    <table class="table dataTable my-0 responsive  display" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Booking Date</th>
+                                <th>Event Name</th>
+                                <th>Event Date</th>
+                                <th>Client</th>
+                                <th>Coordinator</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model.ClosedEvent)
+                            {
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
+                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
@@ -328,14 +393,14 @@
 
                             @foreach (var item in Model.IncomingEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                            </tr>
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
@@ -365,7 +430,7 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Past</p>
+                        <p class="text-primary m-0 font-weight-bold">Closed</p>
                     </div>
                 </div>
             </div>
@@ -385,16 +450,16 @@
                         </thead>
                         <tbody>
 
-                            @foreach (var item in Model.PastEvent)
+                            @foreach (var item in Model.ClosedEvent)
                             {
-                            <tr data-id="@item.ID">
-                                <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>.
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view"> View Event Details</button></td>
-                            </tr>
+                                <tr data-id="@item.ID">
+                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>.
+                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                    <td><button type="button" class="btn btn-primary border rounded view"> View Event Details</button></td>
+                                </tr>
                             }
                         </tbody>
                         <tfoot>
