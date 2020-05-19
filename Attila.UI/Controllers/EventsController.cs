@@ -36,17 +36,19 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Index()
         {
             var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
-            var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery { });
-            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
-            var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
-            var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
+            var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery());
+            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery());
+            var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery());
+            var _completedEvents = await mediator.Send(new GetAllCompletedEventsQuery());
+            var _closedEvents = await mediator.Send(new GetAllClosedEventsQuery());
 
             var _forEvent = new EventViewCVM
             {
                 ProcessingEvent = _processingEvents,
-                IncomingEvent = _incomingEvents,
-                PastEvent = _pastEvents,
                 PendingEvent = _pendingEvents,
+                IncomingEvent = _incomingEvents,
+                CompletedEvent = _completedEvents,
+                ClosedEvent = _closedEvents,
                 Events = _searchResult
             };
 
@@ -266,9 +268,43 @@ namespace Attila.UI.Controllers
         }
 
 
+        [Authorize(Roles = "Coordinator")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
+
+        {
+            var response = await mediator.Send(new UpdateEventCommand
+            {
+                UpdateEvent = _eventDetails.EventDetails
+            });
+
+            return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
+        }
+
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEventStatusToForApproval(int EventID)
+        {
+            var response = await mediator.Send(new ChangeEventStatusToForApprovalCommand
+            {
+                ID = EventID
+            });
+
+            await mediator.Send(new AddEventNotificationCommand
+            {
+                Message = "New Event For Approval",
+                TargetUserID = -1,
+                MethodName = "/Events/Details",
+                RequestID = response
+            });
+
+            return RedirectToAction("Index");
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> Approve(int EventID)
+        public async Task<IActionResult> ApproveEvent(int EventID)
         {
             var response = await mediator.Send(new ApproveEventRequestCommand { EventID = EventID });
 
@@ -279,6 +315,7 @@ namespace Attila.UI.Controllers
                 MethodName = "/Events/Details",
                 RequestID = response.ID
             });
+
             var inventoryManagerList = await mediator.Send(new GetInventoryManagerListQuery());
 
             foreach (var item in inventoryManagerList)
@@ -290,7 +327,6 @@ namespace Attila.UI.Controllers
                     MethodName = "/Events/Details",
                     RequestID = response.ID
                 }); ;
-
             }
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = response.ID });
@@ -375,10 +411,8 @@ namespace Attila.UI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Decline(int EventID)
+        public async Task<IActionResult> DeclineEvent(int EventID)
         {
-
-
             var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
 
             await mediator.Send(new AddEventNotificationCommand
@@ -389,31 +423,39 @@ namespace Attila.UI.Controllers
                 RequestID = response.ID
             });
 
-
             return RedirectToAction("Details", new { EventID = EventID });
         }
-
-        [Authorize(Roles = "Coordinator")]
-
-        [HttpPost]
-        public async Task<IActionResult> UpdateEvent(ViewEventCVM _eventDetails)
-
-        {
-            var response = await mediator.Send(new UpdateEventCommand
-            {
-                UpdateEvent = _eventDetails.EventDetails
-            });
-
-            return RedirectToAction("Details", new { EventID = _eventDetails.EventDetails.ID });
-        }
-
 
 
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> ChangeEventStatusToCompleted(int EventID)
         {
-            var response = await mediator.Send(new ChangeEventStatusToCompletedCommand
+            await mediator.Send(new ChangeEventStatusToCompletedCommand
+            {
+                EventID = EventID
+            });
+
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEventStatusToCancelled(int EventID)
+        {
+            await mediator.Send(new ChangeEventStatusToCancelledCommand
+            {
+                EventID = EventID
+            });
+
+            return RedirectToAction("Details", new { EventID = EventID });
+        }
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> ChangeEventStatusToClosed(int EventID)
+        {
+            await mediator.Send(new ChangeEventStatusToClosedCommand
             {
                 EventID = EventID
             });
@@ -424,31 +466,8 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
-        public async Task<IActionResult> ChangeEventStatusToForApproval(int EventID)
-        {
-            var response = await mediator.Send(new ChangeEventStatusCommand
-            {
-                ID = EventID
-            });
-
-            await mediator.Send(new AddEventNotificationCommand
-            {
-                Message = "New Event For Approval",
-                TargetUserID = -1,
-                MethodName = "/Events/Details",
-                RequestID = response
-            });
-
-            return RedirectToAction("Index");
-        }
-
-
-        [Authorize(Roles = "Admin, Coordinator")]
-        [HttpGet]
         public async Task<IActionResult> MenuForm(int EventID)
         {
-
-
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
 
             if (_eventDetails != null)

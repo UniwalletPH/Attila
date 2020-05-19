@@ -40,12 +40,12 @@ namespace Attila.UI.Controllers
 
             var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
             var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery { });
-            var _pastEvents = await mediator.Send(new GetAllPastEventsQuery { });
+            var _completedEvents = await mediator.Send(new GetAllCompletedEventsQuery { });
 
             var _forEvent = new EventViewCVM
             { 
                 IncomingEvent = _incomingEvents,
-                PastEvent = _pastEvents,
+                CompletedEvent = _completedEvents,
                 PendingEvent = _pendingEvents
             };
 
