@@ -11,7 +11,9 @@ namespace Attila.UI.Models
 
         public List<EventVM> IncomingEvent { get; set; }
 
-        public List<EventVM> PastEvent { get; set; }
+        public List<EventVM> CompletedEvent { get; set; }
+
+        public List<EventVM> ClosedEvent { get; set; }
 
         public IEnumerable<EventVM> Events{get;set;}
     }
