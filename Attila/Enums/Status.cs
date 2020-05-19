@@ -13,6 +13,8 @@ namespace Attila
         ForApproval = 4,
         Approved = 5,
         Completed = 6,
+        Cancelled = 7,
+        Closed = 8,
         Declined = 10
     }
 }
