@@ -29,6 +29,7 @@ namespace Attila.Application.Events.Queries
                 var _searchedEvent = dbContext.Events
                     .Include(a => a.EventPackage)
                     .Include(a => a.Client)
+                    .Include(a => a.Coordinator)
                     .Where(a => a.ID == request.EventId).SingleOrDefault();
 
 
@@ -56,7 +57,8 @@ namespace Attila.Application.Events.Queries
                     ServingType = _searchedEvent.ServingType,
                     Theme = _searchedEvent.Theme,
                     VenueType = _searchedEvent.VenueType,
-                    ToPay = _searchedEvent.ToPay,     
+                    ToPay = _searchedEvent.ToPay,
+                    User = _searchedEvent.Coordinator
                 };
 
 

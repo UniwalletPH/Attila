@@ -53,6 +53,8 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public decimal ToPay { get; set; }
 
+        public User User { get; set; }
+
         public ICollection<EventMenuVM> EventMenu { get; set; }
 
         public List<AdditionalDishVM> AdditionalDish { get; set; }
