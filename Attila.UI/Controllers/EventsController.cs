@@ -41,6 +41,7 @@ namespace Attila.UI.Controllers
             var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery());
             var _completedEvents = await mediator.Send(new GetAllCompletedEventsQuery());
             var _closedEvents = await mediator.Send(new GetAllClosedEventsQuery());
+            var _cancelledEvents = await mediator.Send(new GetAllCancelledEventsQuery());
 
             var _forEvent = new EventViewCVM
             {
@@ -49,6 +50,7 @@ namespace Attila.UI.Controllers
                 IncomingEvent = _incomingEvents,
                 CompletedEvent = _completedEvents,
                 ClosedEvent = _closedEvents,
+                CancelledEvent = _cancelledEvents,
                 Events = _searchResult
             };
 

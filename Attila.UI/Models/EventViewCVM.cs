@@ -15,6 +15,8 @@ namespace Attila.UI.Models
 
         public List<EventVM> ClosedEvent { get; set; }
 
+        public List<EventVM> CancelledEvent { get; set; }
+
         public IEnumerable<EventVM> Events{get;set;}
     }
 }
