@@ -3,7 +3,7 @@
     ViewData["Title"] = "ServiceCharge";
 }
 @model ServiceChargeCVM
- 
+
 
 <div class="container-fluid" style="margin-top: 10px;">
     <h3 class="text-dark mb-4">Service Charge Fee</h3>
@@ -51,25 +51,21 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Description</strong></td>
-                            <td><strong>Item</strong></td>
-                            <td><strong>Price Per Quantity</strong></td>
-                            <td><strong>Quantity</strong></td>
-                            <td><strong>Total</strong></td>
+                            <th colspan="4" style="text-align:right">Total: ₱</th>
+                            <th> @Html.DisplayFor(m => m.TotalCharges)</th>
                         </tr>
                     </tfoot>
                 </table>
 
             </div>
-            <br />
-            <h4 style="padding-left: 80%;">Total Charge : ₱@Html.DisplayFor(m => m.TotalCharges)</h4>
+          
         </div>
     </div>
 </div>
 
 
 
-    
+
 
 
 
@@ -91,8 +87,6 @@
             window.location.href = url.replace('__id__', id);
 
 
-            });
-
+         });
     </script>
-
-}
+      }
