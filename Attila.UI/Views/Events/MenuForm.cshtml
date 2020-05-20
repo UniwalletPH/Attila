@@ -77,14 +77,14 @@
                                             <div class="col">
                                                 <input type="hidden" class="form-control" asp-for="EventID" readonly>
                                                 <div class="form-group">
-                                                    <label for="food_details"><strong>Food Details</strong></label>
-
+                                          
                                                     <div class="form-actions">
                                                         @{
                                                             foreach (var group in Model.Groupings)
                                                             {
                                                                 <div class="form-group">
-                                                                    <h2>[@group.Key.Category]  -- Select One --</h2>
+                                                                    <h1>@group.Key.Category </h1>
+                                                                    <h3>( Select One )</h3>
                                                                 </div>
 
                                                                 foreach (var item in group)

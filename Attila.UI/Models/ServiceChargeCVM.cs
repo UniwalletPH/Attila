@@ -11,5 +11,7 @@ namespace Attila.UI.Models
         public EventDetailsVM Event { get; set; }
 
         public List<AdditionalEventFeeVM> EventFees { get; set; }
+
+        public decimal TotalCharges { get; set; }
     }
 }

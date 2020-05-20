@@ -51,9 +51,9 @@
                             @foreach (var item in Model.ProcessingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -122,9 +122,9 @@
                             @foreach (var item in Model.PendingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -187,9 +187,9 @@
                             @foreach (var item in Model.IncomingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -258,9 +258,9 @@
                             @foreach (var item in Model.CompletedEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -325,9 +325,9 @@
                             @foreach (var item in Model.ClosedEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -389,9 +389,9 @@
                             @foreach (var item in Model.CancelledEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -456,9 +456,9 @@
                             @foreach (var item in Model.IncomingEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
@@ -515,9 +515,9 @@
                             @foreach (var item in Model.ClosedEvent)
                             {
                                 <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>.
+                                    <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>.
                                     <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                    <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
                                     <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                     <td><button type="button" class="btn btn-primary border rounded view"> View Event Details</button></td>

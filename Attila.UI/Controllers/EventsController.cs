@@ -962,13 +962,22 @@ namespace Attila.UI.Controllers
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]
         public async Task<IActionResult> ServiceCharge(int EventID)
-        {
+            {
             var _eventDetail = await mediator.Send(new SearchEventByIdQuery { EventId = EventID});
             var _rValue = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID });
+
+            decimal totalCharges = 0;
+
+            foreach (var item in _rValue)
+            {
+                totalCharges = totalCharges + item.TotalPrice;
+            }
+
             var _ViewData = new ServiceChargeCVM
             {
                 Event = _eventDetail,
-                EventFees = _rValue
+                EventFees = _rValue,
+                TotalCharges = totalCharges
             };
 
             return View(_ViewData);
