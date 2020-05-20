@@ -3,10 +3,9 @@
     ViewData["Title"] = "Equipment Tracking";
 }
 
-@model ViewEventCVM
+@model EquipmentTrackingCVM
 
 <div class="container-fluid" style="margin-top: 10px;">
-    <h3 class="text-dark mb-4">Events</h3>
     <div style="margin: 10px;">
         <div class="row">
         </div>
@@ -25,36 +24,36 @@
                 <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Booking Date</th>
-                            <th>Event Name</th>
-                            <th>Event Date</th>
-                            <th>Client</th>
-                            <th>Coordinator</th>
-                            <th></th>
+                            <th>Check In ID</th>
+                            <th>Event ID</th>
+                            <th>Equipment ID</th>
+                            <th>Quantity</th>
+                            <th>Tracking Date</th>
+                            <th>Tracking Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model.IncomingEvent)
+                        @foreach (var item in Model.CheckInEquipmentTracking)
                         {
-                            <tr data-id="@item.ID">
-                                <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                            </tr>
+                        <tr data-id="@item.ID">
+                            <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EventID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.EquipmentID)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TrackingDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TrackingAction)</td>
+                        </tr>
                         }
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Booking Date</strong></td>
-                            <td><strong>Event Name</strong></td>
-                            <td><strong>Event Date</strong></td>
-                            <td><strong>Client</strong></td>
-                            <td><strong>Coordinator</strong></td>
-                            <td><strong></strong></td>
+                            <td><strong>Check In ID</strong></td>
+                            <td><strong>Event ID</strong></td>
+                            <td><strong>Equipment ID</strong></td>
+                            <td><strong>Quantity</strong></td>
+                            <td><strong>Tracking Date</strong></td>
+                            <td><strong>Tracking Action</strong></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -74,7 +73,7 @@
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p class="text-primary m-0 font-weight-bold">Completed</p>
+                    <p class="text-primary m-0 font-weight-bold">Check Out List</p>
                 </div>
             </div>
         </div>
@@ -84,39 +83,36 @@
                 <table class="table dataTable my-0" id="dataTable">
                     <thead>
                         <tr>
-                            <th>Booking Date</th>.
-                            <th>Event Name</th>
-                            <th>Event Date</th>
-                            <th>Client</th>
-                            <th>Coordinator</th>
-                            <th></th>
-                            <th></th>
+                            <th>Check In ID</th>
+                            <th>Event ID</th>
+                            <th>Equipment ID</th>
+                            <th>Quantity</th>
+                            <th>Tracking Date</th>
+                            <th>Tracking Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
-                        @foreach (var item in Model.CompletedEvent)
+                        @foreach (var item in Model.CheckOutEquipmentTracking)
                         {
                             <tr data-id="@item.ID">
-                                <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>.
-                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
-                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button></td>
-                                <td><button type="button" class="btn btn-primary border rounded checkIn">Check In Equipments</button></td>
+                                <td>@Html.DisplayFor(modelItem => item.ID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EventID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.EquipmentID)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TrackingDate)</td>
+                                <td>@Html.DisplayFor(modelItem => item.TrackingAction)</td>
                             </tr>
                         }
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Booking Date</strong></td>
-                            <td><strong>Event Name</strong></td>
-                            <td><strong>Event Date</strong></td>
-                            <td><strong>Client</strong></td>
-                            <td><strong>Coordinator</strong></td>
-                            <td><strong></strong></td>
-                            <td><strong></strong></td>
+                            <td><strong>Check In ID</strong></td>
+                            <td><strong>Event ID</strong></td>
+                            <td><strong>Equipment ID</strong></td>
+                            <td><strong>Quantity</strong></td>
+                            <td><strong>Tracking Date</strong></td>
+                            <td><strong>Tracking Action</strong></td>
                         </tr>
                     </tfoot>
                 </table>
