@@ -36,47 +36,56 @@
 
                                             else if (Model.EventDetails.EventStatus.ToString() == "Approved")
                                             {
-                                                <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
 
-                                                if (User.IsInRole("Coordinator"))
-                                                {
-                                                    <br/>
-                                                    <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Complete Event</button>
-                                                    <button class="btn btn-primary btn-sm" id="btnCancel" type="button">Cancel Event</button>
-                                                }
-                                            }
-
-                                            else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                                            if (User.IsInRole("Coordinator"))
                                             {
-                                                <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-
-                                                if (User.IsInRole("Coordinator"))
-                                                {
-                                                    <br/>
-                                                    <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete</button>
-                                                }
+                                                <br />
+                                                <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Complete Event</button>
+                                                <button class="btn btn-primary btn-sm" id="btnCancel" type="button">Cancel Event</button>
                                             }
+                                        }
 
-                                            else if (Model.EventDetails.EventStatus.ToString() == "Completed")
+                                        else if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                                        {
+                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+
+                                            if (User.IsInRole("Coordinator"))
                                             {
-                                                <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+                                                <br />
+                                                <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete</button>
+                                            }
+                                        }
 
-                                                if (User.IsInRole("Coordinator"))
+                                        else if (Model.EventDetails.EventStatus.ToString() == "Completed")
+                                        {
+                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+
+                                            if (User.IsInRole("Coordinator"))
+                                            {
+                                                if (Model.TotalPayment >= Model.TotalCharge)
                                                 {
-                                                    <br/>
+                                                    <br />
                                                     <button class="btn btn-primary btn-sm" id="btnClose" type="button">Close Event</button>
                                                 }
-                                            }
+                                                else
+                                                {
+                                                    <p class="text-primary m-0 font-weight-bold"> Payment Status: Not Yet Fully Paid  </p>
+                                                }
 
-                                            else if (Model.EventDetails.EventStatus.ToString() == "Cancelled")
-                                            {
-                                                <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
                                             }
+                                        }
 
-                                            else if (Model.EventDetails.EventStatus.ToString() == "Closed")
-                                            {
-                                                <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-                                            }
+                                        else if (Model.EventDetails.EventStatus.ToString() == "Cancelled")
+                                        {
+                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+                                        }
+
+                                        else if (Model.EventDetails.EventStatus.ToString() == "Closed")
+                                        {
+                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
+                                            <p class="text-primary m-0 font-weight-bold"> Payment Status: Fully Paid  </p>
+                                        }
                                         }
                                     </div>
                                 </div>

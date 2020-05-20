@@ -4,14 +4,16 @@ using Attila.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    partial class AttilaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200520103543_AddedSeederForPresentation")]
+    partial class AddedSeederForPresentation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2222,9 +2224,6 @@ namespace Attila.DbMigration.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Returned")
-                        .HasColumnType("bit");
 
                     b.Property<byte>("TrackingAction")
                         .HasColumnType("tinyint");

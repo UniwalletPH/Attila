@@ -41,6 +41,8 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 IsTemporaryPassword = true,
                 TemporaryPassword = _pass
             });
+
+         
         }
     }
 }

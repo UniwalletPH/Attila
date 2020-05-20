@@ -890,6 +890,34 @@ namespace Attila.UI.Controllers
         }
 
 
+
+        [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
+        public IActionResult Tracking()
+        {
+            //var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
+            //var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery());
+            //var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery());
+            //var _adminPendingEvents = await mediator.Send(new GetAllAdminPendingEventsQuery());
+            //var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery());
+            //var _completedEvents = await mediator.Send(new GetAllCompletedEventsQuery());
+            //var _closedEvents = await mediator.Send(new GetAllClosedEventsQuery());
+            //var _cancelledEvents = await mediator.Send(new GetAllCancelledEventsQuery());
+
+            ////var _forEvent = new EventViewCVM
+            ////{
+            ////    ProcessingEvent = _processingEvents,
+            ////    PendingEvent = _pendingEvents,
+            ////    AdminPendingEvent = _adminPendingEvents,
+            ////    IncomingEvent = _incomingEvents,
+            ////    CompletedEvent = _completedEvents,
+            ////    ClosedEvent = _closedEvents,
+            ////    CancelledEvent = _cancelledEvents,
+            ////    Events = _searchResult
+            ////};
+
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
