@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Attila.DbMigration.Migrations
 {
     [DbContext(typeof(AttilaDbContext))]
-    [Migration("20200520103543_AddedSeederForPresentation")]
+    [Migration("20200520122348_AddedSeederForPresentation")]
     partial class AddedSeederForPresentation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,7 +53,7 @@ namespace Attila.DbMigration.Migrations
                             ID = 1,
                             Address = "Cavite, Philippines",
                             Contact = "090909090909",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 764, DateTimeKind.Local).AddTicks(5312),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "vincentdagpin@uniwallet.ph",
                             Name = "Vincent Dagpin"
                         },
@@ -62,7 +62,7 @@ namespace Attila.DbMigration.Migrations
                             ID = 2,
                             Address = "Manila, Philippines",
                             Contact = "+65877327373",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 767, DateTimeKind.Local).AddTicks(4585),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "cherylchan@gmail.com",
                             Name = "Cheryl Chan"
                         },
@@ -71,7 +71,7 @@ namespace Attila.DbMigration.Migrations
                             ID = 3,
                             Address = "Manila, Philippines",
                             Contact = "+6523423523",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 767, DateTimeKind.Local).AddTicks(4757),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "peishi@gmail.com",
                             Name = "Pei Shi"
                         },
@@ -80,7 +80,7 @@ namespace Attila.DbMigration.Migrations
                             ID = 4,
                             Address = "Singapore",
                             Contact = "+65342642345",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 767, DateTimeKind.Local).AddTicks(4768),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "ryx@gmail.com",
                             Name = "Ren Yi Xiang"
                         });
@@ -128,7 +128,7 @@ namespace Attila.DbMigration.Migrations
                         {
                             ID = 1,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DeliveryDate = new DateTime(2020, 5, 20, 18, 35, 41, 768, DateTimeKind.Local).AddTicks(4081),
+                            DeliveryDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeliveryPrice = 50000m,
                             SupplierID = 1
                         },
@@ -136,7 +136,7 @@ namespace Attila.DbMigration.Migrations
                         {
                             ID = 2,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DeliveryDate = new DateTime(2020, 5, 20, 18, 35, 41, 768, DateTimeKind.Local).AddTicks(5684),
+                            DeliveryDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DeliveryPrice = 100000m,
                             SupplierID = 2
                         });
@@ -2224,6 +2224,9 @@ namespace Attila.DbMigration.Migrations
 
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Returned")
+                        .HasColumnType("bit");
 
                     b.Property<byte>("TrackingAction")
                         .HasColumnType("tinyint");
@@ -10471,7 +10474,7 @@ namespace Attila.DbMigration.Migrations
                             Address = "Quezon City",
                             ContactNumber = "+639439435435",
                             ContactPersonName = "Paul Parks",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 892, DateTimeKind.Local).AddTicks(8782),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "CSI"
                         },
                         new
@@ -10480,7 +10483,7 @@ namespace Attila.DbMigration.Migrations
                             Address = "Quezon City",
                             ContactNumber = "+6392674564564",
                             ContactPersonName = "Cris Cruz",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 892, DateTimeKind.Local).AddTicks(9036),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "UVWoods"
                         },
                         new
@@ -10489,7 +10492,7 @@ namespace Attila.DbMigration.Migrations
                             Address = "Pasig City",
                             ContactNumber = "+639465634453",
                             ContactPersonName = "Angel Tan",
-                            CreatedOn = new DateTime(2020, 5, 20, 18, 35, 41, 892, DateTimeKind.Local).AddTicks(9049),
+                            CreatedOn = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "ABC"
                         });
                 });
@@ -10544,7 +10547,34 @@ namespace Attila.DbMigration.Migrations
                             Email = "admin@acs.com",
                             Name = "Admin",
                             Role = (byte)1,
-                            UID = new Guid("00000000-0000-0000-0000-000000000000")
+                            UID = new Guid("00000000-0000-0000-0000-000000000001")
+                        },
+                        new
+                        {
+                            ID = -2,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "coordinator@acs.com",
+                            Name = "Test-Coordinator",
+                            Role = (byte)2,
+                            UID = new Guid("00000000-0000-0000-0000-000000000002")
+                        },
+                        new
+                        {
+                            ID = -3,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "inventory-mgr@acs.com",
+                            Name = "Test-Inventory-Manager",
+                            Role = (byte)4,
+                            UID = new Guid("00000000-0000-0000-0000-000000000003")
+                        },
+                        new
+                        {
+                            ID = -4,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "chef@acs.com",
+                            Name = "Test-Chef",
+                            Role = (byte)3,
+                            UID = new Guid("00000000-0000-0000-0000-000000000004")
                         });
                 });
 
@@ -10594,6 +10624,36 @@ namespace Attila.DbMigration.Migrations
                             Salt = new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 },
                             TemporaryPassword = "admin",
                             Username = "admin"
+                        },
+                        new
+                        {
+                            ID = -2,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsTemporaryPassword = true,
+                            Password = new byte[] { 0, 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 152, 156, 47, 115, 252, 177, 181, 237, 49, 172, 91, 121, 81, 188, 196, 100, 45, 157, 169, 124, 209, 176, 77, 87, 192, 4, 80, 245, 135, 176, 31, 123 },
+                            Salt = new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 },
+                            TemporaryPassword = "admin",
+                            Username = "test-coordinator"
+                        },
+                        new
+                        {
+                            ID = -3,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsTemporaryPassword = true,
+                            Password = new byte[] { 0, 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 152, 156, 47, 115, 252, 177, 181, 237, 49, 172, 91, 121, 81, 188, 196, 100, 45, 157, 169, 124, 209, 176, 77, 87, 192, 4, 80, 245, 135, 176, 31, 123 },
+                            Salt = new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 },
+                            TemporaryPassword = "admin",
+                            Username = "test-inventory-manager"
+                        },
+                        new
+                        {
+                            ID = -4,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsTemporaryPassword = true,
+                            Password = new byte[] { 0, 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 152, 156, 47, 115, 252, 177, 181, 237, 49, 172, 91, 121, 81, 188, 196, 100, 45, 157, 169, 124, 209, 176, 77, 87, 192, 4, 80, 245, 135, 176, 31, 123 },
+                            Salt = new byte[] { 65, 68, 77, 73, 78, 45, 83, 65, 76, 84, 45, 49, 50, 51, 52, 33, 64, 35, 36 },
+                            TemporaryPassword = "admin",
+                            Username = "test-chef"
                         });
                 });
 

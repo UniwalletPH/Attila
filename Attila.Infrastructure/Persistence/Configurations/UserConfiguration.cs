@@ -1,4 +1,5 @@
-﻿using Attila.Domain.Entities;
+﻿using Attila.Application.Common.Extensions;
+using Attila.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -29,10 +30,37 @@ namespace Attila.Infrastructure.Persistence.Configurations
             builder.HasData(new User
             {
                 ID = -1,
-                UID = Guid.Empty,
+                UID = Guid.Empty.Increment(1),
                 Name = "Admin",
                 Role = AccessRole.Admin,
                 Email = "admin@acs.com"
+            });
+
+            builder.HasData(new User
+            {
+                ID = -2,
+                UID = Guid.Empty.Increment(2),
+                Name = "Test-Coordinator",
+                Role = AccessRole.Coordinator,
+                Email = "coordinator@acs.com"
+            });
+
+            builder.HasData(new User
+            {
+                ID = -3,
+                UID = Guid.Empty.Increment(3),
+                Name = "Test-Inventory-Manager",
+                Role = AccessRole.InventoryManager,
+                Email = "inventory-mgr@acs.com"
+            });
+
+            builder.HasData(new User
+            {
+                ID = -4,
+                UID = Guid.Empty.Increment(4),
+                Name = "Test-Chef",
+                Role = AccessRole.Chef,
+                Email = "chef@acs.com"
             });
         }
     }

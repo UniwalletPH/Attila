@@ -30,7 +30,7 @@ namespace Attila.UI.Controllers
         {
             var _pendingFoodReq = await mediator.Send(new GetAllPendingFoodRestockRequestQuery { });
             var _pendingEquimentReq = await mediator.Send(new GetAllPendingEquipmentRestockRequestQuery { });
-            var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery { });
+            var _pendingEvents = await mediator.Send(new Application.Admin.Events.Queries.GetAllPendingEventsQuery { });
             var _getInventoryDeliveryList = await mediator.Send(new GetInventoryDeliveryQuery());
 
 

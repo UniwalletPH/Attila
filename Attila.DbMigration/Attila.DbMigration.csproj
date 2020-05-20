@@ -13,6 +13,18 @@
     <Compile Remove="Migrations\20200327143551_Init.Designer.cs" />
     <Compile Remove="Migrations\20200517101904_EquipmentTrackingEntity.cs" />
     <Compile Remove="Migrations\20200517101904_EquipmentTrackingEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200520094027_ReturnedProperty.cs" />
+    <Compile Remove="Migrations\20200520094027_ReturnedProperty.Designer.cs" />
+    <Compile Remove="Migrations\20200520103543_AddedSeederForPresentation.cs" />
+    <Compile Remove="Migrations\20200520103543_AddedSeederForPresentation.Designer.cs" />
+    <Compile Remove="Migrations\20200520120953_test.cs" />
+    <Compile Remove="Migrations\20200520120953_test.Designer.cs" />
+    <Compile Remove="Migrations\20200520121630_Seed_Users.cs" />
+    <Compile Remove="Migrations\20200520121630_Seed_Users.Designer.cs" />
+    <Compile Remove="Migrations\20200520121943_SeedUsers.cs" />
+    <Compile Remove="Migrations\20200520121943_SeedUsers.Designer.cs" />
+    <Compile Remove="Migrations\20200520122232_AddedSeededForPresentation.cs" />
+    <Compile Remove="Migrations\20200520122232_AddedSeededForPresentation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

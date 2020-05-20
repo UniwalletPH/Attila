@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using System;
 
 namespace Attila.UI
@@ -29,14 +32,22 @@ namespace Attila.UI
             services.AddApplication();
             services.AddInfrastructure(Configuration);
 
+            services.AddHttpContextAccessor();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
             services.AddScoped<ISignInManager, SignInManager>();
-            services.AddHttpContextAccessor();
+            services.AddScoped<ICurrentUser, AppUser>();
 
             services.AddKendo();
 
 
             services.AddControllersWithViews()
+                .AddNewtonsoftJson(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                    opt.SerializerSettings.Formatting = Formatting.Indented;
+                    opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    opt.SerializerSettings.Converters.Add(new StringEnumConverter());
+                })
                 .AddRazorRuntimeCompilation();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -56,6 +67,8 @@ namespace Attila.UI
                     authBuilder.RequireRole("Admin");
                 });
             });
+
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

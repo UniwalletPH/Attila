@@ -10,10 +10,13 @@ using Attila.Application.Inventory_Manager.Shared.Queries;
 using Attila.Application.Notification.Commands;
 using Attila.Application.Users.Queries;
 using Attila.UI.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -31,8 +34,30 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
-         
         public async Task<IActionResult> Index()
+        {
+            if (User.IsInRole(AccessRole.Admin))
+            {
+                return View("~/Views/Events/Index_Admin.cshtml");
+            }
+
+            if (User.IsInRole(AccessRole.Coordinator))
+            {
+                return View("~/Views/Events/Index_Coordinator.cshtml");
+            }
+
+            return View("~/Views/Events/Index_Admin.cshtml");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetPendingEventsQuery([DataSourceRequest]DataSourceRequest request)
+        {
+            var _query = await mediator.Send(new GetPendingEventsQuery());
+
+            return Json(await _query.ToDataSourceResultAsync(request));
+        }
+
+        public async Task<IActionResult> Index2()
         {
             var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
             var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery());
@@ -46,7 +71,7 @@ namespace Attila.UI.Controllers
             var _forEvent = new EventViewCVM
             {
                 ProcessingEvent = _processingEvents,
-                PendingEvent = _pendingEvents,
+                PendingEvent = _pendingEvents.ToList(),
                 AdminPendingEvent = _adminPendingEvents,
                 IncomingEvent = _incomingEvents,
                 CompletedEvent = _completedEvents,
@@ -674,7 +699,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: Non-Consumable | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -682,7 +707,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -730,7 +755,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: Non-Consumable | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -738,7 +763,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -786,7 +811,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: Non-Consumable | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -794,7 +819,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -837,7 +862,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: Non-Consumable | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: Non-Consumable | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }
@@ -845,7 +870,7 @@ namespace Attila.UI.Controllers
                     {
                         _selectListEquipment.Add(new SelectListItem
                         {
-                            Text = item.Name + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
+                            Text = item.Name,// + " | Type: " + item.EquipmentType + " | Unit: " + item.UnitType,
                             Value = item.ID.ToString()
                         });
                     }

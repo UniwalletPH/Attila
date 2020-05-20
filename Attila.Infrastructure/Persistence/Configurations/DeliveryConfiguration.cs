@@ -15,7 +15,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
             {
                 ID = 1,
                 SupplierID = 1,
-                DeliveryDate = DateTime.Now,
+                DeliveryDate = DateTime.Parse("01/01/2020"),
                 DeliveryPrice = 50000
             });
 
@@ -23,7 +23,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
             { 
                 ID = 2,
                 SupplierID = 2,
-                DeliveryDate = DateTime.Now,
+                DeliveryDate = DateTime.Parse("01/01/2020"),
                 DeliveryPrice = 100000
             });
         }

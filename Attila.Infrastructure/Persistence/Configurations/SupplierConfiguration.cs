@@ -18,7 +18,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Address = "Quezon City",
                 ContactNumber = "+639439435435",
                 ContactPersonName = "Paul Parks",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
 
             builder.HasData(new Supplier
@@ -28,7 +28,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Address = "Quezon City",
                 ContactNumber = "+6392674564564",
                 ContactPersonName = "Cris Cruz",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
 
             builder.HasData(new Supplier
@@ -38,7 +38,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Address = "Pasig City",
                 ContactNumber = "+639465634453",
                 ContactPersonName = "Angel Tan",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
         }
     }

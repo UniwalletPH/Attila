@@ -18,7 +18,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Email = "vincentdagpin@uniwallet.ph",
                 Contact = "090909090909",
                 Address = "Cavite, Philippines",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
 
             builder.HasData(new Client 
@@ -28,7 +28,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Email = "cherylchan@gmail.com",
                 Contact = "+65877327373",
                 Address = "Manila, Philippines",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
 
             builder.HasData(new Client
@@ -38,7 +38,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Email = "peishi@gmail.com",
                 Contact = "+6523423523",
                 Address = "Manila, Philippines",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
 
             builder.HasData( new Client
@@ -48,7 +48,7 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 Email = "ryx@gmail.com",
                 Contact = "+65342642345",
                 Address = "Singapore",
-                CreatedOn = DateTime.Now
+                CreatedOn = DateTime.Parse("01/01/2020")
             });
         }
     }

@@ -20,6 +20,16 @@
     <link rel="stylesheet" href="/assets/css/styles.min.css">
     <link rel="stylesheet" href="~/lib/kendo-ui/styles/kendo.default-v2.min.css" />
 
+    <style>
+        .k-grid-norecords {
+            min-height: 100px;
+        }
+
+            .k-grid-norecords p {
+                margin: auto;
+            }
+    </style>
+
     @RenderSection("Styles", required: false)
 
     <script src="~/lib/jquery/jquery.min.js"></script>
@@ -33,14 +43,14 @@
         <partial name="_Sidebar.cshtml" />
 
         <div class="d-flex flex-column" id="content-wrapper">
-            <div>
+            <div id="topnavigation">
 
                 <partial name="_NavBar.cshtml" />
             </div>
 
 
             @RenderBody()
-            <footer class="bg-white sticky-footer">
+            <footer id="footer" class="bg-white sticky-footer" style="display:none;">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © Arlene's Catering 2020</span></div>
                 </div>
@@ -55,6 +65,7 @@
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
     <script src="/assets/js/script.min.js"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
 
     <script type="text/javascript">
         $('#' + '@ViewData["Title"]').addClass('active');
@@ -70,6 +81,8 @@
     <partial name="_Notification" />
 
     @RenderSection("Scripts", required: false)
+
+
 
 </body>
 

@@ -42,7 +42,35 @@ namespace Attila.Infrastructure.Persistence.Configurations
                 TemporaryPassword = _pass
             });
 
-         
+            builder.HasData(new UserLogin
+            {
+                ID = -2,
+                Salt = _salt,
+                Password = Convert.FromBase64String(_passb64),
+                Username = "test-coordinator",
+                IsTemporaryPassword = true,
+                TemporaryPassword = _pass
+            });
+
+            builder.HasData(new UserLogin
+            {
+                ID = -3,
+                Salt = _salt,
+                Password = Convert.FromBase64String(_passb64),
+                Username = "test-inventory-manager",
+                IsTemporaryPassword = true,
+                TemporaryPassword = _pass
+            });
+
+            builder.HasData(new UserLogin
+            {
+                ID = -4,
+                Salt = _salt,
+                Password = Convert.FromBase64String(_passb64),
+                Username = "test-chef",
+                IsTemporaryPassword = true,
+                TemporaryPassword = _pass
+            });
         }
     }
 }
