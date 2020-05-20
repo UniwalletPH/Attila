@@ -40,7 +40,9 @@ namespace Attila.Application.Inventory_Manager.Equipments.Commands
                         Quantity = request.MyEquipmentInventoryVM.Quantity,
                         TrackingDate = DateTime.Now,
                         TrackingAction = EquipmentAction.CheckOut,
-                        Remarks = request.MyEquipmentInventoryVM.Remarks
+                        Remarks = request.MyEquipmentInventoryVM.Remarks,
+                        CreatedOn = DateTime.Now,
+                        Returned = false
                     };
 
                     dbContext.EquipmentTracking.Add(_checkOutRecord);
