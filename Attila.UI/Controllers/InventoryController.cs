@@ -447,16 +447,27 @@ namespace Attila.UI.Controllers
         [HttpGet]
         public async Task<IActionResult> CheckInEquipmentStock(int EventID, int TrackingID)
         {
-            //var getEquipmentTracking = await mediator.Send(new SearchEquipmentTrackingQuery { EquipmentTrackingID = TrackingID });
+            var getEquipmentTracking = await mediator.Send(new SearchEquipmentTrackingQuery { EquipmentTrackingID = TrackingID });
+            var getEquipmentList = await mediator.Send(new GetAllEquipmentsQuery());
 
-            //EquipmentInventoryCVM equipmentTracking = new EquipmentInventoryCVM
-            //{
-            //    EquipmentTrackingVM = getEquipmentTracking
-            //};
+            List<SelectListItem> _list = new List<SelectListItem>();
 
-            //return View(equipmentTracking);
+            foreach (var item in getEquipmentList)
+            {
+                _list.Add(new SelectListItem
+                {
+                    Value = item.ID.ToString(),
+                    Text = item.Code + " | " + item.Name + " | " + item.Description
+                });
+            }
 
-            return View();
+            EquipmentInventoryCVM equipmentTracking = new EquipmentInventoryCVM
+            {
+                EquipmentDetailsList = _list,
+                EquipmentTrackingVM = getEquipmentTracking
+            };
+
+            return View(equipmentTracking);
         }
 
         [Authorize(Roles = "Admin, InventoryManager")]
@@ -933,6 +944,22 @@ namespace Attila.UI.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> EquipmentTrackingList()
+        {
+            var getEquipmentCheckIn = await mediator.Send(new GetEquipmentTrackingCheckInQuery());
+            var getEquipmentCheckOut = await mediator.Send(new GetEquipmentTrackingCheckOutQuery());
+
+            EquipmentTrackingCVM equipmentTracking = new EquipmentTrackingCVM
+            {
+                CheckInEquipmentTracking = getEquipmentCheckIn,
+                CheckOutEquipmentTracking = getEquipmentCheckOut
+            };
+
+            return View(equipmentTracking);
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

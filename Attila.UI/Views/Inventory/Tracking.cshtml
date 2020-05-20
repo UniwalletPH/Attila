@@ -1,661 +1,127 @@
-﻿@*@{
-    ViewData["Title"] = "Events";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿
+@{
+    ViewData["Title"] = "Equipment Tracking";
 }
-@model EventViewCVM
 
+@model ViewEventCVM
 
-
-@if (User.IsInRole("Coordinator"))
-{
-    <div class="container-fluid" style="margin-top: 10px;">
-        @if (User.IsInRole("Coordinator"))
-        {
-            <h3 class="text-dark mb-4">Events</h3>}
-        <div style="margin: 10px;">
-            <div class="row">
-                <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("BookingForm", "Events")'">Book an Event</button></div>
-                <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Register", "Clients")'">Register a Client</button></div>
-                <div class="col-4 text-center"><button class="btn btn-primary" type="button" style="font-size: 11px;" onclick="location.href='@Url.Action("Index", "EventPackages")'">Event Packages</button></div>
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">In Process </p>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                        <p class="text-primary m-0 font-weight-bold"> </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.ProcessingEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded add-menu">Add Menu Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded add-additional">Add Additionals</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded change-status">Submit For Approval</button>  </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Events</h3>
+    <div style="margin: 10px;">
+        <div class="row">
         </div>
     </div>
-}
-@if (User.IsInRole("Coordinator") || User.IsInRole("Admin"))
-{
-    <div class="container-fluid" style="margin-top: 10px;">
-        @if (User.IsInRole("Admin"))
-        {
-            <h3 class="text-dark mb-4">Events</h3>
-        }
-        <div style="margin: 10px;">
+    <div class="card shadow">
+        <div class="card-header py-3">
             <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Pending</p>
-                    </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Check In List</p>
                 </div>
             </div>
-            <div class="card-body">
+        </div>
+        <div class="card-body">
 
-                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        @{ if (User.IsInRole("Admin"))
-                            {
-                                <thead>
-                                    <tr>
-                                        <th>Booking Date</th>
-                                        <th>Event Name</th>
-                                        <th>Event Date</th>
-                                        <th>Client</th>
-                                        <th>Coordinator</th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                    </tr>
-                                </thead>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Booking Date</th>
+                            <th>Event Name</th>
+                            <th>Event Date</th>
+                            <th>Client</th>
+                            <th>Coordinator</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                                <tbody>
-                                    @foreach (var item in Model.AdminPendingEvent)
-                                    {
-                                        <tr data-id="@item.ID">
-                                            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                            <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                            <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                        </tr>
-                                    }
-                                </tbody>
-
-                                <tfoot>
-                                    <tr>
-                                        <td><strong>Booking Date</strong></td>
-                                        <td><strong>Event Name</strong></td>
-                                        <td><strong>Event Date</strong></td>
-                                        <td><strong>Client</strong></td>
-                                        <td><strong>Coordinator</strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                    </tr>
-                                </tfoot>
-                            }
-
-                            else
-                            {
-                                <thead>
-                                    <tr>
-                                        <th>Booking Date</th>
-                                        <th>Event Name</th>
-                                        <th>Event Date</th>
-                                        <th>Client</th>
-                                        <th>Remarks</th>
-                                        <th>Coordinator</th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                        <th>  </th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    @foreach (var item in Model.PendingEvent)
-                                    {
-                                        <tr data-id="@item.ID">
-                                            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                            <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.AdminRemarks)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                            <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                        </tr>
-                                    }
-                                </tbody>
-
-                                <tfoot>
-                                    <tr>
-                                        <td><strong>Booking Date</strong></td>
-                                        <td><strong>Event Name</strong></td>
-                                        <td><strong>Event Date</strong></td>
-                                        <td><strong>Client</strong></td>
-                                        <td><strong>Remarks</strong></td>
-                                        <td><strong>Coordinator</strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                        <td><strong> </strong></td>
-                                    </tr>
-                                </tfoot>
-                            }
+                        @foreach (var item in Model.IncomingEvent)
+                        {
+                            <tr data-id="@item.ID">
+                                <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>
+                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
+                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                            </tr>
                         }
-                    </table>
-                </div>
-
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Booking Date</strong></td>
+                            <td><strong>Event Name</strong></td>
+                            <td><strong>Event Date</strong></td>
+                            <td><strong>Client</strong></td>
+                            <td><strong>Coordinator</strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+
         </div>
     </div>
+</div>
 
 
-    <div class="container-fluid" style="margin-top: 10px;">
-        <div style="margin: 10px;">
+<div class="container-fluid" style="margin-top: 10px;">
+    <div style="margin: 10px;">
+        <div class="row">
+        </div>
+    </div>
+    <div class="card shadow">
+        <div class="card-header py-3">
             <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p class="text-primary m-0 font-weight-bold">Completed</p>
+                </div>
             </div>
         </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Incoming</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
+        <div class="card-body">
 
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Booking Date</th>.
+                            <th>Event Name</th>
+                            <th>Event Date</th>
+                            <th>Client</th>
+                            <th>Coordinator</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.CompletedEvent)
+                        {
+                            <tr data-id="@item.ID">
+                                <td>@($"{item.BookingDate: MMM dd, yyyy}")</td>.
+                                <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                <td>@($"{item.EventDate: MMM dd, yyyy}")</td>
+                                <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button></td>
+                                <td><button type="button" class="btn btn-primary border rounded checkIn">Check In Equipments</button></td>
                             </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.IncomingEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                    @if (User.IsInRole("Coordinator"))
-                                    {
-                                        <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
-                                    }
-
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Booking Date</strong></td>
+                            <td><strong>Event Name</strong></td>
+                            <td><strong>Event Date</strong></td>
+                            <td><strong>Client</strong></td>
+                            <td><strong>Coordinator</strong></td>
+                            <td><strong></strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
+
         </div>
     </div>
-
-    <div class="container-fluid" style="margin-top: 10px;">
-        <div style="margin: 10px;">
-            <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Completed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0 responsive  display" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.CompletedEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded add-payment">Add Payment</button>  </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid" style="margin-top: 10px;">
-        <div style="margin: 10px;">
-            <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Closed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0 responsive  display" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.ClosedEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded service-charge">View Service Charges</button>  </td>
-                                    <td><button type="button" class="btn btn-primary border rounded view-payment">View Payment</button>  </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid" style="margin-top: 10px;">
-        <div style="margin: 10px;">
-            <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Cancelled</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0 responsive  display" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.CancelledEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-}
-@if (User.IsInRole("InventoryManager"))
-{
-
-    <div class="container-fluid" style="margin-top: 10px;">
-
-
-        <h3 class="text-dark mb-4">Events</h3>
-        <div style="margin: 10px;">
-            <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Incoming</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.IncomingEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container-fluid" style="margin-top: 10px;">
-        <div style="margin: 10px;">
-            <div class="row">
-            </div>
-        </div>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                        <p class="text-primary m-0 font-weight-bold">Closed</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-
-                <div class="table-responsive table mt-2" id="dataTable-3" role="grid" aria-describedby="dataTable_info">
-                    <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>.
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach (var item in Model.ClosedEvent)
-                            {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>.
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view"> View Event Details</button></td>
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong></strong></td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-
-            </div>
-        </div>
-    </div>
-}
-
-
-@section Scripts {
-
-
-    <script>
-
-    $(document).on('click', 'tr .view', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-     $(document).on('click', 'tr .add-menu', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-         var url = '@Url.Action("MenuForm", "Events", new { EventID = "__id__" })';
-         window.location.href = url.replace('__id__', id);
-    });
-
-    $(document).on('click', 'tr .add-additional', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("Additional", "Events", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-     $(document).on('click', 'tr .change-status', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("ChangeEventStatusToForApproval", "Events", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-     $(document).on('click', 'tr .view', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("Details", "Events", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-    $(document).on('click', 'tr .add-payment', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("AddPayment", "Payment", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-     $(document).on('click', 'tr .service-charge', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("ServiceCharge", "Events", new { EventID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
-
-
-      $(document).on('click', 'tr .view-payment', function (e) {
-         try {
-            id = $(this).closest('tr').attr('data-id');
-            var url = '@Url.Action("Record", "Payment", new { EventID = "__id__" })';
-            window.location.href = url.replace('__id__', id);
-            }
-         catch (err) {
-             alert(err);
-         }
-    });
-
-    </script>
-}*@
+</div>
