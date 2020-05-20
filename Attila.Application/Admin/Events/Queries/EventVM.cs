@@ -28,11 +28,15 @@ namespace Attila.Application.Admin.Events.Queries
 
         public string Remarks { get; set; }
 
+        public string AdminRemarks { get; set; }
+
         public User Coordinator { get; set; }
 
         public EventPackage  Package{ get; set; }
 
         public Client Client { get; set; }
+
+        public bool Result { get; set; }
 
         public List<EventAdditionalEquipmentRequest> AdditionalEquipment { get; set; }
 

@@ -88,7 +88,8 @@
     <div class="container-fluid" style="margin-top: 10px;">
         @if (User.IsInRole("Admin"))
         {
-            <h3 class="text-dark mb-4">Events</h3>}
+            <h3 class="text-dark mb-4">Events</h3>
+        }
         <div style="margin: 10px;">
             <div class="row">
             </div>
@@ -105,45 +106,99 @@
 
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th>  </th>
-                                <th>  </th>
-                                <th>  </th>
-                                <th>  </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.PendingEvent)
+                        @{ if (User.IsInRole("Admin"))
                             {
-                                <tr data-id="@item.ID">
-                                    <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.EventName)</td>
-                                    <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
-                                    <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Booking Date</th>
+                                        <th>Event Name</th>
+                                        <th>Event Date</th>
+                                        <th>Client</th>
+                                        <th>Coordinator</th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.AdminPendingEvent)
+                                    {
+                                        <tr data-id="@item.ID">
+                                            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                            <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                            <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Booking Date</strong></td>
+                                        <td><strong>Event Name</strong></td>
+                                        <td><strong>Event Date</strong></td>
+                                        <td><strong>Client</strong></td>
+                                        <td><strong>Coordinator</strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                    </tr>
+                                </tfoot>
                             }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                            </tr>
-                        </tfoot>
+
+                            else
+                            {
+                                <thead>
+                                    <tr>
+                                        <th>Booking Date</th>
+                                        <th>Event Name</th>
+                                        <th>Event Date</th>
+                                        <th>Client</th>
+                                        <th>Remarks</th>
+                                        <th>Coordinator</th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.PendingEvent)
+                                    {
+                                        <tr data-id="@item.ID">
+                                            <td>@Html.DisplayFor(modelItem => item.BookingDate)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.EventName)</td>
+                                            <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.AdminRemarks)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
+                                            <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Booking Date</strong></td>
+                                        <td><strong>Event Name</strong></td>
+                                        <td><strong>Event Date</strong></td>
+                                        <td><strong>Client</strong></td>
+                                        <td><strong>Remarks</strong></td>
+                                        <td><strong>Coordinator</strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                    </tr>
+                                </tfoot>
+                            }
+                        }
                     </table>
                 </div>
 
