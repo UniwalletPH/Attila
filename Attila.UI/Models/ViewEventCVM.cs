@@ -6,7 +6,6 @@ namespace Attila.UI.Models
 {
     public class ViewEventCVM
     {
-
         public EventDetailsVM EventDetails { get; set; }  
 
         public int Selected { get; set; }
@@ -17,6 +16,4 @@ namespace Attila.UI.Models
 
         public SelectList Client { get; set; }
     }
-
-     
 }

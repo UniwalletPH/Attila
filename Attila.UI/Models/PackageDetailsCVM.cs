@@ -8,13 +8,11 @@ namespace Attila.UI.Models
 {
     public class PackageDetailsCVM
     {
-         
         public EventPackageVM PackageDetails { get; set; }
+
         public List<PackageMenuVM> MenuList { get; set; }
 
         public List<SelectListItem> Menu { get; set; }
-
-
 
         public List<int> SelectedMenu { get; set; }  
         

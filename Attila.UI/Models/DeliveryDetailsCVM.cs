@@ -22,6 +22,5 @@ namespace Attila.UI.Models
         public string Remarks { get; set; }
 
         public IEnumerable<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }
-
     }
 }

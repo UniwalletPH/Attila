@@ -23,11 +23,9 @@ namespace Attila.UI.Models
 
         public string Remarks { get; set; }
 
-
         [FileExtensions(Extensions = "jpg,jpeg,png,pdf")]
         public IFormFile file { get; set; }
 
         public List<SelectListItem> SupplierDetailsList { get; set; }
-
     }
 }

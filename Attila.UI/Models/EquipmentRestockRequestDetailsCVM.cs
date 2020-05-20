@@ -9,6 +9,7 @@ namespace Attila.UI.Models
     public class EquipmentRestockRequestDetailsCVM
     {
         public EquipmentRequestVM EquipmentRequest { get; set; }
+
         public List<EquipmentCollectionVM> EquipmentCollection { get; set; }
     }
 }

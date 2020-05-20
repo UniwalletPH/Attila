@@ -6,7 +6,6 @@ namespace Attila.UI.Models
 {
     public class PackagesCVM
     {
-
         public IEnumerable<EventPackageVM>? EventPackages { get; set; }
 
         public IEnumerable<PackageMenuVM>? PackageMenu { get; set; }
