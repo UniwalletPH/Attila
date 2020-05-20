@@ -11,7 +11,8 @@ namespace Attila.Application.Admin.Events.Commands
 {
     public class DeclineEventRequestCommand : IRequest<EventVM>
     {
-       public int EventID { get; set; }
+        public int EventID { get; set; }
+        public string AdminRemarks { get; set; }
 
         public class DeclineEventRequestCommandHandler : IRequestHandler<DeclineEventRequestCommand, EventVM>
         {
@@ -30,13 +31,15 @@ namespace Attila.Application.Admin.Events.Commands
                 if (_toDecline != null)
                 {
                     _toDecline.EventStatus = Status.Declined;
+                    _toDecline.AdminRemarks = request.AdminRemarks;
                     await dbContext.SaveChangesAsync();
 
                     var _toReturn = new EventVM
                     {
                         ID = _toDecline.ID,
                         EventName = _toDecline.EventName,
-                        Coordinator = _toDecline.Coordinator
+                        Coordinator = _toDecline.Coordinator,
+                        Result = true
                     };
 
                     return _toReturn;

@@ -106,21 +106,22 @@
 
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <table class="table dataTable my-0" id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Booking Date</th>
-                                <th>Event Name</th>
-                                <th>Event Date</th>
-                                <th>Client</th>
-                                <th>Coordinator</th>
-                                <th>  </th>
-                                <th>  </th>
-                                <th>  </th>
-                                <th>  </th>
-                            </tr>
-                        </thead>
                         @{ if (User.IsInRole("Admin"))
                             {
+                                <thead>
+                                    <tr>
+                                        <th>Booking Date</th>
+                                        <th>Event Name</th>
+                                        <th>Event Date</th>
+                                        <th>Client</th>
+                                        <th>Coordinator</th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+
                                 <tbody>
                                     @foreach (var item in Model.AdminPendingEvent)
                                     {
@@ -134,10 +135,39 @@
                                         </tr>
                                     }
                                 </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Booking Date</strong></td>
+                                        <td><strong>Event Name</strong></td>
+                                        <td><strong>Event Date</strong></td>
+                                        <td><strong>Client</strong></td>
+                                        <td><strong>Coordinator</strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                    </tr>
+                                </tfoot>
                             }
 
                             else
                             {
+                                <thead>
+                                    <tr>
+                                        <th>Booking Date</th>
+                                        <th>Event Name</th>
+                                        <th>Event Date</th>
+                                        <th>Client</th>
+                                        <th>Remarks</th>
+                                        <th>Coordinator</th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                        <th>  </th>
+                                    </tr>
+                                </thead>
+
                                 <tbody>
                                     @foreach (var item in Model.PendingEvent)
                                     {
@@ -146,27 +176,29 @@
                                             <td>@Html.DisplayFor(modelItem => item.EventName)</td>
                                             <td>@($"{item.EventDate: MM/dd/yyyy}")</td>
                                             <td>@Html.DisplayFor(modelItem => item.Client.Name)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.AdminRemarks)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Coordinator.Name)</td>
                                             <td><button type="button" class="btn btn-primary border rounded view">View Event Details</button>  </td>
                                         </tr>
                                     }
                                 </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Booking Date</strong></td>
+                                        <td><strong>Event Name</strong></td>
+                                        <td><strong>Event Date</strong></td>
+                                        <td><strong>Client</strong></td>
+                                        <td><strong>Remarks</strong></td>
+                                        <td><strong>Coordinator</strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                        <td><strong> </strong></td>
+                                    </tr>
+                                </tfoot>
                             }
                         }
-
-                        <tfoot>
-                            <tr>
-                                <td><strong>Booking Date</strong></td>
-                                <td><strong>Event Name</strong></td>
-                                <td><strong>Event Date</strong></td>
-                                <td><strong>Client</strong></td>
-                                <td><strong>Coordinator</strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                                <td><strong> </strong></td>
-                            </tr>
-                        </tfoot>
                     </table>
                 </div>
 

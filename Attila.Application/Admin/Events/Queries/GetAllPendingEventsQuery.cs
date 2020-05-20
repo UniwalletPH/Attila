@@ -45,7 +45,8 @@ namespace Attila.Application.Admin.Events.Queries
                     Coordinator = item.Coordinator,
                     Client = item.Client,
                     EventStatus = item.EventStatus,
-                    Remarks = item.Remarks
+                    Remarks = item.Remarks,
+                    AdminRemarks = item.AdminRemarks
                     };
 
                     _listOfPendingEvents.Add(Event);
