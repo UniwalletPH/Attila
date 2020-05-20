@@ -9,6 +9,8 @@ namespace Attila.UI.Models
 
         public List<EventVM> PendingEvent { get; set; }
 
+        public List<EventVM> AdminPendingEvent { get; set; }
+
         public List<EventVM> IncomingEvent { get; set; }
 
         public List<EventVM> CompletedEvent { get; set; }

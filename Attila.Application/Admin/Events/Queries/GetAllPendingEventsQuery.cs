@@ -52,10 +52,7 @@ namespace Attila.Application.Admin.Events.Queries
                 }
 
                 return _listOfPendingEvents;
-               
-
             }
         }
-
     }
 }
