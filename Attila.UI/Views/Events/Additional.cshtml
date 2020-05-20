@@ -110,7 +110,8 @@
                                             <div class="form-group">
                                                 <label for="address"><strong>Additional Hours</strong></label>
                                                 @*@Html.TextBoxFor(x => x.AdditionalDurationRequest.Duration, "{0:hh\\:mm}")*@
-                                                <input type="number" asp-for="AdditionalDurationRequest.Duration" class="form-control">
+
+                                                <input id="timepicker"  asp-for="AdditionalDurationRequest.Duration" style="width: 100%;" />
                                             </div>
                                         </div>
                                     </div>
@@ -216,6 +217,10 @@
         }
 
     </script>
-
+    <script>
+        $("#timepicker").kendoTimePicker({
+            format: 'H:mm',    min: new Date(2000, 0, 1, 1, 0, 0) //date part is ignored
+        });
+    </script>
     <partial name="_ValidationScriptsPartial" />
 }
