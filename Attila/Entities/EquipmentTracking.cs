@@ -21,6 +21,7 @@ namespace Attila.Domain.Entities
         public DateTime TrackingDate { get; set; }
         public EquipmentAction TrackingAction { get; set; }
         public string Remarks { get; set; }
+        public bool Returned { get; set; }
 
         public Event Event { get; set; }
         public Equipment Equipment { get; set; }
