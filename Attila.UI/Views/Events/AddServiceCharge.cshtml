@@ -4,7 +4,6 @@
 }
 @model AdditionalEventFeeVM
 
- 
 
 <div class="container-fluid">
     <h3 class="text-dark mb-4">Service Charge </h3>
@@ -75,16 +74,9 @@
         var id = @Model.EventID; 
             var url = window.location.href = '/Events/ServiceCharge?id=' + id;
             window.location.href = url.replace('__id__', id);
-
-
-            
         }
 
     </script>
 
-
-
-
     <partial name="_ValidationScriptsPartial" />
-
 }

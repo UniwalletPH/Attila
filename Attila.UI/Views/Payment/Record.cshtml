@@ -5,7 +5,7 @@
 }
 @model EventPaymentCVM
 
- 
+
 
 <div class="container-fluid" style="margin-top: 10px;">
     <h3 class="text-dark mb-4">Event Payment</h3>
@@ -29,8 +29,9 @@
                             <th></th>
                             <th> Reference No. </th>
                             <th> Date Of Payment </th>
-                            <th> Amount </th>
+
                             <th> Remarks </th>
+                            <th> Amount </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,32 +39,35 @@
                         @{int rowNo = 0;}
                         @foreach (var item in Model.PaymentStatus)
                         {
-                            <tr>
+                        <tr>
 
 
-                                <td>  @(rowNo += 1)</td>
-                                <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Amount)</td>
-                                <td> @Html.DisplayFor(modelItem => item.Remarks) </td>
+                            <td>  @(rowNo += 1)</td>
+                            <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
+
+                            <td> @Html.DisplayFor(modelItem => item.Remarks) </td>
+                            <td> @Html.DisplayFor(modelItem => item.Amount)</td>
 
 
-                            </tr>
+                        </tr>
                         }
                     </tbody>
+             
                     <tfoot>
                         <tr>
-                            <td><strong></strong></td>
-                            <td><strong>Reference No.</strong></td>
-                            <td><strong>Date of Payment</strong></td>
-                            <td><strong>Amount</strong></td>
-                            <td><strong>Remarks</strong></td>
+                            <th colspan="4" style="text-align:right">Total Service Charge: </th>
+                            <th style="display:block">₱ @Html.DisplayFor(m => m.TotalCharges)</th> 
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="text-align:right">Total Payment: </th>
+                            <th style="display:block">₱ @Html.DisplayFor(m => m.TotalPayment)</th> 
                         </tr>
                     </tfoot>
+                     
                 </table>
-            </div>
-            <h4 style="padding-left: 80%;">Total Charge : ₱@Html.DisplayFor(m => m.TotalCharges)</h4>
-            <h4 style="padding-left: 80%;">Total Payment : ₱@Html.DisplayFor(m => m.TotalPayment)</h4>
+            </div> 
         </div>
     </div>
 </div>
+ 

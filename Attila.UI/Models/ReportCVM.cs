@@ -11,10 +11,11 @@ namespace Attila.UI.Models
     public class ReportCVM
     {
         public  List<EventVM> Events { get; set; }
+
         public List<FoodRequestVM> FoodRequest { get;  set; }
+
         public IEnumerable<EquipmentRequestVM> EquipmentRequest { get; set; }
 
         public IEnumerable<InventoriesDeliveryVM> Delivery { get; set; }
-
     }
 }

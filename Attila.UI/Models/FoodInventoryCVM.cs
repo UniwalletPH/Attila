@@ -28,7 +28,6 @@ namespace Attila.UI.Models
         [Required]
         public int UserID { get; set; }
 
-         
         [Required]
         public int FoodDetailsID { get; set; }
 

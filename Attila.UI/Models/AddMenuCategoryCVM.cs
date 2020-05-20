@@ -6,6 +6,5 @@ namespace Attila.UI.Models
     {
        [Required]
        public string Category { get; set; }
-
     }
 }

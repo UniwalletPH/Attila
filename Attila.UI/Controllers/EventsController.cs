@@ -31,8 +31,7 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
-
-        [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
+         
         public async Task<IActionResult> Index()
         {
             var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
@@ -981,19 +980,16 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {
-
-
-            ;
             var _add = new AdditionalDurationRequestVM
             {
-                Duration =  additionals.AdditionalDurationRequest.Duration,
+                Duration = additionals.AdditionalDurationRequest.Duration,
                 EventDetailsID = additionals.EventID,
 
             };
 
             var _rVal = await mediator.Send(new AddAdditionalDurationRequestCommand { AdditionalPackage = _add });
 
-            return Json(true);
+            return Json(_rVal);
         }
 
 
