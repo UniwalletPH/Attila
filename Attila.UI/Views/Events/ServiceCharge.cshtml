@@ -5,8 +5,6 @@
 @model ServiceChargeCVM
  
 
-
-
 <div class="container-fluid" style="margin-top: 10px;">
     <h3 class="text-dark mb-4">Service Charge Fee</h3>
     <div class="card shadow">
@@ -17,9 +15,12 @@
                     <p class="text-primary m-0 font-weight-bold">Client: @Model.Event.Client.Name</p>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
-                    <p class="text-primary m-0 font-weight-bold">
-                        <button class="btn btn-primary add" type="button" data-id="@Model.Event.ID"> Add Service Charge</button>
-                    </p>
+                    @if (Model.Event.EventStatus.ToString() == "Approved" || Model.Event.EventStatus.ToString() == "Completed")
+                    {
+                        <p class="text-primary m-0 font-weight-bold">
+                            <button class="btn btn-primary add" type="button" data-id="@Model.Event.ID"> Add Service Charge</button>
+                        </p>
+                    }
                 </div>
             </div>
         </div>
