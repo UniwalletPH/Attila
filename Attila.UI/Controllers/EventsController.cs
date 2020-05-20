@@ -465,6 +465,18 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Details", new { EventID = EventID });
         }
 
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> DeleteEvent(int EventID)
+        {
+            await mediator.Send(new DeleteEventCommand
+            {
+                EventID = EventID
+            });
+
+            return RedirectToAction("Index", new { EventID = EventID });
+        }
+
 
         [Authorize(Roles = "Admin, Coordinator")]
         [HttpGet]

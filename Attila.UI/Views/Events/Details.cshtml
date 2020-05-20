@@ -13,10 +13,7 @@
                     <div class="card shadow mb-3">
                         <div class="card-header py-3">
                             <div class="row">
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                                    <p class="text-primary m-0 font-weight-bold"> </p>
-                                </div>
-                                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
                                     <p class="text-primary m-0 font-weight-bold">
 
                                         @{ if (Model.EventDetails.EventStatus.ToString() == "Processing")
@@ -55,6 +52,7 @@
 
                                                 if (User.IsInRole("Coordinator"))
                                                 {
+                                                    <br/>
                                                     <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete</button>
                                                 }
                                             }
@@ -441,11 +439,11 @@
             window.location.href = url.replace('__id__', eventID)
         });
 
-        @*$(document).on('click', ' #btnDelete', function (e) {
+        $(document).on('click', ' #btnDelete', function (e) {
             id = $(this).val();
             var url = '@Url.Action("DeleteEvent", "Events", new { EventID = "__id__"  })';
             window.location.href = url.replace('__id__', eventID)
-        });*@
+        });
 
         $(document).on('click', ' #btnComplete', function (e) {
             id = $(this).val();
