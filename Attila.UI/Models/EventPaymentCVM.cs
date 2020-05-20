@@ -8,7 +8,6 @@ namespace Attila.UI.Models
     public class EventPaymentCVM
     {
         public int ID { get; set; }
-
         [Required]
         public int EventDetailsID { get; set; }
 
@@ -21,6 +20,10 @@ namespace Attila.UI.Models
         public string? ReferenceNumber { get; set; }
 
         public string? Remarks { get; set; }
+
+        public decimal TotalPayment { get; set; }
+
+        public decimal TotalCharges { get; set; }
 
         public IEnumerable<PaymentStatusVM>? PaymentStatus {get;set;}
     }

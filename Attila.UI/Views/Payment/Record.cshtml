@@ -34,23 +34,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                       
-                            @{int rowNo = 0;}
-                            @foreach (var item in Model.PaymentStatus)
-                            {
-                                <tr>
+
+                        @{int rowNo = 0;}
+                        @foreach (var item in Model.PaymentStatus)
+                        {
+                            <tr>
 
 
-                                    <td>  @(rowNo += 1)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Amount)</td>
-                                    <td> @Html.DisplayFor(modelItem => item.Remarks) </td>
+                                <td>  @(rowNo += 1)</td>
+                                <td> @Html.DisplayFor(modelItem => item.ReferenceNumber)</td>
+                                <td>@Html.DisplayFor(modelItem => item.DateOfPayment)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Amount)</td>
+                                <td> @Html.DisplayFor(modelItem => item.Remarks) </td>
 
 
-                                </tr>
-                            }
-                        </tbody>
+                            </tr>
+                        }
+                    </tbody>
                     <tfoot>
                         <tr>
                             <td><strong></strong></td>
@@ -62,7 +62,8 @@
                     </tfoot>
                 </table>
             </div>
-
+            <h4 style="padding-left: 80%;">Total Charge : ₱@Html.DisplayFor(m => m.TotalCharges)</h4>
+            <h4 style="padding-left: 80%;">Total Payment : ₱@Html.DisplayFor(m => m.TotalPayment)</h4>
         </div>
     </div>
 </div>
