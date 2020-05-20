@@ -170,8 +170,6 @@ namespace Attila.UI.Controllers
                 totalCharges = totalCharges + item.TotalPrice;
             }
 
-
-
             return View(new ViewEventCVM
             {
                 EventDetails = _eventDetails,

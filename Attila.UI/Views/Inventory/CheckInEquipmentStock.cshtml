@@ -1,0 +1,83 @@
+﻿@model Attila.UI.Models.EquipmentInventoryCVM
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Check In Equipment Stock</h3>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-12">
+                    <form role="form" asp-controller="Inventory" asp-action="CheckInEquipmentStock" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess" data-ajax-failure="OnFailure">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                        <p class="text-primary m-0 font-weight-bold"></p>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right">
+                                        <p class="text-primary m-0 font-weight-bold">
+                                            <button class="btn btn-primary" id="btnSubmit" type="submit">Submit</button>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="address"><strong>Equipment</strong></label>
+                                                @*@Html.DropDownListFor(m => m.EquipmentDetailsID, Model.EquipmentStockDetailsList, "--SELECT Equipment--", new { @class = "form-control", @id = "dropdown_equipment" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Quantity</strong></label>
+                                                <input type="number" class="form-control" asp-for="Quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Remarks</strong></label>
+                                                <textarea type="number" class="form-control" asp-for="Remarks"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @*<script type="text/javascript">
+
+        var eventID = '@Model.EventDetails.ID';
+
+        $('document').ready(function () {
+            $('#btnCheckIn').on('click', function () {
+                equipmentTrackingID = $(this).closest('tr').attr('data-id');
+                $.post('/Inventory/CheckInEquipmentStock', { TrackingID: equipmentTrackingID })
+                    .done(function (r) {
+                        window.location = "/Events/Index";
+                    })
+                    .fail(function (err) {
+                        console.log("Fail");
+                    })
+            });
+        })
+
+    </script>*@
+
+    <partial name="_ValidationScriptsPartial" />
+}

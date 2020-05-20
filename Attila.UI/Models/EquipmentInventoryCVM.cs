@@ -41,6 +41,8 @@ namespace Attila.UI.Models
 
         public EventDetailsVM EventDetailsVM { get; set; }
 
+        public EquipmentTrackingVM EquipmentTrackingVM { get; set; }
+
         public List<EquipmentTrackingVM> EquipmentTrackingVMs { get; set; }
 
         public List<SelectListItem> EquipmentDetailsList { get; set; }

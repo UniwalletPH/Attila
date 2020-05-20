@@ -444,8 +444,24 @@ namespace Attila.UI.Controllers
         }
 
         [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> CheckInEquipmentStock(int EventID, int TrackingID)
+        {
+            //var getEquipmentTracking = await mediator.Send(new SearchEquipmentTrackingQuery { EquipmentTrackingID = TrackingID });
+
+            //EquipmentInventoryCVM equipmentTracking = new EquipmentInventoryCVM
+            //{
+            //    EquipmentTrackingVM = getEquipmentTracking
+            //};
+
+            //return View(equipmentTracking);
+
+            return View();
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> CheckInEquipmentStockList(EquipmentInventoryCVM equipmentInventoryVM)
+        public async Task<IActionResult> CheckInEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
         {
             EquipmentsInventoryVM _checkInEquipment = new EquipmentsInventoryVM
             {

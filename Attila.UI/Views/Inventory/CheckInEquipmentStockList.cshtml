@@ -10,7 +10,7 @@
 
 
 <div class="container-fluid" style="margin-top: 10px;">
-    <h3 class="text-dark mb-4">Check In Equipment</h3>
+    <h3 class="text-dark mb-4">Check In Equipment Stock List</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <div class="row">
@@ -42,7 +42,7 @@
                                 <td>@item.Quantity</td>
                                 <td>@item.TrackingDate</td>
                                 <td>@item.Remarks</td>
-                                <td><button type="button" class="btn btn-primary border rounded view">Check In</button>  </td>
+                                <td><button type="button" class="btn btn-primary border rounded checkIn" id="btnCheckIn">Check In</button>  </td>
                             </tr>
                         }
                     </tbody>
@@ -68,11 +68,18 @@
     <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript">
 
-        $(document).on('click', 'tr .view', function (e) {
-        id = $(this).closest('tr').attr('data-id');
-        var url = '@Url.Action("Details", "EventPackages", new { PackageID = "__id__" })';
-        window.location.href = url.replace('__id__', id);
-    });
+        $('document').ready(function () {
+            $('#btnCheckIn').on('click', function () {
+                equipmentTrackingID = $(this).closest('tr').attr('data-id');
+                $.get('/Inventory/CheckInEquipmentStock', { TrackingID: equipmentTrackingID })
+                    .done(function (r) {
+                        window.location = "/Inventory/CheckInEquipmentStock";
+                    })
+                    .fail(function (err) {
+                        console.log("Fail");
+                    })
+            });
+        })
 
     </script>
 }
