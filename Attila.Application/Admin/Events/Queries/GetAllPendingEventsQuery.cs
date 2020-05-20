@@ -28,7 +28,7 @@ namespace Attila.Application.Admin.Events.Queries
                     .Include(a => a.EventPackage)
                     .Include(a => a.Coordinator)
                     .Include(a => a.Client)
-                    .Where(a => a.EventStatus == Status.ForApproval).ToList();
+                    .Where(a => a.EventStatus == Status.ForApproval || a.EventStatus == Status.Declined).ToList();
 
                 foreach (var item in _pendingEvents)
                 {
@@ -45,17 +45,15 @@ namespace Attila.Application.Admin.Events.Queries
                     Coordinator = item.Coordinator,
                     Client = item.Client,
                     EventStatus = item.EventStatus,
-                    Remarks = item.Remarks
+                    Remarks = item.Remarks,
+                    AdminRemarks = item.AdminRemarks
                     };
 
                     _listOfPendingEvents.Add(Event);
                 }
 
                 return _listOfPendingEvents;
-               
-
             }
         }
-
     }
 }

@@ -27,6 +27,8 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public string Remarks { get; set; }
 
+        public string AdminRemarks { get; set; }
+
         public int UserID { get; set; }
          
         public int PackageDetailsID { get; set; }

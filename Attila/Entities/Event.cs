@@ -23,6 +23,7 @@ namespace Attila.Domain.Entities
         public string Description { get; set; }
         public string Location { get; set; }
         public string Remarks { get; set; }
+        public string AdminRemarks { get; set; }
         public decimal ToPay { get; set; }
         public int NumberOfGuests { get; set; }
         public TimeSpan ProgramStart { get; set; }

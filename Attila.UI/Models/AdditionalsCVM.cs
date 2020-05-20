@@ -13,7 +13,7 @@ namespace Attila.UI.Models
       
         public int EventID { get; set; }
 
-
+        public int AdditionalHour { get; set; }
         public List<SelectListItem> EquipmentList { get; set; }
 
         public List<SelectListItem> DishList { get; set; }

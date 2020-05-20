@@ -38,6 +38,7 @@ namespace Attila.UI.Controllers
             var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
             var _processingEvents = await mediator.Send(new GetAllProcessingEventsQuery());
             var _pendingEvents = await mediator.Send(new GetAllPendingEventsQuery());
+            var _adminPendingEvents = await mediator.Send(new GetAllAdminPendingEventsQuery());
             var _incomingEvents = await mediator.Send(new GetAllIncomingEventsQuery());
             var _completedEvents = await mediator.Send(new GetAllCompletedEventsQuery());
             var _closedEvents = await mediator.Send(new GetAllClosedEventsQuery());
@@ -47,6 +48,7 @@ namespace Attila.UI.Controllers
             {
                 ProcessingEvent = _processingEvents,
                 PendingEvent = _pendingEvents,
+                AdminPendingEvent = _adminPendingEvents,
                 IncomingEvent = _incomingEvents,
                 CompletedEvent = _completedEvents,
                 ClosedEvent = _closedEvents,
@@ -413,9 +415,10 @@ namespace Attila.UI.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> DeclineEvent(int EventID)
+        [HttpPost]
+        public async Task<IActionResult> DeclineEvent(int EventID, string DeclineRemarks)
         {
-            var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID });
+            var response = await mediator.Send(new DeclineEventRequestCommand { EventID = EventID, AdminRemarks = DeclineRemarks});
 
             await mediator.Send(new AddEventNotificationCommand
             {
@@ -425,7 +428,8 @@ namespace Attila.UI.Controllers
                 RequestID = response.ID
             });
 
-            return RedirectToAction("Details", new { EventID = EventID });
+            //return RedirectToAction("Index", new { EventID = EventID });
+            return Json(response.Result);
         }
 
 
@@ -463,6 +467,18 @@ namespace Attila.UI.Controllers
             });
 
             return RedirectToAction("Details", new { EventID = EventID });
+        }
+
+        [Authorize(Roles = "Admin, Coordinator")]
+        [HttpGet]
+        public async Task<IActionResult> DeleteEvent(int EventID)
+        {
+            await mediator.Send(new DeleteEventCommand
+            {
+                EventID = EventID
+            });
+
+            return RedirectToAction("Index", new { EventID = EventID });
         }
 
 
@@ -946,9 +962,12 @@ namespace Attila.UI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddAdditionalDuration(AdditionalsCVM additionals)
         {
+
+
+            ;
             var _add = new AdditionalDurationRequestVM
             {
-                Duration = additionals.AdditionalDurationRequest.Duration,
+                Duration =  additionals.AdditionalDurationRequest.Duration,
                 EventDetailsID = additionals.EventID,
 
             };
