@@ -156,9 +156,28 @@ namespace Attila.UI.Controllers
 
             var _eventDetails = await mediator.Send(new SearchEventByIdQuery { EventId = EventID });
 
+            var _payments = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
+            var _charges = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID });
+
+            decimal totalPayments = 0;
+            foreach (var item in _payments)
+            {
+                totalPayments = totalPayments + item.Amount;
+            }
+
+            decimal totalCharges = 0;
+            foreach (var item in _charges)
+            {
+                totalCharges = totalCharges + item.TotalPrice;
+            }
+
+
+
             return View(new ViewEventCVM
             {
-                EventDetails = _eventDetails
+                EventDetails = _eventDetails,
+                TotalCharge = totalCharges,
+                TotalPayment = totalPayments
             });
         }
 

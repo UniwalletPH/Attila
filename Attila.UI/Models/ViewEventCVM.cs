@@ -16,6 +16,10 @@ namespace Attila.UI.Models
         public SelectList Package { get; set; }
 
         public SelectList Client { get; set; }
+
+        public decimal TotalCharge { get; set; }
+
+        public decimal TotalPayment { get; set; }
     }
 
      
