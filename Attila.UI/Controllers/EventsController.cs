@@ -31,8 +31,7 @@ namespace Attila.UI.Controllers
             this.mediator = mediator;
         }
 
-
-        [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
+         
         public async Task<IActionResult> Index()
         {
             var _searchResult = await mediator.Send(new GetAllEventDetailsListQuery());
