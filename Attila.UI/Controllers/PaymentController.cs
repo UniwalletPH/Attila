@@ -41,7 +41,6 @@ namespace Attila.UI.Controllers
         public async Task<IActionResult> Record(int EventID)
         {
 
-
             var _searchResult = await mediator.Send(new SearchEventByIdQuery
             {
                 EventId = EventID
@@ -75,16 +74,30 @@ namespace Attila.UI.Controllers
 
             };
 
-            var eventPackages = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
+            var _payments = await mediator.Send(new GetPaymentStatusByEventIDQuery { EventID = EventID });
+            var _charges = await mediator.Send(new GetEventAdditionalChargesQuery { EventID = EventID });
+
+            decimal totalPayments = 0;
+            foreach (var item in _payments)
+            {
+                totalPayments = totalPayments + item.Amount;
+            }
+
+            decimal totalCharges = 0;
+            foreach (var item in _charges)
+            {
+                totalCharges = totalCharges + item.TotalPrice;
+            }
+
+
             var eventDetails = new EventPaymentCVM
             {
-
-                PaymentStatus = eventPackages,
-                EventDetails = _eventDetails
-
-
-
+                PaymentStatus = _payments,
+                EventDetails = _eventDetails,
+                TotalPayment = totalPayments,
+                TotalCharges = totalCharges
             };
+
 
             return View(eventDetails);
              

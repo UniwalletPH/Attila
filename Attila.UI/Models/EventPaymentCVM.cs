@@ -21,6 +21,9 @@ namespace Attila.UI.Models
 
         public string? Remarks { get; set; }
 
+        public decimal TotalPayment { get; set; }
+
+        public decimal TotalCharges { get; set; }
 
         public IEnumerable<PaymentStatusVM>? PaymentStatus {get;set;}
     }
