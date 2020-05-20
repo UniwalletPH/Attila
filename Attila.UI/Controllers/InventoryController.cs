@@ -917,7 +917,6 @@ namespace Attila.UI.Controllers
         }
 
 
-
         [Authorize(Roles = "InventoryManager,Coordinator,Admin")]
         [HttpGet]
         public async Task<IActionResult> Tracking()
@@ -933,6 +932,7 @@ namespace Attila.UI.Controllers
 
             return View(equipmentTracking);
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

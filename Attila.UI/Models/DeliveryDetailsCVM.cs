@@ -18,7 +18,6 @@ namespace Attila.UI.Models
         [Required]
         public decimal DeliveryPrice { get; set; }
 
-        [Required]
         public string Remarks { get; set; }
 
         public IEnumerable<InventoriesDeliveryVM> InventoryDeliveryVM { get; set; }

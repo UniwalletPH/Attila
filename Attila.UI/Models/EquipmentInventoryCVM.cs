@@ -20,7 +20,6 @@ namespace Attila.UI.Models
         [Required]
         public decimal ItemPrice { get; set; }
 
-        [Required]
         public string Remarks { get; set; }
 
         [Required]
