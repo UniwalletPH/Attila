@@ -28,7 +28,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label for="address"><strong>Event</strong></label>
-                                                @Html.DropDownListFor(m => m.EventDetailsID, Model.ProcessingEventsList, "--SELECT EVENT--", new { @class = "form-control"})
+                                                @Html.DropDownListFor(m => m.EventDetailsID, Model.ProcessingEventsList, "--SELECT EVENT--", new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
@@ -45,6 +45,14 @@
                                             <div class="form-group">
                                                 <label for="supplier"><strong>Quantity</strong></label>
                                                 <input type="number" class="form-control" asp-for="Quantity">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="supplier"><strong>Remarks</strong></label>
+                                                <textarea type="number" class="form-control" asp-for="Remarks"></textarea>
                                             </div>
                                         </div>
                                     </div>

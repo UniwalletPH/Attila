@@ -3,6 +3,7 @@ using Attila.Application.Admin.Equipments.Commands;
 using Attila.Application.Admin.Equipments.Queries;
 using Attila.Application.Admin.Foods.Commands;
 using Attila.Application.Admin.Foods.Queries;
+using Attila.Application.Coordinator.Events.Queries;
 using Attila.Application.Inventory_Manager.Equipments.Commands;
 using Attila.Application.Inventory_Manager.Equipments.Queries;
 using Attila.Application.Inventory_Manager.Events.Queries;
@@ -230,7 +231,7 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate.ToString("MMM, dd, yyyy")
+                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate.ToString("MMM dd, yyyy")
 
                 });
             }
@@ -373,7 +374,7 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Delivery ID: " + item.ID + " | Encoding Date: " + item.DeliveryDate
+                    Text = "Delivery ID: " + item.ID + " | Delivery Date: " + item.DeliveryDate.ToString("MMM dd, yyyy")
                 });
             }
 
@@ -417,24 +418,26 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "InventoryManager")]
         [HttpGet]
-        public async Task<IActionResult> CheckInEquipmentStock()
+        public async Task<IActionResult> CheckInEquipmentStockList(int EventID)
         {
-            var getEquipmentDetails = await mediator.Send(new GetEquipmentStockDetailsQuery());
-            List<SelectListItem> _list = new List<SelectListItem>();
+            var getEquipmentCheckOutList = await mediator.Send(new GetEventCheckOutEquipmentListQuery { EventDetailsID = EventID });
+            var getEquipmentDetails = await mediator.Send(new GetEventDetailsQuery { EventDetailsID = EventID });
 
-            foreach (var item in getEquipmentDetails)
-            {
-                _list.Add(new SelectListItem
-                {
-                    Value = item.ID.ToString(),
-                    Text = item.EquipmentDetailsVM.Code + " | " + item.EquipmentDetailsVM.Name + " | " + item.EquipmentDetailsVM.Description + " | Quantity: " + item.Quantity
-                });
-            }
+            //List<SelectListItem> _list = new List<SelectListItem>();
 
-            _list.Add(new SelectListItem { Text = "Add New Equipment", Value = "Add New Equipment" });
+            //foreach (var item in getEquipmentCheckOutList)
+            //{
+            //    _list.Add(new SelectListItem
+            //    {
+            //        Value = item.ID.ToString(),
+            //        Text = "Check Out ID: " + item.ID + " | " + item.Equipment.Code + " | " + item.Equipment.Name + " | " + item.Equipment.Description + " | Quantity: " + item.Quantity + " | Check Out Date: " + item.TrackingDate 
+            //    });
+            //}
+
             EquipmentInventoryCVM equipmentDetailsListVM = new EquipmentInventoryCVM
             {
-                EquipmentStockDetailsList = _list,
+                EquipmentTrackingVMs = getEquipmentCheckOutList,
+                EventDetailsVM = getEquipmentDetails
             };
 
             return View(equipmentDetailsListVM);
@@ -442,12 +445,16 @@ namespace Attila.UI.Controllers
 
         [Authorize(Roles = "Admin, InventoryManager")]
         [HttpPost]
-        public async Task<IActionResult> CheckInEquipmentStock(EquipmentInventoryCVM equipmentInventoryVM)
+        public async Task<IActionResult> CheckInEquipmentStockList(EquipmentInventoryCVM equipmentInventoryVM)
         {
             EquipmentsInventoryVM _checkInEquipment = new EquipmentsInventoryVM
             {
+                EventDetailsID = equipmentInventoryVM.EventDetailsID,
                 EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
-                Quantity = equipmentInventoryVM.Quantity
+                CheckOutEquipmentID = equipmentInventoryVM.CheckOutEquipmentID,
+                Quantity = equipmentInventoryVM.Quantity,
+                Remarks = equipmentInventoryVM.Remarks,
+                UserID = CurrentUser.ID
             };
 
             var response = await mediator.Send(new CheckInEquipmentStockCommand
@@ -482,7 +489,7 @@ namespace Attila.UI.Controllers
                 _list2.Add(new SelectListItem
                 {
                     Value = item.ID.ToString(),
-                    Text = "Event Name: " + item.EventName + " | Event Date:" + item.EventDate + " | Event Status: " + item.EventStatus
+                    Text = "Event Name: " + item.EventName + " | Event Date: " + item.EventDate + " | Event Status: " + item.EventStatus
                 });
             }
 
@@ -506,6 +513,7 @@ namespace Attila.UI.Controllers
                 EventDetailsID = equipmentInventoryVM.EventDetailsID,
                 EquipmentDetailsID = equipmentInventoryVM.EquipmentDetailsID,
                 Quantity = equipmentInventoryVM.Quantity,
+                Remarks = equipmentInventoryVM.Remarks,
                 UserID = CurrentUser.ID
             };
 

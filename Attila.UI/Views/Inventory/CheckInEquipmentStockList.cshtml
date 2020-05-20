@@ -1,0 +1,78 @@
+﻿@model EquipmentInventoryCVM
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link href="../assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+}
+
+
+<div class="container-fluid" style="margin-top: 10px;">
+    <h3 class="text-dark mb-4">Check In Equipment</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
+                    <p class="text-primary m-0 font-weight-bold text-left"> Event Name: @Html.DisplayFor(a => a.EventDetailsVM.EventName) </p>
+                    <p class="text-primary m-0 font-weight-bold text-left"> Status: @Html.DisplayFor(a => a.EventDetailsVM.EventStatus) </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+
+            <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
+                <table class="table dataTable my-0" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Equipment</th>
+                            <th>Check Out Quantity</th>
+                            <th>Check Out Date</th>
+                            <th>Remarks</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model.EquipmentTrackingVMs)
+                        {
+                            <tr class="odd gradeX" data-id="@item.ID">
+                                <td>@item.Equipment.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.TrackingDate</td>
+                                <td>@item.Remarks</td>
+                                <td><button type="button" class="btn btn-primary border rounded view">Check In</button>  </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td><strong>Equipment</strong></td>
+                            <td><strong>Check Out Quantit</strong></td>
+                            <td><strong>Check Out Date</strong></td>
+                            <td><strong>Remarks</strong></td>
+                            <td><strong></strong></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript">
+
+        $(document).on('click', 'tr .view', function (e) {
+        id = $(this).closest('tr').attr('data-id');
+        var url = '@Url.Action("Details", "EventPackages", new { PackageID = "__id__" })';
+        window.location.href = url.replace('__id__', id);
+    });
+
+    </script>
+}
