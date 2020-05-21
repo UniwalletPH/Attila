@@ -36,23 +36,59 @@ namespace Attila.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            if (User.IsInRole(AccessRole.Admin))
+            if (User.IsInRole(AccessRole.InventoryManager))
             {
-                return View("~/Views/Events/Index_Admin.cshtml");
+                return View("~/Views/Events/Index_InventoryManager.cshtml");
             }
 
-            if (User.IsInRole(AccessRole.Coordinator))
-            {
-                return View("~/Views/Events/Index_Coordinator.cshtml");
-            }
+            return View();
+        }
 
-            return View("~/Views/Events/Index_Admin.cshtml");
+        [HttpPost]
+        [Authorize("Coordinator")]
+        public async Task<IActionResult> GetMyEventsQuery([DataSourceRequest] DataSourceRequest request)
+        {
+            var _query = await mediator.Send(new GetMyEventsQuery());
+
+            return Json(await _query.ToDataSourceResultAsync(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAllEventsQuery([DataSourceRequest] DataSourceRequest request)
+        {
+            var _query = await mediator.Send(new GetAllEventsQuery());
+
+            return Json(await _query.ToDataSourceResultAsync(request));
         }
 
         [HttpPost]
         public async Task<IActionResult> GetPendingEventsQuery([DataSourceRequest]DataSourceRequest request)
         {
             var _query = await mediator.Send(new GetPendingEventsQuery());
+
+            return Json(await _query.ToDataSourceResultAsync(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetEventMenu([DataSourceRequest] DataSourceRequest request, int eventID)
+        {
+            var _query = await mediator.Send(new GetEventMenuDishQuery { EventID = eventID });
+
+            return Json(await _query.ToDataSourceResultAsync(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAdditionalEquipmentQuery([DataSourceRequest] DataSourceRequest request, int eventID)
+        {
+            var _query = await mediator.Send(new GetAdditionalEquipmentQuery { EventID = eventID });
+
+            return Json(await _query.ToDataSourceResultAsync(request));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAdditionalDishQuery([DataSourceRequest] DataSourceRequest request, int eventID)
+        {
+            var _query = await mediator.Send(new GetAdditionalDishQuery { EventID = eventID });
 
             return Json(await _query.ToDataSourceResultAsync(request));
         }
@@ -347,6 +383,22 @@ namespace Attila.UI.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "InventoryManager")]
+        public async Task<IActionResult> MarkAsCheckingRequirements(int EventID) 
+        {
+            await mediator.Send(new MarkEventAsCheckingRequirementCommand { EventID = EventID });
+
+            return Redirect("/Events/Details?EventID=" + EventID);
+        }
+
+        [Authorize(Roles = "InventoryManager")]
+        public async Task<IActionResult> MarkAsRequirementsComplete(int EventID)
+        {
+            await mediator.Send(new MarkEventAsRequirementsCompleteCommand { EventID = EventID });
+
+            return Redirect("/Events/Details?EventID=" + EventID);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> ApproveEvent(int EventID)
@@ -541,7 +593,7 @@ namespace Attila.UI.Controllers
                 var _selected = await mediator.Send(new GetEventMenuQuery { EventId = EventID });
                 var _selectedMenu = new List<int>();
 
-                foreach (var item in _selected)
+                foreach (var item in _selected.ToList())
                 {
                     _selectedMenu.Add(item.DishID);
                 }

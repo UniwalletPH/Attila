@@ -57,13 +57,13 @@ namespace Attila.Application.Coordinator.Events.Queries
 
         public User User { get; set; }
 
-        public ICollection<EventMenuVM> EventMenu { get; set; }
+        public IEnumerable<EventMenuVM> EventMenu { get; set; } = new List<EventMenuVM>();
 
         public List<AdditionalDishVM> AdditionalDish { get; set; }
 
         public List<AdditionalDurationRequestVM> AdditionalDuration { get; set; }
 
-        public List<AdditionalEquipmentRequestListVM> AdditionalEquipment { get; set; }
+        public IEnumerable<AdditionalEquipmentRequestListVM> AdditionalEquipment { get; set; } = new List<AdditionalEquipmentRequestListVM>();
 
 
     }

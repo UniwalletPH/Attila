@@ -4,430 +4,324 @@
 }
 
 @model ViewEventCVM
+
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Event Details</h3>
-    <div class="row">
-        <div class="col-lg-8">
+    <div class="card shadow mb-3">
+        <div class="card-header py-3">
             <div class="row">
-                <div class="col-12">
-                    <div class="card shadow mb-3">
-                        <div class="card-header py-3">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-right">
-                                    <p class="text-primary m-0 font-weight-bold">
+                <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <h5 class="text-dark mb-4">Event Details</h5>
+                </div>
 
-                                        @{ if (Model.EventDetails.EventStatus.ToString() == "Processing")
-                                            {
-                                                <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit</button>
-                                            }
+                <div class="col-sm-9 col-md-9 col-lg-9 col-xl-9 text-right">
+                    <p class="text-primary m-0 font-weight-bold">
+                        @{
+                            if (Model.EventDetails.EventStatus == Status.Processing)
+                            {
+                                <a class="btn btn-primary btn-sm" href="/Events/Update?EventID=@(Model.EventDetails.ID)">Edit</a>
+                                <a class="btn btn-primary btn-sm" href="/Events/MenuForm?EventID=@(Model.EventDetails.ID)">Add Menu Details</a>
+                                <a class="btn btn-primary btn-sm" href="/Events/Additional?EventID=@(Model.EventDetails.ID)">Add Additionals</a>
+                                <a class="btn btn-primary btn-sm" href="/Events/ChangeEventStatusToForApproval?EventID=@(Model.EventDetails.ID)"><i class="fa fa-share-square-o" aria-hidden="true"></i> Submit for Approval</a>
+                            }
 
-                                            else if (Model.EventDetails.EventStatus.ToString() == "ForApproval")
-                                            {
-                                                if (User.IsInRole("Admin"))
-                                                {
-                                                    <button class="btn btn-primary btn-sm" id="btnApprove" type="button">Approve</button>
-                                                    <button class="btn btn-primary btn-sm" id="btnDecline" type="button">Decline</button>
-                                                }
-                                                else if (User.IsInRole("Coordinator"))
-                                                {
-                                                    <button class="btn btn-primary btn-sm" id="btnEdit" type="button">Edit</button>
-                                                }
-                                            }
-
-                                            else if (Model.EventDetails.EventStatus.ToString() == "Approved")
-                                            {
-                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-
-                                            if (User.IsInRole("Coordinator"))
-                                            {
-                                                <br />
-                                                <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Complete Event</button>
-                                                <button class="btn btn-primary btn-sm" id="btnCancel" type="button">Cancel Event</button>
-                                            }
-                                        }
-
-                                        else if (Model.EventDetails.EventStatus.ToString() == "Declined")
-                                        {
-                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-
-                                            if (User.IsInRole("Coordinator"))
-                                            {
-                                                <br />
-                                                <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete</button>
-                                            }
-                                        }
-
-                                        else if (Model.EventDetails.EventStatus.ToString() == "Completed")
-                                        {
-                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-
-                                            if (User.IsInRole("Coordinator"))
-                                            {
-                                                if (Model.TotalPayment >= Model.TotalCharge)
-                                                {
-                                                    <br />
-                                                    <button class="btn btn-primary btn-sm" id="btnClose" type="button">Close Event</button>
-                                                }
-                                                else
-                                                {
-                                                    <p class="text-primary m-0 font-weight-bold"> Payment Status: Not Yet Fully Paid  </p>
-                                                }
-
-                                            }
-                                        }
-
-                                        else if (Model.EventDetails.EventStatus.ToString() == "Cancelled")
-                                        {
-                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-                                        }
-
-                                        else if (Model.EventDetails.EventStatus.ToString() == "Closed")
-                                        {
-                                            <p class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </p>
-                                            <p class="text-primary m-0 font-weight-bold"> Payment Status: Fully Paid  </p>
-                                        }
-                                        }
-                                    </div>
-                                </div>
-
-                            <div class="card-body">
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="address"><strong>Client</strong></label>
-                                            <input type="text" class="form-control " asp-for="EventDetails.Client.Name" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Event Name</strong></label>
-                                            <input type="text" asp-for="EventDetails.EventName" placeholder="John Smith's 70th Birthday" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Event Date</strong></label>
-                                            <input type="date" asp-for="EventDetails.EventDate" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Booking Date</strong></label>
-                                            <input type="date" asp-for="EventDetails.BookingDate" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Type</strong></label>
-                                            <input type="text" class="form-control details" asp-for="EventDetails.Type" placeholder="" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Theme</strong></label>
-                                            <input type="text" class="form-control" placeholder="Mermaid /Aqua " asp-for="EventDetails.Theme" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Description</strong></label>
-                                            <input type="text" asp-for="EventDetails.Description" placeholder="For Friends and Family" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Event Location</strong></label>
-                                            <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.Location" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="supplier"><strong>Location Area</strong></label>
-                                            <input type="text" class="form-control" placeholder="Address" asp-for="EventDetails.LocationType" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="supplier"><strong>Set Up Time</strong></label>
-                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.EntryTime" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="supplier"><strong>Program Starts at </strong></label>
-                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ProgramStart" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="supplier"><strong>Serving Time </strong></label>
-                                            <input type="time" placeholder="12:30 PM" data-format="hh:mm A" class="form-control" asp-for="EventDetails.ServingTime" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="supplier"><strong>Serving Type </strong></label>
-                                            @{ if (Model.EventDetails.ServingType.ToString() == "ManageBuffet")
-                                                {
-                                                    <input type="text" class="form-control" value="Manage Buffet" readonly />
-                                                }
-                                                else
-                                                {
-                                                    <input type="text" class="form-control" value="Self-Service Buffet" readonly />
-                                                }}
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Venue in a Building/Condominium</strong></label>
-                                            @{ if (Model.EventDetails.VenueType.ToString() == "BuildingOrCondo")
-                                                {
-                                                    <input type="text" class="form-control" value="Yes" readonly />
-                                                }
-                                                else
-                                                {
-                                                    <input type="text" class="form-control" value="No" readonly />
-                                                }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Package</strong></label>
-                                            <input type="text" class="form-control" asp-for="EventDetails.Package.Name" readonly />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Number of Guests</strong></label>
-                                            <input type="number" class="form-control" placeholder="" asp-for="EventDetails.NumberOfGuests" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Remarks</strong></label>
-                                            <textarea class="form-control" rows="4" asp-for="EventDetails.Remarks" name="remarks" readonly></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                @if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            if (Model.EventDetails.EventStatus == Status.ForApproval)
+                            {
+                                if (User.IsInRole(AccessRole.Admin))
                                 {
-                                    <div class="form-row">
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label for="first_name"><strong>Admin Remarks</strong></label>
-                                                <textarea class="form-control" rows="4" asp-for="EventDetails.AdminRemarks" name="remarks" readonly></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <button class="btn btn-primary btn-sm" id="btnApprove" type="button">Approve</button>
+                                    <button class="btn btn-primary btn-sm" id="btnDecline" type="button">Decline</button>
                                 }
+                                else
+                                {
+                                    <label>Awaiting for approval</label>
+                                }
+                            }
 
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="first_name"><strong>Coordinator</strong></label>
-                                            <input type="text" class="form-control" placeholder="" asp-for="EventDetails.User.Name" readonly>
-                                        </div>
-                                    </div>
-                                </div>
+                            if (Model.EventDetails.EventStatus == Status.Approved)
+                            {
+                                if (User.IsInRole(AccessRole.InventoryManager))
+                                {
+                                    <br />
+                                    <a class="btn btn-primary btn-sm" href="/Events/MarkAsCheckingRequirements?EventID=@(Model.EventDetails.ID)">Mark as Checking Requirements</a>
+                                }
+                                else
+                                {
+                                    <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+                                    <label>Awaiting for requirements</label>
+                                }
+                            }
 
-                            </div>
-                            </div>
-                        </div>
-                    </div>
+                            if (Model.EventDetails.EventStatus == Status.CheckingRequirements)
+                            {
+                                if (User.IsInRole(AccessRole.InventoryManager))
+                                {
+                                    <br />
+                                    <a class="btn btn-primary btn-sm" href="/Events/MarkAsRequirementsComplete?EventID=@(Model.EventDetails.ID)">Mark as Requirements Complete</a>
+                                }
+                                else
+                                {
+                                    <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+                                    <label>Awaiting for requirements</label>
+                                }
+                            }
+
+                            if (Model.EventDetails.EventStatus == Status.RequirementsComplete)
+                            {
+                                if (User.IsInRole(AccessRole.Coordinator))
+                                {
+                                    <button class="btn btn-primary btn-sm" id="btnComplete" type="button">Complete Event</button>
+                                    <button class="btn btn-primary btn-sm" id="btnCancel" type="button">Cancel Event</button>
+                                }
+                            }
+
+                            if (Model.EventDetails.EventStatus == Status.Completed)
+                            {
+                                <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    if (Model.TotalPayment >= Model.TotalCharge)
+                                    {
+                                        <br />
+                                        <button class="btn btn-primary btn-sm" id="btnClose" type="button">Close Event</button>
+                                    }
+                                    else
+                                    {
+                                        <br />
+                                        <label class="text-primary m-0 font-weight-bold"> Payment Status: Not Yet Fully Paid  </label> <br />
+                                        <a class="btn btn-primary btn-sm" href="/Payment/AddPayment?EventID=@(Model.EventDetails.ID)">Add Payment</a>
+                                    }
+
+                                }
+                            }
+
+                            if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            {
+                                <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+
+                                if (User.IsInRole("Coordinator"))
+                                {
+                                    <br />
+                                    <button class="btn btn-primary btn-sm" id="btnDelete" type="button">Delete</button>
+                                }
+                            }
+
+
+
+                            if (Model.EventDetails.EventStatus.ToString() == "Cancelled")
+                            {
+                                <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+                            }
+
+                            if (Model.EventDetails.EventStatus.ToString() == "Closed")
+                            {
+                                <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
+                                <label class="text-primary m-0 font-weight-bold"> Payment Status: Fully Paid  </label>
+                            }
+                        }
+                    </p>
                 </div>
             </div>
 
+            <div class="card-body">
+                <kendo-tabstrip name="tabstrip">
+                    <popup-animation>
+                        <open effects="fade:in" />
+                    </popup-animation>
+                    <items>
+                        <tabstrip-item text="Details" selected="true">
+                            <content>
+                                <style>
+                                    .event-details span {
+                                        font-weight: bold;
+                                    }
+                                </style>
 
-            <div class="col-lg-4">
-                @{
-                    if (Model.EventDetails.EventMenu != null)
-                    {
-                                <div class="card mb-3">
-                                    <div class="card-header py-3">
-                                        <h6 class="text-primary font-weight-bold m-0">Menu </h6>
-                                    </div>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="event-details py-3">
+                                                <div>
+                                                    <label>Event Name: </label> <span>@Model.EventDetails.EventName</span>
+                                                </div>
+                                                <div>
+                                                    <label>Client: </label> <span>@Model.EventDetails.Client.Name</span>
+                                                </div>
+                                                <div>
+                                                    <label>Event Date: </label> <span>@Model.EventDetails.EventDate.ToString("MMM dd, yyyy")</span>
+                                                </div>
+                                                <div>
+                                                    <label>Booking Date: </label> <span>@Model.EventDetails.BookingDate.ToString("MMM dd, yyyy")</span>
+                                                </div>
+                                                <div>
+                                                    <label>Type: </label> <span>@Model.EventDetails.Type</span>
+                                                </div>
+                                                <div>
+                                                    <label>Theme: </label> <span>@Model.EventDetails.Theme</span>
+                                                </div>
+                                                <div>
+                                                    <label>Description: </label> <span>@Model.EventDetails.Description</span>
+                                                </div>
+                                                <hr />
+                                                <div>
+                                                    <label>Package: </label> <span>@Model.EventDetails.Package.Name</span>
+                                                </div>
 
-                                    <div class="card-body text-center shadow">
-
-                                        <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table dataTable my-0" id="dataTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th> Dish Name </th>
-                                                        <th> Category</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    @foreach (var item in Model.EventDetails.EventMenu)
-                                                    {
-                                                        <tr data-id="@item.ID">
-                                                            <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
-                                                            <td> @Html.DisplayFor(modelItem => item.Dish.DishCategory.Category)</td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td><strong>Dish</strong></td>
-                                                        <td><strong>Category</strong></td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
+                                                <div>
+                                                    <label>Number of Guests: </label> <span>@Html.DisplayFor(a => a.EventDetails.NumberOfGuests)</span>
+                                                </div>
+                                                <div>
+                                                    <label>Remarks: </label> <span>@Html.DisplayFor(a => a.EventDetails.Remarks)</span>
+                                                </div>
+                                                <div>
+                                                    <label>Coordinator: </label> <span>@Html.DisplayFor(a => a.EventDetails.User.Name)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="event-details py-3">
+                                                <div>
+                                                    <label>Location: </label> <span>@Model.EventDetails.Location</span>
+                                                </div>
+                                                <div>
+                                                    <label>Location Area: </label> <span>@Model.EventDetails.LocationType</span>
+                                                </div>
+                                                <div>
+                                                    <label>Set Up Time: </label> <span>@Model.EventDetails.EntryTime.GetTimeString()</span>
+                                                </div>
+                                                <div>
+                                                    <label>Program Starts at: </label> <span>@Model.EventDetails.ProgramStart.GetTimeString()</span>
+                                                </div>
+                                                <div>
+                                                    <label>Serving Time: </label> <span>@Model.EventDetails.ServingTime.GetTimeString()</span>
+                                                </div>
+                                                <div>
+                                                    <label>Serving Type: </label> <span>@Html.DisplayFor(a => a.EventDetails.ServingType)</span>
+                                                </div>
+                                                <div>
+                                                    <label>Venue in a Building/Condominium: </label> <span>@(Model.EventDetails.VenueType ==VenueType.BuildingOrCondo ? "Yes" : "No" )</span>
+                                                </div>
+                                                   
+                                                <hr />
+                                                @if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                                                {
+                                                    <div>
+                                                        <label>Admin Remarks: </label> <span>@Html.DisplayFor(a => a.EventDetails.AdminRemarks)</span>
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div> } }
-
-                @{
-                    if (Model.EventDetails.AdditionalDuration != null)
-                    {
-                        @foreach (var item in Model.EventDetails.AdditionalDuration)
-                        {
-                            <div class="card mb-3">
-                                <div class="card-header py-3">
-                                    <h6 class="text-primary font-weight-bold m-0">Additional Duration [Hours]  @Html.DisplayFor(modelItem => item.Duration.Hours)</h6>
                                 </div>
-                            </div>
-                        }
-                    }
-                }
 
-                @{
-                    if (Model.EventDetails.AdditionalEquipment != null)
-                    {
+
+                            </content>
+                        </tabstrip-item>
+                        <tabstrip-item text="Menu">
+                            <content>
+                                <kendo-grid name="grdEventMenu">
+                                    <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                                        <transport>
+                                            <read url="/Events/GetEventMenu?eventID=@(Model.EventDetails.ID)" />
+                                        </transport>
+                                    </datasource>
+                                    <toolbar>
+                                        <toolbar-button name="search"></toolbar-button>
+                                    </toolbar>
+                                    <search fields="@(new[] { "Name", "Category" })" />
+                                    <no-records template="<p>No records found</p>" />
+                                    <pageable enabled="true" refresh="true" />
+                                    <columns>
+                                        <column field="Name" title="Dish Name" />
+                                        <column field="Category" />
+                                    </columns>
+                                </kendo-grid>                                   
+                            </content>
+                        </tabstrip-item>
+                        <tabstrip-item text="Additionals">
+                            <content>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <label>Additional Duration [Hours]:</label>
+                                        <span class="font-weight-bold">
+                                            @{
+                                                if (Model.EventDetails.AdditionalDuration == null || !Model.EventDetails.AdditionalDuration.Any())
+                                                {
+                                                    <span>No additional hours</span>
+                                                }
+                                                else
+                                                {
+                                                    foreach (var item in Model.EventDetails.AdditionalDuration)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Duration.Hours)
+                                                    }
+                                                }
+                                            }
+                                        </span>
+                                    </div>
+                                </div>                                                                       
+
                                 <div class="card mb-3">
                                     <div class="card-header py-3">
                                         <h6 class="text-primary font-weight-bold m-0">
                                             Additional Equipment
                                         </h6>
                                     </div>
-                                    <div class="card-body text-center shadow">
-
-                                        <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table dataTable my-0" id="dataTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th> Equipment Code </th>
-                                                        <th> Equipment </th>
-                                                        <th> Quantity </th>
-                                                        <th> Inventory Stock  </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    @foreach (var item in Model.EventDetails.AdditionalEquipment)
-                                                    {
-                                                        <tr data-id="@item.ID">
-                                                            <td>@Html.DisplayFor(modelItem => item.EquipmentDetails.Code)</td>
-                                                            <td> @Html.DisplayFor(modelItem => item.EquipmentDetails.Name)</td>
-                                                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                                            <td> @Html.DisplayFor(modelItem => item.InventoryQuantity)</td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td><strong>Code</strong></td>
-                                                        <td><strong>Name</strong></td>
-                                                        <td><strong>Quantity</strong></td>
-                                                        <td><strong>Unit</strong></td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
+                                    <div class="card-body shadow">
+                                        <kendo-grid name="grdAddlEquipment">
+                                            <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                                                <transport>
+                                                    <read url="/Events/GetAdditionalEquipmentQuery?eventID=@(Model.EventDetails.ID)" />
+                                                </transport>
+                                            </datasource>
+                                            <toolbar>
+                                                <toolbar-button name="search"></toolbar-button>
+                                            </toolbar>
+                                            <search fields="@(new[] { "EquipmentDetails.Code", "EquipmentDetails.Name" })" />
+                                            <no-records template="<p>No records found</p>" />
+                                            <pageable enabled="true" refresh="true" />
+                                            <columns>
+                                                <column field="EquipmentDetails.Code" title="Equipment Code" />
+                                                <column field="EquipmentDetails.Name" title="Equipment" />
+                                                <column field="Quantity" title="Quantity" />
+                                                <column field="InventoryQuantity" title="Inventory Stock" />
+                                            </columns>
+                                        </kendo-grid>
                                     </div>
-                                </div> } }
+                                </div>
 
-                @{
-                    if (Model.EventDetails.AdditionalDish != null)
-                    {
                                 <div class="card mb-3">
                                     <div class="card-header py-3">
                                         <h6 class="text-primary font-weight-bold m-0">Additional Dish </h6>
                                     </div>
-                                    <div class="card-body text-center shadow">
-
-                                        <div class="table-responsive table mt-2" id="dataTable-4" role="grid" aria-describedby="dataTable_info">
-                                            <table class="table dataTable my-0" id="dataTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th> Dish</th>
-                                                        <th> Requested Quantity </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    @foreach (var item in Model.EventDetails.AdditionalDish)
-                                                    {
-                                                        <tr data-id="@item.ID">
-                                                            <td>@Html.DisplayFor(modelItem => item.Dish.Name)</td>
-                                                            <td> @Html.DisplayFor(modelItem => item.Quantity)</td>
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td><strong>Dish</strong></td>
-                                                        <td><strong>Requested Quantity</strong></td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
+                                    <div class="card-body shadow">
+                                        <kendo-grid name="grdAddlDish">
+                                            <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                                                <transport>
+                                                    <read url="/Events/GetAdditionalDishQuery?eventID=@(Model.EventDetails.ID)" />
+                                                </transport>
+                                            </datasource>
+                                            <toolbar>
+                                                <toolbar-button name="search"></toolbar-button>
+                                            </toolbar>
+                                            <search fields="@(new[] { "Dish.Name" })" />
+                                            <no-records template="<p>No records found</p>" />
+                                            <pageable enabled="true" refresh="true" />
+                                            <columns>
+                                                <column field="Dish.Name" title="Dish" />
+                                                <column field="Quantity" title="Requested Quantity" />
+                                            </columns>
+                                        </kendo-grid>
                                     </div>
-                                </div> } }
+                                </div>
+                            </content>
+                        </tabstrip-item>
+                    </items>
+                </kendo-tabstrip>
             </div>
         </div>
     </div>
+</div>
 
 
 @section Scripts{

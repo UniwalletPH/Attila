@@ -9,53 +9,32 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Attila.Application.Events.Queries
 {
-    public class GetPendingEventsQuery : IRequest<IQueryable<EventVM>>
+    public class GetAllEventsQuery : IRequest<IQueryable<EventVM>>
     {
         #region Public members
 
         #endregion
 
         #region Handler
-        public class GetPendingEventsQueryHandler : RequestHandler<GetPendingEventsQuery, IQueryable<EventVM>>
+        public class GetAllEventsQueryHandler : RequestHandler<GetAllEventsQuery, IQueryable<EventVM>>
         {
             private readonly IMediator mediator;
             private readonly IAttilaDbContext dbContext;
             private readonly ICurrentUser currentUser;
 
-            public GetPendingEventsQueryHandler(IMediator mediator, IAttilaDbContext dbContext, ICurrentUser currentUser)
+            public GetAllEventsQueryHandler(IMediator mediator, IAttilaDbContext dbContext, ICurrentUser currentUser)
             {
                 this.mediator = mediator;
                 this.dbContext = dbContext;
                 this.currentUser = currentUser;
             }
 
-            protected override IQueryable<EventVM> Handle(GetPendingEventsQuery request)
+            protected override IQueryable<EventVM> Handle(GetAllEventsQuery request)
             {
-                IQueryable<Event> _query = null;
-
-                if (currentUser.IsInRole(AccessRole.Coordinator))
-                {
-                    _query = dbContext.Events
+                return dbContext.Events
                         .Include(a => a.EventPackage)
                         .Include(a => a.Coordinator)
                         .Include(a => a.Client)
-                        .Where(a => a.EventStatus == Status.ForApproval && a.CoordinatorID == currentUser.ID);
-                }
-                else if (currentUser.IsInRole(AccessRole.Admin))
-                {
-                    _query = dbContext.Events
-                       .Include(a => a.EventPackage)
-                       .Include(a => a.Coordinator)
-                       .Include(a => a.Client)
-                       .Where(a => a.EventStatus == Status.ForApproval);
-                }
-
-                if (_query == null)
-                {
-                    return new List<EventVM>().AsQueryable();
-                }
-
-                return _query
                     .Select(a => new EventVM
                     {
                         ID = a.ID,

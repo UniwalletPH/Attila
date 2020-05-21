@@ -66,6 +66,16 @@ namespace Attila.UI
                 {
                     authBuilder.RequireRole("Admin");
                 });
+
+                options.AddPolicy("Coordinator", authBuilder =>
+                {
+                    authBuilder.RequireRole("Coordinator");
+                });
+
+                options.AddPolicy("InventoryManager", authBuilder =>
+                {
+                    authBuilder.RequireRole("InventoryManager");
+                });
             });
 
             services.AddHttpContextAccessor();

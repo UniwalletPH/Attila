@@ -1,0 +1,66 @@
+﻿@{
+    ViewData["Title"] = "Events";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model EventViewCVM
+
+<style>
+    .event-link {
+        color: black;
+        font-weight:bold;
+    }
+
+    .event-link:hover {
+        text-decoration:underline !important; 
+    }
+</style>
+
+<div id="content" class="container-fluid" style="margin-top: 10px;">
+    <div class="card shadow">
+        <div class="card-header py-3">
+            Approved Events
+        </div>
+        <div class="card-body">
+            <kendo-grid name="grdEvents">
+                <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                    <transport>
+                        <read url="/Events/GetAllEventsQuery" />
+                    </transport>
+                    <sorts>
+                        <sort field="BookingDate" direction="desc" />
+                    </sorts>
+                    <filters>
+                        <datasource-filter logic="or">
+                            <filters>
+                                <datasource-filter field="EventStatus" operator="eq" value="Status.Approved" />
+                                <datasource-filter field="EventStatus" operator="eq" value="Status.CheckingRequirements" />
+                            </filters>
+                        </datasource-filter>
+                    </filters>
+                    <schema>
+                        <model>
+                            <fields>
+                                <field name="BookingDate" type="Date" />
+                                <field name="EventDate" type="Date" />
+                            </fields>
+                        </model>
+                    </schema>
+                </datasource>
+                <toolbar>
+                    <toolbar-button name="search"></toolbar-button>
+                </toolbar>
+                <search fields="@(new[] { "EventName" })" />
+                <no-records template="<p>No records found</p>" />
+                <pageable enabled="true" refresh="true" />
+                <sortable enabled="true" />
+                <columns>
+                    <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="140" />
+                    <column field="EventDate" format="{0:MMM dd, yyyy}" title="Event Date" width="140" />
+                    <column field="EventName" template="<a class='event-link' href='/Events/Details?EventID=#=ID#'>#=EventName#</a>" title="Event" />
+                    <column field="Client.Name" title="Client" width="200" />
+                    <column field="EventStatus" title="Status" width="200" />
+                </columns>
+            </kendo-grid>
+        </div>
+    </div>
+</div>

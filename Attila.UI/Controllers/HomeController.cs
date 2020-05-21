@@ -67,11 +67,6 @@ namespace Attila.UI.Controllers
             return Redirect("/");
         }
 
-        [Route("/Error/403")]
-        public IActionResult ErrorPage() {  
-            return View();
-        }
-
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddUser(UserVM user)
@@ -79,16 +74,6 @@ namespace Attila.UI.Controllers
             var _return = await mediator.Send(new AddUserCommand { User = user });
 
             return Json(_return);
-        }
-
-
-
-
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
