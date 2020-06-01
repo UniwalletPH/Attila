@@ -137,7 +137,9 @@
             @{
                 if (User.IsInRole("Admin"))
                 {
+
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Packages" href="/EventPackages/Index"><i class="fa fa-cubes"></i><span>Packages</span></a></li>
+
                     <li class="nav-item dropdown no-arrow" role="presentation">
                         <div class="nav-item dropright show">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
@@ -149,8 +151,10 @@
                             </div>
                         </div>
                     </li>
+
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Events" href="/Events/Index"><i class="far fa-calendar-alt"></i><span>Events</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Packages" href="/Services/Index"><i class="fa fa-cubes"></i><span>Services</span></a></li>
+
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Clients" href="/Clients/Index"><i class="fa fa-users"></i><span>Clients</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Payment" href="/Payment/Index"><i class="fas fa-file-invoice-dollar"></i><span>Payment</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Index"><i class="fa fa-tasks"></i><span>Inventory</span></a></li>
@@ -160,8 +164,8 @@
                 }
 
                 if (User.IsInRole("Coordinator"))
-                {
 
+                {
                     <li class="nav-item dropdown no-arrow" role="presentation">
                         <div class="nav-item dropright show">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
@@ -183,6 +187,8 @@
                 {
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Delivery" href="/Inventory/Deliveries"><i class="far fa-calendar-alt"></i><span>Deliveries</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Index"><i class="fa fa-tasks"></i><span>Inventory</span></a></li>
+
+
                     <li class="nav-item dropdown no-arrow" role="presentation">
                         <div class="nav-item dropright show">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Inventory</span></a>
@@ -196,6 +202,7 @@
                     </li>
 
                     <li class="nav-item" role="presentation"><a class="nav-link" id="requisition" href="/Inventory/Requisition"><i class="fa fa-tasks"></i><span>Requisition</span></a></li>
+
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Tracking"><i class="fa fa-tasks"></i><span>Tracking </span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Suppliers" href="/Inventory/Suppliers"><i class="fas fa-asterisk"></i><span>Suppliers</span></a></li>
                 }
