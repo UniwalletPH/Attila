@@ -164,18 +164,19 @@
                 }
 
                 if (User.IsInRole("Coordinator"))
-                <li class="nav-item dropdown no-arrow" role="presentation">
-                    <div class="nav-item dropright show">
-                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
-                        <div class="dropdown-menu dropdown-menu-left show" role="menu">
-                            <a class="dropdown-item" role="presentation" href="#">Catering</a>
-                            <a class="dropdown-item" role="presentation" href="#">Food Trays</a>
-                            <a class="dropdown-item" role="presentation" href="#">Packed Meals</a>
-                            <a class="dropdown-item" role="presentation" href="#">Merchandising</a>
-                        </div>
-                    </div>
-                </li>
+
                 {
+                    <li class="nav-item dropdown no-arrow" role="presentation">
+                        <div class="nav-item dropright show">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
+                            <div class="dropdown-menu dropdown-menu-left show" role="menu">
+                                <a class="dropdown-item" role="presentation" href="#">Catering</a>
+                                <a class="dropdown-item" role="presentation" href="#">Food Trays</a>
+                                <a class="dropdown-item" role="presentation" href="#">Packed Meals</a>
+                                <a class="dropdown-item" role="presentation" href="#">Merchandising</a>
+                            </div>
+                        </div>
+                    </li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Events" href="/Events/Index"><i class="far fa-calendar-alt"></i><span>Events</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Packages" href="/MenuPackages/Index"><i class="fa fa-cubes"></i><span>Menu & Packages</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Clients" href="/Clients/Index"><i class="fa fa-users"></i><span>Clients</span></a></li>
