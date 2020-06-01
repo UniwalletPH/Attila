@@ -72,7 +72,7 @@
                             <p class="text-primary m-0 font-weight-bold"> Date Requested: @Html.DisplayFor(a => a.EquipmentRequest.DateTimeRequest) </p>
                             <p class="text-primary m-0 font-weight-bold"> Status: @Html.DisplayFor(a => a.EquipmentRequest.Status) </p>
                             <p class="text-primary m-0 font-weight-bold"> Requested By: @Html.DisplayFor(a => a.EquipmentRequest.InventoryManager.Name) </p>
-                            @{ if (User.IsInRole("InventoryManager") && Model.EquipmentRequest.Status.ToString() == "Declined")
+                            @{ if (User.IsInRole("InventoryManager") && Model.EquipmentRequest.Status == Status.Declined)
                                 {
                                     <p class="text-primary m-0 font-weight-bold"> Remarks: @Html.DisplayFor(a => a.EquipmentRequest.Remarks) </p>
                                 }
@@ -119,11 +119,11 @@
                         </table>
 
                         @{
-                            if (Model.EquipmentRequest.Status.ToString() == "Processing")
+                            if (Model.EquipmentRequest.Status == Status.Processing)
                             {
                                 <div class="form-group"><button id="btnSubmit" class="btn btn-primary">Submit Request</button></div>
                             }
-                            else if (Model.EquipmentRequest.Status.ToString() == "ForApproval")
+                            else if (Model.EquipmentRequest.Status == Status.ForApproval)
                             {
                                 if (User.IsInRole("Admin"))
                                 {

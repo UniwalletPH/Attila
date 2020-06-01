@@ -284,7 +284,7 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        @{ if (item.Status.ToString() == "ForApproval")
+                                        @{ if (item.Status == Status.ForApproval)
                                             {
                                                 <td> @Html.DisplayName("For Approval")</td>
                                             }
@@ -346,7 +346,7 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        @{ if (item.Status.ToString() == "ForApproval")
+                                        @{ if (item.Status == Status.ForApproval)
                                             {
                                                 <td> @Html.DisplayName("For Approval")</td>
                                             }
@@ -415,7 +415,7 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        @{ if (item.Status.ToString() == "ForApproval")
+                                        @{ if (item.Status == Status.ForApproval)
                                             {
                                                 <td> @Html.DisplayName("For Approval")</td>
                                             }
@@ -475,7 +475,7 @@
                                 {
                                     <tr data-id="@item.ID">
                                         <td> @Html.DisplayFor(modelItem => item.DateTimeRequest)</td>
-                                        @{ if (item.Status.ToString() == "ForApproval")
+                                        @{ if (item.Status == Status.ForApproval)
                                             {
                                                 <td> @Html.DisplayName("For Approval")</td>
                                             }

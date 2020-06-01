@@ -95,7 +95,7 @@
                                 }
                             }
 
-                            if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                            if (Model.EventDetails.EventStatus == Status.Declined)
                             {
                                 <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
 
@@ -108,12 +108,12 @@
 
 
 
-                            if (Model.EventDetails.EventStatus.ToString() == "Cancelled")
+                            if (Model.EventDetails.EventStatus == Status.Cancelled)
                             {
                                 <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
                             }
 
-                            if (Model.EventDetails.EventStatus.ToString() == "Closed")
+                            if (Model.EventDetails.EventStatus == Status.Closed)
                             {
                                 <label class="text-primary m-0 font-weight-bold"> Event Status: @Html.DisplayFor(a => a.EventDetails.EventStatus) </label>
                                 <label class="text-primary m-0 font-weight-bold"> Payment Status: Fully Paid  </label>
@@ -203,7 +203,7 @@
                                                 </div>
                                                    
                                                 <hr />
-                                                @if (Model.EventDetails.EventStatus.ToString() == "Declined")
+                                                @if (Model.EventDetails.EventStatus == Status.Declined)
                                                 {
                                                     <div>
                                                         <label>Admin Remarks: </label> <span>@Html.DisplayFor(a => a.EventDetails.AdminRemarks)</span>
