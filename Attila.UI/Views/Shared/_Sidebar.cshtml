@@ -139,15 +139,29 @@
                 {
 
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Packages" href="/EventPackages/Index"><i class="fa fa-cubes"></i><span>Packages</span></a></li>
-
-                    <li class="nav-item dropdown no-arrow" role="presentation">
-                        <div class="nav-item dropright show">
+                    <li class="nav-item dropdown arrow" role="presentation"  >
+                        <div class="nav-item dropright"  style="margin-bottom: 0px;">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
-                            <div class="dropdown-menu dropdown-menu-left show" role="menu">
+                            <div class="dropdown-menu dropdown-menu-left border-white" role="menu">
                                 <a class="dropdown-item" role="presentation" href="#">Catering</a>
                                 <a class="dropdown-item" role="presentation" href="#">Food Trays</a>
+
                                 <a class="dropdown-item" role="presentation" href="#">Packed Meals</a>
                                 <a class="dropdown-item" role="presentation" href="#">Merchandising</a>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item dropdown arrow" role="presentation"  >
+                        <div class="nav-item dropright"  style="margin-bottom: 0px;">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Inventory</span></a>
+                            <div class="dropdown-menu dropdown-menu-left border-white" role="menu">
+                                <a class="dropdown-item" role="presentation" href="#">Admin</a>
+                                <a class="dropdown-item" role="presentation" href="#">Creatives</a>
+
+                                <a class="dropdown-item" role="presentation" href="#">Kitchen</a>
+                                <a class="dropdown-item" role="presentation" href="#">Service</a>
                             </div>
                         </div>
                     </li>
@@ -166,12 +180,14 @@
                 if (User.IsInRole("Coordinator"))
 
                 {
-                    <li class="nav-item dropdown no-arrow" role="presentation">
-                        <div class="nav-item dropright show">
+
+                    <li class="nav-item dropdown arrow" role="presentation"  >
+                        <div class="nav-item dropright"  style="margin-bottom: 0px;">
                             <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Menu and Packages</span></a>
-                            <div class="dropdown-menu dropdown-menu-left show" role="menu">
+                            <div class="dropdown-menu dropdown-menu-left border-white" role="menu">
                                 <a class="dropdown-item" role="presentation" href="#">Catering</a>
                                 <a class="dropdown-item" role="presentation" href="#">Food Trays</a>
+
                                 <a class="dropdown-item" role="presentation" href="#">Packed Meals</a>
                                 <a class="dropdown-item" role="presentation" href="#">Merchandising</a>
                             </div>
@@ -189,18 +205,18 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Index"><i class="fa fa-tasks"></i><span>Inventory</span></a></li>
 
 
-                    <li class="nav-item dropdown no-arrow" role="presentation">
-                        <div class="nav-item dropright show">
-                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#"><i class="fa fa-star"></i><span>Inventory</span></a>
-                            <div class="dropdown-menu dropdown-menu-left show" role="menu">
+                    <li class="nav-item dropdown arrow" role="presentation" >
+                        <div class="nav-item dropright"  style="margin-bottom: 0px;">
+                            <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="true" href="#" ><i class="fa fa-star"></i><span>Inventory</span></a>
+                            <div class="dropdown-menu dropdown-menu-left border-white" role="menu">
                                 <a class="dropdown-item" role="presentation" href="#">Admin</a>
                                 <a class="dropdown-item" role="presentation" href="#">Creatives</a>
+
                                 <a class="dropdown-item" role="presentation" href="#">Kitchen</a>
                                 <a class="dropdown-item" role="presentation" href="#">Service</a>
                             </div>
                         </div>
                     </li>
-
                     <li class="nav-item" role="presentation"><a class="nav-link" id="requisition" href="/Inventory/Requisition"><i class="fa fa-tasks"></i><span>Requisition</span></a></li>
 
                     <li class="nav-item" role="presentation"><a class="nav-link" id="Inventory" href="/Inventory/Tracking"><i class="fa fa-tasks"></i><span>Tracking </span></a></li>
