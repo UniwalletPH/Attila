@@ -1,7 +1,164 @@
 ﻿
 @{
-    ViewData["Title"] = "InventoryCreativesIndex";
+    ViewData["Title"] = "Creatives";
 }
 
-<h2>InventoryCreativesIndex</h2>
+@{
+    string _inventoryListUrl = "/Inventory/InventoryCreativesIndex";
 
+    if (User.IsInRole(AccessRole.Admin) || User.IsInRole(AccessRole.InventoryManager))
+    {
+        _inventoryListUrl = "/Inventory/InventoryCreativesIndex";
+    }
+
+}
+<!-- Content start-->
+<div id="content" class="container-fluid" style="margin-top: 10px;">
+    <!-- Vases and Glasses grid start-->
+    <div class="card">
+        <div class="card-body">
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;">Check In</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Stock</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Details</a>
+            <h4 class="card-title">Vase and Glasses</h4></a>
+            <kendo-grid name="grdVases">
+                <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                    <transport>
+                        <read url="@_inventoryListUrl" />
+                    </transport>
+                    <sorts>
+                        <sort field="BookingDate" direction="desc" />
+                    </sorts>
+                    <schema>
+                        <model>
+                            <fields>
+                                <field name="BookingDate" type="Date" />
+                                <field name="EventDate" type="Date" />
+                            </fields>
+                        </model>
+                    </schema>
+                </datasource>
+                <toolbar>
+                    <toolbar-button name="search"></toolbar-button>
+                </toolbar>
+                <search fields="@(new[] { "EventName" })" />
+                <no-records template="<p>No records found</p>" />
+                <pageable enabled="false" refresh="true" />
+                <scrollable enabled="true" />
+                <sortable enabled="true" />
+                <columns>
+                    <column field="" title="Item" width="140" />
+                    <column field="" title="Specification" width="140" />
+                    <column field="" title="Brand" />
+                    <column field="" title="Supplier" width="200" />
+                    <column field="" title="Quantity" width="140" />
+                    <column field="" title="Unit" width="200" />
+                    <column field="" title="Unit Cost" width="200" />
+                    <column field="" title="Total Cost" width="200" />
+                    <column field="" title="Status" width="200" />
+                    <column field="" title="Remarks" width="200" />
+                </columns>
+            </kendo-grid>
+        </div>
+    </div>
+    <!-- Vases and Glasses grid end-->
+
+    <!-- Linen grid start-->
+    <div class="card">
+        <div class="card-body">
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;">Check In</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Stock</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Details</a>
+            <h4 class="card-title">Linen</h4></a>
+            <kendo-grid name="grdLinen">
+                <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                    <transport>
+                        <read url="@_inventoryListUrl" />
+                    </transport>
+                    <sorts>
+                        <sort field="BookingDate" direction="desc" />
+                    </sorts>
+                    <schema>
+                        <model>
+                            <fields>
+                                <field name="BookingDate" type="Date" />
+                                <field name="EventDate" type="Date" />
+                            </fields>
+                        </model>
+                    </schema>
+                </datasource>
+                <toolbar>
+                    <toolbar-button name="search"></toolbar-button>
+                </toolbar>
+                <search fields="@(new[] { "EventName" })" />
+                <no-records template="<p>No records found</p>" />
+                <pageable enabled="false" refresh="true" />
+                <scrollable enabled="true" />
+                <sortable enabled="true" />
+                <columns>
+                    <column field="" title="Item" width="140" />
+                    <column field="" title="Specification" width="140" />
+                    <column field="" title="Brand" />
+                    <column field="" title="Supplier" width="200" />
+                    <column field="" title="Quantity" width="140" />
+                    <column field="" title="Unit" width="200" />
+                    <column field="" title="Unit Cost" width="200" />
+                    <column field="" title="Total Cost" width="200" />
+                    <column field="" title="Status" width="200" />
+                    <column field="" title="Remarks" width="200" />
+                </columns>
+            </kendo-grid>
+        </div>
+    </div>
+    <!-- Linen grid end-->
+
+    <!-- Other Materials grid start-->
+    <div class="card">
+        <div class="card-body">
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;">Check In</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Stock</a>
+            <a href="#" class="btn btn-primary pull-right" style="font-size:11px;margin-right:10px;">Add Details</a>
+            <h4 class="card-title">Cleaning Materials</h4></a>
+            <kendo-grid name="grdOthers">
+                <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
+                    <transport>
+                        <read url="@_inventoryListUrl" />
+                    </transport>
+                    <sorts>
+                        <sort field="BookingDate" direction="desc" />
+                    </sorts>
+                    <schema>
+                        <model>
+                            <fields>
+                                <field name="BookingDate" type="Date" />
+                                <field name="EventDate" type="Date" />
+                            </fields>
+                        </model>
+                    </schema>
+                </datasource>
+                <toolbar>
+                    <toolbar-button name="search"></toolbar-button>
+                </toolbar>
+                <search fields="@(new[] { "EventName" })" />
+                <no-records template="<p>No records found</p>" />
+                <pageable enabled="false" refresh="true" />
+                <scrollable enabled="true" />
+                <sortable enabled="true" />
+                <columns>
+                    <column field="" title="Item" width="140" />
+                    <column field="" title="Specification" width="140" />
+                    <column field="" title="Brand" />
+                    <column field="" title="Supplier" width="200" />
+                    <column field="" title="Quantity" width="140" />
+                    <column field="" title="Unit" width="200" />
+                    <column field="" title="Unit Cost" width="200" />
+                    <column field="" title="Total Cost" width="200" />
+                    <column field="" title="Status" width="200" />
+                    <column field="" title="Remarks" width="200" />
+                </columns>
+            </kendo-grid>
+        </div>
+    </div>
+    <!-- Other Materials grid end-->
+</div>
+<!--Content end-->

@@ -939,5 +939,40 @@ namespace Attila.UI.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> InventoryAdminIndex()
+        {
+            var _inventoryAdmin = await mediator.Send(new GetInventoryDataQuery());
+            return View(_inventoryAdmin);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> InventoryCreativesIndex()
+        {
+            var _inventoryCreatives = await mediator.Send(new GetInventoryDataQuery());
+            return View(_inventoryCreatives);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> InventoryKitchenIndex()
+        {
+            var _inventoryKitchen = await mediator.Send(new GetInventoryDataQuery());
+            return View(_inventoryKitchen);
+        }
+
+        [Authorize(Roles = "Admin, InventoryManager")]
+        [HttpGet]
+        public async Task<IActionResult> InventoryServiceIndex()
+        {
+            var _inventoryService = await mediator.Send(new GetInventoryDataQuery());
+            return View(_inventoryService);
+        }
+
+
+
     }
 }
