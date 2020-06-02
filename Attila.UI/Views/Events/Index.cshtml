@@ -20,8 +20,8 @@
         <div class="card-header py-3">
             Events
             <a href="/Events/BookingForm" class="btn btn-primary pull-right" style="font-size:11px;">Book an Event</a>
-            <a href="/Clients/Register" class="btn btn-primary pull-right mr-1" style="font-size:11px;">Register a Client</a>
-            <a href="/EventPackages" class="btn btn-primary pull-right mr-1" style="font-size:11px;">Event Packages</a>
+            @*<a href="/Clients/Register" class="btn btn-primary pull-right mr-1" style="font-size:11px;">Register a Client</a>
+            <a href="/EventPackages" class="btn btn-primary pull-right mr-1" style="font-size:11px;">Event Packages</a>*@
         </div>
         <div class="card-body">
             @{
@@ -66,7 +66,8 @@
                                         </toolbar>
                                         <search fields="@(new[] { "EventName" })" />
                                         <no-records template="<p>No records found</p>" />
-                                        <pageable enabled="true" refresh="true" />
+                                        <pageable enabled="false" refresh="true" />
+                                        <scrollable enabled="true"/>
                                         <sortable enabled="true" />
                                         <columns>
                                             <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="140" />
@@ -86,7 +87,7 @@
                             <kendo-grid name="grdPendingEvents">
                                 <datasource type="DataSourceTagHelperType.Ajax" server-operation="true">
                                     <transport>
-                                         <read url="@_eventListUrl" />
+                                        <read url="@_eventListUrl" />
                                     </transport>
                                     <sorts>
                                         <sort field="BookingDate" direction="desc" />
@@ -108,7 +109,9 @@
                                 </toolbar>
                                 <search fields="@(new[] { "EventName" })" />
                                 <no-records template="<p>No records found</p>" />
-                                <pageable enabled="true" refresh="true" />
+                                <pageable enabled="false" refresh="true" />
+
+                                <scrollable enabled="true" />
                                 <sortable enabled="true" />
                                 <columns>
                                     <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="120" />
@@ -152,7 +155,9 @@
                                 </toolbar>
                                 <search fields="@(new[] { "EventName" })" />
                                 <no-records template="<p>No records found</p>" />
-                                <pageable enabled="true" refresh="true" />
+                                <pageable enabled="false" refresh="true" />
+
+                                <scrollable enabled="true" />
                                 <columns>
                                     <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="120" />
                                     <column field="EventDate" format="{0:MMM dd, yyyy}" title="Event Date" width="120" />
@@ -190,7 +195,8 @@
                                 </toolbar>
                                 <search fields="@(new[] { "EventName" })" />
                                 <no-records template="<p>No records found</p>" />
-                                <pageable enabled="true" refresh="true" />
+                                <pageable enabled="false" refresh="true" />
+                                <scrollable enabled="true" />
                                 <columns>
                                     <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="120" />
                                     <column field="EventDate" format="{0:MMM dd, yyyy}" title="Event Date" width="120" />
@@ -227,7 +233,8 @@
                                 </toolbar>
                                 <search fields="@(new[] { "EventName" })" />
                                 <no-records template="<p>No records found</p>" />
-                                <pageable enabled="true" refresh="true" />
+                                <pageable enabled="false" refresh="true" />
+                                <scrollable enabled="true" />
                                 <columns>
                                     <column field="BookingDate" format="{0:MMM dd, yyyy}" title="Booking Date" width="120" />
                                     <column field="EventDate" format="{0:MMM dd, yyyy}" title="Event Date" width="120" />
